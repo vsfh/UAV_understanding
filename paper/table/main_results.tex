@@ -1,0 +1,18 @@
+\begin{table*}[t]
+\centering
+\caption{Registered main-result schema, conditional on a \texttt{READY} provenance gate and frozen acquisition-aware split. Lower is better for AURC. No placeholder is a result.}
+\label{tab:main}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}Y l l C{1.0cm} C{0.9cm} C{1.0cm} C{1.0cm} C{1.0cm} C{1.0cm} C{0.9cm}@{}}
+\toprule
+Method & Adapt. & Views & Macro F1 & mAP & Hard-neg. & Set F1 & Assign. & Unseen F1 & AURC $\downarrow$ \\
+\midrule
+OpenCLIP ViT-L/14 & zero-shot & context & \tbd & \tbd & \tbd & -- & -- & \tbd & \tbd \\
+GeoChat-7B & zero-shot & context & \tbd & \tbd & \tbd & -- & -- & \tbd & \tbd \\
+Qwen3-VL-8B + definition & prompt & context & \tbd & \tbd & \tbd & -- & -- & \tbd & \tbd \\
+Grounded-caption Qwen3-VL & LoRA & context & \tbd & \tbd & \tbd & \tbd & -- & \tbd & \tbd \\
+Two-view concatenation & LoRA & pair & \tbd & \tbd & \tbd & \tbd & \tbd & \tbd & \tbd \\
+\method / CLEAR-Set (ours) & LoRA & pair / set & \tbd & \tbd & \tbd & \tbd & \tbd & \tbd & \tbd \\
+\bottomrule
+\end{tabularx}
+\end{table*}

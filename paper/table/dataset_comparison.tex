@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\caption{Positioning against representative aerial resources. Scale alone is not our claim; \dataset contributes paired context/evidence, operational factorization, and leakage-aware groups. Counts follow the cited papers and our reconciled development snapshot.}
+\label{tab:datasets}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}l r c Y c c@{}}
+\toprule
+Dataset & Scale & Real & Primary scope & Paired context/evidence & Operational factors \\
+\midrule
+VisDrone~\cite{zhu2018vision} & 10,209 images & Yes & detection and tracking & No & No \\
+ERA / CapERA~\cite{mou2020era,papadopoulos2023capera} & 2,864 videos & Mixed & 25 events and captions & No & No \\
+UAV-Human~\cite{li2021uavhuman} & 67,428 videos & Yes & human behavior & No & No \\
+UAVBench~\cite{zhan2026uavbench} & 261k images & Yes & 10 image/region VLM tasks & Region annotations & No \\
+SpatialSky~\cite{zhang2026spatialsky} & 1M samples & -- & 13 UAV spatial categories & Multi-granularity & No \\
+UAVLight~\cite{du2026uavlight} & repeat paths & Yes & illumination-robust 3D reconstruction & Multi-time views & No \\
+UAVReason~\cite{sun2026uavreason} & 273k samples & No & 22 spatial/temporal reasoning types & Multi-frame & No \\
+\dataset (ours) & 9,093 pairs / 7,279 contexts & Yes & operational event sets & Yes & ontology + sample graph \\
+\bottomrule
+\end{tabularx}
+\end{table*}

@@ -1,0 +1,29 @@
+{
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk-relative-unicode-safe",
+      "command": "latexmk",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-pdf",
+        "%DOCFILE_EXT%"
+      ],
+      "cwd": "%DIR%"
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk (relative path, Unicode-safe)",
+      "tools": [
+        "latexmk-relative-unicode-safe"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "first",
+  "latex-workshop.latex.outDir": ".",
+  "latex-workshop.latex.auxDir": ".",
+  "latex-workshop.latex.clean.method": "glob",
+  "latex-workshop.latex.autoClean.run": "never"
+}

@@ -1,0 +1,44 @@
+\begin{figure*}[t]
+\centering
+\resizebox{0.98\textwidth}{!}{%
+\begin{tikzpicture}[
+  font=\scriptsize,
+  node distance=12mm and 6mm,
+  box/.style={draw,rounded corners=2pt,minimum height=10mm,text width=31mm,align=center,inner xsep=4pt,inner ysep=3pt},
+  data/.style={box,fill=lightblue,draw=eventblue},
+  audit/.style={box,fill=lightorange,draw=eventorange},
+  model/.style={box,fill=lightgreen,draw=eventgreen},
+  loss/.style={box,fill=red!5,draw=eventred},
+  arrow/.style={-Latex,thick,draw=black!70}
+]
+\node[data] (pair) {unique context $x_i^g$ + crops $\{x_{ij}^l\}$\\content / flight / site group};
+\node[audit,right=of pair] (card) {sample graph + evidence cards\\events, factors, assignments};
+\node[audit,right=of card] (caption) {label-agnostic description\\grounded rewrite + audit};
+\node[data,right=of caption] (tiers) {versioned benchmark\\Core / Tail / Catalog};
+
+\node[model,below=of pair] (student) {Qwen3-VL-8B\\frozen vision + LoRA};
+\node[model,right=of student] (views) {context--crop edge scores\\view / evidence dropout};
+\node[model,right=of views] (score) {permutation-invariant set score\\event set + crop assignment};
+\node[data,right=of score] (eval) {group-disjoint evaluation\\hard negatives + calibration};
+
+\node[loss,text width=70mm,below=7mm of $(views.south)!0.5!(score.south)$,anchor=north] (losses)
+{$\mathcal{L}_{\mathrm{gen}}$ + taxonomy-neighbor margin + counterfactual unlikelihood};
+
+\draw[arrow] (pair) -- (card);
+\draw[arrow] (card) -- (caption);
+\draw[arrow] (caption) -- (tiers);
+\draw[arrow] (pair.south) -- (student.north);
+\draw[arrow] (student) -- (views);
+\draw[arrow] (views) -- (score);
+\draw[arrow] (score) -- (eval);
+\draw[arrow] (card.south) -- (views.north);
+\draw[arrow] (tiers.south) -- (eval.north);
+\draw[arrow] ([xshift=-13mm]losses.north) -- ([xshift=5mm]views.south);
+\draw[arrow] ([xshift=13mm]losses.north) -- ([xshift=-5mm]score.south);
+
+\node[font=\footnotesize\bfseries,text=eventorange,above=2mm of pair.north west,anchor=south west] {Auditable data engine};
+\node[font=\footnotesize\bfseries,text=eventgreen,above=2mm of student.north west,anchor=south west] {\method baseline};
+\end{tikzpicture}}
+\caption{\dataset separates an auditable data engine (top) from \method/CLEAR-Set and frozen evaluation (bottom). Exact-context grouping converts pair rows into variable-size sample graphs; edge scores are aggregated without crop order while retaining evidence assignments.}
+\label{fig:method}
+\end{figure*}

@@ -1,0 +1,45 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{xspace}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,backgrounds,calc,fit,positioning,shapes.geometric}
+\usepackage{url}
+\usepackage{cite}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,capitalise,noabbrev]{cleveref}
+
+% The IEEE two-column output routine produces one low-badness (2245) vertical
+% stretch diagnostic when the full-width and single-column result tables queue.
+% Keep stricter box failures visible; every output page is also raster-inspected.
+\vbadness=3000
+
+\graphicspath{{figure/}}
+\renewcommand{\arraystretch}{1.08}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\definecolor{eventblue}{HTML}{2F6690}
+\definecolor{eventgreen}{HTML}{3A7D44}
+\definecolor{eventorange}{HTML}{D97706}
+\definecolor{eventred}{HTML}{B91C1C}
+\definecolor{lightblue}{HTML}{E8F1F8}
+\definecolor{lightgreen}{HTML}{EAF4EC}
+\definecolor{lightorange}{HTML}{FFF2DE}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=eventblue,
+  citecolor=eventgreen,
+  urlcolor=eventblue
+}
+
+\AtBeginEnvironment{thebibliography}{\footnotesize}

@@ -1,0 +1,60 @@
+\section{The \method Baseline}
+\label{sec:method}
+
+\input{figure/method_overview}
+
+\subsection{Dual-View Structured Prediction}
+
+\method instantiates a deliberately reproducible baseline rather than a new foundation model. A Qwen3-VL-8B-Instruct student~\cite{bai2025qwen3vl} receives the global context $x^g$ and local evidence $x^l$ as two ordered images with explicit \texttt{CONTEXT} and \texttt{EVIDENCE} markers. The pair-level target is
+\begin{equation}
+\begin{aligned}
+s=[&\texttt{events}:Y;\ \texttt{factors}:\{(d,e,s,r,c)\}_{y\in Y};\\
+   &\texttt{evidence}:q;\ \texttt{uncertain}:u],
+\end{aligned}
+\end{equation}
+where $q$ is a short visible-evidence statement and $u$ is a binary abstention field. Language-model and projector LoRA modules are trained while the vision tower and base language weights remain frozen. Single-view baselines use the same prompt and token budget.
+
+Training uses verified event phrases, factors, and audited evidence statements. The model is never given a candidate list in the free-generation setting. In the closed-set setting, the normalized conditional log-likelihood of each canonical event definition gives a reproducible label-wise score
+\begin{equation}
+ S_{\theta}(y\mid x^g,x^l)=\frac{1}{|a_y|}\sum_{t\in a_y}
+ \log p_{\theta}(a_{y,t}\mid a_{y,<t},x^g,x^l),
+\end{equation}
+where $a_y$ is the canonical label plus its compact visual definition. Temperature-scaled label scores are thresholded independently, allowing legitimate co-occurrence rather than forcing a softmax winner.
+
+\subsection{Permutation-Invariant Set Extension}
+
+For a context set $G_i$ with $m_i$ crops, \method evaluates every context--crop edge and aggregates evidence without crop order:
+\begin{equation}
+ S_{\theta}^{\mathrm{set}}(y\mid G_i)=
+ \tau\log\sum_{j=1}^{m_i}\exp\!\left(S_{\theta}(y\mid x_i^g,x_{ij}^l)/\tau\right).
+\end{equation}
+Binary cross-entropy over $Y_i$ trains set prediction, while the maximizing edge supplies a transparent evidence assignment $\hat{A}_i$. We compare log-sum-exp with max pooling and a parameter-matched attention pool. This \emph{CLEAR-Set} extension adds no crop-order encoding and is scored only on adjudicated multi-evidence groups.
+
+\subsection{Graph-Structured Supervision}
+
+Token-level cross-entropy alone rewards fluent background description and ignores which confusion was resolved. We retain label-span weighting from conventional grounded caption tuning, but add two graph-aware terms. For each positive $y\in Y$, a neighbor $y^{-}\in\mathcal{N}(y)\setminus Y$ shares the entity or scene while differing in one decision-critical factor. A margin loss requires
+\begin{equation}
+ \mathcal{L}_{\mathrm{nbr}}=
+ \max\!\left(0,m-S_{\theta}(y\mid x^g,x^l)+S_{\theta}(y^{-}\mid x^g,x^l)\right).
+\end{equation}
+We also construct a counterfactual evidence statement $q^{-}$ by changing only the disputed factor. Its token probability is penalized with an unlikelihood objective
+\begin{equation}
+ \mathcal{L}_{\mathrm{cf}}=-\sum_{t\in q^{-}}\log\left(1-p_{\theta}(q^{-}_t\mid q^{-}_{<t},x^g,x^l)\right).
+\end{equation}
+The full objective is
+\begin{equation}
+ \mathcal{L}=\mathcal{L}_{\mathrm{gen}}+
+ \lambda_{\mathrm{nbr}}\mathcal{L}_{\mathrm{nbr}}+
+ \lambda_{\mathrm{cf}}\mathcal{L}_{\mathrm{cf}},
+\end{equation}
+where $\mathcal{L}_{\mathrm{gen}}$ upweights canonical label tokens by $\gamma$. Ablations remove each term and replace graph neighbors with random negatives to test whether gains come from decision-boundary structure.
+
+\subsection{Context--Evidence Reliance}
+
+Joint input can still ignore one view. We therefore train with controlled view dropout: context-only, evidence-only, and joint examples appear with fixed probabilities. The target stays unchanged only when the remaining view satisfies the event's required evidence factors; otherwise \texttt{uncertain} is set true. At evaluation, four conditions isolate the perception pipeline: context-only, oracle crop, context plus oracle crop, and context plus a detector/retriever proposal. The oracle-to-proposal gap measures localization error, while the joint-to-best-single-view gap measures genuine complementarity.
+
+Accepting two images does not prove cross-view synthesis~\cite{guo2026cvbench}. We therefore add three necessity diagnostics on adjudicated graphs. \emph{Single-view insufficiency success} counts items that are correct jointly but incorrect from either view alone. \emph{Assigned-evidence deletion} removes the human-linked crop for an event and compares the score drop with deletion of a size-matched random crop. Finally, a crop-budget curve reports set F1 as the model admits its top-$k$ evidence edges. A method that cherry-picks one easy view will have a small assigned-versus-random deletion gap and a flat joint advantage even if its headline set F1 is high.
+
+\subsection{Confidence and Selective Prediction}
+
+Closed-set label scores are temperature-scaled on validation groups. The model abstains when no label exceeds its validation-selected threshold or when factor outputs violate the \eventgraph. We report classwise expected calibration error and risk--coverage curves; abstention is never counted as correct. Free-generation outputs are mapped to the taxonomy by exact canonical/synonym matching, followed by a frozen embedding tie-breaker, with all unmatched phrases counted as errors.

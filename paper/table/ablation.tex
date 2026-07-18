@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\caption{Prespecified \method ablations. Random negatives are frequency-matched; all other settings are fixed.}
+\label{tab:ablation}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}Y c c c c C{1.25cm} C{1.25cm} C{1.25cm}@{}}
+\toprule
+Variant & Context & Crop & Graph neighbor & Counterfactual & Macro-F1 & Pair acc. & AURC $\downarrow$ \\
+\midrule
+Label-only LoRA & Yes & No & No & No & \tbd & \tbd & \tbd \\
+Grounded-caption LoRA & Yes & No & No & No & \tbd & \tbd & \tbd \\
+Two-view concatenation & Yes & Yes & No & No & \tbd & \tbd & \tbd \\
+Random-negative margin & Yes & Yes & Random & No & \tbd & \tbd & \tbd \\
+Graph-neighbor margin & Yes & Yes & Yes & No & \tbd & \tbd & \tbd \\
+\method without view dropout & Yes & Yes & Yes & Yes & \tbd & \tbd & \tbd \\
+\method (full) & Yes & Yes & Yes & Yes & \tbd & \tbd & \tbd \\
+\bottomrule
+\end{tabularx}
+\end{table*}

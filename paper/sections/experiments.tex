@@ -1,0 +1,35 @@
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Questions and Baselines}
+
+The machine-readable experiment registry freezes four questions. \textbf{RQ1:} How far are general and aerial VLMs from operational event recognition? \textbf{RQ2:} Do paired and set-valued inputs outperform either view alone because they use complementary evidence rather than cherry-pick one view? \textbf{RQ3:} Do graph neighbors and counterfactual rejection improve decision-boundary accuracy beyond label-grounded captions? \textbf{RQ4:} Are improvements preserved across frozen acquisition groups and under selective prediction, and---only after site recovery---on unseen locations? Registry rows for main results remain blocked until the provenance gate is \texttt{READY}; only parser and training smoke tests may use the proxy split.
+
+Zero-shot baselines include OpenCLIP ViT-L/14~\cite{radford2021clip}, GeoChat~\cite{kuckreja2024geochat}, and Qwen3-VL-8B~\cite{bai2025qwen3vl}, each with direct and definition prompts. Adapted baselines use the same Qwen3-VL student, images, and split: linear probe, label-only LoRA, generic-caption LoRA, grounded-caption LoRA, two-image concatenation, and full \method. If compatible, a UAVIT-1M-adapted model is evaluated without retraining on benchmark test sources. No baseline is removed after test inspection.
+
+\subsection{Metrics and Statistical Protocol}
+
+Pair recognition uses macro-F1 as the primary metric, with label mAP, micro-F1, per-domain macro-F1, and worst-class recall as secondary measures. Context-set prediction reports macro/micro F1, label mAP, exact-set accuracy, and evidence-assignment accuracy on adjudicated graphs. The ontology is evaluated with factor exact match, hierarchy-consistent F1, and confusion-edge pairwise accuracy. We report the view conditions from \cref{sec:method}, single-view-insufficiency success, assigned-versus-random deletion gaps, crop-budget area under the F1 curve, and challenge slices. Prompt robustness reports the maximum and standard deviation across six meaning-preserving paraphrases~\cite{mahadev2026pinpoint}; evidence sensitivity reports prediction change after assigned-evidence removal, not consistency alone~\cite{bhat2026viewdiag}. Unseen-location macro-F1 is enabled only after an official site-disjoint split exists. Parsing, prompts, splits, and seeds are frozen.
+
+Calibration uses 15-bin expected calibration error and area under the risk--coverage curve (AURC). Explanation quality is evaluated by event correctness, support by visible evidence, contradiction rate, and hallucination rate; CIDEr is omitted from the primary analysis because lexical overlap is not evidence faithfulness. Three blinded raters score a stratified test subset, with inter-rater agreement and adjudication rate reported.
+
+All model results are mean $\pm$ standard deviation over three seeds. Paired group bootstrap confidence intervals use 10,000 resamples at the location/flight-group level. The date/content proxy split is permitted only for parser, dataloader, and training smoke tests; its scores cannot enter the main table. If acquisition provenance remains incomplete, location generalization is removed rather than approximated with exact-context resampling. The primary comparison (\method versus grounded-caption LoRA) uses a paired permutation test with Holm correction for prespecified secondary comparisons. Model selection uses validation macro-F1 and AURC; test groups are evaluated only after configuration freeze.
+
+\input{table/main_results}
+\input{table/peft_efficiency}
+
+\subsection{Implementation and Data Budgets}
+
+The primary student is Qwen3-VL-8B-Instruct. Context and crop images preserve aspect ratio with a shared visual-token budget; allocation is ablated rather than independently increasing compute for the joint model. The initial LoRA configuration uses rank $r=16$, $\alpha=32$, dropout $0.05$, AdamW, and three epochs. Learning rate, token budget, view-drop probabilities, $\gamma$, margin $m$, and $\lambda$ values are selected on validation groups from a small prespecified grid. The final paper will report exact hardware, peak memory, training energy/time, images per second, and trainable parameters.
+
+To test whether the method survives realistic curation limits, learning curves use 1, 4, 16, and all training groups per class. The dominant class is capped per epoch; no synthetic duplication is used in validation or test. Pair batches and complete context sets are sampled separately so two crops from one context cannot masquerade as independent evidence. Tail evaluation uses text-only zero-shot and 1-/4-shot exemplars without mixing tail test images into supervised core training.
+
+\subsection{Ablations, Stress Tests, and Error Analysis}
+
+The ablation matrix isolates paired views, audited captions, label-token weighting, graph neighbors, counterfactual unlikelihood, and view dropout. Set ablations compare max, log-sum-exp, and parameter-matched attention aggregation, plus shuffled or missing evidence crops. Neighbor negatives are compared with frequency-matched random negatives. Crop experiments compare oracle crops, detector/retriever proposals, spatially jittered crops, irrelevant same-scene crops, human-assigned evidence deletion, and size-matched random deletion. Counterfactual tests swap only one factor, including water location, material state, coverage state, and scene relation.
+
+\input{table/ablation}
+\input{table/robustness}
+\input{table/caption_quality}
+
+Error analysis reports a confusion-edge heat map and a fixed gallery of successes, abstentions, unsupported rationales, and leakage-like near duplicates. Every preregistered row is retained. A failed baseline is marked with the concrete hardware/software reason; no \tbd cell may remain in the submission version.
