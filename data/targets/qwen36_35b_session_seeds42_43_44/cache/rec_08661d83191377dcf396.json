@@ -1,0 +1,55 @@
+{
+  "prompt_version": "clear-uav-teacher-v3",
+  "identity": {
+    "record_uid": "rec_08661d83191377dcf396",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1026-0652-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1026-0652-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved two-lane road running vertically through a rural landscape.",
+      "To the left, there are multi-story white buildings and a circular paved area surrounded by trees.",
+      "To the right, there is a canal or drainage ditch lined with vegetation, adjacent to yellow agricultural fields.",
+      "Several vehicles, including cars and motorcycles, are visible on the road in the distance."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a zoomed-in view of the central section of the road shown in the context image.",
+      "The green rectangular object visible in the crop is located on the left shoulder of the road, near the white buildings seen in the context.",
+      "The vehicles and road markings in the crop correspond to the traffic and infrastructure visible in the wider context view."
+    ],
+    "description": "Aerial view of a rural road flanked by buildings and fields. A large, rectangular green object, appearing to be a tarp or netting, is spread across the left shoulder of the road. Several vehicles, including cars and motorcycles, are present on the roadway near the object.",
+    "evidence_visible": [
+      "A large, rectangular green object is spread flat on the ground on the left side of the road.",
+      "The object appears to be a green mesh or tarp, covering a significant portion of the road shoulder.",
+      "Vehicles, including a white car, a dark car, and motorcycles, are positioned on the road near the green object.",
+      "A person is visible standing near the green object on the road."
+    ],
+    "unclear": [
+      "The specific contents or purpose of the green object are unclear.",
+      "The exact nature of the activity involving the vehicles and the person near the object is unclear.",
+      "The material composition of the green object is unclear (e.g., plastic, fabric, netting)."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a paved two-lane road running vertically through a rural landscape.\",\n    \"To the left, there are multi-story white buildings and a circular paved area surrounded by trees.\",\n    \"To the right, there is a canal or drainage ditch lined with vegetation, adjacent to yellow agricultural fields.\",\n    \"Several vehicles, including cars and motorcycles, are visible on the road in the distance.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a zoomed-in view of the central section of the road shown in the context image.\",\n    \"The green rectangular object visible in the crop is located on the left shoulder of the road, near the white buildings seen in the context.\",\n    \"The vehicles and road markings in the crop correspond to the traffic and infrastructure visible in the wider context view.\"\n  ],\n  \"description\": \"Aerial view of a rural road flanked by buildings and fields. A large, rectangular green object, appearing to be a tarp or netting, is spread across the left shoulder of the road. Several vehicles, including cars and motorcycles, are present on the roadway near the object.\",\n  \"evidence_visible\": [\n    \"A large, rectangular green object is spread flat on the ground on the left side of the road.\",\n    \"The object appears to be a green mesh or tarp, covering a significant portion of the road shoulder.\",\n    \"Vehicles, including a white car, a dark car, and motorcycles, are positioned on the road near the green object.\",\n    \"A person is visible standing near the green object on the road.\"\n  ],\n  \"unclear\": [\n    \"The specific contents or purpose of the green object are unclear.\",\n    \"The exact nature of the activity involving the vehicles and the person near the object is unclear.\",\n    \"The material composition of the green object is unclear (e.g., plastic, fabric, netting).\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite_failed_attempts": [
+    {
+      "attempt": 0,
+      "raw": "```json\n{\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible evidence of a large, rectangular green mesh or tarp spread flat across the left shoulder of the paved road, covering the ground surface.\",\n    \"factors\": {},\n    \"uncertain\": false\n  },\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is a declarative audit hypothesis where the green mesh is visibly fragmented, torn, or only partially deployed, leaving significant areas of the road shoulder exposed.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the continuity of the green mesh; the actual image shows a continuous, intact sheet, whereas the neighbor requires visible gaps or damage.\",\n  \"missing_required_factors\": []\n}\n```",
+      "error": "Counterfactual evidence must be a positive assertion without a disclaimer"
+    },
+    {
+      "attempt": 1,
+      "raw": "```json\n{\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible evidence of a large, rectangular green mesh or tarp spread flat across the left shoulder of the paved road, covering the ground surface.\",\n    \"factors\": {},\n    \"uncertain\": false\n  },\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is a declarative audit hypothesis where the green mesh is visibly fragmented, torn, or only partially deployed, leaving significant areas of the road shoulder exposed.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the continuity of the green mesh; the actual image shows a continuous, intact sheet, whereas the neighbor requires visible gaps or damage.\",\n  \"missing_required_factors\": []\n}\n```",
+      "error": "Counterfactual evidence must be a positive assertion without a disclaimer"
+    },
+    {
+      "attempt": 2,
+      "raw": "```json\n{\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible evidence of a large, rectangular green mesh or tarp spread flat across the left shoulder of the paved road, covering the ground surface.\",\n    \"factors\": {},\n    \"uncertain\": false\n  },\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is a declarative audit hypothesis where the green mesh is visibly fragmented, torn, or only partially deployed, leaving significant areas of the road shoulder exposed.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the continuity of the green mesh; the actual image shows a continuous, intact sheet, whereas the neighbor requires visible gaps or damage.\",\n  \"missing_required_factors\": []\n}\n```",
+      "error": "Counterfactual evidence must be a positive assertion without a disclaimer"
+    }
+  ]
+}

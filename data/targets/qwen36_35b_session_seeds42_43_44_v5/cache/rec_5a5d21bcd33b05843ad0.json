@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_5a5d21bcd33b05843ad0",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1006-5046-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1006-5046-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a paved road running vertically through the center.",
+      "Large rectangular plots of green crops, likely rice, dominate the right side.",
+      "A cluster of residential buildings with grey tiled roofs is located in the upper left.",
+      "Smaller, irregularly shaped plots with varied vegetation and soil colors are visible in the lower left.",
+      "A dirt path intersects the main road and leads towards the residential area."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a high-magnification crop of the lower-left quadrant of the context image.",
+      "The brown, textured soil patch in the evidence corresponds to a specific plot in the context image.",
+      "The blue and green rectangular patches in the evidence are visible in the context image to the left of the brown soil."
+    ],
+    "description": "The context image shows a rural area with a road, residential buildings, and agricultural fields. The evidence image provides a detailed view of a specific plot of brown, tilled soil adjacent to smaller plots covered with blue and green materials, located in the lower-left section of the wider scene.",
+    "evidence_visible": [
+      "A large rectangular patch of brown, tilled soil with a rough texture.",
+      "To the left of the soil, there are smaller plots covered with bright blue and green materials.",
+      "A narrow strip of green vegetation borders the bottom of the brown soil patch.",
+      "The ground appears dry and uneven in the brown soil area."
+    ],
+    "unclear": [
+      "The specific type of crop or material on the blue and green patches.",
+      "The exact purpose of the brown soil patch (e.g., fallow, prepared for planting).",
+      "The identity of the residential buildings or the specific location."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a paved road running vertically through the center.\",\n    \"Large rectangular plots of green crops, likely rice, dominate the right side.\",\n    \"A cluster of residential buildings with grey tiled roofs is located in the upper left.\",\n    \"Smaller, irregularly shaped plots with varied vegetation and soil colors are visible in the lower left.\",\n    \"A dirt path intersects the main road and leads towards the residential area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a high-magnification crop of the lower-left quadrant of the context image.\",\n    \"The brown, textured soil patch in the evidence corresponds to a specific plot in the context image.\",\n    \"The blue and green rectangular patches in the evidence are visible in the context image to the left of the brown soil.\"\n  ],\n  \"description\": \"The context image shows a rural area with a road, residential buildings, and agricultural fields. The evidence image provides a detailed view of a specific plot of brown, tilled soil adjacent to smaller plots covered with blue and green materials, located in the lower-left section of the wider scene.\",\n  \"evidence_visible\": [\n    \"A large rectangular patch of brown, tilled soil with a rough texture.\",\n    \"To the left of the soil, there are smaller plots covered with bright blue and green materials.\",\n    \"A narrow strip of green vegetation borders the bottom of the brown soil patch.\",\n    \"The ground appears dry and uneven in the brown soil area.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop or material on the blue and green patches.\",\n    \"The exact purpose of the brown soil patch (e.g., fallow, prepared for planting).\",\n    \"The identity of the residential buildings or the specific location.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large rectangular patch of brown, tilled soil adjacent to smaller plots covered with bright blue and green materials, located in the lower-left section of the wider scene.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large rectangular patch of brown, tilled soil adjacent to smaller plots covered with bright blue and green materials, located in the lower-left section of the wider scene.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a large rectangular patch of brown, tilled soil situated next to smaller plots covered with bright blue and green materials. This visual configuration matches the description of bare soil netting support in the lower-left section of the wider scene.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims 'incomplete soil cover' is supported by evidence showing soil where protective covering is visibly incomplete. However, the evidence image shows a large area of bare, tilled soil (no cover) and adjacent plots with full coverage (blue/green nets). There is no visual evidence of a single plot where a protective covering is partially applied or 'incomplete'; the distinction is between covered and uncovered plots, not incomplete coverage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a large rectangular patch of brown, tilled soil situated next to smaller plots covered with bright blue and green materials. This visual configuration matches the description of bare soil netting support in the lower-left section of the wider scene.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims 'incomplete soil cover' is supported by evidence showing soil where protective covering is visibly incomplete. However, the evidence image shows a large area of bare, tilled soil (no cover) and adjacent plots with full coverage (blue/green nets). There is no visual evidence of a single plot where a protective covering is partially applied or 'incomplete'; the distinction is between covered and uncovered plots, not incomplete coverage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

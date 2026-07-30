@@ -1,0 +1,83 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_02ebb739206ee7c9d030",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0815-5143-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0815-5143-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a dark river winding through green vegetation and agricultural fields. Residential buildings with varied roof colors (grey, red, blue) are clustered along the waterway. Solar panels are visible on several rooftops."
+    ],
+    "cross_view_relations": [
+      "The close-up crop corresponds to the lower-left quadrant of the wide image, specifically focusing on a cluster of houses near the riverbank where a white vehicle is parked on a paved path."
+    ],
+    "description": "Aerial imagery of a rural village with a river and green fields. A close-up view details a specific residential cluster featuring a white car, a house with a blue roof, and a structure with an exposed brick framework, situated near solar-paneled buildings.",
+    "evidence_visible": [
+      "Close-up of a paved path between houses. A white sedan is parked on the path. A house with a bright blue roof is visible. Adjacent to it is a structure with an exposed brick framework, appearing unfinished or under construction. Solar panels are visible on a roof in the foreground."
+    ],
+    "unclear": [
+      "Exact status of the exposed brick structure (abandoned vs. under construction), specific license plate details, and interior contents of the buildings."
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"Aerial view of a rural settlement with a dark river winding through green vegetation and agricultural fields. Residential buildings with varied roof colors (grey, red, blue) are clustered along the waterway. Solar panels are visible on several rooftops.\"\n],\n\"cross_view_relations\": [\n\"The close-up crop corresponds to the lower-left quadrant of the wide image, specifically focusing on a cluster of houses near the riverbank where a white vehicle is parked on a paved path.\"\n],\n\"description\": \"Aerial imagery of a rural village with a river and green fields. A close-up view details a specific residential cluster featuring a white car, a house with a blue roof, and a structure with an exposed brick framework, situated near solar-paneled buildings.\",\n\"evidence_visible\": [\n\"Close-up of a paved path between houses. A white sedan is parked on the path. A house with a bright blue roof is visible. Adjacent to it is a structure with an exposed brick framework, appearing unfinished or under construction. Solar panels are visible on a roof in the foreground.\"\n],\n\"unclear\": [\n\"Exact status of the exposed brick structure (abandoned vs. under construction), specific license plate details, and interior contents of the buildings.\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a complete collapse of the wall structure (exposed framework) rather than general surface damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the close-up evidence shows a structure with an exposed brick framework and missing roof sections, consistent with a visibly collapsed wall.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a complete collapse of the wall structure (exposed framework) rather than general surface damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the close-up evidence shows a structure with an exposed brick framework and missing roof sections, consistent with a visibly collapsed wall.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The close-up evidence image clearly displays a structure with an exposed brick framework and missing roof sections, which visually confirms a collapsed wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The close-up evidence image shows a building with significant structural damage, specifically an exposed brick framework and missing roof sections, which supports the claim of visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The close-up evidence image clearly displays a structure with an exposed brick framework and missing roof sections, which visually confirms a collapsed wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The close-up evidence image shows a building with significant structural damage, specifically an exposed brick framework and missing roof sections, which supports the claim of visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

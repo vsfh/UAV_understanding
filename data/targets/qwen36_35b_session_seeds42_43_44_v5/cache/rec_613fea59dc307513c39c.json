@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_613fea59dc307513c39c",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0814-3742-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0814-3742-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area with residential buildings, green fields, and a large rectangular plot of tilled brown soil.",
+      "A narrow waterway or drainage ditch runs along the left side of the tilled plot.",
+      "A paved road separates the tilled plot from a cluster of buildings in the lower right.",
+      "Blue tarps or plastic sheeting are visible on the ground near the road and buildings."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the lower right section of the context image.",
+      "The large tilled field in the context image is visible in the upper left of the crop.",
+      "The road and the buildings with blue sheeting are the central focus of the crop.",
+      "The waterway seen in the context image is visible to the left of the buildings in the crop."
+    ],
+    "description": "An aerial view shows a rural landscape with a large tilled field adjacent to a road and buildings. A zoomed-in view details a structure with a damaged or open roof, next to a road where blue plastic sheeting covers the ground. A narrow waterway runs alongside the property.",
+    "evidence_visible": [
+      "A building with a partially collapsed or open roof, revealing dark interior materials.",
+      "A paved road runs directly alongside the building.",
+      "Bright blue plastic sheeting is spread on the ground next to the road and building.",
+      "A small, separate structure with a traditional tiled roof is visible nearby.",
+      "The large tilled field is visible in the background."
+    ],
+    "unclear": [
+      "The specific contents of the damaged building.",
+      "The purpose of the blue plastic sheeting.",
+      "The exact nature of the damage to the roof.",
+      "The identity of the people or vehicles, if any, in the scene."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural area with residential buildings, green fields, and a large rectangular plot of tilled brown soil.\",\n    \"A narrow waterway or drainage ditch runs along the left side of the tilled plot.\",\n    \"A paved road separates the tilled plot from a cluster of buildings in the lower right.\",\n    \"Blue tarps or plastic sheeting are visible on the ground near the road and buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the lower right section of the context image.\",\n    \"The large tilled field in the context image is visible in the upper left of the crop.\",\n    \"The road and the buildings with blue sheeting are the central focus of the crop.\",\n    \"The waterway seen in the context image is visible to the left of the buildings in the crop.\"\n  ],\n  \"description\": \"An aerial view shows a rural landscape with a large tilled field adjacent to a road and buildings. A zoomed-in view details a structure with a damaged or open roof, next to a road where blue plastic sheeting covers the ground. A narrow waterway runs alongside the property.\",\n  \"evidence_visible\": [\n    \"A building with a partially collapsed or open roof, revealing dark interior materials.\",\n    \"A paved road runs directly alongside the building.\",\n    \"Bright blue plastic sheeting is spread on the ground next to the road and building.\",\n    \"A small, separate structure with a traditional tiled roof is visible nearby.\",\n    \"The large tilled field is visible in the background.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the damaged building.\",\n    \"The purpose of the blue plastic sheeting.\",\n    \"The exact nature of the damage to the roof.\",\n    \"The identity of the people or vehicles, if any, in the scene.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image explicitly shows a roof section that has fallen in or collapsed, which is a specific instance of structural damage, but the label 'collapsed house wall' is the precise description of the visible failure mode.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a building with a partially collapsed or open roof, revealing dark interior materials.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image explicitly shows a roof section that has fallen in or collapsed, which is a specific instance of structural damage, but the label 'collapsed house wall' is the precise description of the visible failure mode.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a building with a partially collapsed or open roof, revealing dark interior materials.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a building with a damaged roof structure, specifically open sections revealing dark interior materials, which directly supports the claim of a collapsed or open roof.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image evidence shows a building with a damaged roof structure, which constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a building with a damaged roof structure, specifically open sections revealing dark interior materials, which directly supports the claim of a collapsed or open roof.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows a building with a damaged roof structure, which constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

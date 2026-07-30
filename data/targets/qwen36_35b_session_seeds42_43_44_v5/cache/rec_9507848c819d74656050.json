@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_9507848c819d74656050",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1007-6295-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1007-6295-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a wide, murky river with two long, flat barges.",
+      "A shoreline on the left features a white building complex, a small pier, and a dirt embankment.",
+      "The foreground barge is moving, creating a visible wake.",
+      "The background barge is stationary or moving slowly near the shore."
+    ],
+    "cross_view_relations": [
+      "The crop is a high-resolution zoom of the barge located in the foreground of the context image.",
+      "The spatial orientation of the barge in the crop matches the foreground vessel in the context view."
+    ],
+    "description": "Aerial imagery shows a long, flat barge navigating a wide river. The vessel features a reddish-brown hull and a cabin structure at the stern. The cargo hold is covered by a continuous, segmented green tarp. The barge is moving through murky water, leaving a visible wake.",
+    "evidence_visible": [
+      "Close-up of the barge's cargo hold covered by a green, segmented tarp.",
+      "The stern cabin is reddish-brown with a flat roof.",
+      "The bow area contains various equipment and machinery.",
+      "The water is opaque and brownish-grey."
+    ],
+    "unclear": [
+      "The specific contents of the cargo hold beneath the tarp.",
+      "The exact type of machinery on the bow.",
+      "The identity of the building on the shore."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a wide, murky river with two long, flat barges.\",\n    \"A shoreline on the left features a white building complex, a small pier, and a dirt embankment.\",\n    \"The foreground barge is moving, creating a visible wake.\",\n    \"The background barge is stationary or moving slowly near the shore.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a high-resolution zoom of the barge located in the foreground of the context image.\",\n    \"The spatial orientation of the barge in the crop matches the foreground vessel in the context view.\"\n  ],\n  \"description\": \"Aerial imagery shows a long, flat barge navigating a wide river. The vessel features a reddish-brown hull and a cabin structure at the stern. The cargo hold is covered by a continuous, segmented green tarp. The barge is moving through murky water, leaving a visible wake.\",\n  \"evidence_visible\": [\n    \"Close-up of the barge's cargo hold covered by a green, segmented tarp.\",\n    \"The stern cabin is reddish-brown with a flat roof.\",\n    \"The bow area contains various equipment and machinery.\",\n    \"The water is opaque and brownish-grey.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the cargo hold beneath the tarp.\",\n    \"The exact type of machinery on the bow.\",\n    \"The identity of the building on the shore.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible; the image depicts a barge on water rather than exposed soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a long barge navigating a wide river with a cargo hold covered by a continuous, segmented green tarp.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible; the image depicts a barge on water rather than exposed soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a long barge navigating a wide river with a cargo hold covered by a continuous, segmented green tarp.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a long barge with a cargo hold covered by a continuous, segmented green tarp. The statement accurately describes the visible evidence of a barge navigating a river with this specific covering.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims 'incomplete soil cover' and 'soil for which protective covering is visibly incomplete'. The image shows a barge with a cargo hold covered by a green tarp. There is no visible soil, nor is there any indication of incomplete soil cover. The claim invents a context (soil) not present in the image.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a long barge with a cargo hold covered by a continuous, segmented green tarp. The statement accurately describes the visible evidence of a barge navigating a river with this specific covering.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims 'incomplete soil cover' and 'soil for which protective covering is visibly incomplete'. The image shows a barge with a cargo hold covered by a green tarp. There is no visible soil, nor is there any indication of incomplete soil cover. The claim invents a context (soil) not present in the image.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

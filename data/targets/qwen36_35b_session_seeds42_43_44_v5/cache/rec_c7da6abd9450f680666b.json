@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_c7da6abd9450f680666b",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0122-7226-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0122-7226-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a large aquaculture or salt farming complex with numerous rectangular ponds separated by earthen dikes.",
+      "Ponds contain water of varying colors, from dark green to murky brown.",
+      "A network of unpaved roads runs between the ponds.",
+      "A small cluster of buildings is situated on a corner of a dike in the lower center of the frame.",
+      "Distant background shows a flat landscape with scattered structures."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the specific building cluster visible in the lower center of the context image.",
+      "The spatial orientation of the buildings and the adjacent water channel is consistent between the wide shot and the close-up.",
+      "The white boat visible in the channel in the context image is also visible in the crop."
+    ],
+    "description": "The images show an aquaculture facility with rectangular ponds and earthen dikes. A close-up view details a small cluster of structures on a dike corner, including a long white building with a brown roof and a smaller adjacent shed. A white boat is moored in the channel next to the buildings.",
+    "evidence_visible": [
+      "A long, rectangular building with white walls and a brown corrugated metal roof.",
+      "A smaller, dilapidated structure with a rusted roof adjacent to the main building.",
+      "A white boat moored in the channel running parallel to the buildings.",
+      "A utility pole standing near the buildings.",
+      "Patches of white material, possibly snow or salt, on the ground near the structures."
+    ],
+    "unclear": [
+      "The specific contents of the buildings.",
+      "The exact type of farming (e.g., shrimp, fish, salt).",
+      "The condition of the smaller shed's interior.",
+      "The identity of any people present."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a large aquaculture or salt farming complex with numerous rectangular ponds separated by earthen dikes.\",\n    \"Ponds contain water of varying colors, from dark green to murky brown.\",\n    \"A network of unpaved roads runs between the ponds.\",\n    \"A small cluster of buildings is situated on a corner of a dike in the lower center of the frame.\",\n    \"Distant background shows a flat landscape with scattered structures.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the specific building cluster visible in the lower center of the context image.\",\n    \"The spatial orientation of the buildings and the adjacent water channel is consistent between the wide shot and the close-up.\",\n    \"The white boat visible in the channel in the context image is also visible in the crop.\"\n  ],\n  \"description\": \"The images show an aquaculture facility with rectangular ponds and earthen dikes. A close-up view details a small cluster of structures on a dike corner, including a long white building with a brown roof and a smaller adjacent shed. A white boat is moored in the channel next to the buildings.\",\n  \"evidence_visible\": [\n    \"A long, rectangular building with white walls and a brown corrugated metal roof.\",\n    \"A smaller, dilapidated structure with a rusted roof adjacent to the main building.\",\n    \"A white boat moored in the channel running parallel to the buildings.\",\n    \"A utility pole standing near the buildings.\",\n    \"Patches of white material, possibly snow or salt, on the ground near the structures.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the buildings.\",\n    \"The exact type of farming (e.g., shrimp, fish, salt).\",\n    \"The condition of the smaller shed's interior.\",\n    \"The identity of any people present.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the specific state of the smaller shed, which appears to be a ruin or a structure undergoing demolition, rather than a larger building that has sustained structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a small, dilapidated structure with a rusted roof adjacent to a larger white building, which appears to be in a state of disrepair or partial collapse.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the specific state of the smaller shed, which appears to be a ruin or a structure undergoing demolition, rather than a larger building that has sustained structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a small, dilapidated structure with a rusted roof adjacent to a larger white building, which appears to be in a state of disrepair or partial collapse.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a small, dilapidated structure with a rusted roof adjacent to a larger white building. The smaller structure appears to be in a state of disrepair, with a collapsed or missing section of the roof and walls, which supports the claim of a building demolition or partial collapse.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image clearly shows visible structural damage to a building, specifically the smaller structure with a rusted roof that appears to be partially collapsed or in disrepair.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a small, dilapidated structure with a rusted roof adjacent to a larger white building. The smaller structure appears to be in a state of disrepair, with a collapsed or missing section of the roof and walls, which supports the claim of a building demolition or partial collapse.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image clearly shows visible structural damage to a building, specifically the smaller structure with a rusted roof that appears to be partially collapsed or in disrepair.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

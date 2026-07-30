@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_bc2b91b244f1487f39dd",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0303-6123-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0303-6123-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a settlement adjacent to a river.",
+      "A large rectangular plot of land has been cleared of structures, leaving bare earth.",
+      "A paved road with yellow center lines curves around the cleared plot.",
+      "A white vehicle is visible on the road.",
+      "Dense residential buildings with grey and red roofs are located to the right and bottom of the cleared area.",
+      "A yellow-roofed building is visible on the far left edge.",
+      "Boats are docked along the riverbank in the lower left."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the central cleared plot and the road shown in the context image.",
+      "The spatial relationship between the cleared land, the road, and the adjacent buildings is consistent across both views.",
+      "The white vehicle is visible in both the context and evidence images."
+    ],
+    "description": "Aerial imagery shows a large, cleared plot of bare earth bordered by a paved road and dense residential buildings. A white vehicle is present on the road. The site appears to be a construction or demolition zone adjacent to a river, with no active construction equipment visible in the immediate vicinity.",
+    "evidence_visible": [
+      "Close-up of the cleared rectangular plot showing disturbed soil and tire tracks.",
+      "Green mesh fencing lines the perimeter of the cleared area.",
+      "A white car is positioned on the curved road bordering the site.",
+      "A blue tarp or netting is visible on the ground within the cleared area.",
+      "The texture of the bare earth and the layout of the adjacent buildings are clearly defined."
+    ],
+    "unclear": [
+      "The specific purpose of the cleared land (e.g., future construction, storage).",
+      "The exact date of the imagery.",
+      "The legal status or ownership of the land."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a settlement adjacent to a river.\",\n    \"A large rectangular plot of land has been cleared of structures, leaving bare earth.\",\n    \"A paved road with yellow center lines curves around the cleared plot.\",\n    \"A white vehicle is visible on the road.\",\n    \"Dense residential buildings with grey and red roofs are located to the right and bottom of the cleared area.\",\n    \"A yellow-roofed building is visible on the far left edge.\",\n    \"Boats are docked along the riverbank in the lower left.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the central cleared plot and the road shown in the context image.\",\n    \"The spatial relationship between the cleared land, the road, and the adjacent buildings is consistent across both views.\",\n    \"The white vehicle is visible in both the context and evidence images.\"\n  ],\n  \"description\": \"Aerial imagery shows a large, cleared plot of bare earth bordered by a paved road and dense residential buildings. A white vehicle is present on the road. The site appears to be a construction or demolition zone adjacent to a river, with no active construction equipment visible in the immediate vicinity.\",\n  \"evidence_visible\": [\n    \"Close-up of the cleared rectangular plot showing disturbed soil and tire tracks.\",\n    \"Green mesh fencing lines the perimeter of the cleared area.\",\n    \"A white car is positioned on the curved road bordering the site.\",\n    \"A blue tarp or netting is visible on the ground within the cleared area.\",\n    \"The texture of the bare earth and the layout of the adjacent buildings are clearly defined.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the cleared land (e.g., future construction, storage).\",\n    \"The exact date of the imagery.\",\n    \"The legal status or ownership of the land.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the complete removal of the structure leaving a cleared plot of bare earth, whereas building damage would show visible structural damage to a standing building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a large rectangular plot of land that has been cleared of structures, leaving bare earth and disturbed soil, bordered by a paved road and adjacent residential buildings.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the complete removal of the structure leaving a cleared plot of bare earth, whereas building damage would show visible structural damage to a standing building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a large rectangular plot of land that has been cleared of structures, leaving bare earth and disturbed soil, bordered by a paved road and adjacent residential buildings.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence directly supports the claim of a large rectangular plot of land that has been cleared of structures. The visual data shows bare earth, disturbed soil, and construction fencing, bordered by a paved road and adjacent residential buildings, which aligns perfectly with the description of a building demolition site.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible evidence of structural damage to a building. The image shows a large area of cleared land (bare earth) where structures have been removed, rather than a standing building with visible damage. The primary visual subject is the cleared plot, not a damaged structure.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence directly supports the claim of a large rectangular plot of land that has been cleared of structures. The visual data shows bare earth, disturbed soil, and construction fencing, bordered by a paved road and adjacent residential buildings, which aligns perfectly with the description of a building demolition site.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible evidence of structural damage to a building. The image shows a large area of cleared land (bare earth) where structures have been removed, rather than a standing building with visible damage. The primary visual subject is the cleared plot, not a damaged structure.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

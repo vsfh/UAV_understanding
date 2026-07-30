@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b9654acdb853914501fe",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1002-3313-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1002-3313-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to large green agricultural fields.",
+      "A canal runs horizontally across the lower portion of the frame.",
+      "A paved road separates the residential buildings from the fields.",
+      "A red running track is visible on the right side of the image.",
+      "A tall metal lattice tower stands in the upper right field."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of the area on the right side of the context image.",
+      "The red track in the context image corresponds to the red surface in the crop.",
+      "The green rectangular object in the crop is located between the red track and the adjacent buildings."
+    ],
+    "description": "The context image shows a village with a canal and fields, while the crop zooms in on a red running track adjacent to buildings. A green rectangular object, possibly a tarp or mat, is visible on the ground between the track and the structures. The scene depicts a rural environment with mixed residential and recreational infrastructure.",
+    "evidence_visible": [
+      "A red surface, likely a running track, occupies the right side of the frame.",
+      "A bright green rectangular object lies on the ground next to the red surface.",
+      "The roofs of adjacent buildings are visible on the left, featuring grey tiles and solar water heaters.",
+      "Vegetation and a white fence line separate the buildings from the track area."
+    ],
+    "unclear": [
+      "The specific material of the green object (tarp, mat, or painted surface).",
+      "The exact function of the red surface (track, court, or painted ground).",
+      "The identity of any objects on the rooftops."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to large green agricultural fields.\",\n    \"A canal runs horizontally across the lower portion of the frame.\",\n    \"A paved road separates the residential buildings from the fields.\",\n    \"A red running track is visible on the right side of the image.\",\n    \"A tall metal lattice tower stands in the upper right field.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of the area on the right side of the context image.\",\n    \"The red track in the context image corresponds to the red surface in the crop.\",\n    \"The green rectangular object in the crop is located between the red track and the adjacent buildings.\"\n  ],\n  \"description\": \"The context image shows a village with a canal and fields, while the crop zooms in on a red running track adjacent to buildings. A green rectangular object, possibly a tarp or mat, is visible on the ground between the track and the structures. The scene depicts a rural environment with mixed residential and recreational infrastructure.\",\n  \"evidence_visible\": [\n    \"A red surface, likely a running track, occupies the right side of the frame.\",\n    \"A bright green rectangular object lies on the ground next to the red surface.\",\n    \"The roofs of adjacent buildings are visible on the left, featuring grey tiles and solar water heaters.\",\n    \"Vegetation and a white fence line separate the buildings from the track area.\"\n  ],\n  \"unclear\": [\n    \"The specific material of the green object (tarp, mat, or painted surface).\",\n    \"The exact function of the red surface (track, court, or painted ground).\",\n    \"The identity of any objects on the rooftops.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous green sheet covering the ground area, whereas incomplete soil cover would show exposed soil patches within the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a bright green rectangular sheet of material lying on the ground adjacent to a red running track and residential buildings, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous green sheet covering the ground area, whereas incomplete soil cover would show exposed soil patches within the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a bright green rectangular sheet of material lying on the ground adjacent to a red running track and residential buildings, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a bright green rectangular sheet of material lying on the ground adjacent to a red running track and residential buildings. This visual evidence directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a red running track and a green sheet, but there is no visible evidence of 'incomplete soil cover' or bare soil patches that are not covered. The claim invents a condition (incomplete soil cover) not present in the visual data.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a bright green rectangular sheet of material lying on the ground adjacent to a red running track and residential buildings. This visual evidence directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a red running track and a green sheet, but there is no visible evidence of 'incomplete soil cover' or bare soil patches that are not covered. The claim invents a condition (incomplete soil cover) not present in the visual data.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

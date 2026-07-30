@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_3b21b57cc4055cd058f2",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0916-6807-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0916-6807-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of rectangular agricultural plots with dense green vegetation, separated by narrow dirt paths.",
+      "A waterway with green algae or scum runs horizontally across the mid-ground.",
+      "Industrial structures include a building with a blue roof and a long red-roofed shed.",
+      "An unpaved yard contains piles of raw materials and construction debris."
+    ],
+    "cross_view_relations": [
+      "The construction yard in the context image corresponds to the area shown in the evidence crop.",
+      "The yellow cylindrical tank visible on a roof in the context image is the primary subject of the evidence crop.",
+      "The evidence crop provides a closer view of the dark, muddy ground and scattered white and blue materials in the yard."
+    ],
+    "description": "Aerial imagery shows agricultural fields adjacent to an industrial yard. A yellow tank on a roof is visible in both views. The yard contains piles of materials, puddles, and a yellow vehicle. A green waterway separates the fields from the industrial area.",
+    "evidence_visible": [
+      "Close-up of a dark, unpaved surface with multiple puddles and tire tracks.",
+      "A yellow cylindrical tank is mounted on a small roof structure in the foreground.",
+      "Piles of white and blue materials are scattered on the ground.",
+      "A yellow construction vehicle is visible in the lower right corner.",
+      "A concrete wall borders the upper edge of the area."
+    ],
+    "unclear": [
+      "The specific contents of the white and blue piles.",
+      "The function of the yellow tank.",
+      "The exact type of construction vehicle.",
+      "The specific crop species in the fields."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of rectangular agricultural plots with dense green vegetation, separated by narrow dirt paths.\",\n    \"A waterway with green algae or scum runs horizontally across the mid-ground.\",\n    \"Industrial structures include a building with a blue roof and a long red-roofed shed.\",\n    \"An unpaved yard contains piles of raw materials and construction debris.\"\n  ],\n  \"cross_view_relations\": [\n    \"The construction yard in the context image corresponds to the area shown in the evidence crop.\",\n    \"The yellow cylindrical tank visible on a roof in the context image is the primary subject of the evidence crop.\",\n    \"The evidence crop provides a closer view of the dark, muddy ground and scattered white and blue materials in the yard.\"\n  ],\n  \"description\": \"Aerial imagery shows agricultural fields adjacent to an industrial yard. A yellow tank on a roof is visible in both views. The yard contains piles of materials, puddles, and a yellow vehicle. A green waterway separates the fields from the industrial area.\",\n  \"evidence_visible\": [\n    \"Close-up of a dark, unpaved surface with multiple puddles and tire tracks.\",\n    \"A yellow cylindrical tank is mounted on a small roof structure in the foreground.\",\n    \"Piles of white and blue materials are scattered on the ground.\",\n    \"A yellow construction vehicle is visible in the lower right corner.\",\n    \"A concrete wall borders the upper edge of the area.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the white and blue piles.\",\n    \"The function of the yellow tank.\",\n    \"The exact type of construction vehicle.\",\n    \"The specific crop species in the fields.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of the white and blue materials on the ground; these materials are visible in the evidence, whereas incomplete soil cover would imply a lack of such protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported by visible evidence of an industrial yard containing exposed dark soil and multiple puddles, where piles of white and blue materials are scattered on the ground, consistent with dust-control netting or cover materials.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of the white and blue materials on the ground; these materials are visible in the evidence, whereas incomplete soil cover would imply a lack of such protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by visible evidence of an industrial yard containing exposed dark soil and multiple puddles, where piles of white and blue materials are scattered on the ground, consistent with dust-control netting or cover materials.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays an industrial yard with exposed dark soil, multiple puddles, and scattered piles of white and blue materials. These visual elements directly support the description of bare soil netting and dust-control materials.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a large area of exposed dark soil with no protective covering, which visually confirms that the soil cover is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays an industrial yard with exposed dark soil, multiple puddles, and scattered piles of white and blue materials. These visual elements directly support the description of bare soil netting and dust-control materials.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a large area of exposed dark soil with no protective covering, which visually confirms that the soil cover is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

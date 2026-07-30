@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_64b803120a7d7740636c",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0116-8550-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0116-8550-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a dense urban area with mixed building types, including multi-story structures with grey and blue roofs.",
+      "Narrow paved roads and alleys separate the buildings.",
+      "Vegetation is visible as trees and small patches of greenery between structures.",
+      "A white van is parked on a road in the upper right quadrant.",
+      "The lighting suggests daytime with distinct shadows cast by buildings."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the large white building with a blue awning located in the lower right section of the context image.",
+      "The spatial arrangement of the white building relative to the adjacent grey-roofed structures is consistent between the wide view and the crop.",
+      "The blue awning and the specific window layout on the white building are clearly visible in both views."
+    ],
+    "description": "The context image shows a dense urban neighborhood with varied architecture. The crop provides a detailed view of a specific white multi-story building with a blue awning, situated among other structures with grey roofs. The relationship confirms the crop is a localized section of the broader scene, highlighting architectural details like windows and roof features.",
+    "evidence_visible": [
+      "Close-up of a white multi-story building with numerous rectangular windows.",
+      "A blue awning extends from the side of the building.",
+      "Adjacent buildings have grey tiled or flat roofs.",
+      "A paved area or courtyard is visible in front of the white building.",
+      "Some debris or objects are scattered on the ground near the blue awning.",
+      "A curved architectural feature is visible on the left side of the white building."
+    ],
+    "unclear": [
+      "The specific function or business type of the buildings.",
+      "The exact date the images were taken.",
+      "The identity of any people or vehicles present.",
+      "The material composition of the roofs beyond visual appearance (e.g., tile vs. concrete)."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a dense urban area with mixed building types, including multi-story structures with grey and blue roofs.\",\n    \"Narrow paved roads and alleys separate the buildings.\",\n    \"Vegetation is visible as trees and small patches of greenery between structures.\",\n    \"A white van is parked on a road in the upper right quadrant.\",\n    \"The lighting suggests daytime with distinct shadows cast by buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the large white building with a blue awning located in the lower right section of the context image.\",\n    \"The spatial arrangement of the white building relative to the adjacent grey-roofed structures is consistent between the wide view and the crop.\",\n    \"The blue awning and the specific window layout on the white building are clearly visible in both views.\"\n  ],\n  \"description\": \"The context image shows a dense urban neighborhood with varied architecture. The crop provides a detailed view of a specific white multi-story building with a blue awning, situated among other structures with grey roofs. The relationship confirms the crop is a localized section of the broader scene, highlighting architectural details like windows and roof features.\",\n  \"evidence_visible\": [\n    \"Close-up of a white multi-story building with numerous rectangular windows.\",\n    \"A blue awning extends from the side of the building.\",\n    \"Adjacent buildings have grey tiled or flat roofs.\",\n    \"A paved area or courtyard is visible in front of the white building.\",\n    \"Some debris or objects are scattered on the ground near the blue awning.\",\n    \"A curved architectural feature is visible on the left side of the white building.\"\n  ],\n  \"unclear\": [\n    \"The specific function or business type of the buildings.\",\n    \"The exact date the images were taken.\",\n    \"The identity of any people or vehicles present.\",\n    \"The material composition of the roofs beyond visual appearance (e.g., tile vs. concrete).\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the absence of structural collapse or debris; the building stands intact, which contradicts the definition of active or recent demolition.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the visible evidence shows a white multi-story building with a blue awning that appears structurally intact, with no visible signs of active or recent demolition such as rubble, collapsed walls, or heavy machinery.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the absence of structural collapse or debris; the building stands intact, which contradicts the definition of active or recent demolition.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the visible evidence shows a white multi-story building with a blue awning that appears structurally intact, with no visible signs of active or recent demolition such as rubble, collapsed walls, or heavy machinery.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a white multi-story building with a blue awning that appears structurally intact. There are no visible signs of active or recent demolition such as rubble, collapsed walls, or heavy machinery.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The visible evidence shows a building that appears structurally intact with no visible signs of damage such as collapsed walls or debris.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a white multi-story building with a blue awning that appears structurally intact. There are no visible signs of active or recent demolition such as rubble, collapsed walls, or heavy machinery.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The visible evidence shows a building that appears structurally intact with no visible signs of damage such as collapsed walls or debris.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

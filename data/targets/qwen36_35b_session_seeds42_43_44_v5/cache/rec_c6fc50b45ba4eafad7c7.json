@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_c6fc50b45ba4eafad7c7",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0314-2101-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0314-2101-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to a large body of murky green water.",
+      "Residential buildings with varied roof colors (blue, grey, red) line a paved road on the left.",
+      "Agricultural plots and fish ponds are visible in the background.",
+      "A concrete embankment separates the built-up area from the water."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of a specific structure located on the concrete embankment shown in the wider context image.",
+      "The structure in the crop corresponds to the building with the blue corrugated roof situated near the water's edge in the main image."
+    ],
+    "description": "The images show a rural settlement bordering a large pond. The context view displays a row of houses along a road and a concrete embankment. The linked crop provides a detailed view of a specific single-story structure on this embankment, featuring a blue corrugated roof, a flat concrete roof with solar panels, and a fenced yard containing dark material.",
+    "evidence_visible": [
+      "A single-story structure with a blue corrugated metal roof and an adjacent flat concrete roof.",
+      "Two solar water heaters are mounted on the flat concrete roof.",
+      "A fenced enclosure contains a large pile of dark, loose material.",
+      "A small concrete pier or walkway extends from the structure into the water.",
+      "A small garden plot with green vegetation is visible in the foreground."
+    ],
+    "unclear": [
+      "The specific contents of the fenced enclosure.",
+      "The exact function of the building (residential vs. storage).",
+      "The identity of any persons present."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to a large body of murky green water.\",\n    \"Residential buildings with varied roof colors (blue, grey, red) line a paved road on the left.\",\n    \"Agricultural plots and fish ponds are visible in the background.\",\n    \"A concrete embankment separates the built-up area from the water.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of a specific structure located on the concrete embankment shown in the wider context image.\",\n    \"The structure in the crop corresponds to the building with the blue corrugated roof situated near the water's edge in the main image.\"\n  ],\n  \"description\": \"The images show a rural settlement bordering a large pond. The context view displays a row of houses along a road and a concrete embankment. The linked crop provides a detailed view of a specific single-story structure on this embankment, featuring a blue corrugated roof, a flat concrete roof with solar panels, and a fenced yard containing dark material.\",\n  \"evidence_visible\": [\n    \"A single-story structure with a blue corrugated metal roof and an adjacent flat concrete roof.\",\n    \"Two solar water heaters are mounted on the flat concrete roof.\",\n    \"A fenced enclosure contains a large pile of dark, loose material.\",\n    \"A small concrete pier or walkway extends from the structure into the water.\",\n    \"A small garden plot with green vegetation is visible in the foreground.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the fenced enclosure.\",\n    \"The exact function of the building (residential vs. storage).\",\n    \"The identity of any persons present.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a large pile of dark, loose material in a fenced enclosure, which indicates active demolition rather than just visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a fenced enclosure containing a large pile of dark, loose material adjacent to a structure with a blue corrugated roof and solar panels, indicating active or recent demolition activity.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a large pile of dark, loose material in a fenced enclosure, which indicates active demolition rather than just visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a fenced enclosure containing a large pile of dark, loose material adjacent to a structure with a blue corrugated roof and solar panels, indicating active or recent demolition activity.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a fenced enclosure containing a pile of dark, loose material (likely soil or debris) adjacent to a structure with a blue corrugated roof and solar panels. This visual evidence is consistent with the description of a demolition site or active construction activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a building with a blue roof and solar panels, but there is no visible evidence of structural damage (e.g., collapsed walls, broken windows, or debris fields) to the building itself. The dark pile is contained within a separate fenced area.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a fenced enclosure containing a pile of dark, loose material (likely soil or debris) adjacent to a structure with a blue corrugated roof and solar panels. This visual evidence is consistent with the description of a demolition site or active construction activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a building with a blue roof and solar panels, but there is no visible evidence of structural damage (e.g., collapsed walls, broken windows, or debris fields) to the building itself. The dark pile is contained within a separate fenced area.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

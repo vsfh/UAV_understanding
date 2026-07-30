@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_fc2bd8462c640054bef7",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0303-4105-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0303-4105-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a dense urban area with a main road running vertically on the left, lined with multi-story buildings and vehicles.",
+      "A large white-roofed structure is prominent in the lower-left foreground.",
+      "A construction site with exposed earth and blue tarps is visible in the center.",
+      "A sports field with a red track and green surface is located in the upper right.",
+      "Several residential or commercial buildings feature dark grey tiled roofs."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the area immediately to the right of the large white-roofed structure seen in the context image.",
+      "The building with the solar panels in the crop corresponds to the building with the dark grey roof located just right of the white roof in the context image.",
+      "The narrow alleyway in the crop is the space between the white-roofed building and the row of buildings with grey roofs."
+    ],
+    "description": "The images show a high-angle view of a built-up area. The context reveals a street scene with a large white-roofed building and a construction site. The linked crop focuses on the adjacent alleyway, highlighting a white car parked near a building with a dark grey tiled roof and a solar panel array.",
+    "evidence_visible": [
+      "A white sedan is parked in a narrow paved alleyway.",
+      "A building with a dark grey tiled roof features a rectangular array of solar panels.",
+      "The roof surface shows signs of wear, with some debris and possibly damaged tiles.",
+      "A small, glass-enclosed structure is visible on a lower roof section.",
+      "A green truck is parked on the street in the background of the crop."
+    ],
+    "unclear": [
+      "The specific type of the white sedan.",
+      "The exact number of solar panels.",
+      "The purpose of the glass-enclosed structure.",
+      "The condition of the debris on the roof."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a dense urban area with a main road running vertically on the left, lined with multi-story buildings and vehicles.\",\n    \"A large white-roofed structure is prominent in the lower-left foreground.\",\n    \"A construction site with exposed earth and blue tarps is visible in the center.\",\n    \"A sports field with a red track and green surface is located in the upper right.\",\n    \"Several residential or commercial buildings feature dark grey tiled roofs.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the area immediately to the right of the large white-roofed structure seen in the context image.\",\n    \"The building with the solar panels in the crop corresponds to the building with the dark grey roof located just right of the white roof in the context image.\",\n    \"The narrow alleyway in the crop is the space between the white-roofed building and the row of buildings with grey roofs.\"\n  ],\n  \"description\": \"The images show a high-angle view of a built-up area. The context reveals a street scene with a large white-roofed building and a construction site. The linked crop focuses on the adjacent alleyway, highlighting a white car parked near a building with a dark grey tiled roof and a solar panel array.\",\n  \"evidence_visible\": [\n    \"A white sedan is parked in a narrow paved alleyway.\",\n    \"A building with a dark grey tiled roof features a rectangular array of solar panels.\",\n    \"The roof surface shows signs of wear, with some debris and possibly damaged tiles.\",\n    \"A small, glass-enclosed structure is visible on a lower roof section.\",\n    \"A green truck is parked on the street in the background of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific type of the white sedan.\",\n    \"The exact number of solar panels.\",\n    \"The purpose of the glass-enclosed structure.\",\n    \"The condition of the debris on the roof.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the cleared ground and debris field in the context image, which indicates the removal of a structure, whereas building damage would imply a standing structure with visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a cleared plot of land with exposed earth and blue tarps in the center of the context image, indicating active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the cleared ground and debris field in the context image, which indicates the removal of a structure, whereas building damage would imply a standing structure with visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a cleared plot of land with exposed earth and blue tarps in the center of the context image, indicating active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The context image clearly shows a rectangular plot of land in the center that has been cleared of structures, exposing bare earth. Blue tarps are visible on the ground and surrounding the perimeter, which is consistent with active or recent demolition work.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a building with solar panels on the roof. While the roof appears weathered, there is no visible evidence of structural damage (e.g., collapsed walls, missing roof sections, or debris) to support the claim of damage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The context image clearly shows a rectangular plot of land in the center that has been cleared of structures, exposing bare earth. Blue tarps are visible on the ground and surrounding the perimeter, which is consistent with active or recent demolition work.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a building with solar panels on the roof. While the roof appears weathered, there is no visible evidence of structural damage (e.g., collapsed walls, missing roof sections, or debris) to support the claim of damage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

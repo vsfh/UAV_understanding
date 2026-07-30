@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_06d8b5093d0c30775514",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-05-01_2025-05-29/collapsed_house_wall/original/0529-4244-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-05-01_2025-05-29/collapsed_house_wall/cropped/0529-4244-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring large rectangular agricultural fields with dry, brown crop stubble.",
+      "A paved road network intersects the fields and connects to a residential area on the right.",
+      "A prominent single-story building with a blue hip roof and a concrete driveway is situated near the road intersection.",
+      "A narrow canal or waterway runs vertically through the right side of the frame, separating the fields from the houses.",
+      "The residential area contains multiple structures with varying roof colors, including grey, red, and blue."
+    ],
+    "cross_view_relations": [
+      "The high-magnification crop isolates a specific cluster of buildings located on the far right edge of the wide context image.",
+      "The crop focuses on a structure with a bright blue corrugated metal roof, which is visible in the context image as part of the dense housing cluster.",
+      "The spatial relationship confirms the crop is a zoomed-in detail of the residential zone adjacent to the waterway seen in the main view."
+    ],
+    "description": "The wide image shows a rural scene with harvested fields and a road network. The crop provides a detailed view of a specific residential cluster on the right, highlighting a house with a bright blue metal roof and a white vehicle parked nearby, confirming the location within the broader context.",
+    "evidence_visible": [
+      "A building with a bright blue corrugated metal roof is the central subject.",
+      "A white vehicle is parked on the concrete surface next to the blue-roofed building.",
+      "Adjacent structures include a house with a grey tiled roof and another with a reddish-brown roof.",
+      "A narrow paved road runs vertically along the left side of the cluster.",
+      "A small patch of green vegetation is visible near the bottom left corner of the crop."
+    ],
+    "unclear": [
+      "The specific type of the white vehicle is unclear due to resolution.",
+      "The interior or specific use of the buildings is not visible.",
+      "The exact date of the imagery cannot be determined."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring large rectangular agricultural fields with dry, brown crop stubble.\",\n    \"A paved road network intersects the fields and connects to a residential area on the right.\",\n    \"A prominent single-story building with a blue hip roof and a concrete driveway is situated near the road intersection.\",\n    \"A narrow canal or waterway runs vertically through the right side of the frame, separating the fields from the houses.\",\n    \"The residential area contains multiple structures with varying roof colors, including grey, red, and blue.\"\n  ],\n  \"cross_view_relations\": [\n    \"The high-magnification crop isolates a specific cluster of buildings located on the far right edge of the wide context image.\",\n    \"The crop focuses on a structure with a bright blue corrugated metal roof, which is visible in the context image as part of the dense housing cluster.\",\n    \"The spatial relationship confirms the crop is a zoomed-in detail of the residential zone adjacent to the waterway seen in the main view.\"\n  ],\n  \"description\": \"The wide image shows a rural scene with harvested fields and a road network. The crop provides a detailed view of a specific residential cluster on the right, highlighting a house with a bright blue metal roof and a white vehicle parked nearby, confirming the location within the broader context.\",\n  \"evidence_visible\": [\n    \"A building with a bright blue corrugated metal roof is the central subject.\",\n    \"A white vehicle is parked on the concrete surface next to the blue-roofed building.\",\n    \"Adjacent structures include a house with a grey tiled roof and another with a reddish-brown roof.\",\n    \"A narrow paved road runs vertically along the left side of the cluster.\",\n    \"A small patch of green vegetation is visible near the bottom left corner of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific type of the white vehicle is unclear due to resolution.\",\n    \"The interior or specific use of the buildings is not visible.\",\n    \"The exact date of the imagery cannot be determined.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a total structural failure of the wall element itself, whereas building damage is a broader category that could include superficial damage like broken windows or roof leaks which are not the primary feature here.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-magnification evidence image clearly shows a structure with a bright blue corrugated metal roof where the adjacent wall has visibly collapsed, exposing the internal wooden framework and debris.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a total structural failure of the wall element itself, whereas building damage is a broader category that could include superficial damage like broken windows or roof leaks which are not the primary feature here.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-magnification evidence image clearly shows a structure with a bright blue corrugated metal roof where the adjacent wall has visibly collapsed, exposing the internal wooden framework and debris.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification evidence image clearly shows a building with a bright blue corrugated metal roof. Adjacent to this building, there is a structure with a completely collapsed roof and walls, exposing the internal wooden framework and debris. This visual evidence directly supports the claim of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays a building with a bright blue roof next to a structure with a collapsed roof and walls, exposing internal wooden beams and debris. This constitutes visible structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification evidence image clearly shows a building with a bright blue corrugated metal roof. Adjacent to this building, there is a structure with a completely collapsed roof and walls, exposing the internal wooden framework and debris. This visual evidence directly supports the claim of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a building with a bright blue roof next to a structure with a collapsed roof and walls, exposing internal wooden beams and debris. This constitutes visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

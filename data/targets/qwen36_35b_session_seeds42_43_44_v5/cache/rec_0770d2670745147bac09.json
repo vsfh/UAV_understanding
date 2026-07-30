@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0770d2670745147bac09",
+    "source_class": "construction_waste",
+    "negative_label": "construction_materials",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/construction_waste/original/0205-7687-construction_waste.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/construction_waste/cropped/0205-7687-construction_waste.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural-urban interface featuring a canal running vertically through the center.",
+      "Large rectangular agricultural plots with green crops and dry vegetation on the left bank.",
+      "Residential apartment buildings and paved roads with parked vehicles on the upper right bank.",
+      "Greenhouse structures and smaller garden plots along the canal banks.",
+      "A small boat is visible on the water near the bottom center."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a zoomed-in view of the area on the right bank of the canal, situated between the water and the residential buildings.",
+      "The spatial relationship confirms the presence of small garden plots directly adjacent to the canal edge and the road.",
+      "The residential buildings in the background of the crop match the architectural style and location of the buildings in the upper right of the context image."
+    ],
+    "description": "Aerial imagery shows a canal separating agricultural fields from a residential area. A zoomed-in view of the right bank reveals small garden plots cluttered with white and blue plastic sheeting, debris, and makeshift structures situated between the water and a road with parked cars.",
+    "evidence_visible": [
+      "Close-up view of small garden plots adjacent to a road and canal.",
+      "Significant accumulation of white and blue plastic sheeting, tarps, and miscellaneous debris scattered across the ground.",
+      "Several vehicles, including a white sedan and a dark SUV, are parked on the paved road above the plots.",
+      "Red brick residential buildings are visible in the background."
+    ],
+    "unclear": [
+      "The specific contents of the white and blue piles are unclear.",
+      "The exact nature of the structures (e.g., temporary shelters vs. storage) is unclear.",
+      "The identity of the individuals or specific activities occurring in the scene cannot be determined."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a rural-urban interface featuring a canal running vertically through the center.\",\n    \"Large rectangular agricultural plots with green crops and dry vegetation on the left bank.\",\n    \"Residential apartment buildings and paved roads with parked vehicles on the upper right bank.\",\n    \"Greenhouse structures and smaller garden plots along the canal banks.\",\n    \"A small boat is visible on the water near the bottom center.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a zoomed-in view of the area on the right bank of the canal, situated between the water and the residential buildings.\",\n    \"The spatial relationship confirms the presence of small garden plots directly adjacent to the canal edge and the road.\",\n    \"The residential buildings in the background of the crop match the architectural style and location of the buildings in the upper right of the context image.\"\n  ],\n  \"description\": \"Aerial imagery shows a canal separating agricultural fields from a residential area. A zoomed-in view of the right bank reveals small garden plots cluttered with white and blue plastic sheeting, debris, and makeshift structures situated between the water and a road with parked cars.\",\n  \"evidence_visible\": [\n    \"Close-up view of small garden plots adjacent to a road and canal.\",\n    \"Significant accumulation of white and blue plastic sheeting, tarps, and miscellaneous debris scattered across the ground.\",\n    \"Several vehicles, including a white sedan and a dark SUV, are parked on the paved road above the plots.\",\n    \"Red brick residential buildings are visible in the background.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the white and blue piles are unclear.\",\n    \"The exact nature of the structures (e.g., temporary shelters vs. storage) is unclear.\",\n    \"The identity of the individuals or specific activities occurring in the scene cannot be determined.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "construction_materials"
+      ],
+      "evidence": "The event construction materials is supported: visible evidence shows stored materials intended for construction.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "the visible factor separating construction waste from construction materials, or an explicit statement that it is not visible",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "construction_waste"
+      ],
+      "evidence": "The event construction waste is supported: visible evidence shows a significant accumulation of mixed debris, including white and blue plastic sheeting and miscellaneous refuse, scattered across the ground in the garden plots adjacent to the canal.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"construction_materials\"\n    ],\n    \"evidence\": \"The event construction materials is supported: visible evidence shows stored materials intended for construction.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"the visible factor separating construction waste from construction materials, or an explicit statement that it is not visible\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"construction_waste\"\n    ],\n    \"evidence\": \"The event construction waste is supported: visible evidence shows a significant accumulation of mixed debris, including white and blue plastic sheeting and miscellaneous refuse, scattered across the ground in the garden plots adjacent to the canal.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a large accumulation of mixed debris, including white and blue plastic sheeting and miscellaneous refuse, scattered across the ground in the garden plots adjacent to the canal. This directly supports the description of construction waste.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The visible materials are disorganized, mixed with refuse, and scattered across the ground, which is characteristic of waste or debris rather than organized stored materials intended for construction. The claim of 'stored materials' is contradicted by the visual evidence of a messy dump site.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The materials are stored",
+        "The materials are intended for construction"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a large accumulation of mixed debris, including white and blue plastic sheeting and miscellaneous refuse, scattered across the ground in the garden plots adjacent to the canal. This directly supports the description of construction waste.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The visible materials are disorganized, mixed with refuse, and scattered across the ground, which is characteristic of waste or debris rather than organized stored materials intended for construction. The claim of 'stored materials' is contradicted by the visual evidence of a messy dump site.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The materials are stored\",\n      \"The materials are intended for construction\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

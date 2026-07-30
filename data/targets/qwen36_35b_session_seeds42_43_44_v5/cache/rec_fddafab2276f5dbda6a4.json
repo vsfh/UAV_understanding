@@ -1,0 +1,102 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_fddafab2276f5dbda6a4",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1005-5098-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1005-5098-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural residential area with scattered houses, paved roads, and agricultural fields.",
+      "A large rectangular pond is situated between the housing cluster and the fields.",
+      "Fields on the right contain dense green crops, likely rice or similar vegetation.",
+      "Houses feature varied roof colors including red, grey, and blue.",
+      "Solar panels are visible on a roof in the lower-left corner."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a zoomed-in view of the central area in the context image.",
+      "The house with the red hip roof and adjacent concrete driveway in the evidence view corresponds to the house located directly south of the pond in the context view.",
+      "The green netting visible in the evidence crop is located on the concrete pad between the red-roofed house and the grey-roofed house.",
+      "The black car parked near the pond in the evidence view is visible in the context view as a small dark object on the driveway."
+    ],
+    "description": "The images show a rural village scene with houses and fields. The evidence crop zooms in on a specific property south of a pond, revealing a red-roofed house, a grey-roofed house, a concrete driveway with two parked cars, and a pile of green netting on the ground.",
+    "evidence_visible": [
+      "A house with a red hip roof and white walls.",
+      "A concrete driveway or courtyard area.",
+      "Two parked vehicles: a silver sedan and a black sedan.",
+      "A pile of green mesh netting lying on the concrete.",
+      "A grey-roofed building adjacent to the red-roofed house.",
+      "A black car parked near the edge of a pond.",
+      "Vegetation growing along the edge of the concrete and near the water."
+    ],
+    "unclear": [
+      "The specific type of crop in the fields.",
+      "The make and model of the vehicles.",
+      "The purpose of the green netting.",
+      "The identity of any individuals.",
+      "The exact date of the image."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural residential area with scattered houses, paved roads, and agricultural fields.\",\n    \"A large rectangular pond is situated between the housing cluster and the fields.\",\n    \"Fields on the right contain dense green crops, likely rice or similar vegetation.\",\n    \"Houses feature varied roof colors including red, grey, and blue.\",\n    \"Solar panels are visible on a roof in the lower-left corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a zoomed-in view of the central area in the context image.\",\n    \"The house with the red hip roof and adjacent concrete driveway in the evidence view corresponds to the house located directly south of the pond in the context view.\",\n    \"The green netting visible in the evidence crop is located on the concrete pad between the red-roofed house and the grey-roofed house.\",\n    \"The black car parked near the pond in the evidence view is visible in the context view as a small dark object on the driveway.\"\n  ],\n  \"description\": \"The images show a rural village scene with houses and fields. The evidence crop zooms in on a specific property south of a pond, revealing a red-roofed house, a grey-roofed house, a concrete driveway with two parked cars, and a pile of green netting on the ground.\",\n  \"evidence_visible\": [\n    \"A house with a red hip roof and white walls.\",\n    \"A concrete driveway or courtyard area.\",\n    \"Two parked vehicles: a silver sedan and a black sedan.\",\n    \"A pile of green mesh netting lying on the concrete.\",\n    \"A grey-roofed building adjacent to the red-roofed house.\",\n    \"A black car parked near the edge of a pond.\",\n    \"Vegetation growing along the edge of the concrete and near the water.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the fields.\",\n    \"The make and model of the vehicles.\",\n    \"The purpose of the green netting.\",\n    \"The identity of any individuals.\",\n    \"The exact date of the image.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible, as the netting is resting on a paved surface rather than exposed soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a pile of green mesh netting lying on a concrete driveway adjacent to a red-roofed house.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible, as the netting is resting on a paved surface rather than exposed soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a pile of green mesh netting lying on a concrete driveway adjacent to a red-roofed house.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a pile of green mesh netting lying on a concrete driveway next to a house with a red roof. This matches the description in the statement perfectly.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible evidence shows soil for which protective covering is visibly incomplete. The fields in the image are covered with green crops, not bare soil. The term 'incomplete soil cover' is ambiguous but generally implies bare spots or lack of vegetation, which is not the dominant feature here. The fields appear fully vegetated. Therefore, the claim of 'incomplete' cover is not supported by the visual evidence of lush green fields.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a pile of green mesh netting lying on a concrete driveway next to a house with a red roof. This matches the description in the statement perfectly.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible evidence shows soil for which protective covering is visibly incomplete. The fields in the image are covered with green crops, not bare soil. The term 'incomplete soil cover' is ambiguous but generally implies bare spots or lack of vegetation, which is not the dominant feature here. The fields appear fully vegetated. Therefore, the claim of 'incomplete' cover is not supported by the visual evidence of lush green fields.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 1,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

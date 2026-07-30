@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_53af4a1b89f7233cc8ab",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0123-4970-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0123-4970-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area with a canal on the right and a road running parallel to it. The left side contains multi-story residential buildings and industrial-style structures with blue and grey corrugated metal roofs. A green basketball court is visible in the upper left corner.",
+      "A paved road separates the canal from the buildings on the left. Several vehicles are parked along the road and in lots. Trees line the canal bank and the road."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the area in the upper left quadrant of the context image, specifically focusing on the green basketball court and the adjacent parking area.",
+      "The white van and the row of parked cars in the crop correspond to the vehicles seen in the lot near the basketball court in the context image."
+    ],
+    "description": "The context image shows a wide aerial view of a town with a canal, roads, and mixed buildings. The crop provides a detailed view of a specific section containing a green basketball court, a white van, and several parked cars next to a building with a flat roof. A person is visible walking near the court.",
+    "evidence_visible": [
+      "A green basketball court with white lines and a hoop is visible on the left.",
+      "A white van is parked in a paved lot.",
+      "Three dark-colored cars are parked in a row next to a building with a flat, dark roof.",
+      "A person wearing red is walking on the pavement near the court.",
+      "Another person is standing near the corner of the building on the right.",
+      "A small, dilapidated structure with exposed brick is visible near the road.",
+      "A tree with green leaves stands near the road intersection."
+    ],
+    "unclear": [
+      "The specific model or make of the vehicles.",
+      "The exact activity of the person in red (walking vs. running).",
+      "The purpose of the small dilapidated structure.",
+      "The identity of the people."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area with a canal on the right and a road running parallel to it. The left side contains multi-story residential buildings and industrial-style structures with blue and grey corrugated metal roofs. A green basketball court is visible in the upper left corner.\",\n    \"A paved road separates the canal from the buildings on the left. Several vehicles are parked along the road and in lots. Trees line the canal bank and the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the area in the upper left quadrant of the context image, specifically focusing on the green basketball court and the adjacent parking area.\",\n    \"The white van and the row of parked cars in the crop correspond to the vehicles seen in the lot near the basketball court in the context image.\"\n  ],\n  \"description\": \"The context image shows a wide aerial view of a town with a canal, roads, and mixed buildings. The crop provides a detailed view of a specific section containing a green basketball court, a white van, and several parked cars next to a building with a flat roof. A person is visible walking near the court.\",\n  \"evidence_visible\": [\n    \"A green basketball court with white lines and a hoop is visible on the left.\",\n    \"A white van is parked in a paved lot.\",\n    \"Three dark-colored cars are parked in a row next to a building with a flat, dark roof.\",\n    \"A person wearing red is walking on the pavement near the court.\",\n    \"Another person is standing near the corner of the building on the right.\",\n    \"A small, dilapidated structure with exposed brick is visible near the road.\",\n    \"A tree with green leaves stands near the road intersection.\"\n  ],\n  \"unclear\": [\n    \"The specific model or make of the vehicles.\",\n    \"The exact activity of the person in red (walking vs. running).\",\n    \"The purpose of the small dilapidated structure.\",\n    \"The identity of the people.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a small, dilapidated structure with exposed brick and debris near the road, which indicates a state of ruin or active dismantling rather than damage to an otherwise intact standing building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a small, dilapidated structure with exposed brick and debris located near the road intersection, adjacent to the basketball court and the white van.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a small, dilapidated structure with exposed brick and debris near the road, which indicates a state of ruin or active dismantling rather than damage to an otherwise intact standing building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a small, dilapidated structure with exposed brick and debris located near the road intersection, adjacent to the basketball court and the white van.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a small structure near the road intersection and basketball court that appears dilapidated with exposed brick and debris, consistent with a demolition site. A white van is also visible in the vicinity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a small structure near the road intersection and basketball court that appears dilapidated with exposed brick and debris, consistent with a demolition site. A white van is also visible in the vicinity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a small structure near the road intersection and basketball court that appears dilapidated with exposed brick and debris, consistent with a demolition site. A white van is also visible in the vicinity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a small structure near the road intersection and basketball court that appears dilapidated with exposed brick and debris, consistent with a demolition site. A white van is also visible in the vicinity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

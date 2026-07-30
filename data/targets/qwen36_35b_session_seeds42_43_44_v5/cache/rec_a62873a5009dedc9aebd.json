@@ -1,0 +1,91 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a62873a5009dedc9aebd",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1002-0588-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1002-0588-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multi-story houses, agricultural plots, and a large river with barges.",
+      "A dirt access road runs along the riverbank, bordered by dense trees.",
+      "A yellow construction vehicle is visible on the dirt road near a patch of exposed earth."
+    ],
+    "cross_view_relations": [
+      "The local crop is a zoomed-in view of the dirt road and construction area seen in the wide context image.",
+      "The yellow vehicle and the blue mesh covering the ground in the crop correspond to the same objects visible in the wider scene."
+    ],
+    "description": "Aerial imagery shows a rural area with houses, fields, and a river. A dirt road runs alongside the water, where a yellow construction vehicle is parked near a pile of earth covered by blue mesh netting, surrounded by trees.",
+    "evidence_visible": [
+      "Close-up of a dirt road surface with tire tracks.",
+      "A yellow construction vehicle (loader) is positioned on the road.",
+      "A patch of ground is covered by a blue mesh netting, likely over soil or sand.",
+      "Green vegetation and trees border the road."
+    ],
+    "unclear": [
+      "Specific type of construction vehicle",
+      "Purpose of the blue mesh",
+      "Identity of the location"
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with multi-story houses, agricultural plots, and a large river with barges.\",\n    \"A dirt access road runs along the riverbank, bordered by dense trees.\",\n    \"A yellow construction vehicle is visible on the dirt road near a patch of exposed earth.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop is a zoomed-in view of the dirt road and construction area seen in the wide context image.\",\n    \"The yellow vehicle and the blue mesh covering the ground in the crop correspond to the same objects visible in the wider scene.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural area with houses, fields, and a river. A dirt road runs alongside the water, where a yellow construction vehicle is parked near a pile of earth covered by blue mesh netting, surrounded by trees.\",\n  \"evidence_visible\": [\n    \"Close-up of a dirt road surface with tire tracks.\",\n    \"A yellow construction vehicle (loader) is positioned on the road.\",\n    \"A patch of ground is covered by a blue mesh netting, likely over soil or sand.\",\n    \"Green vegetation and trees border the road.\"\n  ],\n  \"unclear\": [\n    \"Specific type of construction vehicle\",\n    \"Purpose of the blue mesh\",\n    \"Identity of the location\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible; the netting appears to fully cover the specific patch of soil in the image.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a patch of exposed earth on the dirt road covered by a blue mesh netting, with a yellow construction vehicle parked nearby.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible; the netting appears to fully cover the specific patch of soil in the image.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a patch of exposed earth on the dirt road covered by a blue mesh netting, with a yellow construction vehicle parked nearby.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a patch of exposed earth covered by a blue mesh netting located on the dirt road, and a yellow construction vehicle is parked immediately adjacent to this area. The statement accurately describes these visible elements.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a patch of bare soil that is partially covered by a blue mesh netting. Since the netting does not completely cover the soil patch, the condition of 'incomplete soil cover' is visually supported.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a patch of exposed earth covered by a blue mesh netting located on the dirt road, and a yellow construction vehicle is parked immediately adjacent to this area. The statement accurately describes these visible elements.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a patch of bare soil that is partially covered by a blue mesh netting. Since the netting does not completely cover the soil patch, the condition of 'incomplete soil cover' is visually supported.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

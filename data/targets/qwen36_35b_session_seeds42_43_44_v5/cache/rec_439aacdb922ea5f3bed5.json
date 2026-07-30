@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_439aacdb922ea5f3bed5",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0307-3860-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0307-3860-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a river with multiple barges and a tree-lined bank.",
+      "A village with houses featuring red and grey roofs situated near the river.",
+      "Green agricultural fields and a dirt access road.",
+      "A small pond or water channel within the residential area."
+    ],
+    "cross_view_relations": [
+      "The crop image shows a high-angle, close-up view of a specific plot of land.",
+      "This plot is located within the village area visible in the wide context image, likely adjacent to the houses with red roofs.",
+      "The crop details the agricultural use of the green patches seen in the wider village scene."
+    ],
+    "description": "The wide image shows a river with barges and a village with red-roofed houses. The crop image provides a detailed view of a garden plot within this village, showing rows of green crops, a small shed, and a dirt path, confirming the agricultural activity in the residential area.",
+    "evidence_visible": [
+      "A rectangular plot of land divided into sections with different vegetation.",
+      "Rows of low-growing green leafy plants.",
+      "A small structure with a grey corrugated roof.",
+      "A dirt path or boundary line separating the garden from a larger grassy area.",
+      "A bare tree in the foreground."
+    ],
+    "unclear": [
+      "Specific types of crops planted.",
+      "Exact location of the plot within the village.",
+      "Ownership or purpose of the garden."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a river with multiple barges and a tree-lined bank.\",\n    \"A village with houses featuring red and grey roofs situated near the river.\",\n    \"Green agricultural fields and a dirt access road.\",\n    \"A small pond or water channel within the residential area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image shows a high-angle, close-up view of a specific plot of land.\",\n    \"This plot is located within the village area visible in the wide context image, likely adjacent to the houses with red roofs.\",\n    \"The crop details the agricultural use of the green patches seen in the wider village scene.\"\n  ],\n  \"description\": \"The wide image shows a river with barges and a village with red-roofed houses. The crop image provides a detailed view of a garden plot within this village, showing rows of green crops, a small shed, and a dirt path, confirming the agricultural activity in the residential area.\",\n  \"evidence_visible\": [\n    \"A rectangular plot of land divided into sections with different vegetation.\",\n    \"Rows of low-growing green leafy plants.\",\n    \"A small structure with a grey corrugated roof.\",\n    \"A dirt path or boundary line separating the garden from a larger grassy area.\",\n    \"A bare tree in the foreground.\"\n  ],\n  \"unclear\": [\n    \"Specific types of crops planted.\",\n    \"Exact location of the plot within the village.\",\n    \"Ownership or purpose of the garden.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of a cultivated garden plot with rows of crops and a small shed, which is inconsistent with the heavy machinery, structural frameworks, or raw materials typically associated with an active general construction project.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a rectangular plot of land divided into sections with different vegetation, including rows of low-growing green leafy plants, a small structure with a grey corrugated roof, and a dirt path or boundary line separating the garden from a larger grassy area.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of a cultivated garden plot with rows of crops and a small shed, which is inconsistent with the heavy machinery, structural frameworks, or raw materials typically associated with an active general construction project.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a rectangular plot of land divided into sections with different vegetation, including rows of low-growing green leafy plants, a small structure with a grey corrugated roof, and a dirt path or boundary line separating the garden from a larger grassy area.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a rectangular plot of land divided into sections with different vegetation, including rows of low-growing green leafy plants, a small structure with a grey corrugated roof, and a dirt path or boundary line separating the garden from a larger grassy area. These visual elements directly support the description of the event building demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a garden plot with vegetation and a small structure, but there is no visible evidence of an active general construction project. The scene depicts a rural or semi-rural setting with agricultural activity, not construction.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a rectangular plot of land divided into sections with different vegetation, including rows of low-growing green leafy plants, a small structure with a grey corrugated roof, and a dirt path or boundary line separating the garden from a larger grassy area. These visual elements directly support the description of the event building demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a garden plot with vegetation and a small structure, but there is no visible evidence of an active general construction project. The scene depicts a rural or semi-rural setting with agricultural activity, not construction.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

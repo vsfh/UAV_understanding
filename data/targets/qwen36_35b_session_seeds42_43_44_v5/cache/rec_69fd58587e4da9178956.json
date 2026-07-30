@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_69fd58587e4da9178956",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0308-0478-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0308-0478-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural village with dense residential structures, paved roads, and surrounding green agricultural fields.",
+      "Houses feature varied roofing materials including grey tiles, red tiles, and flat concrete surfaces.",
+      "A small stream or drainage ditch runs through the settlement, crossed by a narrow concrete bridge.",
+      "Utility poles and overhead power lines are visible throughout the area."
+    ],
+    "cross_view_relations": [
+      "The zoomed-in evidence view corresponds to a specific section of the village shown in the wide context image.",
+      "The evidence view focuses on a cluster of buildings adjacent to a waterway and a patch of dry, harvested vegetation.",
+      "The concrete bridge visible in the wide image is the central feature in the evidence view, connecting two sections of the settlement.",
+      "The blue-roofed structure seen in the wide image is visible in the evidence view near the bridge."
+    ],
+    "description": "The images show a rural village with mixed housing and agricultural land. The wide view reveals a network of roads and fields, while the zoomed-in view highlights a specific area with a concrete bridge over a ditch, adjacent to buildings with tiled and flat roofs, and a patch of dry crop residue.",
+    "evidence_visible": [
+      "Close-up of a concrete bridge spanning a narrow, dark waterway or ditch.",
+      "Buildings with grey tiled roofs and a structure with a blue corrugated roof.",
+      "A patch of dry, yellow-brown vegetation, likely harvested crop residue, next to a green field.",
+      "Debris and scattered items along the banks of the waterway.",
+      "Overhead power lines crossing the scene.",
+      "A concrete path or small road leading to the bridge."
+    ],
+    "unclear": [
+      "Specific identity of the debris in the waterway.",
+      "Exact type of the dry crop residue.",
+      "Purpose of the blue-roofed structure.",
+      "Number of people or specific activities occurring."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural village with dense residential structures, paved roads, and surrounding green agricultural fields.\",\n    \"Houses feature varied roofing materials including grey tiles, red tiles, and flat concrete surfaces.\",\n    \"A small stream or drainage ditch runs through the settlement, crossed by a narrow concrete bridge.\",\n    \"Utility poles and overhead power lines are visible throughout the area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The zoomed-in evidence view corresponds to a specific section of the village shown in the wide context image.\",\n    \"The evidence view focuses on a cluster of buildings adjacent to a waterway and a patch of dry, harvested vegetation.\",\n    \"The concrete bridge visible in the wide image is the central feature in the evidence view, connecting two sections of the settlement.\",\n    \"The blue-roofed structure seen in the wide image is visible in the evidence view near the bridge.\"\n  ],\n  \"description\": \"The images show a rural village with mixed housing and agricultural land. The wide view reveals a network of roads and fields, while the zoomed-in view highlights a specific area with a concrete bridge over a ditch, adjacent to buildings with tiled and flat roofs, and a patch of dry crop residue.\",\n  \"evidence_visible\": [\n    \"Close-up of a concrete bridge spanning a narrow, dark waterway or ditch.\",\n    \"Buildings with grey tiled roofs and a structure with a blue corrugated roof.\",\n    \"A patch of dry, yellow-brown vegetation, likely harvested crop residue, next to a green field.\",\n    \"Debris and scattered items along the banks of the waterway.\",\n    \"Overhead power lines crossing the scene.\",\n    \"A concrete path or small road leading to the bridge.\"\n  ],\n  \"unclear\": [\n    \"Specific identity of the debris in the waterway.\",\n    \"Exact type of the dry crop residue.\",\n    \"Purpose of the blue-roofed structure.\",\n    \"Number of people or specific activities occurring.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of a pile of dark debris and rubble, which indicates demolition activity rather than the organized assembly of new structures typical of project construction.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by visible evidence of a building undergoing active or recent demolition, specifically the presence of a large pile of dark debris and rubble adjacent to the concrete bridge and blue-roofed structure in the zoomed-in view.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of a pile of dark debris and rubble, which indicates demolition activity rather than the organized assembly of new structures typical of project construction.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by visible evidence of a building undergoing active or recent demolition, specifically the presence of a large pile of dark debris and rubble adjacent to the concrete bridge and blue-roofed structure in the zoomed-in view.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The zoomed-in image clearly shows a large pile of dark debris and rubble situated next to a concrete bridge and a structure with a blue roof. This visual evidence directly supports the claim of a building undergoing active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image depicts a demolition site characterized by a pile of rubble and debris. It does not show the organized activity, materials, or structural progress typical of an active general construction project.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The zoomed-in image clearly shows a large pile of dark debris and rubble situated next to a concrete bridge and a structure with a blue roof. This visual evidence directly supports the claim of a building undergoing active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image depicts a demolition site characterized by a pile of rubble and debris. It does not show the organized activity, materials, or structural progress typical of an active general construction project.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

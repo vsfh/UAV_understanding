@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_f8fc5cb62d273caa6c1e",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0815-1130-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0815-1130-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area featuring a grid of rectangular aquaculture ponds filled with green water, separated by earthen dikes and vegetation.",
+      "A paved road runs horizontally across the lower section, separating the ponds from a cluster of residential buildings.",
+      "The buildings have varied roof colors including blue, red, and grey tiles.",
+      "A small blue structure and a white truck are visible on the road near the center."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the area immediately south of the road shown in the context image.",
+      "The white truck visible in the context image is clearly visible in the crop image, parked on the road.",
+      "The building with the red roof and the adjacent white building with a flat roof in the crop correspond to the structures in the bottom-left of the context image.",
+      "The grey-roofed building in the crop corresponds to the structure in the bottom-right of the context image."
+    ],
+    "description": "The images show a rural landscape with aquaculture ponds and a road. The crop provides a detailed view of the buildings and vehicles along the road, confirming the presence of a white truck and specific residential structures visible in the wider context.",
+    "evidence_visible": [
+      "A white pickup truck is parked on the paved road.",
+      "A building with a red pitched roof and a white flat roof is visible on the left.",
+      "A building with a grey tiled roof is visible on the right.",
+      "A small, dilapidated wooden structure is located in a yard between the buildings.",
+      "Green vegetation and trees are present in the yards and along the water's edge."
+    ],
+    "unclear": [
+      "The specific type of fish or aquatic life in the ponds.",
+      "The exact nature of the activity in the small wooden structure.",
+      "The identity of the people visible in the distance."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural area featuring a grid of rectangular aquaculture ponds filled with green water, separated by earthen dikes and vegetation.\",\n    \"A paved road runs horizontally across the lower section, separating the ponds from a cluster of residential buildings.\",\n    \"The buildings have varied roof colors including blue, red, and grey tiles.\",\n    \"A small blue structure and a white truck are visible on the road near the center.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the area immediately south of the road shown in the context image.\",\n    \"The white truck visible in the context image is clearly visible in the crop image, parked on the road.\",\n    \"The building with the red roof and the adjacent white building with a flat roof in the crop correspond to the structures in the bottom-left of the context image.\",\n    \"The grey-roofed building in the crop corresponds to the structure in the bottom-right of the context image.\"\n  ],\n  \"description\": \"The images show a rural landscape with aquaculture ponds and a road. The crop provides a detailed view of the buildings and vehicles along the road, confirming the presence of a white truck and specific residential structures visible in the wider context.\",\n  \"evidence_visible\": [\n    \"A white pickup truck is parked on the paved road.\",\n    \"A building with a red pitched roof and a white flat roof is visible on the left.\",\n    \"A building with a grey tiled roof is visible on the right.\",\n    \"A small, dilapidated wooden structure is located in a yard between the buildings.\",\n    \"Green vegetation and trees are present in the yards and along the water's edge.\"\n  ],\n  \"unclear\": [\n    \"The specific type of fish or aquatic life in the ponds.\",\n    \"The exact nature of the activity in the small wooden structure.\",\n    \"The identity of the people visible in the distance.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a total structural collapse of a small outbuilding rather than general damage to the main residential structures.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-magnification crop image reveals a small, dilapidated wooden structure in a yard between the main buildings that exhibits a visibly collapsed roof and structural failure.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a total structural collapse of a small outbuilding rather than general damage to the main residential structures.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-magnification crop image reveals a small, dilapidated wooden structure in a yard between the main buildings that exhibits a visibly collapsed roof and structural failure.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification crop image clearly shows a small, dilapidated wooden structure in the yard between the main buildings. This structure exhibits a visibly collapsed roof and structural failure, directly supporting the claim of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The high-magnification crop image clearly shows a small, dilapidated wooden structure in the yard between the main buildings. This structure exhibits a visibly collapsed roof and structural failure, directly supporting the claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification crop image clearly shows a small, dilapidated wooden structure in the yard between the main buildings. This structure exhibits a visibly collapsed roof and structural failure, directly supporting the claim of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The high-magnification crop image clearly shows a small, dilapidated wooden structure in the yard between the main buildings. This structure exhibits a visibly collapsed roof and structural failure, directly supporting the claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

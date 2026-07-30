@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_1c397f06971369c95a1c",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0928-15652-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0928-15652-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a mixed-use area containing residential housing on the left, large industrial buildings with blue roofs on the right, and agricultural plots in the center.",
+      "A paved road runs vertically through the left side of the frame.",
+      "A large patch of bright blue material is visible in the central agricultural zone.",
+      "Tall metal electrical transmission towers are present in the field area."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a high-magnification view of the central area in the wide image.",
+      "The paved road on the left edge of the crop corresponds to the road visible in the wide image.",
+      "The blue material in the crop is the same blue patch seen in the center of the wide image.",
+      "The surrounding green crops and tilled soil in the crop match the agricultural plots in the wide image."
+    ],
+    "description": "The images show a mixed rural-industrial landscape. A wide view reveals houses, factories, and fields, while a zoomed-in crop focuses on a specific plot containing a large, irregular spread of bright blue material, possibly plastic sheeting or tarp, surrounded by green crops and tilled soil near a road.",
+    "evidence_visible": [
+      "A large, irregular area covered in bright blue material, appearing to be plastic sheeting or tarp.",
+      "The blue material is situated on uneven ground, partially covering soil and vegetation.",
+      "Surrounding the blue area are organized rows of green crops and tilled brown soil.",
+      "A paved road with utility poles runs along the left edge of the scene.",
+      "A small blue structure or container is visible near the top edge of the blue material."
+    ],
+    "unclear": [
+      "The specific contents or purpose of the blue material.",
+      "The exact type of crops in the surrounding fields.",
+      "The condition or state of the blue material (e.g., whether it is waste, covering, or construction material).",
+      "The identity of the small blue structure."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a mixed-use area containing residential housing on the left, large industrial buildings with blue roofs on the right, and agricultural plots in the center.\",\n    \"A paved road runs vertically through the left side of the frame.\",\n    \"A large patch of bright blue material is visible in the central agricultural zone.\",\n    \"Tall metal electrical transmission towers are present in the field area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a high-magnification view of the central area in the wide image.\",\n    \"The paved road on the left edge of the crop corresponds to the road visible in the wide image.\",\n    \"The blue material in the crop is the same blue patch seen in the center of the wide image.\",\n    \"The surrounding green crops and tilled soil in the crop match the agricultural plots in the wide image.\"\n  ],\n  \"description\": \"The images show a mixed rural-industrial landscape. A wide view reveals houses, factories, and fields, while a zoomed-in crop focuses on a specific plot containing a large, irregular spread of bright blue material, possibly plastic sheeting or tarp, surrounded by green crops and tilled soil near a road.\",\n  \"evidence_visible\": [\n    \"A large, irregular area covered in bright blue material, appearing to be plastic sheeting or tarp.\",\n    \"The blue material is situated on uneven ground, partially covering soil and vegetation.\",\n    \"Surrounding the blue area are organized rows of green crops and tilled brown soil.\",\n    \"A paved road with utility poles runs along the left edge of the scene.\",\n    \"A small blue structure or container is visible near the top edge of the blue material.\"\n  ],\n  \"unclear\": [\n    \"The specific contents or purpose of the blue material.\",\n    \"The exact type of crops in the surrounding fields.\",\n    \"The condition or state of the blue material (e.g., whether it is waste, covering, or construction material).\",\n    \"The identity of the small blue structure.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of a continuous, complete covering layer (the blue sheeting) versus a state where the protective covering is visibly incomplete or absent.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large, irregular area of exposed ground covered by a bright blue material, appearing to be plastic sheeting or tarp, situated within an agricultural plot surrounded by green crops and tilled soil.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of a continuous, complete covering layer (the blue sheeting) versus a state where the protective covering is visibly incomplete or absent.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large, irregular area of exposed ground covered by a bright blue material, appearing to be plastic sheeting or tarp, situated within an agricultural plot surrounded by green crops and tilled soil.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large area of exposed ground covered by a bright blue material (plastic sheeting/tarp) within an agricultural plot. This directly contradicts the claim that the event is 'bare soil netting' (implying no cover) or that the soil is 'incomplete' (implying a lack of cover). The visual evidence shows a significant, distinct covering.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event is bare soil netting.",
+        "The soil for which protective covering is visibly incomplete."
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a large, irregular area of exposed ground covered by a bright blue material, appearing to be plastic sheeting or tarp, situated within an agricultural plot surrounded by green crops and tilled soil. This matches the description of the visible evidence perfectly.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large area of exposed ground covered by a bright blue material (plastic sheeting/tarp) within an agricultural plot. This directly contradicts the claim that the event is 'bare soil netting' (implying no cover) or that the soil is 'incomplete' (implying a lack of cover). The visual evidence shows a significant, distinct covering.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event is bare soil netting.\",\n      \"The soil for which protective covering is visibly incomplete.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a large, irregular area of exposed ground covered by a bright blue material, appearing to be plastic sheeting or tarp, situated within an agricultural plot surrounded by green crops and tilled soil. This matches the description of the visible evidence perfectly.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

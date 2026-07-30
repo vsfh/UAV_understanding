@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4cca7ce514f01bd24e73",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1005-1471-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1005-1471-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring large rectangular plots of green crops, likely rice paddies.",
+      "A multi-lane highway with moving vehicles runs along the upper left edge.",
+      "A cluster of residential buildings with grey and blue roofs is situated near the highway.",
+      "A small, isolated structure with a red roof stands near a dirt path in the lower center.",
+      "A paved road runs horizontally across the lower portion of the frame, separating the fields from a lower-elevation area with vegetation and water."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the area adjacent to the highway and the building cluster seen in the top-left of the context image.",
+      "The green and red rectangular surface in the crop corresponds to the area next to the building with the blue roof in the context image.",
+      "The white van and tanker truck visible in the crop are located on the highway shown in the context image."
+    ],
+    "description": "The images show a rural area with green agricultural fields bordered by a highway and residential buildings. A zoomed-in view reveals a rectangular recreational court with green and red surfacing located next to a house near the road. Vehicles, including a white van and a tanker truck, are visible on the adjacent highway.",
+    "evidence_visible": [
+      "A rectangular paved area with green and red sections, resembling a sports court or playground.",
+      "A white van and a large tanker truck traveling on a multi-lane highway.",
+      "A building with a grey roof and a small fenced yard area.",
+      "A low wall with a black and white checkered pattern bordering the paved area.",
+      "A circular red feature on the ground near the court."
+    ],
+    "unclear": [
+      "The specific type of recreational equipment on the court surface.",
+      "The exact nature of the activity or business associated with the building.",
+      "The specific crop species in the fields."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring large rectangular plots of green crops, likely rice paddies.\",\n    \"A multi-lane highway with moving vehicles runs along the upper left edge.\",\n    \"A cluster of residential buildings with grey and blue roofs is situated near the highway.\",\n    \"A small, isolated structure with a red roof stands near a dirt path in the lower center.\",\n    \"A paved road runs horizontally across the lower portion of the frame, separating the fields from a lower-elevation area with vegetation and water.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the area adjacent to the highway and the building cluster seen in the top-left of the context image.\",\n    \"The green and red rectangular surface in the crop corresponds to the area next to the building with the blue roof in the context image.\",\n    \"The white van and tanker truck visible in the crop are located on the highway shown in the context image.\"\n  ],\n  \"description\": \"The images show a rural area with green agricultural fields bordered by a highway and residential buildings. A zoomed-in view reveals a rectangular recreational court with green and red surfacing located next to a house near the road. Vehicles, including a white van and a tanker truck, are visible on the adjacent highway.\",\n  \"evidence_visible\": [\n    \"A rectangular paved area with green and red sections, resembling a sports court or playground.\",\n    \"A white van and a large tanker truck traveling on a multi-lane highway.\",\n    \"A building with a grey roof and a small fenced yard area.\",\n    \"A low wall with a black and white checkered pattern bordering the paved area.\",\n    \"A circular red feature on the ground near the court.\"\n  ],\n  \"unclear\": [\n    \"The specific type of recreational equipment on the court surface.\",\n    \"The exact nature of the activity or business associated with the building.\",\n    \"The specific crop species in the fields.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible because the scene contains a paved recreational court rather than exposed soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular recreational court with green and red surfacing located next to a house near the highway.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible because the scene contains a paved recreational court rather than exposed soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular recreational court with green and red surfacing located next to a house near the highway.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The wide image shows a rectangular recreational court with green and red surfacing located next to a house near the highway, which matches the description in the statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible evidence of soil with incomplete protective covering. However, the images show a recreational court with surfacing, not bare soil with netting or protective covering. There is no visible evidence of soil with incomplete protective covering.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The wide image shows a rectangular recreational court with green and red surfacing located next to a house near the highway, which matches the description in the statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible evidence of soil with incomplete protective covering. However, the images show a recreational court with surfacing, not bare soil with netting or protective covering. There is no visible evidence of soil with incomplete protective covering.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

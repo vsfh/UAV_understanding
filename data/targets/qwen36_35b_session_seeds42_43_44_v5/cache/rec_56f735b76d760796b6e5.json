@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_56f735b76d760796b6e5",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0929-7439-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0929-7439-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring large rectangular agricultural fields with green and yellow crops.",
+      "A waterway runs along the right side, bordered by a road and buildings.",
+      "A separate body of water in the foreground is partially covered with green algae or aquatic vegetation.",
+      "Blue-roofed structures are visible on the left side of the image.",
+      "Power lines and poles traverse the fields."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of the cluster of blue-roofed structures and the adjacent waterway bank seen on the left side of the context image.",
+      "The spatial relationship confirms the structures are located immediately next to the water body covered in green vegetation."
+    ],
+    "description": "The context image shows a rural area with agricultural fields and waterways. The crop image provides a detailed view of a specific site featuring blue-roofed buildings and a cluttered bank next to a water body covered in green algae.",
+    "evidence_visible": [
+      "Two large structures with blue corrugated metal roofs.",
+      "A dirt or gravel yard area between the buildings and the water.",
+      "Piles of debris, white sacks, and miscellaneous materials scattered on the ground.",
+      "A green tarp covering a pile of items near the water's edge.",
+      "Dense green vegetation and algae along the water bank.",
+      "Trees and bushes partially obscuring the view of the structures."
+    ],
+    "unclear": [
+      "The specific contents of the blue-roofed structures.",
+      "The exact nature of the scattered debris and materials.",
+      "The identity of any individuals present.",
+      "The legal status or business type of the site."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring large rectangular agricultural fields with green and yellow crops.\",\n    \"A waterway runs along the right side, bordered by a road and buildings.\",\n    \"A separate body of water in the foreground is partially covered with green algae or aquatic vegetation.\",\n    \"Blue-roofed structures are visible on the left side of the image.\",\n    \"Power lines and poles traverse the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of the cluster of blue-roofed structures and the adjacent waterway bank seen on the left side of the context image.\",\n    \"The spatial relationship confirms the structures are located immediately next to the water body covered in green vegetation.\"\n  ],\n  \"description\": \"The context image shows a rural area with agricultural fields and waterways. The crop image provides a detailed view of a specific site featuring blue-roofed buildings and a cluttered bank next to a water body covered in green algae.\",\n  \"evidence_visible\": [\n    \"Two large structures with blue corrugated metal roofs.\",\n    \"A dirt or gravel yard area between the buildings and the water.\",\n    \"Piles of debris, white sacks, and miscellaneous materials scattered on the ground.\",\n    \"A green tarp covering a pile of items near the water's edge.\",\n    \"Dense green vegetation and algae along the water bank.\",\n    \"Trees and bushes partially obscuring the view of the structures.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the blue-roofed structures.\",\n    \"The exact nature of the scattered debris and materials.\",\n    \"The identity of any individuals present.\",\n    \"The legal status or business type of the site.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a green tarp covering a specific pile of items near the water's edge, which serves as a form of protective covering, whereas the neighbor definition requires the protective covering to be visibly incomplete.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a dirt or gravel yard area adjacent to blue-roofed structures where piles of debris, white sacks, and miscellaneous materials are scattered on the ground, alongside a green tarp covering a pile of items near the water's edge.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a green tarp covering a specific pile of items near the water's edge, which serves as a form of protective covering, whereas the neighbor definition requires the protective covering to be visibly incomplete.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a dirt or gravel yard area adjacent to blue-roofed structures where piles of debris, white sacks, and miscellaneous materials are scattered on the ground, alongside a green tarp covering a pile of items near the water's edge.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a dirt yard adjacent to blue-roofed structures containing scattered debris, white sacks, and a green tarp near the water, which directly supports the description of bare soil netting and associated materials.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible evidence of 'incomplete soil cover' where protective covering is visibly incomplete. While the image shows bare soil and debris, it does not show any 'protective covering' (such as plastic sheeting or netting) that is torn or partially removed. The claim relies on the assumption that the bare ground is a result of incomplete covering rather than just being an uncovered yard.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a dirt yard adjacent to blue-roofed structures containing scattered debris, white sacks, and a green tarp near the water, which directly supports the description of bare soil netting and associated materials.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible evidence of 'incomplete soil cover' where protective covering is visibly incomplete. While the image shows bare soil and debris, it does not show any 'protective covering' (such as plastic sheeting or netting) that is torn or partially removed. The claim relies on the assumption that the bare ground is a result of incomplete covering rather than just being an uncovered yard.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

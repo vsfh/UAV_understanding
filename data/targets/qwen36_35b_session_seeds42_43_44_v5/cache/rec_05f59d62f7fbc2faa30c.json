@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_05f59d62f7fbc2faa30c",
+    "source_class": "construction_waste",
+    "negative_label": "construction_materials",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/construction_waste/original/0403-1701-construction_waste.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/construction_waste/cropped/0403-1701-construction_waste.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a riverside industrial area with a large warehouse featuring a grey corrugated metal roof and an adjacent blue-roofed structure.",
+      "A red gantry crane is positioned on a dirt lot next to the warehouse.",
+      "Stacks of rusted metal plates are arranged on the ground near the water's edge.",
+      "A paved road runs parallel to the river, with residential houses and yellow flowering fields visible in the background.",
+      "A barge is moored along the riverbank on the left side of the frame."
+    ],
+    "cross_view_relations": [
+      "The crop is a high-angle close-up of the corner of the blue-roofed building and the grey-roofed warehouse seen in the context image.",
+      "The barge visible on the far left of the context image is partially visible on the left edge of the crop.",
+      "The riverbank in the crop shows a pile of white debris and scattered branches directly adjacent to the building's foundation."
+    ],
+    "description": "The images show a riverside industrial site with a large warehouse and a blue-roofed annex. A red crane and stacked metal plates are visible nearby. The crop reveals a pile of white debris and branches along the concrete embankment next to the blue building, with a barge moored in the adjacent water.",
+    "evidence_visible": [
+      "Close-up of the corner of a building with a bright blue corrugated metal roof and a grey corrugated metal roof.",
+      "A pile of white, irregular debris and scattered branches lies on the ground between the building and the water.",
+      "The riverbank appears to be reinforced with concrete or stone blocks.",
+      "A portion of a dark-colored barge is visible on the left edge, floating in the water.",
+      "Green vegetation grows along the waterline and near the debris pile."
+    ],
+    "unclear": [
+      "The specific composition of the white debris pile.",
+      "The exact nature of the materials stacked in the wider context view.",
+      "The identity of any persons or vehicles.",
+      "The operational status of the crane."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a riverside industrial area with a large warehouse featuring a grey corrugated metal roof and an adjacent blue-roofed structure.\",\n    \"A red gantry crane is positioned on a dirt lot next to the warehouse.\",\n    \"Stacks of rusted metal plates are arranged on the ground near the water's edge.\",\n    \"A paved road runs parallel to the river, with residential houses and yellow flowering fields visible in the background.\",\n    \"A barge is moored along the riverbank on the left side of the frame.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a high-angle close-up of the corner of the blue-roofed building and the grey-roofed warehouse seen in the context image.\",\n    \"The barge visible on the far left of the context image is partially visible on the left edge of the crop.\",\n    \"The riverbank in the crop shows a pile of white debris and scattered branches directly adjacent to the building's foundation.\"\n  ],\n  \"description\": \"The images show a riverside industrial site with a large warehouse and a blue-roofed annex. A red crane and stacked metal plates are visible nearby. The crop reveals a pile of white debris and branches along the concrete embankment next to the blue building, with a barge moored in the adjacent water.\",\n  \"evidence_visible\": [\n    \"Close-up of the corner of a building with a bright blue corrugated metal roof and a grey corrugated metal roof.\",\n    \"A pile of white, irregular debris and scattered branches lies on the ground between the building and the water.\",\n    \"The riverbank appears to be reinforced with concrete or stone blocks.\",\n    \"A portion of a dark-colored barge is visible on the left edge, floating in the water.\",\n    \"Green vegetation grows along the waterline and near the debris pile.\"\n  ],\n  \"unclear\": [\n    \"The specific composition of the white debris pile.\",\n    \"The exact nature of the materials stacked in the wider context view.\",\n    \"The identity of any persons or vehicles.\",\n    \"The operational status of the crane.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "construction_materials"
+      ],
+      "evidence": "The event construction materials is supported: visible evidence shows stored materials intended for construction.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating construction waste from construction materials is the disorganized and scattered nature of the white debris pile, which contrasts with the orderly stacking expected of stored materials.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "construction_waste"
+      ],
+      "evidence": "The event construction waste is supported by the visible presence of a pile of white, irregular debris and scattered branches lying on the ground between the building foundation and the water.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"construction_materials\"\n    ],\n    \"evidence\": \"The event construction materials is supported: visible evidence shows stored materials intended for construction.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating construction waste from construction materials is the disorganized and scattered nature of the white debris pile, which contrasts with the orderly stacking expected of stored materials.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"construction_waste\"\n    ],\n    \"evidence\": \"The event construction waste is supported by the visible presence of a pile of white, irregular debris and scattered branches lying on the ground between the building foundation and the water.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a pile of white, irregular debris and scattered branches on the ground between the building foundation and the water. This visual evidence directly supports the claim of construction waste.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a pile of white, irregular debris and scattered branches, which is consistent with construction waste. However, the claim specifically refers to 'stored materials intended for construction'. While the debris is likely construction-related, it is not clearly identifiable as 'stored materials' (e.g., stacks of bricks, bags of cement, organized lumber). The debris appears to be waste or rubble rather than organized materials ready for use. Therefore, the specific claim of 'stored materials' is not directly supported by the visual evidence of scattered waste.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows stored materials intended for construction"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a pile of white, irregular debris and scattered branches on the ground between the building foundation and the water. This visual evidence directly supports the claim of construction waste.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a pile of white, irregular debris and scattered branches, which is consistent with construction waste. However, the claim specifically refers to 'stored materials intended for construction'. While the debris is likely construction-related, it is not clearly identifiable as 'stored materials' (e.g., stacks of bricks, bags of cement, organized lumber). The debris appears to be waste or rubble rather than organized materials ready for use. Therefore, the specific claim of 'stored materials' is not directly supported by the visual evidence of scattered waste.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows stored materials intended for construction\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

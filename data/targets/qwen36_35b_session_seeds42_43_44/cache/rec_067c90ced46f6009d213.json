@@ -1,0 +1,56 @@
+{
+  "prompt_version": "clear-uav-teacher-v3",
+  "identity": {
+    "record_uid": "rec_067c90ced46f6009d213",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0928-20563-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0928-20563-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a winding river, residential buildings with blue and grey roofs, and extensive agricultural fields.",
+      "The fields are divided into rectangular plots containing various crops, including large areas of green vegetation and patches of bare brown soil.",
+      "A paved road runs along the bottom left, adjacent to the river and buildings."
+    ],
+    "cross_view_relations": [
+      "The second image is a high-magnification crop of the lower-left quadrant of the first image.",
+      "The specific rectangular plots containing blue and green tarps in the second image correspond to the cluster of plots located just above the road and to the right of the river bend in the first image.",
+      "The surrounding brown soil and green vegetation patterns match perfectly between the two views."
+    ],
+    "description": "The images show a rural agricultural area with a river and houses. The second image zooms in on specific plots containing blue and green tarps laid over the soil, confirming their location within the broader landscape shown in the first image.",
+    "evidence_visible": [
+      "Close-up view of several rectangular agricultural plots.",
+      "Two distinct rectangular areas are covered with blue and green tarpaulins or netting.",
+      "Surrounding plots contain low-lying green vegetation or bare brown soil.",
+      "A white utility pole is visible on the right edge of the frame.",
+      "A paved road edge is visible at the bottom left."
+    ],
+    "unclear": [
+      "The specific type of crop or material under the tarps.",
+      "The purpose of the tarps (e.g., weed control, moisture retention, protection).",
+      "The exact date of the imagery.",
+      "The ownership of the land or buildings."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a winding river, residential buildings with blue and grey roofs, and extensive agricultural fields.\",\n    \"The fields are divided into rectangular plots containing various crops, including large areas of green vegetation and patches of bare brown soil.\",\n    \"A paved road runs along the bottom left, adjacent to the river and buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a high-magnification crop of the lower-left quadrant of the first image.\",\n    \"The specific rectangular plots containing blue and green tarps in the second image correspond to the cluster of plots located just above the road and to the right of the river bend in the first image.\",\n    \"The surrounding brown soil and green vegetation patterns match perfectly between the two views.\"\n  ],\n  \"description\": \"The images show a rural agricultural area with a river and houses. The second image zooms in on specific plots containing blue and green tarps laid over the soil, confirming their location within the broader landscape shown in the first image.\",\n  \"evidence_visible\": [\n    \"Close-up view of several rectangular agricultural plots.\",\n    \"Two distinct rectangular areas are covered with blue and green tarpaulins or netting.\",\n    \"Surrounding plots contain low-lying green vegetation or bare brown soil.\",\n    \"A white utility pole is visible on the right edge of the frame.\",\n    \"A paved road edge is visible at the bottom left.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop or material under the tarps.\",\n    \"The purpose of the tarps (e.g., weed control, moisture retention, protection).\",\n    \"The exact date of the imagery.\",\n    \"The ownership of the land or buildings.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite_failed_attempts": [
+    {
+      "attempt": 0,
+      "raw": "```json\n{\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible presence of rectangular plots where exposed brown soil is covered by blue and green tarpaulins or netting, as seen in the high-magnification crop of the agricultural area.\",\n    \"factors\": {},\n    \"uncertain\": false\n  },\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is a hypothesis where the protective covering is visibly incomplete, such as showing large gaps of bare soil or torn sections.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the completeness of the coverage; the visible evidence shows the tarps are laid flat and cover the designated rectangular areas, whereas incomplete cover would imply gaps or damage.\",\n  \"missing_required_factors\": []\n}\n```",
+      "error": "Counterfactual evidence must be a positive assertion without a disclaimer"
+    },
+    {
+      "attempt": 1,
+      "raw": "```json\n{\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible presence of rectangular plots where exposed brown soil is covered by blue and green tarpaulins or netting, as seen in the high-magnification crop of the agricultural area.\",\n    \"factors\": {},\n    \"uncertain\": false\n  },\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is a hypothesis where the protective covering is visibly incomplete, such as showing large gaps of bare soil or torn sections.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the completeness of the coverage; the visible evidence shows the tarps are laid flat and cover the designated rectangular areas, whereas incomplete cover would imply gaps or damage.\",\n  \"missing_required_factors\": []\n}\n```",
+      "error": "Counterfactual evidence must be a positive assertion without a disclaimer"
+    },
+    {
+      "attempt": 2,
+      "raw": "```json\n{\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible presence of rectangular plots where exposed brown soil is covered by blue and green tarpaulins or netting, as seen in the high-magnification crop of the agricultural area.\",\n    \"factors\": {},\n    \"uncertain\": false\n  },\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is a hypothesis where the protective covering is visibly incomplete, such as showing large gaps of bare soil or torn sections.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the completeness of the coverage; the visible evidence shows the tarps are laid flat and cover the designated rectangular areas, whereas incomplete cover would imply gaps or damage.\",\n  \"missing_required_factors\": []\n}\n```",
+      "error": "Counterfactual evidence must be a positive assertion without a disclaimer"
+    }
+  ]
+}

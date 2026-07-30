@@ -18,4 +18,4 @@ This paper makes three contributions:
     \item We propose \method, a Qwen3-VL-based parameter-efficient baseline that combines context and evidence with taxonomy-neighbor ranking and counterfactual rejection; its deterministic set extension exposes which crop supports each predicted event.
 \end{itemize}
 
-The manuscript is intentionally result-honest: verified snapshot statistics are included, whereas unresolved split counts and measurements remain \tbd. The submission version must replace every placeholder with outputs from the frozen protocol in \cref{sec:experiments}.
+The manuscript is intentionally result-honest: verified snapshot statistics and explicitly marked development diagnostics are included, whereas official split-dependent measurements remain \tbd. On the provisional 18-class validation split, a label-only two-view LoRA baseline improves free-generation macro-F1 over either single view, but the crop supplies most of the predictive signal and closed-set gains are decoder-dependent. The submission version must replace every placeholder with outputs from the frozen protocol in \cref{sec:experiments}.

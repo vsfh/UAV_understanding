@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_52c758ae9e6b51b85911",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/collapsed_house_wall/original/1010-2347-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/collapsed_house_wall/cropped/1010-2347-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area with a paved road running vertically.",
+      "Left side: residential houses with grey and red roofs, and a large white building with a blue roof.",
+      "Right side: a large industrial warehouse with a blue roof and adjacent concrete silos.",
+      "Center: agricultural plots with tilled soil, green vegetation, and blue tarps.",
+      "Bottom left: a pile of debris and rubble near a house."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the specific debris pile located in the bottom-left quadrant of the context image.",
+      "The crop shows the debris pile is situated between a house with a grey tiled roof and a small plot of green crops.",
+      "A white sedan is visible in the crop on a paved area adjacent to the debris, which corresponds to the general vicinity of the houses on the left side of the context image."
+    ],
+    "description": "The context image shows a rural-industrial landscape with a road, houses, and fields. The linked crop provides a detailed view of a collapsed structure or debris pile located near a residential house and a vegetable garden in the lower-left section of the wider scene.",
+    "evidence_visible": [
+      "A pile of rubble consisting of broken grey bricks, concrete slabs, and wooden beams.",
+      "The debris is located next to a house with a traditional grey tiled roof.",
+      "A small garden plot with green leafy vegetables is visible to the right of the debris.",
+      "A white sedan is parked on a concrete surface in the background of the crop.",
+      "A utility pole stands near the edge of the debris pile."
+    ],
+    "unclear": [
+      "The specific cause of the debris (demolition vs. collapse).",
+      "The identity of the white sedan.",
+      "The exact nature of the materials in the debris pile beyond general construction waste."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area with a paved road running vertically.\",\n    \"Left side: residential houses with grey and red roofs, and a large white building with a blue roof.\",\n    \"Right side: a large industrial warehouse with a blue roof and adjacent concrete silos.\",\n    \"Center: agricultural plots with tilled soil, green vegetation, and blue tarps.\",\n    \"Bottom left: a pile of debris and rubble near a house.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the specific debris pile located in the bottom-left quadrant of the context image.\",\n    \"The crop shows the debris pile is situated between a house with a grey tiled roof and a small plot of green crops.\",\n    \"A white sedan is visible in the crop on a paved area adjacent to the debris, which corresponds to the general vicinity of the houses on the left side of the context image.\"\n  ],\n  \"description\": \"The context image shows a rural-industrial landscape with a road, houses, and fields. The linked crop provides a detailed view of a collapsed structure or debris pile located near a residential house and a vegetable garden in the lower-left section of the wider scene.\",\n  \"evidence_visible\": [\n    \"A pile of rubble consisting of broken grey bricks, concrete slabs, and wooden beams.\",\n    \"The debris is located next to a house with a traditional grey tiled roof.\",\n    \"A small garden plot with green leafy vegetables is visible to the right of the debris.\",\n    \"A white sedan is parked on a concrete surface in the background of the crop.\",\n    \"A utility pole stands near the edge of the debris pile.\"\n  ],\n  \"unclear\": [\n    \"The specific cause of the debris (demolition vs. collapse).\",\n    \"The identity of the white sedan.\",\n    \"The exact nature of the materials in the debris pile beyond general construction waste.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the debris; the image shows a pile of rubble from a collapsed wall rather than general structural damage to the standing building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the crop image shows a pile of rubble consisting of broken grey bricks and concrete slabs situated next to a house with a grey tiled roof, indicating a wall has visibly collapsed.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the debris; the image shows a pile of rubble from a collapsed wall rather than general structural damage to the standing building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the crop image shows a pile of rubble consisting of broken grey bricks and concrete slabs situated next to a house with a grey tiled roof, indicating a wall has visibly collapsed.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The crop image clearly displays a pile of rubble consisting of broken grey bricks and concrete slabs situated next to a house with a grey tiled roof. This visual evidence directly supports the claim that a wall has visibly collapsed.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a pile of rubble and debris next to a building, which constitutes visible evidence of structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The crop image clearly displays a pile of rubble consisting of broken grey bricks and concrete slabs situated next to a house with a grey tiled roof. This visual evidence directly supports the claim that a wall has visibly collapsed.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a pile of rubble and debris next to a building, which constitutes visible evidence of structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

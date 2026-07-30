@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a51497846a0e04eb1555",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-2807-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-2807-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a body of water, agricultural plots with green crops, and a dirt road.",
+      "A large area of bare, brown earth is visible on the left side of the water.",
+      "A building with a swimming pool is situated on a peninsula in the upper section.",
+      "Vegetation appears dormant, with many trees lacking leaves."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the blue-green mesh-covered area located in the bottom right corner of the context image.",
+      "The dirt road running diagonally through the crop image corresponds to the road visible in the lower right of the context image.",
+      "The small patch of green crops in the bottom left of the crop image matches the adjacent agricultural plot in the context image."
+    ],
+    "description": "The images show a rural area with agricultural fields and a water body. The crop view details a specific plot covered by a blue-green mesh netting, situated next to a dirt road and a small patch of green crops. The surrounding environment includes bare earth and dormant vegetation.",
+    "evidence_visible": [
+      "A large, irregular patch of blue-green mesh netting covers a mound of earth or debris.",
+      "The netting appears loose and wrinkled, not tightly secured.",
+      "A dirt road runs diagonally adjacent to the covered area.",
+      "A small section of green crops is visible in the bottom left corner of the crop frame.",
+      "The ground surrounding the netting is dry and brown."
+    ],
+    "unclear": [
+      "The specific contents beneath the blue-green mesh are not visible.",
+      "The purpose of the mesh covering (e.g., erosion control, crop protection, construction) cannot be determined.",
+      "The exact nature of the material under the netting is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a body of water, agricultural plots with green crops, and a dirt road.\",\n    \"A large area of bare, brown earth is visible on the left side of the water.\",\n    \"A building with a swimming pool is situated on a peninsula in the upper section.\",\n    \"Vegetation appears dormant, with many trees lacking leaves.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the blue-green mesh-covered area located in the bottom right corner of the context image.\",\n    \"The dirt road running diagonally through the crop image corresponds to the road visible in the lower right of the context image.\",\n    \"The small patch of green crops in the bottom left of the crop image matches the adjacent agricultural plot in the context image.\"\n  ],\n  \"description\": \"The images show a rural area with agricultural fields and a water body. The crop view details a specific plot covered by a blue-green mesh netting, situated next to a dirt road and a small patch of green crops. The surrounding environment includes bare earth and dormant vegetation.\",\n  \"evidence_visible\": [\n    \"A large, irregular patch of blue-green mesh netting covers a mound of earth or debris.\",\n    \"The netting appears loose and wrinkled, not tightly secured.\",\n    \"A dirt road runs diagonally adjacent to the covered area.\",\n    \"A small section of green crops is visible in the bottom left corner of the crop frame.\",\n    \"The ground surrounding the netting is dry and brown.\"\n  ],\n  \"unclear\": [\n    \"The specific contents beneath the blue-green mesh are not visible.\",\n    \"The purpose of the mesh covering (e.g., erosion control, crop protection, construction) cannot be determined.\",\n    \"The exact nature of the material under the netting is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the netting in the image appears to fully cover the exposed soil mound, whereas incomplete soil cover would require visible gaps in the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large mound of earth covered by a blue-green mesh netting situated next to a dirt road and a small patch of green crops.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the netting in the image appears to fully cover the exposed soil mound, whereas incomplete soil cover would require visible gaps in the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large mound of earth covered by a blue-green mesh netting situated next to a dirt road and a small patch of green crops.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large mound of earth covered by a blue-green mesh netting situated next to a dirt road and a small patch of green crops. This visual evidence directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a large mound of earth covered by a blue-green mesh netting. The covering is visibly incomplete, as large portions of the mound are exposed or only partially covered. This supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large mound of earth covered by a blue-green mesh netting situated next to a dirt road and a small patch of green crops. This visual evidence directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a large mound of earth covered by a blue-green mesh netting. The covering is visibly incomplete, as large portions of the mound are exposed or only partially covered. This supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

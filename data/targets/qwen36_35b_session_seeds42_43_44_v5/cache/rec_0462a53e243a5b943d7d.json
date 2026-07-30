@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0462a53e243a5b943d7d",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2572-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2572-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a river on the left, large rectangular green agricultural fields, and a cluster of residential buildings with grey tiled roofs.",
+      "One building in the lower-left foreground has a large array of dark blue photovoltaic panels installed on its roof.",
+      "Vegetation includes dense trees and smaller garden plots near the structures."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a high-magnification view of the specific building with solar panels seen in the lower-left corner of the wide context image.",
+      "The spatial relationship confirms the crop shows the roof and immediate surroundings of the structure identified in the context.",
+      "The path and adjacent smaller shed visible in the crop correspond to the area immediately south of the solar-paneled building in the context view."
+    ],
+    "description": "The images show a rural area with green fields and a river. A specific building with a grey tiled roof and a large array of dark blue solar panels is highlighted. The crop reveals the panels' grid structure and a smaller adjacent shed with a damaged roof section, situated next to a dirt path and dense vegetation.",
+    "evidence_visible": [
+      "Close-up of a building roof covered in a grid of dark blue rectangular photovoltaic solar panels.",
+      "Adjacent to the solar array is a smaller, single-story structure with a grey tiled roof that appears to have a hole or missing tiles near the ridge.",
+      "The ground between the buildings is a mix of dirt and low-lying green vegetation.",
+      "A wooden ladder or frame is visible on the ground near the bottom right of the crop."
+    ],
+    "unclear": [
+      "The specific type of crop or vegetation in the fields.",
+      "The operational status of the solar panels.",
+      "The exact nature of the damage on the smaller shed's roof.",
+      "The identity or purpose of the buildings."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a river on the left, large rectangular green agricultural fields, and a cluster of residential buildings with grey tiled roofs.\",\n    \"One building in the lower-left foreground has a large array of dark blue photovoltaic panels installed on its roof.\",\n    \"Vegetation includes dense trees and smaller garden plots near the structures.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a high-magnification view of the specific building with solar panels seen in the lower-left corner of the wide context image.\",\n    \"The spatial relationship confirms the crop shows the roof and immediate surroundings of the structure identified in the context.\",\n    \"The path and adjacent smaller shed visible in the crop correspond to the area immediately south of the solar-paneled building in the context view.\"\n  ],\n  \"description\": \"The images show a rural area with green fields and a river. A specific building with a grey tiled roof and a large array of dark blue solar panels is highlighted. The crop reveals the panels' grid structure and a smaller adjacent shed with a damaged roof section, situated next to a dirt path and dense vegetation.\",\n  \"evidence_visible\": [\n    \"Close-up of a building roof covered in a grid of dark blue rectangular photovoltaic solar panels.\",\n    \"Adjacent to the solar array is a smaller, single-story structure with a grey tiled roof that appears to have a hole or missing tiles near the ridge.\",\n    \"The ground between the buildings is a mix of dirt and low-lying green vegetation.\",\n    \"A wooden ladder or frame is visible on the ground near the bottom right of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop or vegetation in the fields.\",\n    \"The operational status of the solar panels.\",\n    \"The exact nature of the damage on the smaller shed's roof.\",\n    \"The identity or purpose of the buildings.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific nature of the failure; the evidence shows a localized section of the roof structure has fallen in (collapsed), whereas building damage is a broader category of structural harm.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a smaller adjacent structure with a grey tiled roof that has a distinct hole or missing tiles near the ridge, indicating a section of the roof structure has fallen in.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific nature of the failure; the evidence shows a localized section of the roof structure has fallen in (collapsed), whereas building damage is a broader category of structural harm.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a smaller adjacent structure with a grey tiled roof that has a distinct hole or missing tiles near the ridge, indicating a section of the roof structure has fallen in.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence shows a building with a grey tiled roof that has a distinct hole or missing tiles near the ridge, exposing the interior structure. This visual detail directly supports the claim of a collapsed section of the roof structure.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image evidence shows a building with a grey tiled roof that has a distinct hole or missing tiles near the ridge, exposing the interior structure. This visual detail directly supports the claim of visible structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence shows a building with a grey tiled roof that has a distinct hole or missing tiles near the ridge, exposing the interior structure. This visual detail directly supports the claim of a collapsed section of the roof structure.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows a building with a grey tiled roof that has a distinct hole or missing tiles near the ridge, exposing the interior structure. This visual detail directly supports the claim of visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

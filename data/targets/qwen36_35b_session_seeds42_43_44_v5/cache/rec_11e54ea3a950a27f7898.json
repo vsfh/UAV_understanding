@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_11e54ea3a950a27f7898",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0917-0959-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0917-0959-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of an industrial complex with multiple large buildings featuring blue and grey corrugated metal roofs.",
+      "Two long rows of dark photovoltaic solar panels are mounted on the roof of a central white building.",
+      "A multi-lane highway runs along the top edge of the frame, with visible traffic including a red truck and white cars.",
+      "Green vegetation and trees line the highway and surround the facility.",
+      "A parking area with several cars is visible in the bottom right corner."
+    ],
+    "cross_view_relations": [
+      "The crop image shows a specific intersection located near the facility seen in the context image.",
+      "The grey and blue roof in the foreground of the crop matches the architectural style and color palette of the buildings in the context image.",
+      "The green playground area visible in the background of the crop is situated near the highway and trees seen in the upper portion of the context image.",
+      "The perspective of the crop is a closer, angled view of the area adjacent to the main industrial buildings."
+    ],
+    "description": "Aerial imagery of an industrial site with solar panels on a white building and a blue-roofed structure. A highway with traffic runs nearby. A linked crop view details a nearby intersection with a blue bus, cars, and a green playground area adjacent to the facility's perimeter.",
+    "evidence_visible": [
+      "A paved intersection with white lane markings and crosswalks.",
+      "A blue bus and several cars (white, black, silver) are present at the intersection.",
+      "A green playground area with equipment is visible in the background.",
+      "The foreground shows a section of a building roof with grey and blue panels.",
+      "Streetlights and trees line the roads."
+    ],
+    "unclear": [
+      "The specific business type of the facility.",
+      "The exact date or time of the images.",
+      "The legal status or ownership of the buildings."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of an industrial complex with multiple large buildings featuring blue and grey corrugated metal roofs.\",\n    \"Two long rows of dark photovoltaic solar panels are mounted on the roof of a central white building.\",\n    \"A multi-lane highway runs along the top edge of the frame, with visible traffic including a red truck and white cars.\",\n    \"Green vegetation and trees line the highway and surround the facility.\",\n    \"A parking area with several cars is visible in the bottom right corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image shows a specific intersection located near the facility seen in the context image.\",\n    \"The grey and blue roof in the foreground of the crop matches the architectural style and color palette of the buildings in the context image.\",\n    \"The green playground area visible in the background of the crop is situated near the highway and trees seen in the upper portion of the context image.\",\n    \"The perspective of the crop is a closer, angled view of the area adjacent to the main industrial buildings.\"\n  ],\n  \"description\": \"Aerial imagery of an industrial site with solar panels on a white building and a blue-roofed structure. A highway with traffic runs nearby. A linked crop view details a nearby intersection with a blue bus, cars, and a green playground area adjacent to the facility's perimeter.\",\n  \"evidence_visible\": [\n    \"A paved intersection with white lane markings and crosswalks.\",\n    \"A blue bus and several cars (white, black, silver) are present at the intersection.\",\n    \"A green playground area with equipment is visible in the background.\",\n    \"The foreground shows a section of a building roof with grey and blue panels.\",\n    \"Streetlights and trees line the roads.\"\n  ],\n  \"unclear\": [\n    \"The specific business type of the facility.\",\n    \"The exact date or time of the images.\",\n    \"The legal status or ownership of the buildings.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the netting in the image appears to be a complete, uniform green mesh covering the area, whereas incomplete soil cover would show visible gaps or exposed earth within the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a green mesh structure covering the ground in the background of the crop image, adjacent to the highway and trees.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the netting in the image appears to be a complete, uniform green mesh covering the area, whereas incomplete soil cover would show visible gaps or exposed earth within the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a green mesh structure covering the ground in the background of the crop image, adjacent to the highway and trees.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The crop image clearly shows a green mesh structure (bare soil netting) covering the ground in the background, adjacent to the highway and trees. This directly supports the claim.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The claim of 'incomplete soil cover' is not supported. The visible ground cover in the background is a complete green mesh netting, not exposed or incomplete soil. The foreground shows building roofs, not soil.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The crop image clearly shows a green mesh structure (bare soil netting) covering the ground in the background, adjacent to the highway and trees. This directly supports the claim.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The claim of 'incomplete soil cover' is not supported. The visible ground cover in the background is a complete green mesh netting, not exposed or incomplete soil. The foreground shows building roofs, not soil.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

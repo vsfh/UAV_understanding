@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0ec2279a021a84c2df0a",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0927-3629-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0927-3629-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved road separating a rural area on the left from an industrial zone on the right.",
+      "The industrial zone features a large building with a blue corrugated metal roof and a parking lot with multiple vehicles.",
+      "A rectangular plot of bare earth is situated between the road and the industrial building.",
+      "The rural area contains residential buildings with grey tiled roofs and agricultural plots with green vegetation.",
+      "A dense cluster of trees separates the residential area from the road."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of the agricultural plots located in the bottom-left corner of the context image.",
+      "The white building with the grey roof visible in the crop corresponds to the structures adjacent to the fields in the context image."
+    ],
+    "description": "The context image shows a road dividing a rural residential area with gardens from a large industrial facility with a blue roof. The linked crop provides a detailed view of the agricultural plots in the rural section, revealing organized vegetable patches and blue protective netting on the ground.",
+    "evidence_visible": [
+      "Close-up of rectangular garden plots containing rows of green leafy crops.",
+      "Blue plastic netting or tarps are visible on the soil surface in two distinct locations.",
+      "A white building with a grey tiled roof borders the garden plots on the left.",
+      "The soil appears dark and tilled."
+    ],
+    "unclear": [
+      "Specific crop species",
+      "Exact dimensions of the plots",
+      "Purpose of the blue netting (e.g., pest control vs. frost protection)"
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a paved road separating a rural area on the left from an industrial zone on the right.\",\n    \"The industrial zone features a large building with a blue corrugated metal roof and a parking lot with multiple vehicles.\",\n    \"A rectangular plot of bare earth is situated between the road and the industrial building.\",\n    \"The rural area contains residential buildings with grey tiled roofs and agricultural plots with green vegetation.\",\n    \"A dense cluster of trees separates the residential area from the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of the agricultural plots located in the bottom-left corner of the context image.\",\n    \"The white building with the grey roof visible in the crop corresponds to the structures adjacent to the fields in the context image.\"\n  ],\n  \"description\": \"The context image shows a road dividing a rural residential area with gardens from a large industrial facility with a blue roof. The linked crop provides a detailed view of the agricultural plots in the rural section, revealing organized vegetable patches and blue protective netting on the ground.\",\n  \"evidence_visible\": [\n    \"Close-up of rectangular garden plots containing rows of green leafy crops.\",\n    \"Blue plastic netting or tarps are visible on the soil surface in two distinct locations.\",\n    \"A white building with a grey tiled roof borders the garden plots on the left.\",\n    \"The soil appears dark and tilled.\"\n  ],\n  \"unclear\": [\n    \"Specific crop species\",\n    \"Exact dimensions of the plots\",\n    \"Purpose of the blue netting (e.g., pest control vs. frost protection)\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the former describes the specific presence of dust-control netting on the soil, whereas the latter describes the state of the covering being incomplete; the visible blue netting establishes the presence of the material required for bare soil netting.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the linked crop image shows rectangular garden plots where the dark tilled soil is partially covered by blue plastic netting or tarps.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the former describes the specific presence of dust-control netting on the soil, whereas the latter describes the state of the covering being incomplete; the visible blue netting establishes the presence of the material required for bare soil netting.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the linked crop image shows rectangular garden plots where the dark tilled soil is partially covered by blue plastic netting or tarps.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The linked crop image clearly displays rectangular garden plots containing dark tilled soil. Portions of this soil are covered by blue plastic material (netting or tarps), while other portions remain exposed. This visual evidence directly supports the claim that the bare soil netting is present and that the soil cover is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The linked crop image clearly displays rectangular garden plots containing dark tilled soil. Portions of this soil are covered by blue plastic material (netting or tarps), while other portions remain exposed. This visual evidence directly supports the claim that the bare soil netting is present and that the soil cover is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The linked crop image clearly displays rectangular garden plots containing dark tilled soil. Portions of this soil are covered by blue plastic material (netting or tarps), while other portions remain exposed. This visual evidence directly supports the claim that the bare soil netting is present and that the soil cover is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The linked crop image clearly displays rectangular garden plots containing dark tilled soil. Portions of this soil are covered by blue plastic material (netting or tarps), while other portions remain exposed. This visual evidence directly supports the claim that the bare soil netting is present and that the soil cover is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_cbd7ad8d6328bcf604fc",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1009-12108-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1009-12108-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area featuring a multi-lane road with moving vehicles on the right, a tall white residential building, and a large plot of land divided into agricultural plots with green vegetation and bare soil.",
+      "In the foreground, rooftops of lower buildings are visible, including one with solar panels and two yellow buses parked in a lot.",
+      "A white lattice tower stands within the agricultural plot."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a zoomed-in view of the upper-right quadrant of the context image.",
+      "The road with the black car in the crop corresponds to the road on the right side of the context image.",
+      "The white hoarding wall and the water body visible in the crop are located along the northern boundary of the agricultural plot in the context image."
+    ],
+    "description": "Aerial imagery shows a road bordered by a white hoarding wall and a water body, adjacent to a large agricultural plot with divided fields. A tall white building and a white lattice tower are visible nearby. The scene includes vehicles on the road and rooftops in the foreground.",
+    "evidence_visible": [
+      "A paved road with a single black car traveling on it.",
+      "A long white construction hoarding or wall running parallel to the road.",
+      "A body of water (pond or canal) adjacent to the hoarding.",
+      "Greenhouse structures with white plastic covering and a small shed in the field area.",
+      "A strip of blue netting or tarp on the ground near the water."
+    ],
+    "unclear": [
+      "Specific crop types in the fields.",
+      "The exact purpose of the white hoarding wall.",
+      "License plate details of the vehicles."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area featuring a multi-lane road with moving vehicles on the right, a tall white residential building, and a large plot of land divided into agricultural plots with green vegetation and bare soil.\",\n    \"In the foreground, rooftops of lower buildings are visible, including one with solar panels and two yellow buses parked in a lot.\",\n    \"A white lattice tower stands within the agricultural plot.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a zoomed-in view of the upper-right quadrant of the context image.\",\n    \"The road with the black car in the crop corresponds to the road on the right side of the context image.\",\n    \"The white hoarding wall and the water body visible in the crop are located along the northern boundary of the agricultural plot in the context image.\"\n  ],\n  \"description\": \"Aerial imagery shows a road bordered by a white hoarding wall and a water body, adjacent to a large agricultural plot with divided fields. A tall white building and a white lattice tower are visible nearby. The scene includes vehicles on the road and rooftops in the foreground.\",\n  \"evidence_visible\": [\n    \"A paved road with a single black car traveling on it.\",\n    \"A long white construction hoarding or wall running parallel to the road.\",\n    \"A body of water (pond or canal) adjacent to the hoarding.\",\n    \"Greenhouse structures with white plastic covering and a small shed in the field area.\",\n    \"A strip of blue netting or tarp on the ground near the water.\"\n  ],\n  \"unclear\": [\n    \"Specific crop types in the fields.\",\n    \"The exact purpose of the white hoarding wall.\",\n    \"License plate details of the vehicles.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a distinct blue netting or tarp material covering the ground, whereas incomplete soil cover would imply a lack of such protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a strip of blue netting or tarp on the ground near the water body and greenhouse structures.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a distinct blue netting or tarp material covering the ground, whereas incomplete soil cover would imply a lack of such protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a strip of blue netting or tarp on the ground near the water body and greenhouse structures.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a strip of blue netting or tarp on the ground near the water body and greenhouse structures, directly supporting the claim.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows agricultural plots with visible bare soil and incomplete protective covering (e.g., some areas have netting, others do not), supporting the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a strip of blue netting or tarp on the ground near the water body and greenhouse structures, directly supporting the claim.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows agricultural plots with visible bare soil and incomplete protective covering (e.g., some areas have netting, others do not), supporting the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

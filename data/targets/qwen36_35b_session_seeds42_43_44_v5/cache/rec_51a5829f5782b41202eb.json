@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_51a5829f5782b41202eb",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0221-0584-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0221-0584-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural settlement with dense housing and agricultural fields.",
+      "Large rectangular plots of green crops separated by dirt roads.",
+      "A cluster of multi-story residential buildings with varied roof colors (red, grey, blue).",
+      "A small body of water or pond visible in the upper right quadrant.",
+      "Trees and vegetation scattered throughout the landscape."
+    ],
+    "cross_view_relations": [
+      "The close-up view focuses on a specific cluster of buildings within the larger settlement shown in the wide view.",
+      "The red inflatable arches visible in the close-up are located near a water feature and a paved area, which corresponds to the built-up area seen in the wider context.",
+      "The architectural style (multi-story, tiled roofs) is consistent between the two views."
+    ],
+    "description": "Aerial imagery shows a rural village with residential buildings and agricultural fields. A close-up reveals red inflatable arches near a water feature and paved area, indicating a specific location within the broader settlement. The scene includes multi-story houses with varied roofing and surrounding greenery.",
+    "evidence_visible": [
+      "Close-up view of a cluster of buildings with grey and red tiled roofs.",
+      "Two large red inflatable arches are visible, one near a water feature and another on a rooftop or elevated platform.",
+      "A paved road or courtyard area with a dark car and a small blue vehicle.",
+      "A water feature (pond or canal) with a small bridge or walkway.",
+      "Construction materials or debris are visible near one of the buildings.",
+      "A blue tarp or roof section is visible on a lower structure."
+    ],
+    "unclear": [
+      "The specific purpose of the red inflatable arches (e.g., celebration, construction marker).",
+      "The exact nature of the debris or construction activity.",
+      "The identity of the vehicles.",
+      "The precise location of this cluster within the wider image without more landmarks."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a rural settlement with dense housing and agricultural fields.\",\n    \"Large rectangular plots of green crops separated by dirt roads.\",\n    \"A cluster of multi-story residential buildings with varied roof colors (red, grey, blue).\",\n    \"A small body of water or pond visible in the upper right quadrant.\",\n    \"Trees and vegetation scattered throughout the landscape.\"\n  ],\n  \"cross_view_relations\": [\n    \"The close-up view focuses on a specific cluster of buildings within the larger settlement shown in the wide view.\",\n    \"The red inflatable arches visible in the close-up are located near a water feature and a paved area, which corresponds to the built-up area seen in the wider context.\",\n    \"The architectural style (multi-story, tiled roofs) is consistent between the two views.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural village with residential buildings and agricultural fields. A close-up reveals red inflatable arches near a water feature and paved area, indicating a specific location within the broader settlement. The scene includes multi-story houses with varied roofing and surrounding greenery.\",\n  \"evidence_visible\": [\n    \"Close-up view of a cluster of buildings with grey and red tiled roofs.\",\n    \"Two large red inflatable arches are visible, one near a water feature and another on a rooftop or elevated platform.\",\n    \"A paved road or courtyard area with a dark car and a small blue vehicle.\",\n    \"A water feature (pond or canal) with a small bridge or walkway.\",\n    \"Construction materials or debris are visible near one of the buildings.\",\n    \"A blue tarp or roof section is visible on a lower structure.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the red inflatable arches (e.g., celebration, construction marker).\",\n    \"The exact nature of the debris or construction activity.\",\n    \"The identity of the vehicles.\",\n    \"The precise location of this cluster within the wider image without more landmarks.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a large pile of rubble and debris indicating active or recent demolition, whereas building damage would only show visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the close-up evidence shows a building reduced to a pile of rubble and debris, indicating active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a large pile of rubble and debris indicating active or recent demolition, whereas building damage would only show visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the close-up evidence shows a building reduced to a pile of rubble and debris, indicating active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The close-up evidence clearly shows a building that has been reduced to a pile of rubble and debris, with the surrounding structure still standing. This visual state is consistent with a demolition event rather than just damage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The building is merely damaged; it is actually demolished.",
+        "The event is building damage; it is building demolition."
+      ]
+    },
+    "positive": {
+      "reason": "The close-up evidence shows a building reduced to a pile of rubble and debris, which is a definitive visual indicator of active or recent demolition. The surrounding context (red arches, vehicles) suggests a planned event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The close-up evidence clearly shows a building that has been reduced to a pile of rubble and debris, with the surrounding structure still standing. This visual state is consistent with a demolition event rather than just damage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The building is merely damaged; it is actually demolished.\",\n      \"The event is building damage; it is building demolition.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The close-up evidence shows a building reduced to a pile of rubble and debris, which is a definitive visual indicator of active or recent demolition. The surrounding context (red arches, vehicles) suggests a planned event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

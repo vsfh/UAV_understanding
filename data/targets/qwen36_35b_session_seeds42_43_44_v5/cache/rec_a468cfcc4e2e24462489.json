@@ -1,0 +1,91 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a468cfcc4e2e24462489",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0219-3250-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0219-3250-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "A wide aerial view of an industrial area featuring a paved road, large warehouse buildings with blue and brown roofs, and a yard densely packed with stacked metal frames and construction equipment.",
+      "An unpaved, dirt area is visible in the upper right section of the yard, adjacent to a building with a brown roof."
+    ],
+    "cross_view_relations": [
+      "The crop image provides a close-up view of the unpaved dirt area seen in the upper right of the context image.",
+      "The red metal beams in the crop correspond to the reddish-brown materials visible in the dirt patch of the context image."
+    ],
+    "description": "Aerial view of an industrial site with warehouses and a yard containing stacked metal frames. A specific section of the yard features a dirt patch with a pile of red metal beams and scattered debris, shown in a linked close-up crop.",
+    "evidence_visible": [
+      "A pile of red metal beams, possibly I-beams or structural supports, stacked diagonally on a dirt surface.",
+      "Surrounding the beams are scattered piles of grey rubble, rocks, and loose dirt.",
+      "A white fence or wall is visible in the background of the crop."
+    ],
+    "unclear": [
+      "Exact identity of the metal beams (e.g., specific structural type).",
+      "Whether the area is an active construction zone or a storage yard.",
+      "Specific contents of the scattered rubble."
+    ]
+  },
+  "raw_perception": "```json\n{\n\"context_visible\": [\n\"A wide aerial view of an industrial area featuring a paved road, large warehouse buildings with blue and brown roofs, and a yard densely packed with stacked metal frames and construction equipment.\",\n\"An unpaved, dirt area is visible in the upper right section of the yard, adjacent to a building with a brown roof.\"\n],\n\"cross_view_relations\": [\n\"The crop image provides a close-up view of the unpaved dirt area seen in the upper right of the context image.\",\n\"The red metal beams in the crop correspond to the reddish-brown materials visible in the dirt patch of the context image.\"\n],\n\"description\": \"Aerial view of an industrial site with warehouses and a yard containing stacked metal frames. A specific section of the yard features a dirt patch with a pile of red metal beams and scattered debris, shown in a linked close-up crop.\",\n\"evidence_visible\": [\n\"A pile of red metal beams, possibly I-beams or structural supports, stacked diagonally on a dirt surface.\",\n\"Surrounding the beams are scattered piles of grey rubble, rocks, and loose dirt.\",\n\"A white fence or wall is visible in the background of the crop.\"\n],\n\"unclear\": [\n\"Exact identity of the metal beams (e.g., specific structural type).\",\n\"Whether the area is an active construction zone or a storage yard.\",\n\"Specific contents of the scattered rubble.\"\n]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of dismantled structural debris and scattered rubble, rather than the organized assembly of new materials.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a pile of red metal beams and scattered grey rubble on a dirt surface, indicating the dismantling or storage of structural components.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of dismantled structural debris and scattered rubble, rather than the organized assembly of new materials.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a pile of red metal beams and scattered grey rubble on a dirt surface, indicating the dismantling or storage of structural components.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence crop clearly displays a pile of red metal beams and scattered grey rubble on a dirt surface, which visually supports the description of dismantling or storage of structural components.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence crop shows static piles of materials (beams and rubble) on a dirt surface. There is no visible evidence of active construction work, such as workers, operating machinery, or partially built structures, which contradicts the claim of an 'active general construction project'.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence crop clearly displays a pile of red metal beams and scattered grey rubble on a dirt surface, which visually supports the description of dismantling or storage of structural components.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence crop shows static piles of materials (beams and rubble) on a dirt surface. There is no visible evidence of active construction work, such as workers, operating machinery, or partially built structures, which contradicts the claim of an 'active general construction project'.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

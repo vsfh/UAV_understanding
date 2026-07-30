@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_bda6854972f5f78b21b3",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0319-1352-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0319-1352-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to a wide waterway.",
+      "Large rectangular plots of dense green crops dominate the center.",
+      "Houses with grey tiled roofs line the left side and the riverbank on the right.",
+      "Two boats are moored along the right bank.",
+      "Solar panels are visible on rooftops in the upper left and lower right areas."
+    ],
+    "cross_view_relations": [
+      "The second image is a high-magnification crop of the lower-right section of the first image.",
+      "The specific house with the solar array in the evidence view corresponds to the cluster of buildings on the riverbank in the context view.",
+      "The green vegetation surrounding the house in the evidence view matches the texture of the crops in the context view."
+    ],
+    "description": "The images show a rural landscape with green agricultural fields and a river. The second image provides a detailed view of a specific house on the riverbank, highlighting a large array of solar panels installed on its roof and surrounding vegetation.",
+    "evidence_visible": [
+      "A single-story structure with a flat concrete roof.",
+      "A large array of blue photovoltaic solar panels mounted on the roof.",
+      "The panels are arranged in multiple rows and are tilted at an angle.",
+      "Green leafy vegetation and small trees surround the base of the house.",
+      "A concrete path runs along the water's edge next to the house."
+    ],
+    "unclear": [
+      "The specific type of crop in the fields.",
+      "The operational status of the solar panels.",
+      "The exact date of the imagery."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to a wide waterway.\",\n    \"Large rectangular plots of dense green crops dominate the center.\",\n    \"Houses with grey tiled roofs line the left side and the riverbank on the right.\",\n    \"Two boats are moored along the right bank.\",\n    \"Solar panels are visible on rooftops in the upper left and lower right areas.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a high-magnification crop of the lower-right section of the first image.\",\n    \"The specific house with the solar array in the evidence view corresponds to the cluster of buildings on the riverbank in the context view.\",\n    \"The green vegetation surrounding the house in the evidence view matches the texture of the crops in the context view.\"\n  ],\n  \"description\": \"The images show a rural landscape with green agricultural fields and a river. The second image provides a detailed view of a specific house on the riverbank, highlighting a large array of solar panels installed on its roof and surrounding vegetation.\",\n  \"evidence_visible\": [\n    \"A single-story structure with a flat concrete roof.\",\n    \"A large array of blue photovoltaic solar panels mounted on the roof.\",\n    \"The panels are arranged in multiple rows and are tilted at an angle.\",\n    \"Green leafy vegetation and small trees surround the base of the house.\",\n    \"A concrete path runs along the water's edge next to the house.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the fields.\",\n    \"The operational status of the solar panels.\",\n    \"The exact date of the imagery.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage, or an explicit statement that it is not visible",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a single-story structure with a flat concrete roof and a large array of blue photovoltaic solar panels mounted on the roof, situated next to a waterway.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage, or an explicit statement that it is not visible\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a single-story structure with a flat concrete roof and a large array of blue photovoltaic solar panels mounted on the roof, situated next to a waterway.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a single-story structure with a flat concrete roof and a large array of blue photovoltaic solar panels mounted on it, situated next to a waterway. This matches the description in the statement perfectly.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible structural damage to a building. While there are some dilapidated structures nearby (e.g., the ruin with a circular opening), the specific building described in the context (the one with solar panels) appears structurally sound and intact. The statement is too vague to be supported as a general description of the scene's primary subject, and the specific building mentioned in the context does not show damage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a single-story structure with a flat concrete roof and a large array of blue photovoltaic solar panels mounted on it, situated next to a waterway. This matches the description in the statement perfectly.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible structural damage to a building. While there are some dilapidated structures nearby (e.g., the ruin with a circular opening), the specific building described in the context (the one with solar panels) appears structurally sound and intact. The statement is too vague to be supported as a general description of the scene's primary subject, and the specific building mentioned in the context does not show damage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

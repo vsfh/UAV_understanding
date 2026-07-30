@@ -1,0 +1,41 @@
+{
+  "prompt_version": "clear-uav-teacher-v3",
+  "identity": {
+    "record_uid": "rec_092d1c7070c9ed34f2d9",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0917-0873-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0917-0873-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area with residential housing on the left and large industrial warehouses with blue roofs on the right.",
+      "A central plot of land is divided into rectangular agricultural plots with varying vegetation density.",
+      "A tall metal lattice tower stands in the middle of the agricultural area.",
+      "A paved road runs vertically through the scene, separating the residential zone from the fields."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a zoomed-in section of the central agricultural area seen in the context image.",
+      "The paved road visible in the crop view corresponds to the vertical road in the context image.",
+      "The residential buildings on the left edge of the crop view match the housing cluster in the context image.",
+      "The blue tarp covering a large area in the crop view is visible as a distinct blue patch in the lower-left quadrant of the context image."
+    ],
+    "description": "The images show a rural-urban interface with residential homes, industrial warehouses, and a central agricultural plot. A paved road divides the area. The zoomed view highlights a specific section of the fields containing a large blue tarp, scattered vegetation, and a small concrete structure, situated next to the road and houses.",
+    "evidence_visible": [
+      "A large area covered by a blue tarp or netting, appearing to cover a depression or pile of materials.",
+      "Surrounding vegetation includes green leafy plants and yellow flowering bushes.",
+      "A small concrete slab or foundation is visible to the right of the blue tarp.",
+      "A utility pole with wires is visible near the road.",
+      "Parts of residential buildings with grey tiled roofs are visible on the left edge."
+    ],
+    "unclear": [
+      "The specific contents under the blue tarp.",
+      "The exact type of crops in the surrounding plots.",
+      "The purpose of the concrete slab.",
+      "The identity of any individuals present."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area with residential housing on the left and large industrial warehouses with blue roofs on the right.\",\n    \"A central plot of land is divided into rectangular agricultural plots with varying vegetation density.\",\n    \"A tall metal lattice tower stands in the middle of the agricultural area.\",\n    \"A paved road runs vertically through the scene, separating the residential zone from the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a zoomed-in section of the central agricultural area seen in the context image.\",\n    \"The paved road visible in the crop view corresponds to the vertical road in the context image.\",\n    \"The residential buildings on the left edge of the crop view match the housing cluster in the context image.\",\n    \"The blue tarp covering a large area in the crop view is visible as a distinct blue patch in the lower-left quadrant of the context image.\"\n  ],\n  \"description\": \"The images show a rural-urban interface with residential homes, industrial warehouses, and a central agricultural plot. A paved road divides the area. The zoomed view highlights a specific section of the fields containing a large blue tarp, scattered vegetation, and a small concrete structure, situated next to the road and houses.\",\n  \"evidence_visible\": [\n    \"A large area covered by a blue tarp or netting, appearing to cover a depression or pile of materials.\",\n    \"Surrounding vegetation includes green leafy plants and yellow flowering bushes.\",\n    \"A small concrete slab or foundation is visible to the right of the blue tarp.\",\n    \"A utility pole with wires is visible near the road.\",\n    \"Parts of residential buildings with grey tiled roofs are visible on the left edge.\"\n  ],\n  \"unclear\": [\n    \"The specific contents under the blue tarp.\",\n    \"The exact type of crops in the surrounding plots.\",\n    \"The purpose of the concrete slab.\",\n    \"The identity of any individuals present.\"\n  ]\n}",
+  "perception_retries": 0
+}

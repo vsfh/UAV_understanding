@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_cce38681759ca579f963",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-11-01_2025-11-30/collapsed_house_wall/original/1105-4598-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-11-01_2025-11-30/collapsed_house_wall/cropped/1105-4598-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape with a mix of agricultural fields and residential clusters.",
+      "Fields in the background show varying states: some are brown and tilled, others are yellow, suggesting harvested crops or dry vegetation.",
+      "A network of unpaved or narrow paved roads connects the scattered buildings.",
+      "The terrain is relatively flat with a hazy horizon indicating atmospheric conditions.",
+      "In the foreground, there is a dense cluster of buildings with grey tiled roofs and some modern structures."
+    ],
+    "cross_view_relations": [
+      "The close-up crop corresponds to the building cluster in the lower-left quadrant of the wide context image.",
+      "The large array of blue solar panels visible in the foreground of the context image is the primary subject of the crop.",
+      "The white two-story building with blue trim seen in the crop is adjacent to the solar panel array in the context view.",
+      "The surrounding tilled fields in the context image match the background terrain behind the buildings in the crop."
+    ],
+    "description": "The images show a rural settlement with agricultural fields. A prominent feature is a large installation of blue photovoltaic solar panels on a roof in the foreground. Adjacent buildings include a white two-story house with blue window frames and traditional grey-tiled roofs. The surrounding area consists of harvested or tilled fields under hazy conditions.",
+    "evidence_visible": [
+      "A large array of blue rectangular solar panels covers a significant portion of a roof structure in the foreground.",
+      "A white two-story building with a blue-trimmed upper window section and a red garage door is visible.",
+      "Adjacent buildings have grey tiled roofs, some appearing weathered or damaged.",
+      "A pile of debris or materials is visible on the ground near the buildings.",
+      "The roof of one building appears to have an orange-colored section, possibly under repair or different material."
+    ],
+    "unclear": [
+      "The specific type of crop in the fields is unclear due to distance and resolution.",
+      "The operational status of the solar panels cannot be determined visually.",
+      "The exact nature of the debris pile is unclear.",
+      "The purpose of the orange section on the roof is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape with a mix of agricultural fields and residential clusters.\",\n    \"Fields in the background show varying states: some are brown and tilled, others are yellow, suggesting harvested crops or dry vegetation.\",\n    \"A network of unpaved or narrow paved roads connects the scattered buildings.\",\n    \"The terrain is relatively flat with a hazy horizon indicating atmospheric conditions.\",\n    \"In the foreground, there is a dense cluster of buildings with grey tiled roofs and some modern structures.\"\n  ],\n  \"cross_view_relations\": [\n    \"The close-up crop corresponds to the building cluster in the lower-left quadrant of the wide context image.\",\n    \"The large array of blue solar panels visible in the foreground of the context image is the primary subject of the crop.\",\n    \"The white two-story building with blue trim seen in the crop is adjacent to the solar panel array in the context view.\",\n    \"The surrounding tilled fields in the context image match the background terrain behind the buildings in the crop.\"\n  ],\n  \"description\": \"The images show a rural settlement with agricultural fields. A prominent feature is a large installation of blue photovoltaic solar panels on a roof in the foreground. Adjacent buildings include a white two-story house with blue window frames and traditional grey-tiled roofs. The surrounding area consists of harvested or tilled fields under hazy conditions.\",\n  \"evidence_visible\": [\n    \"A large array of blue rectangular solar panels covers a significant portion of a roof structure in the foreground.\",\n    \"A white two-story building with a blue-trimmed upper window section and a red garage door is visible.\",\n    \"Adjacent buildings have grey tiled roofs, some appearing weathered or damaged.\",\n    \"A pile of debris or materials is visible on the ground near the buildings.\",\n    \"The roof of one building appears to have an orange-colored section, possibly under repair or different material.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the fields is unclear due to distance and resolution.\",\n    \"The operational status of the solar panels cannot be determined visually.\",\n    \"The exact nature of the debris pile is unclear.\",\n    \"The purpose of the orange section on the roof is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a complete collapse of the roof and wall structure rather than general surface damage or wear.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the close-up evidence image shows a building with a visibly collapsed roof and wall structure, exposing the interior, located adjacent to a white two-story building and a large array of solar panels.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a complete collapse of the roof and wall structure rather than general surface damage or wear.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the close-up evidence image shows a building with a visibly collapsed roof and wall structure, exposing the interior, located adjacent to a white two-story building and a large array of solar panels.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a building with a collapsed roof and wall structure, exposing the interior. This building is located adjacent to a white two-story building and a large array of solar panels, matching the description in the statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows visible structural damage to a building, specifically a collapsed roof and wall structure. This supports the claim of visible building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a building with a collapsed roof and wall structure, exposing the interior. This building is located adjacent to a white two-story building and a large array of solar panels, matching the description in the statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows visible structural damage to a building, specifically a collapsed roof and wall structure. This supports the claim of visible building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

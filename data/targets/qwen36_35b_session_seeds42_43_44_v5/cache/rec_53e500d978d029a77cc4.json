@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_53e500d978d029a77cc4",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1027-11527-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1027-11527-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural agricultural landscape with rectangular fields.",
+      "Fields contain golden crops, tilled brown soil, and blue plastic sheeting.",
+      "A paved road runs horizontally across the lower section, crossing a small bridge.",
+      "Several white, arched greenhouse structures are visible in the lower-left quadrant.",
+      "A cluster of trees and small buildings is situated on the right side."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a high-magnification detail of the white greenhouse and adjacent field seen in the lower-left of the context image.",
+      "The dirt track in the crop view corresponds to the path running alongside the greenhouses in the context view."
+    ],
+    "description": "The context image shows a rural agricultural area with fields, greenhouses, and a road. The crop view zooms in on a white arched greenhouse and a dirt track where a blue truck is parked. A large pile of light blue plastic sheeting and scattered white debris are visible on the ground next to the greenhouse.",
+    "evidence_visible": [
+      "A white, arched greenhouse structure with a dark entrance.",
+      "A blue truck parked on a dirt track adjacent to the greenhouse.",
+      "A large, disorganized pile of light blue plastic sheeting or netting on the ground.",
+      "Scattered white debris and materials along the track and near the greenhouse.",
+      "Parallel rows of tilled soil with black plastic mulch strips to the left of the track."
+    ],
+    "unclear": [
+      "The specific contents of the blue pile.",
+      "The identity of the truck's cargo.",
+      "The exact nature of the white debris.",
+      "The specific crop type in the surrounding fields."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural agricultural landscape with rectangular fields.\",\n    \"Fields contain golden crops, tilled brown soil, and blue plastic sheeting.\",\n    \"A paved road runs horizontally across the lower section, crossing a small bridge.\",\n    \"Several white, arched greenhouse structures are visible in the lower-left quadrant.\",\n    \"A cluster of trees and small buildings is situated on the right side.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a high-magnification detail of the white greenhouse and adjacent field seen in the lower-left of the context image.\",\n    \"The dirt track in the crop view corresponds to the path running alongside the greenhouses in the context view.\"\n  ],\n  \"description\": \"The context image shows a rural agricultural area with fields, greenhouses, and a road. The crop view zooms in on a white arched greenhouse and a dirt track where a blue truck is parked. A large pile of light blue plastic sheeting and scattered white debris are visible on the ground next to the greenhouse.\",\n  \"evidence_visible\": [\n    \"A white, arched greenhouse structure with a dark entrance.\",\n    \"A blue truck parked on a dirt track adjacent to the greenhouse.\",\n    \"A large, disorganized pile of light blue plastic sheeting or netting on the ground.\",\n    \"Scattered white debris and materials along the track and near the greenhouse.\",\n    \"Parallel rows of tilled soil with black plastic mulch strips to the left of the track.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the blue pile.\",\n    \"The identity of the truck's cargo.\",\n    \"The exact nature of the white debris.\",\n    \"The specific crop type in the surrounding fields.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a distinct, large pile of netting material, whereas incomplete soil cover would imply netting applied to the soil surface that is visibly missing or torn.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large pile of light blue plastic sheeting or netting on the ground next to a white arched greenhouse and a dirt track.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a distinct, large pile of netting material, whereas incomplete soil cover would imply netting applied to the soil surface that is visibly missing or torn.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large pile of light blue plastic sheeting or netting on the ground next to a white arched greenhouse and a dirt track.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a large pile of light blue plastic sheeting or netting on the ground next to a white arched greenhouse and a dirt track, which directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows fields with rows of black plastic mulch, but also shows areas of bare soil and a pile of discarded plastic sheeting, indicating that the soil cover is incomplete or has been removed.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a large pile of light blue plastic sheeting or netting on the ground next to a white arched greenhouse and a dirt track, which directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows fields with rows of black plastic mulch, but also shows areas of bare soil and a pile of discarded plastic sheeting, indicating that the soil cover is incomplete or has been removed.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_6b36d85a7ab1c5196eeb",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-0871-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-0871-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement situated on a narrow strip of land between two waterways.",
+      "A paved road runs longitudinally through the settlement, flanked by rectangular plots of green crops.",
+      "Buildings with red and grey tiled roofs are visible, along with a small blue structure near the water's edge.",
+      "The surrounding water contains patches of dry reeds and vegetation."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a high-magnification detail of the green agricultural plots visible in the context image.",
+      "The grey tiled roof in the crop view corresponds to the buildings lining the road in the context view.",
+      "The concrete path in the crop view aligns with the road and plot boundaries seen in the wider context."
+    ],
+    "description": "The images depict a rural settlement along a waterway, featuring a road and rectangular plots of green crops. The local crop view confirms the presence of low-growing vegetation in these plots, bordered by concrete paths and buildings with grey tiled roofs.",
+    "evidence_visible": [
+      "Rectangular plots of dense, low-growing green vegetation.",
+      "A concrete path or border separating the vegetation from a building.",
+      "A building with a grey tiled roof and a small window.",
+      "A section of green mesh or netting lying on the ground near the vegetation.",
+      "A blue bucket visible on the far left edge."
+    ],
+    "unclear": [
+      "Specific species of the green crops.",
+      "The exact function of the green mesh on the ground.",
+      "The purpose of the blue bucket."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement situated on a narrow strip of land between two waterways.\",\n    \"A paved road runs longitudinally through the settlement, flanked by rectangular plots of green crops.\",\n    \"Buildings with red and grey tiled roofs are visible, along with a small blue structure near the water's edge.\",\n    \"The surrounding water contains patches of dry reeds and vegetation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a high-magnification detail of the green agricultural plots visible in the context image.\",\n    \"The grey tiled roof in the crop view corresponds to the buildings lining the road in the context view.\",\n    \"The concrete path in the crop view aligns with the road and plot boundaries seen in the wider context.\"\n  ],\n  \"description\": \"The images depict a rural settlement along a waterway, featuring a road and rectangular plots of green crops. The local crop view confirms the presence of low-growing vegetation in these plots, bordered by concrete paths and buildings with grey tiled roofs.\",\n  \"evidence_visible\": [\n    \"Rectangular plots of dense, low-growing green vegetation.\",\n    \"A concrete path or border separating the vegetation from a building.\",\n    \"A building with a grey tiled roof and a small window.\",\n    \"A section of green mesh or netting lying on the ground near the vegetation.\",\n    \"A blue bucket visible on the far left edge.\"\n  ],\n  \"unclear\": [\n    \"Specific species of the green crops.\",\n    \"The exact function of the green mesh on the ground.\",\n    \"The purpose of the blue bucket.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of dense, low-growing green vegetation covering the plots, whereas incomplete soil cover would imply visible exposed soil with incomplete protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the local crop view shows rectangular plots of dense, low-growing green vegetation bordered by concrete paths and buildings with grey tiled roofs, with a section of green mesh or netting lying on the ground near the vegetation.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of dense, low-growing green vegetation covering the plots, whereas incomplete soil cover would imply visible exposed soil with incomplete protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the local crop view shows rectangular plots of dense, low-growing green vegetation bordered by concrete paths and buildings with grey tiled roofs, with a section of green mesh or netting lying on the ground near the vegetation.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The local crop view clearly shows rectangular plots of dense, low-growing green vegetation bordered by concrete paths and buildings with grey tiled roofs. A section of green mesh or netting is visible lying on the ground near the vegetation. This matches the description in the statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims 'incomplete soil cover' is supported by visible evidence. However, the local crop view shows dense green vegetation covering the soil, not bare soil with incomplete covering. The green mesh is present but does not indicate incomplete soil cover in the way described (i.e., exposed soil with partial covering). The primary visual content is lush green crops, not bare soil.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The local crop view clearly shows rectangular plots of dense, low-growing green vegetation bordered by concrete paths and buildings with grey tiled roofs. A section of green mesh or netting is visible lying on the ground near the vegetation. This matches the description in the statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims 'incomplete soil cover' is supported by visible evidence. However, the local crop view shows dense green vegetation covering the soil, not bare soil with incomplete covering. The green mesh is present but does not indicate incomplete soil cover in the way described (i.e., exposed soil with partial covering). The primary visual content is lush green crops, not bare soil.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

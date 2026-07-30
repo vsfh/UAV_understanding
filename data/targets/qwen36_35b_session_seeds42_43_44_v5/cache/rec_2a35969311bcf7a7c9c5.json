@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_2a35969311bcf7a7c9c5",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1027-9457-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1027-9457-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multi-story residential buildings featuring grey and red roofs.",
+      "Extensive agricultural fields surrounding the village, predominantly filled with mature, golden-yellow crops.",
+      "A network of paved roads and smaller dirt paths connecting the structures.",
+      "Several buildings have solar panels installed on their rooftops.",
+      "Vegetation includes trees and shrubs interspersed among the houses and fields."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a zoomed-in view of the lower-left quadrant of the context image.",
+      "The building with the large solar panel array in the evidence image corresponds to the structure in the bottom-left corner of the context image.",
+      "The golden crop field in the evidence image is adjacent to the solar-paneled building and matches the fields seen in the wider context.",
+      "The tilled garden plots with blue tarps in the evidence image are located between the solar-paneled house and the main road network visible in the context."
+    ],
+    "description": "The images depict a rural village surrounded by golden agricultural fields. A specific house with a rooftop solar array is visible in both views, adjacent to tilled garden plots covered with blue tarps. The wider context shows a dense cluster of residential buildings and a network of roads within the farming landscape.",
+    "evidence_visible": [
+      "Close-up of a white building with a large, dark solar panel array on the roof.",
+      "A small, light-blue shed or outbuilding next to the solar-paneled house.",
+      "Rectangular garden plots with dark soil, some covered by blue plastic tarps.",
+      "A field of dense, golden-yellow crops adjacent to the garden plots.",
+      "A utility pole standing near the garden area."
+    ],
+    "unclear": [
+      "The specific type of crop in the golden fields (e.g., rice, wheat, rapeseed).",
+      "The contents of the blue tarps.",
+      "The exact date of the imagery.",
+      "The names or ownership of the properties."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with multi-story residential buildings featuring grey and red roofs.\",\n    \"Extensive agricultural fields surrounding the village, predominantly filled with mature, golden-yellow crops.\",\n    \"A network of paved roads and smaller dirt paths connecting the structures.\",\n    \"Several buildings have solar panels installed on their rooftops.\",\n    \"Vegetation includes trees and shrubs interspersed among the houses and fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a zoomed-in view of the lower-left quadrant of the context image.\",\n    \"The building with the large solar panel array in the evidence image corresponds to the structure in the bottom-left corner of the context image.\",\n    \"The golden crop field in the evidence image is adjacent to the solar-paneled building and matches the fields seen in the wider context.\",\n    \"The tilled garden plots with blue tarps in the evidence image are located between the solar-paneled house and the main road network visible in the context.\"\n  ],\n  \"description\": \"The images depict a rural village surrounded by golden agricultural fields. A specific house with a rooftop solar array is visible in both views, adjacent to tilled garden plots covered with blue tarps. The wider context shows a dense cluster of residential buildings and a network of roads within the farming landscape.\",\n  \"evidence_visible\": [\n    \"Close-up of a white building with a large, dark solar panel array on the roof.\",\n    \"A small, light-blue shed or outbuilding next to the solar-paneled house.\",\n    \"Rectangular garden plots with dark soil, some covered by blue plastic tarps.\",\n    \"A field of dense, golden-yellow crops adjacent to the garden plots.\",\n    \"A utility pole standing near the garden area.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the golden fields (e.g., rice, wheat, rapeseed).\",\n    \"The contents of the blue tarps.\",\n    \"The exact date of the imagery.\",\n    \"The names or ownership of the properties.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue plastic tarps covering the soil; the distinction is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows rectangular garden plots with exposed soil covered by blue plastic tarps.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue plastic tarps covering the soil; the distinction is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows rectangular garden plots with exposed soil covered by blue plastic tarps.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows rectangular garden plots with exposed soil covered by blue plastic tarps, which directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows soil for which protective covering is visibly incomplete, as there are areas of bare soil adjacent to the blue tarps.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows rectangular garden plots with exposed soil covered by blue plastic tarps, which directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows soil for which protective covering is visibly incomplete, as there are areas of bare soil adjacent to the blue tarps.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

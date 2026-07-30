@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_3228310548937e7bd60e",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/collapsed_house_wall/original/0116-6117-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/collapsed_house_wall/cropped/0116-6117-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to a river system with green water.",
+      "A cluster of single-story residential buildings with red and blue roofs situated on a peninsula-like landform.",
+      "Rectangular plots of green crops located between the buildings and the water.",
+      "A narrow paved road runs parallel to the riverbank.",
+      "Vegetation includes bare deciduous trees and dry reeds along the water's edge."
+    ],
+    "cross_view_relations": [
+      "The local crop image is a zoomed-in view of the central cluster of buildings and gardens seen in the wide context image.",
+      "The red-roofed structures and the specific layout of the garden plots are consistent across both views.",
+      "The wide view confirms the settlement's isolation by water on multiple sides."
+    ],
+    "description": "Aerial imagery shows a rural settlement on a river peninsula. The scene features single-story houses with red and blue roofs, surrounded by rectangular vegetable gardens and a paved road. The area is bordered by green water and dry vegetation, with a zoomed view highlighting the building details and garden plots.",
+    "evidence_visible": [
+      "Close-up view of the residential cluster showing a main house with a red roof and an adjacent smaller structure with a red roof.",
+      "A dilapidated brick structure with an open roof stands near the garden plots.",
+      "A white building with a blue roof is visible to the left.",
+      "Garden plots contain rows of green leafy crops.",
+      "A small concrete utility building is located near the center of the cluster."
+    ],
+    "unclear": [
+      "Occupancy status of the buildings.",
+      "Specific crop species.",
+      "Exact construction dates.",
+      "Ownership details."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to a river system with green water.\",\n    \"A cluster of single-story residential buildings with red and blue roofs situated on a peninsula-like landform.\",\n    \"Rectangular plots of green crops located between the buildings and the water.\",\n    \"A narrow paved road runs parallel to the riverbank.\",\n    \"Vegetation includes bare deciduous trees and dry reeds along the water's edge.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop image is a zoomed-in view of the central cluster of buildings and gardens seen in the wide context image.\",\n    \"The red-roofed structures and the specific layout of the garden plots are consistent across both views.\",\n    \"The wide view confirms the settlement's isolation by water on multiple sides.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural settlement on a river peninsula. The scene features single-story houses with red and blue roofs, surrounded by rectangular vegetable gardens and a paved road. The area is bordered by green water and dry vegetation, with a zoomed view highlighting the building details and garden plots.\",\n  \"evidence_visible\": [\n    \"Close-up view of the residential cluster showing a main house with a red roof and an adjacent smaller structure with a red roof.\",\n    \"A dilapidated brick structure with an open roof stands near the garden plots.\",\n    \"A white building with a blue roof is visible to the left.\",\n    \"Garden plots contain rows of green leafy crops.\",\n    \"A small concrete utility building is located near the center of the cluster.\"\n  ],\n  \"unclear\": [\n    \"Occupancy status of the buildings.\",\n    \"Specific crop species.\",\n    \"Exact construction dates.\",\n    \"Ownership details.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific structural failure of the wall and roof resulting in a ruin-like state, whereas building damage is a broader category of structural harm.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported by the visible evidence of a dilapidated brick structure with an open roof and missing walls situated near the garden plots.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific structural failure of the wall and roof resulting in a ruin-like state, whereas building damage is a broader category of structural harm.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported by the visible evidence of a dilapidated brick structure with an open roof and missing walls situated near the garden plots.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a brick structure with an open roof and missing walls situated near garden plots, which directly supports the description of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image evidence shows a brick structure with an open roof and missing walls, which constitutes visible structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a brick structure with an open roof and missing walls situated near garden plots, which directly supports the description of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows a brick structure with an open roof and missing walls, which constitutes visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

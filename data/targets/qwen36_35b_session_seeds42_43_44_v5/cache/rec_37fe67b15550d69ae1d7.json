@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_37fe67b15550d69ae1d7",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0917-6059-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0917-6059-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "A wide aerial view showing a multi-lane paved road with moving vehicles, including a red bus and a truck.",
+      "A landscaped area with a pond, rock formations, and trees in the foreground.",
+      "A large industrial building with a blue roof covered in solar panels on the right.",
+      "A white rectangular structure and a dirt lot adjacent to the solar building.",
+      "A construction or industrial site in the upper left with a building featuring a red roof.",
+      "A large area of exposed earth and piles of material located in the upper left corner of the context image."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the exposed earth area located in the upper left corner of the context image.",
+      "The blue tarp visible in the crop is located on the left side of the excavation site shown in the context image.",
+      "The green vegetation bordering the bottom of the crop corresponds to the tree line separating the excavation site from the landscaped pond area in the context image."
+    ],
+    "description": "The images show an industrial area with a solar-paneled building and a landscaped pond. The crop provides a detailed view of a large excavation site with exposed soil, tire tracks, and blue tarps, situated adjacent to the main road and greenery.",
+    "evidence_visible": [
+      "A large, irregularly shaped excavation pit with exposed brown soil.",
+      "Distinct tire tracks and ruts visible on the ground surface.",
+      "Piles of earth and mounds of material within the pit.",
+      "Blue tarps covering sections of the ground on the left side.",
+      "A small structure or machinery piece on the right edge of the pit.",
+      "Green vegetation and trees bordering the site."
+    ],
+    "unclear": [
+      "The specific type of material in the piles (e.g., sand, gravel, dirt).",
+      "The purpose of the excavation (e.g., construction, mining, storage).",
+      "The identity of the small structure or machinery in the pit.",
+      "The exact date or time of the images."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"A wide aerial view showing a multi-lane paved road with moving vehicles, including a red bus and a truck.\",\n    \"A landscaped area with a pond, rock formations, and trees in the foreground.\",\n    \"A large industrial building with a blue roof covered in solar panels on the right.\",\n    \"A white rectangular structure and a dirt lot adjacent to the solar building.\",\n    \"A construction or industrial site in the upper left with a building featuring a red roof.\",\n    \"A large area of exposed earth and piles of material located in the upper left corner of the context image.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the exposed earth area located in the upper left corner of the context image.\",\n    \"The blue tarp visible in the crop is located on the left side of the excavation site shown in the context image.\",\n    \"The green vegetation bordering the bottom of the crop corresponds to the tree line separating the excavation site from the landscaped pond area in the context image.\"\n  ],\n  \"description\": \"The images show an industrial area with a solar-paneled building and a landscaped pond. The crop provides a detailed view of a large excavation site with exposed soil, tire tracks, and blue tarps, situated adjacent to the main road and greenery.\",\n  \"evidence_visible\": [\n    \"A large, irregularly shaped excavation pit with exposed brown soil.\",\n    \"Distinct tire tracks and ruts visible on the ground surface.\",\n    \"Piles of earth and mounds of material within the pit.\",\n    \"Blue tarps covering sections of the ground on the left side.\",\n    \"A small structure or machinery piece on the right edge of the pit.\",\n    \"Green vegetation and trees bordering the site.\"\n  ],\n  \"unclear\": [\n    \"The specific type of material in the piles (e.g., sand, gravel, dirt).\",\n    \"The purpose of the excavation (e.g., construction, mining, storage).\",\n    \"The identity of the small structure or machinery in the pit.\",\n    \"The exact date or time of the images.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue tarps covering the soil; the distinction is not visible because the tarps are present.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large excavation site with exposed brown soil and distinct blue tarps covering sections of the ground on the left side.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue tarps covering the soil; the distinction is not visible because the tarps are present.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large excavation site with exposed brown soil and distinct blue tarps covering sections of the ground on the left side.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large excavation site with exposed brown soil and distinct blue tarps covering sections of the ground on the left side, directly supporting the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a large excavation site with exposed brown soil and distinct blue tarps covering sections of the ground on the left side. The presence of these tarps indicates that protective covering is visibly incomplete, as large areas of soil remain exposed.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large excavation site with exposed brown soil and distinct blue tarps covering sections of the ground on the left side, directly supporting the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a large excavation site with exposed brown soil and distinct blue tarps covering sections of the ground on the left side. The presence of these tarps indicates that protective covering is visibly incomplete, as large areas of soil remain exposed.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

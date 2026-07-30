@@ -1,0 +1,90 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a0b167ef10621a04d91f",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1001-0736-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1001-0736-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multiple residential buildings, a large rectangular pond covered in green algae, and a dense forest in the background. A road runs horizontally through the middle of the scene.",
+      "Several buildings feature rooftop solar panel arrays. A small pavilion with a traditional roof sits on a stone platform within the green pond."
+    ],
+    "cross_view_relations": [
+      "The close-up crop corresponds to the building located on the left side of the pond in the wide context image. The spatial relationship confirms the crop shows the rooftop and the immediate adjacent ground area next to the water."
+    ],
+    "description": "Aerial view of a rural area featuring a green algae-covered pond with a pavilion. A nearby building has a rooftop solar array. The ground next to the building contains drying agricultural materials, small greenhouses, and garden plots.",
+    "evidence_visible": [
+      "Close-up of a building roof covered in a grid of solar panels. Adjacent to the building is a paved area with scattered brown material, likely drying crops. Two small, arched greenhouses with translucent coverings are visible on the ground. A vegetable garden with rows of green plants is located near the pond's edge."
+    ],
+    "unclear": [
+      "Specific type of crops being dried or grown",
+      "Exact dimensions of the solar array",
+      "Identity of the person or object near the drying material"
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"Aerial view of a rural settlement with multiple residential buildings, a large rectangular pond covered in green algae, and a dense forest in the background. A road runs horizontally through the middle of the scene.\",\n\"Several buildings feature rooftop solar panel arrays. A small pavilion with a traditional roof sits on a stone platform within the green pond.\"\n],\n\"cross_view_relations\": [\n\"The close-up crop corresponds to the building located on the left side of the pond in the wide context image. The spatial relationship confirms the crop shows the rooftop and the immediate adjacent ground area next to the water.\"\n],\n\"description\": \"Aerial view of a rural area featuring a green algae-covered pond with a pavilion. A nearby building has a rooftop solar array. The ground next to the building contains drying agricultural materials, small greenhouses, and garden plots.\",\n\"evidence_visible\": [\n\"Close-up of a building roof covered in a grid of solar panels. Adjacent to the building is a paved area with scattered brown material, likely drying crops. Two small, arched greenhouses with translucent coverings are visible on the ground. A vegetable garden with rows of green plants is located near the pond's edge.\"\n],\n\"unclear\": [\n\"Specific type of crops being dried or grown\",\n\"Exact dimensions of the solar array\",\n\"Identity of the person or object near the drying material\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the complete arched structures (greenhouses) covering the soil, whereas incomplete soil cover would imply a lack of such protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting, specifically the two small arched greenhouses with translucent coverings located on the ground adjacent to the building with the solar array.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the complete arched structures (greenhouses) covering the soil, whereas incomplete soil cover would imply a lack of such protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting, specifically the two small arched greenhouses with translucent coverings located on the ground adjacent to the building with the solar array.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows two small arched structures with green translucent coverings (greenhouses) located on the ground adjacent to the building with the solar array. The statement claims these are 'dust-control netting' and 'exposed soil covered by dust-control netting'. While the structures are present, describing them as 'dust-control netting' is a misinterpretation of the visual evidence; they are clearly small greenhouse tunnels used for agriculture, not dust control. Furthermore, the soil is not 'covered by dust-control netting' in the sense of a flat sheet; it is enclosed by the arched structures. The claim that the event is 'bare soil netting' is contradicted by the presence of the greenhouse structures.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The structures are dust-control netting.",
+        "The soil is covered by dust-control netting.",
+        "The event is bare soil netting."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a building with solar panels. Adjacent to it, there is a patch of ground where the soil is visible. While there are two small arched greenhouses, the area immediately surrounding them and the path leading to them shows exposed brown soil. The statement 'incomplete soil cover' is supported because the soil is not fully covered by vegetation or structures; there are visible patches of bare earth. The presence of the greenhouses does not negate the existence of the bare soil nearby, making the claim of 'incomplete' cover accurate.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows two small arched structures with green translucent coverings (greenhouses) located on the ground adjacent to the building with the solar array. The statement claims these are 'dust-control netting' and 'exposed soil covered by dust-control netting'. While the structures are present, describing them as 'dust-control netting' is a misinterpretation of the visual evidence; they are clearly small greenhouse tunnels used for agriculture, not dust control. Furthermore, the soil is not 'covered by dust-control netting' in the sense of a flat sheet; it is enclosed by the arched structures. The claim that the event is 'bare soil netting' is contradicted by the presence of the greenhouse structures.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The structures are dust-control netting.\",\n      \"The soil is covered by dust-control netting.\",\n      \"The event is bare soil netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a building with solar panels. Adjacent to it, there is a patch of ground where the soil is visible. While there are two small arched greenhouses, the area immediately surrounding them and the path leading to them shows exposed brown soil. The statement 'incomplete soil cover' is supported because the soil is not fully covered by vegetation or structures; there are visible patches of bare earth. The presence of the greenhouses does not negate the existence of the bare soil nearby, making the claim of 'incomplete' cover accurate.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

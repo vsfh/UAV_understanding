@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_030b9e7595c447ad7fed",
+    "source_class": "construction_waste",
+    "negative_label": "construction_materials",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/construction_waste/original/0111-0619-construction_waste.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/construction_waste/cropped/0111-0619-construction_waste.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of an industrial area with multiple factory buildings featuring blue and grey roofs.",
+      "A large, unpaved lot in the center contains disorganized piles of materials.",
+      "Yellow lattice structures, resembling crane sections, are stacked in the lot.",
+      "A paved road with parked cars and trees runs along the right side of the lot.",
+      "A narrow drainage ditch or canal runs along the left edge of the lot, separating it from a building."
+    ],
+    "cross_view_relations": [
+      "The crop is a high-magnification view of the central-left portion of the wide context image.",
+      "The yellow lattice structures and the pile of blue and white debris in the crop correspond directly to the same objects in the wider shot.",
+      "The drainage ditch visible on the left of the crop is seen running along the left edge of the lot in the context view."
+    ],
+    "description": "An aerial view shows an industrial yard containing stacked yellow crane sections and piles of scrap metal and debris. A narrow ditch borders the lot on the left. The scene is surrounded by factory buildings and a road with parked vehicles.",
+    "evidence_visible": [
+      "Close-up of yellow metal lattice structures, likely crane parts, stacked on the ground.",
+      "A large pile of mixed debris including blue and white panels, possibly insulation or siding.",
+      "Dry, brown vegetation and bare ground cover the lot.",
+      "A concrete-lined drainage ditch runs vertically along the left side of the frame.",
+      "A portion of a multi-story building with windows is visible on the far left edge."
+    ],
+    "unclear": [
+      "The specific type of materials in the debris pile (e.g., insulation, siding, packaging).",
+      "The operational status of the yellow structures (new, used, or discarded).",
+      "The exact nature of the industrial activity at the site."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of an industrial area with multiple factory buildings featuring blue and grey roofs.\",\n    \"A large, unpaved lot in the center contains disorganized piles of materials.\",\n    \"Yellow lattice structures, resembling crane sections, are stacked in the lot.\",\n    \"A paved road with parked cars and trees runs along the right side of the lot.\",\n    \"A narrow drainage ditch or canal runs along the left edge of the lot, separating it from a building.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a high-magnification view of the central-left portion of the wide context image.\",\n    \"The yellow lattice structures and the pile of blue and white debris in the crop correspond directly to the same objects in the wider shot.\",\n    \"The drainage ditch visible on the left of the crop is seen running along the left edge of the lot in the context view.\"\n  ],\n  \"description\": \"An aerial view shows an industrial yard containing stacked yellow crane sections and piles of scrap metal and debris. A narrow ditch borders the lot on the left. The scene is surrounded by factory buildings and a road with parked vehicles.\",\n  \"evidence_visible\": [\n    \"Close-up of yellow metal lattice structures, likely crane parts, stacked on the ground.\",\n    \"A large pile of mixed debris including blue and white panels, possibly insulation or siding.\",\n    \"Dry, brown vegetation and bare ground cover the lot.\",\n    \"A concrete-lined drainage ditch runs vertically along the left side of the frame.\",\n    \"A portion of a multi-story building with windows is visible on the far left edge.\"\n  ],\n  \"unclear\": [\n    \"The specific type of materials in the debris pile (e.g., insulation, siding, packaging).\",\n    \"The operational status of the yellow structures (new, used, or discarded).\",\n    \"The exact nature of the industrial activity at the site.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "construction_materials"
+      ],
+      "evidence": "The event construction materials is supported: visible evidence shows stored materials intended for construction.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "the visible factor separating construction waste from construction materials, or an explicit statement that it is not visible",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "construction_waste"
+      ],
+      "evidence": "The event construction waste is supported: visible evidence shows a large, disorganized pile of mixed debris including blue and white panels and scrap metal, alongside stacked yellow lattice structures in an unpaved industrial lot.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"construction_materials\"\n    ],\n    \"evidence\": \"The event construction materials is supported: visible evidence shows stored materials intended for construction.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"the visible factor separating construction waste from construction materials, or an explicit statement that it is not visible\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"construction_waste\"\n    ],\n    \"evidence\": \"The event construction waste is supported: visible evidence shows a large, disorganized pile of mixed debris including blue and white panels and scrap metal, alongside stacked yellow lattice structures in an unpaved industrial lot.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly displays a large, disorganized pile of mixed debris, including blue and white panels and scrap metal, alongside stacked yellow lattice structures in an unpaved industrial lot. This visual evidence directly supports the description of construction waste.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a disorganized pile of mixed debris and scrap metal rather than organized stored materials intended for construction. The presence of a large waste pile contradicts the claim of stored materials.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows stored materials intended for construction"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly displays a large, disorganized pile of mixed debris, including blue and white panels and scrap metal, alongside stacked yellow lattice structures in an unpaved industrial lot. This visual evidence directly supports the description of construction waste.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a disorganized pile of mixed debris and scrap metal rather than organized stored materials intended for construction. The presence of a large waste pile contradicts the claim of stored materials.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows stored materials intended for construction\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

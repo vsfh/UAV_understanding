@@ -1,0 +1,91 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4c6b45e5363bc4e6b219",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0107-5414-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0107-5414-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved road with multiple red and blue cargo trucks, adjacent to industrial buildings with blue roofs and agricultural plots covered in green mesh netting.",
+      "A distinct patch of cleared land containing a pile of red brick rubble and concrete debris, situated between a cultivated vegetable garden and a field covered in blue-green construction netting."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of the specific debris patch visible in the lower-right quadrant of the wide context image, confirming the presence of demolition waste adjacent to the agricultural plots."
+    ],
+    "description": "The wide image shows a road with trucks and fields covered in netting. The linked crop details a specific site within these fields, revealing a pile of red brick rubble and concrete debris. This cleared area is bordered by a green vegetable garden on one side and a large expanse of blue-green mesh netting on the other.",
+    "evidence_visible": [
+      "A concentrated pile of red brick fragments and grey concrete rubble.",
+      "A small, dilapidated structure with a blue roof and white walls adjacent to the debris.",
+      "A cultivated plot with rows of green leafy vegetables.",
+      "A large area covered in blue-green mesh netting with visible white patches."
+    ],
+    "unclear": [
+      "The specific contents of the small blue structure.",
+      "The exact cause of the rubble pile (demolition vs. construction waste).",
+      "The identity of any vehicles or people."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a paved road with multiple red and blue cargo trucks, adjacent to industrial buildings with blue roofs and agricultural plots covered in green mesh netting.\",\n    \"A distinct patch of cleared land containing a pile of red brick rubble and concrete debris, situated between a cultivated vegetable garden and a field covered in blue-green construction netting.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of the specific debris patch visible in the lower-right quadrant of the wide context image, confirming the presence of demolition waste adjacent to the agricultural plots.\"\n  ],\n  \"description\": \"The wide image shows a road with trucks and fields covered in netting. The linked crop details a specific site within these fields, revealing a pile of red brick rubble and concrete debris. This cleared area is bordered by a green vegetable garden on one side and a large expanse of blue-green mesh netting on the other.\",\n  \"evidence_visible\": [\n    \"A concentrated pile of red brick fragments and grey concrete rubble.\",\n    \"A small, dilapidated structure with a blue roof and white walls adjacent to the debris.\",\n    \"A cultivated plot with rows of green leafy vegetables.\",\n    \"A large area covered in blue-green mesh netting with visible white patches.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the small blue structure.\",\n    \"The exact cause of the rubble pile (demolition vs. construction waste).\",\n    \"The identity of any vehicles or people.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of a pile of red brick fragments and grey concrete rubble, which indicates the dismantling of an existing structure rather than the assembly of new materials.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a concentrated pile of red brick fragments and grey concrete rubble situated between a cultivated vegetable garden and a field covered in blue-green mesh netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of a pile of red brick fragments and grey concrete rubble, which indicates the dismantling of an existing structure rather than the assembly of new materials.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a concentrated pile of red brick fragments and grey concrete rubble situated between a cultivated vegetable garden and a field covered in blue-green mesh netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The local crop image clearly displays a concentrated pile of red brick fragments and grey concrete rubble. This debris is situated immediately adjacent to a cultivated vegetable garden on the left and a field covered in blue-green mesh netting on the right, directly supporting the visual description.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The visual evidence depicts a demolition site characterized by rubble and debris, not an active construction project. There are no visible signs of new building activity, such as cranes, scaffolding, or workers erecting a structure. The scene shows the aftermath of destruction rather than the process of construction.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The local crop image clearly displays a concentrated pile of red brick fragments and grey concrete rubble. This debris is situated immediately adjacent to a cultivated vegetable garden on the left and a field covered in blue-green mesh netting on the right, directly supporting the visual description.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The visual evidence depicts a demolition site characterized by rubble and debris, not an active construction project. There are no visible signs of new building activity, such as cranes, scaffolding, or workers erecting a structure. The scene shows the aftermath of destruction rather than the process of construction.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

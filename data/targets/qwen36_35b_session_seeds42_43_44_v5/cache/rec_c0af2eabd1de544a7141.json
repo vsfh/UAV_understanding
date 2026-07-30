@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_c0af2eabd1de544a7141",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1003-8222-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1003-8222-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a mixed-use area containing residential buildings, industrial structures, and agricultural plots.",
+      "A waterway covered in green algae or duckweed runs along the right side.",
+      "Multiple rectangular garden plots with varying soil conditions and crop densities are visible.",
+      "A small structure with a blue roof is located near the center of the agricultural zone."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a high-magnification view of a specific plot located within the agricultural area shown in the context image.",
+      "The plot in the evidence image corresponds to the rectangular area situated between the dense tree line and the tilled soil rows in the wider context view.",
+      "The blue/green mesh structure visible in the evidence image is identifiable as the small blue-roofed structure in the context image."
+    ],
+    "description": "The context image shows a mixed landscape of buildings and agricultural plots alongside an algae-covered waterway. The evidence image provides a close-up of a specific garden plot within this area, featuring tilled soil, green crops, and a small structure covered in blue mesh, surrounded by dense trees.",
+    "evidence_visible": [
+      "A rectangular plot of land with tilled soil rows in the foreground.",
+      "Several patches of low-growing green vegetation and crops.",
+      "A small, low-profile structure covered in blue/green mesh or netting.",
+      "Dense green trees and shrubbery bordering the plot on the upper and right sides.",
+      "A dirt path or boundary separating the tilled area from the vegetation."
+    ],
+    "unclear": [
+      "The specific type of crops or plants growing in the patches.",
+      "The exact material of the blue mesh covering the structure.",
+      "The purpose of the structure (e.g., storage, greenhouse, shelter).",
+      "The identity of any persons or animals present."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a mixed-use area containing residential buildings, industrial structures, and agricultural plots.\",\n    \"A waterway covered in green algae or duckweed runs along the right side.\",\n    \"Multiple rectangular garden plots with varying soil conditions and crop densities are visible.\",\n    \"A small structure with a blue roof is located near the center of the agricultural zone.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a high-magnification view of a specific plot located within the agricultural area shown in the context image.\",\n    \"The plot in the evidence image corresponds to the rectangular area situated between the dense tree line and the tilled soil rows in the wider context view.\",\n    \"The blue/green mesh structure visible in the evidence image is identifiable as the small blue-roofed structure in the context image.\"\n  ],\n  \"description\": \"The context image shows a mixed landscape of buildings and agricultural plots alongside an algae-covered waterway. The evidence image provides a close-up of a specific garden plot within this area, featuring tilled soil, green crops, and a small structure covered in blue mesh, surrounded by dense trees.\",\n  \"evidence_visible\": [\n    \"A rectangular plot of land with tilled soil rows in the foreground.\",\n    \"Several patches of low-growing green vegetation and crops.\",\n    \"A small, low-profile structure covered in blue/green mesh or netting.\",\n    \"Dense green trees and shrubbery bordering the plot on the upper and right sides.\",\n    \"A dirt path or boundary separating the tilled area from the vegetation.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops or plants growing in the patches.\",\n    \"The exact material of the blue mesh covering the structure.\",\n    \"The purpose of the structure (e.g., storage, greenhouse, shelter).\",\n    \"The identity of any persons or animals present.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of the blue mesh structure covering the plot area in the evidence image, which indicates a deliberate covering rather than merely incomplete coverage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported by the visible presence of a small structure covered in blue mesh netting situated within a plot of tilled soil and green crops, as seen in the high-magnification evidence image.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of the blue mesh structure covering the plot area in the evidence image, which indicates a deliberate covering rather than merely incomplete coverage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible presence of a small structure covered in blue mesh netting situated within a plot of tilled soil and green crops, as seen in the high-magnification evidence image.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a small structure covered in blue mesh netting located within a plot of tilled soil and green crops, directly supporting the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a plot of tilled soil where a blue mesh netting structure is present but does not cover the entire area, leaving visible soil and crops exposed, which supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a small structure covered in blue mesh netting located within a plot of tilled soil and green crops, directly supporting the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a plot of tilled soil where a blue mesh netting structure is present but does not cover the entire area, leaving visible soil and crops exposed, which supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

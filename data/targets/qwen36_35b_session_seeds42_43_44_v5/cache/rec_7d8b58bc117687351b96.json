@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_7d8b58bc117687351b96",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0327-10421-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0327-10421-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a large industrial facility with a blue corrugated metal roof.",
+      "A smaller adjacent structure with a roof covered in solar panels.",
+      "A paved yard area in front of the main building containing parked vehicles and equipment.",
+      "A large area of ground covered by green mesh netting in the foreground.",
+      "A long, linear structure, possibly a pipe or conveyor, lying on the green mesh."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the lower section of the main building's facade.",
+      "The yellow excavator visible in the crop is located in the paved yard area seen in the context image.",
+      "The ventilation stack and ductwork in the crop are attached to the side of the building with the blue roof."
+    ],
+    "description": "Aerial view of an industrial site featuring a large blue-roofed warehouse and an adjacent solar-panelled building. A yellow excavator is parked on the paved ground near a ventilation stack and ductwork. The foreground shows ground covered in green mesh netting with a long linear object.",
+    "evidence_visible": [
+      "Close-up of a grey ventilation stack with a cylindrical top.",
+      "A large grey duct connecting the stack to the building wall.",
+      "Two white box-shaped vents on a concrete platform.",
+      "A yellow excavator parked on the paved surface below the vents.",
+      "Windows along the lower wall of the structure."
+    ],
+    "unclear": [
+      "The specific function of the ventilation system.",
+      "The contents of the building.",
+      "The exact type of the long linear object on the ground."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a large industrial facility with a blue corrugated metal roof.\",\n    \"A smaller adjacent structure with a roof covered in solar panels.\",\n    \"A paved yard area in front of the main building containing parked vehicles and equipment.\",\n    \"A large area of ground covered by green mesh netting in the foreground.\",\n    \"A long, linear structure, possibly a pipe or conveyor, lying on the green mesh.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the lower section of the main building's facade.\",\n    \"The yellow excavator visible in the crop is located in the paved yard area seen in the context image.\",\n    \"The ventilation stack and ductwork in the crop are attached to the side of the building with the blue roof.\"\n  ],\n  \"description\": \"Aerial view of an industrial site featuring a large blue-roofed warehouse and an adjacent solar-panelled building. A yellow excavator is parked on the paved ground near a ventilation stack and ductwork. The foreground shows ground covered in green mesh netting with a long linear object.\",\n  \"evidence_visible\": [\n    \"Close-up of a grey ventilation stack with a cylindrical top.\",\n    \"A large grey duct connecting the stack to the building wall.\",\n    \"Two white box-shaped vents on a concrete platform.\",\n    \"A yellow excavator parked on the paved surface below the vents.\",\n    \"Windows along the lower wall of the structure.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the ventilation system.\",\n    \"The contents of the building.\",\n    \"The exact type of the long linear object on the ground.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of heavy machinery (excavator) and active site preparation, whereas building damage is defined by visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a yellow excavator parked on the paved ground adjacent to a ventilation stack and ductwork attached to the main industrial building.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of heavy machinery (excavator) and active site preparation, whereas building damage is defined by visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a yellow excavator parked on the paved ground adjacent to a ventilation stack and ductwork attached to the main industrial building.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a yellow excavator parked on the paved ground next to a ventilation stack and ductwork attached to the main industrial building, directly supporting the description.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a building with a blue roof and a ventilation stack, but there is no visible structural damage to the building itself. The claim of structural damage is not supported by the visual evidence.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a yellow excavator parked on the paved ground next to a ventilation stack and ductwork attached to the main industrial building, directly supporting the description.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a building with a blue roof and a ventilation stack, but there is no visible structural damage to the building itself. The claim of structural damage is not supported by the visual evidence.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a16b9e4510e1e88a5ff7",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0917-8211-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0917-8211-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a cluster of multi-story residential buildings with tiled roofs and solar panels on the left.",
+      "Large rectangular plots of green crops in the upper right.",
+      "A dirt road separates the residential area from a large agricultural zone in the foreground.",
+      "The foreground zone contains numerous long, parallel plastic-covered tunnels (greenhouses) and a strip of tilled soil.",
+      "A blue-roofed structure is visible in the distance near the green fields."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in view of the agricultural zone in the lower right of the first image.",
+      "The white and black tunnel structures visible in the first image are shown in detail in the second image.",
+      "The dirt path separating the greenhouses is clearly visible in both views.",
+      "The row of trees along the road in the first image corresponds to the vegetation seen in the background of the second image."
+    ],
+    "description": "The images show a rural area with houses and green fields. The foreground features a large agricultural site with rows of plastic-covered greenhouses and a dirt access road. The second image provides a closer view of these tunnels, revealing their white and black coverings and the surrounding vegetation.",
+    "evidence_visible": [
+      "Close-up of the plastic-covered tunnels seen in the context image.",
+      "Tunnels are arranged in parallel rows with a dirt path running between them.",
+      "Some tunnels have white plastic covers, while others appear to have black or dark-colored covers.",
+      "Green vegetation is visible inside the open ends of some tunnels.",
+      "Small white objects, possibly weights or anchors, are visible along the edges of the plastic sheets."
+    ],
+    "unclear": [
+      "The specific type of crop being grown inside the tunnels.",
+      "The exact dimensions of the structures.",
+      "The purpose of the white objects along the edges.",
+      "The condition of the plastic covers (e.g., age, damage)."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a cluster of multi-story residential buildings with tiled roofs and solar panels on the left.\",\n    \"Large rectangular plots of green crops in the upper right.\",\n    \"A dirt road separates the residential area from a large agricultural zone in the foreground.\",\n    \"The foreground zone contains numerous long, parallel plastic-covered tunnels (greenhouses) and a strip of tilled soil.\",\n    \"A blue-roofed structure is visible in the distance near the green fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in view of the agricultural zone in the lower right of the first image.\",\n    \"The white and black tunnel structures visible in the first image are shown in detail in the second image.\",\n    \"The dirt path separating the greenhouses is clearly visible in both views.\",\n    \"The row of trees along the road in the first image corresponds to the vegetation seen in the background of the second image.\"\n  ],\n  \"description\": \"The images show a rural area with houses and green fields. The foreground features a large agricultural site with rows of plastic-covered greenhouses and a dirt access road. The second image provides a closer view of these tunnels, revealing their white and black coverings and the surrounding vegetation.\",\n  \"evidence_visible\": [\n    \"Close-up of the plastic-covered tunnels seen in the context image.\",\n    \"Tunnels are arranged in parallel rows with a dirt path running between them.\",\n    \"Some tunnels have white plastic covers, while others appear to have black or dark-colored covers.\",\n    \"Green vegetation is visible inside the open ends of some tunnels.\",\n    \"Small white objects, possibly weights or anchors, are visible along the edges of the plastic sheets.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop being grown inside the tunnels.\",\n    \"The exact dimensions of the structures.\",\n    \"The purpose of the white objects along the edges.\",\n    \"The condition of the plastic covers (e.g., age, damage).\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows agricultural fields with plastic greenhouses and open green crops. There is no visible evidence of dust-control netting or bare soil covered by such netting. The claim invents a specific material (dust-control netting) not present in the visual data.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a large area of agricultural land. While there are many plastic-covered greenhouses, there are also significant areas of open fields (green crops) and bare soil patches (brown areas) that are not covered by any protective material. This visually supports the claim that soil cover is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows agricultural fields with plastic greenhouses and open green crops. There is no visible evidence of dust-control netting or bare soil covered by such netting. The claim invents a specific material (dust-control netting) not present in the visual data.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a large area of agricultural land. While there are many plastic-covered greenhouses, there are also significant areas of open fields (green crops) and bare soil patches (brown areas) that are not covered by any protective material. This visually supports the claim that soil cover is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_83fcbc92e04dc2db95c1",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0828-2997-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0828-2997-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area with agricultural plots, greenhouses, and buildings.",
+      "Large white industrial-style building on the left with a flat roof.",
+      "Smaller residential or utility structures with grey tiled roofs in the foreground.",
+      "Numerous rectangular garden plots with varying vegetation density and color.",
+      "A paved road runs along the top edge of the frame.",
+      "Green fields and trees are scattered throughout the landscape."
+    ],
+    "cross_view_relations": [
+      "The context image shows a wide overview, while the evidence image is a zoomed-in, lower-altitude view of a specific section.",
+      "The evidence image focuses on the cluster of buildings with grey tiled roofs and adjacent garden plots seen in the bottom-left of the context image.",
+      "The large white building from the context image is visible in the upper-left of the evidence image, confirming the spatial relationship.",
+      "The blue tarp and red-roofed structures in the evidence image correspond to the buildings near the white structure in the context image."
+    ],
+    "description": "The images show a rural or semi-industrial area with agricultural plots and buildings. The context view provides a wide overview, while the evidence view zooms in on a cluster of structures with grey tiled roofs, adjacent garden plots, and nearby industrial buildings with blue and red roofing elements.",
+    "evidence_visible": [
+      "Close-up of several buildings with grey, possibly slate or tile, roofs.",
+      "Adjacent to the buildings are cultivated garden plots with rows of green plants.",
+      "A pile of white sacks or bags is visible near a red-roofed structure.",
+      "A blue tarp covers part of a structure or ground area.",
+      "A small blue vehicle is parked near the white sacks.",
+      "Dense green trees and shrubs surround the buildings and plots."
+    ],
+    "unclear": [
+      "Exact type of crops in the garden plots.",
+      "Specific contents of the white sacks.",
+      "Purpose of the blue tarp.",
+      "Identity of the blue vehicle.",
+      "Exact nature of the activities in the area."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area with agricultural plots, greenhouses, and buildings.\",\n    \"Large white industrial-style building on the left with a flat roof.\",\n    \"Smaller residential or utility structures with grey tiled roofs in the foreground.\",\n    \"Numerous rectangular garden plots with varying vegetation density and color.\",\n    \"A paved road runs along the top edge of the frame.\",\n    \"Green fields and trees are scattered throughout the landscape.\"\n  ],\n  \"cross_view_relations\": [\n    \"The context image shows a wide overview, while the evidence image is a zoomed-in, lower-altitude view of a specific section.\",\n    \"The evidence image focuses on the cluster of buildings with grey tiled roofs and adjacent garden plots seen in the bottom-left of the context image.\",\n    \"The large white building from the context image is visible in the upper-left of the evidence image, confirming the spatial relationship.\",\n    \"The blue tarp and red-roofed structures in the evidence image correspond to the buildings near the white structure in the context image.\"\n  ],\n  \"description\": \"The images show a rural or semi-industrial area with agricultural plots and buildings. The context view provides a wide overview, while the evidence view zooms in on a cluster of structures with grey tiled roofs, adjacent garden plots, and nearby industrial buildings with blue and red roofing elements.\",\n  \"evidence_visible\": [\n    \"Close-up of several buildings with grey, possibly slate or tile, roofs.\",\n    \"Adjacent to the buildings are cultivated garden plots with rows of green plants.\",\n    \"A pile of white sacks or bags is visible near a red-roofed structure.\",\n    \"A blue tarp covers part of a structure or ground area.\",\n    \"A small blue vehicle is parked near the white sacks.\",\n    \"Dense green trees and shrubs surround the buildings and plots.\"\n  ],\n  \"unclear\": [\n    \"Exact type of crops in the garden plots.\",\n    \"Specific contents of the white sacks.\",\n    \"Purpose of the blue tarp.\",\n    \"Identity of the blue vehicle.\",\n    \"Exact nature of the activities in the area.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific structural failure of a wall section, which is a subset of building damage but specifically denotes a collapse rather than general damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported by the visible evidence of a building with a grey tiled roof where a section of the wall has visibly collapsed, exposing the interior structure and debris.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific structural failure of a wall section, which is a subset of building damage but specifically denotes a collapse rather than general damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported by the visible evidence of a building with a grey tiled roof where a section of the wall has visibly collapsed, exposing the interior structure and debris.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a building with a grey tiled roof, but the wall is intact. There is no visible evidence of a collapsed wall or exposed interior structure.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "A section of the wall has visibly collapsed",
+        "The interior structure is exposed",
+        "There is debris from a collapsed wall"
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a building with a grey tiled roof. While there is no major structural failure, there is visible damage to the roof surface (missing or broken tiles) and the presence of debris and rubble in the adjacent yard, which supports the claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a building with a grey tiled roof, but the wall is intact. There is no visible evidence of a collapsed wall or exposed interior structure.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"A section of the wall has visibly collapsed\",\n      \"The interior structure is exposed\",\n      \"There is debris from a collapsed wall\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a building with a grey tiled roof. While there is no major structural failure, there is visible damage to the roof surface (missing or broken tiles) and the presence of debris and rubble in the adjacent yard, which supports the claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

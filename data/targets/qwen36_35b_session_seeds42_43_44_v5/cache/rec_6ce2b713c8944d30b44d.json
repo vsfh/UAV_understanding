@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_6ce2b713c8944d30b44d",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0222-3714-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0222-3714-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a network of waterways and rectangular agricultural plots.",
+      "Fields display varying states: some are green with low-growing crops, others are brown and appear fallow or harvested.",
+      "A paved road intersects the fields and runs parallel to a canal.",
+      "A cluster of residential buildings is visible in the upper left, including a prominent two-story house with a blue roof.",
+      "Tall, dry reeds line the banks of the waterways."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the upper-left section of the first image.",
+      "The house with the blue roof and the adjacent canal bank are the central subjects in the evidence crop.",
+      "The spatial relationship confirms the house is situated directly adjacent to the waterway, separated by a small garden plot."
+    ],
+    "description": "The images show a rural agricultural area with a canal and residential buildings. The wide view displays a grid of green and brown fields intersected by roads and waterways. The close-up view focuses on a specific two-story house with a blue roof located next to the canal, bordered by tall dry reeds and small garden plots.",
+    "evidence_visible": [
+      "Close-up of a two-story residential building with a bright blue pitched roof and grey walls.",
+      "A small outbuilding with a blue roof stands near the main house.",
+      "The house is adjacent to a canal with murky water.",
+      "Tall, dry, yellowish-brown reeds grow densely along the canal bank opposite the house.",
+      "Small, cultivated garden plots with green vegetation are visible between the house and the water."
+    ],
+    "unclear": [
+      "Specific crop species in the fields",
+      "Occupancy status of the house",
+      "Exact date of the imagery",
+      "Identity of the boat in the canal"
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a network of waterways and rectangular agricultural plots.\",\n    \"Fields display varying states: some are green with low-growing crops, others are brown and appear fallow or harvested.\",\n    \"A paved road intersects the fields and runs parallel to a canal.\",\n    \"A cluster of residential buildings is visible in the upper left, including a prominent two-story house with a blue roof.\",\n    \"Tall, dry reeds line the banks of the waterways.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the upper-left section of the first image.\",\n    \"The house with the blue roof and the adjacent canal bank are the central subjects in the evidence crop.\",\n    \"The spatial relationship confirms the house is situated directly adjacent to the waterway, separated by a small garden plot.\"\n  ],\n  \"description\": \"The images show a rural agricultural area with a canal and residential buildings. The wide view displays a grid of green and brown fields intersected by roads and waterways. The close-up view focuses on a specific two-story house with a blue roof located next to the canal, bordered by tall dry reeds and small garden plots.\",\n  \"evidence_visible\": [\n    \"Close-up of a two-story residential building with a bright blue pitched roof and grey walls.\",\n    \"A small outbuilding with a blue roof stands near the main house.\",\n    \"The house is adjacent to a canal with murky water.\",\n    \"Tall, dry, yellowish-brown reeds grow densely along the canal bank opposite the house.\",\n    \"Small, cultivated garden plots with green vegetation are visible between the house and the water.\"\n  ],\n  \"unclear\": [\n    \"Specific crop species in the fields\",\n    \"Occupancy status of the house\",\n    \"Exact date of the imagery\",\n    \"Identity of the boat in the canal\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between building demolition and project construction is not visibly established in the provided imagery.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a two-story residential building with a blue roof situated adjacent to a canal, which is the subject of the verified source annotation.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and project construction is not visibly established in the provided imagery.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a two-story residential building with a blue roof situated adjacent to a canal, which is the subject of the verified source annotation.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a two-story residential building with a blue roof adjacent to a canal, which matches the visual description in the statement. However, the statement claims this is evidence of a 'building demolition' event. The building is fully intact, standing, and appears to be in good condition with no visible signs of demolition (e.g., rubble, partial collapse, heavy machinery). Therefore, the claim of demolition is contradicted by the visual evidence.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event building demolition is supported by the visible evidence"
+      ]
+    },
+    "positive": {
+      "reason": "The statement claims there is visible evidence of an 'active general construction project'. While there is a building present, it appears finished and occupied (or at least structurally complete), not under active construction. There are no visible construction materials, scaffolding, cranes, or workers. The scene depicts a rural residential area with fields and a canal, not an active construction site.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a two-story residential building with a blue roof adjacent to a canal, which matches the visual description in the statement. However, the statement claims this is evidence of a 'building demolition' event. The building is fully intact, standing, and appears to be in good condition with no visible signs of demolition (e.g., rubble, partial collapse, heavy machinery). Therefore, the claim of demolition is contradicted by the visual evidence.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event building demolition is supported by the visible evidence\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims there is visible evidence of an 'active general construction project'. While there is a building present, it appears finished and occupied (or at least structurally complete), not under active construction. There are no visible construction materials, scaffolding, cranes, or workers. The scene depicts a rural residential area with fields and a canal, not an active construction site.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

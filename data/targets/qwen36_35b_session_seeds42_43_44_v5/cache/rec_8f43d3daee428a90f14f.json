@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8f43d3daee428a90f14f",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0930-3619-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0930-3619-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape featuring rectangular aquaculture ponds, a central waterway with dense vegetation, and large agricultural fields with yellow-green crops.",
+      "A paved road runs parallel to the fields, connecting to a cluster of buildings with red and grey roofs.",
+      "A solar panel array is visible on the ground near the buildings."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a high-magnification view of the building complex located in the lower right quadrant of the wide context image.",
+      "The red-roofed structure and the adjacent concrete courtyard with a green tarp are identical in both views.",
+      "The solar panel array seen in the wide view is located on the ground adjacent to the building shown in the crop."
+    ],
+    "description": "Aerial view of a rural area with aquaculture ponds and agricultural fields. A zoomed-in section details a specific property featuring a red-roofed building, a concrete courtyard with a green tarp, and a nearby solar panel array situated along a paved road.",
+    "evidence_visible": [
+      "Close-up of a building with a red corrugated metal roof and a grey tiled roof section.",
+      "A concrete courtyard contains a large green mesh tarp spread on the ground.",
+      "A small vegetable garden plot is visible to the left of the concrete area.",
+      "A utility pole stands near the road edge.",
+      "A small solar panel is mounted on the flat roof of the lower building section."
+    ],
+    "unclear": [
+      "The specific contents of the grey shed or the red-roofed building.",
+      "The identity of the small figures near the bottom left of the courtyard.",
+      "The exact type of crops in the background fields."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape featuring rectangular aquaculture ponds, a central waterway with dense vegetation, and large agricultural fields with yellow-green crops.\",\n    \"A paved road runs parallel to the fields, connecting to a cluster of buildings with red and grey roofs.\",\n    \"A solar panel array is visible on the ground near the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a high-magnification view of the building complex located in the lower right quadrant of the wide context image.\",\n    \"The red-roofed structure and the adjacent concrete courtyard with a green tarp are identical in both views.\",\n    \"The solar panel array seen in the wide view is located on the ground adjacent to the building shown in the crop.\"\n  ],\n  \"description\": \"Aerial view of a rural area with aquaculture ponds and agricultural fields. A zoomed-in section details a specific property featuring a red-roofed building, a concrete courtyard with a green tarp, and a nearby solar panel array situated along a paved road.\",\n  \"evidence_visible\": [\n    \"Close-up of a building with a red corrugated metal roof and a grey tiled roof section.\",\n    \"A concrete courtyard contains a large green mesh tarp spread on the ground.\",\n    \"A small vegetable garden plot is visible to the left of the concrete area.\",\n    \"A utility pole stands near the road edge.\",\n    \"A small solar panel is mounted on the flat roof of the lower building section.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the grey shed or the red-roofed building.\",\n    \"The identity of the small figures near the bottom left of the courtyard.\",\n    \"The exact type of crops in the background fields.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous green mesh tarp covering the ground surface, whereas incomplete soil cover would imply visible gaps or exposed soil within the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large green mesh tarp spread on the ground in the concrete courtyard adjacent to the red-roofed building.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous green mesh tarp covering the ground surface, whereas incomplete soil cover would imply visible gaps or exposed soil within the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large green mesh tarp spread on the ground in the concrete courtyard adjacent to the red-roofed building.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large green mesh tarp spread on the ground in the concrete courtyard adjacent to the red-roofed building. This visual evidence directly supports the claim of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a large green mesh tarp spread on the ground in the concrete courtyard adjacent to the red-roofed building. This visual evidence directly supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large green mesh tarp spread on the ground in the concrete courtyard adjacent to the red-roofed building. This visual evidence directly supports the claim of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a large green mesh tarp spread on the ground in the concrete courtyard adjacent to the red-roofed building. This visual evidence directly supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

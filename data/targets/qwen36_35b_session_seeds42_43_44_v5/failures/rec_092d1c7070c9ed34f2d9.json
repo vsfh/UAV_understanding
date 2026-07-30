@@ -1,0 +1,6 @@
+{
+  "record_uid": "rec_092d1c7070c9ed34f2d9",
+  "source_class": "bare_soil_netting",
+  "error_type": "TeacherGenerationError",
+  "error": "Teacher failed after 3 attempts: Teacher response does not contain a valid JSON object | Teacher response does not contain a valid JSON object | Teacher response does not contain a valid JSON object"
+}

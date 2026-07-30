@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d045701cf449e6be4233",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0306-0916-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0306-0916-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural or semi-industrial area featuring a network of water channels and rectangular ponds.",
+      "A paved road with white lane markings curves through the scene, connecting a cluster of buildings in the lower left to the upper right.",
+      "A long, single-story building with a blue roof is situated on a concrete embankment next to a water channel.",
+      "The ponds contain murky water with visible sediment patterns and some green vegetation along the banks.",
+      "A small brick structure with a reddish-brown roof is located near the blue-roofed building."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the area surrounding the long blue-roofed building and the adjacent small brick structure seen in the context image.",
+      "The spatial relationship between the blue-roofed building, the small brick building, and the water channel is consistent between both views.",
+      "The paved road visible in the context image runs parallel to the water channel where the buildings are located."
+    ],
+    "description": "The images show a rural landscape with water channels and ponds. A long building with a blue roof and a smaller brick building are situated on an embankment next to a water channel. A paved road curves nearby. The crop provides a closer view of these two structures and the adjacent water.",
+    "evidence_visible": [
+      "Close-up of a long, rectangular building with a light blue roof and white walls.",
+      "A small, single-story brick building with a dark, pitched roof is located near the corner of the blue-roofed building.",
+      "The ground around the buildings appears to be dirt and concrete, with some debris or construction materials scattered nearby.",
+      "The water body next to the buildings is murky and brownish-green.",
+      "A dirt path or road runs alongside the buildings."
+    ],
+    "unclear": [
+      "The specific purpose or function of the buildings (e.g., residential, agricultural, industrial).",
+      "The exact contents of the ponds or channels.",
+      "The condition of the small brick building (e.g., abandoned, under construction).",
+      "The presence of people or vehicles in the crop view."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural or semi-industrial area featuring a network of water channels and rectangular ponds.\",\n    \"A paved road with white lane markings curves through the scene, connecting a cluster of buildings in the lower left to the upper right.\",\n    \"A long, single-story building with a blue roof is situated on a concrete embankment next to a water channel.\",\n    \"The ponds contain murky water with visible sediment patterns and some green vegetation along the banks.\",\n    \"A small brick structure with a reddish-brown roof is located near the blue-roofed building.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the area surrounding the long blue-roofed building and the adjacent small brick structure seen in the context image.\",\n    \"The spatial relationship between the blue-roofed building, the small brick building, and the water channel is consistent between both views.\",\n    \"The paved road visible in the context image runs parallel to the water channel where the buildings are located.\"\n  ],\n  \"description\": \"The images show a rural landscape with water channels and ponds. A long building with a blue roof and a smaller brick building are situated on an embankment next to a water channel. A paved road curves nearby. The crop provides a closer view of these two structures and the adjacent water.\",\n  \"evidence_visible\": [\n    \"Close-up of a long, rectangular building with a light blue roof and white walls.\",\n    \"A small, single-story brick building with a dark, pitched roof is located near the corner of the blue-roofed building.\",\n    \"The ground around the buildings appears to be dirt and concrete, with some debris or construction materials scattered nearby.\",\n    \"The water body next to the buildings is murky and brownish-green.\",\n    \"A dirt path or road runs alongside the buildings.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose or function of the buildings (e.g., residential, agricultural, industrial).\",\n    \"The exact contents of the ponds or channels.\",\n    \"The condition of the small brick building (e.g., abandoned, under construction).\",\n    \"The presence of people or vehicles in the crop view.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the state of the small brick structure, which appears to be a ruin or debris rather than an active construction site with scaffolding or new materials.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a small brick structure with a reddish-brown roof that appears to be in a state of disrepair or partial collapse, situated on a dirt embankment next to a long building with a blue roof and a water channel.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the state of the small brick structure, which appears to be a ruin or debris rather than an active construction site with scaffolding or new materials.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a small brick structure with a reddish-brown roof that appears to be in a state of disrepair or partial collapse, situated on a dirt embankment next to a long building with a blue roof and a water channel.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a small brick structure with a reddish-brown roof situated on a dirt embankment next to a long building with a blue roof. The structure appears dilapidated, with debris scattered around it, supporting the description of disrepair or partial collapse.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image does not show any active construction activity, such as cranes, scaffolding, or workers. The scene depicts a static environment with existing structures and water channels, contradicting the claim of an active general construction project.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a small brick structure with a reddish-brown roof situated on a dirt embankment next to a long building with a blue roof. The structure appears dilapidated, with debris scattered around it, supporting the description of disrepair or partial collapse.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image does not show any active construction activity, such as cranes, scaffolding, or workers. The scene depicts a static environment with existing structures and water channels, contradicting the claim of an active general construction project.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b250643430be87825529",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0928-16385-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0928-16385-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a residential area with a central paved road running vertically.",
+      "Multi-story apartment buildings with grey roofs and solar panels on the left.",
+      "Lower-density housing with red and grey roofs on the right.",
+      "Green vegetation, trees, and a canal or river in the background.",
+      "Vehicles parked along the side of the road and in designated spots."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the upper-left quadrant of the context image.",
+      "The crop focuses on the cluster of multi-story residential buildings adjacent to the water body.",
+      "The solar panels visible on the rooftops in the crop correspond to the same panels seen in the wider context view."
+    ],
+    "description": "The images show a residential district with multi-story apartment buildings featuring grey tiled roofs and installed solar panels. A central road separates the apartment complex from lower-density housing and green spaces. A waterway runs along the northern edge of the apartment block. The crop provides a closer look at the rooftop details and building arrangement.",
+    "evidence_visible": [
+      "Close-up of three rows of multi-story residential buildings.",
+      "Grey tiled roofs with multiple solar water heating panels installed.",
+      "A waterway or canal running behind the buildings.",
+      "Green vegetation and trees between the buildings and the water.",
+      "A red vehicle and a yellow vehicle visible on the ground level near the buildings."
+    ],
+    "unclear": [
+      "Specific model or brand of the solar panels.",
+      "Exact number of residents or occupancy status.",
+      "Legal status or ownership of the properties.",
+      "Specific location or address."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a residential area with a central paved road running vertically.\",\n    \"Multi-story apartment buildings with grey roofs and solar panels on the left.\",\n    \"Lower-density housing with red and grey roofs on the right.\",\n    \"Green vegetation, trees, and a canal or river in the background.\",\n    \"Vehicles parked along the side of the road and in designated spots.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the upper-left quadrant of the context image.\",\n    \"The crop focuses on the cluster of multi-story residential buildings adjacent to the water body.\",\n    \"The solar panels visible on the rooftops in the crop correspond to the same panels seen in the wider context view.\"\n  ],\n  \"description\": \"The images show a residential district with multi-story apartment buildings featuring grey tiled roofs and installed solar panels. A central road separates the apartment complex from lower-density housing and green spaces. A waterway runs along the northern edge of the apartment block. The crop provides a closer look at the rooftop details and building arrangement.\",\n  \"evidence_visible\": [\n    \"Close-up of three rows of multi-story residential buildings.\",\n    \"Grey tiled roofs with multiple solar water heating panels installed.\",\n    \"A waterway or canal running behind the buildings.\",\n    \"Green vegetation and trees between the buildings and the water.\",\n    \"A red vehicle and a yellow vehicle visible on the ground level near the buildings.\"\n  ],\n  \"unclear\": [\n    \"Specific model or brand of the solar panels.\",\n    \"Exact number of residents or occupancy status.\",\n    \"Legal status or ownership of the properties.\",\n    \"Specific location or address.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence explicitly shows a large area of green mesh netting covering the ground in the upper portion of the crop. This directly contradicts the claim that the soil is 'bare' or 'exposed'.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil",
+        "visible evidence shows bare soil"
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a large patch of ground covered by green dust-control netting. The netting is not perfectly uniform; there are visible gaps, wrinkles, and areas where the underlying ground is not fully obscured by the mesh. This visual evidence supports the claim that the protective covering is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence explicitly shows a large area of green mesh netting covering the ground in the upper portion of the crop. This directly contradicts the claim that the soil is 'bare' or 'exposed'.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil\",\n      \"visible evidence shows bare soil\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a large patch of ground covered by green dust-control netting. The netting is not perfectly uniform; there are visible gaps, wrinkles, and areas where the underlying ground is not fully obscured by the mesh. This visual evidence supports the claim that the protective covering is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4fef3fa15ae2f4c5d71f",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/original/0208-2263-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/cropped/0208-2263-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with residential buildings and agricultural fields.",
+      "Fields show varying states of cultivation, with some green crops and others appearing as bare soil.",
+      "A distinct linear feature, likely a ditch or small stream, runs horizontally through the center of the frame, separating the upper and lower field sections.",
+      "Vegetation along the linear feature appears dry and brown."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of a specific location within the context image.",
+      "The structure in the crop is situated on the bank of the linear ditch feature visible in the context image.",
+      "The surrounding terrain in the crop matches the texture and color of the fields adjacent to the ditch in the context image."
+    ],
+    "description": "An aerial view of a rural area with houses and fields. A linear ditch runs through the center. A close-up crop reveals a wire mesh enclosure on the bank of this ditch, containing dark material and a white object, positioned next to a pole casting a shadow.",
+    "evidence_visible": [
+      "A rectangular structure constructed from wire mesh fencing.",
+      "The structure is positioned on a dirt bank next to a field.",
+      "Inside the enclosure, there is a pile of dark, indistinct material and a white object.",
+      "A pole is visible adjacent to the structure, casting a long shadow to the right.",
+      "The ground is dry soil with sparse vegetation."
+    ],
+    "unclear": [
+      "The specific identity of the dark material and white object inside the enclosure.",
+      "The purpose of the wire mesh structure (e.g., animal pen, storage, debris containment).",
+      "The exact contents of the enclosure."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with residential buildings and agricultural fields.\",\n    \"Fields show varying states of cultivation, with some green crops and others appearing as bare soil.\",\n    \"A distinct linear feature, likely a ditch or small stream, runs horizontally through the center of the frame, separating the upper and lower field sections.\",\n    \"Vegetation along the linear feature appears dry and brown.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of a specific location within the context image.\",\n    \"The structure in the crop is situated on the bank of the linear ditch feature visible in the context image.\",\n    \"The surrounding terrain in the crop matches the texture and color of the fields adjacent to the ditch in the context image.\"\n  ],\n  \"description\": \"An aerial view of a rural area with houses and fields. A linear ditch runs through the center. A close-up crop reveals a wire mesh enclosure on the bank of this ditch, containing dark material and a white object, positioned next to a pole casting a shadow.\",\n  \"evidence_visible\": [\n    \"A rectangular structure constructed from wire mesh fencing.\",\n    \"The structure is positioned on a dirt bank next to a field.\",\n    \"Inside the enclosure, there is a pile of dark, indistinct material and a white object.\",\n    \"A pole is visible adjacent to the structure, casting a long shadow to the right.\",\n    \"The ground is dry soil with sparse vegetation.\"\n  ],\n  \"unclear\": [\n    \"The specific identity of the dark material and white object inside the enclosure.\",\n    \"The purpose of the wire mesh structure (e.g., animal pen, storage, debris containment).\",\n    \"The exact contents of the enclosure.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the debris; the evidence shows a pile of material (debris) rather than a standing structure with visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence image shows a wire mesh enclosure on a dirt bank containing a pile of dark, indistinct material and a white object, which visually corresponds to the definition of a house wall that has visibly collapsed.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the debris; the evidence shows a pile of material (debris) rather than a standing structure with visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence image shows a wire mesh enclosure on a dirt bank containing a pile of dark, indistinct material and a white object, which visually corresponds to the definition of a house wall that has visibly collapsed.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image shows a wire mesh enclosure containing debris and a white object on a dirt bank. While the debris is indistinct, it does not visually correspond to a 'house wall' (which implies a standing vertical architectural element). The claim that this pile of material constitutes a 'house wall' is a misinterpretation of the visual data, as the object is a pile of refuse or debris within a cage, not a structural wall.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The pile of dark material and white object is a house wall.",
+        "The image shows a collapsed house wall."
+      ]
+    },
+    "positive": {
+      "reason": "The evidence image displays a wire mesh enclosure containing a pile of dark, indistinct material and a white object. This visual content is consistent with the definition of 'building damage' (debris, structural remnants, or destruction of a structure). The visible debris pile supports the claim of damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image shows a wire mesh enclosure containing debris and a white object on a dirt bank. While the debris is indistinct, it does not visually correspond to a 'house wall' (which implies a standing vertical architectural element). The claim that this pile of material constitutes a 'house wall' is a misinterpretation of the visual data, as the object is a pile of refuse or debris within a cage, not a structural wall.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The pile of dark material and white object is a house wall.\",\n      \"The image shows a collapsed house wall.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a wire mesh enclosure containing a pile of dark, indistinct material and a white object. This visual content is consistent with the definition of 'building damage' (debris, structural remnants, or destruction of a structure). The visible debris pile supports the claim of damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

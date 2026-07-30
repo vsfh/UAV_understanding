@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4966c852835fb91008b6",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0308-4469-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0308-4469-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a river separating two distinct zones: a modern area with a large building and pool in the background, and a dense cluster of older, single-story structures with grey tiled roofs in the foreground.",
+      "A large, cleared plot of bare earth with scattered debris and blue tarps is visible in the bottom-left corner.",
+      "A paved road runs along the far bank of the river.",
+      "Vegetation includes green trees and some trees with white blossoms along the riverbanks."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the bottom-left quadrant of the context image.",
+      "The crop focuses specifically on the boundary between the cleared dirt lot and the row of older buildings.",
+      "The spatial relationship confirms the dirt lot is adjacent to the older residential structures.",
+      "The river and the modern building complex are visible in the background of the context but cropped out of the evidence view."
+    ],
+    "description": "Aerial imagery shows a river dividing a modern property with a pool from a cluster of older, grey-roofed buildings. A large, cleared dirt lot with scattered debris and blue tarps borders the older structures. The crop highlights the interface between the cleared land and the existing buildings, with vegetation and a road visible along the riverbank.",
+    "evidence_visible": [
+      "Close-up of the cleared dirt lot showing uneven ground, scattered white debris, and patches of blue material (possibly tarps or plastic).",
+      "A row of single-story buildings with grey tiled roofs, some showing signs of disrepair or partial demolition.",
+      "A narrow paved path or road runs between the older buildings and the river.",
+      "Some buildings have visible rooftop structures, possibly water tanks or small additions.",
+      "The edge of the dirt lot is irregular, with some vegetation encroaching."
+    ],
+    "unclear": [
+      "The exact condition or occupancy status of the older buildings (e.g., abandoned, under renovation, inhabited).",
+      "The specific nature of the debris on the dirt lot.",
+      "The purpose of the blue materials scattered on the ground.",
+      "The exact date of the imagery.",
+      "The legal status or ownership of the properties."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a river separating two distinct zones: a modern area with a large building and pool in the background, and a dense cluster of older, single-story structures with grey tiled roofs in the foreground.\",\n    \"A large, cleared plot of bare earth with scattered debris and blue tarps is visible in the bottom-left corner.\",\n    \"A paved road runs along the far bank of the river.\",\n    \"Vegetation includes green trees and some trees with white blossoms along the riverbanks.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the bottom-left quadrant of the context image.\",\n    \"The crop focuses specifically on the boundary between the cleared dirt lot and the row of older buildings.\",\n    \"The spatial relationship confirms the dirt lot is adjacent to the older residential structures.\",\n    \"The river and the modern building complex are visible in the background of the context but cropped out of the evidence view.\"\n  ],\n  \"description\": \"Aerial imagery shows a river dividing a modern property with a pool from a cluster of older, grey-roofed buildings. A large, cleared dirt lot with scattered debris and blue tarps borders the older structures. The crop highlights the interface between the cleared land and the existing buildings, with vegetation and a road visible along the riverbank.\",\n  \"evidence_visible\": [\n    \"Close-up of the cleared dirt lot showing uneven ground, scattered white debris, and patches of blue material (possibly tarps or plastic).\",\n    \"A row of single-story buildings with grey tiled roofs, some showing signs of disrepair or partial demolition.\",\n    \"A narrow paved path or road runs between the older buildings and the river.\",\n    \"Some buildings have visible rooftop structures, possibly water tanks or small additions.\",\n    \"The edge of the dirt lot is irregular, with some vegetation encroaching.\"\n  ],\n  \"unclear\": [\n    \"The exact condition or occupancy status of the older buildings (e.g., abandoned, under renovation, inhabited).\",\n    \"The specific nature of the debris on the dirt lot.\",\n    \"The purpose of the blue materials scattered on the ground.\",\n    \"The exact date of the imagery.\",\n    \"The legal status or ownership of the properties.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of cleared land and debris rather than active construction materials or machinery.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a large cleared plot of bare earth with scattered debris and blue tarps directly adjacent to a row of older, single-story structures with grey tiled roofs, some of which show signs of disrepair or partial structural loss.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of cleared land and debris rather than active construction materials or machinery.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a large cleared plot of bare earth with scattered debris and blue tarps directly adjacent to a row of older, single-story structures with grey tiled roofs, some of which show signs of disrepair or partial structural loss.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large plot of bare earth with scattered debris and blue tarps directly adjacent to a row of older, single-story structures with grey tiled roofs. Several of these structures show signs of disrepair, such as missing roof tiles and exposed interiors, which supports the description of demolition or partial structural loss.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image does not show an active general construction project. There are no visible cranes, scaffolding, heavy machinery, or workers. The site appears to be a cleared area with debris, consistent with demolition or a vacant lot, rather than active construction.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large plot of bare earth with scattered debris and blue tarps directly adjacent to a row of older, single-story structures with grey tiled roofs. Several of these structures show signs of disrepair, such as missing roof tiles and exposed interiors, which supports the description of demolition or partial structural loss.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image does not show an active general construction project. There are no visible cranes, scaffolding, heavy machinery, or workers. The site appears to be a cleared area with debris, consistent with demolition or a vacant lot, rather than active construction.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

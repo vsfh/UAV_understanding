@@ -1,0 +1,81 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e2831eb12eab06cc1c1b",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/collapsed_house_wall/original/0309-5724-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/collapsed_house_wall/cropped/0309-5724-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a meandering river or canal system.",
+      "Surrounding the water are rectangular agricultural plots containing green crops and patches of yellow flowers.",
+      "Residential buildings with white walls and grey or red roofs are situated along the waterways and roads.",
+      "A paved road runs along the right side of the image, parallel to the fields.",
+      "Vegetation includes bare deciduous trees along the riverbanks and dense green crops in the fields."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a zoomed-in section of the wider context image.",
+      "The specific house in the crop view is located on a small peninsula or bend in the river, visible in the upper-left quadrant of the context image.",
+      "The yellow flowering crops in the crop view correspond to the yellow patches seen in the fields in the context image.",
+      "The bare trees along the riverbank in the crop view match the vegetation seen along the river in the context image."
+    ],
+    "description": "Aerial imagery shows a rural area with a winding river, green agricultural fields, and scattered residential buildings. A zoomed-in view highlights a specific house on a river bend surrounded by green crops and yellow flowers, with bare trees along the bank.",
+    "evidence_visible": [
+      "A multi-story white house with a grey tiled roof is situated directly adjacent to the river.",
+      "The house has a flat roof section with visible railings or structures.",
+      "Adjacent to the house are rectangular plots of green crops interspersed with bright yellow flowers.",
+      "Bare, leafless trees line the riverbank near the house.",
+      "A small concrete structure or dock extends into the water near the house."
+    ],
+    "unclear": [
+      "Exact species of the yellow flowers and green crops.",
+      "Number of occupants in the house.",
+      "Specific purpose of the structures on the flat roof.",
+      "Condition of the buildings in the background of the crop view."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a meandering river or canal system.\",\n    \"Surrounding the water are rectangular agricultural plots containing green crops and patches of yellow flowers.\",\n    \"Residential buildings with white walls and grey or red roofs are situated along the waterways and roads.\",\n    \"A paved road runs along the right side of the image, parallel to the fields.\",\n    \"Vegetation includes bare deciduous trees along the riverbanks and dense green crops in the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a zoomed-in section of the wider context image.\",\n    \"The specific house in the crop view is located on a small peninsula or bend in the river, visible in the upper-left quadrant of the context image.\",\n    \"The yellow flowering crops in the crop view correspond to the yellow patches seen in the fields in the context image.\",\n    \"The bare trees along the riverbank in the crop view match the vegetation seen along the river in the context image.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural area with a winding river, green agricultural fields, and scattered residential buildings. A zoomed-in view highlights a specific house on a river bend surrounded by green crops and yellow flowers, with bare trees along the bank.\",\n  \"evidence_visible\": [\n    \"A multi-story white house with a grey tiled roof is situated directly adjacent to the river.\",\n    \"The house has a flat roof section with visible railings or structures.\",\n    \"Adjacent to the house are rectangular plots of green crops interspersed with bright yellow flowers.\",\n    \"Bare, leafless trees line the riverbank near the house.\",\n    \"A small concrete structure or dock extends into the water near the house.\"\n  ],\n  \"unclear\": [\n    \"Exact species of the yellow flowers and green crops.\",\n    \"Number of occupants in the house.\",\n    \"Specific purpose of the structures on the flat roof.\",\n    \"Condition of the buildings in the background of the crop view.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is that the wall has visibly fallen down, exposing the interior, whereas building damage is a broader category of structural damage that does not necessarily imply a total collapse of a wall.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a multi-story white house situated on a river bend where the exterior wall on the left side has visibly collapsed, exposing the interior structure and debris.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is that the wall has visibly fallen down, exposing the interior, whereas building damage is a broader category of structural damage that does not necessarily imply a total collapse of a wall.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a multi-story white house situated on a river bend where the exterior wall on the left side has visibly collapsed, exposing the interior structure and debris.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification_failed_attempts": [
+    {
+      "attempt": 0,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a multi-story white house on a river bend. The exterior wall on the left side (facing the river) is visibly collapsed, exposing the interior structure and debris. This matches the description in statement A.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"Statement B claims visible structural damage to a building. The image clearly shows a building with a collapsed wall, which constitutes structural damage. This claim is supported by the visual evidence.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+      "error": "positive verdict contains cross-candidate meta-commentary"
+    },
+    {
+      "attempt": 1,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a multi-story white house on a river bend. The exterior wall on the left side (facing the river) is visibly collapsed, exposing the interior structure and debris. This matches the description in statement A.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a multi-story white house on a river bend. The exterior wall on the left side (facing the river) is visibly collapsed, exposing the interior structure and debris. This constitutes visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+      "error": "counterfactual verdict contains cross-candidate meta-commentary"
+    },
+    {
+      "attempt": 2,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a multi-story white house on a river bend. The exterior wall on the left side (facing the river) is visibly collapsed, exposing the interior structure and debris. This matches the description in statement A.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a multi-story white house on a river bend. The exterior wall on the left side (facing the river) is visibly collapsed, exposing the interior structure and debris. This constitutes visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+      "error": "counterfactual verdict contains cross-candidate meta-commentary"
+    }
+  ]
+}

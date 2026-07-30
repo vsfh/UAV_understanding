@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_395f9c9da8c589d32ab4",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-1024-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-1024-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement surrounded by green agricultural fields.",
+      "Houses feature grey tiled roofs, many equipped with solar panels.",
+      "A rectangular blue and pink sports court is visible in the lower right.",
+      "A small pond is located in the upper right section of the village.",
+      "Paved roads and narrow pathways connect the residential structures."
+    ],
+    "cross_view_relations": [
+      "The context image provides the geographic location of the structures shown in the evidence crop.",
+      "The evidence crop is a high-magnification view of the central cluster of buildings within the context image.",
+      "The long white building with the dark roof in the evidence crop is centrally located in the context view.",
+      "The red brick structure in the evidence crop corresponds to a specific building in the central village area."
+    ],
+    "description": "The images show a rural village with grey-roofed houses and solar panels surrounded by green fields. The evidence crop zooms in on a central cluster, highlighting a long white building with a dark roof and a red brick structure, confirming the spatial relationship between the wide context and the detailed local view.",
+    "evidence_visible": [
+      "A long, single-story white building with a dark grey roof and multiple windows.",
+      "A small, rectangular structure made of red brick, appearing unfinished or open.",
+      "Surrounding buildings with grey tiled roofs and flat concrete roofs.",
+      "Vegetation and small garden plots between the houses.",
+      "A blue tarp or cover visible on a lower roof section."
+    ],
+    "unclear": [
+      "The specific function of the long white building (e.g., school, factory, residence).",
+      "The status of the red brick structure (construction, demolition, or ruin).",
+      "The exact date of the imagery.",
+      "The names of the residents or owners."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement surrounded by green agricultural fields.\",\n    \"Houses feature grey tiled roofs, many equipped with solar panels.\",\n    \"A rectangular blue and pink sports court is visible in the lower right.\",\n    \"A small pond is located in the upper right section of the village.\",\n    \"Paved roads and narrow pathways connect the residential structures.\"\n  ],\n  \"cross_view_relations\": [\n    \"The context image provides the geographic location of the structures shown in the evidence crop.\",\n    \"The evidence crop is a high-magnification view of the central cluster of buildings within the context image.\",\n    \"The long white building with the dark roof in the evidence crop is centrally located in the context view.\",\n    \"The red brick structure in the evidence crop corresponds to a specific building in the central village area.\"\n  ],\n  \"description\": \"The images show a rural village with grey-roofed houses and solar panels surrounded by green fields. The evidence crop zooms in on a central cluster, highlighting a long white building with a dark roof and a red brick structure, confirming the spatial relationship between the wide context and the detailed local view.\",\n  \"evidence_visible\": [\n    \"A long, single-story white building with a dark grey roof and multiple windows.\",\n    \"A small, rectangular structure made of red brick, appearing unfinished or open.\",\n    \"Surrounding buildings with grey tiled roofs and flat concrete roofs.\",\n    \"Vegetation and small garden plots between the houses.\",\n    \"A blue tarp or cover visible on a lower roof section.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the long white building (e.g., school, factory, residence).\",\n    \"The status of the red brick structure (construction, demolition, or ruin).\",\n    \"The exact date of the imagery.\",\n    \"The names of the residents or owners.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a structure that is a collapsed wall (a specific component failure), whereas building damage is a broader category of structural harm.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence crop clearly shows a small, rectangular structure made of red brick that appears to be an unfinished or collapsed wall, distinct from the surrounding intact buildings.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a structure that is a collapsed wall (a specific component failure), whereas building damage is a broader category of structural harm.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence crop clearly shows a small, rectangular structure made of red brick that appears to be an unfinished or collapsed wall, distinct from the surrounding intact buildings.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence crop clearly shows a rectangular structure made of red brick that is open to the sky and lacks a roof, appearing as a collapsed or unfinished wall distinct from the surrounding intact buildings with roofs.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence crop shows a building with a missing roof and exposed red brick interior, which constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence crop clearly shows a rectangular structure made of red brick that is open to the sky and lacks a roof, appearing as a collapsed or unfinished wall distinct from the surrounding intact buildings with roofs.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence crop shows a building with a missing roof and exposed red brick interior, which constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

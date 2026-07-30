@@ -1,0 +1,78 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_85616e944c6c0bdf2cae",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1003-1309-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1003-1309-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area with multiple bodies of water, some covered in green algae or duckweed.",
+      "Several multi-story residential buildings with tiled roofs are visible.",
+      "Agricultural fields are present, including a bright green crop field on the right.",
+      "Vegetation includes trees and tall grasses along the water banks."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a zoomed-in view of a specific rectangular plot of land located in the upper right quadrant of the wide image.",
+      "This plot is situated between a large body of water covered in green algae and a field of bright green crops.",
+      "The plot contains two distinct rectangular mats, one teal and one black, placed on the ground."
+    ],
+    "description": "The wide image shows a rural landscape with ponds and houses. The crop isolates a specific rectangular plot of land adjacent to a green algae-covered pond and a bright green crop field. This plot contains two rectangular mats, one teal and one black, laid out on the ground surface.",
+    "evidence_visible": [
+      "A rectangular plot of land with visible soil texture.",
+      "Two rectangular mats placed side-by-side on the plot.",
+      "One mat is teal/green, and the other is black.",
+      "The plot is bordered by tall green vegetation on one side and a bright green crop field on the other."
+    ],
+    "unclear": [
+      "The specific material of the mats (e.g., plastic, fabric, netting).",
+      "The purpose of the mats (e.g., drying crops, covering soil).",
+      "The exact type of crop in the bright green field.",
+      "The condition of the soil within the plot."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural area with multiple bodies of water, some covered in green algae or duckweed.\",\n    \"Several multi-story residential buildings with tiled roofs are visible.\",\n    \"Agricultural fields are present, including a bright green crop field on the right.\",\n    \"Vegetation includes trees and tall grasses along the water banks.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a zoomed-in view of a specific rectangular plot of land located in the upper right quadrant of the wide image.\",\n    \"This plot is situated between a large body of water covered in green algae and a field of bright green crops.\",\n    \"The plot contains two distinct rectangular mats, one teal and one black, placed on the ground.\"\n  ],\n  \"description\": \"The wide image shows a rural landscape with ponds and houses. The crop isolates a specific rectangular plot of land adjacent to a green algae-covered pond and a bright green crop field. This plot contains two rectangular mats, one teal and one black, laid out on the ground surface.\",\n  \"evidence_visible\": [\n    \"A rectangular plot of land with visible soil texture.\",\n    \"Two rectangular mats placed side-by-side on the plot.\",\n    \"One mat is teal/green, and the other is black.\",\n    \"The plot is bordered by tall green vegetation on one side and a bright green crop field on the other.\"\n  ],\n  \"unclear\": [\n    \"The specific material of the mats (e.g., plastic, fabric, netting).\",\n    \"The purpose of the mats (e.g., drying crops, covering soil).\",\n    \"The exact type of crop in the bright green field.\",\n    \"The condition of the soil within the plot.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of the complete rectangular mats covering the soil in the image, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular plot of land where the soil is covered by two distinct rectangular mats, one teal and one black, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of the complete rectangular mats covering the soil in the image, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular plot of land where the soil is covered by two distinct rectangular mats, one teal and one black, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification_failed_attempts": [
+    {
+      "attempt": 0,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a rectangular plot of land containing two distinct rectangular mats, one teal and one black, placed on the soil. This visual evidence directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a plot of land where the soil is covered by two distinct rectangular mats (teal and black). The claim of 'incomplete soil cover' implies that the soil is not fully covered or that the covering is insufficient. While the mats do not cover the entire plot, the presence of specific, distinct mats suggests a deliberate covering rather than an 'incomplete' state in the sense of a failed or partial attempt. However, strictly speaking, the soil is not fully covered by the mats, so 'incomplete soil cover' is a valid description of the visual state where the mats do not cover the whole area. But the prompt asks to judge literal visible support. The mats are clearly visible. The claim 'incomplete soil cover' is a bit ambiguous. Does it mean the cover is incomplete (i.e., not full coverage) or that the soil cover itself is incomplete (i.e., missing)? Given the presence of the mats, the soil is partially covered. The claim 'incomplete soil cover' is supported by the fact that the mats do not cover the entire plot. However, the first statement is more specific and accurate about the *nature* of the covering (nets/mats). The second statement is a bit vague. Let's re-evaluate. The claim is 'incomplete soil cover'. The image shows soil with two mats. The soil is not fully covered. So the cover is incomplete. This is",
+      "error": "Verification keys must be ['counterfactual', 'positive'], got ['reason', 'support_score', 'supported', 'unsupported_claims']"
+    },
+    {
+      "attempt": 1,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a rectangular plot of land containing two distinct rectangular mats, one teal and one black, placed on the soil. This visual evidence directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a plot of land where the soil is covered by two distinct rectangular mats (teal and black). The claim of 'incomplete soil cover' implies that the soil is not fully covered or that the covering is insufficient. While the mats do not cover the entire plot, the presence of specific, distinct mats suggests a deliberate covering rather than an 'incomplete' state in the sense of a failed or partial attempt. However, strictly speaking, the soil is not fully covered by the mats, so 'incomplete soil cover' is a valid description of the visual state where the mats do not cover the whole area. But the prompt asks to judge literal visible support. The mats are clearly visible. The claim 'incomplete soil cover' is a bit ambiguous. Does it mean the cover is incomplete (i.e., not full coverage) or that the soil cover itself is incomplete (i.e., missing)? Given the presence of the mats, the soil is partially covered. The claim 'incomplete soil cover' is supported by the fact that the mats do not cover the entire plot. However, the first statement is more specific and accurate about the *nature* of the covering (nets/mats). The second statement is a bit vague. Let's re-evaluate. The claim is 'incomplete soil cover'. The image shows soil with two mats. The soil is not fully covered. So the cover is incomplete. This is",
+      "error": "Verification keys must be ['counterfactual', 'positive'], got ['reason', 'support_score', 'supported', 'unsupported_claims']"
+    },
+    {
+      "attempt": 2,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a rectangular plot of land containing two distinct rectangular mats, one teal and one black, placed on the soil. This visual evidence directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a plot of land where the soil is covered by two distinct rectangular mats (teal and black). The claim of 'incomplete soil cover' implies that the soil is not fully covered or that the covering is insufficient. While the mats do not cover the entire plot, the presence of specific, distinct mats suggests a deliberate covering rather than an 'incomplete' state in the sense of a failed or partial attempt. However, strictly speaking, the soil is not fully covered by the mats, so 'incomplete soil cover' is a valid description of the visual state where the mats do not cover the whole area. But the prompt asks to judge literal visible support. The mats are clearly visible. The claim 'incomplete soil cover' is a bit ambiguous. Does it mean the cover is incomplete (i.e., not full coverage) or that the soil cover itself is incomplete (i.e., missing)? Given the presence of the mats, the soil is partially covered. The claim 'incomplete soil cover' is supported by the fact that the mats do not cover the entire plot. However, the first statement is more specific and accurate about the *nature* of the covering (nets/mats). The second statement is a bit vague. Let's re-evaluate. The claim is 'incomplete soil cover'. The image shows soil with two mats. The soil is not fully covered. So the cover is incomplete. This is",
+      "error": "Verification keys must be ['counterfactual', 'positive'], got ['reason', 'support_score', 'supported', 'unsupported_claims']"
+    }
+  ]
+}

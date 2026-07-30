@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_af1f900f13e9323ca8de",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-10063-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-10063-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area containing large industrial buildings with blue and brown roofs on the left, and a cluster of small residential structures with gardens on the right.",
+      "A central zone of disturbed earth and construction activity, featuring a rectangular concrete pad and a large area covered by green mesh netting.",
+      "Vegetation includes bare deciduous trees and dry reeds along the left edge, and cultivated garden plots in the lower right.",
+      "A dirt track runs through the center, connecting the residential area to the construction site."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a high-magnification view of the central construction zone visible in the context image.",
+      "The rectangular concrete pad and the green mesh-covered area are the primary subjects of the evidence crop.",
+      "The context image provides the spatial relationship of the construction site to the adjacent industrial and residential zones.",
+      "The evidence crop reveals details of the ground texture and the white frame structure on the concrete pad that are not distinct in the wide view."
+    ],
+    "description": "The images show a construction site adjacent to industrial and residential areas. A rectangular concrete pad and a large area covered in green mesh are visible. The evidence crop provides a detailed view of the concrete pad, which has a white frame structure on it, and the surrounding disturbed earth and dirt tracks.",
+    "evidence_visible": [
+      "A rectangular concrete slab with a white, rectangular frame structure resting on its surface.",
+      "A large area of ground covered by green mesh netting, showing tire tracks and uneven terrain.",
+      "Piles of grey rubble and debris located to the right of the mesh-covered area.",
+      "A dirt track running vertically along the left side of the mesh area.",
+      "A large white industrial building is visible in the upper right corner of the crop."
+    ],
+    "unclear": [
+      "The specific purpose of the white frame structure on the concrete pad.",
+      "The exact contents of the rubble piles.",
+      "The identity of any vehicles or people visible in the distance.",
+      "The specific type of green mesh used."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area containing large industrial buildings with blue and brown roofs on the left, and a cluster of small residential structures with gardens on the right.\",\n    \"A central zone of disturbed earth and construction activity, featuring a rectangular concrete pad and a large area covered by green mesh netting.\",\n    \"Vegetation includes bare deciduous trees and dry reeds along the left edge, and cultivated garden plots in the lower right.\",\n    \"A dirt track runs through the center, connecting the residential area to the construction site.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a high-magnification view of the central construction zone visible in the context image.\",\n    \"The rectangular concrete pad and the green mesh-covered area are the primary subjects of the evidence crop.\",\n    \"The context image provides the spatial relationship of the construction site to the adjacent industrial and residential zones.\",\n    \"The evidence crop reveals details of the ground texture and the white frame structure on the concrete pad that are not distinct in the wide view.\"\n  ],\n  \"description\": \"The images show a construction site adjacent to industrial and residential areas. A rectangular concrete pad and a large area covered in green mesh are visible. The evidence crop provides a detailed view of the concrete pad, which has a white frame structure on it, and the surrounding disturbed earth and dirt tracks.\",\n  \"evidence_visible\": [\n    \"A rectangular concrete slab with a white, rectangular frame structure resting on its surface.\",\n    \"A large area of ground covered by green mesh netting, showing tire tracks and uneven terrain.\",\n    \"Piles of grey rubble and debris located to the right of the mesh-covered area.\",\n    \"A dirt track running vertically along the left side of the mesh area.\",\n    \"A large white industrial building is visible in the upper right corner of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the white frame structure on the concrete pad.\",\n    \"The exact contents of the rubble piles.\",\n    \"The identity of any vehicles or people visible in the distance.\",\n    \"The specific type of green mesh used.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the netting is visibly present and covers the majority of the disturbed area, whereas incomplete soil cover would imply the protective covering is visibly missing or insufficient in the observed zone.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large area of exposed soil covered by green mesh netting, with tire tracks visible on the surface.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the netting is visibly present and covers the majority of the disturbed area, whereas incomplete soil cover would imply the protective covering is visibly missing or insufficient in the observed zone.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large area of exposed soil covered by green mesh netting, with tire tracks visible on the surface.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large area of bare soil covered by green mesh netting. The statement claims this is 'incomplete' soil cover, which contradicts the visual evidence of a substantial, contiguous patch of netting covering the ground.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The soil cover is visibly incomplete."
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a large area of exposed soil covered by green mesh netting. The close-up view confirms the presence of the green mesh and visible tire tracks on the surface, supporting the description.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large area of bare soil covered by green mesh netting. The statement claims this is 'incomplete' soil cover, which contradicts the visual evidence of a substantial, contiguous patch of netting covering the ground.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The soil cover is visibly incomplete.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a large area of exposed soil covered by green mesh netting. The close-up view confirms the presence of the green mesh and visible tire tracks on the surface, supporting the description.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

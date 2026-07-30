@@ -1,0 +1,6 @@
+{
+  "record_uid": "rec_d40b7a5b0f18fa38ec45",
+  "source_class": "collapsed_house_wall",
+  "error_type": "TeacherGenerationError",
+  "error": "Teacher failed after 3 attempts: Teacher response does not contain a valid JSON object | Teacher response does not contain a valid JSON object | Teacher response does not contain a valid JSON object"
+}

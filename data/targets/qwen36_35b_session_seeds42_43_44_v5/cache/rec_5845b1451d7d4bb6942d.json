@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_5845b1451d7d4bb6942d",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2582-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2582-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to a wide river on the left.",
+      "Dense residential area with multi-story houses featuring red, grey, and blue roofs.",
+      "Numerous rooftops are covered with dark rectangular solar panels.",
+      "Green agricultural fields and small ponds are interspersed between the houses.",
+      "A paved road runs through the village, connecting the buildings."
+    ],
+    "cross_view_relations": [
+      "The second image is a high-magnification crop of the central residential cluster visible in the first image.",
+      "The spatial arrangement of houses, the specific solar panel arrays, and the road layout are identical in both views.",
+      "The wider context confirms the settlement is situated in a flat, green landscape near water."
+    ],
+    "description": "Aerial imagery of a rural village situated next to a river, characterized by dense housing and extensive rooftop solar panel installations. A zoomed-in view confirms the specific layout of the residential structures, the presence of photovoltaic arrays on multiple roofs, and the surrounding green agricultural plots.",
+    "evidence_visible": [
+      "Close-up view of the village rooftops showing detailed installation of solar panels.",
+      "Houses feature varied roofing materials including red tiles, grey tiles, and blue metal sheets.",
+      "A white vehicle is visible parked on the road in the upper section of the crop.",
+      "Small garden plots and vegetation are visible in the yards between the houses."
+    ],
+    "unclear": [
+      "Exact number of solar panels per roof due to resolution limits.",
+      "Specific type of crops in the green fields.",
+      "Occupancy status of the houses.",
+      "Brand or model of the solar panels."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to a wide river on the left.\",\n    \"Dense residential area with multi-story houses featuring red, grey, and blue roofs.\",\n    \"Numerous rooftops are covered with dark rectangular solar panels.\",\n    \"Green agricultural fields and small ponds are interspersed between the houses.\",\n    \"A paved road runs through the village, connecting the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a high-magnification crop of the central residential cluster visible in the first image.\",\n    \"The spatial arrangement of houses, the specific solar panel arrays, and the road layout are identical in both views.\",\n    \"The wider context confirms the settlement is situated in a flat, green landscape near water.\"\n  ],\n  \"description\": \"Aerial imagery of a rural village situated next to a river, characterized by dense housing and extensive rooftop solar panel installations. A zoomed-in view confirms the specific layout of the residential structures, the presence of photovoltaic arrays on multiple roofs, and the surrounding green agricultural plots.\",\n  \"evidence_visible\": [\n    \"Close-up view of the village rooftops showing detailed installation of solar panels.\",\n    \"Houses feature varied roofing materials including red tiles, grey tiles, and blue metal sheets.\",\n    \"A white vehicle is visible parked on the road in the upper section of the crop.\",\n    \"Small garden plots and vegetation are visible in the yards between the houses.\"\n  ],\n  \"unclear\": [\n    \"Exact number of solar panels per roof due to resolution limits.\",\n    \"Specific type of crops in the green fields.\",\n    \"Occupancy status of the houses.\",\n    \"Brand or model of the solar panels.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the image shows a total structural failure of a wall resulting in a pile of rubble, which is a specific instance of building damage, but the event is defined by the collapsed wall itself.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-magnification view of the central residential cluster reveals a structure with a visibly collapsed wall, characterized by a pile of rubble and debris on the ground adjacent to the remaining building structure.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the image shows a total structural failure of a wall resulting in a pile of rubble, which is a specific instance of building damage, but the event is defined by the collapsed wall itself.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-magnification view of the central residential cluster reveals a structure with a visibly collapsed wall, characterized by a pile of rubble and debris on the ground adjacent to the remaining building structure.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification view of the central residential cluster shows a building with a flat roof covered in solar panels. While there is a pile of debris or rubble on the ground next to this building, the vertical walls of the structure appear intact and upright. There is no visual evidence of a 'collapsed wall' as described; the building stands vertically.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The structure has a visibly collapsed wall.",
+        "The wall is characterized by a pile of rubble and debris on the ground adjacent to the remaining building structure."
+      ]
+    },
+    "positive": {
+      "reason": "The high-magnification view shows a building with a flat roof covered in solar panels. Adjacent to this building, there is a significant pile of rubble and debris on the ground. This accumulation of construction waste or debris next to a residential structure constitutes visible evidence of building damage or construction activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification view of the central residential cluster shows a building with a flat roof covered in solar panels. While there is a pile of debris or rubble on the ground next to this building, the vertical walls of the structure appear intact and upright. There is no visual evidence of a 'collapsed wall' as described; the building stands vertically.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The structure has a visibly collapsed wall.\",\n      \"The wall is characterized by a pile of rubble and debris on the ground adjacent to the remaining building structure.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The high-magnification view shows a building with a flat roof covered in solar panels. Adjacent to this building, there is a significant pile of rubble and debris on the ground. This accumulation of construction waste or debris next to a residential structure constitutes visible evidence of building damage or construction activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

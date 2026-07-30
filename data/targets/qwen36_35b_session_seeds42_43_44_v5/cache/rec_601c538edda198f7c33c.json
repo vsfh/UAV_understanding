@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_601c538edda198f7c33c",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0922-3346-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0922-3346-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a central paved road running vertically.",
+      "To the left of the road, there is a waterway with dense green vegetation and a large field of green crops.",
+      "To the right, there is a field of tilled brown soil with visible furrows, followed by a series of long, parallel plastic-covered greenhouses.",
+      "In the background, a cluster of residential buildings with tiled roofs is visible.",
+      "Utility poles line the road and the fields."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in version of the first image.",
+      "The second image focuses specifically on the right side of the road, highlighting the tilled soil and the plastic greenhouses.",
+      "The spatial arrangement of the road, the brown field, and the greenhouses remains consistent between the two views."
+    ],
+    "description": "Aerial imagery of a rural area with a central road. The right side features a tilled brown field and a row of plastic-covered greenhouses. The left side shows a waterway and green crops. A second view zooms in on the agricultural plots on the right.",
+    "evidence_visible": [
+      "The linked evidence image isolates the agricultural plots on the right side of the road.",
+      "It clearly shows the texture of the tilled brown soil and the reflective surfaces of the plastic greenhouses.",
+      "The spatial relationship between the road and these specific crop structures is confirmed."
+    ],
+    "unclear": [
+      "Specific crop species in the green fields.",
+      "Exact dimensions of the fields.",
+      "Identity of any vehicles or people.",
+      "Specific location or address."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a central paved road running vertically.\",\n    \"To the left of the road, there is a waterway with dense green vegetation and a large field of green crops.\",\n    \"To the right, there is a field of tilled brown soil with visible furrows, followed by a series of long, parallel plastic-covered greenhouses.\",\n    \"In the background, a cluster of residential buildings with tiled roofs is visible.\",\n    \"Utility poles line the road and the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in version of the first image.\",\n    \"The second image focuses specifically on the right side of the road, highlighting the tilled soil and the plastic greenhouses.\",\n    \"The spatial arrangement of the road, the brown field, and the greenhouses remains consistent between the two views.\"\n  ],\n  \"description\": \"Aerial imagery of a rural area with a central road. The right side features a tilled brown field and a row of plastic-covered greenhouses. The left side shows a waterway and green crops. A second view zooms in on the agricultural plots on the right.\",\n  \"evidence_visible\": [\n    \"The linked evidence image isolates the agricultural plots on the right side of the road.\",\n    \"It clearly shows the texture of the tilled brown soil and the reflective surfaces of the plastic greenhouses.\",\n    \"The spatial relationship between the road and these specific crop structures is confirmed.\"\n  ],\n  \"unclear\": [\n    \"Specific crop species in the green fields.\",\n    \"Exact dimensions of the fields.\",\n    \"Identity of any vehicles or people.\",\n    \"Specific location or address.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover relies on the presence of a structured, uniform linear pattern (furrows) versus a lack of protective covering; the visible evidence shows a consistent linear pattern rather than a random or absent covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the aerial imagery displays a field of exposed brown soil characterized by distinct, parallel linear furrows, which is consistent with the visual signature of dust-control netting or soil preparation structures.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover relies on the presence of a structured, uniform linear pattern (furrows) versus a lack of protective covering; the visible evidence shows a consistent linear pattern rather than a random or absent covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the aerial imagery displays a field of exposed brown soil characterized by distinct, parallel linear furrows, which is consistent with the visual signature of dust-control netting or soil preparation structures.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly displays a field of exposed brown soil with distinct parallel linear furrows, which directly supports the description of bare soil and soil preparation structures.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a field of exposed brown soil with distinct parallel linear furrows. This visual evidence directly supports the claim of 'incomplete soil cover' as the soil is visible and not covered by crops or other materials.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly displays a field of exposed brown soil with distinct parallel linear furrows, which directly supports the description of bare soil and soil preparation structures.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a field of exposed brown soil with distinct parallel linear furrows. This visual evidence directly supports the claim of 'incomplete soil cover' as the soil is visible and not covered by crops or other materials.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

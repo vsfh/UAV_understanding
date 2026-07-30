@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_daf715a9066854052e9c",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2560-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2560-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement surrounded by vibrant green agricultural fields.",
+      "A paved two-lane road runs along the upper right, with a white truck and a red truck visible.",
+      "A network of waterways and ponds, some covered in green algae, separates the houses and fields.",
+      "The village consists of a mix of single-story structures with grey tiled roofs and multi-story buildings with red or grey roofs.",
+      "Vegetation is dense, with trees and garden plots interspersed among the buildings."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a high-magnification crop of the central cluster of buildings in the context image.",
+      "The prominent two-story house with a red hip roof in the evidence view is located centrally in the context view.",
+      "The long single-story building with a multi-colored roof (grey, orange, red) in the evidence view is situated directly north of the two-story house.",
+      "The waterway visible on the right edge of the evidence view corresponds to the pond system in the context view."
+    ],
+    "description": "The images show a rural village with mixed residential architecture, including a two-story house with a red roof and a long single-story building with a multi-colored roof. The settlement is surrounded by green fields and waterways, with a paved road and vehicles visible in the wider context.",
+    "evidence_visible": [
+      "A two-story building with a red hip roof and grey concrete walls.",
+      "A long, single-story structure with a segmented roof featuring grey, orange, and red tiles.",
+      "A concrete driveway or courtyard in front of the two-story house.",
+      "A smaller single-story building with a grey tiled roof and a solar water heater in the foreground.",
+      "Green vegetation and trees surrounding the buildings."
+    ],
+    "unclear": [
+      "The specific type of crops in the fields.",
+      "The exact number of vehicles on the road in the wider view.",
+      "The interior details or current occupancy of the buildings."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement surrounded by vibrant green agricultural fields.\",\n    \"A paved two-lane road runs along the upper right, with a white truck and a red truck visible.\",\n    \"A network of waterways and ponds, some covered in green algae, separates the houses and fields.\",\n    \"The village consists of a mix of single-story structures with grey tiled roofs and multi-story buildings with red or grey roofs.\",\n    \"Vegetation is dense, with trees and garden plots interspersed among the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a high-magnification crop of the central cluster of buildings in the context image.\",\n    \"The prominent two-story house with a red hip roof in the evidence view is located centrally in the context view.\",\n    \"The long single-story building with a multi-colored roof (grey, orange, red) in the evidence view is situated directly north of the two-story house.\",\n    \"The waterway visible on the right edge of the evidence view corresponds to the pond system in the context view.\"\n  ],\n  \"description\": \"The images show a rural village with mixed residential architecture, including a two-story house with a red roof and a long single-story building with a multi-colored roof. The settlement is surrounded by green fields and waterways, with a paved road and vehicles visible in the wider context.\",\n  \"evidence_visible\": [\n    \"A two-story building with a red hip roof and grey concrete walls.\",\n    \"A long, single-story structure with a segmented roof featuring grey, orange, and red tiles.\",\n    \"A concrete driveway or courtyard in front of the two-story house.\",\n    \"A smaller single-story building with a grey tiled roof and a solar water heater in the foreground.\",\n    \"Green vegetation and trees surrounding the buildings.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the fields.\",\n    \"The exact number of vehicles on the road in the wider view.\",\n    \"The interior details or current occupancy of the buildings.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is that the former specifically denotes a wall that has visibly collapsed, whereas the latter is a broader category for visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence image shows a two-story building with a red hip roof where the ground floor walls are visibly missing, leaving an open, hollowed-out concrete frame.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is that the former specifically denotes a wall that has visibly collapsed, whereas the latter is a broader category for visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence image shows a two-story building with a red hip roof where the ground floor walls are visibly missing, leaving an open, hollowed-out concrete frame.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a two-story building with a red hip roof. The ground floor of this building is visibly an open concrete frame with no walls installed, leaving the interior hollowed out. This visual evidence directly supports the claim of a collapsed or missing wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays a building with a red roof where the ground floor walls are missing, exposing the concrete frame. This absence of walls constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a two-story building with a red hip roof. The ground floor of this building is visibly an open concrete frame with no walls installed, leaving the interior hollowed out. This visual evidence directly supports the claim of a collapsed or missing wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a building with a red roof where the ground floor walls are missing, exposing the concrete frame. This absence of walls constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4a0d9c183e4e494c8383",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/collapsed_house_wall/original/0917-6634-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/collapsed_house_wall/cropped/0917-6634-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a mix of residential buildings and agricultural fields.",
+      "Large green crop fields occupy the left side of the frame.",
+      "Houses feature varied roofing materials, including grey tiles, red metal sheets, and concrete.",
+      "Several rooftops are equipped with solar panels.",
+      "A paved road runs vertically through the center of the village.",
+      "Vegetation is present in backyards and along the road edges."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a high-magnification view of a specific cluster of buildings visible in the central-right area of the context image.",
+      "The white building with the red roof in the evidence view corresponds to the structure located just to the right of the main vertical road in the context view.",
+      "The adjacent building with the grey tiled roof in the evidence view matches the structure immediately to the right of the white building in the context view.",
+      "The small outbuilding with the red brick wall seen in the evidence view is visible in the context image as a small rectangular structure between the main houses.",
+      "The paved road visible on the left edge of the evidence crop aligns with the main road running through the village in the context view."
+    ],
+    "description": "The context image shows a rural village with mixed housing and green fields. The evidence crop zooms in on a specific group of houses near the central road, revealing a white building with a red roof, an adjacent grey-tiled house, and a small brick-walled structure in the yard.",
+    "evidence_visible": [
+      "A white single-story building with a red pitched roof.",
+      "An adjacent building with a grey tiled roof and a flat concrete section.",
+      "A small structure with exposed red brick walls in a yard area.",
+      "A paved road running along the left side of the buildings.",
+      "Vegetation and small garden plots in the yards.",
+      "A solar panel is visible on the flat roof of the grey-tiled building."
+    ],
+    "unclear": [
+      "The specific type of crop in the green fields.",
+      "The exact number of people or vehicles present.",
+      "The interior layout of the buildings.",
+      "The precise date of the image capture."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a mix of residential buildings and agricultural fields.\",\n    \"Large green crop fields occupy the left side of the frame.\",\n    \"Houses feature varied roofing materials, including grey tiles, red metal sheets, and concrete.\",\n    \"Several rooftops are equipped with solar panels.\",\n    \"A paved road runs vertically through the center of the village.\",\n    \"Vegetation is present in backyards and along the road edges.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a high-magnification view of a specific cluster of buildings visible in the central-right area of the context image.\",\n    \"The white building with the red roof in the evidence view corresponds to the structure located just to the right of the main vertical road in the context view.\",\n    \"The adjacent building with the grey tiled roof in the evidence view matches the structure immediately to the right of the white building in the context view.\",\n    \"The small outbuilding with the red brick wall seen in the evidence view is visible in the context image as a small rectangular structure between the main houses.\",\n    \"The paved road visible on the left edge of the evidence crop aligns with the main road running through the village in the context view.\"\n  ],\n  \"description\": \"The context image shows a rural village with mixed housing and green fields. The evidence crop zooms in on a specific group of houses near the central road, revealing a white building with a red roof, an adjacent grey-tiled house, and a small brick-walled structure in the yard.\",\n  \"evidence_visible\": [\n    \"A white single-story building with a red pitched roof.\",\n    \"An adjacent building with a grey tiled roof and a flat concrete section.\",\n    \"A small structure with exposed red brick walls in a yard area.\",\n    \"A paved road running along the left side of the buildings.\",\n    \"Vegetation and small garden plots in the yards.\",\n    \"A solar panel is visible on the flat roof of the grey-tiled building.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the green fields.\",\n    \"The exact number of people or vehicles present.\",\n    \"The interior layout of the buildings.\",\n    \"The precise date of the image capture.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a wall that has visibly collapsed, whereas building damage is a broader category of structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence crop shows a small structure with exposed red brick walls in a yard area, indicating a visibly collapsed wall.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a wall that has visibly collapsed, whereas building damage is a broader category of structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence crop shows a small structure with exposed red brick walls in a yard area, indicating a visibly collapsed wall.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence crop clearly shows a small structure with exposed red brick walls in a yard area, which visually corresponds to a collapsed wall. The wide image confirms the presence of this specific building within the village context.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence crop shows a small structure with exposed red brick walls in a yard area, which visually corresponds to a collapsed wall. The wide image confirms the presence of this specific building within the village context.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence crop clearly shows a small structure with exposed red brick walls in a yard area, which visually corresponds to a collapsed wall. The wide image confirms the presence of this specific building within the village context.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence crop shows a small structure with exposed red brick walls in a yard area, which visually corresponds to a collapsed wall. The wide image confirms the presence of this specific building within the village context.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

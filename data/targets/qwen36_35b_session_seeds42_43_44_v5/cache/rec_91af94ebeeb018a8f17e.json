@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_91af94ebeeb018a8f17e",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-0896-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-0896-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a riverbank construction site adjacent to a wide river.",
+      "A large concrete bridge spans the river in the upper left.",
+      "The site contains a yellow excavator, a long black conveyor belt system, and stacks of yellow metal trusses.",
+      "Blue temporary structures and a long building with a brown roof are present.",
+      "A green mesh fence runs along the water's edge.",
+      "Surrounding areas include bare earth, a dirt road, and a field with dry vegetation."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the riverbank area shown in the center-right of the context image.",
+      "The green mesh fence and the black conveyor belt system visible in the crop are clearly identifiable in the wider context view.",
+      "The spatial relationship confirms the conveyor belt is positioned on the dirt bank next to the river, parallel to the fence."
+    ],
+    "description": "Aerial imagery shows a riverbank construction zone with a black conveyor belt and green mesh fence. The crop confirms the equipment's position on the dirt bank next to the water, adjacent to a wider site containing heavy machinery, stacked trusses, and a bridge.",
+    "evidence_visible": [
+      "Close-up of the riverbank showing a green mesh fence installed along the water's edge.",
+      "A black conveyor belt system is positioned on the dirt ground, angled slightly towards the river.",
+      "The ground is bare earth with tire tracks.",
+      "The water is murky green with some floating debris or rocks visible near the bank."
+    ],
+    "unclear": [
+      "The specific function of the conveyor belt (e.g., sand extraction, material transport).",
+      "The exact contents of the blue temporary structures.",
+      "The identity of the vehicles or people (if any) in the distance."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a riverbank construction site adjacent to a wide river.\",\n    \"A large concrete bridge spans the river in the upper left.\",\n    \"The site contains a yellow excavator, a long black conveyor belt system, and stacks of yellow metal trusses.\",\n    \"Blue temporary structures and a long building with a brown roof are present.\",\n    \"A green mesh fence runs along the water's edge.\",\n    \"Surrounding areas include bare earth, a dirt road, and a field with dry vegetation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the riverbank area shown in the center-right of the context image.\",\n    \"The green mesh fence and the black conveyor belt system visible in the crop are clearly identifiable in the wider context view.\",\n    \"The spatial relationship confirms the conveyor belt is positioned on the dirt bank next to the river, parallel to the fence.\"\n  ],\n  \"description\": \"Aerial imagery shows a riverbank construction zone with a black conveyor belt and green mesh fence. The crop confirms the equipment's position on the dirt bank next to the water, adjacent to a wider site containing heavy machinery, stacked trusses, and a bridge.\",\n  \"evidence_visible\": [\n    \"Close-up of the riverbank showing a green mesh fence installed along the water's edge.\",\n    \"A black conveyor belt system is positioned on the dirt ground, angled slightly towards the river.\",\n    \"The ground is bare earth with tire tracks.\",\n    \"The water is murky green with some floating debris or rocks visible near the bank.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the conveyor belt (e.g., sand extraction, material transport).\",\n    \"The exact contents of the blue temporary structures.\",\n    \"The identity of the vehicles or people (if any) in the distance.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous green mesh fence along the bank; the image does not show a visibly incomplete covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a green mesh fence installed along the water's edge on the exposed dirt bank.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous green mesh fence along the bank; the image does not show a visibly incomplete covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a green mesh fence installed along the water's edge on the exposed dirt bank.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a green mesh fence installed along the water's edge on the exposed dirt bank, which directly supports the claim of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a large area of exposed dirt bank with a green mesh fence installed along the water's edge. This indicates that the soil cover is incomplete, as there is visible bare soil.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a green mesh fence installed along the water's edge on the exposed dirt bank, which directly supports the claim of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a large area of exposed dirt bank with a green mesh fence installed along the water's edge. This indicates that the soil cover is incomplete, as there is visible bare soil.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

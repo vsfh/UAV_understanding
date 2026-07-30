@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e1825bff676d4abceec2",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2600-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2600-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to large, vibrant green agricultural fields.",
+      "The settlement contains a mix of residential structures with grey tiled roofs and red or blue metal roofs.",
+      "A paved road runs along the boundary between the village and the fields.",
+      "A line of tall trees separates the fields from a road in the upper portion of the image.",
+      "Shadows indicate the sun is at a low angle, casting long shadows from the trees and buildings."
+    ],
+    "cross_view_relations": [
+      "The crop view is a high-magnification section of the lower-right quadrant of the context image.",
+      "The specific cluster of houses with grey tiled roofs and surrounding vegetable patches in the crop matches the area located just below the central cluster of buildings in the context image.",
+      "The spatial arrangement of the buildings and the adjacent green plots is consistent between the wide view and the crop."
+    ],
+    "description": "The images show a rural village bordering green farmland. The context view provides a wide overview of the settlement and fields, while the linked crop zooms in on a specific cluster of houses with grey tiled roofs and adjacent vegetable gardens, confirming the location within the broader scene.",
+    "evidence_visible": [
+      "Close-up of a house with a weathered grey tiled roof.",
+      "A dense patch of green leafy crops (vegetables) growing immediately next to the house.",
+      "A green mesh fence or screen is visible along the side of the structure.",
+      "A white sack or bag lies on the ground near the base of the building.",
+      "Adjacent buildings feature red and grey roofs.",
+      "Concrete pathways and small garden plots are visible between the structures."
+    ],
+    "unclear": [
+      "The specific type of vegetable crop is unclear.",
+      "The condition of the grey-tiled roof (e.g., whether it is damaged or under repair) is unclear.",
+      "The contents of the white sack are unclear.",
+      "The exact number of residents or occupancy status is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to large, vibrant green agricultural fields.\",\n    \"The settlement contains a mix of residential structures with grey tiled roofs and red or blue metal roofs.\",\n    \"A paved road runs along the boundary between the village and the fields.\",\n    \"A line of tall trees separates the fields from a road in the upper portion of the image.\",\n    \"Shadows indicate the sun is at a low angle, casting long shadows from the trees and buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop view is a high-magnification section of the lower-right quadrant of the context image.\",\n    \"The specific cluster of houses with grey tiled roofs and surrounding vegetable patches in the crop matches the area located just below the central cluster of buildings in the context image.\",\n    \"The spatial arrangement of the buildings and the adjacent green plots is consistent between the wide view and the crop.\"\n  ],\n  \"description\": \"The images show a rural village bordering green farmland. The context view provides a wide overview of the settlement and fields, while the linked crop zooms in on a specific cluster of houses with grey tiled roofs and adjacent vegetable gardens, confirming the location within the broader scene.\",\n  \"evidence_visible\": [\n    \"Close-up of a house with a weathered grey tiled roof.\",\n    \"A dense patch of green leafy crops (vegetables) growing immediately next to the house.\",\n    \"A green mesh fence or screen is visible along the side of the structure.\",\n    \"A white sack or bag lies on the ground near the base of the building.\",\n    \"Adjacent buildings feature red and grey roofs.\",\n    \"Concrete pathways and small garden plots are visible between the structures.\"\n  ],\n  \"unclear\": [\n    \"The specific type of vegetable crop is unclear.\",\n    \"The condition of the grey-tiled roof (e.g., whether it is damaged or under repair) is unclear.\",\n    \"The contents of the white sack are unclear.\",\n    \"The exact number of residents or occupancy status is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a total collapse of the roof and wall structure, whereas building damage is a broader category that could include non-catastrophic defects.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-magnification crop view reveals a residential structure with a visibly collapsed section of its grey tiled roof and wall, exposing the interior framework and debris.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a total collapse of the roof and wall structure, whereas building damage is a broader category that could include non-catastrophic defects.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-magnification crop view reveals a residential structure with a visibly collapsed section of its grey tiled roof and wall, exposing the interior framework and debris.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification crop clearly shows a residential building with a grey tiled roof that has partially collapsed, exposing the interior wooden framework and debris. This visual evidence directly supports the claim of a collapsed house wall and roof structure.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a building with significant structural damage, specifically a collapsed roof and wall section. This constitutes visible evidence of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification crop clearly shows a residential building with a grey tiled roof that has partially collapsed, exposing the interior wooden framework and debris. This visual evidence directly supports the claim of a collapsed house wall and roof structure.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a building with significant structural damage, specifically a collapsed roof and wall section. This constitutes visible evidence of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

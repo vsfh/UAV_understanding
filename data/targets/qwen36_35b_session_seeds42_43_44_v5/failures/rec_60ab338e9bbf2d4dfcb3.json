@@ -1,0 +1,6 @@
+{
+  "record_uid": "rec_60ab338e9bbf2d4dfcb3",
+  "source_class": "collapsed_house_wall",
+  "error_type": "TeacherGenerationError",
+  "error": "Teacher failed after 3 attempts: positive verdict contains cross-candidate meta-commentary | positive verdict contains cross-candidate meta-commentary | positive verdict contains cross-candidate meta-commentary"
+}

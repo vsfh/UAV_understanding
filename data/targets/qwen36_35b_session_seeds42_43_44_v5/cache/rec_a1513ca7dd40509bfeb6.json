@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a1513ca7dd40509bfeb6",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1005-3973-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1005-3973-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of agricultural land divided into distinct zones.",
+      "Left side: Rows of long, parallel plastic-covered greenhouses.",
+      "Center: A strip of land covered in dense green vegetation and trees, separating the greenhouses from the fields.",
+      "Right side: Large rectangular plots of green crops with visible linear patterns.",
+      "A narrow water channel runs along the top edge of the greenhouse area."
+    ],
+    "cross_view_relations": [
+      "The local crop image shows a close-up of the boundary between the plastic greenhouses and the adjacent field.",
+      "The green vegetation strip seen in the context image corresponds to the area between the greenhouses and the field in the crop image.",
+      "The yellow flowers in the crop image are located in the field area adjacent to the greenhouses."
+    ],
+    "description": "The images show an agricultural area with plastic greenhouses on the left and green crop fields on the right, separated by a vegetated strip. The crop view confirms the proximity of the greenhouses to a field containing yellow flowers.",
+    "evidence_visible": [
+      "Close-up of two plastic-covered greenhouse structures.",
+      "A strip of green vegetation and a small water channel between the greenhouses and the field.",
+      "A field with brown soil and scattered yellow flowers adjacent to the greenhouses."
+    ],
+    "unclear": [
+      "Specific crop species in the green fields.",
+      "Specific crop species in the yellow-flowered field.",
+      "Contents inside the greenhouses.",
+      "Exact location or ownership of the land."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of agricultural land divided into distinct zones.\",\n    \"Left side: Rows of long, parallel plastic-covered greenhouses.\",\n    \"Center: A strip of land covered in dense green vegetation and trees, separating the greenhouses from the fields.\",\n    \"Right side: Large rectangular plots of green crops with visible linear patterns.\",\n    \"A narrow water channel runs along the top edge of the greenhouse area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop image shows a close-up of the boundary between the plastic greenhouses and the adjacent field.\",\n    \"The green vegetation strip seen in the context image corresponds to the area between the greenhouses and the field in the crop image.\",\n    \"The yellow flowers in the crop image are located in the field area adjacent to the greenhouses.\"\n  ],\n  \"description\": \"The images show an agricultural area with plastic greenhouses on the left and green crop fields on the right, separated by a vegetated strip. The crop view confirms the proximity of the greenhouses to a field containing yellow flowers.\",\n  \"evidence_visible\": [\n    \"Close-up of two plastic-covered greenhouse structures.\",\n    \"A strip of green vegetation and a small water channel between the greenhouses and the field.\",\n    \"A field with brown soil and scattered yellow flowers adjacent to the greenhouses.\"\n  ],\n  \"unclear\": [\n    \"Specific crop species in the green fields.\",\n    \"Specific crop species in the yellow-flowered field.\",\n    \"Contents inside the greenhouses.\",\n    \"Exact location or ownership of the land.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence shows bare soil adjacent to greenhouses, but there is no visible dust-control netting. The soil appears to be covered with scattered yellow plant matter (likely crop residue), not a dust-control net.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The image evidence shows bare soil adjacent to greenhouses where the ground is not fully covered by vegetation or plastic sheeting, consistent with incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence shows bare soil adjacent to greenhouses, but there is no visible dust-control netting. The soil appears to be covered with scattered yellow plant matter (likely crop residue), not a dust-control net.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows bare soil adjacent to greenhouses where the ground is not fully covered by vegetation or plastic sheeting, consistent with incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

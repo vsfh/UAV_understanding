@@ -1,0 +1,102 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_2a31c52d5f56a903e609",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2540-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2540-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring rectangular agricultural plots with varying shades of green vegetation.",
+      "Several bodies of water, including ponds and canals, are interspersed among the fields.",
+      "A small structure with a reddish roof is visible near a pond in the lower-left quadrant.",
+      "Dense vegetation lines the waterways and field boundaries.",
+      "A dirt path or small road runs through the upper-left section."
+    ],
+    "cross_view_relations": [
+      "The evidence crop shows a zoomed-in section of the wider context image.",
+      "The concrete structure visible in the evidence crop corresponds to the small building with the reddish roof seen in the lower-left of the context image.",
+      "The large pond with green algae in the evidence crop is located to the right of the concrete structure, matching the pond in the center-right of the context image.",
+      "The dirt path in the evidence crop aligns with the path seen in the upper-left of the context image."
+    ],
+    "description": "The images show a rural agricultural area with green fields, ponds, and vegetation. A small concrete structure with a reddish roof is visible near a pond. The evidence crop provides a closer view of this structure and the adjacent water body, confirming its location within the broader landscape.",
+    "evidence_visible": [
+      "A small, rectangular concrete structure with a reddish roof is situated near a body of water.",
+      "The water body appears to have green algae or vegetation on its surface.",
+      "A dirt path runs adjacent to the structure and fields.",
+      "Surrounding vegetation includes grassy areas and dense shrubs or reeds along the water's edge.",
+      "A larger building with a white roof is partially visible in the upper-left corner of the evidence crop."
+    ],
+    "unclear": [
+      "The exact purpose of the small concrete structure (e.g., pump house, storage).",
+      "The specific type of crops in the fields.",
+      "The exact date or time the images were taken.",
+      "The ownership or legal status of the land and structures."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring rectangular agricultural plots with varying shades of green vegetation.\",\n    \"Several bodies of water, including ponds and canals, are interspersed among the fields.\",\n    \"A small structure with a reddish roof is visible near a pond in the lower-left quadrant.\",\n    \"Dense vegetation lines the waterways and field boundaries.\",\n    \"A dirt path or small road runs through the upper-left section.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop shows a zoomed-in section of the wider context image.\",\n    \"The concrete structure visible in the evidence crop corresponds to the small building with the reddish roof seen in the lower-left of the context image.\",\n    \"The large pond with green algae in the evidence crop is located to the right of the concrete structure, matching the pond in the center-right of the context image.\",\n    \"The dirt path in the evidence crop aligns with the path seen in the upper-left of the context image.\"\n  ],\n  \"description\": \"The images show a rural agricultural area with green fields, ponds, and vegetation. A small concrete structure with a reddish roof is visible near a pond. The evidence crop provides a closer view of this structure and the adjacent water body, confirming its location within the broader landscape.\",\n  \"evidence_visible\": [\n    \"A small, rectangular concrete structure with a reddish roof is situated near a body of water.\",\n    \"The water body appears to have green algae or vegetation on its surface.\",\n    \"A dirt path runs adjacent to the structure and fields.\",\n    \"Surrounding vegetation includes grassy areas and dense shrubs or reeds along the water's edge.\",\n    \"A larger building with a white roof is partially visible in the upper-left corner of the evidence crop.\"\n  ],\n  \"unclear\": [\n    \"The exact purpose of the small concrete structure (e.g., pump house, storage).\",\n    \"The specific type of crops in the fields.\",\n    \"The exact date or time the images were taken.\",\n    \"The ownership or legal status of the land and structures.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is that the former specifically denotes a house wall that has visibly collapsed, while the latter refers to general visible structural damage to a building. In this case, the structure appears to be a small concrete building with a reddish roof, which has collapsed into the water, fitting the definition of a collapsed house wall rather than general building damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a small concrete structure with a reddish roof that has visibly collapsed, with its roof and walls appearing damaged and partially sunken into the adjacent water body.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is that the former specifically denotes a house wall that has visibly collapsed, while the latter refers to general visible structural damage to a building. In this case, the structure appears to be a small concrete building with a reddish roof, which has collapsed into the water, fitting the definition of a collapsed house wall rather than general building damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a small concrete structure with a reddish roof that has visibly collapsed, with its roof and walls appearing damaged and partially sunken into the adjacent water body.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a small concrete structure with a reddish roof, but it is situated on land surrounded by vegetation and is not sunken into the water body. The structure appears intact, not collapsed.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The structure is sunken into the adjacent water body.",
+        "The roof and walls are visibly damaged and collapsed."
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a small concrete structure with a reddish roof. While the structure appears largely intact, the claim of 'visible structural damage' is not clearly supported by the visual evidence, as no obvious cracks, missing sections, or debris are visible.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "Visible structural damage to a building is clearly depicted."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a small concrete structure with a reddish roof, but it is situated on land surrounded by vegetation and is not sunken into the water body. The structure appears intact, not collapsed.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The structure is sunken into the adjacent water body.\",\n      \"The roof and walls are visibly damaged and collapsed.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a small concrete structure with a reddish roof. While the structure appears largely intact, the claim of 'visible structural damage' is not clearly supported by the visual evidence, as no obvious cracks, missing sections, or debris are visible.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"Visible structural damage to a building is clearly depicted.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

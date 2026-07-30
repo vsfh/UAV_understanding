@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_963a591316659068ffff",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1017-10524-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1017-10524-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape featuring a large body of water in the background.",
+      "Extensive agricultural fields with varying vegetation colors, including yellow-green and brown patches.",
+      "A cluster of residential buildings with red and grey roofs situated on the right side.",
+      "A central area containing multiple long, parallel structures covered in translucent blue-green plastic sheeting.",
+      "Surrounding plots of tilled soil and crops covered in white plastic mulch."
+    ],
+    "cross_view_relations": [
+      "The second image provides a zoomed-in perspective of the central agricultural zone visible in the first image.",
+      "The long, blue-green covered structures in the wide view correspond to the greenhouse-like structures in the close-up.",
+      "The surrounding tilled fields and white plastic-covered rows in the close-up match the patterns seen in the wider context.",
+      "The residential area and water body visible in the wide view provide the spatial context for the crop-focused close-up."
+    ],
+    "description": "Aerial imagery shows a rural agricultural landscape with a large water body and residential clusters. The central focus is a series of long, parallel structures covered in blue-green plastic sheeting, surrounded by tilled fields and crops covered in white plastic mulch. A closer view details these covered structures and adjacent soil plots.",
+    "evidence_visible": [
+      "Close-up view of several long, tunnel-like structures covered in blue-green translucent plastic sheeting.",
+      "Adjacent plots of tilled brown soil arranged in rectangular beds.",
+      "Rows of crops covered in white plastic mulch with visible dark soil or plants underneath.",
+      "A small blue vehicle or object is visible on a dirt path near the structures.",
+      "Vegetation and trees border the agricultural plots."
+    ],
+    "unclear": [
+      "The specific type of crop being grown under the plastic coverings.",
+      "The exact material composition of the blue-green covering (e.g., mesh, plastic film).",
+      "The purpose of the structures (e.g., greenhouses, storage, temporary cover).",
+      "The identity of the small blue object on the path.",
+      "The exact date or season, though vegetation suggests late summer or autumn."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape featuring a large body of water in the background.\",\n    \"Extensive agricultural fields with varying vegetation colors, including yellow-green and brown patches.\",\n    \"A cluster of residential buildings with red and grey roofs situated on the right side.\",\n    \"A central area containing multiple long, parallel structures covered in translucent blue-green plastic sheeting.\",\n    \"Surrounding plots of tilled soil and crops covered in white plastic mulch.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image provides a zoomed-in perspective of the central agricultural zone visible in the first image.\",\n    \"The long, blue-green covered structures in the wide view correspond to the greenhouse-like structures in the close-up.\",\n    \"The surrounding tilled fields and white plastic-covered rows in the close-up match the patterns seen in the wider context.\",\n    \"The residential area and water body visible in the wide view provide the spatial context for the crop-focused close-up.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural agricultural landscape with a large water body and residential clusters. The central focus is a series of long, parallel structures covered in blue-green plastic sheeting, surrounded by tilled fields and crops covered in white plastic mulch. A closer view details these covered structures and adjacent soil plots.\",\n  \"evidence_visible\": [\n    \"Close-up view of several long, tunnel-like structures covered in blue-green translucent plastic sheeting.\",\n    \"Adjacent plots of tilled brown soil arranged in rectangular beds.\",\n    \"Rows of crops covered in white plastic mulch with visible dark soil or plants underneath.\",\n    \"A small blue vehicle or object is visible on a dirt path near the structures.\",\n    \"Vegetation and trees border the agricultural plots.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop being grown under the plastic coverings.\",\n    \"The exact material composition of the blue-green covering (e.g., mesh, plastic film).\",\n    \"The purpose of the structures (e.g., greenhouses, storage, temporary cover).\",\n    \"The identity of the small blue object on the path.\",\n    \"The exact date or season, though vegetation suggests late summer or autumn.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the continuous blue-green plastic sheeting covering the long structures, whereas incomplete soil cover would imply a lack of such protective covering on the soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting, specifically the long, parallel structures covered in translucent blue-green plastic sheeting and adjacent plots of tilled brown soil arranged in rectangular beds.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the continuous blue-green plastic sheeting covering the long structures, whereas incomplete soil cover would imply a lack of such protective covering on the soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting, specifically the long, parallel structures covered in translucent blue-green plastic sheeting and adjacent plots of tilled brown soil arranged in rectangular beds.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows long, parallel structures covered in translucent blue-green plastic sheeting (greenhouses) and adjacent plots of tilled brown soil. The description of 'exposed soil covered by dust-control netting' is a misinterpretation of the agricultural plastic sheeting and bare earth, but the visual elements of 'long, parallel structures' and 'rectangular beds' are present.",
+      "support_score": 0.8,
+      "supported": true,
+      "unsupported_claims": [
+        "The structures are covered by 'dust-control netting' rather than plastic sheeting."
+      ]
+    },
+    "positive": {
+      "reason": "The image displays agricultural fields where the soil is not fully covered by vegetation or plastic. There are distinct areas of exposed brown earth (tilled soil) and areas where the plastic sheeting is not fully covering the ground or is absent, supporting the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows long, parallel structures covered in translucent blue-green plastic sheeting (greenhouses) and adjacent plots of tilled brown soil. The description of 'exposed soil covered by dust-control netting' is a misinterpretation of the agricultural plastic sheeting and bare earth, but the visual elements of 'long, parallel structures' and 'rectangular beds' are present.\",\n    \"support_score\": 0.8,\n    \"supported\": true,\n    \"unsupported_claims\": [\n      \"The structures are covered by 'dust-control netting' rather than plastic sheeting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays agricultural fields where the soil is not fully covered by vegetation or plastic. There are distinct areas of exposed brown earth (tilled soil) and areas where the plastic sheeting is not fully covering the ground or is absent, supporting the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.8,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

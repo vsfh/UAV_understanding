@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e7b37120e9f929b0244d",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/original/0227-4718-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/cropped/0227-4718-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to a wide river.",
+      "Large rectangular plots of green crops with distinct rows.",
+      "Houses with grey tiled roofs and solar panels installed on rooftops.",
+      "A paved road runs parallel to the riverbank.",
+      "A white car is parked on the road near the houses."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the cluster of buildings located on the right side of the context image, near the river.",
+      "The solar panels and the white car visible in the context image are clearly visible in the crop image.",
+      "The green crop field to the left of the houses in the context image is visible in the crop image."
+    ],
+    "description": "Aerial view of a riverside village with green crop fields and houses featuring rooftop solar panels. A white car is parked on the road. The crop image provides a detailed close-up of the buildings, showing solar arrays, a concrete structure, and the adjacent field.",
+    "evidence_visible": [
+      "Close-up of a cluster of buildings with grey tiled roofs.",
+      "Multiple solar panel arrays installed on rooftops.",
+      "A white car parked on the road.",
+      "A concrete structure with a circular opening.",
+      "Green crops and yellow flowers in the adjacent field."
+    ],
+    "unclear": [
+      "Exact purpose of the concrete structure with the circular opening.",
+      "Specific type of green crop.",
+      "Number of occupants or activities inside the buildings."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to a wide river.\",\n    \"Large rectangular plots of green crops with distinct rows.\",\n    \"Houses with grey tiled roofs and solar panels installed on rooftops.\",\n    \"A paved road runs parallel to the riverbank.\",\n    \"A white car is parked on the road near the houses.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the cluster of buildings located on the right side of the context image, near the river.\",\n    \"The solar panels and the white car visible in the context image are clearly visible in the crop image.\",\n    \"The green crop field to the left of the houses in the context image is visible in the crop image.\"\n  ],\n  \"description\": \"Aerial view of a riverside village with green crop fields and houses featuring rooftop solar panels. A white car is parked on the road. The crop image provides a detailed close-up of the buildings, showing solar arrays, a concrete structure, and the adjacent field.\",\n  \"evidence_visible\": [\n    \"Close-up of a cluster of buildings with grey tiled roofs.\",\n    \"Multiple solar panel arrays installed on rooftops.\",\n    \"A white car parked on the road.\",\n    \"A concrete structure with a circular opening.\",\n    \"Green crops and yellow flowers in the adjacent field.\"\n  ],\n  \"unclear\": [\n    \"Exact purpose of the concrete structure with the circular opening.\",\n    \"Specific type of green crop.\",\n    \"Number of occupants or activities inside the buildings.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a complete wall collapse rather than general surface damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-magnification crop image reveals a building with a visibly collapsed wall, exposing the interior of the structure.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a complete wall collapse rather than general surface damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-magnification crop image reveals a building with a visibly collapsed wall, exposing the interior of the structure.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification crop image clearly shows a building with a missing roof and a large, open interior void, which visually corresponds to a collapsed wall or structural failure. The claim is directly supported by the visible pixels.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a building with significant structural damage, specifically a missing roof and exposed interior, which supports the claim of visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification crop image clearly shows a building with a missing roof and a large, open interior void, which visually corresponds to a collapsed wall or structural failure. The claim is directly supported by the visible pixels.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a building with significant structural damage, specifically a missing roof and exposed interior, which supports the claim of visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

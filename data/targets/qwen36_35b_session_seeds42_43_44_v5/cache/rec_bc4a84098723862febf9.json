@@ -1,0 +1,91 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_bc4a84098723862febf9",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0927-1288-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0927-1288-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a wide, murky river flanked by dense trees. On the left bank, there are several industrial or agricultural buildings with blue and white roofs. Adjacent to these structures are rectangular plots of green crops. A bridge crosses the river in the upper right.",
+      "A closer view of the agricultural fields adjacent to the buildings. The fields are divided into rectangular sections by dirt paths or ditches. A long, narrow strip of bright green material is laid out on the ground in one of the plots."
+    ],
+    "cross_view_relations": [
+      "The green strip visible in the evidence crop corresponds to the long, narrow green object seen in the lower-left portion of the context image, situated within the agricultural fields next to the blue-roofed buildings.",
+      "The context image provides the spatial relationship, showing the green strip is located on a field bordering a dirt path and near a small structure, while the evidence crop isolates this specific area for detail."
+    ],
+    "description": "Aerial imagery shows a river bordered by trees and adjacent agricultural fields with blue-roofed buildings. A distinct, long strip of bright green material is laid out on the ground within one of the rectangular crop plots, visible in both the wide context and the zoomed-in evidence view.",
+    "evidence_visible": [
+      "Close-up of a green agricultural field divided by dirt paths. A long, rectangular strip of bright green material, possibly a tarp or netting, is laid flat on the soil. A small, indistinct object is visible near the end of the green strip.",
+      "The surrounding fields show uniform green vegetation, likely crops, with visible tire tracks or furrows in the soil."
+    ],
+    "unclear": [
+      "The specific type of green material (e.g., plastic sheeting, netting, or a specific crop variety).",
+      "The purpose of the green strip (e.g., weed control, moisture retention, or temporary cover).",
+      "The identity of the small object near the green strip.",
+      "The exact species of the crops in the surrounding fields."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a wide, murky river flanked by dense trees. On the left bank, there are several industrial or agricultural buildings with blue and white roofs. Adjacent to these structures are rectangular plots of green crops. A bridge crosses the river in the upper right.\",\n    \"A closer view of the agricultural fields adjacent to the buildings. The fields are divided into rectangular sections by dirt paths or ditches. A long, narrow strip of bright green material is laid out on the ground in one of the plots.\"\n  ],\n  \"cross_view_relations\": [\n    \"The green strip visible in the evidence crop corresponds to the long, narrow green object seen in the lower-left portion of the context image, situated within the agricultural fields next to the blue-roofed buildings.\",\n    \"The context image provides the spatial relationship, showing the green strip is located on a field bordering a dirt path and near a small structure, while the evidence crop isolates this specific area for detail.\"\n  ],\n  \"description\": \"Aerial imagery shows a river bordered by trees and adjacent agricultural fields with blue-roofed buildings. A distinct, long strip of bright green material is laid out on the ground within one of the rectangular crop plots, visible in both the wide context and the zoomed-in evidence view.\",\n  \"evidence_visible\": [\n    \"Close-up of a green agricultural field divided by dirt paths. A long, rectangular strip of bright green material, possibly a tarp or netting, is laid flat on the soil. A small, indistinct object is visible near the end of the green strip.\",\n    \"The surrounding fields show uniform green vegetation, likely crops, with visible tire tracks or furrows in the soil.\"\n  ],\n  \"unclear\": [\n    \"The specific type of green material (e.g., plastic sheeting, netting, or a specific crop variety).\",\n    \"The purpose of the green strip (e.g., weed control, moisture retention, or temporary cover).\",\n    \"The identity of the small object near the green strip.\",\n    \"The exact species of the crops in the surrounding fields.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the continuous and complete coverage of the specific soil strip by the green material, whereas incomplete soil cover would show gaps or exposed soil within the covered area.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a long, rectangular strip of bright green material laid flat on the soil within an agricultural field, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the continuous and complete coverage of the specific soil strip by the green material, whereas incomplete soil cover would show gaps or exposed soil within the covered area.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a long, rectangular strip of bright green material laid flat on the soil within an agricultural field, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a long, rectangular strip of bright green material laid flat on the ground within an agricultural field. This visual evidence directly supports the description of 'bare soil netting' used for dust control.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a distinct rectangular patch of green netting laid on the soil. The surrounding area is bare earth, and the netting itself is a discrete, contained object rather than a general state of 'incomplete cover' over a larger area. The claim of 'incomplete soil cover' is a vague generalization not directly supported by the specific visual of a discrete netting strip.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image shows a general state of incomplete soil cover rather than a specific discrete object."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a long, rectangular strip of bright green material laid flat on the ground within an agricultural field. This visual evidence directly supports the description of 'bare soil netting' used for dust control.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a distinct rectangular patch of green netting laid on the soil. The surrounding area is bare earth, and the netting itself is a discrete, contained object rather than a general state of 'incomplete cover' over a larger area. The claim of 'incomplete soil cover' is a vague generalization not directly supported by the specific visual of a discrete netting strip.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image shows a general state of incomplete soil cover rather than a specific discrete object.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

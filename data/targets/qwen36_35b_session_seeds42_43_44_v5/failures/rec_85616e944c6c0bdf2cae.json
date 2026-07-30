@@ -1,0 +1,6 @@
+{
+  "record_uid": "rec_85616e944c6c0bdf2cae",
+  "source_class": "bare_soil_netting",
+  "error_type": "TeacherGenerationError",
+  "error": "Teacher failed after 3 attempts: Verification keys must be ['counterfactual', 'positive'], got ['reason', 'support_score', 'supported', 'unsupported_claims'] | Verification keys must be ['counterfactual', 'positive'], got ['reason', 'support_score', 'supported', 'unsupported_claims'] | Verification keys must be ['counterfactual', 'positive'], got ['reason', 'support_score', 'supported', 'unsupported_claims']"
+}

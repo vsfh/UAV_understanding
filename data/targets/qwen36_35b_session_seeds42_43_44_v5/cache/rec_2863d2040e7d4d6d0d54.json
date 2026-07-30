@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_2863d2040e7d4d6d0d54",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0814-3745-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0814-3745-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a multi-lane paved road with white lane markings and a red car driving on it.",
+      "Surrounding area includes industrial buildings with blue roofs, green vegetation, and a large area of rubble and debris.",
+      "A red truck is visible on a road in the upper section of the image.",
+      "A bus stop shelter is visible on the right side of the road."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the upper-left quadrant of the context image.",
+      "The red truck seen in the distance in the context image is shown in detail in the crop.",
+      "The area of rubble and partially demolished buildings in the context image is shown in greater detail in the crop.",
+      "The road with the red truck in the crop corresponds to the road in the upper part of the context image."
+    ],
+    "description": "Aerial images show a road with a red truck and a red car, surrounded by industrial buildings with blue roofs, green vegetation, and a large area of rubble from demolished structures. The crop provides a closer view of the red truck and the adjacent buildings and debris field.",
+    "evidence_visible": [
+      "Close-up of a red semi-truck driving on a paved road.",
+      "Adjacent to the road are several buildings, some appearing intact and others partially demolished.",
+      "A large pile of red brick rubble and debris is visible next to the buildings.",
+      "Green vegetation and trees are present along the roadside and between buildings.",
+      "A white building with a grey roof is visible next to the rubble."
+    ],
+    "unclear": [
+      "The specific type of vehicles in the distance.",
+      "The exact state of the partially demolished buildings.",
+      "The purpose of the buildings.",
+      "The reason for the demolition and rubble."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a multi-lane paved road with white lane markings and a red car driving on it.\",\n    \"Surrounding area includes industrial buildings with blue roofs, green vegetation, and a large area of rubble and debris.\",\n    \"A red truck is visible on a road in the upper section of the image.\",\n    \"A bus stop shelter is visible on the right side of the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the upper-left quadrant of the context image.\",\n    \"The red truck seen in the distance in the context image is shown in detail in the crop.\",\n    \"The area of rubble and partially demolished buildings in the context image is shown in greater detail in the crop.\",\n    \"The road with the red truck in the crop corresponds to the road in the upper part of the context image.\"\n  ],\n  \"description\": \"Aerial images show a road with a red truck and a red car, surrounded by industrial buildings with blue roofs, green vegetation, and a large area of rubble from demolished structures. The crop provides a closer view of the red truck and the adjacent buildings and debris field.\",\n  \"evidence_visible\": [\n    \"Close-up of a red semi-truck driving on a paved road.\",\n    \"Adjacent to the road are several buildings, some appearing intact and others partially demolished.\",\n    \"A large pile of red brick rubble and debris is visible next to the buildings.\",\n    \"Green vegetation and trees are present along the roadside and between buildings.\",\n    \"A white building with a grey roof is visible next to the rubble.\"\n  ],\n  \"unclear\": [\n    \"The specific type of vehicles in the distance.\",\n    \"The exact state of the partially demolished buildings.\",\n    \"The purpose of the buildings.\",\n    \"The reason for the demolition and rubble.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the presence of a large pile of red brick rubble and debris on the ground, which is visible in the image and indicates a total collapse rather than just structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence shows a large area of red brick rubble and debris adjacent to standing structures, indicating a wall has visibly collapsed.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the presence of a large pile of red brick rubble and debris on the ground, which is visible in the image and indicates a total collapse rather than just structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence shows a large area of red brick rubble and debris adjacent to standing structures, indicating a wall has visibly collapsed.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a large area of red brick rubble and debris situated directly adjacent to standing structures, which visually confirms that a wall has collapsed.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a building with a damaged roof and a partially collapsed structure nearby, providing visible evidence of structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a large area of red brick rubble and debris situated directly adjacent to standing structures, which visually confirms that a wall has collapsed.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a building with a damaged roof and a partially collapsed structure nearby, providing visible evidence of structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_c8e1985eb596f4b1dcfb",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1010-10723-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1010-10723-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring multiple rectangular aquaculture ponds with varying water colors (dark blue, green, brown).",
+      "A paved road runs vertically through the left side, connecting several buildings with red and grey roofs.",
+      "A narrow canal or waterway runs diagonally from top-right to bottom-left, bordered by dense green vegetation and trees.",
+      "Yellow-green agricultural fields are visible in the bottom-left corner.",
+      "A small boat is moored along the bank of the canal in the upper-right quadrant."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a high-magnification view of the area along the canal bank in the upper-right quadrant of the context image.",
+      "The blue tarp and small boat visible in the crop are located on the bank adjacent to the canal, near the dense vegetation seen in the context view."
+    ],
+    "description": "The context image shows a rural area with aquaculture ponds, a road, and a canal. The crop zooms in on the canal bank, revealing a small boat moored near a blue tarp and dense vegetation. The scene depicts agricultural and aquacultural infrastructure with no visible human activity.",
+    "evidence_visible": [
+      "Close-up of a canal bank with a small, dark-colored boat moored alongside.",
+      "A bright blue tarp is laid out on the ground near the water's edge.",
+      "Green vegetation and trees line the bank.",
+      "A small structure or object with blue elements is visible near the tarp.",
+      "The water in the canal appears dark and still."
+    ],
+    "unclear": [
+      "The specific contents of the blue tarp or the boat.",
+      "The exact type of crops in the yellow-green fields.",
+      "The purpose of the blue tarp (e.g., drying, covering).",
+      "Any text or markings on the boat or structures."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring multiple rectangular aquaculture ponds with varying water colors (dark blue, green, brown).\",\n    \"A paved road runs vertically through the left side, connecting several buildings with red and grey roofs.\",\n    \"A narrow canal or waterway runs diagonally from top-right to bottom-left, bordered by dense green vegetation and trees.\",\n    \"Yellow-green agricultural fields are visible in the bottom-left corner.\",\n    \"A small boat is moored along the bank of the canal in the upper-right quadrant.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a high-magnification view of the area along the canal bank in the upper-right quadrant of the context image.\",\n    \"The blue tarp and small boat visible in the crop are located on the bank adjacent to the canal, near the dense vegetation seen in the context view.\"\n  ],\n  \"description\": \"The context image shows a rural area with aquaculture ponds, a road, and a canal. The crop zooms in on the canal bank, revealing a small boat moored near a blue tarp and dense vegetation. The scene depicts agricultural and aquacultural infrastructure with no visible human activity.\",\n  \"evidence_visible\": [\n    \"Close-up of a canal bank with a small, dark-colored boat moored alongside.\",\n    \"A bright blue tarp is laid out on the ground near the water's edge.\",\n    \"Green vegetation and trees line the bank.\",\n    \"A small structure or object with blue elements is visible near the tarp.\",\n    \"The water in the canal appears dark and still.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the blue tarp or the boat.\",\n    \"The exact type of crops in the yellow-green fields.\",\n    \"The purpose of the blue tarp (e.g., drying, covering).\",\n    \"Any text or markings on the boat or structures.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue netting material itself; the distinction is that the netting is present and covering the ground, whereas incomplete soil cover would imply a lack of such protective material.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a bright blue mesh netting laid out on the ground along the bank of the canal, adjacent to a moored boat and dense vegetation.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue netting material itself; the distinction is that the netting is present and covering the ground, whereas incomplete soil cover would imply a lack of such protective material.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a bright blue mesh netting laid out on the ground along the bank of the canal, adjacent to a moored boat and dense vegetation.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a bright blue mesh netting laid out on the ground along the bank of the canal, adjacent to a moored boat and dense vegetation. This directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a blue netting laid out on the ground, but it does not provide enough visual evidence to determine if the soil cover is 'incomplete' or if the netting is intended to cover soil. The claim of 'incomplete soil cover' is an interpretation not directly supported by the visible pixels.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The soil cover is visibly incomplete."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a bright blue mesh netting laid out on the ground along the bank of the canal, adjacent to a moored boat and dense vegetation. This directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a blue netting laid out on the ground, but it does not provide enough visual evidence to determine if the soil cover is 'incomplete' or if the netting is intended to cover soil. The claim of 'incomplete soil cover' is an interpretation not directly supported by the visible pixels.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The soil cover is visibly incomplete.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

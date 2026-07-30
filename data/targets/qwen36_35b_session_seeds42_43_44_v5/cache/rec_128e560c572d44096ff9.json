@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_128e560c572d44096ff9",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-05-01_2026-05-31/building_demolition/original/0518-5828-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-05-01_2026-05-31/building_demolition/cropped/0518-5828-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a paved two-lane road with yellow center lines running vertically.",
+      "A narrow canal or drainage ditch runs parallel to the road, lined with green vegetation.",
+      "Large rectangular agricultural fields with green crops occupy the right side of the image.",
+      "A row of trees separates the fields from a road in the background.",
+      "A multi-story building under construction is visible on the far left edge."
+    ],
+    "cross_view_relations": [
+      "The zoomed crop confirms the presence of the multi-story building on the left, which appears to be an unfinished concrete structure.",
+      "The crop reveals a large area of cleared land and rubble immediately adjacent to the building, distinct from the agricultural fields.",
+      "The crop shows two motorcyclists traveling on the road, providing scale and activity context.",
+      "The crop shows utility poles and wires running alongside the road and over the cleared land."
+    ],
+    "description": "Aerial imagery shows a paved road flanked by a canal and green agricultural fields. To the left, a multi-story concrete building stands next to a cleared plot of land with scattered rubble and debris. Two motorcyclists are visible on the road. The scene depicts a mix of active farming, infrastructure, and a construction or demolition site.",
+    "evidence_visible": [
+      "Close-up of the multi-story building showing exposed concrete floors and columns.",
+      "A pile of grey rubble and dirt on the ground next to the building.",
+      "Two motorcyclists riding on the asphalt road.",
+      "Utility poles and overhead wires running parallel to the road."
+    ],
+    "unclear": [
+      "The specific type of crop in the fields.",
+      "The exact status of the building (abandoned vs. under construction).",
+      "The identity of the motorcyclists.",
+      "The origin of the rubble."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a paved two-lane road with yellow center lines running vertically.\",\n    \"A narrow canal or drainage ditch runs parallel to the road, lined with green vegetation.\",\n    \"Large rectangular agricultural fields with green crops occupy the right side of the image.\",\n    \"A row of trees separates the fields from a road in the background.\",\n    \"A multi-story building under construction is visible on the far left edge.\"\n  ],\n  \"cross_view_relations\": [\n    \"The zoomed crop confirms the presence of the multi-story building on the left, which appears to be an unfinished concrete structure.\",\n    \"The crop reveals a large area of cleared land and rubble immediately adjacent to the building, distinct from the agricultural fields.\",\n    \"The crop shows two motorcyclists traveling on the road, providing scale and activity context.\",\n    \"The crop shows utility poles and wires running alongside the road and over the cleared land.\"\n  ],\n  \"description\": \"Aerial imagery shows a paved road flanked by a canal and green agricultural fields. To the left, a multi-story concrete building stands next to a cleared plot of land with scattered rubble and debris. Two motorcyclists are visible on the road. The scene depicts a mix of active farming, infrastructure, and a construction or demolition site.\",\n  \"evidence_visible\": [\n    \"Close-up of the multi-story building showing exposed concrete floors and columns.\",\n    \"A pile of grey rubble and dirt on the ground next to the building.\",\n    \"Two motorcyclists riding on the asphalt road.\",\n    \"Utility poles and overhead wires running parallel to the road.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the fields.\",\n    \"The exact status of the building (abandoned vs. under construction).\",\n    \"The identity of the motorcyclists.\",\n    \"The origin of the rubble.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of a large pile of grey rubble and cleared land immediately adjacent to the building, which indicates a demolition or site clearance activity rather than the assembly of a new structure.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a multi-story concrete structure with exposed floors and columns adjacent to a large area of cleared land containing scattered rubble and debris.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of a large pile of grey rubble and cleared land immediately adjacent to the building, which indicates a demolition or site clearance activity rather than the assembly of a new structure.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a multi-story concrete structure with exposed floors and columns adjacent to a large area of cleared land containing scattered rubble and debris.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a multi-story concrete structure with exposed floors and columns situated next to a large area of cleared land containing scattered rubble and debris, which visually supports the description of a building demolition event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The visible evidence depicts a structure that appears to be in a state of demolition or abandonment rather than active construction. There are no visible signs of active construction work, such as cranes, scaffolding, or workers, and the surrounding area is characterized by rubble and cleared land rather than building materials or ongoing construction activity.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a multi-story concrete structure with exposed floors and columns situated next to a large area of cleared land containing scattered rubble and debris, which visually supports the description of a building demolition event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The visible evidence depicts a structure that appears to be in a state of demolition or abandonment rather than active construction. There are no visible signs of active construction work, such as cranes, scaffolding, or workers, and the surrounding area is characterized by rubble and cleared land rather than building materials or ongoing construction activity.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

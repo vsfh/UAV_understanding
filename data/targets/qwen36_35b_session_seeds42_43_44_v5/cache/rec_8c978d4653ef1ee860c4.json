@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8c978d4653ef1ee860c4",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-07-01_2025-07-31/collapsed_house_wall/original/0717-5121-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-07-01_2025-07-31/collapsed_house_wall/cropped/0717-5121-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a central canal running vertically through the frame.",
+      "Surrounding the canal are residential buildings with varied roof colors (red, grey, white) and dense vegetation.",
+      "Large rectangular agricultural fields with green crops are visible in the upper left and lower left corners.",
+      "A large pond with green water is located on the right side of the image.",
+      "A small, isolated brick structure with a damaged or unfinished roof is visible in the lower left quadrant, adjacent to a narrow irrigation ditch."
+    ],
+    "cross_view_relations": [
+      "The second image is a high-magnification view of the isolated brick structure and its immediate surroundings seen in the lower left of the first image.",
+      "The narrow irrigation ditch and the specific arrangement of the garden plots match the spatial layout in the wider context image."
+    ],
+    "description": "The images show a rural village with a central canal and surrounding agricultural plots. The second image provides a detailed view of a small, isolated brick building with a damaged roof situated next to a narrow irrigation ditch and cultivated vegetable patches.",
+    "evidence_visible": [
+      "Close-up of a small, single-story brick structure with a flat roof that appears partially collapsed or under construction.",
+      "The structure is surrounded by organized rows of green leafy crops.",
+      "A narrow concrete-lined irrigation channel runs parallel to the building.",
+      "A dirt path separates the building from the crops.",
+      "The vegetation is dense and green, indicating active cultivation."
+    ],
+    "unclear": [
+      "The exact state of the roof damage (e.g., whether it is intentional or due to decay).",
+      "The specific type of crops being grown.",
+      "The current occupancy status of the brick structure."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a central canal running vertically through the frame.\",\n    \"Surrounding the canal are residential buildings with varied roof colors (red, grey, white) and dense vegetation.\",\n    \"Large rectangular agricultural fields with green crops are visible in the upper left and lower left corners.\",\n    \"A large pond with green water is located on the right side of the image.\",\n    \"A small, isolated brick structure with a damaged or unfinished roof is visible in the lower left quadrant, adjacent to a narrow irrigation ditch.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a high-magnification view of the isolated brick structure and its immediate surroundings seen in the lower left of the first image.\",\n    \"The narrow irrigation ditch and the specific arrangement of the garden plots match the spatial layout in the wider context image.\"\n  ],\n  \"description\": \"The images show a rural village with a central canal and surrounding agricultural plots. The second image provides a detailed view of a small, isolated brick building with a damaged roof situated next to a narrow irrigation ditch and cultivated vegetable patches.\",\n  \"evidence_visible\": [\n    \"Close-up of a small, single-story brick structure with a flat roof that appears partially collapsed or under construction.\",\n    \"The structure is surrounded by organized rows of green leafy crops.\",\n    \"A narrow concrete-lined irrigation channel runs parallel to the building.\",\n    \"A dirt path separates the building from the crops.\",\n    \"The vegetation is dense and green, indicating active cultivation.\"\n  ],\n  \"unclear\": [\n    \"The exact state of the roof damage (e.g., whether it is intentional or due to decay).\",\n    \"The specific type of crops being grown.\",\n    \"The current occupancy status of the brick structure.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence explicitly identifies the roof as partially collapsed, which is a specific instance of structural damage, whereas building damage is a broader category.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a small, isolated brick structure with a flat roof that appears partially collapsed or under construction, situated next to a narrow irrigation ditch and cultivated vegetable patches.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence explicitly identifies the roof as partially collapsed, which is a specific instance of structural damage, whereas building damage is a broader category.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a small, isolated brick structure with a flat roof that appears partially collapsed or under construction, situated next to a narrow irrigation ditch and cultivated vegetable patches.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a small, isolated brick structure with a flat roof that appears partially collapsed or under construction, situated next to a narrow irrigation ditch and cultivated vegetable patches. This matches the description in the statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a small brick structure with visible damage to its roof and walls, consistent with structural damage. The claim is supported by the visual evidence.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a small, isolated brick structure with a flat roof that appears partially collapsed or under construction, situated next to a narrow irrigation ditch and cultivated vegetable patches. This matches the description in the statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a small brick structure with visible damage to its roof and walls, consistent with structural damage. The claim is supported by the visual evidence.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

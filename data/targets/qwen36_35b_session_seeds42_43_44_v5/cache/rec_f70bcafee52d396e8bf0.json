@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_f70bcafee52d396e8bf0",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0219-1507-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0219-1507-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a densely populated settlement adjacent to a wide river.",
+      "The area features a mix of low-rise residential structures with grey and red roofs and taller multi-story apartment buildings on the right.",
+      "The immediate shoreline is irregular, consisting of exposed earth, rocks, and scattered debris.",
+      "A paved road runs along the left edge of the settlement, and a bridge is visible in the far distance.",
+      "Vegetation is sparse, with mostly leafless trees indicating a dormant season."
+    ],
+    "cross_view_relations": [
+      "The crop is a high-magnification view of the shoreline area visible in the lower center of the wide image.",
+      "The cluster of buildings in the crop corresponds to the structures situated directly on the bank of the water in the context view.",
+      "The debris field visible in the crop is part of the shoreline accumulation seen in the wider shot."
+    ],
+    "description": "The images show a dense settlement bordering a river. The wide view reveals a mix of housing types and an irregular shoreline. The crop details the specific bank area, highlighting a cluster of residential buildings with grey and red roofs situated immediately next to a shoreline covered in rocks and scattered debris.",
+    "evidence_visible": [
+      "Close-up of a dense cluster of residential buildings with flat and pitched roofs.",
+      "Roof materials include grey tiles, concrete, and red/orange tiles.",
+      "A small, walled garden plot with a grid pattern is visible between buildings.",
+      "The ground level near the water is cluttered with rocks, dry vegetation, and scattered white debris.",
+      "A small blue structure is visible on the far right edge of the crop."
+    ],
+    "unclear": [
+      "The specific function of the walled garden plot.",
+      "The exact nature of the white debris on the shore.",
+      "The condition of the buildings (occupied vs. abandoned).",
+      "The specific type of construction materials used for the walls."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a densely populated settlement adjacent to a wide river.\",\n    \"The area features a mix of low-rise residential structures with grey and red roofs and taller multi-story apartment buildings on the right.\",\n    \"The immediate shoreline is irregular, consisting of exposed earth, rocks, and scattered debris.\",\n    \"A paved road runs along the left edge of the settlement, and a bridge is visible in the far distance.\",\n    \"Vegetation is sparse, with mostly leafless trees indicating a dormant season.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a high-magnification view of the shoreline area visible in the lower center of the wide image.\",\n    \"The cluster of buildings in the crop corresponds to the structures situated directly on the bank of the water in the context view.\",\n    \"The debris field visible in the crop is part of the shoreline accumulation seen in the wider shot.\"\n  ],\n  \"description\": \"The images show a dense settlement bordering a river. The wide view reveals a mix of housing types and an irregular shoreline. The crop details the specific bank area, highlighting a cluster of residential buildings with grey and red roofs situated immediately next to a shoreline covered in rocks and scattered debris.\",\n  \"evidence_visible\": [\n    \"Close-up of a dense cluster of residential buildings with flat and pitched roofs.\",\n    \"Roof materials include grey tiles, concrete, and red/orange tiles.\",\n    \"A small, walled garden plot with a grid pattern is visible between buildings.\",\n    \"The ground level near the water is cluttered with rocks, dry vegetation, and scattered white debris.\",\n    \"A small blue structure is visible on the far right edge of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the walled garden plot.\",\n    \"The exact nature of the white debris on the shore.\",\n    \"The condition of the buildings (occupied vs. abandoned).\",\n    \"The specific type of construction materials used for the walls.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of scattered debris and a cleared, irregular shoreline, whereas project construction would typically show organized building materials, scaffolding, or active structural assembly.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a dense cluster of residential structures situated directly on the riverbank, where the ground level is cluttered with rocks, dry vegetation, and scattered white debris, indicating a cleared or disturbed site.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of scattered debris and a cleared, irregular shoreline, whereas project construction would typically show organized building materials, scaffolding, or active structural assembly.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a dense cluster of residential structures situated directly on the riverbank, where the ground level is cluttered with rocks, dry vegetation, and scattered white debris, indicating a cleared or disturbed site.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence supports the claim of demolition. The local crop shows a dense cluster of residential structures on the riverbank. The ground level is cluttered with rocks, dry vegetation, and scattered white debris, which visually indicates a cleared or disturbed site consistent with demolition activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image evidence does not support the claim of active construction. There are no visible signs of an active general construction project, such as cranes, scaffolding, heavy machinery, or workers. The scene depicts existing residential structures and debris.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "```json\n{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence supports the claim of demolition. The local crop shows a dense cluster of residential structures on the riverbank. The ground level is cluttered with rocks, dry vegetation, and scattered white debris, which visually indicates a cleared or disturbed site consistent with demolition activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence does not support the claim of active construction. There are no visible signs of an active general construction project, such as cranes, scaffolding, heavy machinery, or workers. The scene depicts existing residential structures and debris.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}\n```",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

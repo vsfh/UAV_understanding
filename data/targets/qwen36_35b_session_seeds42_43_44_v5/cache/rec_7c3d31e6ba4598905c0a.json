@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_7c3d31e6ba4598905c0a",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0106-2251-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0106-2251-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a riverbank with a paved road, bare deciduous trees, and green vegetation.",
+      "A barge with red flags is docked on the left side of the river.",
+      "A small boat is visible on the water in the upper center.",
+      "A cluster of buildings with varied roof colors (red, grey) and adjacent garden plots are in the lower left.",
+      "A rectangular structure with a reddish-brown perimeter wall is visible in the lower right foreground."
+    ],
+    "cross_view_relations": [
+      "The crop is a high-magnification view of the rectangular structure located in the lower right corner of the wide image.",
+      "The paved road and tree line visible in the crop correspond to the area immediately north of the structure in the wide image.",
+      "The garden plots visible in the wide image are located to the west (left) of the structure shown in the crop."
+    ],
+    "description": "Aerial view of a riverbank area featuring a paved road, bare trees, and a docked barge. The linked crop details a rectangular, walled enclosure in the lower right foreground, containing a concrete slab and scattered debris, situated adjacent to the road and garden plots.",
+    "evidence_visible": [
+      "A rectangular enclosure with a low, reddish-brown brick or concrete wall.",
+      "Inside the enclosure, a flat concrete slab is visible.",
+      "A pile of mixed debris, including wood, blue tarps, and metal rods, is located in the corner of the enclosure.",
+      "To the north of the enclosure, a paved road runs parallel to a line of bare trees.",
+      "Green vegetation is visible to the west of the enclosure."
+    ],
+    "unclear": [
+      "The specific contents of the debris pile.",
+      "The purpose of the walled enclosure.",
+      "The exact date of the imagery.",
+      "The legal status or ownership of the property."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a riverbank with a paved road, bare deciduous trees, and green vegetation.\",\n    \"A barge with red flags is docked on the left side of the river.\",\n    \"A small boat is visible on the water in the upper center.\",\n    \"A cluster of buildings with varied roof colors (red, grey) and adjacent garden plots are in the lower left.\",\n    \"A rectangular structure with a reddish-brown perimeter wall is visible in the lower right foreground.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a high-magnification view of the rectangular structure located in the lower right corner of the wide image.\",\n    \"The paved road and tree line visible in the crop correspond to the area immediately north of the structure in the wide image.\",\n    \"The garden plots visible in the wide image are located to the west (left) of the structure shown in the crop.\"\n  ],\n  \"description\": \"Aerial view of a riverbank area featuring a paved road, bare trees, and a docked barge. The linked crop details a rectangular, walled enclosure in the lower right foreground, containing a concrete slab and scattered debris, situated adjacent to the road and garden plots.\",\n  \"evidence_visible\": [\n    \"A rectangular enclosure with a low, reddish-brown brick or concrete wall.\",\n    \"Inside the enclosure, a flat concrete slab is visible.\",\n    \"A pile of mixed debris, including wood, blue tarps, and metal rods, is located in the corner of the enclosure.\",\n    \"To the north of the enclosure, a paved road runs parallel to a line of bare trees.\",\n    \"Green vegetation is visible to the west of the enclosure.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the debris pile.\",\n    \"The purpose of the walled enclosure.\",\n    \"The exact date of the imagery.\",\n    \"The legal status or ownership of the property.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a cleared site with a concrete slab and a pile of mixed construction debris, rather than the visible structural damage to a standing building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the high-magnification crop reveals a rectangular walled enclosure containing a flat concrete slab and a pile of mixed debris, including wood, blue tarps, and metal rods, consistent with the aftermath of a structure being dismantled.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a cleared site with a concrete slab and a pile of mixed construction debris, rather than the visible structural damage to a standing building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the high-magnification crop reveals a rectangular walled enclosure containing a flat concrete slab and a pile of mixed debris, including wood, blue tarps, and metal rods, consistent with the aftermath of a structure being dismantled.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification crop clearly shows a rectangular walled enclosure containing a flat concrete slab and a pile of mixed debris, including wood, blue tarps, and metal rods. This visual evidence is consistent with the aftermath of a structure being dismantled or demolished.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a rectangular walled enclosure containing a flat concrete slab and a pile of mixed debris, including wood, blue tarps, and metal rods. This visual evidence is consistent with the aftermath of a structure being dismantled or demolished, rather than just damage to an existing building.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification crop clearly shows a rectangular walled enclosure containing a flat concrete slab and a pile of mixed debris, including wood, blue tarps, and metal rods. This visual evidence is consistent with the aftermath of a structure being dismantled or demolished.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a rectangular walled enclosure containing a flat concrete slab and a pile of mixed debris, including wood, blue tarps, and metal rods. This visual evidence is consistent with the aftermath of a structure being dismantled or demolished, rather than just damage to an existing building.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

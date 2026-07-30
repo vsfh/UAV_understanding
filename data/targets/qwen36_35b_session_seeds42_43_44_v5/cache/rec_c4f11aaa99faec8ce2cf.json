@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_c4f11aaa99faec8ce2cf",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0210-6474-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0210-6474-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with dense housing, agricultural plots, and a road network.",
+      "Houses feature varied roofing materials, including grey tiles and red metal sheets.",
+      "Large green agricultural fields are visible in the upper left quadrant.",
+      "A paved road runs horizontally through the middle of the scene, with several vehicles parked along it."
+    ],
+    "cross_view_relations": [
+      "The crop view corresponds to a specific cluster of buildings within the wider context image.",
+      "The red metal roof in the crop matches the red roofs seen in the lower right section of the context image.",
+      "The grey tiled roof adjacent to the red roof in the crop is visible in the context image, confirming the spatial relationship."
+    ],
+    "description": "The context image shows a rural village with mixed housing and agriculture. The crop zooms in on a specific residential cluster, highlighting a building with a red metal roof next to one with grey tiles. A small yard area is visible between the structures, containing various indistinct items.",
+    "evidence_visible": [
+      "Close-up of a building with a long, red metal roof.",
+      "Adjacent building with a grey, weathered tiled roof.",
+      "A small, enclosed yard area between the buildings containing various objects, including what appears to be a green sign or board.",
+      "Air conditioning units mounted on the roof of the grey-tiled building.",
+      "A blue tarp or sheet is visible on the far right edge of the crop."
+    ],
+    "unclear": [
+      "The specific contents of the yard area are indistinct.",
+      "The exact nature of the green object in the yard is unclear.",
+      "The condition of the grey roof suggests weathering, but the exact material type is ambiguous."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with dense housing, agricultural plots, and a road network.\",\n    \"Houses feature varied roofing materials, including grey tiles and red metal sheets.\",\n    \"Large green agricultural fields are visible in the upper left quadrant.\",\n    \"A paved road runs horizontally through the middle of the scene, with several vehicles parked along it.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop view corresponds to a specific cluster of buildings within the wider context image.\",\n    \"The red metal roof in the crop matches the red roofs seen in the lower right section of the context image.\",\n    \"The grey tiled roof adjacent to the red roof in the crop is visible in the context image, confirming the spatial relationship.\"\n  ],\n  \"description\": \"The context image shows a rural village with mixed housing and agriculture. The crop zooms in on a specific residential cluster, highlighting a building with a red metal roof next to one with grey tiles. A small yard area is visible between the structures, containing various indistinct items.\",\n  \"evidence_visible\": [\n    \"Close-up of a building with a long, red metal roof.\",\n    \"Adjacent building with a grey, weathered tiled roof.\",\n    \"A small, enclosed yard area between the buildings containing various objects, including what appears to be a green sign or board.\",\n    \"Air conditioning units mounted on the roof of the grey-tiled building.\",\n    \"A blue tarp or sheet is visible on the far right edge of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the yard area are indistinct.\",\n    \"The exact nature of the green object in the yard is unclear.\",\n    \"The condition of the grey roof suggests weathering, but the exact material type is ambiguous.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of a collapsed roof and debris, which indicates demolition rather than the assembly of new structures.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a building undergoing active or recent demolition, specifically the collapsed grey tiled roof and the debris-filled yard area between the structures.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of a collapsed roof and debris, which indicates demolition rather than the assembly of new structures.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a building undergoing active or recent demolition, specifically the collapsed grey tiled roof and the debris-filled yard area between the structures.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a building with a collapsed grey tiled roof and a yard filled with debris, which visually supports the claim of a building undergoing active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a collapsed structure and debris, which is evidence of demolition, not an active general construction project. There are no visible signs of new construction (e.g., cranes, scaffolding, new foundations).",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a building with a collapsed grey tiled roof and a yard filled with debris, which visually supports the claim of a building undergoing active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a collapsed structure and debris, which is evidence of demolition, not an active general construction project. There are no visible signs of new construction (e.g., cranes, scaffolding, new foundations).\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

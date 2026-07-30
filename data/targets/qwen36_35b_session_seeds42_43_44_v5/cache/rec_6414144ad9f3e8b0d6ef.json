@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_6414144ad9f3e8b0d6ef",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/original/0421-10473-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/cropped/0421-10473-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area featuring a paved road running horizontally.",
+      "Large rectangular aquaculture ponds are visible in the upper section.",
+      "Green agricultural fields are located between the ponds and the road.",
+      "A row of residential buildings with varying roof colors (red, grey, black) lines the road.",
+      "Vegetation and small plots are present along the water body in the foreground."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a zoomed-in section of the central area in the context view.",
+      "The view focuses on a specific plot of land situated between a white building on the left and a red-roofed building on the right.",
+      "The road and the green fields visible in the context view frame the construction site shown in the crop.",
+      "Vehicles and figures visible on the road in the context view correspond to those in the crop."
+    ],
+    "description": "The images show a construction site adjacent to a road and residential buildings. The site contains a concrete foundation, piles of red bricks, and scattered debris. Workers and vehicles are present on the road and within the site boundaries. The surrounding area includes green fields and large water ponds.",
+    "evidence_visible": [
+      "A rectangular plot of land containing a concrete foundation slab with a cross-shaped pattern.",
+      "Piles of red bricks and rubble are scattered across the site.",
+      "Several individuals are visible standing on the concrete foundation and near the road.",
+      "Motorcycles and a blue truck are parked or moving along the road edge.",
+      "Construction materials and equipment are visible near the building on the right."
+    ],
+    "unclear": [
+      "The specific stage of construction or the final purpose of the building.",
+      "The identity or actions of the individuals.",
+      "The exact date of the imagery."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural area featuring a paved road running horizontally.\",\n    \"Large rectangular aquaculture ponds are visible in the upper section.\",\n    \"Green agricultural fields are located between the ponds and the road.\",\n    \"A row of residential buildings with varying roof colors (red, grey, black) lines the road.\",\n    \"Vegetation and small plots are present along the water body in the foreground.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a zoomed-in section of the central area in the context view.\",\n    \"The view focuses on a specific plot of land situated between a white building on the left and a red-roofed building on the right.\",\n    \"The road and the green fields visible in the context view frame the construction site shown in the crop.\",\n    \"Vehicles and figures visible on the road in the context view correspond to those in the crop.\"\n  ],\n  \"description\": \"The images show a construction site adjacent to a road and residential buildings. The site contains a concrete foundation, piles of red bricks, and scattered debris. Workers and vehicles are present on the road and within the site boundaries. The surrounding area includes green fields and large water ponds.\",\n  \"evidence_visible\": [\n    \"A rectangular plot of land containing a concrete foundation slab with a cross-shaped pattern.\",\n    \"Piles of red bricks and rubble are scattered across the site.\",\n    \"Several individuals are visible standing on the concrete foundation and near the road.\",\n    \"Motorcycles and a blue truck are parked or moving along the road edge.\",\n    \"Construction materials and equipment are visible near the building on the right.\"\n  ],\n  \"unclear\": [\n    \"The specific stage of construction or the final purpose of the building.\",\n    \"The identity or actions of the individuals.\",\n    \"The exact date of the imagery.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of rubble and debris piles alongside a foundation slab, which indicates demolition activity rather than the active general construction project defined for the neighbor.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by visible evidence of a rectangular plot containing a concrete foundation slab with a cross-shaped pattern, surrounded by scattered piles of red bricks and rubble, with workers and vehicles present on the site and adjacent road.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of rubble and debris piles alongside a foundation slab, which indicates demolition activity rather than the active general construction project defined for the neighbor.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by visible evidence of a rectangular plot containing a concrete foundation slab with a cross-shaped pattern, surrounded by scattered piles of red bricks and rubble, with workers and vehicles present on the site and adjacent road.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a rectangular plot with a concrete foundation slab featuring a cross-shaped pattern, surrounded by scattered red bricks and rubble. Workers and vehicles are visible on the site and the adjacent road, supporting the description of a demolition or construction event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows an active construction or demolition site with visible materials like bricks and rubble, a concrete foundation, and workers/vehicles present. This supports the claim of an active general construction project.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a rectangular plot with a concrete foundation slab featuring a cross-shaped pattern, surrounded by scattered red bricks and rubble. Workers and vehicles are visible on the site and the adjacent road, supporting the description of a demolition or construction event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows an active construction or demolition site with visible materials like bricks and rubble, a concrete foundation, and workers/vehicles present. This supports the claim of an active general construction project.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

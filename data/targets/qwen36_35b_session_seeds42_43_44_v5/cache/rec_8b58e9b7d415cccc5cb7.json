@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8b58e9b7d415cccc5cb7",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-14231-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-14231-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with residential houses, paved roads, and agricultural plots containing green crops and bare soil.",
+      "Houses feature varied roofing materials including red tiles, grey tiles, and blue corrugated metal.",
+      "Vegetation includes dormant trees and cultivated fields."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of a specific residential courtyard located within the broader settlement shown in the context image.",
+      "The red roof visible in the bottom-left corner of the crop corresponds to the red-roofed house situated in the lower-middle section of the context image.",
+      "The white building with the grey roof in the crop matches the structure located immediately to the right of the red-roofed house in the context view."
+    ],
+    "description": "The context image displays a rural village with mixed housing and agricultural land. The crop image provides a detailed view of a specific residential courtyard, showing a red-roofed house, a white building, and a walled yard containing a green tarp-covered object and a small structure. The spatial arrangement confirms the crop is a zoomed-in section of the wider settlement.",
+    "evidence_visible": [
+      "A walled courtyard with grey paving or concrete flooring.",
+      "A pile of materials covered by a bright green mesh or tarp.",
+      "A small, rectangular structure with a grey, possibly corrugated, roof.",
+      "A red-tiled roof in the foreground.",
+      "A white building with a grey roof adjacent to the courtyard.",
+      "A low wall separating the courtyard from the adjacent property."
+    ],
+    "unclear": [
+      "The specific contents of the green tarp-covered pile.",
+      "The function of the small grey-roofed structure.",
+      "The identity of any persons or vehicles.",
+      "The exact legal status or ownership of the property."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with residential houses, paved roads, and agricultural plots containing green crops and bare soil.\",\n    \"Houses feature varied roofing materials including red tiles, grey tiles, and blue corrugated metal.\",\n    \"Vegetation includes dormant trees and cultivated fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of a specific residential courtyard located within the broader settlement shown in the context image.\",\n    \"The red roof visible in the bottom-left corner of the crop corresponds to the red-roofed house situated in the lower-middle section of the context image.\",\n    \"The white building with the grey roof in the crop matches the structure located immediately to the right of the red-roofed house in the context view.\"\n  ],\n  \"description\": \"The context image displays a rural village with mixed housing and agricultural land. The crop image provides a detailed view of a specific residential courtyard, showing a red-roofed house, a white building, and a walled yard containing a green tarp-covered object and a small structure. The spatial arrangement confirms the crop is a zoomed-in section of the wider settlement.\",\n  \"evidence_visible\": [\n    \"A walled courtyard with grey paving or concrete flooring.\",\n    \"A pile of materials covered by a bright green mesh or tarp.\",\n    \"A small, rectangular structure with a grey, possibly corrugated, roof.\",\n    \"A red-tiled roof in the foreground.\",\n    \"A white building with a grey roof adjacent to the courtyard.\",\n    \"A low wall separating the courtyard from the adjacent property.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the green tarp-covered pile.\",\n    \"The function of the small grey-roofed structure.\",\n    \"The identity of any persons or vehicles.\",\n    \"The exact legal status or ownership of the property.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a pile of materials covered by a bright green mesh or tarp within a walled courtyard.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a pile of materials covered by a bright green mesh or tarp within a walled courtyard.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a pile of materials covered by a bright green mesh or tarp located within a walled courtyard area. This visual evidence directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a pile of materials covered by a green mesh, but it does not show any bare soil or ground surface where protective covering is visibly incomplete. The claim of 'incomplete soil cover' is not supported by the visual content.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a pile of materials covered by a bright green mesh or tarp located within a walled courtyard area. This visual evidence directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a pile of materials covered by a green mesh, but it does not show any bare soil or ground surface where protective covering is visibly incomplete. The claim of 'incomplete soil cover' is not supported by the visual content.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

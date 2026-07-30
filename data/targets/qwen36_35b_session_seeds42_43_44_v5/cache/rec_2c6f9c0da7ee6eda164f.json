@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_2c6f9c0da7ee6eda164f",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1015-7668-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1015-7668-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a large industrial building with a red roof and white walls on the left.",
+      "Extensive agricultural fields with yellow-green crops in the foreground and background.",
+      "A paved road runs horizontally across the upper section.",
+      "Several small residential structures with grey roofs are scattered among trees and plots.",
+      "A distinct green rectangular object is visible on a patch of bare soil near a house."
+    ],
+    "cross_view_relations": [
+      "The green rectangular object seen in the wide context image is the primary subject of the cropped evidence image.",
+      "The evidence image provides a closer view of the object's position relative to the adjacent grey-roofed house and surrounding vegetation."
+    ],
+    "description": "The images show a rural area with a large factory and agricultural fields. A green rectangular sheet covers a patch of bare ground near a small house. The evidence crop confirms the object's location and color but does not reveal its contents or specific function.",
+    "evidence_visible": [
+      "A bright green, rectangular sheet or tarp is laid flat on a patch of brown, tilled earth.",
+      "The sheet is positioned next to a small building with a grey tiled roof and a low red brick wall.",
+      "Surrounding vegetation includes green bushes and trees.",
+      "The ground appears to be a garden plot or small agricultural field."
+    ],
+    "unclear": [
+      "The specific material of the green sheet (e.g., plastic, fabric, mesh).",
+      "The contents or purpose of the covered area.",
+      "The exact type of crops in the surrounding fields.",
+      "The identity or ownership of the buildings."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a large industrial building with a red roof and white walls on the left.\",\n    \"Extensive agricultural fields with yellow-green crops in the foreground and background.\",\n    \"A paved road runs horizontally across the upper section.\",\n    \"Several small residential structures with grey roofs are scattered among trees and plots.\",\n    \"A distinct green rectangular object is visible on a patch of bare soil near a house.\"\n  ],\n  \"cross_view_relations\": [\n    \"The green rectangular object seen in the wide context image is the primary subject of the cropped evidence image.\",\n    \"The evidence image provides a closer view of the object's position relative to the adjacent grey-roofed house and surrounding vegetation.\"\n  ],\n  \"description\": \"The images show a rural area with a large factory and agricultural fields. A green rectangular sheet covers a patch of bare ground near a small house. The evidence crop confirms the object's location and color but does not reveal its contents or specific function.\",\n  \"evidence_visible\": [\n    \"A bright green, rectangular sheet or tarp is laid flat on a patch of brown, tilled earth.\",\n    \"The sheet is positioned next to a small building with a grey tiled roof and a low red brick wall.\",\n    \"Surrounding vegetation includes green bushes and trees.\",\n    \"The ground appears to be a garden plot or small agricultural field.\"\n  ],\n  \"unclear\": [\n    \"The specific material of the green sheet (e.g., plastic, fabric, mesh).\",\n    \"The contents or purpose of the covered area.\",\n    \"The exact type of crops in the surrounding fields.\",\n    \"The identity or ownership of the buildings.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the soil patch by the green sheet; the sheet fully obscures the ground beneath it, whereas incomplete soil cover would show exposed soil areas.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a distinct green rectangular sheet laid flat on a patch of bare, tilled earth adjacent to a small residential structure.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the soil patch by the green sheet; the sheet fully obscures the ground beneath it, whereas incomplete soil cover would show exposed soil areas.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a distinct green rectangular sheet laid flat on a patch of bare, tilled earth adjacent to a small residential structure.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a green rectangular sheet (netting) laid flat on a patch of bare, tilled earth adjacent to a small residential structure. This visual evidence directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a patch of bare soil where a green protective sheet is laid out, but it does not cover the entire area. The soil surrounding the sheet is visible and uncovered, indicating that the protective covering is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a green rectangular sheet (netting) laid flat on a patch of bare, tilled earth adjacent to a small residential structure. This visual evidence directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a patch of bare soil where a green protective sheet is laid out, but it does not cover the entire area. The soil surrounding the sheet is visible and uncovered, indicating that the protective covering is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

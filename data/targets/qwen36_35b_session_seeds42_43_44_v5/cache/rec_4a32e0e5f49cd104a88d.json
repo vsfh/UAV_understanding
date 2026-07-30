@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4a32e0e5f49cd104a88d",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/collapsed_house_wall/original/1023-7343-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/collapsed_house_wall/cropped/1023-7343-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement surrounded by agricultural fields.",
+      "Large rectangular greenhouses with white plastic sheeting in the upper right.",
+      "Yellow-green crops covering the majority of the open land.",
+      "A cluster of multi-story residential buildings with white facades and grey tiled roofs.",
+      "Narrow paved roads and dirt paths connecting the structures.",
+      "Vegetation including trees and small garden plots interspersed among the buildings."
+    ],
+    "cross_view_relations": [
+      "The second image is a high-resolution crop of the central building cluster visible in the first image.",
+      "The long, linear arrangement of the white buildings is consistent across both views.",
+      "The surrounding vegetation and adjacent structures in the crop match the context of the wider image."
+    ],
+    "description": "Aerial imagery of a rural village featuring a row of white, multi-story residential buildings with grey tiled roofs. The structures are surrounded by yellow-green agricultural fields and greenhouses. The detailed view confirms the linear layout and architectural style of the housing cluster within the agricultural landscape.",
+    "evidence_visible": [
+      "Close-up of a row of connected, multi-story buildings with white walls and grey pitched roofs.",
+      "Roof details include visible tiles and some blue tarpaulin or plastic sheeting on one section.",
+      "A small, rectangular blue pool or water feature is visible on a rooftop terrace.",
+      "Surrounding vegetation includes dense green trees and smaller garden plots.",
+      "A dirt path runs alongside the buildings.",
+      "Construction materials appear to be concrete and brick with tiled roofing."
+    ],
+    "unclear": [
+      "Exact number of floors in each building unit.",
+      "Specific type of crop in the surrounding fields.",
+      "Occupancy status of the buildings.",
+      "Purpose of the blue tarp on the roof."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement surrounded by agricultural fields.\",\n    \"Large rectangular greenhouses with white plastic sheeting in the upper right.\",\n    \"Yellow-green crops covering the majority of the open land.\",\n    \"A cluster of multi-story residential buildings with white facades and grey tiled roofs.\",\n    \"Narrow paved roads and dirt paths connecting the structures.\",\n    \"Vegetation including trees and small garden plots interspersed among the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a high-resolution crop of the central building cluster visible in the first image.\",\n    \"The long, linear arrangement of the white buildings is consistent across both views.\",\n    \"The surrounding vegetation and adjacent structures in the crop match the context of the wider image.\"\n  ],\n  \"description\": \"Aerial imagery of a rural village featuring a row of white, multi-story residential buildings with grey tiled roofs. The structures are surrounded by yellow-green agricultural fields and greenhouses. The detailed view confirms the linear layout and architectural style of the housing cluster within the agricultural landscape.\",\n  \"evidence_visible\": [\n    \"Close-up of a row of connected, multi-story buildings with white walls and grey pitched roofs.\",\n    \"Roof details include visible tiles and some blue tarpaulin or plastic sheeting on one section.\",\n    \"A small, rectangular blue pool or water feature is visible on a rooftop terrace.\",\n    \"Surrounding vegetation includes dense green trees and smaller garden plots.\",\n    \"A dirt path runs alongside the buildings.\",\n    \"Construction materials appear to be concrete and brick with tiled roofing.\"\n  ],\n  \"unclear\": [\n    \"Exact number of floors in each building unit.\",\n    \"Specific type of crop in the surrounding fields.\",\n    \"Occupancy status of the buildings.\",\n    \"Purpose of the blue tarp on the roof.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a total loss of structural integrity and the physical collapse of the wall and roof sections, rather than merely visible damage to an otherwise standing structure.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-resolution crop of the central building cluster reveals a long row of white residential structures where the rooflines and upper walls are visibly broken, jagged, and uneven, indicating structural failure and collapse of the masonry.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a total loss of structural integrity and the physical collapse of the wall and roof sections, rather than merely visible damage to an otherwise standing structure.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-resolution crop of the central building cluster reveals a long row of white residential structures where the rooflines and upper walls are visibly broken, jagged, and uneven, indicating structural failure and collapse of the masonry.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-resolution crop of the central building cluster shows a long row of white residential structures. The rooflines and upper walls are visibly broken, jagged, and uneven, with exposed masonry and missing sections, which directly supports the claim of structural failure and collapse.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image clearly shows a building with significant structural damage, including broken walls and exposed interiors, which supports the claim of visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-resolution crop of the central building cluster shows a long row of white residential structures. The rooflines and upper walls are visibly broken, jagged, and uneven, with exposed masonry and missing sections, which directly supports the claim of structural failure and collapse.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image clearly shows a building with significant structural damage, including broken walls and exposed interiors, which supports the claim of visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

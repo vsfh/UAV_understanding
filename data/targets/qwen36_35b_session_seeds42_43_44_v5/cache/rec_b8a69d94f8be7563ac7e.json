@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b8a69d94f8be7563ac7e",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-05-30_2025-06-30/collapsed_house_wall/original/0603-3473-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-05-30_2025-06-30/collapsed_house_wall/cropped/0603-3473-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multi-story residential buildings featuring red and grey roofs, adjacent to large agricultural fields with visible crop rows and harvested stubble.",
+      "A paved road runs diagonally through the scene, separating the housing cluster from the fields.",
+      "Vegetation and small garden plots are visible between the buildings."
+    ],
+    "cross_view_relations": [
+      "The zoomed crop focuses on a specific cluster of buildings visible in the upper-left quadrant of the wide context image.",
+      "The crop provides a closer view of the residential structures and the immediate surrounding terrain, including a small stream or drainage ditch.",
+      "The wide image confirms the proximity of these buildings to the agricultural fields seen in the foreground of the crop."
+    ],
+    "description": "Aerial imagery of a rural area showing residential buildings with red and grey roofs adjacent to agricultural fields. The zoomed view highlights a specific cluster of houses, a small stream, and surrounding vegetation, confirming the settlement's location within the broader agricultural landscape.",
+    "evidence_visible": [
+      "Close-up of residential buildings with red and grey pitched roofs.",
+      "Blue solar panels installed on the roof of a building to the right.",
+      "A small stream or drainage ditch running alongside the buildings.",
+      "Green vegetation and small garden plots near the houses.",
+      "A blue car parked on a paved surface near the buildings.",
+      "Construction materials or debris visible near the base of the buildings."
+    ],
+    "unclear": [
+      "Exact number of residents or occupants.",
+      "Specific type of crops in the fields.",
+      "Legal status or ownership of the properties.",
+      "Exact date of the image capture."
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"Aerial view of a rural settlement with multi-story residential buildings featuring red and grey roofs, adjacent to large agricultural fields with visible crop rows and harvested stubble.\",\n\"A paved road runs diagonally through the scene, separating the housing cluster from the fields.\",\n\"Vegetation and small garden plots are visible between the buildings.\"\n],\n\"cross_view_relations\": [\n\"The zoomed crop focuses on a specific cluster of buildings visible in the upper-left quadrant of the wide context image.\",\n\"The crop provides a closer view of the residential structures and the immediate surrounding terrain, including a small stream or drainage ditch.\",\n\"The wide image confirms the proximity of these buildings to the agricultural fields seen in the foreground of the crop.\"\n],\n\"description\": \"Aerial imagery of a rural area showing residential buildings with red and grey roofs adjacent to agricultural fields. The zoomed view highlights a specific cluster of houses, a small stream, and surrounding vegetation, confirming the settlement's location within the broader agricultural landscape.\",\n\"evidence_visible\": [\n\"Close-up of residential buildings with red and grey pitched roofs.\",\n\"Blue solar panels installed on the roof of a building to the right.\",\n\"A small stream or drainage ditch running alongside the buildings.\",\n\"Green vegetation and small garden plots near the houses.\",\n\"A blue car parked on a paved surface near the buildings.\",\n\"Construction materials or debris visible near the base of the buildings.\"\n],\n\"unclear\": [\n\"Exact number of residents or occupants.\",\n\"Specific type of crops in the fields.\",\n\"Legal status or ownership of the properties.\",\n\"Exact date of the image capture.\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the severity of the structural failure; the image shows a total loss of vertical integrity and a collapse of the wall structure, rather than merely visible surface damage or partial structural compromise.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the zoomed evidence image clearly shows a residential building with a red roof that has structurally failed, with the wall leaning severely and the structure appearing to have partially collapsed onto the ground.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the severity of the structural failure; the image shows a total loss of vertical integrity and a collapse of the wall structure, rather than merely visible surface damage or partial structural compromise.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the zoomed evidence image clearly shows a residential building with a red roof that has structurally failed, with the wall leaning severely and the structure appearing to have partially collapsed onto the ground.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a residential building with a red roof that has structurally failed, with the wall leaning severely and the structure appearing to have partially collapsed onto the ground.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image clearly shows visible structural damage to a building, specifically a house with a red roof that is leaning and appears to have collapsed.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a residential building with a red roof that has structurally failed, with the wall leaning severely and the structure appearing to have partially collapsed onto the ground.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image clearly shows visible structural damage to a building, specifically a house with a red roof that is leaning and appears to have collapsed.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

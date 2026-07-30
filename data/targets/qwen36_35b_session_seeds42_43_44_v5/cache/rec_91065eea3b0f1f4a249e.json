@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_91065eea3b0f1f4a249e",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0215-0530-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0215-0530-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with dense residential structures featuring grey tiled and flat concrete roofs.",
+      "Surrounding agricultural fields displaying green crops and yellow flowering plants.",
+      "A rectangular blue surface, likely a basketball court, located in an open area near the center.",
+      "Solar panels installed on multiple rooftops.",
+      "Narrow paved roads and dirt paths connecting the buildings."
+    ],
+    "cross_view_relations": [
+      "The local crop view corresponds to the cluster of buildings and gardens located in the lower-left quadrant of the wide context image.",
+      "The specific garden plot with yellow flowers visible in the crop is identifiable within the broader settlement layout."
+    ],
+    "description": "The images depict a rural village with mixed residential architecture and adjacent agricultural land. The wide view shows the settlement's layout, including a blue court and solar panels, while the close-up highlights specific garden plots with green and yellow vegetation situated between houses.",
+    "evidence_visible": [
+      "A rectangular garden plot containing dense green leafy vegetables and a section of bright yellow flowering plants.",
+      "A low red brick enclosure containing white sacks and indistinct dark objects.",
+      "A white building with a grey tiled roof adjacent to the garden.",
+      "A flat concrete rooftop in the foreground with a small glass-enclosed structure.",
+      "A narrow dirt path separating the garden from the buildings."
+    ],
+    "unclear": [
+      "The specific species of the green and yellow plants.",
+      "The contents of the white sacks in the brick enclosure.",
+      "The identity or activity of any persons present."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with dense residential structures featuring grey tiled and flat concrete roofs.\",\n    \"Surrounding agricultural fields displaying green crops and yellow flowering plants.\",\n    \"A rectangular blue surface, likely a basketball court, located in an open area near the center.\",\n    \"Solar panels installed on multiple rooftops.\",\n    \"Narrow paved roads and dirt paths connecting the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view corresponds to the cluster of buildings and gardens located in the lower-left quadrant of the wide context image.\",\n    \"The specific garden plot with yellow flowers visible in the crop is identifiable within the broader settlement layout.\"\n  ],\n  \"description\": \"The images depict a rural village with mixed residential architecture and adjacent agricultural land. The wide view shows the settlement's layout, including a blue court and solar panels, while the close-up highlights specific garden plots with green and yellow vegetation situated between houses.\",\n  \"evidence_visible\": [\n    \"A rectangular garden plot containing dense green leafy vegetables and a section of bright yellow flowering plants.\",\n    \"A low red brick enclosure containing white sacks and indistinct dark objects.\",\n    \"A white building with a grey tiled roof adjacent to the garden.\",\n    \"A flat concrete rooftop in the foreground with a small glass-enclosed structure.\",\n    \"A narrow dirt path separating the garden from the buildings.\"\n  ],\n  \"unclear\": [\n    \"The specific species of the green and yellow plants.\",\n    \"The contents of the white sacks in the brick enclosure.\",\n    \"The identity or activity of any persons present.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of a low brick enclosure containing debris and sacks, which is distinct from the structural assembly or scaffolding typically associated with an active general construction project.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a low red brick enclosure containing white sacks and indistinct dark objects, which indicates a state of active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of a low brick enclosure containing debris and sacks, which is distinct from the structural assembly or scaffolding typically associated with an active general construction project.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a low red brick enclosure containing white sacks and indistinct dark objects, which indicates a state of active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a low red brick enclosure containing white sacks and dark objects, but there is no visual evidence of an active demolition event (e.g., debris piles, heavy machinery, or structural collapse). The scene appears to be a static storage or waste area within a residential compound.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event building demolition is supported by the visible presence of a low red brick enclosure containing white sacks and indistinct dark objects, which indicates a state of active or recent demolition."
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a static residential scene with no signs of active construction. There are no cranes, scaffolding, unfinished structures, or construction materials visible.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event project construction is supported: visible evidence shows an active general construction project."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a low red brick enclosure containing white sacks and dark objects, but there is no visual evidence of an active demolition event (e.g., debris piles, heavy machinery, or structural collapse). The scene appears to be a static storage or waste area within a residential compound.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event building demolition is supported by the visible presence of a low red brick enclosure containing white sacks and indistinct dark objects, which indicates a state of active or recent demolition.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a static residential scene with no signs of active construction. There are no cranes, scaffolding, unfinished structures, or construction materials visible.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event project construction is supported: visible evidence shows an active general construction project.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

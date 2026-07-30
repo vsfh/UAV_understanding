@@ -1,0 +1,58 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8ca3cca3594e06543b41",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/collapsed_house_wall/original/0405-0561-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/collapsed_house_wall/cropped/0405-0561-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to a wide waterway.",
+      "Large rectangular plots of green crops dominate the center.",
+      "Yellow flowering crops (likely rapeseed) are visible near the water's edge.",
+      "Houses with grey tiled roofs line the left side and the waterfront.",
+      "Solar panels are installed on rooftops in the lower right.",
+      "A white vehicle is parked on the road near the bottom center."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a zoomed-in view of the cluster of buildings and solar panels located in the lower right quadrant of the context image.",
+      "The yellow flowering crops in the evidence view correspond to the yellow patches seen along the riverbank in the context view.",
+      "The white vehicle visible in the context view is also visible in the top right of the evidence crop."
+    ],
+    "description": "The images show a rural area with green fields, yellow flowers, and houses along a river. The evidence crop zooms in on a specific cluster of buildings in the lower right, highlighting rooftop solar panels and adjacent yellow crops, confirming the spatial location within the wider scene.",
+    "evidence_visible": [
+      "Close-up of a cluster of buildings with grey tiled roofs.",
+      "Multiple solar panel arrays installed on flat and sloped rooftops.",
+      "Bright yellow flowering plants growing next to the buildings.",
+      "A white car parked on the paved road to the right.",
+      "A concrete structure with a circular opening is visible between the buildings."
+    ],
+    "unclear": [
+      "The specific type of green crop in the main fields.",
+      "The exact function of the concrete structure with the circular opening.",
+      "The number of people or specific activities occurring on the rooftops."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to a wide waterway.\",\n    \"Large rectangular plots of green crops dominate the center.\",\n    \"Yellow flowering crops (likely rapeseed) are visible near the water's edge.\",\n    \"Houses with grey tiled roofs line the left side and the waterfront.\",\n    \"Solar panels are installed on rooftops in the lower right.\",\n    \"A white vehicle is parked on the road near the bottom center.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a zoomed-in view of the cluster of buildings and solar panels located in the lower right quadrant of the context image.\",\n    \"The yellow flowering crops in the evidence view correspond to the yellow patches seen along the riverbank in the context view.\",\n    \"The white vehicle visible in the context view is also visible in the top right of the evidence crop.\"\n  ],\n  \"description\": \"The images show a rural area with green fields, yellow flowers, and houses along a river. The evidence crop zooms in on a specific cluster of buildings in the lower right, highlighting rooftop solar panels and adjacent yellow crops, confirming the spatial location within the wider scene.\",\n  \"evidence_visible\": [\n    \"Close-up of a cluster of buildings with grey tiled roofs.\",\n    \"Multiple solar panel arrays installed on flat and sloped rooftops.\",\n    \"Bright yellow flowering plants growing next to the buildings.\",\n    \"A white car parked on the paved road to the right.\",\n    \"A concrete structure with a circular opening is visible between the buildings.\"\n  ],\n  \"unclear\": [\n    \"The specific type of green crop in the main fields.\",\n    \"The exact function of the concrete structure with the circular opening.\",\n    \"The number of people or specific activities occurring on the rooftops.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite_failed_attempts": [
+    {
+      "attempt": 0,
+      "raw": "```json\n{\n  \"events\": [\n    \"collapsed_house_wall\"\n  ],\n  \"evidence\": \"The event collapsed house wall is supported: the evidence image shows a cluster of buildings where a wall has visibly collapsed, creating a gap between the structures.\",\n  \"factors\": {},\n  \"uncertain\": false,\n  \"distinction\": \"The distinction is the specific nature of the structural failure; the evidence shows a complete collapse of a wall section, whereas the neighbor definition refers to general visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence image shows a cluster of buildings where a wall has visibly collapsed, creating a gap between the structures.\",\n    \"factors\": {},\n    \"uncertain\": false\n  },\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}\n```",
+      "error": "Rewrite keys must be ['counterfactual_target', 'distinction', 'missing_required_factors', 'target'], got ['counterfactual_target', 'distinction', 'events', 'evidence', 'factors', 'missing_required_factors', 'target', 'uncertain']"
+    },
+    {
+      "attempt": 1,
+      "raw": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction is the specific nature of the structural failure; the evidence shows a complete collapse of a wall section, whereas the neighbor definition refers to general visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence image shows a cluster of buildings where a wall has visibly collapsed, creating a gap between the structures.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+      "error": "Rewrite distinction must explicitly name both event labels"
+    },
+    {
+      "attempt": 2,
+      "raw": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction is the specific nature of the structural failure; the evidence shows a complete collapse of a wall section, whereas the neighbor definition refers to general visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence image shows a cluster of buildings where a wall has visibly collapsed, creating a gap between the structures.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+      "error": "Rewrite distinction must explicitly name both event labels"
+    }
+  ]
+}

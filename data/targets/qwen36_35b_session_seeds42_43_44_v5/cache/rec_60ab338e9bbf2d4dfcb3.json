@@ -1,0 +1,78 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_60ab338e9bbf2d4dfcb3",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/original/0219-0865-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/cropped/0219-0865-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with rectangular agricultural fields, some green and some brown, separated by paved roads and utility poles.",
+      "A cluster of residential buildings in the foreground with varied roof colors (red, grey, blue) and a large array of solar panels on a flat roof.",
+      "A white vehicle is visible on the road to the right."
+    ],
+    "cross_view_relations": [
+      "The zoomed-in crop corresponds to the residential cluster in the bottom-right corner of the wide context image.",
+      "The building with the large solar panel array in the crop is the same structure visible in the bottom-right of the context view.",
+      "The green vegetation patch to the right of the buildings in the crop matches the green area adjacent to the houses in the context view."
+    ],
+    "description": "The images show a rural residential area adjacent to agricultural fields. A building with a large solar panel array is visible in both views. The zoomed-in crop details the rooftops, including grey tiles, red tiles, and a blue corrugated roof, along with a green garden patch and a parked scooter.",
+    "evidence_visible": [
+      "Close-up of a building with a large, grid-like solar panel array mounted on a flat roof.",
+      "Adjacent structures feature grey and red tiled roofs.",
+      "A patch of green leafy vegetation is visible next to the buildings.",
+      "A paved courtyard area contains a parked scooter and some indistinct items.",
+      "A small solar water heater is visible on a lower roof section."
+    ],
+    "unclear": [
+      "The specific type of crops in the fields or garden.",
+      "The exact number of solar panels.",
+      "The identity of the person or object near the scooter.",
+      "The legal status or ownership of the property."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape with rectangular agricultural fields, some green and some brown, separated by paved roads and utility poles.\",\n    \"A cluster of residential buildings in the foreground with varied roof colors (red, grey, blue) and a large array of solar panels on a flat roof.\",\n    \"A white vehicle is visible on the road to the right.\"\n  ],\n  \"cross_view_relations\": [\n    \"The zoomed-in crop corresponds to the residential cluster in the bottom-right corner of the wide context image.\",\n    \"The building with the large solar panel array in the crop is the same structure visible in the bottom-right of the context view.\",\n    \"The green vegetation patch to the right of the buildings in the crop matches the green area adjacent to the houses in the context view.\"\n  ],\n  \"description\": \"The images show a rural residential area adjacent to agricultural fields. A building with a large solar panel array is visible in both views. The zoomed-in crop details the rooftops, including grey tiles, red tiles, and a blue corrugated roof, along with a green garden patch and a parked scooter.\",\n  \"evidence_visible\": [\n    \"Close-up of a building with a large, grid-like solar panel array mounted on a flat roof.\",\n    \"Adjacent structures feature grey and red tiled roofs.\",\n    \"A patch of green leafy vegetation is visible next to the buildings.\",\n    \"A paved courtyard area contains a parked scooter and some indistinct items.\",\n    \"A small solar water heater is visible on a lower roof section.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the fields or garden.\",\n    \"The exact number of solar panels.\",\n    \"The identity of the person or object near the scooter.\",\n    \"The legal status or ownership of the property.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a complete collapse of a wall/roof section rather than general damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the zoomed-in evidence image shows a building with a visibly collapsed section of its roof and wall structure, exposing the interior and debris, adjacent to a building with a large solar panel array.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a complete collapse of a wall/roof section rather than general damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the zoomed-in evidence image shows a building with a visibly collapsed section of its roof and wall structure, exposing the interior and debris, adjacent to a building with a large solar panel array.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification_failed_attempts": [
+    {
+      "attempt": 0,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image shows a building with a damaged roof (missing tiles, exposed structure) and a collapsed wall section, adjacent to a building with a large solar panel array. This matches the description in statement A.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image clearly shows visible structural damage to a building, including a collapsed wall and damaged roof. This directly supports the claim in statement B.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+      "error": "positive verdict contains cross-candidate meta-commentary"
+    },
+    {
+      "attempt": 1,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image shows a building with a damaged roof (missing tiles, exposed structure) and a collapsed wall section, adjacent to a building with a large solar panel array. This matches the description in statement A.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image clearly shows visible structural damage to a building, including a collapsed wall and damaged roof. This directly supports the claim in statement B.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+      "error": "positive verdict contains cross-candidate meta-commentary"
+    },
+    {
+      "attempt": 2,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image shows a building with a damaged roof (missing tiles, exposed structure) and a collapsed wall section, adjacent to a building with a large solar panel array. This matches the description in statement A.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image clearly shows visible structural damage to a building, including a collapsed wall and damaged roof. This directly supports the claim in statement B.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+      "error": "positive verdict contains cross-candidate meta-commentary"
+    }
+  ]
+}

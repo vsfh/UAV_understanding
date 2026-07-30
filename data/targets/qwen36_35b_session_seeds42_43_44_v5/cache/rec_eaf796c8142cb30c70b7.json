@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_eaf796c8142cb30c70b7",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1016-13227-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1016-13227-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area adjacent to a wide, murky river.",
+      "A paved road runs parallel to the river, separated by a dense line of trees.",
+      "A cluster of buildings with blue and grey roofs is situated near a pond and agricultural plots.",
+      "A dirt path intersects the paved road near the buildings."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of a specific section of the dirt path visible in the main context image.",
+      "The objects in the crop correspond to the two distinct piles located on the dirt path near the tree line in the wide shot."
+    ],
+    "description": "The wide image shows a rural landscape with a river, road, and buildings. The linked crop provides a close-up of two material piles on a dirt path: one covered in green tarp and another in blue and white tarps, situated next to a wooded area.",
+    "evidence_visible": [
+      "Two distinct piles of material are situated on a dirt surface.",
+      "The left pile is covered by a green tarp.",
+      "The right pile is covered by blue and white tarps.",
+      "The ground surrounding the piles appears to be dirt or gravel with scattered debris.",
+      "Vegetation and trees are visible in the background of the crop."
+    ],
+    "unclear": [
+      "The specific contents of the piles under the tarps.",
+      "The exact nature of the material (e.g., construction waste, agricultural produce).",
+      "The ownership or legal status of the materials."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural area adjacent to a wide, murky river.\",\n    \"A paved road runs parallel to the river, separated by a dense line of trees.\",\n    \"A cluster of buildings with blue and grey roofs is situated near a pond and agricultural plots.\",\n    \"A dirt path intersects the paved road near the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of a specific section of the dirt path visible in the main context image.\",\n    \"The objects in the crop correspond to the two distinct piles located on the dirt path near the tree line in the wide shot.\"\n  ],\n  \"description\": \"The wide image shows a rural landscape with a river, road, and buildings. The linked crop provides a close-up of two material piles on a dirt path: one covered in green tarp and another in blue and white tarps, situated next to a wooded area.\",\n  \"evidence_visible\": [\n    \"Two distinct piles of material are situated on a dirt surface.\",\n    \"The left pile is covered by a green tarp.\",\n    \"The right pile is covered by blue and white tarps.\",\n    \"The ground surrounding the piles appears to be dirt or gravel with scattered debris.\",\n    \"Vegetation and trees are visible in the background of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the piles under the tarps.\",\n    \"The exact nature of the material (e.g., construction waste, agricultural produce).\",\n    \"The ownership or legal status of the materials.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the material piles by tarps; the tarps fully enclose the contents of both piles, whereas incomplete soil cover would imply visible gaps or exposed soil within the protected area.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows two distinct piles of material situated on a dirt path, where the left pile is fully covered by a green tarp and the right pile is covered by blue and white tarps, consistent with exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the material piles by tarps; the tarps fully enclose the contents of both piles, whereas incomplete soil cover would imply visible gaps or exposed soil within the protected area.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows two distinct piles of material situated on a dirt path, where the left pile is fully covered by a green tarp and the right pile is covered by blue and white tarps, consistent with exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence shows two distinct piles of material (likely hay or crops) covered by tarps on a dirt path. The statement incorrectly identifies these as 'bare soil netting' and 'dust-control netting'. The visual content contradicts the claim of bare soil; instead, it shows mounds of material under tarps.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The piles are bare soil.",
+        "The material is dust-control netting."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows two piles of material covered by tarps. The covering is not a continuous sheet over the ground but rather covers specific mounds, leaving the surrounding dirt path and parts of the piles exposed. This visually supports the description of 'incomplete soil cover' or incomplete covering of the material piles.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence shows two distinct piles of material (likely hay or crops) covered by tarps on a dirt path. The statement incorrectly identifies these as 'bare soil netting' and 'dust-control netting'. The visual content contradicts the claim of bare soil; instead, it shows mounds of material under tarps.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The piles are bare soil.\",\n      \"The material is dust-control netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows two piles of material covered by tarps. The covering is not a continuous sheet over the ground but rather covers specific mounds, leaving the surrounding dirt path and parts of the piles exposed. This visually supports the description of 'incomplete soil cover' or incomplete covering of the material piles.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

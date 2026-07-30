@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_9d49f94a7e05d5701a4a",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0809-3236-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0809-3236-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape dominated by large, rectangular plots of vibrant green crops.",
+      "A cluster of residential buildings with varied roof colors (grey, red, blue) is situated in the lower right quadrant.",
+      "A paved road runs horizontally across the middle of the frame, separating the main housing cluster from the fields to the north.",
+      "A smaller, single-story structure with a grey roof is visible near the road, adjacent to the fields."
+    ],
+    "cross_view_relations": [
+      "The local crop view corresponds to the agricultural fields seen in the context image.",
+      "The grey-roofed structure in the local view matches the building located near the road in the context image.",
+      "The curved concrete path in the local view connects to the road network visible in the context image."
+    ],
+    "description": "The images show a rural area with extensive green crop fields and a cluster of houses. A local view highlights a specific field section with visible yellowing patches and a small building with a grey roof near a curved concrete path.",
+    "evidence_visible": [
+      "Close-up of a green crop field showing distinct rows and a large, irregular patch of yellowing vegetation.",
+      "A small, single-story building with a grey tiled roof and red brick walls is visible next to the field.",
+      "A curved concrete path runs alongside the building and field.",
+      "Vegetation and trees are present near the building and along the path."
+    ],
+    "unclear": [
+      "The specific type of crop is unclear.",
+      "The cause of the yellowing in the crop is unclear.",
+      "The exact function of the small building is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape dominated by large, rectangular plots of vibrant green crops.\",\n    \"A cluster of residential buildings with varied roof colors (grey, red, blue) is situated in the lower right quadrant.\",\n    \"A paved road runs horizontally across the middle of the frame, separating the main housing cluster from the fields to the north.\",\n    \"A smaller, single-story structure with a grey roof is visible near the road, adjacent to the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view corresponds to the agricultural fields seen in the context image.\",\n    \"The grey-roofed structure in the local view matches the building located near the road in the context image.\",\n    \"The curved concrete path in the local view connects to the road network visible in the context image.\"\n  ],\n  \"description\": \"The images show a rural area with extensive green crop fields and a cluster of houses. A local view highlights a specific field section with visible yellowing patches and a small building with a grey roof near a curved concrete path.\",\n  \"evidence_visible\": [\n    \"Close-up of a green crop field showing distinct rows and a large, irregular patch of yellowing vegetation.\",\n    \"A small, single-story building with a grey tiled roof and red brick walls is visible next to the field.\",\n    \"A curved concrete path runs alongside the building and field.\",\n    \"Vegetation and trees are present near the building and along the path.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop is unclear.\",\n    \"The cause of the yellowing in the crop is unclear.\",\n    \"The exact function of the small building is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is not visible; the image shows a standing structure without clear evidence of a wall collapse or structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the local view shows a small single-story building with a grey tiled roof and red brick walls situated next to a curved concrete path and crop field.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is not visible; the image shows a standing structure without clear evidence of a wall collapse or structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the local view shows a small single-story building with a grey tiled roof and red brick walls situated next to a curved concrete path and crop field.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The local view clearly shows a small single-story building with a grey tiled roof and red brick walls situated next to a curved concrete path and crop field. This matches the description in the statement exactly.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible structural damage to a building. In the provided images, all buildings appear structurally intact. There is no visible evidence of damage, collapse, or structural failure.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The local view clearly shows a small single-story building with a grey tiled roof and red brick walls situated next to a curved concrete path and crop field. This matches the description in the statement exactly.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible structural damage to a building. In the provided images, all buildings appear structurally intact. There is no visible evidence of damage, collapse, or structural failure.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

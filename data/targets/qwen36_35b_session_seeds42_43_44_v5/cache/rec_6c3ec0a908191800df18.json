@@ -1,0 +1,92 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_6c3ec0a908191800df18",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-07-01_2025-07-31/collapsed_house_wall/original/0701-4012-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-07-01_2025-07-31/collapsed_house_wall/cropped/0701-4012-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with mixed housing styles, including buildings with red, blue, and grey roofs.",
+      "Surrounding agricultural fields, some flooded with water and others covered in bright green algae or vegetation.",
+      "Dense clusters of trees and vegetation interspersed among the structures and fields."
+    ],
+    "cross_view_relations": [
+      "The building in the evidence crop is a single-story structure with a grey tiled roof, matching the architectural style of several buildings in the context image.",
+      "The building is situated in a green, vegetated area adjacent to a paved path, consistent with the layout seen in the wider context view."
+    ],
+    "description": "The context image shows a rural village with varied housing and agricultural fields. The evidence crop isolates a specific single-story building with a grey tiled roof, surrounded by green vegetation and a paved path, which appears to be one of the structures visible in the wider aerial view.",
+    "evidence_visible": [
+      "A single-story rectangular building with a grey tiled roof.",
+      "The building is surrounded by lush green vegetation and trees.",
+      "A paved path runs alongside the building.",
+      "A pile of debris or construction materials is visible near the corner of the building.",
+      "A small brick structure or foundation is visible near the path."
+    ],
+    "unclear": [
+      "The specific use or occupancy status of the building.",
+      "The exact identity of the debris pile.",
+      "The precise location of the building within the larger context image."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with mixed housing styles, including buildings with red, blue, and grey roofs.\",\n    \"Surrounding agricultural fields, some flooded with water and others covered in bright green algae or vegetation.\",\n    \"Dense clusters of trees and vegetation interspersed among the structures and fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The building in the evidence crop is a single-story structure with a grey tiled roof, matching the architectural style of several buildings in the context image.\",\n    \"The building is situated in a green, vegetated area adjacent to a paved path, consistent with the layout seen in the wider context view.\"\n  ],\n  \"description\": \"The context image shows a rural village with varied housing and agricultural fields. The evidence crop isolates a specific single-story building with a grey tiled roof, surrounded by green vegetation and a paved path, which appears to be one of the structures visible in the wider aerial view.\",\n  \"evidence_visible\": [\n    \"A single-story rectangular building with a grey tiled roof.\",\n    \"The building is surrounded by lush green vegetation and trees.\",\n    \"A paved path runs alongside the building.\",\n    \"A pile of debris or construction materials is visible near the corner of the building.\",\n    \"A small brick structure or foundation is visible near the path.\"\n  ],\n  \"unclear\": [\n    \"The specific use or occupancy status of the building.\",\n    \"The exact identity of the debris pile.\",\n    \"The precise location of the building within the larger context image.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a total structural failure of a wall section (collapse) rather than general surface damage or wear.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence crop shows a single-story building with a grey tiled roof where the wall at the corner has visibly collapsed, leaving a pile of debris and exposed brickwork.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a total structural failure of a wall section (collapse) rather than general surface damage or wear.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence crop shows a single-story building with a grey tiled roof where the wall at the corner has visibly collapsed, leaving a pile of debris and exposed brickwork.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a single-story building with a grey tiled roof. At the corner of the building, there is a significant pile of rubble and exposed red brickwork, indicating a collapsed wall. This visual evidence directly supports the description of a collapsed wall, debris, and exposed brickwork.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays a building with a pile of rubble and exposed brickwork at its corner, which constitutes visible structural damage. This supports the general claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a single-story building with a grey tiled roof. At the corner of the building, there is a significant pile of rubble and exposed red brickwork, indicating a collapsed wall. This visual evidence directly supports the description of a collapsed wall, debris, and exposed brickwork.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a building with a pile of rubble and exposed brickwork at its corner, which constitutes visible structural damage. This supports the general claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

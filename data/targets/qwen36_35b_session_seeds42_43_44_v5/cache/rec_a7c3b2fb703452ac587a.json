@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a7c3b2fb703452ac587a",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1026-0553-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1026-0553-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multi-story residential buildings and agricultural fields.",
+      "Fields are predominantly yellow, indicating mature crops, with some patches of green and brown soil.",
+      "A network of paved roads connects the houses and fields.",
+      "Vegetation includes trees and shrubs interspersed among the buildings and fields."
+    ],
+    "cross_view_relations": [
+      "The crop view is a magnified section of the wider context image.",
+      "The specific cluster of buildings and the green mesh fence visible in the crop are located in the central-left area of the context image.",
+      "The spatial arrangement of the houses and the adjacent field matches between the two views."
+    ],
+    "description": "The images show a rural village with houses and yellow fields. The crop highlights a specific area with a green mesh fence and a small plot of tilled earth adjacent to a house, confirming the presence of agricultural activity within the settlement.",
+    "evidence_visible": [
+      "A close-up view of a section of the village.",
+      "A bright green mesh fence or tarp is visible, draped over a structure or fence line.",
+      "A small plot of brown, tilled soil is adjacent to the green mesh.",
+      "Parts of residential buildings with grey and red roofs are visible.",
+      "Trees and bushes are present around the buildings."
+    ],
+    "unclear": [
+      "The specific type of crop in the yellow fields.",
+      "The exact purpose of the green mesh (e.g., construction, agriculture, privacy).",
+      "The identity of any people or vehicles.",
+      "The specific contents of the tilled soil plot."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with multi-story residential buildings and agricultural fields.\",\n    \"Fields are predominantly yellow, indicating mature crops, with some patches of green and brown soil.\",\n    \"A network of paved roads connects the houses and fields.\",\n    \"Vegetation includes trees and shrubs interspersed among the buildings and fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop view is a magnified section of the wider context image.\",\n    \"The specific cluster of buildings and the green mesh fence visible in the crop are located in the central-left area of the context image.\",\n    \"The spatial arrangement of the houses and the adjacent field matches between the two views.\"\n  ],\n  \"description\": \"The images show a rural village with houses and yellow fields. The crop highlights a specific area with a green mesh fence and a small plot of tilled earth adjacent to a house, confirming the presence of agricultural activity within the settlement.\",\n  \"evidence_visible\": [\n    \"A close-up view of a section of the village.\",\n    \"A bright green mesh fence or tarp is visible, draped over a structure or fence line.\",\n    \"A small plot of brown, tilled soil is adjacent to the green mesh.\",\n    \"Parts of residential buildings with grey and red roofs are visible.\",\n    \"Trees and bushes are present around the buildings.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the yellow fields.\",\n    \"The exact purpose of the green mesh (e.g., construction, agriculture, privacy).\",\n    \"The identity of any people or vehicles.\",\n    \"The specific contents of the tilled soil plot.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the green mesh netting itself; the distinction is that the netting is visibly present and deployed over the soil, whereas incomplete soil cover would imply a lack of such protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a plot of exposed brown soil adjacent to a residential building, partially covered by a bright green mesh netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the green mesh netting itself; the distinction is that the netting is visibly present and deployed over the soil, whereas incomplete soil cover would imply a lack of such protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a plot of exposed brown soil adjacent to a residential building, partially covered by a bright green mesh netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a plot of bare brown soil adjacent to a residential building. A bright green mesh netting is visible draped over a portion of this area, partially covering the ground. This matches the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays a plot of soil where a green protective covering (netting) is present but does not fully cover the entire area, leaving significant portions of the brown soil exposed. This supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a plot of bare brown soil adjacent to a residential building. A bright green mesh netting is visible draped over a portion of this area, partially covering the ground. This matches the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a plot of soil where a green protective covering (netting) is present but does not fully cover the entire area, leaving significant portions of the brown soil exposed. This supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

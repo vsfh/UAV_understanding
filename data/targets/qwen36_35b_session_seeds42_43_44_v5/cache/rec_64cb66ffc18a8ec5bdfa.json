@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_64cb66ffc18a8ec5bdfa",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1025-4494-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1025-4494-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of an industrial zone with large warehouse buildings featuring blue roofs in the background.",
+      "A large, undeveloped plot of land with dry, brownish grass and exposed soil.",
+      "A waterway or canal runs along the bottom edge of the frame, bordered by trees and a road.",
+      "Construction activity is concentrated in the lower center of the plot, adjacent to the waterway."
+    ],
+    "cross_view_relations": [
+      "The local crop provides a high-resolution view of the construction site visible in the lower center of the wide context image.",
+      "The spatial relationship confirms the construction site is situated directly next to a bridge crossing the canal.",
+      "The blue hoarding and temporary structures seen in the wide view are clearly defined in the crop."
+    ],
+    "description": "Aerial view of a construction site adjacent to a canal within an industrial area. Visible elements include a large drilling rig, temporary white modular buildings, a blue overhead gantry, and a bridge crossing the water. The surrounding land is undeveloped with dry vegetation.",
+    "evidence_visible": [
+      "A large, dark-colored drilling rig or crane is positioned on the dirt ground.",
+      "Several white, rectangular temporary buildings (likely site offices) are arranged in a row.",
+      "A blue metal gantry structure spans a dirt access road.",
+      "A section of the ground is covered with green mesh netting.",
+      "A blue construction hoarding runs along the edge of the canal.",
+      "A bridge with vehicles (a white van and a dark car) crosses the water.",
+      "Construction materials, including pipes and concrete slabs, are scattered on the site."
+    ],
+    "unclear": [
+      "The specific type of construction work (e.g., foundation, piling) is unclear.",
+      "The identity of the vehicles on the bridge is unclear.",
+      "The purpose of the temporary buildings is unclear.",
+      "The exact date of the image is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of an industrial zone with large warehouse buildings featuring blue roofs in the background.\",\n    \"A large, undeveloped plot of land with dry, brownish grass and exposed soil.\",\n    \"A waterway or canal runs along the bottom edge of the frame, bordered by trees and a road.\",\n    \"Construction activity is concentrated in the lower center of the plot, adjacent to the waterway.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop provides a high-resolution view of the construction site visible in the lower center of the wide context image.\",\n    \"The spatial relationship confirms the construction site is situated directly next to a bridge crossing the canal.\",\n    \"The blue hoarding and temporary structures seen in the wide view are clearly defined in the crop.\"\n  ],\n  \"description\": \"Aerial view of a construction site adjacent to a canal within an industrial area. Visible elements include a large drilling rig, temporary white modular buildings, a blue overhead gantry, and a bridge crossing the water. The surrounding land is undeveloped with dry vegetation.\",\n  \"evidence_visible\": [\n    \"A large, dark-colored drilling rig or crane is positioned on the dirt ground.\",\n    \"Several white, rectangular temporary buildings (likely site offices) are arranged in a row.\",\n    \"A blue metal gantry structure spans a dirt access road.\",\n    \"A section of the ground is covered with green mesh netting.\",\n    \"A blue construction hoarding runs along the edge of the canal.\",\n    \"A bridge with vehicles (a white van and a dark car) crosses the water.\",\n    \"Construction materials, including pipes and concrete slabs, are scattered on the site.\"\n  ],\n  \"unclear\": [\n    \"The specific type of construction work (e.g., foundation, piling) is unclear.\",\n    \"The identity of the vehicles on the bridge is unclear.\",\n    \"The purpose of the temporary buildings is unclear.\",\n    \"The exact date of the image is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of the green mesh netting covering the soil; the image shows the netting is present and covering the area, whereas incomplete soil cover would imply the protective covering is visibly missing or insufficient.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported by the visible presence of a large section of exposed ground covered by green mesh netting, situated adjacent to a blue construction hoarding and a canal.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of the green mesh netting covering the soil; the image shows the netting is present and covering the area, whereas incomplete soil cover would imply the protective covering is visibly missing or insufficient.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible presence of a large section of exposed ground covered by green mesh netting, situated adjacent to a blue construction hoarding and a canal.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large section of exposed ground covered by green mesh netting, situated adjacent to a blue construction hoarding and a canal. This directly contradicts the claim that this evidence is missing.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event bare soil netting is supported by the visible presence of a large section of exposed ground covered by green mesh netting, situated adjacent to a blue construction hoarding and a canal."
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a construction site where a significant portion of the ground is covered by green mesh netting, while other areas remain as bare soil. This visual evidence confirms that the protective covering is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large section of exposed ground covered by green mesh netting, situated adjacent to a blue construction hoarding and a canal. This directly contradicts the claim that this evidence is missing.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event bare soil netting is supported by the visible presence of a large section of exposed ground covered by green mesh netting, situated adjacent to a blue construction hoarding and a canal.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a construction site where a significant portion of the ground is covered by green mesh netting, while other areas remain as bare soil. This visual evidence confirms that the protective covering is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

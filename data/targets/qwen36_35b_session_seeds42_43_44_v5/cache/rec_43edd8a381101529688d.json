@@ -1,0 +1,57 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_43edd8a381101529688d",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-05-01_2026-05-31/building_demolition/original/0505-2882-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-05-01_2026-05-31/building_demolition/cropped/0505-2882-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to large, rectangular agricultural fields.",
+      "The fields are filled with dense, low-growing green vegetation arranged in distinct rows.",
+      "A paved road runs horizontally across the middle of the frame, separating the fields from the residential area.",
+      "The residential area on the left contains multi-story buildings with grey and red roofs, situated along a canal.",
+      "The lighting is bright and sunny, casting distinct shadows from the buildings and trees."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a high-magnification segment of the upper-left quadrant of the context image.",
+      "The canal and the specific cluster of buildings with grey tiled roofs in the crop view correspond exactly to the structures visible on the far left edge of the context image.",
+      "The spatial relationship between the water, the road, and the houses is consistent across both views."
+    ],
+    "description": "The images show a rural landscape with a canal-side village bordering extensive green agricultural fields. The context view provides a wide overview of the settlement and crops, while the evidence view zooms in on the specific residential structures and waterway visible on the left edge of the main scene.",
+    "evidence_visible": [
+      "A narrow waterway with green algae or vegetation on the surface.",
+      "A cluster of residential buildings with grey tiled roofs and one with a red metal roof.",
+      "A paved road running parallel to the water.",
+      "A small structure with a blue roof near the water's edge.",
+      "Vegetation and trees along the bank of the canal."
+    ],
+    "unclear": [
+      "The specific species of the green crop in the fields.",
+      "The exact number of people or vehicles present.",
+      "The specific type of construction material used for the grey roofs."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to large, rectangular agricultural fields.\",\n    \"The fields are filled with dense, low-growing green vegetation arranged in distinct rows.\",\n    \"A paved road runs horizontally across the middle of the frame, separating the fields from the residential area.\",\n    \"The residential area on the left contains multi-story buildings with grey and red roofs, situated along a canal.\",\n    \"The lighting is bright and sunny, casting distinct shadows from the buildings and trees.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a high-magnification segment of the upper-left quadrant of the context image.\",\n    \"The canal and the specific cluster of buildings with grey tiled roofs in the crop view correspond exactly to the structures visible on the far left edge of the context image.\",\n    \"The spatial relationship between the water, the road, and the houses is consistent across both views.\"\n  ],\n  \"description\": \"The images show a rural landscape with a canal-side village bordering extensive green agricultural fields. The context view provides a wide overview of the settlement and crops, while the evidence view zooms in on the specific residential structures and waterway visible on the left edge of the main scene.\",\n  \"evidence_visible\": [\n    \"A narrow waterway with green algae or vegetation on the surface.\",\n    \"A cluster of residential buildings with grey tiled roofs and one with a red metal roof.\",\n    \"A paved road running parallel to the water.\",\n    \"A small structure with a blue roof near the water's edge.\",\n    \"Vegetation and trees along the bank of the canal.\"\n  ],\n  \"unclear\": [\n    \"The specific species of the green crop in the fields.\",\n    \"The exact number of people or vehicles present.\",\n    \"The specific type of construction material used for the grey roofs.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite_failed_attempts": [
+    {
+      "attempt": 0,
+      "raw": "```json\n{\n  \"events\": [\n    {\n      \"name\": \"building demolition\",\n      \"evidence\": \"The event building demolition is supported: the visible evidence shows a cluster of residential buildings with grey tiled roofs situated along a canal, which aligns with the definition of a building undergoing active or recent demolition.\",\n      \"factors\": {},\n      \"uncertain\": true\n    }\n  ],\n  \"distinction\": \"The distinction between building demolition and building damage is not visibly established in the provided images.\",\n  \"missing_required_factors\": [],\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}\n```",
+      "error": "Rewrite keys must be ['counterfactual_target', 'distinction', 'missing_required_factors', 'target'], got ['counterfactual_target', 'distinction', 'events', 'missing_required_factors']"
+    },
+    {
+      "attempt": 1,
+      "raw": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is not visibly established in the provided images.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the visible evidence shows a cluster of residential buildings with grey tiled roofs situated along a canal, which aligns with the definition of a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+      "error": "Target events must be exactly ['building_demolition']"
+    },
+    {
+      "attempt": 2,
+      "raw": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is not visibly established in the provided images.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the visible evidence shows a cluster of residential buildings with grey tiled roofs situated along a canal, which aligns with the definition of a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+      "error": "Target events must be exactly ['building_damage']"
+    }
+  ]
+}

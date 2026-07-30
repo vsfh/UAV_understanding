@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clear-uav"
+version = "0.1.0"
+description = "Reproducible experiments for the CLEAR-UAV paper"
+requires-python = ">=3.10"
+dependencies = [
+  "accelerate>=1.2",
+  "huggingface-hub>=0.27",
+  "numpy>=1.26",
+  "peft>=0.14",
+  "pillow>=10.0",
+  "pyyaml>=6.0",
+  "torch>=2.4",
+  "transformers>=5.8,<5.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.9"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

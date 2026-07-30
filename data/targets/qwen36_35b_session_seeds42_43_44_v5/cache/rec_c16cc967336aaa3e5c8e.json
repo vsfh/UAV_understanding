@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_c16cc967336aaa3e5c8e",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1024-1947-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1024-1947-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of agricultural fields with varying crop maturity, showing patches of green and yellow vegetation.",
+      "A linear dirt or gravel path runs diagonally through the fields.",
+      "A small cluster of buildings is visible in the upper left quadrant.",
+      "Water bodies or flooded fields are present in the background.",
+      "A road with trees runs along the right side of the image."
+    ],
+    "cross_view_relations": [
+      "The close-up view corresponds to a specific section of the diagonal path visible in the wide context image.",
+      "The green mesh object in the evidence view is located on the path between two crop fields.",
+      "The surrounding vegetation in the evidence view matches the texture and color of the fields in the context view."
+    ],
+    "description": "Aerial imagery of agricultural fields shows a diagonal path separating crop plots. A close-up view reveals a green mesh or netting material lying on this path. The surrounding vegetation displays mixed green and yellow tones, indicating varying crop stages.",
+    "evidence_visible": [
+      "A bright green, semi-transparent mesh or netting material is visible.",
+      "The material is lying on a strip of bare earth or a path.",
+      "The path is bordered by dense, low-growing vegetation on both sides.",
+      "The vegetation appears to be crops, with some areas showing yellowing.",
+      "The mesh appears to be partially covering or resting on the ground surface."
+    ],
+    "unclear": [
+      "The specific type of crop is unclear.",
+      "The purpose of the green mesh is unclear.",
+      "The exact location or address is unclear.",
+      "The identity of any person or vehicle is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of agricultural fields with varying crop maturity, showing patches of green and yellow vegetation.\",\n    \"A linear dirt or gravel path runs diagonally through the fields.\",\n    \"A small cluster of buildings is visible in the upper left quadrant.\",\n    \"Water bodies or flooded fields are present in the background.\",\n    \"A road with trees runs along the right side of the image.\"\n  ],\n  \"cross_view_relations\": [\n    \"The close-up view corresponds to a specific section of the diagonal path visible in the wide context image.\",\n    \"The green mesh object in the evidence view is located on the path between two crop fields.\",\n    \"The surrounding vegetation in the evidence view matches the texture and color of the fields in the context view.\"\n  ],\n  \"description\": \"Aerial imagery of agricultural fields shows a diagonal path separating crop plots. A close-up view reveals a green mesh or netting material lying on this path. The surrounding vegetation displays mixed green and yellow tones, indicating varying crop stages.\",\n  \"evidence_visible\": [\n    \"A bright green, semi-transparent mesh or netting material is visible.\",\n    \"The material is lying on a strip of bare earth or a path.\",\n    \"The path is bordered by dense, low-growing vegetation on both sides.\",\n    \"The vegetation appears to be crops, with some areas showing yellowing.\",\n    \"The mesh appears to be partially covering or resting on the ground surface.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop is unclear.\",\n    \"The purpose of the green mesh is unclear.\",\n    \"The exact location or address is unclear.\",\n    \"The identity of any person or vehicle is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of the green mesh material covering the path; the neighbor event is rejected because the mesh is visibly present.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a strip of bare earth or path covered by a bright green, semi-transparent mesh or netting material, bordered by dense, low-growing vegetation.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of the green mesh material covering the path; the neighbor event is rejected because the mesh is visibly present.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a strip of bare earth or path covered by a bright green, semi-transparent mesh or netting material, bordered by dense, low-growing vegetation.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a strip of bare earth or path covered by a bright green, semi-transparent mesh or netting material. This strip is bordered by dense, low-growing vegetation (the crops). This visual evidence directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a specific strip of bare earth covered by a green net. The claim of 'incomplete soil cover' implies a general state of soil protection failure or a patchy covering over a larger area. The image shows a specific, localized application of netting on a path/strip, not a general incomplete covering of the soil itself. The netting is present and complete on the strip it covers. Therefore, the claim of 'incomplete soil cover' is not directly supported by the visual evidence of a specific netting application.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image shows a general state of incomplete soil cover across the fields.",
+        "The protective covering is visibly incomplete over the soil."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a strip of bare earth or path covered by a bright green, semi-transparent mesh or netting material. This strip is bordered by dense, low-growing vegetation (the crops). This visual evidence directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a specific strip of bare earth covered by a green net. The claim of 'incomplete soil cover' implies a general state of soil protection failure or a patchy covering over a larger area. The image shows a specific, localized application of netting on a path/strip, not a general incomplete covering of the soil itself. The netting is present and complete on the strip it covers. Therefore, the claim of 'incomplete soil cover' is not directly supported by the visual evidence of a specific netting application.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image shows a general state of incomplete soil cover across the fields.\",\n      \"The protective covering is visibly incomplete over the soil.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

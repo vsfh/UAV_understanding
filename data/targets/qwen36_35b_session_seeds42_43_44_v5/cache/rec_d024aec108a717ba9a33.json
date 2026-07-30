@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d024aec108a717ba9a33",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0927-4166-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0927-4166-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area containing large industrial buildings with blue and white roofs, and a central plot of land used for agriculture.",
+      "The agricultural plot features organized rectangular garden beds with varying vegetation density, interspersed with trees and shrubs.",
+      "A pile of construction debris, including red bricks and rubble, is visible in the lower-left foreground.",
+      "A narrow paved road separates the industrial structures from the agricultural land."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the agricultural section located on the left side of the context image.",
+      "The crop image provides higher resolution of the specific plot containing green and black ground cover sheets, which are visible as colored rectangles in the context image.",
+      "The spatial relationship confirms the crop view is looking down at the garden beds adjacent to the white building with the red roof.",
+      "The pile of debris visible in the bottom left of the context image is partially visible on the left edge of the crop image."
+    ],
+    "description": "The images show an agricultural plot situated between industrial buildings. The context view reveals the broader layout, including a debris pile and surrounding structures, while the crop view details specific garden beds covered with green and black sheets. The scene depicts a mix of cultivation and industrial infrastructure.",
+    "evidence_visible": [
+      "Rectangular garden plots with distinct rows of crops.",
+      "Several plots are covered with bright green and black sheeting or netting.",
+      "A concrete wall or drainage channel runs along the left edge of the cultivated area.",
+      "A pile of white debris or materials is visible near the wall.",
+      "Vegetation ranges from low-lying green crops to taller trees."
+    ],
+    "unclear": [
+      "The specific species of plants or crops being grown.",
+      "The exact purpose of the black and green sheets (e.g., weed control, moisture retention).",
+      "The identity of the white objects in the debris pile.",
+      "The operational status of the adjacent industrial buildings."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area containing large industrial buildings with blue and white roofs, and a central plot of land used for agriculture.\",\n    \"The agricultural plot features organized rectangular garden beds with varying vegetation density, interspersed with trees and shrubs.\",\n    \"A pile of construction debris, including red bricks and rubble, is visible in the lower-left foreground.\",\n    \"A narrow paved road separates the industrial structures from the agricultural land.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the agricultural section located on the left side of the context image.\",\n    \"The crop image provides higher resolution of the specific plot containing green and black ground cover sheets, which are visible as colored rectangles in the context image.\",\n    \"The spatial relationship confirms the crop view is looking down at the garden beds adjacent to the white building with the red roof.\",\n    \"The pile of debris visible in the bottom left of the context image is partially visible on the left edge of the crop image.\"\n  ],\n  \"description\": \"The images show an agricultural plot situated between industrial buildings. The context view reveals the broader layout, including a debris pile and surrounding structures, while the crop view details specific garden beds covered with green and black sheets. The scene depicts a mix of cultivation and industrial infrastructure.\",\n  \"evidence_visible\": [\n    \"Rectangular garden plots with distinct rows of crops.\",\n    \"Several plots are covered with bright green and black sheeting or netting.\",\n    \"A concrete wall or drainage channel runs along the left edge of the cultivated area.\",\n    \"A pile of white debris or materials is visible near the wall.\",\n    \"Vegetation ranges from low-lying green crops to taller trees.\"\n  ],\n  \"unclear\": [\n    \"The specific species of plants or crops being grown.\",\n    \"The exact purpose of the black and green sheets (e.g., weed control, moisture retention).\",\n    \"The identity of the white objects in the debris pile.\",\n    \"The operational status of the adjacent industrial buildings.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of continuous, uniform coverage of the netting across the defined plot areas, whereas incomplete soil cover would show significant gaps or exposed soil within the covered zones.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows rectangular garden plots where the soil is covered by distinct bright green and black sheeting or netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of continuous, uniform coverage of the netting across the defined plot areas, whereas incomplete soil cover would show significant gaps or exposed soil within the covered zones.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows rectangular garden plots where the soil is covered by distinct bright green and black sheeting or netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows rectangular garden plots where the soil is covered by distinct bright green and black sheeting or netting. The claim that this is not supported is contradicted by the visible evidence.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The claim that the event 'bare soil netting is supported' is not supported by the image."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows rectangular garden plots where the soil is covered by distinct bright green and black sheeting or netting. This directly supports the claim of 'bare soil netting'.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows rectangular garden plots where the soil is covered by distinct bright green and black sheeting or netting. The claim that this is not supported is contradicted by the visible evidence.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The claim that the event 'bare soil netting is supported' is not supported by the image.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows rectangular garden plots where the soil is covered by distinct bright green and black sheeting or netting. This directly supports the claim of 'bare soil netting'.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

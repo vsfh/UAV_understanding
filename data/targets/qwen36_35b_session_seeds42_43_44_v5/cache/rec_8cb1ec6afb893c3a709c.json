@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8cb1ec6afb893c3a709c",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0121-2050-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0121-2050-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a waterway system with floating structures and a snow-dusted riverbank.",
+      "A cluster of rectangular floating platforms connected by walkways, supporting small buildings with red and grey roofs.",
+      "A large, flat floating platform in the foreground covered in snow, featuring a small brick structure with a blue roof and a solar panel.",
+      "Vegetation includes dry reeds along the banks and bare trees on the floating islands.",
+      "A paved road or railway is visible in the upper left corner."
+    ],
+    "cross_view_relations": [
+      "The crop is a high-magnification view of the bottom-left section of the context image.",
+      "The snow-covered platform with the small brick building and solar panel in the crop corresponds to the structure in the foreground of the context image.",
+      "The water channel and the edge of the floating island with reeds in the crop match the spatial arrangement in the context image."
+    ],
+    "description": "Aerial imagery shows a river system with floating structures and snow-covered banks. The linked crop details a specific floating platform in the foreground, revealing a small brick building with a blue roof, a solar panel, and snow accumulation on the deck, confirming the spatial relationship to the wider scene.",
+    "evidence_visible": [
+      "Close-up of a flat, snow-covered surface adjacent to dark water.",
+      "A small, rectangular brick structure with a blue roof sits on the platform.",
+      "A solar panel is mounted on the snow-covered surface near the brick structure.",
+      "A small evergreen tree is visible next to the brick structure.",
+      "Shadows indicate a low sun angle."
+    ],
+    "unclear": [
+      "The specific function of the floating structures (e.g., residential, aquaculture, commercial).",
+      "The exact date of the imagery.",
+      "The legal status or ownership of the floating platforms."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a waterway system with floating structures and a snow-dusted riverbank.\",\n    \"A cluster of rectangular floating platforms connected by walkways, supporting small buildings with red and grey roofs.\",\n    \"A large, flat floating platform in the foreground covered in snow, featuring a small brick structure with a blue roof and a solar panel.\",\n    \"Vegetation includes dry reeds along the banks and bare trees on the floating islands.\",\n    \"A paved road or railway is visible in the upper left corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a high-magnification view of the bottom-left section of the context image.\",\n    \"The snow-covered platform with the small brick building and solar panel in the crop corresponds to the structure in the foreground of the context image.\",\n    \"The water channel and the edge of the floating island with reeds in the crop match the spatial arrangement in the context image.\"\n  ],\n  \"description\": \"Aerial imagery shows a river system with floating structures and snow-covered banks. The linked crop details a specific floating platform in the foreground, revealing a small brick building with a blue roof, a solar panel, and snow accumulation on the deck, confirming the spatial relationship to the wider scene.\",\n  \"evidence_visible\": [\n    \"Close-up of a flat, snow-covered surface adjacent to dark water.\",\n    \"A small, rectangular brick structure with a blue roof sits on the platform.\",\n    \"A solar panel is mounted on the snow-covered surface near the brick structure.\",\n    \"A small evergreen tree is visible next to the brick structure.\",\n    \"Shadows indicate a low sun angle.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the floating structures (e.g., residential, aquaculture, commercial).\",\n    \"The exact date of the imagery.\",\n    \"The legal status or ownership of the floating platforms.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the state of the structure; the image shows a skeletal brick frame which suggests demolition, whereas building damage would imply a standing structure with broken elements.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the crop image shows a small brick structure on a floating platform that appears to be a skeletal frame or ruin, consistent with a building undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the state of the structure; the image shows a skeletal brick frame which suggests demolition, whereas building damage would imply a standing structure with broken elements.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the crop image shows a small brick structure on a floating platform that appears to be a skeletal frame or ruin, consistent with a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The crop image clearly shows a small brick structure with a collapsed roof and exposed interior, which visually supports the description of a skeletal frame or ruin consistent with demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The crop image displays a building with a missing roof and exposed structural elements, which constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The crop image clearly shows a small brick structure with a collapsed roof and exposed interior, which visually supports the description of a skeletal frame or ruin consistent with demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The crop image displays a building with a missing roof and exposed structural elements, which constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

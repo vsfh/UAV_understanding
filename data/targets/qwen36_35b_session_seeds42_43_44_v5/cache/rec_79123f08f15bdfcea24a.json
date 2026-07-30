@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_79123f08f15bdfcea24a",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1005-5538-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1005-5538-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with residential buildings and paved roads.",
+      "Extensive agricultural fields containing green crops, likely rice paddies, with visible water channels.",
+      "A cluster of trees and vegetation separates the residential area from the fields on the right.",
+      "A narrow strip of land runs along the boundary between the trees and the fields."
+    ],
+    "cross_view_relations": [
+      "The close-up evidence view corresponds to the narrow strip of land visible on the right edge of the context image.",
+      "The strip is located immediately adjacent to the tree line and borders the green crop field.",
+      "The strip contains a long, segmented covering that is not clearly defined in the wide context view but is distinct in the evidence view."
+    ],
+    "description": "Aerial imagery shows a rural village surrounded by green agricultural fields. A close-up view of the field boundary reveals a narrow strip of land covered with alternating sections of green and black mesh or tarp material, situated between a cluster of trees and the crop field.",
+    "evidence_visible": [
+      "A long, narrow strip of ground covered by a segmented material.",
+      "The covering consists of alternating sections of bright green mesh and dark grey or black material.",
+      "The strip is bordered on one side by dense green trees and on the other by a field of low-growing green crops.",
+      "The material appears to be laid flat on the ground, possibly covering soil or a path."
+    ],
+    "unclear": [
+      "The specific purpose of the green and black covering (e.g., weed control, crop protection, construction).",
+      "The exact type of crop in the field.",
+      "The contents beneath the covering.",
+      "The legal status or ownership of the land."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with residential buildings and paved roads.\",\n    \"Extensive agricultural fields containing green crops, likely rice paddies, with visible water channels.\",\n    \"A cluster of trees and vegetation separates the residential area from the fields on the right.\",\n    \"A narrow strip of land runs along the boundary between the trees and the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The close-up evidence view corresponds to the narrow strip of land visible on the right edge of the context image.\",\n    \"The strip is located immediately adjacent to the tree line and borders the green crop field.\",\n    \"The strip contains a long, segmented covering that is not clearly defined in the wide context view but is distinct in the evidence view.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural village surrounded by green agricultural fields. A close-up view of the field boundary reveals a narrow strip of land covered with alternating sections of green and black mesh or tarp material, situated between a cluster of trees and the crop field.\",\n  \"evidence_visible\": [\n    \"A long, narrow strip of ground covered by a segmented material.\",\n    \"The covering consists of alternating sections of bright green mesh and dark grey or black material.\",\n    \"The strip is bordered on one side by dense green trees and on the other by a field of low-growing green crops.\",\n    \"The material appears to be laid flat on the ground, possibly covering soil or a path.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the green and black covering (e.g., weed control, crop protection, construction).\",\n    \"The exact type of crop in the field.\",\n    \"The contents beneath the covering.\",\n    \"The legal status or ownership of the land.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the visible presence of a continuous, segmented covering (green and black mesh) that fully spans the width of the strip, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a narrow strip of ground covered by a segmented material consisting of alternating sections of bright green mesh and dark grey or black material, situated between a cluster of trees and a crop field.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the visible presence of a continuous, segmented covering (green and black mesh) that fully spans the width of the strip, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a narrow strip of ground covered by a segmented material consisting of alternating sections of bright green mesh and dark grey or black material, situated between a cluster of trees and a crop field.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a narrow strip of ground covered by a segmented material consisting of alternating sections of bright green mesh and dark grey or black material, situated between a cluster of trees and a crop field. This matches the description in the statement exactly.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims 'incomplete soil cover' is supported. While the image shows a strip of ground covered by netting, the term 'incomplete soil cover' is vague and potentially misleading. It could imply that the soil is exposed in places where it shouldn't be, or that the coverage is insufficient. The image shows a deliberate, segmented covering (green and black mesh), not necessarily an 'incomplete' state in a negative sense, but rather a specific type of agricultural practice. The statement is too ambiguous to be strictly supported as a literal description of the visual evidence without interpretation.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The term 'incomplete soil cover' is not a precise visual description of the segmented netting shown.",
+        "The image does not show 'soil' in a state of being 'incompletely covered' in a way that implies a failure or deficiency, but rather a specific covering method."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a narrow strip of ground covered by a segmented material consisting of alternating sections of bright green mesh and dark grey or black material, situated between a cluster of trees and a crop field. This matches the description in the statement exactly.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims 'incomplete soil cover' is supported. While the image shows a strip of ground covered by netting, the term 'incomplete soil cover' is vague and potentially misleading. It could imply that the soil is exposed in places where it shouldn't be, or that the coverage is insufficient. The image shows a deliberate, segmented covering (green and black mesh), not necessarily an 'incomplete' state in a negative sense, but rather a specific type of agricultural practice. The statement is too ambiguous to be strictly supported as a literal description of the visual evidence without interpretation.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The term 'incomplete soil cover' is not a precise visual description of the segmented netting shown.\",\n      \"The image does not show 'soil' in a state of being 'incompletely covered' in a way that implies a failure or deficiency, but rather a specific covering method.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

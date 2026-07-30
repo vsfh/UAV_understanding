@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_fa90b62154f59597f17e",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0116-6005-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0116-6005-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a cluster of residential buildings with grey and red roofs on the left.",
+      "A paved two-lane road runs horizontally across the middle of the frame.",
+      "Large rectangular agricultural fields with visible soil rows occupy the upper and right sections.",
+      "A set of long, parallel agricultural tunnels covered in blue plastic sheeting is located in the lower center.",
+      "A small, single-story structure with a grey roof is situated immediately north of the blue tunnels."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the area immediately north of the blue plastic tunnels and south of the road shown in the first image.",
+      "The small grey-roofed structure visible in the context image is the central subject of the evidence image.",
+      "The blue plastic tunnels are visible on the left edge of the evidence image, confirming their spatial adjacency to the structure."
+    ],
+    "description": "The images show a rural agricultural site with blue plastic tunnels and a small grey-roofed building adjacent to a road. The zoomed view reveals the building is surrounded by a low brick wall enclosing a dirt yard containing scattered debris and materials.",
+    "evidence_visible": [
+      "A small, rectangular building with a grey, possibly tiled, roof stands within a low, unfinished brick perimeter wall.",
+      "The interior of the walled area is unpaved dirt containing scattered debris, including what appears to be a white object and dark materials.",
+      "The blue plastic tunnels are visible on the left edge of the frame.",
+      "A paved road with a motorcycle is visible at the top edge of the frame.",
+      "The ground inside the enclosure appears disturbed and uneven."
+    ],
+    "unclear": [
+      "The specific function of the small building (e.g., storage, residence, shed).",
+      "The exact contents of the debris pile within the walled area.",
+      "The legal status or ownership of the property.",
+      "The specific type of crops or materials stored inside the blue tunnels."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a cluster of residential buildings with grey and red roofs on the left.\",\n    \"A paved two-lane road runs horizontally across the middle of the frame.\",\n    \"Large rectangular agricultural fields with visible soil rows occupy the upper and right sections.\",\n    \"A set of long, parallel agricultural tunnels covered in blue plastic sheeting is located in the lower center.\",\n    \"A small, single-story structure with a grey roof is situated immediately north of the blue tunnels.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the area immediately north of the blue plastic tunnels and south of the road shown in the first image.\",\n    \"The small grey-roofed structure visible in the context image is the central subject of the evidence image.\",\n    \"The blue plastic tunnels are visible on the left edge of the evidence image, confirming their spatial adjacency to the structure.\"\n  ],\n  \"description\": \"The images show a rural agricultural site with blue plastic tunnels and a small grey-roofed building adjacent to a road. The zoomed view reveals the building is surrounded by a low brick wall enclosing a dirt yard containing scattered debris and materials.\",\n  \"evidence_visible\": [\n    \"A small, rectangular building with a grey, possibly tiled, roof stands within a low, unfinished brick perimeter wall.\",\n    \"The interior of the walled area is unpaved dirt containing scattered debris, including what appears to be a white object and dark materials.\",\n    \"The blue plastic tunnels are visible on the left edge of the frame.\",\n    \"A paved road with a motorcycle is visible at the top edge of the frame.\",\n    \"The ground inside the enclosure appears disturbed and uneven.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the small building (e.g., storage, residence, shed).\",\n    \"The exact contents of the debris pile within the walled area.\",\n    \"The legal status or ownership of the property.\",\n    \"The specific type of crops or materials stored inside the blue tunnels.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the state of the structure and site; the image shows a small existing building surrounded by a low brick wall and debris, which is characteristic of demolition, whereas project construction would typically show a foundation being laid or a new structure being erected.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a small, single-story structure with a grey roof situated within a low, unfinished brick perimeter wall. The interior of the walled area is unpaved dirt containing scattered debris and materials, indicating the site is undergoing active or recent demolition rather than new construction.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the state of the structure and site; the image shows a small existing building surrounded by a low brick wall and debris, which is characteristic of demolition, whereas project construction would typically show a foundation being laid or a new structure being erected.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a small, single-story structure with a grey roof situated within a low, unfinished brick perimeter wall. The interior of the walled area is unpaved dirt containing scattered debris and materials, indicating the site is undergoing active or recent demolition rather than new construction.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a small, single-story structure with a grey roof located inside a low, unfinished brick perimeter wall. The interior of this walled area consists of unpaved dirt and scattered debris, which visually supports the description of a demolition site rather than a new construction project.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The visual evidence depicts a demolition site (a small building inside a brick perimeter with debris), not an active general construction project. The claim of 'active general construction' is contradicted by the specific visual details of the demolition scene.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The site is an active general construction project."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a small, single-story structure with a grey roof located inside a low, unfinished brick perimeter wall. The interior of this walled area consists of unpaved dirt and scattered debris, which visually supports the description of a demolition site rather than a new construction project.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The visual evidence depicts a demolition site (a small building inside a brick perimeter with debris), not an active general construction project. The claim of 'active general construction' is contradicted by the specific visual details of the demolition scene.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The site is an active general construction project.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

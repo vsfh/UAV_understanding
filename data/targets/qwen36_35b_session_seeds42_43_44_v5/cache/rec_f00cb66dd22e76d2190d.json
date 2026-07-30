@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_f00cb66dd22e76d2190d",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1008-8960-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1008-8960-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape dominated by rectangular agricultural plots with varying shades of green and yellow vegetation.",
+      "A straight, light-colored paved road runs vertically through the center of the frame, separating the fields.",
+      "On the left side, there is a cluster of residential buildings with red and grey tiled roofs, surrounded by trees and vegetation.",
+      "A small body of water or pond is visible near the buildings on the far left."
+    ],
+    "cross_view_relations": [
+      "The close-up evidence view corresponds to the cluster of buildings on the left side of the wide context image.",
+      "The red-roofed building in the evidence view matches the prominent red-roofed structure seen in the context view.",
+      "The green field bordering the house in the evidence view is part of the larger agricultural grid seen in the context view."
+    ],
+    "description": "The images show a rural area with a grid of green and yellow crop fields divided by a central road. A cluster of houses with red and grey roofs sits on the left. The close-up view details the red-roofed house, adjacent trees, and a small yard area with scattered items like tires, bordering the cultivated land.",
+    "evidence_visible": [
+      "A building with a red tiled roof and white walls is visible.",
+      "A smaller structure with a grey roof is attached or adjacent to the main building.",
+      "A yard area contains a large tree with bare branches, a blue tarp or sheet, and several dark tires lying on the ground.",
+      "A small garden plot with a grid-like structure is visible near the bottom left.",
+      "Dense green vegetation borders the agricultural field on the right side of the frame."
+    ],
+    "unclear": [
+      "The specific type of crop in the fields is unclear.",
+      "The purpose of the scattered tires and blue tarp is unclear.",
+      "The exact date of the images is unclear.",
+      "The ownership of the properties is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape dominated by rectangular agricultural plots with varying shades of green and yellow vegetation.\",\n    \"A straight, light-colored paved road runs vertically through the center of the frame, separating the fields.\",\n    \"On the left side, there is a cluster of residential buildings with red and grey tiled roofs, surrounded by trees and vegetation.\",\n    \"A small body of water or pond is visible near the buildings on the far left.\"\n  ],\n  \"cross_view_relations\": [\n    \"The close-up evidence view corresponds to the cluster of buildings on the left side of the wide context image.\",\n    \"The red-roofed building in the evidence view matches the prominent red-roofed structure seen in the context view.\",\n    \"The green field bordering the house in the evidence view is part of the larger agricultural grid seen in the context view.\"\n  ],\n  \"description\": \"The images show a rural area with a grid of green and yellow crop fields divided by a central road. A cluster of houses with red and grey roofs sits on the left. The close-up view details the red-roofed house, adjacent trees, and a small yard area with scattered items like tires, bordering the cultivated land.\",\n  \"evidence_visible\": [\n    \"A building with a red tiled roof and white walls is visible.\",\n    \"A smaller structure with a grey roof is attached or adjacent to the main building.\",\n    \"A yard area contains a large tree with bare branches, a blue tarp or sheet, and several dark tires lying on the ground.\",\n    \"A small garden plot with a grid-like structure is visible near the bottom left.\",\n    \"Dense green vegetation borders the agricultural field on the right side of the frame.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the fields is unclear.\",\n    \"The purpose of the scattered tires and blue tarp is unclear.\",\n    \"The exact date of the images is unclear.\",\n    \"The ownership of the properties is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a yard area containing a large tree with bare branches and several dark tires lying on the ground, which appears to be exposed soil or dirt surface.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a yard area containing a large tree with bare branches and several dark tires lying on the ground, which appears to be exposed soil or dirt surface.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a yard area with a large tree that has bare branches (no leaves) and several dark tires lying on the ground. The ground beneath the tires and tree appears to be exposed soil or dirt, supporting the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The claim of 'incomplete soil cover' is vague and not directly supported by specific visual evidence in the image. While there is exposed soil, the term 'incomplete soil cover' implies a specific context (e.g., agricultural mulch or protective covering) that is not visible or identifiable in the provided image.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image does not show any form of 'protective covering' for soil, making the claim of 'incomplete' cover unsupported."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a yard area with a large tree that has bare branches (no leaves) and several dark tires lying on the ground. The ground beneath the tires and tree appears to be exposed soil or dirt, supporting the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The claim of 'incomplete soil cover' is vague and not directly supported by specific visual evidence in the image. While there is exposed soil, the term 'incomplete soil cover' implies a specific context (e.g., agricultural mulch or protective covering) that is not visible or identifiable in the provided image.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image does not show any form of 'protective covering' for soil, making the claim of 'incomplete' cover unsupported.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

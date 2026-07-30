@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_6645743d8c8666a0006a",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1028-6999-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1028-6999-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with a wide river and a multi-lane elevated highway bridge crossing it.",
+      "Large fields of yellow crops in the foreground, with a small cluster of buildings and a white tent-like structure near the riverbank.",
+      "Distant residential areas and flat terrain under a partly cloudy sky."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a zoomed-in perspective of the area near the riverbank shown in the context image.",
+      "The elevated highway bridge is visible in the background of the crop view, confirming the location relative to the wider scene.",
+      "The white tent-like structure from the context view is visible in the lower right of the crop view, adjacent to the construction materials."
+    ],
+    "description": "Aerial imagery shows a rural landscape with a river and elevated highway. A zoomed-in view reveals a construction or storage site near the riverbank, containing piles of sand, stacked lumber, and heavy machinery. The site is adjacent to harvested fields and a small white structure, with the highway bridge visible in the background.",
+    "evidence_visible": [
+      "A construction or storage yard situated on a dirt patch next to the river.",
+      "Large piles of light-colored sand or gravel.",
+      "Stacks of wooden planks or lumber.",
+      "Heavy machinery, including what appears to be a front-end loader and a conveyor belt system.",
+      "Temporary blue and white structures, possibly site offices or storage containers.",
+      "Green mesh fencing along the riverbank edge."
+    ],
+    "unclear": [
+      "Specific type of heavy machinery (e.g., exact model of loader).",
+      "Identity of the materials in the stacks (e.g., specific wood type).",
+      "Purpose of the site (e.g., construction, storage, recycling).",
+      "Exact date of the images.",
+      "Ownership or legal status of the land."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape with a wide river and a multi-lane elevated highway bridge crossing it.\",\n    \"Large fields of yellow crops in the foreground, with a small cluster of buildings and a white tent-like structure near the riverbank.\",\n    \"Distant residential areas and flat terrain under a partly cloudy sky.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a zoomed-in perspective of the area near the riverbank shown in the context image.\",\n    \"The elevated highway bridge is visible in the background of the crop view, confirming the location relative to the wider scene.\",\n    \"The white tent-like structure from the context view is visible in the lower right of the crop view, adjacent to the construction materials.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural landscape with a river and elevated highway. A zoomed-in view reveals a construction or storage site near the riverbank, containing piles of sand, stacked lumber, and heavy machinery. The site is adjacent to harvested fields and a small white structure, with the highway bridge visible in the background.\",\n  \"evidence_visible\": [\n    \"A construction or storage yard situated on a dirt patch next to the river.\",\n    \"Large piles of light-colored sand or gravel.\",\n    \"Stacks of wooden planks or lumber.\",\n    \"Heavy machinery, including what appears to be a front-end loader and a conveyor belt system.\",\n    \"Temporary blue and white structures, possibly site offices or storage containers.\",\n    \"Green mesh fencing along the riverbank edge.\"\n  ],\n  \"unclear\": [\n    \"Specific type of heavy machinery (e.g., exact model of loader).\",\n    \"Identity of the materials in the stacks (e.g., specific wood type).\",\n    \"Purpose of the site (e.g., construction, storage, recycling).\",\n    \"Exact date of the images.\",\n    \"Ownership or legal status of the land.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of the green mesh netting along the riverbank edge, which is visible in the evidence.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported by the visible presence of green mesh netting installed along the riverbank edge of the exposed soil area, adjacent to the construction materials and heavy machinery.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of the green mesh netting along the riverbank edge, which is visible in the evidence.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible presence of green mesh netting installed along the riverbank edge of the exposed soil area, adjacent to the construction materials and heavy machinery.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows green mesh netting installed along the riverbank edge of the exposed soil area, adjacent to construction materials and heavy machinery. This directly supports the claim of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a large area of exposed soil next to the river. While there is some green netting, a significant portion of the soil remains uncovered, supporting the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows green mesh netting installed along the riverbank edge of the exposed soil area, adjacent to construction materials and heavy machinery. This directly supports the claim of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a large area of exposed soil next to the river. While there is some green netting, a significant portion of the soil remains uncovered, supporting the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

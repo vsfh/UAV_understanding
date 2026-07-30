@@ -1,0 +1,83 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_c0179dbd024e468e175a",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1011-6947-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1011-6947-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with mixed residential buildings and agricultural plots. The area features structures with grey tiled roofs, blue metal roofing, and white walls. Green crops are visible in rectangular fields, alongside bare soil patches and scattered trees. A paved road runs along the right edge of the frame."
+    ],
+    "cross_view_relations": [
+      "The local crop image is a zoomed-in view of the central-left section of the wide context image. It specifically isolates a cluster of buildings with grey and blue roofs and an adjacent dirt yard containing a green mesh tarp."
+    ],
+    "description": "Aerial imagery of a rural village showing residential structures with grey and blue roofs interspersed with agricultural fields. A detailed crop view highlights a specific building cluster and a dirt yard area containing a green mesh tarp and a small shed-like structure.",
+    "evidence_visible": [
+      "Close-up view of a building with a blue metal roof and grey tiled sections. Adjacent is a dirt yard containing a rectangular green mesh tarp. To the right, a small structure with an orange roof and blue tarp is visible. A grey building with a flat roof and rooftop equipment is in the foreground."
+    ],
+    "unclear": [
+      "Specific identity of rooftop equipment, contents of the small shed, and exact crop types in the fields."
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"Aerial view of a rural settlement with mixed residential buildings and agricultural plots. The area features structures with grey tiled roofs, blue metal roofing, and white walls. Green crops are visible in rectangular fields, alongside bare soil patches and scattered trees. A paved road runs along the right edge of the frame.\"\n],\n\"cross_view_relations\": [\n\"The local crop image is a zoomed-in view of the central-left section of the wide context image. It specifically isolates a cluster of buildings with grey and blue roofs and an adjacent dirt yard containing a green mesh tarp.\"\n],\n\"description\": \"Aerial imagery of a rural village showing residential structures with grey and blue roofs interspersed with agricultural fields. A detailed crop view highlights a specific building cluster and a dirt yard area containing a green mesh tarp and a small shed-like structure.\",\n\"evidence_visible\": [\n\"Close-up view of a building with a blue metal roof and grey tiled sections. Adjacent is a dirt yard containing a rectangular green mesh tarp. To the right, a small structure with an orange roof and blue tarp is visible. A grey building with a flat roof and rooftop equipment is in the foreground.\"\n],\n\"unclear\": [\n\"Specific identity of rooftop equipment, contents of the small shed, and exact crop types in the fields.\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, rectangular green mesh tarp covering the soil, whereas incomplete soil cover would imply a lack of such protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the local crop image shows a rectangular green mesh tarp laid flat on a patch of bare dirt in a yard, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, rectangular green mesh tarp covering the soil, whereas incomplete soil cover would imply a lack of such protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the local crop image shows a rectangular green mesh tarp laid flat on a patch of bare dirt in a yard, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The local crop image clearly shows a rectangular green mesh tarp laid flat on a patch of bare dirt in a yard, which is consistent with dust-control netting. The claim is fully supported by the visual evidence.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The local crop image shows a patch of bare dirt with a green mesh tarp laid on it, but the tarp does not cover the entire area. This indicates that the soil cover is visibly incomplete, supporting the claim.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The local crop image clearly shows a rectangular green mesh tarp laid flat on a patch of bare dirt in a yard, which is consistent with dust-control netting. The claim is fully supported by the visual evidence.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The local crop image shows a patch of bare dirt with a green mesh tarp laid on it, but the tarp does not cover the entire area. This indicates that the soil cover is visibly incomplete, supporting the claim.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

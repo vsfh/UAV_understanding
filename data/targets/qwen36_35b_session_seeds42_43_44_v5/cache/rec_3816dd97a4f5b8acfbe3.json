@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_3816dd97a4f5b8acfbe3",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1022-9021-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1022-9021-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape containing rectangular agricultural fields with yellow and green crops, several residential houses, and a cluster of ponds.",
+      "A dirt road runs vertically through the right side of the frame, adjacent to the fields and ponds.",
+      "A blue-roofed structure is visible on the bank of the central pond.",
+      "Vegetation includes dense trees and shrubs along the waterways and field boundaries."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a cropped, zoomed-in view of the upper-right quadrant of the context image.",
+      "The evidence image specifically isolates the area where the dirt road meets the edge of the yellow crop field.",
+      "The green mesh structure and machinery visible in the evidence image are located at the top edge of the context image.",
+      "The spatial relationship confirms the evidence shows the immediate roadside area of the larger field complex."
+    ],
+    "description": "The images show a rural agricultural area with yellow and green fields, houses, and ponds. The evidence view zooms in on the roadside of a yellow field, revealing a green mesh structure and machinery parked near the road. A blue-roofed building is visible on a nearby pond bank in the wider context.",
+    "evidence_visible": [
+      "A large field of yellow crops, appearing to be rice or similar grain, occupies the majority of the frame.",
+      "A green mesh structure, possibly a temporary shelter or greenhouse, is situated at the top edge of the field.",
+      "Several pieces of machinery, including red and blue vehicles, are parked on the dirt road next to the field.",
+      "A white truck is parked near a building with a blue roof on the far right edge.",
+      "The crop surface shows texture consistent with standing grain or recently harvested stubble."
+    ],
+    "unclear": [
+      "The specific type of machinery (e.g., tractor, harvester) is unclear due to resolution.",
+      "The exact contents of the green mesh structure are not visible.",
+      "The specific crop species cannot be definitively identified beyond general appearance.",
+      "The activity status of the machinery (parked vs. operating) is unclear.",
+      "The purpose of the blue-roofed structure on the pond bank is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape containing rectangular agricultural fields with yellow and green crops, several residential houses, and a cluster of ponds.\",\n    \"A dirt road runs vertically through the right side of the frame, adjacent to the fields and ponds.\",\n    \"A blue-roofed structure is visible on the bank of the central pond.\",\n    \"Vegetation includes dense trees and shrubs along the waterways and field boundaries.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a cropped, zoomed-in view of the upper-right quadrant of the context image.\",\n    \"The evidence image specifically isolates the area where the dirt road meets the edge of the yellow crop field.\",\n    \"The green mesh structure and machinery visible in the evidence image are located at the top edge of the context image.\",\n    \"The spatial relationship confirms the evidence shows the immediate roadside area of the larger field complex.\"\n  ],\n  \"description\": \"The images show a rural agricultural area with yellow and green fields, houses, and ponds. The evidence view zooms in on the roadside of a yellow field, revealing a green mesh structure and machinery parked near the road. A blue-roofed building is visible on a nearby pond bank in the wider context.\",\n  \"evidence_visible\": [\n    \"A large field of yellow crops, appearing to be rice or similar grain, occupies the majority of the frame.\",\n    \"A green mesh structure, possibly a temporary shelter or greenhouse, is situated at the top edge of the field.\",\n    \"Several pieces of machinery, including red and blue vehicles, are parked on the dirt road next to the field.\",\n    \"A white truck is parked near a building with a blue roof on the far right edge.\",\n    \"The crop surface shows texture consistent with standing grain or recently harvested stubble.\"\n  ],\n  \"unclear\": [\n    \"The specific type of machinery (e.g., tractor, harvester) is unclear due to resolution.\",\n    \"The exact contents of the green mesh structure are not visible.\",\n    \"The specific crop species cannot be definitively identified beyond general appearance.\",\n    \"The activity status of the machinery (parked vs. operating) is unclear.\",\n    \"The purpose of the blue-roofed structure on the pond bank is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of the complete green mesh structure in the evidence image, which indicates a protective covering is applied rather than visibly incomplete.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported by the visible green mesh structure situated at the edge of the agricultural field in the evidence image, which is consistent with the definition of exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of the complete green mesh structure in the evidence image, which indicates a protective covering is applied rather than visibly incomplete.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible green mesh structure situated at the edge of the agricultural field in the evidence image, which is consistent with the definition of exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a green mesh structure (netting) situated at the edge of the field, which directly supports the description of 'bare soil netting' and 'exposed soil covered by dust-control netting'.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The claim of 'incomplete soil cover' is vague and not directly supported by the specific visual evidence of the green mesh structure. The image shows a specific agricultural practice (netting) rather than a general state of incomplete cover.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image does not show a general state of 'incomplete soil cover' as a primary feature; it shows a specific green mesh structure."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a green mesh structure (netting) situated at the edge of the field, which directly supports the description of 'bare soil netting' and 'exposed soil covered by dust-control netting'.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The claim of 'incomplete soil cover' is vague and not directly supported by the specific visual evidence of the green mesh structure. The image shows a specific agricultural practice (netting) rather than a general state of incomplete cover.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image does not show a general state of 'incomplete soil cover' as a primary feature; it shows a specific green mesh structure.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_36437c8ac911912409ea",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1010-8895-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1010-8895-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with rectangular aquaculture ponds containing green algae or vegetation.",
+      "A cluster of residential buildings with varied roof colors (red, blue, grey) situated next to the ponds.",
+      "Small agricultural plots and dirt paths are visible between the structures and water bodies."
+    ],
+    "cross_view_relations": [
+      "The crop image shows a close-up of a dark, textured surface adjacent to a light-colored paved area.",
+      "This surface corresponds to the dark green vegetation or algae covering the surface of the ponds seen in the context image.",
+      "The light-colored area in the crop matches the concrete or dirt paths bordering the ponds in the wider view."
+    ],
+    "description": "The context image displays a rural area with multiple rectangular ponds covered in green vegetation, surrounded by residential buildings and small plots. The linked crop provides a close-up view of the dark, textured surface of the pond water, confirming the presence of dense algae or aquatic plants adjacent to a light-colored path.",
+    "evidence_visible": [
+      "A close-up view of a dark, textured surface, likely water covered in dense vegetation or algae.",
+      "A light-colored, flat surface, possibly a concrete path or bank, borders the dark area.",
+      "Green foliage is visible in the bottom right corner of the crop."
+    ],
+    "unclear": [
+      "The specific type of aquatic plant or algae covering the pond.",
+      "The exact material of the light-colored path (concrete vs. packed dirt).",
+      "The specific location of the crop within the larger context image."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with rectangular aquaculture ponds containing green algae or vegetation.\",\n    \"A cluster of residential buildings with varied roof colors (red, blue, grey) situated next to the ponds.\",\n    \"Small agricultural plots and dirt paths are visible between the structures and water bodies.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image shows a close-up of a dark, textured surface adjacent to a light-colored paved area.\",\n    \"This surface corresponds to the dark green vegetation or algae covering the surface of the ponds seen in the context image.\",\n    \"The light-colored area in the crop matches the concrete or dirt paths bordering the ponds in the wider view.\"\n  ],\n  \"description\": \"The context image displays a rural area with multiple rectangular ponds covered in green vegetation, surrounded by residential buildings and small plots. The linked crop provides a close-up view of the dark, textured surface of the pond water, confirming the presence of dense algae or aquatic plants adjacent to a light-colored path.\",\n  \"evidence_visible\": [\n    \"A close-up view of a dark, textured surface, likely water covered in dense vegetation or algae.\",\n    \"A light-colored, flat surface, possibly a concrete path or bank, borders the dark area.\",\n    \"Green foliage is visible in the bottom right corner of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific type of aquatic plant or algae covering the pond.\",\n    \"The exact material of the light-colored path (concrete vs. packed dirt).\",\n    \"The specific location of the crop within the larger context image.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible; the evidence shows vegetation on water rather than soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the context image displays a rural settlement with rectangular aquaculture ponds covered in dense green algae or vegetation, and the linked crop provides a close-up view of this dark, textured surface bordering a light-colored path.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible; the evidence shows vegetation on water rather than soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the context image displays a rural settlement with rectangular aquaculture ponds covered in dense green algae or vegetation, and the linked crop provides a close-up view of this dark, textured surface bordering a light-colored path.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The context image displays a rural settlement with rectangular aquaculture ponds covered in dense green algae or vegetation, and the linked crop provides a close-up view of this dark, textured surface bordering a light-colored path.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The linked crop image shows a dark, textured surface (likely a net or cover) that is not fully covering the ground, with visible gaps and edges, supporting the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The context image displays a rural settlement with rectangular aquaculture ponds covered in dense green algae or vegetation, and the linked crop provides a close-up view of this dark, textured surface bordering a light-colored path.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The linked crop image shows a dark, textured surface (likely a net or cover) that is not fully covering the ground, with visible gaps and edges, supporting the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

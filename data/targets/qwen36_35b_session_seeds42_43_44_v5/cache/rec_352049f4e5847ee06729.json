@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_352049f4e5847ee06729",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-2815-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-2815-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved road running vertically, separating a large multi-story building on the right from agricultural fields and ponds on the left.",
+      "A parking area adjacent to the building contains several parked vehicles.",
+      "The left side features greenhouses, tilled soil, and bodies of water with reeds.",
+      "A small paved area with a green surface is visible near the bottom center, adjacent to a road curve."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in crop of the bottom-center area of the first image.",
+      "The green surface in the crop corresponds to the small paved area seen in the wide context.",
+      "The large tree and the road curve in the crop match the features at the bottom of the context image."
+    ],
+    "description": "The images show a roadside area adjacent to a pond and agricultural fields. A small, rectangular paved surface covered in green material is situated near a road curve and a large tree. The wider view places this area between the road and the water, next to a large residential building.",
+    "evidence_visible": [
+      "A rectangular paved area covered with a green material, possibly a tarp or painted surface.",
+      "The area is bordered by a road on the right and a body of water with reeds on the left.",
+      "A large green tree is located in the foreground.",
+      "A small white structure, possibly a utility box, stands near the green surface."
+    ],
+    "unclear": [
+      "The specific material of the green surface (e.g., tarp, paint, moss).",
+      "The purpose of the green surface (e.g., storage, construction, sports court).",
+      "The exact dimensions of the green surface."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a paved road running vertically, separating a large multi-story building on the right from agricultural fields and ponds on the left.\",\n    \"A parking area adjacent to the building contains several parked vehicles.\",\n    \"The left side features greenhouses, tilled soil, and bodies of water with reeds.\",\n    \"A small paved area with a green surface is visible near the bottom center, adjacent to a road curve.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in crop of the bottom-center area of the first image.\",\n    \"The green surface in the crop corresponds to the small paved area seen in the wide context.\",\n    \"The large tree and the road curve in the crop match the features at the bottom of the context image.\"\n  ],\n  \"description\": \"The images show a roadside area adjacent to a pond and agricultural fields. A small, rectangular paved surface covered in green material is situated near a road curve and a large tree. The wider view places this area between the road and the water, next to a large residential building.\",\n  \"evidence_visible\": [\n    \"A rectangular paved area covered with a green material, possibly a tarp or painted surface.\",\n    \"The area is bordered by a road on the right and a body of water with reeds on the left.\",\n    \"A large green tree is located in the foreground.\",\n    \"A small white structure, possibly a utility box, stands near the green surface.\"\n  ],\n  \"unclear\": [\n    \"The specific material of the green surface (e.g., tarp, paint, moss).\",\n    \"The purpose of the green surface (e.g., storage, construction, sports court).\",\n    \"The exact dimensions of the green surface.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular paved area covered with a green material, possibly a tarp or painted surface, situated near a road curve and a large tree.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular paved area covered with a green material, possibly a tarp or painted surface, situated near a road curve and a large tree.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence explicitly shows a rectangular area covered by a green material (likely a tarp or painted surface) situated near a road curve and a large tree. This directly contradicts the claim that the event is 'bare soil netting' or that the soil cover is 'incomplete'. The visual content supports a covered surface, not bare or incomplete soil.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event is bare soil netting.",
+        "The soil cover is visibly incomplete."
+      ]
+    },
+    "positive": {
+      "reason": "The image evidence shows a rectangular paved area covered with a green material, possibly a tarp or painted surface, situated near a road curve and a large tree. This matches the description in the statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence explicitly shows a rectangular area covered by a green material (likely a tarp or painted surface) situated near a road curve and a large tree. This directly contradicts the claim that the event is 'bare soil netting' or that the soil cover is 'incomplete'. The visual content supports a covered surface, not bare or incomplete soil.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event is bare soil netting.\",\n      \"The soil cover is visibly incomplete.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows a rectangular paved area covered with a green material, possibly a tarp or painted surface, situated near a road curve and a large tree. This matches the description in the statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_cde55b1221fd4714d594",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0125-0744-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0125-0744-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a mixed-use area with large industrial buildings on the left and a construction site covered in green mesh in the background. The foreground contains a network of dirt paths, small residential structures, and numerous small-scale agricultural plots.",
+      "The terrain is uneven, featuring patches of dry vegetation, bare earth, and scattered debris. A paved road runs along the left edge, separating the industrial zone from the residential and agricultural areas."
+    ],
+    "cross_view_relations": [
+      "The crop view is a high-magnification section of the lower-right quadrant of the context image. It isolates a specific cluster of small houses and garden plots situated between the main dirt path and the larger construction site.",
+      "The spatial relationship confirms the crop focuses on the residential-agricultural interface, showing the proximity of the small houses to the cleared land and the green mesh-covered area."
+    ],
+    "description": "Aerial view of a mixed industrial and agricultural zone. The context shows a broad landscape with factories, a green-mesh construction site, and scattered homes. The crop zooms in on a cluster of small houses and garden plots, revealing details of the terrain, vegetation, and nearby structures.",
+    "evidence_visible": [
+      "Close-up of a small, single-story house with a grey tiled roof and white walls. Adjacent to it is a larger, two-story building with a red roof and a glass-enclosed sunroom or balcony.",
+      "The ground is a mix of bare soil, dry brush, and scattered rubble. To the right, there are organized garden plots with green crops, some covered by low plastic tunnels or black netting. A white car is parked near the larger building."
+    ],
+    "unclear": [
+      "The specific type of crops in the garden plots is unclear due to resolution. The exact nature of the scattered debris and rubble is unclear. The purpose of the glass structure on the larger building is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a mixed-use area with large industrial buildings on the left and a construction site covered in green mesh in the background. The foreground contains a network of dirt paths, small residential structures, and numerous small-scale agricultural plots.\",\n    \"The terrain is uneven, featuring patches of dry vegetation, bare earth, and scattered debris. A paved road runs along the left edge, separating the industrial zone from the residential and agricultural areas.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop view is a high-magnification section of the lower-right quadrant of the context image. It isolates a specific cluster of small houses and garden plots situated between the main dirt path and the larger construction site.\",\n    \"The spatial relationship confirms the crop focuses on the residential-agricultural interface, showing the proximity of the small houses to the cleared land and the green mesh-covered area.\"\n  ],\n  \"description\": \"Aerial view of a mixed industrial and agricultural zone. The context shows a broad landscape with factories, a green-mesh construction site, and scattered homes. The crop zooms in on a cluster of small houses and garden plots, revealing details of the terrain, vegetation, and nearby structures.\",\n  \"evidence_visible\": [\n    \"Close-up of a small, single-story house with a grey tiled roof and white walls. Adjacent to it is a larger, two-story building with a red roof and a glass-enclosed sunroom or balcony.\",\n    \"The ground is a mix of bare soil, dry brush, and scattered rubble. To the right, there are organized garden plots with green crops, some covered by low plastic tunnels or black netting. A white car is parked near the larger building.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the garden plots is unclear due to resolution. The exact nature of the scattered debris and rubble is unclear. The purpose of the glass structure on the larger building is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of debris and rubble rather than the organized materials, scaffolding, or active machinery typical of a general construction project.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a cleared plot of land characterized by scattered rubble, debris, and bare earth, indicating the aftermath of a structure being torn down.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of debris and rubble rather than the organized materials, scaffolding, or active machinery typical of a general construction project.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a cleared plot of land characterized by scattered rubble, debris, and bare earth, indicating the aftermath of a structure being torn down.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a plot of land in the center that has been cleared of vegetation and structures. This area is characterized by bare earth, piles of dirt, and scattered rubble and debris, which visually supports the description of a cleared plot indicating the aftermath of a structure being torn down.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image does not show an active general construction project. While there is a cleared plot of land with rubble (indicating demolition), there are no visible signs of active construction such as cranes, scaffolding, heavy machinery, or workers building a new structure. The scene depicts a post-demolition state rather than an active construction phase.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a plot of land in the center that has been cleared of vegetation and structures. This area is characterized by bare earth, piles of dirt, and scattered rubble and debris, which visually supports the description of a cleared plot indicating the aftermath of a structure being torn down.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image does not show an active general construction project. While there is a cleared plot of land with rubble (indicating demolition), there are no visible signs of active construction such as cranes, scaffolding, heavy machinery, or workers building a new structure. The scene depicts a post-demolition state rather than an active construction phase.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

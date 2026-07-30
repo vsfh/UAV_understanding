@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_2e2f7dc8715bd46dab68",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0213-3324-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0213-3324-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a dense urban area with mixed building types, including multi-story residential blocks and single-story structures with pitched roofs.",
+      "A paved road runs horizontally across the middle of the frame, with vehicles parked along the curb and moving on the street.",
+      "Buildings feature various roof materials, including grey tiles, red tiles, and blue corrugated metal.",
+      "Air conditioning units are visible mounted on the exterior walls of several buildings."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the lower-left quadrant of the context image.",
+      "The long building with the grey tiled roof and external air conditioning units in the crop corresponds to the structure in the bottom-left of the context image.",
+      "The road with the white car and the adjacent single-story building with a grey roof in the crop match the features seen in the lower-left section of the context image."
+    ],
+    "description": "The images show an aerial view of a residential area. The context image provides a wide overview of streets and mixed housing, while the crop focuses on a specific section featuring a long building with a grey tiled roof and external air conditioning units, alongside a road with parked cars and a smaller adjacent structure.",
+    "evidence_visible": [
+      "A long, single-story building with a grey tiled roof and multiple air conditioning units mounted on its side wall.",
+      "A smaller, adjacent single-story building with a grey tiled roof and a small garden plot with green vegetation.",
+      "A paved road with a white car, a black car, and a motorcycle visible.",
+      "A blue corrugated metal roof is visible on a structure to the right of the smaller grey-roofed building.",
+      "Debris or construction materials are visible on the flat roof of a section between the two main buildings in the crop."
+    ],
+    "unclear": [
+      "The specific type of business or residential use of the buildings.",
+      "The exact date the images were taken.",
+      "The ownership of the properties."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a dense urban area with mixed building types, including multi-story residential blocks and single-story structures with pitched roofs.\",\n    \"A paved road runs horizontally across the middle of the frame, with vehicles parked along the curb and moving on the street.\",\n    \"Buildings feature various roof materials, including grey tiles, red tiles, and blue corrugated metal.\",\n    \"Air conditioning units are visible mounted on the exterior walls of several buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the lower-left quadrant of the context image.\",\n    \"The long building with the grey tiled roof and external air conditioning units in the crop corresponds to the structure in the bottom-left of the context image.\",\n    \"The road with the white car and the adjacent single-story building with a grey roof in the crop match the features seen in the lower-left section of the context image.\"\n  ],\n  \"description\": \"The images show an aerial view of a residential area. The context image provides a wide overview of streets and mixed housing, while the crop focuses on a specific section featuring a long building with a grey tiled roof and external air conditioning units, alongside a road with parked cars and a smaller adjacent structure.\",\n  \"evidence_visible\": [\n    \"A long, single-story building with a grey tiled roof and multiple air conditioning units mounted on its side wall.\",\n    \"A smaller, adjacent single-story building with a grey tiled roof and a small garden plot with green vegetation.\",\n    \"A paved road with a white car, a black car, and a motorcycle visible.\",\n    \"A blue corrugated metal roof is visible on a structure to the right of the smaller grey-roofed building.\",\n    \"Debris or construction materials are visible on the flat roof of a section between the two main buildings in the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific type of business or residential use of the buildings.\",\n    \"The exact date the images were taken.\",\n    \"The ownership of the properties.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of debris and construction materials on the flat roof section, which indicates demolition activity rather than the structural assembly typical of a project construction event.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by visible evidence of a building undergoing active or recent demolition, specifically the flat roof section between the two main structures in the crop which is covered in debris and construction materials.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of debris and construction materials on the flat roof section, which indicates demolition activity rather than the structural assembly typical of a project construction event.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by visible evidence of a building undergoing active or recent demolition, specifically the flat roof section between the two main structures in the crop which is covered in debris and construction materials.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a building in a state of partial demolition or ruin. The flat roof section between the two main structures is covered in rubble, debris, and construction materials, with no roof covering remaining in that area. This directly supports the claim of active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image depicts a building that has been partially demolished, evidenced by the exposed rubble and lack of roof structure in the central section. This contradicts the claim of an 'active general construction project,' which implies building up rather than tearing down.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image shows an active general construction project."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a building in a state of partial demolition or ruin. The flat roof section between the two main structures is covered in rubble, debris, and construction materials, with no roof covering remaining in that area. This directly supports the claim of active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image depicts a building that has been partially demolished, evidenced by the exposed rubble and lack of roof structure in the central section. This contradicts the claim of an 'active general construction project,' which implies building up rather than tearing down.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image shows an active general construction project.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

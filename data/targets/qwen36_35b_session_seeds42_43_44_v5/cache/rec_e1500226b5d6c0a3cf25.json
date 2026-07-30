@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e1500226b5d6c0a3cf25",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/original/0424-7630-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/cropped/0424-7630-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape dominated by large, rectangular plots of dense green crops.",
+      "A cluster of buildings with white and grey roofs is situated in the lower right corner.",
+      "A dirt and gravel area with scattered debris is visible on the far left edge.",
+      "A narrow water channel runs along the bottom left boundary."
+    ],
+    "cross_view_relations": [
+      "The debris field in the context image (left edge) spatially corresponds to the material shown in the evidence crop.",
+      "The evidence crop provides a magnified view of the construction waste and soil texture found in the context scene."
+    ],
+    "description": "The image displays a wide aerial view of agricultural fields with a building cluster and a debris site on the left. The linked evidence crop details the specific composition of this debris, showing scattered wood, rubble, and soil.",
+    "evidence_visible": [
+      "A close-up view of a disturbed ground surface containing loose soil and rocks.",
+      "Scattered construction debris, including white fragments, wooden planks, and a small red object.",
+      "A vertical concrete structure or wall is partially visible on the left side of the crop."
+    ],
+    "unclear": [
+      "The specific type of crops in the green fields.",
+      "The exact nature of the red object in the debris.",
+      "The purpose of the concrete structure in the evidence crop."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape dominated by large, rectangular plots of dense green crops.\",\n    \"A cluster of buildings with white and grey roofs is situated in the lower right corner.\",\n    \"A dirt and gravel area with scattered debris is visible on the far left edge.\",\n    \"A narrow water channel runs along the bottom left boundary.\"\n  ],\n  \"cross_view_relations\": [\n    \"The debris field in the context image (left edge) spatially corresponds to the material shown in the evidence crop.\",\n    \"The evidence crop provides a magnified view of the construction waste and soil texture found in the context scene.\"\n  ],\n  \"description\": \"The image displays a wide aerial view of agricultural fields with a building cluster and a debris site on the left. The linked evidence crop details the specific composition of this debris, showing scattered wood, rubble, and soil.\",\n  \"evidence_visible\": [\n    \"A close-up view of a disturbed ground surface containing loose soil and rocks.\",\n    \"Scattered construction debris, including white fragments, wooden planks, and a small red object.\",\n    \"A vertical concrete structure or wall is partially visible on the left side of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the green fields.\",\n    \"The exact nature of the red object in the debris.\",\n    \"The purpose of the concrete structure in the evidence crop.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of scattered rubble and debris on the ground, whereas project construction typically involves organized assembly of materials and structures.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a disturbed ground surface containing loose soil, rocks, and scattered construction debris, including white fragments, wooden planks, and a small red object, alongside a vertical concrete structure.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of scattered rubble and debris on the ground, whereas project construction typically involves organized assembly of materials and structures.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a disturbed ground surface containing loose soil, rocks, and scattered construction debris, including white fragments, wooden planks, and a small red object, alongside a vertical concrete structure.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a disturbed ground surface with loose soil, rocks, and scattered construction debris, including white fragments, wooden planks, and a small red object, alongside a vertical concrete structure. This visual evidence directly supports the description of a demolition event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a site with debris and rubble, which is characteristic of demolition or a cleared lot, rather than an active construction project. There are no visible signs of active building work, such as cranes, scaffolding, or new structural assembly.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The site is an active general construction project."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a disturbed ground surface with loose soil, rocks, and scattered construction debris, including white fragments, wooden planks, and a small red object, alongside a vertical concrete structure. This visual evidence directly supports the description of a demolition event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a site with debris and rubble, which is characteristic of demolition or a cleared lot, rather than an active construction project. There are no visible signs of active building work, such as cranes, scaffolding, or new structural assembly.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The site is an active general construction project.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

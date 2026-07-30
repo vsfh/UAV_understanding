@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d6db4e9ed1eb5424975a",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0128-1272-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0128-1272-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of an industrial area with multiple buildings featuring blue and grey roofs.",
+      "A large, unpaved lot in the center contains scattered debris, piles of materials, and construction equipment.",
+      "A yellow crane arm extends across the lot.",
+      "A row of trees separates the lot from a road with parked cars.",
+      "A white car is visible on the road in the lower right.",
+      "Piles of curved metal sheets are stacked in the foreground."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the central unpaved lot shown in the context image.",
+      "The yellow crane arm is clearly visible in both images, confirming the spatial relationship.",
+      "The white car on the road is visible in both images, anchoring the location.",
+      "The row of trees and the adjacent building with the grey roof are consistent across both views."
+    ],
+    "description": "An aerial view shows an industrial site with a large, cluttered lot containing debris, construction materials, and a yellow crane. The lot is bordered by a tree-lined road with parked cars and surrounded by buildings with blue and grey roofs. A white car is visible on the road. The scene appears to be a construction or demolition site.",
+    "evidence_visible": [
+      "Close-up of the central lot showing a yellow crane arm extending horizontally.",
+      "Piles of mixed debris, including blue tarps and metal scraps.",
+      "A small yellow vehicle, possibly a loader, is visible near the bottom right of the lot.",
+      "The white car on the road is clearly visible.",
+      "The grey-roofed building and the row of trees are clearly visible."
+    ],
+    "unclear": [
+      "The exact nature of the debris (e.g., construction waste, demolition rubble).",
+      "The specific type of the small yellow vehicle.",
+      "The purpose of the lot (e.g., active construction, storage, demolition).",
+      "The identity of the buildings or the company operating the site."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of an industrial area with multiple buildings featuring blue and grey roofs.\",\n    \"A large, unpaved lot in the center contains scattered debris, piles of materials, and construction equipment.\",\n    \"A yellow crane arm extends across the lot.\",\n    \"A row of trees separates the lot from a road with parked cars.\",\n    \"A white car is visible on the road in the lower right.\",\n    \"Piles of curved metal sheets are stacked in the foreground.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the central unpaved lot shown in the context image.\",\n    \"The yellow crane arm is clearly visible in both images, confirming the spatial relationship.\",\n    \"The white car on the road is visible in both images, anchoring the location.\",\n    \"The row of trees and the adjacent building with the grey roof are consistent across both views.\"\n  ],\n  \"description\": \"An aerial view shows an industrial site with a large, cluttered lot containing debris, construction materials, and a yellow crane. The lot is bordered by a tree-lined road with parked cars and surrounded by buildings with blue and grey roofs. A white car is visible on the road. The scene appears to be a construction or demolition site.\",\n  \"evidence_visible\": [\n    \"Close-up of the central lot showing a yellow crane arm extending horizontally.\",\n    \"Piles of mixed debris, including blue tarps and metal scraps.\",\n    \"A small yellow vehicle, possibly a loader, is visible near the bottom right of the lot.\",\n    \"The white car on the road is clearly visible.\",\n    \"The grey-roofed building and the row of trees are clearly visible.\"\n  ],\n  \"unclear\": [\n    \"The exact nature of the debris (e.g., construction waste, demolition rubble).\",\n    \"The specific type of the small yellow vehicle.\",\n    \"The purpose of the lot (e.g., active construction, storage, demolition).\",\n    \"The identity of the buildings or the company operating the site.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a large, open lot filled with debris and a crane, which indicates an active demolition process rather than static structural damage to a standing building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a large, unpaved lot containing scattered debris, piles of mixed materials, and a yellow crane arm extending across the site, indicating active demolition or construction activity.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a large, open lot filled with debris and a crane, which indicates an active demolition process rather than static structural damage to a standing building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a large, unpaved lot containing scattered debris, piles of mixed materials, and a yellow crane arm extending across the site, indicating active demolition or construction activity.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large, unpaved lot filled with scattered debris, piles of mixed materials, and a yellow crane arm extending across the site. These visual elements directly support the description of active demolition or construction activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image depicts a cleared lot with debris and construction equipment, not a building with visible structural damage. The claim of 'visible structural damage to a building' is contradicted by the visual evidence of a demolished or cleared site.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large, unpaved lot filled with scattered debris, piles of mixed materials, and a yellow crane arm extending across the site. These visual elements directly support the description of active demolition or construction activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image depicts a cleared lot with debris and construction equipment, not a building with visible structural damage. The claim of 'visible structural damage to a building' is contradicted by the visual evidence of a demolished or cleared site.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e1fa7589211391855ad6",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0814-4701-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0814-4701-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with mixed residential and agricultural land use.",
+      "Large rectangular plots of green crops in the upper left.",
+      "A cluster of single-story buildings with grey and red roofs in the center.",
+      "A rectangular pond with green algae on the right side.",
+      "A road running horizontally across the upper section with a train passing on it.",
+      "A building with solar panels on its roof near the road."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a high-resolution, zoomed-in view of the central building cluster seen in the context image.",
+      "The specific building with the grey tiled roof and adjacent concrete courtyard in the evidence view corresponds to the structures located in the middle of the village cluster in the context view."
+    ],
+    "description": "The images show a rural village with agricultural fields and a train passing on a nearby track. The evidence crop provides a detailed view of a specific residential building with a grey tiled roof and a concrete courtyard, confirming the architectural style and layout of the structures within the central village cluster.",
+    "evidence_visible": [
+      "Close-up of a building with a grey, textured tiled roof.",
+      "A concrete courtyard area with a small, rectangular brick structure (possibly a well or furnace).",
+      "Adjacent buildings with similar grey tiled roofs and flat concrete sections.",
+      "A narrow paved path or alleyway between the buildings.",
+      "A small blue object, possibly a tarp or container, on the ground near the bottom right."
+    ],
+    "unclear": [
+      "The specific function of the small brick structure in the courtyard.",
+      "The exact contents of the blue object.",
+      "The identity of any individuals or vehicles."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with mixed residential and agricultural land use.\",\n    \"Large rectangular plots of green crops in the upper left.\",\n    \"A cluster of single-story buildings with grey and red roofs in the center.\",\n    \"A rectangular pond with green algae on the right side.\",\n    \"A road running horizontally across the upper section with a train passing on it.\",\n    \"A building with solar panels on its roof near the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a high-resolution, zoomed-in view of the central building cluster seen in the context image.\",\n    \"The specific building with the grey tiled roof and adjacent concrete courtyard in the evidence view corresponds to the structures located in the middle of the village cluster in the context view.\"\n  ],\n  \"description\": \"The images show a rural village with agricultural fields and a train passing on a nearby track. The evidence crop provides a detailed view of a specific residential building with a grey tiled roof and a concrete courtyard, confirming the architectural style and layout of the structures within the central village cluster.\",\n  \"evidence_visible\": [\n    \"Close-up of a building with a grey, textured tiled roof.\",\n    \"A concrete courtyard area with a small, rectangular brick structure (possibly a well or furnace).\",\n    \"Adjacent buildings with similar grey tiled roofs and flat concrete sections.\",\n    \"A narrow paved path or alleyway between the buildings.\",\n    \"A small blue object, possibly a tarp or container, on the ground near the bottom right.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the small brick structure in the courtyard.\",\n    \"The exact contents of the blue object.\",\n    \"The identity of any individuals or vehicles.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific nature of the failure: a wall that has visibly collapsed versus general structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence crop shows a building with a grey tiled roof where the wall structure appears to have failed or collapsed into the adjacent concrete courtyard area.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific nature of the failure: a wall that has visibly collapsed versus general structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence crop shows a building with a grey tiled roof where the wall structure appears to have failed or collapsed into the adjacent concrete courtyard area.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence crop shows a building with a grey tiled roof and a concrete courtyard. The wall structure appears intact, and there is no visible evidence of a wall collapse or failure into the courtyard area.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The wall structure appears to have failed or collapsed into the adjacent concrete courtyard area."
+      ]
+    },
+    "positive": {
+      "reason": "The evidence crop shows a building with a grey tiled roof and a concrete courtyard. There is no visible evidence of structural damage to the building.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "Visible evidence shows visible structural damage to a building."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence crop shows a building with a grey tiled roof and a concrete courtyard. The wall structure appears intact, and there is no visible evidence of a wall collapse or failure into the courtyard area.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The wall structure appears to have failed or collapsed into the adjacent concrete courtyard area.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The evidence crop shows a building with a grey tiled roof and a concrete courtyard. There is no visible evidence of structural damage to the building.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"Visible evidence shows visible structural damage to a building.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

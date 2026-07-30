@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_6dddf6a948bf595fdba9",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0127-2713-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0127-2713-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a wide, greenish river with a long, narrow boat navigating the center.",
+      "Left bank: Multi-story buildings with red and blue roofs, a parking lot with white vehicles, and a blue-roofed structure.",
+      "Right bank: A paved road runs parallel to the river, bordered by a mix of single-story structures with grey roofs and taller, multi-story buildings.",
+      "Construction or industrial activity is visible on the right bank, including yellow machinery and piles of materials."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the upper-right section of the context image.",
+      "The three multi-story buildings in the crop correspond to the cluster of taller buildings seen on the right bank in the context image.",
+      "The road at the bottom of the crop matches the road running along the riverbank in the context image.",
+      "The yellow construction equipment visible in the crop is located just above the buildings in the context view."
+    ],
+    "description": "Aerial view of a river with a boat, flanked by buildings and a road. The crop shows a detailed view of three multi-story residential-style buildings and yellow construction equipment on the right bank, confirming the location of the industrial activity seen in the wider context.",
+    "evidence_visible": [
+      "Three multi-story buildings with grey and beige facades and numerous windows.",
+      "A paved road with white lane markings runs along the bottom edge of the crop.",
+      "Yellow construction machinery (possibly a crane or lift) is visible in the upper left of the crop.",
+      "Bare trees and a dirt/gravel area are present behind the buildings.",
+      "A fence separates the buildings from the road."
+    ],
+    "unclear": [
+      "The specific function of the multi-story buildings (residential, office, etc.) is unclear.",
+      "The exact type of construction activity is unclear.",
+      "The identity of the vehicles in the parking lot is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a wide, greenish river with a long, narrow boat navigating the center.\",\n    \"Left bank: Multi-story buildings with red and blue roofs, a parking lot with white vehicles, and a blue-roofed structure.\",\n    \"Right bank: A paved road runs parallel to the river, bordered by a mix of single-story structures with grey roofs and taller, multi-story buildings.\",\n    \"Construction or industrial activity is visible on the right bank, including yellow machinery and piles of materials.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the upper-right section of the context image.\",\n    \"The three multi-story buildings in the crop correspond to the cluster of taller buildings seen on the right bank in the context image.\",\n    \"The road at the bottom of the crop matches the road running along the riverbank in the context image.\",\n    \"The yellow construction equipment visible in the crop is located just above the buildings in the context view.\"\n  ],\n  \"description\": \"Aerial view of a river with a boat, flanked by buildings and a road. The crop shows a detailed view of three multi-story residential-style buildings and yellow construction equipment on the right bank, confirming the location of the industrial activity seen in the wider context.\",\n  \"evidence_visible\": [\n    \"Three multi-story buildings with grey and beige facades and numerous windows.\",\n    \"A paved road with white lane markings runs along the bottom edge of the crop.\",\n    \"Yellow construction machinery (possibly a crane or lift) is visible in the upper left of the crop.\",\n    \"Bare trees and a dirt/gravel area are present behind the buildings.\",\n    \"A fence separates the buildings from the road.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the multi-story buildings (residential, office, etc.) is unclear.\",\n    \"The exact type of construction activity is unclear.\",\n    \"The identity of the vehicles in the parking lot is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the absence of structural damage; the buildings in the crop appear intact, whereas building damage would require visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is not visibly supported: the three multi-story buildings in the crop appear structurally intact with no visible signs of active or recent demolition such as rubble, collapsed walls, or heavy machinery engaged in destruction.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the absence of structural damage; the buildings in the crop appear intact, whereas building damage would require visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is not visibly supported: the three multi-story buildings in the crop appear structurally intact with no visible signs of active or recent demolition such as rubble, collapsed walls, or heavy machinery engaged in destruction.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The three multi-story buildings in the crop are structurally intact with no visible signs of active or recent demolition such as rubble, collapsed walls, or heavy machinery engaged in destruction.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The buildings in the crop appear structurally intact with no visible signs of damage such as collapsed walls or structural failure.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The three multi-story buildings in the crop are structurally intact with no visible signs of active or recent demolition such as rubble, collapsed walls, or heavy machinery engaged in destruction.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The buildings in the crop appear structurally intact with no visible signs of damage such as collapsed walls or structural failure.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

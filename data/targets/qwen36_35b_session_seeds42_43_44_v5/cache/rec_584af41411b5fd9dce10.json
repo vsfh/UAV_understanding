@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_584af41411b5fd9dce10",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0303-0660-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0303-0660-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape containing multiple rectangular aquaculture ponds with green water.",
+      "Interspersed agricultural plots with bright yellow flowering crops and green vegetation.",
+      "Several residential buildings with grey and red roofs, connected by paved paths.",
+      "Bare deciduous trees and dense bamboo groves scattered throughout the area."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a high-resolution close-up of the cluster of buildings and yellow crops seen in the lower-left quadrant of the wide context image.",
+      "The paved path and the boundary between the yellow crop field and the adjacent green field are consistent across both views."
+    ],
+    "description": "The images depict a rural area with aquaculture ponds and agricultural fields. The wide view shows the general layout of ponds, yellow crops, and houses. The close-up view details a specific building with a damaged or open roof structure adjacent to a field of yellow flowers and a green crop field.",
+    "evidence_visible": [
+      "A building with a flat, grey roof that appears partially collapsed or open to the elements, revealing interior debris.",
+      "A red brick wall section bordering the building.",
+      "A dense patch of yellow flowering crops immediately adjacent to the building.",
+      "A green crop field with visible rows to the left of the yellow crops.",
+      "Bare trees in the foreground obscuring the lower part of the building."
+    ],
+    "unclear": [
+      "The specific nature of the debris inside the damaged roof structure.",
+      "The exact cause of the roof damage.",
+      "The identity of any persons visible in the distance."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape containing multiple rectangular aquaculture ponds with green water.\",\n    \"Interspersed agricultural plots with bright yellow flowering crops and green vegetation.\",\n    \"Several residential buildings with grey and red roofs, connected by paved paths.\",\n    \"Bare deciduous trees and dense bamboo groves scattered throughout the area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a high-resolution close-up of the cluster of buildings and yellow crops seen in the lower-left quadrant of the wide context image.\",\n    \"The paved path and the boundary between the yellow crop field and the adjacent green field are consistent across both views.\"\n  ],\n  \"description\": \"The images depict a rural area with aquaculture ponds and agricultural fields. The wide view shows the general layout of ponds, yellow crops, and houses. The close-up view details a specific building with a damaged or open roof structure adjacent to a field of yellow flowers and a green crop field.\",\n  \"evidence_visible\": [\n    \"A building with a flat, grey roof that appears partially collapsed or open to the elements, revealing interior debris.\",\n    \"A red brick wall section bordering the building.\",\n    \"A dense patch of yellow flowering crops immediately adjacent to the building.\",\n    \"A green crop field with visible rows to the left of the yellow crops.\",\n    \"Bare trees in the foreground obscuring the lower part of the building.\"\n  ],\n  \"unclear\": [\n    \"The specific nature of the debris inside the damaged roof structure.\",\n    \"The exact cause of the roof damage.\",\n    \"The identity of any persons visible in the distance.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between building demolition and building damage is that the visible evidence shows a building with a flat grey roof that is partially collapsed or open to the elements, revealing interior debris, which is consistent with active or recent demolition rather than just visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the local crop view shows a building with a flat grey roof that is partially collapsed or open to the elements, revealing interior debris, situated adjacent to a field of yellow flowering crops and a green crop field.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is that the visible evidence shows a building with a flat grey roof that is partially collapsed or open to the elements, revealing interior debris, which is consistent with active or recent demolition rather than just visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the local crop view shows a building with a flat grey roof that is partially collapsed or open to the elements, revealing interior debris, situated adjacent to a field of yellow flowering crops and a green crop field.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The local crop image clearly shows a building with a flat grey roof that is partially collapsed, exposing interior debris. This structure is situated directly adjacent to a field of yellow flowering crops and a green crop field, matching the description in the statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The local crop image displays a building with a flat grey roof that is partially collapsed, exposing interior debris. This constitutes visible structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The local crop image clearly shows a building with a flat grey roof that is partially collapsed, exposing interior debris. This structure is situated directly adjacent to a field of yellow flowering crops and a green crop field, matching the description in the statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The local crop image displays a building with a flat grey roof that is partially collapsed, exposing interior debris. This constitutes visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

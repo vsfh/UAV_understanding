@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_72e750675d4481ea7eba",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1015-5482-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1015-5482-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area containing agricultural plots, paved roads, and buildings with blue and grey roofs.",
+      "A river or canal runs through the background.",
+      "A long, rectangular structure covered in green material is located in the center of the agricultural field.",
+      "A smaller structure with a reddish roof is adjacent to the green structure.",
+      "Yellow containers or vehicles are visible in a lot to the right of the field."
+    ],
+    "cross_view_relations": [
+      "The second image is a magnified, lower-resolution crop of the central area of the first image.",
+      "The green rectangular structure and the adjacent reddish structure in the crop correspond to the same objects in the wide view.",
+      "The spatial relationship between the green structure, the reddish structure, and the surrounding vegetation is consistent across both views."
+    ],
+    "description": "The images show an aerial view of a rural area with agricultural plots. A long, green-covered rectangular structure and a smaller reddish structure are visible in the center field. The second image provides a zoomed-in, blurry view of these specific structures, confirming their location and shape within the wider context.",
+    "evidence_visible": [
+      "A close-up, blurry view of a long, rectangular object covered in green material.",
+      "A smaller, reddish-brown rectangular object is positioned next to the green structure.",
+      "Surrounding vegetation and a paved path are visible.",
+      "The image quality is low, obscuring fine details of the materials."
+    ],
+    "unclear": [
+      "The specific contents or purpose of the green and reddish structures.",
+      "The exact material of the green covering.",
+      "The presence of any people or specific activities."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area containing agricultural plots, paved roads, and buildings with blue and grey roofs.\",\n    \"A river or canal runs through the background.\",\n    \"A long, rectangular structure covered in green material is located in the center of the agricultural field.\",\n    \"A smaller structure with a reddish roof is adjacent to the green structure.\",\n    \"Yellow containers or vehicles are visible in a lot to the right of the field.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a magnified, lower-resolution crop of the central area of the first image.\",\n    \"The green rectangular structure and the adjacent reddish structure in the crop correspond to the same objects in the wide view.\",\n    \"The spatial relationship between the green structure, the reddish structure, and the surrounding vegetation is consistent across both views.\"\n  ],\n  \"description\": \"The images show an aerial view of a rural area with agricultural plots. A long, green-covered rectangular structure and a smaller reddish structure are visible in the center field. The second image provides a zoomed-in, blurry view of these specific structures, confirming their location and shape within the wider context.\",\n  \"evidence_visible\": [\n    \"A close-up, blurry view of a long, rectangular object covered in green material.\",\n    \"A smaller, reddish-brown rectangular object is positioned next to the green structure.\",\n    \"Surrounding vegetation and a paved path are visible.\",\n    \"The image quality is low, obscuring fine details of the materials.\"\n  ],\n  \"unclear\": [\n    \"The specific contents or purpose of the green and reddish structures.\",\n    \"The exact material of the green covering.\",\n    \"The presence of any people or specific activities.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the continuous coverage of the green material over the rectangular structure; however, the specific contents or purpose of the structure are unclear, making the distinction not fully visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a long, rectangular structure covered in green material located in the center of the agricultural field, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the continuous coverage of the green material over the rectangular structure; however, the specific contents or purpose of the structure are unclear, making the distinction not fully visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a long, rectangular structure covered in green material located in the center of the agricultural field, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence directly contradicts the claim of 'bare soil netting'. The visual data shows a long, rectangular structure covered in a solid green material (likely a greenhouse or shade cloth), not bare soil. The claim that the structure is 'located in the center' is also inaccurate; it is situated in the middle-right portion of the field, adjacent to a road and other buildings. The description of 'dust-control netting' is an unsupported interpretation of the green covering.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The structure is covered in bare soil netting.",
+        "The structure is located in the center of the agricultural field.",
+        "The green material is dust-control netting."
+      ]
+    },
+    "positive": {
+      "reason": "The image evidence supports the claim of 'incomplete soil cover'. The visual data shows a landscape of agricultural plots where some areas are covered with green vegetation or structures (like the green-roofed shed), while adjacent areas are clearly exposed brown earth. This visual contrast confirms that the soil cover is incomplete across the field.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence directly contradicts the claim of 'bare soil netting'. The visual data shows a long, rectangular structure covered in a solid green material (likely a greenhouse or shade cloth), not bare soil. The claim that the structure is 'located in the center' is also inaccurate; it is situated in the middle-right portion of the field, adjacent to a road and other buildings. The description of 'dust-control netting' is an unsupported interpretation of the green covering.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The structure is covered in bare soil netting.\",\n      \"The structure is located in the center of the agricultural field.\",\n      \"The green material is dust-control netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence supports the claim of 'incomplete soil cover'. The visual data shows a landscape of agricultural plots where some areas are covered with green vegetation or structures (like the green-roofed shed), while adjacent areas are clearly exposed brown earth. This visual contrast confirms that the soil cover is incomplete across the field.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

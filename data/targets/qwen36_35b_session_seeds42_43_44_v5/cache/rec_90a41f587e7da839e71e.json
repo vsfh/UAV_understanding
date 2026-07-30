@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_90a41f587e7da839e71e",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0113-2309-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0113-2309-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a network of dark waterways and rectangular ponds.",
+      "A paved road intersects the waterways via a bridge.",
+      "Surrounding the settlement are large agricultural fields, some flooded with water and others dry.",
+      "Buildings include multi-story white structures with grey roofs and single-story brick buildings.",
+      "Vegetation consists of bare deciduous trees and patches of green crops."
+    ],
+    "cross_view_relations": [
+      "The local crop image is a high-magnification view of the area immediately surrounding the bridge in the context image.",
+      "The white two-story house with a grey roof and red gate visible in the crop is located on the far bank of the waterway in the context image.",
+      "The small brick enclosure and the adjacent green vegetable plots seen in the crop are situated on the near bank of the waterway, just below the bridge.",
+      "A small boat is visible in the water in both images."
+    ],
+    "description": "The images depict a rural landscape with a bridge crossing a waterway. The context view shows the broader settlement and agricultural fields, while the linked crop provides a detailed view of a white two-story house, a small brick enclosure, and green vegetable plots situated on the banks near the bridge.",
+    "evidence_visible": [
+      "A white two-story residential building with a grey tiled roof and a red gate.",
+      "A small, rectangular enclosure made of red brick with a collapsed or low roof.",
+      "A plot of land with rows of green leafy vegetables.",
+      "A small, narrow boat floating in the dark water.",
+      "A paved road running horizontally across the frame.",
+      "A blue tarp structure and a red sign on a building in the background."
+    ],
+    "unclear": [
+      "The specific type of green vegetables in the plot.",
+      "The exact text on the red sign.",
+      "The purpose of the small brick enclosure.",
+      "The identity of the people visible near the blue tarp."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a network of dark waterways and rectangular ponds.\",\n    \"A paved road intersects the waterways via a bridge.\",\n    \"Surrounding the settlement are large agricultural fields, some flooded with water and others dry.\",\n    \"Buildings include multi-story white structures with grey roofs and single-story brick buildings.\",\n    \"Vegetation consists of bare deciduous trees and patches of green crops.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop image is a high-magnification view of the area immediately surrounding the bridge in the context image.\",\n    \"The white two-story house with a grey roof and red gate visible in the crop is located on the far bank of the waterway in the context image.\",\n    \"The small brick enclosure and the adjacent green vegetable plots seen in the crop are situated on the near bank of the waterway, just below the bridge.\",\n    \"A small boat is visible in the water in both images.\"\n  ],\n  \"description\": \"The images depict a rural landscape with a bridge crossing a waterway. The context view shows the broader settlement and agricultural fields, while the linked crop provides a detailed view of a white two-story house, a small brick enclosure, and green vegetable plots situated on the banks near the bridge.\",\n  \"evidence_visible\": [\n    \"A white two-story residential building with a grey tiled roof and a red gate.\",\n    \"A small, rectangular enclosure made of red brick with a collapsed or low roof.\",\n    \"A plot of land with rows of green leafy vegetables.\",\n    \"A small, narrow boat floating in the dark water.\",\n    \"A paved road running horizontally across the frame.\",\n    \"A blue tarp structure and a red sign on a building in the background.\"\n  ],\n  \"unclear\": [\n    \"The specific type of green vegetables in the plot.\",\n    \"The exact text on the red sign.\",\n    \"The purpose of the small brick enclosure.\",\n    \"The identity of the people visible near the blue tarp.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the structural state of the brick enclosure, which exhibits a collapsed or low roof indicative of demolition, whereas building damage would imply visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a small, rectangular enclosure made of red brick with a collapsed or low roof situated on the near bank of the waterway, adjacent to a white two-story residential building.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the structural state of the brick enclosure, which exhibits a collapsed or low roof indicative of demolition, whereas building damage would imply visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a small, rectangular enclosure made of red brick with a collapsed or low roof situated on the near bank of the waterway, adjacent to a white two-story residential building.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence shows a small, rectangular enclosure made of red brick on the near bank of the waterway. The structure has a collapsed or very low roof, appearing as a ruin or demolition site, situated adjacent to a white two-story residential building. This visual evidence directly supports the description of a building demolition event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible evidence shows structural damage to a building. While the image does show a damaged building (the red brick enclosure), the statement is vague and does not specify which building or the nature of the damage. However, the prompt asks to judge literal visible support. The visible evidence *does* show structural damage to a building (the red brick enclosure). Therefore, the claim is supported.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence shows a small, rectangular enclosure made of red brick on the near bank of the waterway. The structure has a collapsed or very low roof, appearing as a ruin or demolition site, situated adjacent to a white two-story residential building. This visual evidence directly supports the description of a building demolition event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible evidence shows structural damage to a building. While the image does show a damaged building (the red brick enclosure), the statement is vague and does not specify which building or the nature of the damage. However, the prompt asks to judge literal visible support. The visible evidence *does* show structural damage to a building (the red brick enclosure). Therefore, the claim is supported.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

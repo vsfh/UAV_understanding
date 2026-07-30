@@ -1,0 +1,83 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_91fb3060e273a4248aa7",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0827-6402-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0827-6402-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a central waterway covered in green algae. The area features a mix of residential structures, including a large modern house with a dark roof on the left and a dense cluster of older buildings with grey tiled roofs on the right. Surrounding the settlement are bright green agricultural fields and scattered trees."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the residential cluster located on the right bank of the waterway in the context image. The specific white building with solar panels visible in the crop is part of the larger group of houses seen in the wide shot."
+    ],
+    "description": "Aerial imagery of a rural village situated along a waterway. The scene includes a large modern residence with a dark roof and a dense cluster of traditional homes with grey tiled roofs. The crop highlights a specific white building within the cluster equipped with rooftop solar panels, surrounded by green vegetation and fields.",
+    "evidence_visible": [
+      "Close-up view of a residential cluster showing a white multi-story building with a red roof and a large array of solar panels on an adjacent flat roof. Surrounding structures include older buildings with grey tiled roofs and exposed brick walls. A dirt path and green vegetation are visible in the background."
+    ],
+    "unclear": [
+      "Exact number of solar panels, specific building materials of the older structures, and the condition of the waterway banks."
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"Aerial view of a rural settlement with a central waterway covered in green algae. The area features a mix of residential structures, including a large modern house with a dark roof on the left and a dense cluster of older buildings with grey tiled roofs on the right. Surrounding the settlement are bright green agricultural fields and scattered trees.\"\n],\n\"cross_view_relations\": [\n\"The crop image is a zoomed-in view of the residential cluster located on the right bank of the waterway in the context image. The specific white building with solar panels visible in the crop is part of the larger group of houses seen in the wide shot.\"\n],\n\"description\": \"Aerial imagery of a rural village situated along a waterway. The scene includes a large modern residence with a dark roof and a dense cluster of traditional homes with grey tiled roofs. The crop highlights a specific white building within the cluster equipped with rooftop solar panels, surrounded by green vegetation and fields.\",\n\"evidence_visible\": [\n\"Close-up view of a residential cluster showing a white multi-story building with a red roof and a large array of solar panels on an adjacent flat roof. Surrounding structures include older buildings with grey tiled roofs and exposed brick walls. A dirt path and green vegetation are visible in the background.\"\n],\n\"unclear\": [\n\"Exact number of solar panels, specific building materials of the older structures, and the condition of the waterway banks.\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is that the former specifically denotes a wall that has fallen down, whereas the latter is a broader category for any visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a house wall that has visibly collapsed, specifically the exposed brick structure in the center of the residential cluster.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is that the former specifically denotes a wall that has fallen down, whereas the latter is a broader category for any visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a house wall that has visibly collapsed, specifically the exposed brick structure in the center of the residential cluster.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a building with a collapsed wall and exposed brick structure in the center of the residential cluster, directly supporting the claim of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image evidence shows visible structural damage to a building, specifically the exposed brick structure where a wall has collapsed, supporting the claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a building with a collapsed wall and exposed brick structure in the center of the residential cluster, directly supporting the claim of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows visible structural damage to a building, specifically the exposed brick structure where a wall has collapsed, supporting the claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

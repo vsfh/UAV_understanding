@@ -1,0 +1,6 @@
+{
+  "record_uid": "rec_8ca3cca3594e06543b41",
+  "source_class": "collapsed_house_wall",
+  "error_type": "TeacherGenerationError",
+  "error": "Teacher failed after 3 attempts: Rewrite keys must be ['counterfactual_target', 'distinction', 'missing_required_factors', 'target'], got ['counterfactual_target', 'distinction', 'events', 'evidence', 'factors', 'missing_required_factors', 'target', 'uncertain'] | Rewrite distinction must explicitly name both event labels | Rewrite distinction must explicitly name both event labels"
+}

@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_f723268e38d03f5679d3",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1028-4135-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1028-4135-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "A wide aerial view of a rural-urban interface featuring a multi-lane highway running horizontally across the frame.",
+      "To the north of the highway, there is a mix of residential housing clusters, agricultural fields with yellow crops, and industrial structures.",
+      "To the south of the highway, the terrain is dominated by dense green vegetation and trees.",
+      "A large blue billboard is visible on the southern side of the highway, adjacent to a construction or storage site."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a magnified view of the area immediately north of the highway, specifically focusing on the site adjacent to the blue billboard.",
+      "The blue billboard visible in the lower-left of the crop corresponds to the billboard seen on the southern side of the highway in the context image.",
+      "The industrial building with the blue roof in the context image is located to the left of the site shown in the crop."
+    ],
+    "description": "The context image shows a highway separating a developed area with fields and buildings from a wooded area. The crop provides a detailed view of a construction or material storage site located just north of the highway, adjacent to a large blue billboard. The site contains multiple large piles of earth or aggregate, some covered with green mesh, and heavy machinery.",
+    "evidence_visible": [
+      "A cleared dirt area containing several large mounds of brown earth or aggregate.",
+      "Green mesh or tarps are draped over portions of the mounds.",
+      "Heavy machinery, appearing to be excavators, is visible on the site.",
+      "A large blue billboard with text and graphics is positioned at the edge of the site near the highway.",
+      "Residential houses with grey and white roofs are visible in the background behind the site."
+    ],
+    "unclear": [
+      "The specific type of material in the piles (e.g., soil, sand, gravel).",
+      "The exact status of the site (active construction vs. storage).",
+      "The text content on the blue billboard."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"A wide aerial view of a rural-urban interface featuring a multi-lane highway running horizontally across the frame.\",\n    \"To the north of the highway, there is a mix of residential housing clusters, agricultural fields with yellow crops, and industrial structures.\",\n    \"To the south of the highway, the terrain is dominated by dense green vegetation and trees.\",\n    \"A large blue billboard is visible on the southern side of the highway, adjacent to a construction or storage site.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a magnified view of the area immediately north of the highway, specifically focusing on the site adjacent to the blue billboard.\",\n    \"The blue billboard visible in the lower-left of the crop corresponds to the billboard seen on the southern side of the highway in the context image.\",\n    \"The industrial building with the blue roof in the context image is located to the left of the site shown in the crop.\"\n  ],\n  \"description\": \"The context image shows a highway separating a developed area with fields and buildings from a wooded area. The crop provides a detailed view of a construction or material storage site located just north of the highway, adjacent to a large blue billboard. The site contains multiple large piles of earth or aggregate, some covered with green mesh, and heavy machinery.\",\n  \"evidence_visible\": [\n    \"A cleared dirt area containing several large mounds of brown earth or aggregate.\",\n    \"Green mesh or tarps are draped over portions of the mounds.\",\n    \"Heavy machinery, appearing to be excavators, is visible on the site.\",\n    \"A large blue billboard with text and graphics is positioned at the edge of the site near the highway.\",\n    \"Residential houses with grey and white roofs are visible in the background behind the site.\"\n  ],\n  \"unclear\": [\n    \"The specific type of material in the piles (e.g., soil, sand, gravel).\",\n    \"The exact status of the site (active construction vs. storage).\",\n    \"The text content on the blue billboard.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a cleared dirt area containing large mounds of earth where portions are covered by green mesh or tarps, and heavy machinery is present on the site.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a cleared dirt area containing large mounds of earth where portions are covered by green mesh or tarps, and heavy machinery is present on the site.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a construction or excavation site with bare soil. There are large mounds of earth, and a significant portion of these mounds is covered by green mesh or tarps. Heavy machinery, specifically an excavator, is visible on the site. The description accurately reflects the visual evidence of bare soil, green mesh/tarps, and heavy machinery.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a site with exposed earth (bare soil). While there is green mesh covering some mounds, other areas of the site, including the ground surface and other mounds, are uncovered. This visual evidence supports the claim that the protective covering is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a construction or excavation site with bare soil. There are large mounds of earth, and a significant portion of these mounds is covered by green mesh or tarps. Heavy machinery, specifically an excavator, is visible on the site. The description accurately reflects the visual evidence of bare soil, green mesh/tarps, and heavy machinery.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a site with exposed earth (bare soil). While there is green mesh covering some mounds, other areas of the site, including the ground surface and other mounds, are uncovered. This visual evidence supports the claim that the protective covering is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

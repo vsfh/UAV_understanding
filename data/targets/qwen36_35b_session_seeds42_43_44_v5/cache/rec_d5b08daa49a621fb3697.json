@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d5b08daa49a621fb3697",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0917-5667-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0917-5667-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with residential houses, green rice paddies, and a waterway covered in vegetation.",
+      "A small plot of cleared, brown earth is visible in the foreground, adjacent to a green field and a small structure with a grey roof.",
+      "A bright cyan object is lying on the ground within the cleared plot."
+    ],
+    "cross_view_relations": [
+      "The cyan object in the context image is visually identical in color, shape, and position to the object in the evidence crop.",
+      "The evidence crop confirms the object is a cyan mesh net lying on the bare soil.",
+      "The context image shows the net is located next to a small building and surrounded by trees and vegetation."
+    ],
+    "description": "Aerial imagery shows a rural village with agricultural fields and a waterway. A small plot of cleared earth in the foreground contains a bright cyan mesh net. The close-up view confirms the net is lying on the bare ground near a small structure and trees.",
+    "evidence_visible": [
+      "A bright cyan mesh net is lying on a patch of bare, brown earth.",
+      "The net is partially folded or crumpled.",
+      "A small pink object is visible near the bottom edge of the net.",
+      "The surrounding area consists of green vegetation and trees."
+    ],
+    "unclear": [
+      "The specific contents of the net are not visible.",
+      "The purpose of the net (e.g., fishing, agriculture, construction) cannot be determined.",
+      "The identity of the small pink object is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with residential houses, green rice paddies, and a waterway covered in vegetation.\",\n    \"A small plot of cleared, brown earth is visible in the foreground, adjacent to a green field and a small structure with a grey roof.\",\n    \"A bright cyan object is lying on the ground within the cleared plot.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cyan object in the context image is visually identical in color, shape, and position to the object in the evidence crop.\",\n    \"The evidence crop confirms the object is a cyan mesh net lying on the bare soil.\",\n    \"The context image shows the net is located next to a small building and surrounded by trees and vegetation.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural village with agricultural fields and a waterway. A small plot of cleared earth in the foreground contains a bright cyan mesh net. The close-up view confirms the net is lying on the bare ground near a small structure and trees.\",\n  \"evidence_visible\": [\n    \"A bright cyan mesh net is lying on a patch of bare, brown earth.\",\n    \"The net is partially folded or crumpled.\",\n    \"A small pink object is visible near the bottom edge of the net.\",\n    \"The surrounding area consists of green vegetation and trees.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the net are not visible.\",\n    \"The purpose of the net (e.g., fishing, agriculture, construction) cannot be determined.\",\n    \"The identity of the small pink object is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the cyan mesh netting is visibly present and covering the soil, whereas incomplete soil cover would imply the protective covering is visibly incomplete or absent.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a patch of exposed brown earth covered by a bright cyan mesh net, confirmed by the close-up view of the object lying on the ground near a small structure.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the cyan mesh netting is visibly present and covering the soil, whereas incomplete soil cover would imply the protective covering is visibly incomplete or absent.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a patch of exposed brown earth covered by a bright cyan mesh net, confirmed by the close-up view of the object lying on the ground near a small structure.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a patch of bare brown earth covered by a bright cyan mesh net, which directly supports the description of 'bare soil netting'. The claim is visually confirmed.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a patch of bare earth covered by a cyan net. While the net is present, the claim of 'incomplete soil cover' is a subjective interpretation of the coverage extent rather than a direct visual fact. The net covers a significant portion of the patch, and 'incomplete' is not a strictly verifiable visual attribute compared to the objective presence of the net.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The claim that the soil cover is 'incomplete' is a subjective judgment not strictly supported by the visual evidence, which simply shows a net on a patch of soil."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a patch of bare brown earth covered by a bright cyan mesh net, which directly supports the description of 'bare soil netting'. The claim is visually confirmed.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a patch of bare earth covered by a cyan net. While the net is present, the claim of 'incomplete soil cover' is a subjective interpretation of the coverage extent rather than a direct visual fact. The net covers a significant portion of the patch, and 'incomplete' is not a strictly verifiable visual attribute compared to the objective presence of the net.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The claim that the soil cover is 'incomplete' is a subjective judgment not strictly supported by the visual evidence, which simply shows a net on a patch of soil.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

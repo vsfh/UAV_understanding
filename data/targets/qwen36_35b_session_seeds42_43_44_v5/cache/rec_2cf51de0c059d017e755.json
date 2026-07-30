@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_2cf51de0c059d017e755",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1002-3117-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1002-3117-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area with residential houses, paved roads, a canal, and organized agricultural plots.",
+      "A large white industrial building with a blue roof is visible in the upper right.",
+      "A cluster of buildings with dark, flat roofs is located in the lower center.",
+      "A white vehicle is parked on a concrete surface near the lower-center buildings."
+    ],
+    "cross_view_relations": [
+      "The crop view is a magnified section of the lower-center area of the context image.",
+      "The white vehicle in the crop corresponds to the vehicle parked near the dark-roofed buildings in the context.",
+      "The white building with the blue roof in the context is located to the upper right of the scene shown in the crop."
+    ],
+    "description": "The context image shows a mixed residential and agricultural area with a canal and a large white industrial building. The crop provides a closer view of a cluster of buildings with dark flat roofs and a white vehicle parked on a concrete surface, confirming the location of these structures within the wider scene.",
+    "evidence_visible": [
+      "A cluster of buildings with dark, flat roofs.",
+      "A white vehicle parked on a concrete surface.",
+      "A white building with a blue roof is visible in the background.",
+      "A pile of materials covered with green netting is visible in the upper right of the crop.",
+      "A red object, possibly a container, is visible near the pile of materials."
+    ],
+    "unclear": [
+      "The specific contents of the pile covered with green netting.",
+      "The exact nature of the red object.",
+      "The purpose of the covered structure in the foreground of the crop."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area with residential houses, paved roads, a canal, and organized agricultural plots.\",\n    \"A large white industrial building with a blue roof is visible in the upper right.\",\n    \"A cluster of buildings with dark, flat roofs is located in the lower center.\",\n    \"A white vehicle is parked on a concrete surface near the lower-center buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop view is a magnified section of the lower-center area of the context image.\",\n    \"The white vehicle in the crop corresponds to the vehicle parked near the dark-roofed buildings in the context.\",\n    \"The white building with the blue roof in the context is located to the upper right of the scene shown in the crop.\"\n  ],\n  \"description\": \"The context image shows a mixed residential and agricultural area with a canal and a large white industrial building. The crop provides a closer view of a cluster of buildings with dark flat roofs and a white vehicle parked on a concrete surface, confirming the location of these structures within the wider scene.\",\n  \"evidence_visible\": [\n    \"A cluster of buildings with dark, flat roofs.\",\n    \"A white vehicle parked on a concrete surface.\",\n    \"A white building with a blue roof is visible in the background.\",\n    \"A pile of materials covered with green netting is visible in the upper right of the crop.\",\n    \"A red object, possibly a container, is visible near the pile of materials.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the pile covered with green netting.\",\n    \"The exact nature of the red object.\",\n    \"The purpose of the covered structure in the foreground of the crop.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a pile of materials covered by green netting in the upper right of the crop view.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a pile of materials covered by green netting in the upper right of the crop view.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a pile of materials covered by green netting in the upper right area, which directly supports the claim of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a large area of bare ground and a pile of materials covered by green netting. The presence of the netting on the pile implies that the surrounding bare soil is intended to be covered but currently is not, supporting the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a pile of materials covered by green netting in the upper right area, which directly supports the claim of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a large area of bare ground and a pile of materials covered by green netting. The presence of the netting on the pile implies that the surrounding bare soil is intended to be covered but currently is not, supporting the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

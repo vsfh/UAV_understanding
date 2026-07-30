@@ -1,0 +1,92 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_bc19e864edc3ea8967cb",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0928-20570-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0928-20570-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring multiple large, rectangular aquaculture ponds with murky water and white surface aerators.",
+      "A canal runs along the right side, bordered by a road and a white two-story building.",
+      "Vegetation includes dense trees, shrubs, and patches of yellow flowering crops.",
+      "A small, irregularly shaped patch of bright turquoise material is visible on a dirt bank in the lower-left quadrant."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the specific turquoise patch located on the dirt bank in the lower-left of the first image.",
+      "The spatial relationship confirms the patch is situated between a dense green tree line and a field of yellow flowers."
+    ],
+    "description": "The images show a rural area with fish ponds and a canal. A zoomed-in view focuses on a patch of bright turquoise material lying on a dirt bank, surrounded by green vegetation and yellow flowers. The material appears to be a sheet or tarp covering an object, though the specific contents are not visible.",
+    "evidence_visible": [
+      "A bright turquoise, irregularly shaped object or covering lies on a patch of bare, brown earth.",
+      "The material appears to be a synthetic sheet or tarp, partially folded or covering a mound.",
+      "It is surrounded by dense green trees to the north and a field of yellow flowers to the south.",
+      "A small stream or drainage ditch runs along the southern edge of the dirt patch."
+    ],
+    "unclear": [
+      "The specific contents covered by the turquoise material.",
+      "The exact nature of the material (e.g., tarp, plastic sheet, painted surface).",
+      "The purpose of the turquoise covering."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring multiple large, rectangular aquaculture ponds with murky water and white surface aerators.\",\n    \"A canal runs along the right side, bordered by a road and a white two-story building.\",\n    \"Vegetation includes dense trees, shrubs, and patches of yellow flowering crops.\",\n    \"A small, irregularly shaped patch of bright turquoise material is visible on a dirt bank in the lower-left quadrant.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the specific turquoise patch located on the dirt bank in the lower-left of the first image.\",\n    \"The spatial relationship confirms the patch is situated between a dense green tree line and a field of yellow flowers.\"\n  ],\n  \"description\": \"The images show a rural area with fish ponds and a canal. A zoomed-in view focuses on a patch of bright turquoise material lying on a dirt bank, surrounded by green vegetation and yellow flowers. The material appears to be a sheet or tarp covering an object, though the specific contents are not visible.\",\n  \"evidence_visible\": [\n    \"A bright turquoise, irregularly shaped object or covering lies on a patch of bare, brown earth.\",\n    \"The material appears to be a synthetic sheet or tarp, partially folded or covering a mound.\",\n    \"It is surrounded by dense green trees to the north and a field of yellow flowers to the south.\",\n    \"A small stream or drainage ditch runs along the southern edge of the dirt patch.\"\n  ],\n  \"unclear\": [\n    \"The specific contents covered by the turquoise material.\",\n    \"The exact nature of the material (e.g., tarp, plastic sheet, painted surface).\",\n    \"The purpose of the turquoise covering.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the turquoise material in the image appears to be a complete, continuous sheet covering the exposed soil mound, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a patch of bare, brown earth covered by a bright turquoise synthetic sheet or tarp, situated between dense green trees and a field of yellow flowers.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the turquoise material in the image appears to be a complete, continuous sheet covering the exposed soil mound, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a patch of bare, brown earth covered by a bright turquoise synthetic sheet or tarp, situated between dense green trees and a field of yellow flowers.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a patch of bare brown earth covered by a bright turquoise synthetic sheet. This sheet is situated between dense green trees and a field of yellow flowers, matching the description exactly.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a patch of bare brown earth covered by a bright turquoise synthetic sheet. This sheet is situated between dense green trees and a field of yellow flowers, matching the description exactly.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a patch of bare brown earth covered by a bright turquoise synthetic sheet. This sheet is situated between dense green trees and a field of yellow flowers, matching the description exactly.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a patch of bare brown earth covered by a bright turquoise synthetic sheet. This sheet is situated between dense green trees and a field of yellow flowers, matching the description exactly.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

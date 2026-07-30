@@ -1,0 +1,20 @@
+# Complete session-disjoint subset as of 2026-07-23.
+# Four otherwise supported classes are excluded because 2025-06 image pairs are missing.
+bare_soil_netting
+building_demolition
+collapsed_house_wall
+construction_waste
+crop_lodging
+dangerous_building
+exposed_garbage
+floating_garbage
+garbage_collection_point
+glass_greenhouse
+grain_drying_road
+green_algae_duckweed
+open_storage_construction
+open_storage_factory
+outbuilding_materials
+piled_materials_factory
+suspected_fire_smoke
+unclean_water_surface

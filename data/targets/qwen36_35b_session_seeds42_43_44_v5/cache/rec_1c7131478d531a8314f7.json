@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_1c7131478d531a8314f7",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1028-10257-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1028-10257-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a wide, murky river with bright sunlight reflecting off the surface.",
+      "Left bank: A residential area with multiple houses, paved roads, and parked vehicles.",
+      "Right bank: Agricultural fields, one with yellow crops and another with dry, brown vegetation.",
+      "Vegetation: Trees and grass line the riverbanks."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the left riverbank shown in the context image.",
+      "The location is identifiable by the specific arrangement of trees and the proximity to the water's edge on the left side of the river."
+    ],
+    "description": "Aerial view of a river with a residential area on the left bank and fields on the right. A zoomed-in crop of the left bank reveals a rectangular, bright turquoise object, possibly a tarp or container, situated on the grassy slope near the water's edge, adjacent to a small concrete drainage structure.",
+    "evidence_visible": [
+      "A rectangular object with a bright turquoise or cyan color is visible on the grassy bank.",
+      "The object appears to be a flat sheet, possibly a tarp, covering a depression or container.",
+      "A small concrete structure with parallel slats (likely a culvert or drain) is located at the water's edge nearby.",
+      "The ground is grassy with shadows cast by nearby trees."
+    ],
+    "unclear": [
+      "The exact contents of the turquoise object are unclear.",
+      "The purpose of the turquoise object is unclear.",
+      "The identity of any person near the object is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a wide, murky river with bright sunlight reflecting off the surface.\",\n    \"Left bank: A residential area with multiple houses, paved roads, and parked vehicles.\",\n    \"Right bank: Agricultural fields, one with yellow crops and another with dry, brown vegetation.\",\n    \"Vegetation: Trees and grass line the riverbanks.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the left riverbank shown in the context image.\",\n    \"The location is identifiable by the specific arrangement of trees and the proximity to the water's edge on the left side of the river.\"\n  ],\n  \"description\": \"Aerial view of a river with a residential area on the left bank and fields on the right. A zoomed-in crop of the left bank reveals a rectangular, bright turquoise object, possibly a tarp or container, situated on the grassy slope near the water's edge, adjacent to a small concrete drainage structure.\",\n  \"evidence_visible\": [\n    \"A rectangular object with a bright turquoise or cyan color is visible on the grassy bank.\",\n    \"The object appears to be a flat sheet, possibly a tarp, covering a depression or container.\",\n    \"A small concrete structure with parallel slats (likely a culvert or drain) is located at the water's edge nearby.\",\n    \"The ground is grassy with shadows cast by nearby trees.\"\n  ],\n  \"unclear\": [\n    \"The exact contents of the turquoise object are unclear.\",\n    \"The purpose of the turquoise object is unclear.\",\n    \"The identity of any person near the object is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of a complete, continuous covering (the turquoise sheet) versus visible gaps or missing sections of protective material.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported by the visible presence of a rectangular, bright turquoise sheet covering a depression on the grassy riverbank, situated adjacent to a concrete drainage structure.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of a complete, continuous covering (the turquoise sheet) versus visible gaps or missing sections of protective material.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible presence of a rectangular, bright turquoise sheet covering a depression on the grassy riverbank, situated adjacent to a concrete drainage structure.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a rectangular, bright turquoise sheet covering a depression on the grassy riverbank, situated adjacent to a concrete drainage structure. This visual evidence directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a specific instance of a turquoise sheet covering a depression, which is a form of soil cover. However, the claim of 'incomplete soil cover' implies a broader context of soil that is generally uncovered or partially covered, which is not the primary visual focus or a clear generalization from the single covered patch shown. The visual evidence is specific to the netting, not a general state of incomplete cover.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image shows a general state of 'incomplete soil cover' across the visible area."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a rectangular, bright turquoise sheet covering a depression on the grassy riverbank, situated adjacent to a concrete drainage structure. This visual evidence directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a specific instance of a turquoise sheet covering a depression, which is a form of soil cover. However, the claim of 'incomplete soil cover' implies a broader context of soil that is generally uncovered or partially covered, which is not the primary visual focus or a clear generalization from the single covered patch shown. The visual evidence is specific to the netting, not a general state of incomplete cover.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image shows a general state of 'incomplete soil cover' across the visible area.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_2e3c583eab626a71cb24",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0123-4986-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0123-4986-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a river with green water running diagonally through a residential area.",
+      "Multi-story apartment buildings with flat roofs line the riverbank and adjacent streets.",
+      "A recreational area with artificial green turf and colorful play structures is visible near the river.",
+      "A road runs parallel to the river, with several vehicles parked along the edge.",
+      "Trees with bare branches suggest a winter or late autumn season."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the upper-left quadrant of the context image.",
+      "The long, rectangular building with a dark roof in the crop corresponds to the building complex situated between the river and the left edge of the context image.",
+      "The white building with the blue roof section in the crop is visible in the lower-left corner of the context image.",
+      "The trees and small structures in the crop match the vegetation and layout seen in the context image."
+    ],
+    "description": "The images show a residential area along a river. The context view provides a wide perspective of apartment blocks, a river, and a recreational park. The crop view zooms in on a specific long building with a dark roof, revealing details like rooftop structures and surrounding vegetation, confirming its location within the broader scene.",
+    "evidence_visible": [
+      "A long, rectangular building with a dark, flat roof dominates the center of the crop.",
+      "The roof has various structures, possibly vents or small sheds, and some blue and red objects.",
+      "To the left of the main building, there is a white building with a blue roof section.",
+      "Trees and small patches of grass are visible around the buildings.",
+      "A white fence or railing is visible in the lower right of the crop.",
+      "The ground appears to be a mix of dirt, grass, and paved areas."
+    ],
+    "unclear": [
+      "The specific purpose of the objects on the roof of the main building in the crop.",
+      "The exact nature of the blue and red objects on the roof.",
+      "The condition of the buildings (e.g., whether they are occupied or under construction).",
+      "The specific type of recreational equipment in the park area."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a river with green water running diagonally through a residential area.\",\n    \"Multi-story apartment buildings with flat roofs line the riverbank and adjacent streets.\",\n    \"A recreational area with artificial green turf and colorful play structures is visible near the river.\",\n    \"A road runs parallel to the river, with several vehicles parked along the edge.\",\n    \"Trees with bare branches suggest a winter or late autumn season.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the upper-left quadrant of the context image.\",\n    \"The long, rectangular building with a dark roof in the crop corresponds to the building complex situated between the river and the left edge of the context image.\",\n    \"The white building with the blue roof section in the crop is visible in the lower-left corner of the context image.\",\n    \"The trees and small structures in the crop match the vegetation and layout seen in the context image.\"\n  ],\n  \"description\": \"The images show a residential area along a river. The context view provides a wide perspective of apartment blocks, a river, and a recreational park. The crop view zooms in on a specific long building with a dark roof, revealing details like rooftop structures and surrounding vegetation, confirming its location within the broader scene.\",\n  \"evidence_visible\": [\n    \"A long, rectangular building with a dark, flat roof dominates the center of the crop.\",\n    \"The roof has various structures, possibly vents or small sheds, and some blue and red objects.\",\n    \"To the left of the main building, there is a white building with a blue roof section.\",\n    \"Trees and small patches of grass are visible around the buildings.\",\n    \"A white fence or railing is visible in the lower right of the crop.\",\n    \"The ground appears to be a mix of dirt, grass, and paved areas.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the objects on the roof of the main building in the crop.\",\n    \"The exact nature of the blue and red objects on the roof.\",\n    \"The condition of the buildings (e.g., whether they are occupied or under construction).\",\n    \"The specific type of recreational equipment in the park area.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a roof cluttered with structures and debris, indicating active demolition work, whereas building damage would be characterized by visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the long rectangular building in the crop view exhibits a dark, flat roof cluttered with various structures and debris, consistent with a building undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a roof cluttered with structures and debris, indicating active demolition work, whereas building damage would be characterized by visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the long rectangular building in the crop view exhibits a dark, flat roof cluttered with various structures and debris, consistent with a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a long rectangular building with a dark, flat roof. The roof is cluttered with various structures, likely solar panels, vents, and other mechanical equipment, as well as some debris. However, there is no visual evidence of active demolition (e.g., heavy machinery, dust clouds, structural collapse) or that the building is 'undergoing' demolition. The structures appear to be installed fixtures rather than signs of destruction.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The building is undergoing active or recent demolition.",
+        "The clutter on the roof is consistent with demolition debris rather than installed equipment."
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a building with a flat roof that has various objects on it. While there is clutter, there is no clear visual evidence of 'structural damage' such as broken walls, missing roofs, or exposed beams. The objects on the roof appear to be installed equipment (like solar panels) or stored items, not damage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "Visible evidence shows visible structural damage to a building."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a long rectangular building with a dark, flat roof. The roof is cluttered with various structures, likely solar panels, vents, and other mechanical equipment, as well as some debris. However, there is no visual evidence of active demolition (e.g., heavy machinery, dust clouds, structural collapse) or that the building is 'undergoing' demolition. The structures appear to be installed fixtures rather than signs of destruction.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The building is undergoing active or recent demolition.\",\n      \"The clutter on the roof is consistent with demolition debris rather than installed equipment.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a building with a flat roof that has various objects on it. While there is clutter, there is no clear visual evidence of 'structural damage' such as broken walls, missing roofs, or exposed beams. The objects on the roof appear to be installed equipment (like solar panels) or stored items, not damage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"Visible evidence shows visible structural damage to a building.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

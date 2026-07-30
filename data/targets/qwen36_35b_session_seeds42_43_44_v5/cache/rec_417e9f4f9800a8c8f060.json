@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_417e9f4f9800a8c8f060",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0218-2506-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0218-2506-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area with a cluster of residential buildings on the left and agricultural fields on the right.",
+      "A paved road runs horizontally across the middle, separating the buildings from the fields.",
+      "A large set of parallel, blue plastic-covered greenhouses occupies the lower center.",
+      "Green crops and yellow flowering plants (likely rapeseed) are visible in the fields.",
+      "A small, dilapidated brick structure with a grey roof sits adjacent to the greenhouses."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in crop of the area immediately to the right of the greenhouses in the first image.",
+      "The white vehicle on the road in the first image is visible in the second image.",
+      "The small brick structure and the adjacent dirt lot are the primary subjects of the second image.",
+      "The blue plastic covering of the greenhouses is visible in the bottom left of the second image."
+    ],
+    "description": "Aerial view showing a rural landscape with residential buildings, greenhouses, and fields. A zoomed-in view highlights a small, dilapidated brick structure and a dirt lot adjacent to the greenhouses and a road with a white vehicle.",
+    "evidence_visible": [
+      "A small, single-story brick building with a grey, possibly tiled, roof.",
+      "The building appears partially ruined or under construction, with exposed brickwork and debris.",
+      "A dirt lot surrounds the building, containing scattered materials and a small, dark object (possibly a vehicle or machinery).",
+      "The lot is bordered by a low brick wall on one side.",
+      "Green fields and yellow flowers are visible in the background."
+    ],
+    "unclear": [
+      "The exact condition or purpose of the small brick structure (e.g., abandoned, under construction, storage).",
+      "The identity of the dark object in the dirt lot.",
+      "The specific type of crops in the fields.",
+      "The exact date or time the images were taken."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural area with a cluster of residential buildings on the left and agricultural fields on the right.\",\n    \"A paved road runs horizontally across the middle, separating the buildings from the fields.\",\n    \"A large set of parallel, blue plastic-covered greenhouses occupies the lower center.\",\n    \"Green crops and yellow flowering plants (likely rapeseed) are visible in the fields.\",\n    \"A small, dilapidated brick structure with a grey roof sits adjacent to the greenhouses.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in crop of the area immediately to the right of the greenhouses in the first image.\",\n    \"The white vehicle on the road in the first image is visible in the second image.\",\n    \"The small brick structure and the adjacent dirt lot are the primary subjects of the second image.\",\n    \"The blue plastic covering of the greenhouses is visible in the bottom left of the second image.\"\n  ],\n  \"description\": \"Aerial view showing a rural landscape with residential buildings, greenhouses, and fields. A zoomed-in view highlights a small, dilapidated brick structure and a dirt lot adjacent to the greenhouses and a road with a white vehicle.\",\n  \"evidence_visible\": [\n    \"A small, single-story brick building with a grey, possibly tiled, roof.\",\n    \"The building appears partially ruined or under construction, with exposed brickwork and debris.\",\n    \"A dirt lot surrounds the building, containing scattered materials and a small, dark object (possibly a vehicle or machinery).\",\n    \"The lot is bordered by a low brick wall on one side.\",\n    \"Green fields and yellow flowers are visible in the background.\"\n  ],\n  \"unclear\": [\n    \"The exact condition or purpose of the small brick structure (e.g., abandoned, under construction, storage).\",\n    \"The identity of the dark object in the dirt lot.\",\n    \"The specific type of crops in the fields.\",\n    \"The exact date or time the images were taken.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the state of the structure; the brick building appears dilapidated and ruined rather than being an active general construction project.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a small, single-story brick structure with a grey roof that appears partially ruined or under construction, surrounded by a dirt lot containing scattered debris and materials.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the state of the structure; the brick building appears dilapidated and ruined rather than being an active general construction project.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a small, single-story brick structure with a grey roof that appears partially ruined or under construction, surrounded by a dirt lot containing scattered debris and materials.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a small, single-story brick structure with a grey roof that is partially ruined or in a state of disrepair. The surrounding area is a dirt lot containing scattered debris, rubble, and construction materials, which visually supports the description of a demolition or ruined site.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image does not show an active general construction project. Instead, it depicts a static scene of a ruined or demolished structure with debris, rather than active building work or machinery associated with a new construction project.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a small, single-story brick structure with a grey roof that is partially ruined or in a state of disrepair. The surrounding area is a dirt lot containing scattered debris, rubble, and construction materials, which visually supports the description of a demolition or ruined site.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image does not show an active general construction project. Instead, it depicts a static scene of a ruined or demolished structure with debris, rather than active building work or machinery associated with a new construction project.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

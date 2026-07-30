@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_2d7da6f2bf97ba622448",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0801-2103-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0801-2103-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring multiple rectangular agricultural plots with varying shades of green vegetation.",
+      "Several multi-story residential structures are visible; some appear to be under construction with exposed concrete frames and missing windows.",
+      "Narrow paved roads and unpaved paths connect the buildings and fields.",
+      "Dense clusters of trees and shrubs line the edges of the fields and waterways."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a zoomed-in view of the central-right section of the wide context image.",
+      "The three unfinished concrete buildings in the crop correspond to the cluster of structures seen in the middle-right of the wide image.",
+      "The green field directly below the buildings in the crop matches the field located south of the houses in the wide image.",
+      "The waterway and vegetation to the left of the buildings in the crop align with the features visible in the wider context."
+    ],
+    "description": "The images show a rural area with agricultural fields and several multi-story concrete buildings under construction. The wide view provides spatial context, while the crop focuses on a specific cluster of three unfinished structures adjacent to green fields and a waterway.",
+    "evidence_visible": [
+      "Three adjacent multi-story buildings constructed with exposed grey concrete frames.",
+      "The buildings lack finished facades, windows, and roofing, indicating an unfinished state.",
+      "The structure on the far right has arched openings on the ground floor.",
+      "Vegetation, including small garden plots, is visible in the immediate foreground of the buildings.",
+      "A waterway with green algae or duckweed runs parallel to the left of the buildings."
+    ],
+    "unclear": [
+      "Exact stage of construction completion.",
+      "Ownership or intended use of the buildings.",
+      "Specific crop types in the fields.",
+      "Occupancy status of the buildings."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring multiple rectangular agricultural plots with varying shades of green vegetation.\",\n    \"Several multi-story residential structures are visible; some appear to be under construction with exposed concrete frames and missing windows.\",\n    \"Narrow paved roads and unpaved paths connect the buildings and fields.\",\n    \"Dense clusters of trees and shrubs line the edges of the fields and waterways.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a zoomed-in view of the central-right section of the wide context image.\",\n    \"The three unfinished concrete buildings in the crop correspond to the cluster of structures seen in the middle-right of the wide image.\",\n    \"The green field directly below the buildings in the crop matches the field located south of the houses in the wide image.\",\n    \"The waterway and vegetation to the left of the buildings in the crop align with the features visible in the wider context.\"\n  ],\n  \"description\": \"The images show a rural area with agricultural fields and several multi-story concrete buildings under construction. The wide view provides spatial context, while the crop focuses on a specific cluster of three unfinished structures adjacent to green fields and a waterway.\",\n  \"evidence_visible\": [\n    \"Three adjacent multi-story buildings constructed with exposed grey concrete frames.\",\n    \"The buildings lack finished facades, windows, and roofing, indicating an unfinished state.\",\n    \"The structure on the far right has arched openings on the ground floor.\",\n    \"Vegetation, including small garden plots, is visible in the immediate foreground of the buildings.\",\n    \"A waterway with green algae or duckweed runs parallel to the left of the buildings.\"\n  ],\n  \"unclear\": [\n    \"Exact stage of construction completion.\",\n    \"Ownership or intended use of the buildings.\",\n    \"Specific crop types in the fields.\",\n    \"Occupancy status of the buildings.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is that the structures show exposed concrete frames and missing walls consistent with being under construction or having collapsed, rather than a finished building suffering damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported by the visible evidence of multi-story buildings with exposed concrete frames and missing walls, indicating a state of structural collapse or unfinished construction.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is that the structures show exposed concrete frames and missing walls consistent with being under construction or having collapsed, rather than a finished building suffering damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported by the visible evidence of multi-story buildings with exposed concrete frames and missing walls, indicating a state of structural collapse or unfinished construction.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The visible evidence shows multi-story buildings with exposed concrete frames and missing walls, which is consistent with the description of structural collapse or unfinished construction.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The visible evidence shows visible structural damage to a building, specifically the multi-story buildings with exposed concrete frames and missing walls.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The visible evidence shows multi-story buildings with exposed concrete frames and missing walls, which is consistent with the description of structural collapse or unfinished construction.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The visible evidence shows visible structural damage to a building, specifically the multi-story buildings with exposed concrete frames and missing walls.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

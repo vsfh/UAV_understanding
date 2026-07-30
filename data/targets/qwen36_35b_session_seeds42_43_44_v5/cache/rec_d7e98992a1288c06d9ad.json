@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d7e98992a1288c06d9ad",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1008-6737-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1008-6737-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to large agricultural fields.",
+      "The fields are divided into rectangular plots containing crops in varying shades of green and yellow.",
+      "A paved road separates the fields from the residential area.",
+      "The residential area consists of clustered houses with red, grey, and blue roofs.",
+      "Solar panels are visible on the rooftops of several buildings.",
+      "Vegetation, including trees and small garden plots, is interspersed among the houses."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a high-magnification view of a specific building visible in the lower-right quadrant of the context image.",
+      "The red corrugated roof and the adjacent solar panel array in the crop match the features of the house located next to the solar panel array in the main image.",
+      "The green vegetation and small garden plot to the left of the house in the crop correspond to the area between the house and the road in the context image."
+    ],
+    "description": "The images show a rural village bordering agricultural fields. The context view displays the layout of houses and crops, while the evidence crop provides a detailed look at a specific house with a red roof and solar panels, confirming its location within the broader settlement.",
+    "evidence_visible": [
+      "A close-up view of a building with a red corrugated metal roof.",
+      "A section of a flat concrete roof adjacent to the pitched roof.",
+      "A solar panel array installed on a lower roof section in the foreground.",
+      "Green vegetation and a small, tilled garden plot to the left of the building.",
+      "A blue tarp or covering is visible in the area below the main roof."
+    ],
+    "unclear": [
+      "The specific type of crop in the fields.",
+      "The exact date the images were taken.",
+      "The ownership or occupancy status of the buildings.",
+      "The condition of the solar panels (e.g., whether they are functional)."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to large agricultural fields.\",\n    \"The fields are divided into rectangular plots containing crops in varying shades of green and yellow.\",\n    \"A paved road separates the fields from the residential area.\",\n    \"The residential area consists of clustered houses with red, grey, and blue roofs.\",\n    \"Solar panels are visible on the rooftops of several buildings.\",\n    \"Vegetation, including trees and small garden plots, is interspersed among the houses.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a high-magnification view of a specific building visible in the lower-right quadrant of the context image.\",\n    \"The red corrugated roof and the adjacent solar panel array in the crop match the features of the house located next to the solar panel array in the main image.\",\n    \"The green vegetation and small garden plot to the left of the house in the crop correspond to the area between the house and the road in the context image.\"\n  ],\n  \"description\": \"The images show a rural village bordering agricultural fields. The context view displays the layout of houses and crops, while the evidence crop provides a detailed look at a specific house with a red roof and solar panels, confirming its location within the broader settlement.\",\n  \"evidence_visible\": [\n    \"A close-up view of a building with a red corrugated metal roof.\",\n    \"A section of a flat concrete roof adjacent to the pitched roof.\",\n    \"A solar panel array installed on a lower roof section in the foreground.\",\n    \"Green vegetation and a small, tilled garden plot to the left of the building.\",\n    \"A blue tarp or covering is visible in the area below the main roof.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the fields.\",\n    \"The exact date the images were taken.\",\n    \"The ownership or occupancy status of the buildings.\",\n    \"The condition of the solar panels (e.g., whether they are functional).\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence shows exposed soil in the lower-left quadrant, but there is no visible netting, mesh, or dust-control material covering it. The soil appears bare and tilled, contradicting the claim of netting.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The image evidence shows a plot of tilled earth in the lower-left area that is completely devoid of vegetation or protective covering. This constitutes visible evidence of soil for which protective covering is incomplete (or absent).",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence shows exposed soil in the lower-left quadrant, but there is no visible netting, mesh, or dust-control material covering it. The soil appears bare and tilled, contradicting the claim of netting.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows a plot of tilled earth in the lower-left area that is completely devoid of vegetation or protective covering. This constitutes visible evidence of soil for which protective covering is incomplete (or absent).\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

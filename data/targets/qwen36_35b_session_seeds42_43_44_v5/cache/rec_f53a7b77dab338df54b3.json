@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_f53a7b77dab338df54b3",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/collapsed_house_wall/original/0324-0742-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/collapsed_house_wall/cropped/0324-0742-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a network of waterways and rectangular agricultural plots containing yellow and green crops.",
+      "Multiple residential structures with varying roof colors (red, grey) and materials (tile, concrete).",
+      "A paved road runs horizontally across the upper section of the image, connecting the buildings.",
+      "Vegetation includes bare deciduous trees and bamboo clusters near the water."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a high-magnification view of a specific cluster of buildings located in the lower-left quadrant of the wide context image.",
+      "The grey-tiled roof of the large building on the right side of the crop matches the building situated next to the waterway in the context view.",
+      "The unpaved path and the adjacent vegetable garden visible in the crop correspond to the area between the houses in the wider shot."
+    ],
+    "description": "The images depict a rural village scene with agricultural fields and residential buildings. The crop provides a detailed view of a specific property featuring a grey-tiled house, a smaller concrete structure, and a garden plot adjacent to a waterway, confirming the spatial layout seen in the wider aerial context.",
+    "evidence_visible": [
+      "A large building with a grey, pitched tiled roof occupies the right side of the frame.",
+      "To the left of the main building is a smaller, rectangular concrete structure with an open or unfinished upper level.",
+      "A narrow, unpaved path runs between the buildings and a small garden plot containing green crops.",
+      "A body of water is visible at the top, featuring a netted enclosure and a small boat moored near the bank.",
+      "Debris and vegetation are scattered along the water's edge."
+    ],
+    "unclear": [
+      "The specific contents of the unfinished concrete structure.",
+      "The exact date of the imagery.",
+      "The legal status or ownership of the buildings."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a network of waterways and rectangular agricultural plots containing yellow and green crops.\",\n    \"Multiple residential structures with varying roof colors (red, grey) and materials (tile, concrete).\",\n    \"A paved road runs horizontally across the upper section of the image, connecting the buildings.\",\n    \"Vegetation includes bare deciduous trees and bamboo clusters near the water.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a high-magnification view of a specific cluster of buildings located in the lower-left quadrant of the wide context image.\",\n    \"The grey-tiled roof of the large building on the right side of the crop matches the building situated next to the waterway in the context view.\",\n    \"The unpaved path and the adjacent vegetable garden visible in the crop correspond to the area between the houses in the wider shot.\"\n  ],\n  \"description\": \"The images depict a rural village scene with agricultural fields and residential buildings. The crop provides a detailed view of a specific property featuring a grey-tiled house, a smaller concrete structure, and a garden plot adjacent to a waterway, confirming the spatial layout seen in the wider aerial context.\",\n  \"evidence_visible\": [\n    \"A large building with a grey, pitched tiled roof occupies the right side of the frame.\",\n    \"To the left of the main building is a smaller, rectangular concrete structure with an open or unfinished upper level.\",\n    \"A narrow, unpaved path runs between the buildings and a small garden plot containing green crops.\",\n    \"A body of water is visible at the top, featuring a netted enclosure and a small boat moored near the bank.\",\n    \"Debris and vegetation are scattered along the water's edge.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the unfinished concrete structure.\",\n    \"The exact date of the imagery.\",\n    \"The legal status or ownership of the buildings.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a wall that has visibly collapsed or is structurally incomplete (open upper level), whereas building damage is a broader category of visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the cropped evidence image shows a smaller rectangular concrete structure with an open, unfinished upper level and missing wall sections, adjacent to a larger building with a grey tiled roof.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a wall that has visibly collapsed or is structurally incomplete (open upper level), whereas building damage is a broader category of visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the cropped evidence image shows a smaller rectangular concrete structure with an open, unfinished upper level and missing wall sections, adjacent to a larger building with a grey tiled roof.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a rectangular concrete structure with an open, unfinished upper level and missing wall sections, situated next to a larger building with a grey tiled roof. This visual evidence directly supports the description of a collapsed or unfinished house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a building structure that is clearly damaged or unfinished, characterized by missing walls and an exposed upper level. This constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a rectangular concrete structure with an open, unfinished upper level and missing wall sections, situated next to a larger building with a grey tiled roof. This visual evidence directly supports the description of a collapsed or unfinished house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a building structure that is clearly damaged or unfinished, characterized by missing walls and an exposed upper level. This constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

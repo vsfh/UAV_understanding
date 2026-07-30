@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_fc07e0566b5174005abf",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1002-3092-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1002-3092-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a waterway running vertically through the center, flanked by a narrow strip of vegetation and trees.",
+      "To the left, a rural bank with a white building, a dirt path, and small plots of land.",
+      "To the right, large rectangular bodies of water, likely aquaculture ponds, with visible grid lines on the surface.",
+      "The water in the central channel is dark and contains patches of green aquatic vegetation."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a digital zoom of the area on the left bank of the waterway, specifically focusing on the white building and the adjacent plots.",
+      "The spatial relationship confirms the plots are situated between the main road/path and the water's edge.",
+      "The vegetation and building layout in the crop match the corresponding section in the wide context image."
+    ],
+    "description": "Aerial imagery shows a waterway bordered by a rural bank with a white building and small agricultural plots on the left, and large rectangular ponds on the right. The crop view details the plots, which are covered with blue and green mesh sheets, situated next to the water's edge.",
+    "evidence_visible": [
+      "A white, single-story building with a dark roof is visible.",
+      "Three distinct rectangular plots of land are covered with blue and green mesh or netting.",
+      "The ground around the plots is brown soil, indicating cultivation.",
+      "Green vegetation and trees surround the plots and line the water's edge.",
+      "A dirt path runs along the bottom left of the frame."
+    ],
+    "unclear": [
+      "The specific type of crop or material under the mesh is unclear.",
+      "The purpose of the mesh (e.g., pest control, shade) is unclear.",
+      "The exact dimensions of the plots cannot be determined.",
+      "The identity of any persons or vehicles is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a waterway running vertically through the center, flanked by a narrow strip of vegetation and trees.\",\n    \"To the left, a rural bank with a white building, a dirt path, and small plots of land.\",\n    \"To the right, large rectangular bodies of water, likely aquaculture ponds, with visible grid lines on the surface.\",\n    \"The water in the central channel is dark and contains patches of green aquatic vegetation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a digital zoom of the area on the left bank of the waterway, specifically focusing on the white building and the adjacent plots.\",\n    \"The spatial relationship confirms the plots are situated between the main road/path and the water's edge.\",\n    \"The vegetation and building layout in the crop match the corresponding section in the wide context image.\"\n  ],\n  \"description\": \"Aerial imagery shows a waterway bordered by a rural bank with a white building and small agricultural plots on the left, and large rectangular ponds on the right. The crop view details the plots, which are covered with blue and green mesh sheets, situated next to the water's edge.\",\n  \"evidence_visible\": [\n    \"A white, single-story building with a dark roof is visible.\",\n    \"Three distinct rectangular plots of land are covered with blue and green mesh or netting.\",\n    \"The ground around the plots is brown soil, indicating cultivation.\",\n    \"Green vegetation and trees surround the plots and line the water's edge.\",\n    \"A dirt path runs along the bottom left of the frame.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop or material under the mesh is unclear.\",\n    \"The purpose of the mesh (e.g., pest control, shade) is unclear.\",\n    \"The exact dimensions of the plots cannot be determined.\",\n    \"The identity of any persons or vehicles is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of complete coverage; the visible evidence shows the plots are fully covered by the mesh, whereas incomplete soil cover would require visible gaps in the protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting, specifically three distinct rectangular plots covered with blue and green mesh sheets situated on the rural bank next to the waterway.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of complete coverage; the visible evidence shows the plots are fully covered by the mesh, whereas incomplete soil cover would require visible gaps in the protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting, specifically three distinct rectangular plots covered with blue and green mesh sheets situated on the rural bank next to the waterway.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows three distinct rectangular plots covered with blue and green mesh sheets on the rural bank next to the waterway. The claim that this evidence is not supported is contradicted by the visible presence of the netting.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The claim that the event bare soil netting is not supported is false; the image shows exposed soil covered by dust-control netting."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows three distinct rectangular plots covered with blue and green mesh sheets on the rural bank next to the waterway. This directly supports the claim of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows three distinct rectangular plots covered with blue and green mesh sheets on the rural bank next to the waterway. The claim that this evidence is not supported is contradicted by the visible presence of the netting.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The claim that the event bare soil netting is not supported is false; the image shows exposed soil covered by dust-control netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows three distinct rectangular plots covered with blue and green mesh sheets on the rural bank next to the waterway. This directly supports the claim of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

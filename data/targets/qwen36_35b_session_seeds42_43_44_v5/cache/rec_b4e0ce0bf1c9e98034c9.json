@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b4e0ce0bf1c9e98034c9",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/original/0410-9695-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/cropped/0410-9695-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a water body with a dock and small island.",
+      "A paved road with a pedestrian crossing runs parallel to the water.",
+      "Dense green trees line the road and separate it from buildings.",
+      "In the lower right, a rectangular structure with a flat roof is visible.",
+      "The roof surface contains scattered debris and construction materials."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the rectangular structure in the lower right of the context image.",
+      "The context image shows the structure's position relative to the road and water.",
+      "The crop confirms the presence of a brick parapet and a pile of long, thin materials on the roof."
+    ],
+    "description": "An aerial view shows a water body, a road, and a flat-roofed structure. A close-up of the structure reveals a brick parapet and a pile of long, thin materials, possibly pipes or poles, scattered on the roof surface alongside other debris.",
+    "evidence_visible": [
+      "Top-down view of a flat roof with a red brick parapet.",
+      "A large pile of long, thin, light-colored materials is on the roof.",
+      "Other scattered debris, including blue and white items, is present.",
+      "Green vegetation and trees surround the structure.",
+      "A paved path is visible adjacent to the structure."
+    ],
+    "unclear": [
+      "The exact nature of the long, thin materials (e.g., pipes, poles, lumber).",
+      "The purpose of the materials on the roof.",
+      "The identity of the person visible in the crop.",
+      "The specific type of blue and white debris."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a water body with a dock and small island.\",\n    \"A paved road with a pedestrian crossing runs parallel to the water.\",\n    \"Dense green trees line the road and separate it from buildings.\",\n    \"In the lower right, a rectangular structure with a flat roof is visible.\",\n    \"The roof surface contains scattered debris and construction materials.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the rectangular structure in the lower right of the context image.\",\n    \"The context image shows the structure's position relative to the road and water.\",\n    \"The crop confirms the presence of a brick parapet and a pile of long, thin materials on the roof.\"\n  ],\n  \"description\": \"An aerial view shows a water body, a road, and a flat-roofed structure. A close-up of the structure reveals a brick parapet and a pile of long, thin materials, possibly pipes or poles, scattered on the roof surface alongside other debris.\",\n  \"evidence_visible\": [\n    \"Top-down view of a flat roof with a red brick parapet.\",\n    \"A large pile of long, thin, light-colored materials is on the roof.\",\n    \"Other scattered debris, including blue and white items, is present.\",\n    \"Green vegetation and trees surround the structure.\",\n    \"A paved path is visible adjacent to the structure.\"\n  ],\n  \"unclear\": [\n    \"The exact nature of the long, thin materials (e.g., pipes, poles, lumber).\",\n    \"The purpose of the materials on the roof.\",\n    \"The identity of the person visible in the crop.\",\n    \"The specific type of blue and white debris.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a large pile of construction materials and debris on the roof, which indicates an active demolition process rather than just visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a flat-roofed structure containing a large pile of long, thin, light-colored materials and scattered debris, consistent with a building undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a large pile of construction materials and debris on the roof, which indicates an active demolition process rather than just visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a flat-roofed structure containing a large pile of long, thin, light-colored materials and scattered debris, consistent with a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a flat-roofed structure containing a large pile of long, thin, light-colored materials (resembling wood planks or pipes) and scattered debris. This visual evidence directly supports the description of a building undergoing active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a flat-roofed structure filled with debris and construction materials, which constitutes visible structural damage or destruction. The claim is supported by the visual evidence of the damaged building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a flat-roofed structure containing a large pile of long, thin, light-colored materials (resembling wood planks or pipes) and scattered debris. This visual evidence directly supports the description of a building undergoing active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a flat-roofed structure filled with debris and construction materials, which constitutes visible structural damage or destruction. The claim is supported by the visual evidence of the damaged building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

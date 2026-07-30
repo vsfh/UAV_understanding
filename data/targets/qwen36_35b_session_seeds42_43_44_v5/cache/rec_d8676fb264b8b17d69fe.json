@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d8676fb264b8b17d69fe",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0324-5571-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0324-5571-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring large rectangular plots of green crops.",
+      "A dirt road runs vertically through the center, flanked by a distinct row of yellow flowering plants.",
+      "To the left of the road is a construction or demolition site with exposed rebar, concrete debris, and a small structure.",
+      "To the right of the road is a cluster of buildings with white and blue roofs, surrounded by small garden plots and parked vehicles."
+    ],
+    "cross_view_relations": [
+      "The local crop image is a cropped, zoomed-in section of the dirt road and the adjacent yellow flowering plants visible in the context image.",
+      "The debris field and small structure on the left side of the road in the context image are clearly visible in the local crop image.",
+      "The green crop field on the right side of the road in the context image corresponds to the vegetation on the right side of the local crop image."
+    ],
+    "description": "The images show a rural area with green agricultural fields and a dirt road lined with yellow flowering plants. A construction site with debris and a small building is visible on the left, while a residential or industrial compound with multiple buildings and vehicles is on the right. The local crop view confirms the specific location of the road and the adjacent debris field.",
+    "evidence_visible": [
+      "A close-up view of a dirt path bordered by a dense row of yellow flowering plants.",
+      "To the left of the path, there is a pile of construction debris, including concrete slabs, rebar, and a small structure with a reddish roof.",
+      "To the right of the path, a field of low-growing green vegetation is visible.",
+      "The ground appears dry and dusty."
+    ],
+    "unclear": [
+      "The specific type of yellow flowering plants.",
+      "The exact nature of the debris (e.g., whether it is from demolition or construction).",
+      "The identity of the vehicles in the compound.",
+      "The specific crop species in the green fields."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring large rectangular plots of green crops.\",\n    \"A dirt road runs vertically through the center, flanked by a distinct row of yellow flowering plants.\",\n    \"To the left of the road is a construction or demolition site with exposed rebar, concrete debris, and a small structure.\",\n    \"To the right of the road is a cluster of buildings with white and blue roofs, surrounded by small garden plots and parked vehicles.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop image is a cropped, zoomed-in section of the dirt road and the adjacent yellow flowering plants visible in the context image.\",\n    \"The debris field and small structure on the left side of the road in the context image are clearly visible in the local crop image.\",\n    \"The green crop field on the right side of the road in the context image corresponds to the vegetation on the right side of the local crop image.\"\n  ],\n  \"description\": \"The images show a rural area with green agricultural fields and a dirt road lined with yellow flowering plants. A construction site with debris and a small building is visible on the left, while a residential or industrial compound with multiple buildings and vehicles is on the right. The local crop view confirms the specific location of the road and the adjacent debris field.\",\n  \"evidence_visible\": [\n    \"A close-up view of a dirt path bordered by a dense row of yellow flowering plants.\",\n    \"To the left of the path, there is a pile of construction debris, including concrete slabs, rebar, and a small structure with a reddish roof.\",\n    \"To the right of the path, a field of low-growing green vegetation is visible.\",\n    \"The ground appears dry and dusty.\"\n  ],\n  \"unclear\": [\n    \"The specific type of yellow flowering plants.\",\n    \"The exact nature of the debris (e.g., whether it is from demolition or construction).\",\n    \"The identity of the vehicles in the compound.\",\n    \"The specific crop species in the green fields.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of debris and exposed rebar, which indicates demolition rather than the active general construction project defined for the neighbor.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by visible evidence of a construction or demolition site containing exposed rebar, concrete debris, and a small structure with a reddish roof adjacent to the dirt road.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of debris and exposed rebar, which indicates demolition rather than the active general construction project defined for the neighbor.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by visible evidence of a construction or demolition site containing exposed rebar, concrete debris, and a small structure with a reddish roof adjacent to the dirt road.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a construction or demolition site adjacent to the dirt road. Visible evidence includes a pile of rubble, exposed rebar (vertical steel bars) on the left, concrete debris, and a small structure with a reddish roof. This directly supports the description of a demolition or construction site.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a site with debris and a small structure, which fits the description of a construction or demolition site. However, the claim that it is an 'active general construction project' is not fully supported. The presence of a small structure with a reddish roof and the nature of the debris (rubble) suggests demolition or a specific small-scale site rather than a broad 'general construction project'. Furthermore, the term 'active' implies ongoing work which is not definitively visible (no workers or active machinery are clearly seen). The claim is too broad and slightly mischaracterizes the visible demolition-like state.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The site is an 'active general construction project' (it appears to be a demolition site or a specific small-scale site with debris, not a general construction project).",
+        "The project is 'active' (no active workers or machinery are clearly visible)."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a construction or demolition site adjacent to the dirt road. Visible evidence includes a pile of rubble, exposed rebar (vertical steel bars) on the left, concrete debris, and a small structure with a reddish roof. This directly supports the description of a demolition or construction site.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a site with debris and a small structure, which fits the description of a construction or demolition site. However, the claim that it is an 'active general construction project' is not fully supported. The presence of a small structure with a reddish roof and the nature of the debris (rubble) suggests demolition or a specific small-scale site rather than a broad 'general construction project'. Furthermore, the term 'active' implies ongoing work which is not definitively visible (no workers or active machinery are clearly seen). The claim is too broad and slightly mischaracterizes the visible demolition-like state.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The site is an 'active general construction project' (it appears to be a demolition site or a specific small-scale site with debris, not a general construction project).\",\n      \"The project is 'active' (no active workers or machinery are clearly visible).\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

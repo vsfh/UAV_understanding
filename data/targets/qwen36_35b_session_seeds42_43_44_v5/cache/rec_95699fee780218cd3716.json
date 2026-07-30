@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_95699fee780218cd3716",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0929-8838-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0929-8838-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved road with yellow center lines and a four-way intersection with traffic signals.",
+      "To the left of the road, there are residential buildings with solar panels and agricultural plots.",
+      "To the right of the road, there is a large area of dense vegetation, trees, and small ponds."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of a specific plot of land located on the right side of the main road in the context image.",
+      "The plot is situated between the road and a cluster of trees, adjacent to a small body of water."
+    ],
+    "description": "The context image shows a road intersection bordered by residential areas and vegetation. The linked crop details a specific plot on the right side of the road, revealing disturbed brown earth covered by two rectangular sheets of green mesh or netting, surrounded by trees and a small pond.",
+    "evidence_visible": [
+      "A patch of exposed brown soil or dirt.",
+      "Two distinct rectangular sections of green mesh or netting laid flat on the ground.",
+      "Surrounding vegetation including tall reeds, bushes, and trees.",
+      "A small pond with green algae or water plants nearby."
+    ],
+    "unclear": [
+      "The specific purpose of the green mesh (e.g., construction, agriculture, erosion control).",
+      "The exact nature of the disturbed soil.",
+      "Any human activity or presence."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a paved road with yellow center lines and a four-way intersection with traffic signals.\",\n    \"To the left of the road, there are residential buildings with solar panels and agricultural plots.\",\n    \"To the right of the road, there is a large area of dense vegetation, trees, and small ponds.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of a specific plot of land located on the right side of the main road in the context image.\",\n    \"The plot is situated between the road and a cluster of trees, adjacent to a small body of water.\"\n  ],\n  \"description\": \"The context image shows a road intersection bordered by residential areas and vegetation. The linked crop details a specific plot on the right side of the road, revealing disturbed brown earth covered by two rectangular sheets of green mesh or netting, surrounded by trees and a small pond.\",\n  \"evidence_visible\": [\n    \"A patch of exposed brown soil or dirt.\",\n    \"Two distinct rectangular sections of green mesh or netting laid flat on the ground.\",\n    \"Surrounding vegetation including tall reeds, bushes, and trees.\",\n    \"A small pond with green algae or water plants nearby.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the green mesh (e.g., construction, agriculture, erosion control).\",\n    \"The exact nature of the disturbed soil.\",\n    \"Any human activity or presence.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed brown earth covered by two distinct rectangular sections of green mesh or netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed brown earth covered by two distinct rectangular sections of green mesh or netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence directly contradicts the claim of bare soil. The visual data shows that the exposed brown earth is covered by two distinct rectangular sections of green mesh or netting. Therefore, the claim that the soil is bare is factually incorrect based on the visible pixels.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed brown earth",
+        "bare soil"
+      ]
+    },
+    "positive": {
+      "reason": "The image evidence supports the claim of incomplete soil cover. The visual data shows a plot of land where the ground is not fully covered by vegetation or soil, but rather by two distinct rectangular sections of green mesh or netting. The presence of these specific coverings on a patch of earth confirms that the soil cover is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence directly contradicts the claim of bare soil. The visual data shows that the exposed brown earth is covered by two distinct rectangular sections of green mesh or netting. Therefore, the claim that the soil is bare is factually incorrect based on the visible pixels.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed brown earth\",\n      \"bare soil\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence supports the claim of incomplete soil cover. The visual data shows a plot of land where the ground is not fully covered by vegetation or soil, but rather by two distinct rectangular sections of green mesh or netting. The presence of these specific coverings on a patch of earth confirms that the soil cover is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

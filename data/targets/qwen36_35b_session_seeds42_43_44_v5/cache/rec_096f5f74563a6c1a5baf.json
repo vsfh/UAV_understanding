@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_096f5f74563a6c1a5baf",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/original/0414-7573-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/cropped/0414-7573-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a river with green vegetation and a small boat.",
+      "Left bank: multi-story buildings with red and blue roofs, paved parking area with white vehicles.",
+      "Right bank: paved road, industrial-style buildings with grey and blue roofs, and a construction site with a crane.",
+      "Trees line both banks of the river."
+    ],
+    "cross_view_relations": [
+      "The crop shows a cluster of buildings and trees that are spatially located on the right bank of the river, near the construction site visible in the wide image.",
+      "The beige building in the crop corresponds to the multi-story structure seen in the upper right quadrant of the context image."
+    ],
+    "description": "Aerial view of a river flanked by industrial and residential buildings. The left bank features structures with red and blue roofs and parked cars. The right bank includes a road, a construction site with a crane, and a beige multi-story building surrounded by trees.",
+    "evidence_visible": [
+      "Close-up of a beige, rectangular multi-story building with a flat grey roof.",
+      "The building has multiple rows of dark, rectangular windows.",
+      "Dense green trees are situated behind and to the side of the building.",
+      "Another building with a dark grey roof is partially visible in the lower left corner of the crop."
+    ],
+    "unclear": [
+      "Specific use of the buildings (residential vs. commercial).",
+      "Exact number of floors on the beige building.",
+      "Identity of the vehicles in the parking lot."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a river with green vegetation and a small boat.\",\n    \"Left bank: multi-story buildings with red and blue roofs, paved parking area with white vehicles.\",\n    \"Right bank: paved road, industrial-style buildings with grey and blue roofs, and a construction site with a crane.\",\n    \"Trees line both banks of the river.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop shows a cluster of buildings and trees that are spatially located on the right bank of the river, near the construction site visible in the wide image.\",\n    \"The beige building in the crop corresponds to the multi-story structure seen in the upper right quadrant of the context image.\"\n  ],\n  \"description\": \"Aerial view of a river flanked by industrial and residential buildings. The left bank features structures with red and blue roofs and parked cars. The right bank includes a road, a construction site with a crane, and a beige multi-story building surrounded by trees.\",\n  \"evidence_visible\": [\n    \"Close-up of a beige, rectangular multi-story building with a flat grey roof.\",\n    \"The building has multiple rows of dark, rectangular windows.\",\n    \"Dense green trees are situated behind and to the side of the building.\",\n    \"Another building with a dark grey roof is partially visible in the lower left corner of the crop.\"\n  ],\n  \"unclear\": [\n    \"Specific use of the buildings (residential vs. commercial).\",\n    \"Exact number of floors on the beige building.\",\n    \"Identity of the vehicles in the parking lot.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a crane and organized construction activity, whereas building damage is defined by visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a construction site on the right bank of the river, featuring a crane and a cluster of industrial-style buildings, which aligns with the context of active site operations.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a crane and organized construction activity, whereas building damage is defined by visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a construction site on the right bank of the river, featuring a crane and a cluster of industrial-style buildings, which aligns with the context of active site operations.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The wide image shows a construction site on the right bank with a crane and industrial buildings, which supports the claim of active site operations. However, the crop image shows a cluster of intact residential-style buildings with no visible structural damage, contradicting the claim of building damage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    },
+    "positive": {
+      "reason": "The wide image clearly shows a construction site on the right bank of the river, featuring a crane and a cluster of industrial-style buildings, which supports the claim of active site operations.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The wide image shows a construction site on the right bank with a crane and industrial buildings, which supports the claim of active site operations. However, the crop image shows a cluster of intact residential-style buildings with no visible structural damage, contradicting the claim of building damage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The wide image clearly shows a construction site on the right bank of the river, featuring a crane and a cluster of industrial-style buildings, which supports the claim of active site operations.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

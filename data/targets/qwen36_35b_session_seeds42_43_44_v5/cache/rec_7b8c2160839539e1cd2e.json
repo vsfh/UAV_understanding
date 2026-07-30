@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_7b8c2160839539e1cd2e",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0121-5628-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0121-5628-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to a river with reeds.",
+      "Residential structures with white walls and blue or grey roofs.",
+      "Agricultural fields with visible crop rows and patches of snow.",
+      "A paved road runs vertically through the center of the frame.",
+      "A small garden plot with green vegetation is visible near the houses."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the area immediately south of the central road and west of the river.",
+      "The blue tarp visible in the crop corresponds to the blue material seen on the ground near the houses in the context image.",
+      "The green garden plot in the context image is located to the left of the debris pile shown in the crop."
+    ],
+    "description": "The images show a rural residential area next to a river. The context view displays houses, fields, and a road. The linked crop reveals a pile of white debris and a blue tarp on the ground near a house, situated between a green garden plot and the riverbank.",
+    "evidence_visible": [
+      "A pile of white, fragmented material scattered on the ground.",
+      "A blue tarp or sheet lying on the ground near the debris.",
+      "A small garden plot with green crops to the left of the debris.",
+      "A paved path or road edge to the right of the debris.",
+      "A house with a grey roof and white walls is visible in the upper portion of the crop."
+    ],
+    "unclear": [
+      "The specific composition of the white debris.",
+      "The origin or purpose of the blue tarp.",
+      "Whether the debris is construction waste, trash, or agricultural material."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to a river with reeds.\",\n    \"Residential structures with white walls and blue or grey roofs.\",\n    \"Agricultural fields with visible crop rows and patches of snow.\",\n    \"A paved road runs vertically through the center of the frame.\",\n    \"A small garden plot with green vegetation is visible near the houses.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the area immediately south of the central road and west of the river.\",\n    \"The blue tarp visible in the crop corresponds to the blue material seen on the ground near the houses in the context image.\",\n    \"The green garden plot in the context image is located to the left of the debris pile shown in the crop.\"\n  ],\n  \"description\": \"The images show a rural residential area next to a river. The context view displays houses, fields, and a road. The linked crop reveals a pile of white debris and a blue tarp on the ground near a house, situated between a green garden plot and the riverbank.\",\n  \"evidence_visible\": [\n    \"A pile of white, fragmented material scattered on the ground.\",\n    \"A blue tarp or sheet lying on the ground near the debris.\",\n    \"A small garden plot with green crops to the left of the debris.\",\n    \"A paved path or road edge to the right of the debris.\",\n    \"A house with a grey roof and white walls is visible in the upper portion of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific composition of the white debris.\",\n    \"The origin or purpose of the blue tarp.\",\n    \"Whether the debris is construction waste, trash, or agricultural material.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a distinct pile of white debris and a blue tarp on the ground, which indicates a demolition event rather than just visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a pile of white, fragmented debris and a blue tarp on the ground near a residential structure, consistent with a building undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a distinct pile of white debris and a blue tarp on the ground, which indicates a demolition event rather than just visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a pile of white, fragmented debris and a blue tarp on the ground near a residential structure, consistent with a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a pile of white, fragmented debris and a blue tarp on the ground adjacent to a residential structure. This visual evidence directly supports the claim of demolition activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a pile of debris and a blue tarp on the ground, but does not show a standing building with visible structural damage (e.g., a collapsed roof or broken walls). The claim of 'building damage' is not supported by the visual content.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a pile of white, fragmented debris and a blue tarp on the ground adjacent to a residential structure. This visual evidence directly supports the claim of demolition activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a pile of debris and a blue tarp on the ground, but does not show a standing building with visible structural damage (e.g., a collapsed roof or broken walls). The claim of 'building damage' is not supported by the visual content.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

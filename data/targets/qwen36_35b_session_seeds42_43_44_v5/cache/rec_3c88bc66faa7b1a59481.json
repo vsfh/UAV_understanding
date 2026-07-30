@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_3c88bc66faa7b1a59481",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0305-6387-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0305-6387-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a dense urban area with a mix of residential and commercial buildings.",
+      "A multi-lane paved road runs vertically along the right side of the frame.",
+      "A large parking lot is visible in the lower-left quadrant, containing numerous parked vehicles.",
+      "Roof colors vary, including grey tiles, red metal sheets, and blue corrugated material.",
+      "The area appears to be a developed town or city district with narrow streets and alleys."
+    ],
+    "cross_view_relations": [
+      "The crop shows a specific cluster of residential buildings with pitched roofs.",
+      "This cluster is located in the upper-left quadrant of the wide context image, amidst other similar structures.",
+      "The spatial arrangement of the houses in the crop matches the pattern seen in the wider view.",
+      "The crop provides a closer look at the roof textures and courtyard details of the buildings seen in the context."
+    ],
+    "description": "The wide image shows a dense urban area with a main road and parking lot. The crop zooms in on a cluster of residential buildings with varied roof colors (red, grey, blue) and small courtyards. The buildings are tightly packed, typical of a town center, with no visible commercial signage or distinct business activity.",
+    "evidence_visible": [
+      "Close-up of several houses with pitched roofs in red, grey, and blue.",
+      "A central courtyard area with a paved surface and some scattered objects.",
+      "A staircase leading to an upper level on the right side of the crop.",
+      "Solar water heaters visible on some rooftops.",
+      "Narrow alleys between the buildings.",
+      "Some buildings appear to be under construction or renovation, with exposed concrete."
+    ],
+    "unclear": [
+      "The specific purpose of the objects in the courtyard.",
+      "The exact number of people or vehicles in the courtyard due to resolution.",
+      "The legal status or ownership of the buildings.",
+      "The specific business or residential nature of each individual building."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a dense urban area with a mix of residential and commercial buildings.\",\n    \"A multi-lane paved road runs vertically along the right side of the frame.\",\n    \"A large parking lot is visible in the lower-left quadrant, containing numerous parked vehicles.\",\n    \"Roof colors vary, including grey tiles, red metal sheets, and blue corrugated material.\",\n    \"The area appears to be a developed town or city district with narrow streets and alleys.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop shows a specific cluster of residential buildings with pitched roofs.\",\n    \"This cluster is located in the upper-left quadrant of the wide context image, amidst other similar structures.\",\n    \"The spatial arrangement of the houses in the crop matches the pattern seen in the wider view.\",\n    \"The crop provides a closer look at the roof textures and courtyard details of the buildings seen in the context.\"\n  ],\n  \"description\": \"The wide image shows a dense urban area with a main road and parking lot. The crop zooms in on a cluster of residential buildings with varied roof colors (red, grey, blue) and small courtyards. The buildings are tightly packed, typical of a town center, with no visible commercial signage or distinct business activity.\",\n  \"evidence_visible\": [\n    \"Close-up of several houses with pitched roofs in red, grey, and blue.\",\n    \"A central courtyard area with a paved surface and some scattered objects.\",\n    \"A staircase leading to an upper level on the right side of the crop.\",\n    \"Solar water heaters visible on some rooftops.\",\n    \"Narrow alleys between the buildings.\",\n    \"Some buildings appear to be under construction or renovation, with exposed concrete.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the objects in the courtyard.\",\n    \"The exact number of people or vehicles in the courtyard due to resolution.\",\n    \"The legal status or ownership of the buildings.\",\n    \"The specific business or residential nature of each individual building.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of active construction debris and exposed structural elements indicating a planned removal process, rather than random structural failure.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by visible evidence of a building undergoing active or recent demolition, specifically the exposed concrete structure and debris within the central courtyard of the residential cluster in the upper-left quadrant.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of active construction debris and exposed structural elements indicating a planned removal process, rather than random structural failure.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by visible evidence of a building undergoing active or recent demolition, specifically the exposed concrete structure and debris within the central courtyard of the residential cluster in the upper-left quadrant.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a building with a missing roof and exposed interior structure, which visually supports the claim of active or recent demolition. The location is correctly identified within the residential cluster in the upper-left quadrant of the wider context.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image clearly displays a building with significant structural damage, specifically a collapsed roof and exposed internal framework, which supports the claim of visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a building with a missing roof and exposed interior structure, which visually supports the claim of active or recent demolition. The location is correctly identified within the residential cluster in the upper-left quadrant of the wider context.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image clearly displays a building with significant structural damage, specifically a collapsed roof and exposed internal framework, which supports the claim of visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

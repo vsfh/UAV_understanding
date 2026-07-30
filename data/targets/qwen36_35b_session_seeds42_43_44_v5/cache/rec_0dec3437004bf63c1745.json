@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0dec3437004bf63c1745",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1009-7697-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1009-7697-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed industrial and residential area adjacent to a river and a green pond.",
+      "Large warehouse structures with blue corrugated metal roofs dominate the center.",
+      "A tall lattice telecommunications tower stands near the road.",
+      "A paved road runs parallel to the river, with vehicles visible.",
+      "Smaller buildings with grey and red roofs are interspersed with vegetation."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of a specific location within the wider context image.",
+      "The grey tiled roof in the crop corresponds to the building located in the lower right quadrant of the context image, situated between the large blue warehouse and the river.",
+      "The green tarp and yellow object in the crop are located in the yard area of this specific building.",
+      "The utility pole and paved road in the crop align with the road infrastructure visible in the context image."
+    ],
+    "description": "The images show an industrial area with large blue-roofed warehouses and a river. The crop zooms in on a specific building with a grey tiled roof in the lower right, revealing a yard containing a green tarp, a yellow object, and a utility pole adjacent to the road.",
+    "evidence_visible": [
+      "A section of a grey tiled roof on the right edge.",
+      "A bright green tarp covering an object or area on the ground.",
+      "A small yellow object, possibly a bin or container, on the dirt ground.",
+      "A concrete utility pole with cross-arms and wires.",
+      "A paved road surface with a white vehicle partially visible at the top.",
+      "Green trees and vegetation surrounding the paved area."
+    ],
+    "unclear": [
+      "The specific contents under the green tarp.",
+      "The exact function of the yellow object.",
+      "The identity of the white vehicle.",
+      "The specific nature of the industrial activity in the wider context."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed industrial and residential area adjacent to a river and a green pond.\",\n    \"Large warehouse structures with blue corrugated metal roofs dominate the center.\",\n    \"A tall lattice telecommunications tower stands near the road.\",\n    \"A paved road runs parallel to the river, with vehicles visible.\",\n    \"Smaller buildings with grey and red roofs are interspersed with vegetation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of a specific location within the wider context image.\",\n    \"The grey tiled roof in the crop corresponds to the building located in the lower right quadrant of the context image, situated between the large blue warehouse and the river.\",\n    \"The green tarp and yellow object in the crop are located in the yard area of this specific building.\",\n    \"The utility pole and paved road in the crop align with the road infrastructure visible in the context image.\"\n  ],\n  \"description\": \"The images show an industrial area with large blue-roofed warehouses and a river. The crop zooms in on a specific building with a grey tiled roof in the lower right, revealing a yard containing a green tarp, a yellow object, and a utility pole adjacent to the road.\",\n  \"evidence_visible\": [\n    \"A section of a grey tiled roof on the right edge.\",\n    \"A bright green tarp covering an object or area on the ground.\",\n    \"A small yellow object, possibly a bin or container, on the dirt ground.\",\n    \"A concrete utility pole with cross-arms and wires.\",\n    \"A paved road surface with a white vehicle partially visible at the top.\",\n    \"Green trees and vegetation surrounding the paved area.\"\n  ],\n  \"unclear\": [\n    \"The specific contents under the green tarp.\",\n    \"The exact function of the yellow object.\",\n    \"The identity of the white vehicle.\",\n    \"The specific nature of the industrial activity in the wider context.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous green netting covering the ground, whereas incomplete soil cover would show exposed soil where the protective covering is visibly incomplete.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a bright green dust-control netting covering an area on the ground adjacent to a utility pole and a building with a grey tiled roof.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous green netting covering the ground, whereas incomplete soil cover would show exposed soil where the protective covering is visibly incomplete.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a bright green dust-control netting covering an area on the ground adjacent to a utility pole and a building with a grey tiled roof.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a bright green dust-control netting covering an area on the ground adjacent to a utility pole and a building with a grey tiled roof. This matches the description in the statement exactly.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims 'incomplete soil cover' where protective covering is 'visibly incomplete'. The evidence image shows a large, continuous sheet of green netting covering a specific rectangular area. While there is bare soil nearby, the covering itself appears complete over the area it is intended to cover. There is no visual evidence of the netting being torn, missing, or partially applied in a way that would constitute 'incomplete cover' as a primary feature. The claim of 'incomplete' is not supported by the visual evidence of a full sheet.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The protective covering is visibly incomplete."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a bright green dust-control netting covering an area on the ground adjacent to a utility pole and a building with a grey tiled roof. This matches the description in the statement exactly.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims 'incomplete soil cover' where protective covering is 'visibly incomplete'. The evidence image shows a large, continuous sheet of green netting covering a specific rectangular area. While there is bare soil nearby, the covering itself appears complete over the area it is intended to cover. There is no visual evidence of the netting being torn, missing, or partially applied in a way that would constitute 'incomplete cover' as a primary feature. The claim of 'incomplete' is not supported by the visual evidence of a full sheet.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The protective covering is visibly incomplete.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

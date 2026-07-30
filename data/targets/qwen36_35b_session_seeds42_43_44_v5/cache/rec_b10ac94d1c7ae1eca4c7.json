@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b10ac94d1c7ae1eca4c7",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-4808-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-4808-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a river or canal dividing a settlement from agricultural land.",
+      "Left bank: Residential buildings with red and grey roofs, paved roads, and green vegetation.",
+      "Right bank: Large rectangular water bodies, likely aquaculture ponds, surrounded by dirt embankments.",
+      "A concrete bridge spans the waterway in the foreground, connecting the two banks.",
+      "A blue corrugated metal roof is visible on the right bank near the bridge.",
+      "A small boat is moored on the dirt bank near the blue roof."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the area on the right bank of the river, immediately adjacent to the bridge shown in the context image.",
+      "The blue corrugated metal roof and the small boat visible in the crop are located on the embankment just above the bridge structure in the context image.",
+      "The green railing of the bridge is visible at the bottom of the crop image, confirming the spatial link."
+    ],
+    "description": "The images show a river crossing with a bridge connecting a residential area to aquaculture ponds. The crop highlights a blue metal shed and a small boat on the embankment near the bridge, providing a detailed view of the infrastructure adjacent to the waterway.",
+    "evidence_visible": [
+      "Close-up of a blue corrugated metal roof structure situated on a dirt embankment.",
+      "A small, light-colored boat is resting on the ground next to the blue roof.",
+      "Green metal railings of a bridge are visible at the bottom edge of the frame.",
+      "Dark green water and a rectangular pond outline are visible to the right.",
+      "Bare trees and vegetation are present on the embankment."
+    ],
+    "unclear": [
+      "The specific contents of the blue shed are not visible.",
+      "The type of boat or its condition cannot be determined.",
+      "The exact purpose of the rectangular pond outline (e.g., netting vs. construction) is unclear.",
+      "No people or moving vehicles are clearly visible."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a river or canal dividing a settlement from agricultural land.\",\n    \"Left bank: Residential buildings with red and grey roofs, paved roads, and green vegetation.\",\n    \"Right bank: Large rectangular water bodies, likely aquaculture ponds, surrounded by dirt embankments.\",\n    \"A concrete bridge spans the waterway in the foreground, connecting the two banks.\",\n    \"A blue corrugated metal roof is visible on the right bank near the bridge.\",\n    \"A small boat is moored on the dirt bank near the blue roof.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the area on the right bank of the river, immediately adjacent to the bridge shown in the context image.\",\n    \"The blue corrugated metal roof and the small boat visible in the crop are located on the embankment just above the bridge structure in the context image.\",\n    \"The green railing of the bridge is visible at the bottom of the crop image, confirming the spatial link.\"\n  ],\n  \"description\": \"The images show a river crossing with a bridge connecting a residential area to aquaculture ponds. The crop highlights a blue metal shed and a small boat on the embankment near the bridge, providing a detailed view of the infrastructure adjacent to the waterway.\",\n  \"evidence_visible\": [\n    \"Close-up of a blue corrugated metal roof structure situated on a dirt embankment.\",\n    \"A small, light-colored boat is resting on the ground next to the blue roof.\",\n    \"Green metal railings of a bridge are visible at the bottom edge of the frame.\",\n    \"Dark green water and a rectangular pond outline are visible to the right.\",\n    \"Bare trees and vegetation are present on the embankment.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the blue shed are not visible.\",\n    \"The type of boat or its condition cannot be determined.\",\n    \"The exact purpose of the rectangular pond outline (e.g., netting vs. construction) is unclear.\",\n    \"No people or moving vehicles are clearly visible.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the former implies a complete containment structure (like the visible rectangular perimeter in the water), whereas the latter would imply a failure or gap in covering exposed soil; the visible structure appears to be a complete enclosure rather than an incomplete cover.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular enclosure within the water body on the right bank, defined by a dark perimeter structure consistent with netting or containment, adjacent to a blue corrugated metal roof and a small boat on the dirt embankment.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the former implies a complete containment structure (like the visible rectangular perimeter in the water), whereas the latter would imply a failure or gap in covering exposed soil; the visible structure appears to be a complete enclosure rather than an incomplete cover.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular enclosure within the water body on the right bank, defined by a dark perimeter structure consistent with netting or containment, adjacent to a blue corrugated metal roof and a small boat on the dirt embankment.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a rectangular enclosure defined by a dark perimeter structure (likely netting or a floating barrier) within the water body on the right bank. This enclosure is situated directly adjacent to a structure with a blue corrugated metal roof. A small boat is also visible on the dirt embankment near the enclosure. All specific visual details in the statement are present.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible evidence of 'incomplete soil cover'. While the image shows dirt embankments, the specific visual evidence described (a rectangular enclosure with netting, a blue roof, and a boat) is not related to the concept of 'incomplete soil cover' as a primary subject. The statement fails to describe the actual salient features (the aquaculture setup) and instead relies on a generic, vague description that does not match the specific 'linked local crop' evidence provided in the context.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a rectangular enclosure defined by a dark perimeter structure (likely netting or a floating barrier) within the water body on the right bank. This enclosure is situated directly adjacent to a structure with a blue corrugated metal roof. A small boat is also visible on the dirt embankment near the enclosure. All specific visual details in the statement are present.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible evidence of 'incomplete soil cover'. While the image shows dirt embankments, the specific visual evidence described (a rectangular enclosure with netting, a blue roof, and a boat) is not related to the concept of 'incomplete soil cover' as a primary subject. The statement fails to describe the actual salient features (the aquaculture setup) and instead relies on a generic, vague description that does not match the specific 'linked local crop' evidence provided in the context.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

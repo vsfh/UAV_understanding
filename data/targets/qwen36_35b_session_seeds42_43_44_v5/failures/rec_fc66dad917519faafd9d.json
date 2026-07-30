@@ -1,0 +1,6 @@
+{
+  "record_uid": "rec_fc66dad917519faafd9d",
+  "source_class": "building_demolition",
+  "error_type": "TeacherGenerationError",
+  "error": "Teacher failed after 3 attempts: Verification keys must be ['counterfactual', 'positive'], got ['reason', 'support_score', 'supported', 'unsupported_claims'] | Verification keys must be ['counterfactual', 'positive'], got ['reason', 'support_score', 'supported', 'unsupported_claims'] | Verification keys must be ['counterfactual', 'positive'], got ['reason', 'support_score', 'supported', 'unsupported_claims']"
+}

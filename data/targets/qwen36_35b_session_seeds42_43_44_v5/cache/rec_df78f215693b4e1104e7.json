@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_df78f215693b4e1104e7",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0303-3175-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0303-3175-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a dense agricultural area with numerous rectangular garden plots containing green crops and soil.",
+      "A paved road runs vertically through the scene, crossing a small bridge over a river in the foreground.",
+      "A white sedan is driving on the road near the bridge.",
+      "A cluster of buildings with blue and grey roofs is situated near the riverbank.",
+      "Urban residential buildings are visible in the background.",
+      "A tall white crane is visible on the left side of the image."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in, rotated view of the area immediately surrounding the bridge and the white sedan seen in the first image.",
+      "The white sedan is visible in both images, confirming the spatial link.",
+      "The blue crane arm visible in the second image corresponds to the white crane structure seen in the first image.",
+      "The power lines and poles in the second image are part of the infrastructure running alongside the road in the first image."
+    ],
+    "description": "Aerial imagery shows a white sedan driving on a road crossing a bridge over a river, adjacent to extensive agricultural plots. A zoomed-in view reveals a blue crane arm, scattered debris, and overhead power lines near the road, with urban buildings in the background.",
+    "evidence_visible": [
+      "Close-up view of the road and bridge area.",
+      "A white sedan is positioned on the road.",
+      "A blue crane arm is visible in the lower left corner.",
+      "Debris and trash are scattered on the ground near the bridge abutment.",
+      "Overhead power lines run diagonally across the frame.",
+      "Green crops and soil are visible in the adjacent plots."
+    ],
+    "unclear": [
+      "The specific type of vehicle the white sedan is following or passing.",
+      "The exact nature of the debris on the ground.",
+      "The purpose of the blue crane arm (construction vs. maintenance).",
+      "The identity of any individuals present."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a dense agricultural area with numerous rectangular garden plots containing green crops and soil.\",\n    \"A paved road runs vertically through the scene, crossing a small bridge over a river in the foreground.\",\n    \"A white sedan is driving on the road near the bridge.\",\n    \"A cluster of buildings with blue and grey roofs is situated near the riverbank.\",\n    \"Urban residential buildings are visible in the background.\",\n    \"A tall white crane is visible on the left side of the image.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in, rotated view of the area immediately surrounding the bridge and the white sedan seen in the first image.\",\n    \"The white sedan is visible in both images, confirming the spatial link.\",\n    \"The blue crane arm visible in the second image corresponds to the white crane structure seen in the first image.\",\n    \"The power lines and poles in the second image are part of the infrastructure running alongside the road in the first image.\"\n  ],\n  \"description\": \"Aerial imagery shows a white sedan driving on a road crossing a bridge over a river, adjacent to extensive agricultural plots. A zoomed-in view reveals a blue crane arm, scattered debris, and overhead power lines near the road, with urban buildings in the background.\",\n  \"evidence_visible\": [\n    \"Close-up view of the road and bridge area.\",\n    \"A white sedan is positioned on the road.\",\n    \"A blue crane arm is visible in the lower left corner.\",\n    \"Debris and trash are scattered on the ground near the bridge abutment.\",\n    \"Overhead power lines run diagonally across the frame.\",\n    \"Green crops and soil are visible in the adjacent plots.\"\n  ],\n  \"unclear\": [\n    \"The specific type of vehicle the white sedan is following or passing.\",\n    \"The exact nature of the debris on the ground.\",\n    \"The purpose of the blue crane arm (construction vs. maintenance).\",\n    \"The identity of any individuals present.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of heavy machinery (cranes) and the organized nature of the site, which supports the active demolition event rather than just visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the presence of a tall white crane and a blue crane arm situated adjacent to a cluster of buildings near the riverbank, which indicates active or recent demolition operations.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of heavy machinery (cranes) and the organized nature of the site, which supports the active demolition event rather than just visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the presence of a tall white crane and a blue crane arm situated adjacent to a cluster of buildings near the riverbank, which indicates active or recent demolition operations.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The wide image clearly shows a tall white lattice crane and a blue crane arm situated near a cluster of buildings and agricultural plots adjacent to the riverbank. The presence of these heavy lifting machines in close proximity to structures is direct visual evidence supporting the claim of active or recent demolition operations.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a white car on a road and various agricultural plots, but it does not show any building with visible structural damage. The claim of visible structural damage is not supported by the visual content.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The wide image clearly shows a tall white lattice crane and a blue crane arm situated near a cluster of buildings and agricultural plots adjacent to the riverbank. The presence of these heavy lifting machines in close proximity to structures is direct visual evidence supporting the claim of active or recent demolition operations.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a white car on a road and various agricultural plots, but it does not show any building with visible structural damage. The claim of visible structural damage is not supported by the visual content.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_72bcd1153a5c92c602a2",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1028-9531-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1028-9531-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a large, multi-story building with a red roof and solar panels on the left.",
+      "Surrounding the building are agricultural fields, some green and others yellow/brown, indicating different crop stages.",
+      "A paved road runs diagonally through the scene, separating the main building from smaller residential structures and gardens on the right.",
+      "A small waterway or canal is visible in the upper right corner."
+    ],
+    "cross_view_relations": [
+      "The close-up crop view corresponds to the small garden plots located immediately to the right of the main building in the wide context image.",
+      "The solar panels visible on the roof of the main building in the context view are partially visible on the left edge of the crop view.",
+      "The paved road seen in the context view runs along the bottom right edge of the crop view."
+    ],
+    "description": "The images show a rural area with a large building and surrounding agricultural fields. The close-up view details small garden plots adjacent to the building, containing green crops and a green tarp, situated next to a paved road.",
+    "evidence_visible": [
+      "A close-up view of several rectangular garden plots containing rows of green leafy vegetables.",
+      "A bright green tarp or netting is laid out on a patch of bare soil in the foreground.",
+      "A paved road runs along the right side of the garden plots.",
+      "The corner of a building with solar panels on the roof is visible on the left edge."
+    ],
+    "unclear": [
+      "The specific type of vegetables in the garden plots.",
+      "The exact date of the imagery.",
+      "The ownership or legal status of the land and buildings."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a large, multi-story building with a red roof and solar panels on the left.\",\n    \"Surrounding the building are agricultural fields, some green and others yellow/brown, indicating different crop stages.\",\n    \"A paved road runs diagonally through the scene, separating the main building from smaller residential structures and gardens on the right.\",\n    \"A small waterway or canal is visible in the upper right corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The close-up crop view corresponds to the small garden plots located immediately to the right of the main building in the wide context image.\",\n    \"The solar panels visible on the roof of the main building in the context view are partially visible on the left edge of the crop view.\",\n    \"The paved road seen in the context view runs along the bottom right edge of the crop view.\"\n  ],\n  \"description\": \"The images show a rural area with a large building and surrounding agricultural fields. The close-up view details small garden plots adjacent to the building, containing green crops and a green tarp, situated next to a paved road.\",\n  \"evidence_visible\": [\n    \"A close-up view of several rectangular garden plots containing rows of green leafy vegetables.\",\n    \"A bright green tarp or netting is laid out on a patch of bare soil in the foreground.\",\n    \"A paved road runs along the right side of the garden plots.\",\n    \"The corner of a building with solar panels on the roof is visible on the left edge.\"\n  ],\n  \"unclear\": [\n    \"The specific type of vegetables in the garden plots.\",\n    \"The exact date of the imagery.\",\n    \"The ownership or legal status of the land and buildings.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous, complete green netting covering the soil patch, whereas incomplete soil cover would show visible gaps or missing sections of the protective material.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a patch of bare soil covered by a bright green dust-control netting in the garden plots adjacent to the building with solar panels.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous, complete green netting covering the soil patch, whereas incomplete soil cover would show visible gaps or missing sections of the protective material.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a patch of bare soil covered by a bright green dust-control netting in the garden plots adjacent to the building with solar panels.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a patch of bare soil covered by a bright green netting in the garden plots adjacent to the building with solar panels, directly supporting the claim.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows garden plots with varying degrees of vegetation cover, including bare soil and areas with green plants, supporting the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a patch of bare soil covered by a bright green netting in the garden plots adjacent to the building with solar panels, directly supporting the claim.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows garden plots with varying degrees of vegetation cover, including bare soil and areas with green plants, supporting the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

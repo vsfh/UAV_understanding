@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_90aba9fc98fc7cbe34b2",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0814-4110-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0814-4110-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area containing large industrial buildings with blue and grey roofs, a paved road with parked vehicles, and a central cluster of residential structures in various states of demolition.",
+      "The central cluster features intact houses with grey tiled roofs, partially collapsed structures with exposed concrete frames, and piles of red brick rubble.",
+      "Green vegetation, including trees and cultivated garden plots, is interspersed among the buildings."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the central cluster of buildings seen in the wide context image.",
+      "The specific building in the crop, characterized by a flat concrete roof with open window frames and adjacent rubble, corresponds to the structures located in the lower-middle section of the context image.",
+      "The green garden plot and trees visible to the left of the building in the crop match the vegetation immediately adjacent to the demolished structures in the context view."
+    ],
+    "description": "Aerial imagery shows a transition zone between industrial facilities and a residential area undergoing demolition. The scene includes intact houses, partially collapsed concrete structures, and piles of red brick rubble. Green vegetation and garden plots are visible among the buildings, alongside a paved road with parked vehicles.",
+    "evidence_visible": [
+      "Close-up view of a two-story building with a flat concrete roof; the interior is exposed, showing empty window frames and missing walls.",
+      "Adjacent to the building is a pile of red brick debris and rubble.",
+      "To the left, a green garden plot with rows of crops and a small tree is visible.",
+      "A paved path runs along the left edge of the frame.",
+      "In the background, other residential structures with grey tiled roofs are visible."
+    ],
+    "unclear": [
+      "The specific cause of the structural damage (demolition vs. collapse).",
+      "The exact date of the imagery.",
+      "The legal status or ownership of the properties.",
+      "The specific type of crops in the garden plots."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area containing large industrial buildings with blue and grey roofs, a paved road with parked vehicles, and a central cluster of residential structures in various states of demolition.\",\n    \"The central cluster features intact houses with grey tiled roofs, partially collapsed structures with exposed concrete frames, and piles of red brick rubble.\",\n    \"Green vegetation, including trees and cultivated garden plots, is interspersed among the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the central cluster of buildings seen in the wide context image.\",\n    \"The specific building in the crop, characterized by a flat concrete roof with open window frames and adjacent rubble, corresponds to the structures located in the lower-middle section of the context image.\",\n    \"The green garden plot and trees visible to the left of the building in the crop match the vegetation immediately adjacent to the demolished structures in the context view.\"\n  ],\n  \"description\": \"Aerial imagery shows a transition zone between industrial facilities and a residential area undergoing demolition. The scene includes intact houses, partially collapsed concrete structures, and piles of red brick rubble. Green vegetation and garden plots are visible among the buildings, alongside a paved road with parked vehicles.\",\n  \"evidence_visible\": [\n    \"Close-up view of a two-story building with a flat concrete roof; the interior is exposed, showing empty window frames and missing walls.\",\n    \"Adjacent to the building is a pile of red brick debris and rubble.\",\n    \"To the left, a green garden plot with rows of crops and a small tree is visible.\",\n    \"A paved path runs along the left edge of the frame.\",\n    \"In the background, other residential structures with grey tiled roofs are visible.\"\n  ],\n  \"unclear\": [\n    \"The specific cause of the structural damage (demolition vs. collapse).\",\n    \"The exact date of the imagery.\",\n    \"The legal status or ownership of the properties.\",\n    \"The specific type of crops in the garden plots.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific visual evidence of a wall that has visibly collapsed, characterized by the exposed interior and missing structural walls, whereas building damage is a broader category of visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence shows a two-story building with a flat concrete roof where the interior is exposed, revealing empty window frames and missing walls, alongside a pile of red brick debris and rubble.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific visual evidence of a wall that has visibly collapsed, characterized by the exposed interior and missing structural walls, whereas building damage is a broader category of visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence shows a two-story building with a flat concrete roof where the interior is exposed, revealing empty window frames and missing walls, alongside a pile of red brick debris and rubble.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a two-story structure with a flat concrete roof where the interior is exposed, revealing empty window frames and missing walls. There is a significant pile of red brick debris and rubble adjacent to the building, confirming the description of a collapsed house wall and structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays a building with a flat concrete roof that has been stripped of its upper structure, exposing the interior layout. The presence of missing walls and empty window frames constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a two-story structure with a flat concrete roof where the interior is exposed, revealing empty window frames and missing walls. There is a significant pile of red brick debris and rubble adjacent to the building, confirming the description of a collapsed house wall and structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a building with a flat concrete roof that has been stripped of its upper structure, exposing the interior layout. The presence of missing walls and empty window frames constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

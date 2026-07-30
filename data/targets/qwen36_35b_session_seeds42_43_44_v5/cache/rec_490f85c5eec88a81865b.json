@@ -1,0 +1,83 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_490f85c5eec88a81865b",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1001-9811-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1001-9811-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a large industrial complex with flat roofs, some covered in solar panels. Adjacent to the complex is a large area of rubble and debris, indicating demolition or construction. A paved road runs along the right side with a bus visible. Small residential structures with tiled roofs are located near the debris field."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the area to the left of the main industrial building in the context image. The red vehicle and the cluster of houses with solar panels seen in the crop are located within the debris field area shown in the context image."
+    ],
+    "description": "The images show an industrial site adjacent to a residential area undergoing demolition. The context view reveals a large factory with solar panels and a significant rubble field. The crop details specific houses within this field, showing solar panels on roofs and a red vehicle parked nearby amidst the debris.",
+    "evidence_visible": [
+      "Close-up of several residential buildings with grey tiled roofs. One building has a blue solar panel array installed on its roof. A red vehicle is parked on the ground next to the houses. The surrounding area is cluttered with rubble and vegetation."
+    ],
+    "unclear": [
+      "The specific type of debris in the rubble field, the exact status of the residential buildings (occupied vs. abandoned), and the identity of the red vehicle."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a large industrial complex with flat roofs, some covered in solar panels. Adjacent to the complex is a large area of rubble and debris, indicating demolition or construction. A paved road runs along the right side with a bus visible. Small residential structures with tiled roofs are located near the debris field.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the area to the left of the main industrial building in the context image. The red vehicle and the cluster of houses with solar panels seen in the crop are located within the debris field area shown in the context image.\"\n  ],\n  \"description\": \"The images show an industrial site adjacent to a residential area undergoing demolition. The context view reveals a large factory with solar panels and a significant rubble field. The crop details specific houses within this field, showing solar panels on roofs and a red vehicle parked nearby amidst the debris.\",\n  \"evidence_visible\": [\n    \"Close-up of several residential buildings with grey tiled roofs. One building has a blue solar panel array installed on its roof. A red vehicle is parked on the ground next to the houses. The surrounding area is cluttered with rubble and vegetation.\"\n  ],\n  \"unclear\": [\n    \"The specific type of debris in the rubble field, the exact status of the residential buildings (occupied vs. abandoned), and the identity of the red vehicle.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the green netting itself; the distinction is that the netting is visibly established in the image, whereas incomplete soil cover would imply a lack of such coverage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large area of exposed soil and rubble adjacent to the industrial complex, where green dust-control netting is clearly installed on the ground.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the green netting itself; the distinction is that the netting is visibly established in the image, whereas incomplete soil cover would imply a lack of such coverage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large area of exposed soil and rubble adjacent to the industrial complex, where green dust-control netting is clearly installed on the ground.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows green dust-control netting installed on the ground adjacent to the industrial complex and exposed soil/rubble. The claim that this evidence is missing or that the netting is not visible is contradicted by the visual data.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a large area of exposed soil and rubble next to the buildings. While there is some green netting visible in the vicinity, the majority of the exposed ground is bare, and the netting does not cover the entire area, making the protective covering visibly incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows green dust-control netting installed on the ground adjacent to the industrial complex and exposed soil/rubble. The claim that this evidence is missing or that the netting is not visible is contradicted by the visual data.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a large area of exposed soil and rubble next to the buildings. While there is some green netting visible in the vicinity, the majority of the exposed ground is bare, and the netting does not cover the entire area, making the protective covering visibly incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_96598647daaed725ca2f",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0116-8549-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0116-8549-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a dense urban residential area with multiple multi-story apartment blocks.",
+      "The buildings are arranged in parallel rows with paved access roads and small courtyards.",
+      "The rooftops are flat and light-colored, with some visible mechanical units.",
+      "Surrounding the modern blocks are older, low-rise structures with grey tiled roofs.",
+      "Vegetation is visible as small trees and shrubs in the spaces between buildings."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the lower-left quadrant of the context image.",
+      "The crop focuses on the interface between the modern apartment complex and the older, lower-density housing.",
+      "The crop reveals details of a construction or demolition site located between the two types of housing.",
+      "The spatial relationship shows the modern buildings are significantly taller than the adjacent older structures."
+    ],
+    "description": "The images show a dense residential area with modern multi-story apartment blocks adjacent to older, low-rise housing. A construction or demolition site is visible in the foreground, characterized by exposed earth, rubble, and a yellow excavator. The scene depicts a transition between different building densities and ages.",
+    "evidence_visible": [
+      "A yellow excavator is visible on a patch of disturbed earth and rubble.",
+      "The ground in the foreground is uneven, with piles of debris and construction materials.",
+      "A low wall or foundation structure is partially visible near the excavator.",
+      "The older buildings in the foreground have grey tiled roofs and appear to be single or double-story.",
+      "The modern apartment buildings have uniform windows and balconies."
+    ],
+    "unclear": [
+      "The specific activity of the excavator (e.g., digging, moving debris) is unclear due to the static nature of the image.",
+      "The exact status of the construction site (e.g., new build, demolition) cannot be definitively determined.",
+      "The number of people present is unclear; no individuals are distinctly visible.",
+      "The specific materials of the debris piles are unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a dense urban residential area with multiple multi-story apartment blocks.\",\n    \"The buildings are arranged in parallel rows with paved access roads and small courtyards.\",\n    \"The rooftops are flat and light-colored, with some visible mechanical units.\",\n    \"Surrounding the modern blocks are older, low-rise structures with grey tiled roofs.\",\n    \"Vegetation is visible as small trees and shrubs in the spaces between buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the lower-left quadrant of the context image.\",\n    \"The crop focuses on the interface between the modern apartment complex and the older, lower-density housing.\",\n    \"The crop reveals details of a construction or demolition site located between the two types of housing.\",\n    \"The spatial relationship shows the modern buildings are significantly taller than the adjacent older structures.\"\n  ],\n  \"description\": \"The images show a dense residential area with modern multi-story apartment blocks adjacent to older, low-rise housing. A construction or demolition site is visible in the foreground, characterized by exposed earth, rubble, and a yellow excavator. The scene depicts a transition between different building densities and ages.\",\n  \"evidence_visible\": [\n    \"A yellow excavator is visible on a patch of disturbed earth and rubble.\",\n    \"The ground in the foreground is uneven, with piles of debris and construction materials.\",\n    \"A low wall or foundation structure is partially visible near the excavator.\",\n    \"The older buildings in the foreground have grey tiled roofs and appear to be single or double-story.\",\n    \"The modern apartment buildings have uniform windows and balconies.\"\n  ],\n  \"unclear\": [\n    \"The specific activity of the excavator (e.g., digging, moving debris) is unclear due to the static nature of the image.\",\n    \"The exact status of the construction site (e.g., new build, demolition) cannot be definitively determined.\",\n    \"The number of people present is unclear; no individuals are distinctly visible.\",\n    \"The specific materials of the debris piles are unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of active construction machinery (a yellow excavator) and the context of a cleared site, whereas building damage would imply structural failure without such active intervention.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a yellow excavator operating on a patch of disturbed earth and rubble, situated between modern apartment blocks and older low-rise structures.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of active construction machinery (a yellow excavator) and the context of a cleared site, whereas building damage would imply structural failure without such active intervention.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a yellow excavator operating on a patch of disturbed earth and rubble, situated between modern apartment blocks and older low-rise structures.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a yellow excavator operating on a patch of disturbed earth and rubble situated between modern apartment blocks and older low-rise structures, which visually supports the claim of building demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a construction site with a yellow excavator and rubble, but there is no visible evidence of structural damage to a standing building; the scene depicts active demolition or construction rather than accidental damage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a yellow excavator operating on a patch of disturbed earth and rubble situated between modern apartment blocks and older low-rise structures, which visually supports the claim of building demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a construction site with a yellow excavator and rubble, but there is no visible evidence of structural damage to a standing building; the scene depicts active demolition or construction rather than accidental damage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

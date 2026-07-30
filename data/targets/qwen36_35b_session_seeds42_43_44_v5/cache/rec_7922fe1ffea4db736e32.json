@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_7922fe1ffea4db736e32",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0814-4123-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0814-4123-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a large, bright green agricultural field on the right and a waterway with fish ponds on the left.",
+      "A cluster of industrial or storage buildings with blue and white corrugated metal roofs is situated between the water and the field.",
+      "A paved road runs parallel to the waterway, separating the water features from the buildings and the field.",
+      "Vegetation, including trees and grass, lines the banks of the waterway and the road."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in crop of the central area in the first image, focusing on the buildings adjacent to the road and waterway.",
+      "The spatial relationship between the road, the waterway, and the specific cluster of buildings is consistent across both views.",
+      "The large green field visible in the context image is not present in the evidence crop."
+    ],
+    "description": "The images show a rural area with a large green field, a waterway, and a cluster of buildings with blue and white roofs. The second image provides a closer view of these buildings, which appear to be industrial or storage facilities, situated next to a road and surrounded by vegetation.",
+    "evidence_visible": [
+      "A close-up view of a cluster of buildings, including a large, unfinished or dilapidated concrete structure with an open roof.",
+      "Adjacent to the concrete structure are smaller buildings with red brick walls and blue corrugated metal roofs.",
+      "A paved road runs along the top of the frame, with a few vehicles visible.",
+      "A small canal or drainage ditch runs alongside the buildings on the right.",
+      "Debris and materials are scattered on the ground near the buildings."
+    ],
+    "unclear": [
+      "The specific function or business type of the buildings is unclear.",
+      "The legal status of the construction or land use is unclear.",
+      "The exact date the images were taken is unclear.",
+      "The ownership of the properties is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a large, bright green agricultural field on the right and a waterway with fish ponds on the left.\",\n    \"A cluster of industrial or storage buildings with blue and white corrugated metal roofs is situated between the water and the field.\",\n    \"A paved road runs parallel to the waterway, separating the water features from the buildings and the field.\",\n    \"Vegetation, including trees and grass, lines the banks of the waterway and the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in crop of the central area in the first image, focusing on the buildings adjacent to the road and waterway.\",\n    \"The spatial relationship between the road, the waterway, and the specific cluster of buildings is consistent across both views.\",\n    \"The large green field visible in the context image is not present in the evidence crop.\"\n  ],\n  \"description\": \"The images show a rural area with a large green field, a waterway, and a cluster of buildings with blue and white roofs. The second image provides a closer view of these buildings, which appear to be industrial or storage facilities, situated next to a road and surrounded by vegetation.\",\n  \"evidence_visible\": [\n    \"A close-up view of a cluster of buildings, including a large, unfinished or dilapidated concrete structure with an open roof.\",\n    \"Adjacent to the concrete structure are smaller buildings with red brick walls and blue corrugated metal roofs.\",\n    \"A paved road runs along the top of the frame, with a few vehicles visible.\",\n    \"A small canal or drainage ditch runs alongside the buildings on the right.\",\n    \"Debris and materials are scattered on the ground near the buildings.\"\n  ],\n  \"unclear\": [\n    \"The specific function or business type of the buildings is unclear.\",\n    \"The legal status of the construction or land use is unclear.\",\n    \"The exact date the images were taken is unclear.\",\n    \"The ownership of the properties is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a complete collapse of the roof and walls of a residential structure, whereas building damage is a broader category that could include partial damage or damage to non-residential structures.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence image shows a large concrete structure with a visibly collapsed roof and missing walls, consistent with a house wall that has visibly collapsed.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a complete collapse of the roof and walls of a residential structure, whereas building damage is a broader category that could include partial damage or damage to non-residential structures.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence image shows a large concrete structure with a visibly collapsed roof and missing walls, consistent with a house wall that has visibly collapsed.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a large concrete structure with a missing roof and open walls, which visually supports the description of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays a building with significant structural damage, specifically a missing roof and exposed interior, which supports the claim of visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a large concrete structure with a missing roof and open walls, which visually supports the description of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a building with significant structural damage, specifically a missing roof and exposed interior, which supports the claim of visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

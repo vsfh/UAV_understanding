@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d3656ea4ac7dc3149617",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0305-4042-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0305-4042-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a wide, murky green river with a narrow boat in the center.",
+      "The right bank features a paved road, a large building with a green roof, and a yard containing stacked materials and construction equipment.",
+      "The left bank contains buildings with red and blue roofs and parked vehicles.",
+      "The riverbank on the right shows exposed soil and concrete structures."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the upper-right section of the wide image.",
+      "The building with the green roof and the adjacent yard with stacked materials are the primary subjects of the crop.",
+      "The dark, linear object floating in the water in the crop corresponds to the boat visible in the wide image.",
+      "The concrete embankment and the transition from the building yard to the water are clearly linked between the two views."
+    ],
+    "description": "Aerial imagery shows a river bordered by industrial buildings and a road. The right bank features a large structure with a green roof and a yard with stacked materials. A narrow boat floats in the water. The crop provides a closer view of the green-roofed building, the adjacent yard, and the concrete embankment.",
+    "evidence_visible": [
+      "Close-up of a building with a large green roof and blue side panels.",
+      "An adjacent yard contains stacks of materials, possibly metal or wood, and some machinery.",
+      "A concrete embankment separates the yard from the water.",
+      "A dark, thin, linear object (likely a boat or debris) is floating in the water near the bottom of the frame.",
+      "The water appears murky and green.",
+      "Some vegetation and exposed soil are visible along the water's edge."
+    ],
+    "unclear": [
+      "The specific type of materials stacked in the yard.",
+      "The exact nature of the dark object in the water (boat vs. debris).",
+      "The specific activities occurring in the yard.",
+      "The condition of the concrete embankment (e.g., cracks, damage)."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a wide, murky green river with a narrow boat in the center.\",\n    \"The right bank features a paved road, a large building with a green roof, and a yard containing stacked materials and construction equipment.\",\n    \"The left bank contains buildings with red and blue roofs and parked vehicles.\",\n    \"The riverbank on the right shows exposed soil and concrete structures.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the upper-right section of the wide image.\",\n    \"The building with the green roof and the adjacent yard with stacked materials are the primary subjects of the crop.\",\n    \"The dark, linear object floating in the water in the crop corresponds to the boat visible in the wide image.\",\n    \"The concrete embankment and the transition from the building yard to the water are clearly linked between the two views.\"\n  ],\n  \"description\": \"Aerial imagery shows a river bordered by industrial buildings and a road. The right bank features a large structure with a green roof and a yard with stacked materials. A narrow boat floats in the water. The crop provides a closer view of the green-roofed building, the adjacent yard, and the concrete embankment.\",\n  \"evidence_visible\": [\n    \"Close-up of a building with a large green roof and blue side panels.\",\n    \"An adjacent yard contains stacks of materials, possibly metal or wood, and some machinery.\",\n    \"A concrete embankment separates the yard from the water.\",\n    \"A dark, thin, linear object (likely a boat or debris) is floating in the water near the bottom of the frame.\",\n    \"The water appears murky and green.\",\n    \"Some vegetation and exposed soil are visible along the water's edge.\"\n  ],\n  \"unclear\": [\n    \"The specific type of materials stacked in the yard.\",\n    \"The exact nature of the dark object in the water (boat vs. debris).\",\n    \"The specific activities occurring in the yard.\",\n    \"The condition of the concrete embankment (e.g., cracks, damage).\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of a large, existing building structure with a green roof situated directly next to the work area, rather than the erection of new structures.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by visible evidence of a large industrial building with a green roof situated directly adjacent to a yard containing stacked materials and construction equipment, with exposed soil and concrete structures along the riverbank indicating active site work.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of a large, existing building structure with a green roof situated directly next to the work area, rather than the erection of new structures.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by visible evidence of a large industrial building with a green roof situated directly adjacent to a yard containing stacked materials and construction equipment, with exposed soil and concrete structures along the riverbank indicating active site work.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large industrial building with a green roof adjacent to a yard containing stacked materials and construction equipment. The riverbank shows exposed soil and concrete structures consistent with active site work, supporting the description of demolition or construction activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays an active construction or demolition site with heavy machinery, stacked materials, and exposed earth along the riverbank, which supports the claim of an active general construction project.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large industrial building with a green roof adjacent to a yard containing stacked materials and construction equipment. The riverbank shows exposed soil and concrete structures consistent with active site work, supporting the description of demolition or construction activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays an active construction or demolition site with heavy machinery, stacked materials, and exposed earth along the riverbank, which supports the claim of an active general construction project.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

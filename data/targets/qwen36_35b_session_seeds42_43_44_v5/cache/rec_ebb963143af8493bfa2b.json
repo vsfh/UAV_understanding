@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_ebb963143af8493bfa2b",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-05-01_2026-05-31/building_demolition/original/0513-5295-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-05-01_2026-05-31/building_demolition/cropped/0513-5295-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring large rectangular agricultural fields with varying vegetation colors, including green and yellow patches.",
+      "A paved road runs horizontally across the lower section, bordered by small trees.",
+      "A cluster of residential buildings with grey and red roofs is situated in the upper right quadrant.",
+      "A dirt path intersects the fields near the village area."
+    ],
+    "cross_view_relations": [
+      "The village cluster visible in the upper right of the context image corresponds to the residential area shown in the evidence image.",
+      "The yellow patches in the fields adjacent to the village in the context image spatially align with the harvested crop piles seen in the evidence image."
+    ],
+    "description": "The images show a rural area with agricultural fields and a village. The context view displays a wide expanse of green and yellow crops alongside a road and houses. The evidence view provides a closer look at the village, revealing piles of yellow harvested crop material in the yards and open spaces between the buildings.",
+    "evidence_visible": [
+      "A dense cluster of residential structures with grey tiled and red roofs.",
+      "Piles of yellow, dried plant material, consistent with harvested crops, are visible on the ground in the yards and open areas between the houses.",
+      "Vegetation and small garden plots are present around the buildings.",
+      "A paved road runs through the village."
+    ],
+    "unclear": [
+      "The specific type of crop (e.g., rice, wheat) cannot be definitively identified from the pixels.",
+      "The exact date of the harvest or the current state of the crop in the fields is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring large rectangular agricultural fields with varying vegetation colors, including green and yellow patches.\",\n    \"A paved road runs horizontally across the lower section, bordered by small trees.\",\n    \"A cluster of residential buildings with grey and red roofs is situated in the upper right quadrant.\",\n    \"A dirt path intersects the fields near the village area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The village cluster visible in the upper right of the context image corresponds to the residential area shown in the evidence image.\",\n    \"The yellow patches in the fields adjacent to the village in the context image spatially align with the harvested crop piles seen in the evidence image.\"\n  ],\n  \"description\": \"The images show a rural area with agricultural fields and a village. The context view displays a wide expanse of green and yellow crops alongside a road and houses. The evidence view provides a closer look at the village, revealing piles of yellow harvested crop material in the yards and open spaces between the buildings.\",\n  \"evidence_visible\": [\n    \"A dense cluster of residential structures with grey tiled and red roofs.\",\n    \"Piles of yellow, dried plant material, consistent with harvested crops, are visible on the ground in the yards and open areas between the houses.\",\n    \"Vegetation and small garden plots are present around the buildings.\",\n    \"A paved road runs through the village.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop (e.g., rice, wheat) cannot be definitively identified from the pixels.\",\n    \"The exact date of the harvest or the current state of the crop in the fields is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the state of the structures; the image shows existing residential buildings that are dilapidated or collapsed, rather than a site with new foundations or active construction equipment.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a dense cluster of residential structures with grey tiled and red roofs, where the buildings appear to be in a state of disrepair or partial collapse, consistent with a building undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the state of the structures; the image shows existing residential buildings that are dilapidated or collapsed, rather than a site with new foundations or active construction equipment.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a dense cluster of residential structures with grey tiled and red roofs, where the buildings appear to be in a state of disrepair or partial collapse, consistent with a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a dense cluster of residential structures with grey tiled and red roofs. The buildings appear intact and occupied, with no visible signs of disrepair, partial collapse, or active demolition machinery. The claim of demolition is contradicted by the visual evidence of a stable, inhabited village.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "buildings appear to be in a state of disrepair or partial collapse",
+        "buildings undergoing active or recent demolition"
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a rural village scene with residential houses and agricultural fields. There is no visible evidence of an active general construction project, such as cranes, scaffolding, unfinished concrete structures, or construction workers.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a dense cluster of residential structures with grey tiled and red roofs. The buildings appear intact and occupied, with no visible signs of disrepair, partial collapse, or active demolition machinery. The claim of demolition is contradicted by the visual evidence of a stable, inhabited village.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"buildings appear to be in a state of disrepair or partial collapse\",\n      \"buildings undergoing active or recent demolition\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a rural village scene with residential houses and agricultural fields. There is no visible evidence of an active general construction project, such as cranes, scaffolding, unfinished concrete structures, or construction workers.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

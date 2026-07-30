@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_ce55df9597237c049cd8",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/bare_soil_netting/original/0421-3074-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/bare_soil_netting/cropped/0421-3074-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of an aquaculture facility with multiple rectangular earthen ponds separated by dirt levees.",
+      "A white vehicle is parked on a dirt road near a large, empty rectangular plot of land.",
+      "Several ponds contain water with varying levels of green algae or vegetation.",
+      "Aerators are visible in at least two of the water bodies."
+    ],
+    "cross_view_relations": [
+      "The local crop is a high-resolution zoom of a specific section of the levee system visible in the wider context image.",
+      "The blue netting and dirt road in the crop correspond to the features located between the large central pond and the pond in the lower-left corner of the context image."
+    ],
+    "description": "The images show an aquaculture site with earthen ponds and dirt roads. The local crop details a specific levee section featuring blue netting laid on the ground, adjacent to a dirt path and dense green vegetation. A white vehicle is visible on a nearby road in the wider view.",
+    "evidence_visible": [
+      "Blue netting material is laid out on the ground along the edge of a pond.",
+      "A dirt road runs parallel to the netting.",
+      "Dense green vegetation grows in clumps near the netting.",
+      "A white object, possibly a bag or piece of debris, lies on the ground near the vegetation.",
+      "A wooden ladder or structure is visible on the ground near the vegetation."
+    ],
+    "unclear": [
+      "The specific purpose of the blue netting (e.g., weed control, erosion control, or temporary storage cover).",
+      "The identity of the white object on the ground.",
+      "The exact contents of the ponds.",
+      "The make and model of the white vehicle."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of an aquaculture facility with multiple rectangular earthen ponds separated by dirt levees.\",\n    \"A white vehicle is parked on a dirt road near a large, empty rectangular plot of land.\",\n    \"Several ponds contain water with varying levels of green algae or vegetation.\",\n    \"Aerators are visible in at least two of the water bodies.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop is a high-resolution zoom of a specific section of the levee system visible in the wider context image.\",\n    \"The blue netting and dirt road in the crop correspond to the features located between the large central pond and the pond in the lower-left corner of the context image.\"\n  ],\n  \"description\": \"The images show an aquaculture site with earthen ponds and dirt roads. The local crop details a specific levee section featuring blue netting laid on the ground, adjacent to a dirt path and dense green vegetation. A white vehicle is visible on a nearby road in the wider view.\",\n  \"evidence_visible\": [\n    \"Blue netting material is laid out on the ground along the edge of a pond.\",\n    \"A dirt road runs parallel to the netting.\",\n    \"Dense green vegetation grows in clumps near the netting.\",\n    \"A white object, possibly a bag or piece of debris, lies on the ground near the vegetation.\",\n    \"A wooden ladder or structure is visible on the ground near the vegetation.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the blue netting (e.g., weed control, erosion control, or temporary storage cover).\",\n    \"The identity of the white object on the ground.\",\n    \"The exact contents of the ponds.\",\n    \"The make and model of the white vehicle.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the netting itself; the distinction is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the netting itself; the distinction is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows blue netting covering the soil, which contradicts the claim that the soil is bare.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The image shows blue netting laid out on the ground, but it is not continuous; there are visible gaps of bare earth and vegetation between the netting sections, supporting the claim of incomplete cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows blue netting covering the soil, which contradicts the claim that the soil is bare.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows blue netting laid out on the ground, but it is not continuous; there are visible gaps of bare earth and vegetation between the netting sections, supporting the claim of incomplete cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

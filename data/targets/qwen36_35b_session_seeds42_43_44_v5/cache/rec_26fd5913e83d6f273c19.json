@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_26fd5913e83d6f273c19",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-3870-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-3870-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a densely built residential and industrial area with varied roof types (red tiles, grey corrugated metal, flat concrete).",
+      "A paved road runs horizontally through the middle of the frame.",
+      "A blue bus is parked on the road in the upper right quadrant.",
+      "A large, long building with a dark, sloped roof is prominent in the lower right.",
+      "A white building with a flat, segmented roof is in the bottom right corner."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the area immediately to the left of the large, long building with the dark sloped roof seen in the context image.",
+      "The crop shows the gap between this large building and the adjacent structures to its left.",
+      "The road visible in the context image is at the top edge of the crop view."
+    ],
+    "description": "The context image shows a dense urban area with a road and a blue bus. The crop provides a detailed view of the space between a large, long building with a dark, sloped roof and the adjacent structures to its left, revealing a narrow alleyway, a small building with a green roof, and a flat concrete rooftop.",
+    "evidence_visible": [
+      "A narrow, unpaved alleyway or gap between buildings.",
+      "A small, single-story structure with a green, possibly tarp-covered, roof.",
+      "A flat concrete rooftop with a circular patch or stain.",
+      "A building with a dark, textured, sloped roof (likely tiles or slate).",
+      "A section of a flat roof with what appears to be debris or a grid-like structure.",
+      "A reddish-brown cylindrical object, possibly a tank or container, on the left.",
+      "A paved road is visible at the very top edge of the crop."
+    ],
+    "unclear": [
+      "The exact material of the green roof.",
+      "The contents of the grid-like structure on the flat roof.",
+      "The purpose of the reddish-brown cylindrical object.",
+      "The identity of the small figures near the road at the top of the crop."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a densely built residential and industrial area with varied roof types (red tiles, grey corrugated metal, flat concrete).\",\n    \"A paved road runs horizontally through the middle of the frame.\",\n    \"A blue bus is parked on the road in the upper right quadrant.\",\n    \"A large, long building with a dark, sloped roof is prominent in the lower right.\",\n    \"A white building with a flat, segmented roof is in the bottom right corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the area immediately to the left of the large, long building with the dark sloped roof seen in the context image.\",\n    \"The crop shows the gap between this large building and the adjacent structures to its left.\",\n    \"The road visible in the context image is at the top edge of the crop view.\"\n  ],\n  \"description\": \"The context image shows a dense urban area with a road and a blue bus. The crop provides a detailed view of the space between a large, long building with a dark, sloped roof and the adjacent structures to its left, revealing a narrow alleyway, a small building with a green roof, and a flat concrete rooftop.\",\n  \"evidence_visible\": [\n    \"A narrow, unpaved alleyway or gap between buildings.\",\n    \"A small, single-story structure with a green, possibly tarp-covered, roof.\",\n    \"A flat concrete rooftop with a circular patch or stain.\",\n    \"A building with a dark, textured, sloped roof (likely tiles or slate).\",\n    \"A section of a flat roof with what appears to be debris or a grid-like structure.\",\n    \"A reddish-brown cylindrical object, possibly a tank or container, on the left.\",\n    \"A paved road is visible at the very top edge of the crop.\"\n  ],\n  \"unclear\": [\n    \"The exact material of the green roof.\",\n    \"The contents of the grid-like structure on the flat roof.\",\n    \"The purpose of the reddish-brown cylindrical object.\",\n    \"The identity of the small figures near the road at the top of the crop.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows exposed soil and debris, but there is no visible evidence of 'netting' or any specific dust-control material covering the ground. The claim invents a specific object (netting) not present in the visual data.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The image clearly shows a patch of ground between buildings that consists of bare earth and scattered debris. There is no protective covering (such as grass, pavement, or netting) on this specific area, which visually supports the description of 'incomplete soil cover'.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows exposed soil and debris, but there is no visible evidence of 'netting' or any specific dust-control material covering the ground. The claim invents a specific object (netting) not present in the visual data.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image clearly shows a patch of ground between buildings that consists of bare earth and scattered debris. There is no protective covering (such as grass, pavement, or netting) on this specific area, which visually supports the description of 'incomplete soil cover'.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

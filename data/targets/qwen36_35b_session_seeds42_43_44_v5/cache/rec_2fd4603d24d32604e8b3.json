@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_2fd4603d24d32604e8b3",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0310-0738-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0310-0738-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a river bend with dense mixed-use development.",
+      "Buildings feature varied roofing materials including blue corrugated metal, grey tiles, and concrete.",
+      "Agricultural plots with green and yellow crops are visible on the riverbanks.",
+      "A paved road curves through the agricultural area on the right.",
+      "A multi-story beige building stands near the water's edge."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the upper-right quadrant of the context image.",
+      "The multi-story beige building is visible in the bottom-left corner of the crop.",
+      "The long grey-roofed structures are visible in the bottom-right of the crop.",
+      "The agricultural plots and road are visible in the upper-right of the crop.",
+      "A large pile of dark cylindrical materials is visible in the upper-left of the crop."
+    ],
+    "description": "The context image shows a river bend surrounded by mixed residential and industrial buildings with varied roofing. The crop image provides a detailed view of the upper-right section, highlighting agricultural plots with yellow and green crops, a curved road, and a large stockpile of dark cylindrical materials near a multi-story building.",
+    "evidence_visible": [
+      "Close-up of agricultural plots with distinct yellow and green vegetation.",
+      "A large pile of dark, cylindrical objects (possibly pipes or logs) stacked near a building.",
+      "A multi-story beige building with a flat roof and visible windows.",
+      "Long structures with grey tiled roofs.",
+      "A paved road curving through the fields.",
+      "Various construction materials and debris scattered near the buildings."
+    ],
+    "unclear": [
+      "Exact nature of the dark cylindrical materials.",
+      "Specific use of the buildings.",
+      "Identity of any vehicles or people.",
+      "Exact date of the images."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a river bend with dense mixed-use development.\",\n    \"Buildings feature varied roofing materials including blue corrugated metal, grey tiles, and concrete.\",\n    \"Agricultural plots with green and yellow crops are visible on the riverbanks.\",\n    \"A paved road curves through the agricultural area on the right.\",\n    \"A multi-story beige building stands near the water's edge.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the upper-right quadrant of the context image.\",\n    \"The multi-story beige building is visible in the bottom-left corner of the crop.\",\n    \"The long grey-roofed structures are visible in the bottom-right of the crop.\",\n    \"The agricultural plots and road are visible in the upper-right of the crop.\",\n    \"A large pile of dark cylindrical materials is visible in the upper-left of the crop.\"\n  ],\n  \"description\": \"The context image shows a river bend surrounded by mixed residential and industrial buildings with varied roofing. The crop image provides a detailed view of the upper-right section, highlighting agricultural plots with yellow and green crops, a curved road, and a large stockpile of dark cylindrical materials near a multi-story building.\",\n  \"evidence_visible\": [\n    \"Close-up of agricultural plots with distinct yellow and green vegetation.\",\n    \"A large pile of dark, cylindrical objects (possibly pipes or logs) stacked near a building.\",\n    \"A multi-story beige building with a flat roof and visible windows.\",\n    \"Long structures with grey tiled roofs.\",\n    \"A paved road curving through the fields.\",\n    \"Various construction materials and debris scattered near the buildings.\"\n  ],\n  \"unclear\": [\n    \"Exact nature of the dark cylindrical materials.\",\n    \"Specific use of the buildings.\",\n    \"Identity of any vehicles or people.\",\n    \"Exact date of the images.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a large, organized stockpile of materials and debris, which indicates an active demolition or construction process rather than incidental structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the context image shows a dense industrial area with a large stockpile of dark cylindrical materials and debris near a multi-story beige building, consistent with a site undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a large, organized stockpile of materials and debris, which indicates an active demolition or construction process rather than incidental structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the context image shows a dense industrial area with a large stockpile of dark cylindrical materials and debris near a multi-story beige building, consistent with a site undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The context image clearly shows a multi-story beige building adjacent to a large stockpile of dark cylindrical materials (likely pipes or logs) and debris. This visual evidence supports the description of a dense industrial area with materials consistent with a site undergoing active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The images show a multi-story beige building that appears structurally intact with no visible signs of damage such as collapsed walls, missing roofs, or structural failure. The claim of visible structural damage is contradicted by the visual evidence.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The context image clearly shows a multi-story beige building adjacent to a large stockpile of dark cylindrical materials (likely pipes or logs) and debris. This visual evidence supports the description of a dense industrial area with materials consistent with a site undergoing active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The images show a multi-story beige building that appears structurally intact with no visible signs of damage such as collapsed walls, missing roofs, or structural failure. The claim of visible structural damage is contradicted by the visual evidence.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

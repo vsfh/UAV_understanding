@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_7dd97ac8409281cdeca4",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-2366-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-2366-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of an industrial area adjacent to a wide, murky river.",
+      "Multiple buildings with varied roofing materials including corrugated metal, blue panels, and flat concrete.",
+      "A large rectangular building with a bright blue roof and a white cylindrical tank structure attached.",
+      "A long warehouse with a brown segmented roof in the foreground.",
+      "A dirt and gravel embankment separates the industrial site from the river.",
+      "Several barges are moored along the riverbank on the right side of the image."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the riverbank area visible on the right edge of the context image.",
+      "The barges seen in the context image are shown in greater detail in the crop.",
+      "The spatial relationship confirms the barges are docked parallel to the industrial site's boundary."
+    ],
+    "description": "The images show an industrial zone bordering a river. The context view displays various factory buildings and a dirt embankment. The linked crop details several barges moored along the riverbank, including a large green-hulled vessel with a red roof structure and a smaller blue boat nearby, floating in murky water.",
+    "evidence_visible": [
+      "Close-up of the river surface and moored vessels.",
+      "A large barge with a green hull and a red-roofed superstructure is docked.",
+      "A smaller blue and brown boat is positioned near the larger barge.",
+      "The water is opaque and brownish-grey.",
+      "Debris or floating material is visible on the water surface near the boats.",
+      "A concrete or paved path runs along the riverbank next to the vessels."
+    ],
+    "unclear": [
+      "Specific type of cargo on the barges.",
+      "Operational status of the vessels (active vs. idle).",
+      "Exact dimensions of the buildings.",
+      "Identity of the people or specific machinery on the roofs."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of an industrial area adjacent to a wide, murky river.\",\n    \"Multiple buildings with varied roofing materials including corrugated metal, blue panels, and flat concrete.\",\n    \"A large rectangular building with a bright blue roof and a white cylindrical tank structure attached.\",\n    \"A long warehouse with a brown segmented roof in the foreground.\",\n    \"A dirt and gravel embankment separates the industrial site from the river.\",\n    \"Several barges are moored along the riverbank on the right side of the image.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the riverbank area visible on the right edge of the context image.\",\n    \"The barges seen in the context image are shown in greater detail in the crop.\",\n    \"The spatial relationship confirms the barges are docked parallel to the industrial site's boundary.\"\n  ],\n  \"description\": \"The images show an industrial zone bordering a river. The context view displays various factory buildings and a dirt embankment. The linked crop details several barges moored along the riverbank, including a large green-hulled vessel with a red roof structure and a smaller blue boat nearby, floating in murky water.\",\n  \"evidence_visible\": [\n    \"Close-up of the river surface and moored vessels.\",\n    \"A large barge with a green hull and a red-roofed superstructure is docked.\",\n    \"A smaller blue and brown boat is positioned near the larger barge.\",\n    \"The water is opaque and brownish-grey.\",\n    \"Debris or floating material is visible on the water surface near the boats.\",\n    \"A concrete or paved path runs along the riverbank next to the vessels.\"\n  ],\n  \"unclear\": [\n    \"Specific type of cargo on the barges.\",\n    \"Operational status of the vessels (active vs. idle).\",\n    \"Exact dimensions of the buildings.\",\n    \"Identity of the people or specific machinery on the roofs.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a large agricultural plot with distinct rectangular beds of green vegetation. There is no visible evidence of bare soil covered by dust-control netting; the soil is covered by crops.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a field with organized rows of crops. While the soil is largely covered by vegetation, the visible gaps between the rows and the specific texture of the beds indicate that the ground cover is not a continuous, solid sheet, fitting the description of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a large agricultural plot with distinct rectangular beds of green vegetation. There is no visible evidence of bare soil covered by dust-control netting; the soil is covered by crops.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a field with organized rows of crops. While the soil is largely covered by vegetation, the visible gaps between the rows and the specific texture of the beds indicate that the ground cover is not a continuous, solid sheet, fitting the description of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_1f865b3c3afc7ed4f0bb",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1031-2900-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1031-2900-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring large rectangular plots of golden-yellow crops, likely rice, showing signs of lodging (flattened stalks).",
+      "A cluster of buildings with blue and grey roofs situated adjacent to the fields.",
+      "A paved road running horizontally across the scene.",
+      "Greenhouse structures visible in the upper left corner.",
+      "A small pond or water body in the bottom right corner."
+    ],
+    "cross_view_relations": [
+      "The local crop image is a zoomed-in view of the area to the right of the blue-roofed building in the context image.",
+      "The white car parked near the red gate in the local view corresponds to the vehicle visible on the road in the context view.",
+      "The green decorative ground pattern and white stepping stones in the local view are located in the grassy area between the fields and the buildings."
+    ],
+    "description": "Aerial imagery shows agricultural fields with golden crops exhibiting significant lodging. A building complex with blue roofs and a red gate is adjacent to the fields. A white car is parked near the gate, and a decorative green ground pattern is visible in the grassy area between the structures and the crops.",
+    "evidence_visible": [
+      "Close-up of the golden crop field showing dense, flattened stalks indicating lodging.",
+      "A white car parked on a paved surface next to a red gate structure.",
+      "A decorative ground feature with green material and white stepping stones.",
+      "A tree with green foliage near the decorative area.",
+      "A building with a grey tiled roof and a blue corrugated metal roof in the foreground."
+    ],
+    "unclear": [
+      "Exact species of the crop",
+      "Identity of the red gate structure",
+      "Purpose of the green ground decoration",
+      "Specific location or address"
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring large rectangular plots of golden-yellow crops, likely rice, showing signs of lodging (flattened stalks).\",\n    \"A cluster of buildings with blue and grey roofs situated adjacent to the fields.\",\n    \"A paved road running horizontally across the scene.\",\n    \"Greenhouse structures visible in the upper left corner.\",\n    \"A small pond or water body in the bottom right corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop image is a zoomed-in view of the area to the right of the blue-roofed building in the context image.\",\n    \"The white car parked near the red gate in the local view corresponds to the vehicle visible on the road in the context view.\",\n    \"The green decorative ground pattern and white stepping stones in the local view are located in the grassy area between the fields and the buildings.\"\n  ],\n  \"description\": \"Aerial imagery shows agricultural fields with golden crops exhibiting significant lodging. A building complex with blue roofs and a red gate is adjacent to the fields. A white car is parked near the gate, and a decorative green ground pattern is visible in the grassy area between the structures and the crops.\",\n  \"evidence_visible\": [\n    \"Close-up of the golden crop field showing dense, flattened stalks indicating lodging.\",\n    \"A white car parked on a paved surface next to a red gate structure.\",\n    \"A decorative ground feature with green material and white stepping stones.\",\n    \"A tree with green foliage near the decorative area.\",\n    \"A building with a grey tiled roof and a blue corrugated metal roof in the foreground.\"\n  ],\n  \"unclear\": [\n    \"Exact species of the crop\",\n    \"Identity of the red gate structure\",\n    \"Purpose of the green ground decoration\",\n    \"Specific location or address\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a green mesh netting installed on a grassy area, not bare soil. The netting is fully covering the ground in that specific area, and the surrounding fields are covered in crops, not bare soil. There is no visible evidence of dust-control netting on exposed soil.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The image displays large agricultural fields where the crop cover is visibly incomplete. There are distinct patches of bare earth or sparse vegetation visible within the yellow fields, indicating that the soil is not fully covered by the crop.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a green mesh netting installed on a grassy area, not bare soil. The netting is fully covering the ground in that specific area, and the surrounding fields are covered in crops, not bare soil. There is no visible evidence of dust-control netting on exposed soil.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays large agricultural fields where the crop cover is visibly incomplete. There are distinct patches of bare earth or sparse vegetation visible within the yellow fields, indicating that the soil is not fully covered by the crop.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

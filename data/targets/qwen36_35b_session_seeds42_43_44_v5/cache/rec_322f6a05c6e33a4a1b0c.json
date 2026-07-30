@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_322f6a05c6e33a4a1b0c",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-2364-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-2364-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with large rectangular agricultural fields showing brown soil and crop stubble.",
+      "A paved road runs vertically through the center, intersecting with a horizontal road.",
+      "A cluster of buildings with grey and red roofs is located in the lower-left corner.",
+      "A small plot of green vegetation is visible adjacent to the buildings near the road intersection."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a zoomed-in section of the area in the lower-left quadrant of the context image.",
+      "The green vegetation patch seen in the context image is the primary subject of the crop view.",
+      "The grey and red roofs visible in the context image correspond to the structures in the foreground of the crop view."
+    ],
+    "description": "The images show a rural area with agricultural fields and a road network. The crop view zooms in on a small plot of green vegetation situated next to buildings with grey and red roofs, located near the road intersection visible in the wider context.",
+    "evidence_visible": [
+      "A dense patch of low-growing green leafy plants cultivated in a small rectangular plot.",
+      "The plot is bordered by a dirt path and adjacent to buildings with grey tiled and red metal roofs.",
+      "A blue tarp or structure is visible near the edge of the vegetation plot.",
+      "The surrounding ground appears to be bare soil or stubble."
+    ],
+    "unclear": [
+      "The specific type of green crop is unclear.",
+      "The exact purpose of the blue structure is unclear.",
+      "The condition of the buildings is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape with large rectangular agricultural fields showing brown soil and crop stubble.\",\n    \"A paved road runs vertically through the center, intersecting with a horizontal road.\",\n    \"A cluster of buildings with grey and red roofs is located in the lower-left corner.\",\n    \"A small plot of green vegetation is visible adjacent to the buildings near the road intersection.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a zoomed-in section of the area in the lower-left quadrant of the context image.\",\n    \"The green vegetation patch seen in the context image is the primary subject of the crop view.\",\n    \"The grey and red roofs visible in the context image correspond to the structures in the foreground of the crop view.\"\n  ],\n  \"description\": \"The images show a rural area with agricultural fields and a road network. The crop view zooms in on a small plot of green vegetation situated next to buildings with grey and red roofs, located near the road intersection visible in the wider context.\",\n  \"evidence_visible\": [\n    \"A dense patch of low-growing green leafy plants cultivated in a small rectangular plot.\",\n    \"The plot is bordered by a dirt path and adjacent to buildings with grey tiled and red metal roofs.\",\n    \"A blue tarp or structure is visible near the edge of the vegetation plot.\",\n    \"The surrounding ground appears to be bare soil or stubble.\"\n  ],\n  \"unclear\": [\n    \"The specific type of green crop is unclear.\",\n    \"The exact purpose of the blue structure is unclear.\",\n    \"The condition of the buildings is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a dense, healthy patch of green vegetation, whereas incomplete soil cover would imply exposed soil with insufficient or damaged protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a small plot of green leafy vegetation adjacent to buildings with grey and red roofs, situated near a road intersection in a rural landscape.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a dense, healthy patch of green vegetation, whereas incomplete soil cover would imply exposed soil with insufficient or damaged protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a small plot of green leafy vegetation adjacent to buildings with grey and red roofs, situated near a road intersection in a rural landscape.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a small plot of green leafy vegetation adjacent to buildings with grey and red roofs, situated near a road intersection in a rural landscape. This visual evidence directly supports the description of bare soil netting (or rather, the vegetation growing in the soil).",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows large areas of brown, tilled earth (bare soil) in the fields. While the soil is visible, the claim of 'incomplete soil cover' implies a specific context of agricultural covering (like plastic mulch) that is partially missing or failing. The image shows bare soil, but does not show evidence of a 'cover' that is 'incomplete' (e.g., torn plastic). The soil is simply bare. Therefore, the specific claim of 'incomplete cover' is not supported by the visual evidence of just bare ground.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image shows bare soil, but does not show evidence of a protective covering that is incomplete."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a small plot of green leafy vegetation adjacent to buildings with grey and red roofs, situated near a road intersection in a rural landscape. This visual evidence directly supports the description of bare soil netting (or rather, the vegetation growing in the soil).\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows large areas of brown, tilled earth (bare soil) in the fields. While the soil is visible, the claim of 'incomplete soil cover' implies a specific context of agricultural covering (like plastic mulch) that is partially missing or failing. The image shows bare soil, but does not show evidence of a 'cover' that is 'incomplete' (e.g., torn plastic). The soil is simply bare. Therefore, the specific claim of 'incomplete cover' is not supported by the visual evidence of just bare ground.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image shows bare soil, but does not show evidence of a protective covering that is incomplete.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

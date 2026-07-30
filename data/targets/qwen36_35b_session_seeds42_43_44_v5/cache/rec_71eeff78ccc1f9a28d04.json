@@ -1,0 +1,86 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_71eeff78ccc1f9a28d04",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1008-8238-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1008-8238-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area with multiple residential buildings, paved roads, and agricultural fields. Several bodies of water are visible, some covered with green algae or aquatic plants. A blue tarp is visible on the ground near a house and a field."
+    ],
+    "cross_view_relations": [
+      "The blue tarp seen in the wide context image is the same object shown in the close-up evidence image. The evidence image confirms the tarp is covering a small, irregular patch of ground adjacent to a cultivated field and a concrete path."
+    ],
+    "description": "Aerial imagery shows a rural landscape with houses, fields, and water bodies. A blue tarp covers a small patch of ground next to a field and a path, as confirmed by a close-up view of the same location.",
+    "evidence_visible": [
+      "Close-up of a blue, crumpled tarp covering a small, irregular patch of bare earth. The tarp is situated next to a green, cultivated field and a concrete path. Tall green vegetation is visible to the left of the tarp."
+    ],
+    "unclear": [
+      "Contents under the tarp, exact purpose of the tarp, specific crop types in the fields, and the exact nature of the water bodies."
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"Aerial view of a rural area with multiple residential buildings, paved roads, and agricultural fields. Several bodies of water are visible, some covered with green algae or aquatic plants. A blue tarp is visible on the ground near a house and a field.\"\n],\n\"cross_view_relations\": [\n\"The blue tarp seen in the wide context image is the same object shown in the close-up evidence image. The evidence image confirms the tarp is covering a small, irregular patch of ground adjacent to a cultivated field and a concrete path.\"\n],\n\"description\": \"Aerial imagery shows a rural landscape with houses, fields, and water bodies. A blue tarp covers a small patch of ground next to a field and a path, as confirmed by a close-up view of the same location.\",\n\"evidence_visible\": [\n\"Close-up of a blue, crumpled tarp covering a small, irregular patch of bare earth. The tarp is situated next to a green, cultivated field and a concrete path. Tall green vegetation is visible to the left of the tarp.\"\n],\n\"unclear\": [\n\"Contents under the tarp, exact purpose of the tarp, specific crop types in the fields, and the exact nature of the water bodies.\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the patch by the blue tarp; the tarp fully conceals the soil, whereas incomplete soil cover would imply visible gaps or exposed soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a blue tarp covering a small, irregular patch of bare earth adjacent to a cultivated field and a concrete path.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the patch by the blue tarp; the tarp fully conceals the soil, whereas incomplete soil cover would imply visible gaps or exposed soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a blue tarp covering a small, irregular patch of bare earth adjacent to a cultivated field and a concrete path.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a blue tarp covering a patch of ground. The claim describes this as 'bare soil netting' and 'bare earth', which contradicts the visual evidence of a large, opaque blue tarp. The material is a tarp, not netting, and it covers the ground, not leaving it bare.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The covering is bare soil netting.",
+        "The patch is bare earth."
+      ]
+    },
+    "positive": {
+      "reason": "The evidence image shows a blue tarp covering a patch of ground. The claim describes 'incomplete soil cover' where 'protective covering is visibly incomplete'. The visual evidence supports this: the blue tarp (protective covering) is irregular in shape and does not cover the entire patch of ground (incomplete), leaving some soil visible at the edges.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a blue tarp covering a patch of ground. The claim describes this as 'bare soil netting' and 'bare earth', which contradicts the visual evidence of a large, opaque blue tarp. The material is a tarp, not netting, and it covers the ground, not leaving it bare.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The covering is bare soil netting.\",\n      \"The patch is bare earth.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a blue tarp covering a patch of ground. The claim describes 'incomplete soil cover' where 'protective covering is visibly incomplete'. The visual evidence supports this: the blue tarp (protective covering) is irregular in shape and does not cover the entire patch of ground (incomplete), leaving some soil visible at the edges.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

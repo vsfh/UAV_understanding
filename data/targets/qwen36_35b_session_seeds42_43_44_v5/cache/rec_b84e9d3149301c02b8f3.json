@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b84e9d3149301c02b8f3",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-10251-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-10251-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved two-lane road with multiple red semi-trucks and white vehicles.",
+      "Industrial buildings with blue and grey roofs on the left side of the road.",
+      "Agricultural plots on the right side, many covered with green mesh netting.",
+      "Vegetable gardens with rows of green crops visible near the road.",
+      "Trees and vegetation scattered throughout the scene."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the agricultural area on the right side of the main road in the context image.",
+      "The small building with the blue roof in the crop is located adjacent to the road, near the vegetable gardens seen in the context image.",
+      "The green mesh netting covering the fields in the crop matches the netting seen in the wider context view."
+    ],
+    "description": "Aerial view showing a road with trucks and adjacent agricultural land. The zoomed crop highlights fields covered in green mesh netting and a small structure with a blue roof near the roadside, confirming the location of the agricultural plots within the broader industrial and rural landscape.",
+    "evidence_visible": [
+      "Close-up of several rectangular plots of land covered in green mesh netting.",
+      "A small building with a blue roof and a grey roof is visible at the bottom center.",
+      "Dirt paths or small roads intersect the netted areas.",
+      "Some bare earth and vegetation are visible between the netted sections.",
+      "A red vehicle is partially visible on the right edge of the crop."
+    ],
+    "unclear": [
+      "The specific type of crops under the netting.",
+      "The purpose of the green netting (e.g., pest control, frost protection).",
+      "The exact nature of the small building's use."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a paved two-lane road with multiple red semi-trucks and white vehicles.\",\n    \"Industrial buildings with blue and grey roofs on the left side of the road.\",\n    \"Agricultural plots on the right side, many covered with green mesh netting.\",\n    \"Vegetable gardens with rows of green crops visible near the road.\",\n    \"Trees and vegetation scattered throughout the scene.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the agricultural area on the right side of the main road in the context image.\",\n    \"The small building with the blue roof in the crop is located adjacent to the road, near the vegetable gardens seen in the context image.\",\n    \"The green mesh netting covering the fields in the crop matches the netting seen in the wider context view.\"\n  ],\n  \"description\": \"Aerial view showing a road with trucks and adjacent agricultural land. The zoomed crop highlights fields covered in green mesh netting and a small structure with a blue roof near the roadside, confirming the location of the agricultural plots within the broader industrial and rural landscape.\",\n  \"evidence_visible\": [\n    \"Close-up of several rectangular plots of land covered in green mesh netting.\",\n    \"A small building with a blue roof and a grey roof is visible at the bottom center.\",\n    \"Dirt paths or small roads intersect the netted areas.\",\n    \"Some bare earth and vegetation are visible between the netted sections.\",\n    \"A red vehicle is partially visible on the right edge of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops under the netting.\",\n    \"The purpose of the green netting (e.g., pest control, frost protection).\",\n    \"The exact nature of the small building's use.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the netting is visibly present and covering the soil, whereas incomplete soil cover would imply the covering is visibly incomplete or absent.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by green mesh netting in the agricultural plots adjacent to the road.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the netting is visibly present and covering the soil, whereas incomplete soil cover would imply the covering is visibly incomplete or absent.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by green mesh netting in the agricultural plots adjacent to the road.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The images clearly show large areas of bare soil covered by green mesh netting, particularly in the agricultural plots adjacent to the road. The claim that this event is not supported is contradicted by the visible evidence of the netting.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event bare soil netting is not supported."
+      ]
+    },
+    "positive": {
+      "reason": "The images show that while much of the soil is covered by green mesh, the coverage is not uniform. There are visible gaps where the soil is exposed, and the netting appears torn or loosely laid in several areas, indicating that the protective covering is visibly incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The images clearly show large areas of bare soil covered by green mesh netting, particularly in the agricultural plots adjacent to the road. The claim that this event is not supported is contradicted by the visible evidence of the netting.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event bare soil netting is not supported.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The images show that while much of the soil is covered by green mesh, the coverage is not uniform. There are visible gaps where the soil is exposed, and the netting appears torn or loosely laid in several areas, indicating that the protective covering is visibly incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d1b0383fb1d96e5ea50b",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-10048-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-10048-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a paved road running vertically on the left.",
+      "Agricultural fields with green netting on the far left and tilled brown soil on the right.",
+      "A cluster of residential buildings with grey and red roofs in the center.",
+      "A small white rectangular structure located in a field adjacent to the road."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a magnified view of the area immediately to the right of the road in the context image.",
+      "The white rectangular structure visible in the context image is the primary subject of the crop.",
+      "The green netting and road edge visible in the crop match the corresponding features in the context image."
+    ],
+    "description": "The images show a rural landscape with a road and fields. The crop provides a close-up of a small, white, rectangular concrete structure situated in a field next to the road, adjacent to a patch of green netting.",
+    "evidence_visible": [
+      "A small, white, rectangular concrete structure with a flat roof.",
+      "The structure is situated in a field of brown soil.",
+      "To the left of the structure is a paved road and a strip of green netting.",
+      "A small orange object is visible on the ground near the structure.",
+      "A small shed or shelter is visible in the upper right corner of the crop."
+    ],
+    "unclear": [
+      "The specific function or contents of the white concrete structure.",
+      "The identity of the orange object.",
+      "The exact dimensions of the structure."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a paved road running vertically on the left.\",\n    \"Agricultural fields with green netting on the far left and tilled brown soil on the right.\",\n    \"A cluster of residential buildings with grey and red roofs in the center.\",\n    \"A small white rectangular structure located in a field adjacent to the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a magnified view of the area immediately to the right of the road in the context image.\",\n    \"The white rectangular structure visible in the context image is the primary subject of the crop.\",\n    \"The green netting and road edge visible in the crop match the corresponding features in the context image.\"\n  ],\n  \"description\": \"The images show a rural landscape with a road and fields. The crop provides a close-up of a small, white, rectangular concrete structure situated in a field next to the road, adjacent to a patch of green netting.\",\n  \"evidence_visible\": [\n    \"A small, white, rectangular concrete structure with a flat roof.\",\n    \"The structure is situated in a field of brown soil.\",\n    \"To the left of the structure is a paved road and a strip of green netting.\",\n    \"A small orange object is visible on the ground near the structure.\",\n    \"A small shed or shelter is visible in the upper right corner of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific function or contents of the white concrete structure.\",\n    \"The identity of the orange object.\",\n    \"The exact dimensions of the structure.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the green netting itself; the distinction is that the netting is visibly present and covering the soil, whereas incomplete soil cover implies a lack of such visible protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a paved road running vertically on the left, adjacent to a field covered in green netting, and a field of exposed brown soil on the right.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the green netting itself; the distinction is that the netting is visibly present and covering the soil, whereas incomplete soil cover implies a lack of such visible protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a paved road running vertically on the left, adjacent to a field covered in green netting, and a field of exposed brown soil on the right.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a paved road on the left, a field covered in green netting adjacent to it, and a large field of exposed brown soil on the right. The description accurately reflects these visible elements.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a large field of exposed brown soil on the right side. While the field on the left has green netting, the field on the right is bare earth. The claim of 'incomplete soil cover' is a subjective interpretation of the bare field, but the visual evidence of bare soil is present. However, the prompt asks for literal visible support. The term 'incomplete' implies a state of being unfinished or partial, which is an interpretation. The visible fact is simply 'bare soil'. The statement 'incomplete soil cover' is a valid description of a field that is not covered (or partially covered). Given the context of the other statement being literal, this one is also supported by the visual of bare earth.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a paved road on the left, a field covered in green netting adjacent to it, and a large field of exposed brown soil on the right. The description accurately reflects these visible elements.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a large field of exposed brown soil on the right side. While the field on the left has green netting, the field on the right is bare earth. The claim of 'incomplete soil cover' is a subjective interpretation of the bare field, but the visual evidence of bare soil is present. However, the prompt asks for literal visible support. The term 'incomplete' implies a state of being unfinished or partial, which is an interpretation. The visible fact is simply 'bare soil'. The statement 'incomplete soil cover' is a valid description of a field that is not covered (or partially covered). Given the context of the other statement being literal, this one is also supported by the visual of bare earth.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

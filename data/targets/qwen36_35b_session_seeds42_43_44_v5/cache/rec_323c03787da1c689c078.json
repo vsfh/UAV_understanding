@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_323c03787da1c689c078",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1007-7878-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1007-7878-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural-urban interface featuring a large rectangular field of yellow-green crops, likely rice, adjacent to a canal.",
+      "A large body of water covered in green algae or duckweed is situated in the foreground.",
+      "A cluster of multi-story residential buildings with solar water heaters on the roofs is visible on the right side.",
+      "A dirt road runs parallel to the canal, with several boats moored along the bank.",
+      "A railway track or elevated road runs horizontally across the upper left portion of the image."
+    ],
+    "cross_view_relations": [
+      "The high-resolution crop shows a specific cluster of residential buildings that corresponds to the buildings visible on the right side of the wide context image.",
+      "The crop reveals details of a green mesh-covered area and a blue-roofed structure located in the open space between the residential buildings.",
+      "The context image establishes the proximity of these residential structures to the agricultural fields and water bodies."
+    ],
+    "description": "The images show a mixed-use area with agricultural fields and residential buildings. The wide view displays a large crop field and a canal with moored boats. The zoomed-in view details the residential block on the right, revealing a green mesh-covered area and blue-roofed structures in the open space between buildings.",
+    "evidence_visible": [
+      "A high-angle close-up of a residential area showing two main multi-story apartment buildings.",
+      "The building on the left is white with a flat roof covered in solar water heaters.",
+      "The building on the right is beige with a dark roof.",
+      "Between the buildings is a paved area containing a rectangular patch covered in green mesh and a small structure with a blue roof.",
+      "A low orange wall separates the residential area from a vegetated slope in the foreground."
+    ],
+    "unclear": [
+      "The specific type of crop in the field is unclear, though it resembles rice.",
+      "The purpose of the green mesh-covered area is unclear.",
+      "The identity of the boats is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a rural-urban interface featuring a large rectangular field of yellow-green crops, likely rice, adjacent to a canal.\",\n    \"A large body of water covered in green algae or duckweed is situated in the foreground.\",\n    \"A cluster of multi-story residential buildings with solar water heaters on the roofs is visible on the right side.\",\n    \"A dirt road runs parallel to the canal, with several boats moored along the bank.\",\n    \"A railway track or elevated road runs horizontally across the upper left portion of the image.\"\n  ],\n  \"cross_view_relations\": [\n    \"The high-resolution crop shows a specific cluster of residential buildings that corresponds to the buildings visible on the right side of the wide context image.\",\n    \"The crop reveals details of a green mesh-covered area and a blue-roofed structure located in the open space between the residential buildings.\",\n    \"The context image establishes the proximity of these residential structures to the agricultural fields and water bodies.\"\n  ],\n  \"description\": \"The images show a mixed-use area with agricultural fields and residential buildings. The wide view displays a large crop field and a canal with moored boats. The zoomed-in view details the residential block on the right, revealing a green mesh-covered area and blue-roofed structures in the open space between buildings.\",\n  \"evidence_visible\": [\n    \"A high-angle close-up of a residential area showing two main multi-story apartment buildings.\",\n    \"The building on the left is white with a flat roof covered in solar water heaters.\",\n    \"The building on the right is beige with a dark roof.\",\n    \"Between the buildings is a paved area containing a rectangular patch covered in green mesh and a small structure with a blue roof.\",\n    \"A low orange wall separates the residential area from a vegetated slope in the foreground.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the field is unclear, though it resembles rice.\",\n    \"The purpose of the green mesh-covered area is unclear.\",\n    \"The identity of the boats is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete green mesh covering the area, whereas incomplete soil cover would show visible gaps or exposed soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular patch covered in green mesh located in the open space between residential buildings.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete green mesh covering the area, whereas incomplete soil cover would show visible gaps or exposed soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular patch covered in green mesh located in the open space between residential buildings.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a rectangular patch covered in green mesh located in an open space between residential buildings. This directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a rectangular patch covered in green mesh. The claim describes 'incomplete soil cover' where protective covering is 'visibly incomplete'. The image shows a complete, solid sheet of green mesh covering the ground, not an incomplete covering. Therefore, the visual evidence contradicts the claim of incompleteness.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The protective covering is visibly incomplete."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a rectangular patch covered in green mesh located in an open space between residential buildings. This directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a rectangular patch covered in green mesh. The claim describes 'incomplete soil cover' where protective covering is 'visibly incomplete'. The image shows a complete, solid sheet of green mesh covering the ground, not an incomplete covering. Therefore, the visual evidence contradicts the claim of incompleteness.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The protective covering is visibly incomplete.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

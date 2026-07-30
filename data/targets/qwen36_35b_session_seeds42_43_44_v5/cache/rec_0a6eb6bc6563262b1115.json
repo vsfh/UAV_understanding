@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0a6eb6bc6563262b1115",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1006-7212-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1006-7212-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "A large, single-story industrial building with a white facade and a flat roof covered in a grid of solar panels.",
+      "A paved service road runs parallel to the building, with a white vehicle visible.",
+      "A large area of disturbed brown earth and dirt tracks is located in the foreground, adjacent to the building.",
+      "A green mesh fence runs along the boundary between the disturbed earth and a grassy area in the lower foreground."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of the lower section of the wide image.",
+      "The blue rectangular object and the green fence in the crop correspond to the same objects visible in the foreground of the wide image.",
+      "The disturbed earth texture in the crop matches the terrain immediately in front of the building in the wide image."
+    ],
+    "description": "An aerial view shows a large industrial building with solar panels on its roof. In the foreground, a green mesh fence runs along a dirt area. A blue rectangular object lies on the ground near the fence, appearing to be a piece of debris or construction material amidst the disturbed earth.",
+    "evidence_visible": [
+      "A blue, rectangular object, possibly a piece of plastic or metal sheeting, lies on the ground.",
+      "A green mesh fence runs horizontally across the frame.",
+      "The ground is uneven, consisting of dirt, rocks, and sparse vegetation.",
+      "A white pipe or pole lies on the ground near the fence."
+    ],
+    "unclear": [
+      "The specific material of the blue object (plastic vs. metal).",
+      "The purpose of the blue object (debris vs. discarded material).",
+      "The exact nature of the white object (pipe vs. pole)."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"A large, single-story industrial building with a white facade and a flat roof covered in a grid of solar panels.\",\n    \"A paved service road runs parallel to the building, with a white vehicle visible.\",\n    \"A large area of disturbed brown earth and dirt tracks is located in the foreground, adjacent to the building.\",\n    \"A green mesh fence runs along the boundary between the disturbed earth and a grassy area in the lower foreground.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of the lower section of the wide image.\",\n    \"The blue rectangular object and the green fence in the crop correspond to the same objects visible in the foreground of the wide image.\",\n    \"The disturbed earth texture in the crop matches the terrain immediately in front of the building in the wide image.\"\n  ],\n  \"description\": \"An aerial view shows a large industrial building with solar panels on its roof. In the foreground, a green mesh fence runs along a dirt area. A blue rectangular object lies on the ground near the fence, appearing to be a piece of debris or construction material amidst the disturbed earth.\",\n  \"evidence_visible\": [\n    \"A blue, rectangular object, possibly a piece of plastic or metal sheeting, lies on the ground.\",\n    \"A green mesh fence runs horizontally across the frame.\",\n    \"The ground is uneven, consisting of dirt, rocks, and sparse vegetation.\",\n    \"A white pipe or pole lies on the ground near the fence.\"\n  ],\n  \"unclear\": [\n    \"The specific material of the blue object (plastic vs. metal).\",\n    \"The purpose of the blue object (debris vs. discarded material).\",\n    \"The exact nature of the white object (pipe vs. pole).\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the green mesh netting itself; the distinction is that the netting is visibly present, whereas incomplete soil cover implies a lack of such covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a green mesh fence running along the boundary of the disturbed earth in the foreground.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the green mesh netting itself; the distinction is that the netting is visibly present, whereas incomplete soil cover implies a lack of such covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a green mesh fence running along the boundary of the disturbed earth in the foreground.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a green mesh fence (silt fence) running along the boundary of the disturbed earth in the foreground, as well as a blue panel lying on the ground. The statement claims the event is supported by visible evidence of this fence, which is factually present in the image.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a large area of bare, disturbed earth in the foreground. While there is a green mesh fence and a blue panel present, the majority of the soil surface is exposed and lacks any protective covering (such as mulch, vegetation, or tarps). The visual evidence supports the description of the soil cover being incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a green mesh fence (silt fence) running along the boundary of the disturbed earth in the foreground, as well as a blue panel lying on the ground. The statement claims the event is supported by visible evidence of this fence, which is factually present in the image.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a large area of bare, disturbed earth in the foreground. While there is a green mesh fence and a blue panel present, the majority of the soil surface is exposed and lacks any protective covering (such as mulch, vegetation, or tarps). The visual evidence supports the description of the soil cover being incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

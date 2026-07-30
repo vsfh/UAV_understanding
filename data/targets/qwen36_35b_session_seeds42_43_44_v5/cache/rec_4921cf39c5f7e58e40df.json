@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4921cf39c5f7e58e40df",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0930-3544-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0930-3544-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape dominated by large, rectangular agricultural fields with varying shades of green and yellow vegetation.",
+      "A narrow waterway or canal runs diagonally through the fields.",
+      "A cluster of buildings with grey tiled roofs is located in the lower-left quadrant, surrounded by smaller garden plots.",
+      "Vegetation includes trees and shrubs along field boundaries and waterways."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a magnified view of the small agricultural plot located immediately to the left of the building cluster in the context image.",
+      "The spatial relationship confirms the evidence crop is situated within the immediate vicinity of the rural homestead shown in the wider context."
+    ],
+    "description": "The context image displays a rural agricultural landscape with extensive crop fields and a waterway. A building complex is visible in the lower left. The evidence image provides a close-up of a specific plot adjacent to these buildings, revealing distinct rectangular sections covered in blue and green materials, likely tarps or nets, contrasting with the surrounding green vegetation.",
+    "evidence_visible": [
+      "A small, irregularly shaped plot of land adjacent to a building.",
+      "The plot is divided into sections; some contain low-growing green vegetation.",
+      "Other sections are covered by bright blue and green rectangular sheets or tarps.",
+      "The ground appears to be tilled soil in uncovered areas.",
+      "The plot is bordered by larger fields of dense green crops."
+    ],
+    "unclear": [
+      "The specific type of crop or material on the blue and green sheets.",
+      "The purpose of the blue and green coverings (e.g., drying, protection, shading).",
+      "The exact species of plants in the surrounding fields.",
+      "The identity of the buildings or their specific function."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape dominated by large, rectangular agricultural fields with varying shades of green and yellow vegetation.\",\n    \"A narrow waterway or canal runs diagonally through the fields.\",\n    \"A cluster of buildings with grey tiled roofs is located in the lower-left quadrant, surrounded by smaller garden plots.\",\n    \"Vegetation includes trees and shrubs along field boundaries and waterways.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a magnified view of the small agricultural plot located immediately to the left of the building cluster in the context image.\",\n    \"The spatial relationship confirms the evidence crop is situated within the immediate vicinity of the rural homestead shown in the wider context.\"\n  ],\n  \"description\": \"The context image displays a rural agricultural landscape with extensive crop fields and a waterway. A building complex is visible in the lower left. The evidence image provides a close-up of a specific plot adjacent to these buildings, revealing distinct rectangular sections covered in blue and green materials, likely tarps or nets, contrasting with the surrounding green vegetation.\",\n  \"evidence_visible\": [\n    \"A small, irregularly shaped plot of land adjacent to a building.\",\n    \"The plot is divided into sections; some contain low-growing green vegetation.\",\n    \"Other sections are covered by bright blue and green rectangular sheets or tarps.\",\n    \"The ground appears to be tilled soil in uncovered areas.\",\n    \"The plot is bordered by larger fields of dense green crops.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop or material on the blue and green sheets.\",\n    \"The purpose of the blue and green coverings (e.g., drying, protection, shading).\",\n    \"The exact species of plants in the surrounding fields.\",\n    \"The identity of the buildings or their specific function.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of the blue and green netting material covering the soil; the neighbor event is rejected because the covering is visibly present.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the evidence image shows a small plot of exposed soil where sections are covered by bright blue and green rectangular sheets, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of the blue and green netting material covering the soil; the neighbor event is rejected because the covering is visibly present.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the evidence image shows a small plot of exposed soil where sections are covered by bright blue and green rectangular sheets, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a plot of exposed soil covered by bright blue and green rectangular sheets. This visual content directly contradicts the claim that the event is 'bare soil netting' (implying no cover) or that the cover is 'incomplete' (as the sheets fully cover the rectangular area shown).",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event is bare soil netting",
+        "The soil is exposed",
+        "The protective covering is incomplete"
+      ]
+    },
+    "positive": {
+      "reason": "The evidence image shows a small plot of exposed soil where sections are covered by bright blue and green rectangular sheets. This visual content is consistent with the description of dust-control netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a plot of exposed soil covered by bright blue and green rectangular sheets. This visual content directly contradicts the claim that the event is 'bare soil netting' (implying no cover) or that the cover is 'incomplete' (as the sheets fully cover the rectangular area shown).\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event is bare soil netting\",\n      \"The soil is exposed\",\n      \"The protective covering is incomplete\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a small plot of exposed soil where sections are covered by bright blue and green rectangular sheets. This visual content is consistent with the description of dust-control netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

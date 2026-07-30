@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_54517412d5dfb191129c",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0106-2376-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0106-2376-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a large rectangular pond, harvested agricultural fields with visible furrows, and a cluster of buildings with blue and grey roofs.",
+      "A paved road runs along the left edge with vehicles, including a truck and cars, and a crosswalk is visible.",
+      "The fields appear dormant or harvested, showing brown soil and crop stubble."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in view of the upper-left quadrant of the first image.",
+      "The road, intersection, and adjacent green fields in the second image correspond spatially to the left side of the main context image.",
+      "The pond visible in the context image is partially visible at the top edge of the second image."
+    ],
+    "description": "Aerial view of a rural area with a pond, harvested fields, and a road with traffic. The second image zooms in on the road intersection and adjacent green fields, confirming the spatial relationship between the main scene and the local crop.",
+    "evidence_visible": [
+      "Close-up of a paved road intersection with a crosswalk.",
+      "Vehicles including a blue truck, a red truck, and several cars are visible on the road.",
+      "Green leafy crops are growing in a field adjacent to the road.",
+      "A small white building and some trees are visible near the road."
+    ],
+    "unclear": [
+      "Specific vehicle license plates.",
+      "Exact type of crops in the green field.",
+      "Identity of the people or specific activities at the intersection."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a large rectangular pond, harvested agricultural fields with visible furrows, and a cluster of buildings with blue and grey roofs.\",\n    \"A paved road runs along the left edge with vehicles, including a truck and cars, and a crosswalk is visible.\",\n    \"The fields appear dormant or harvested, showing brown soil and crop stubble.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in view of the upper-left quadrant of the first image.\",\n    \"The road, intersection, and adjacent green fields in the second image correspond spatially to the left side of the main context image.\",\n    \"The pond visible in the context image is partially visible at the top edge of the second image.\"\n  ],\n  \"description\": \"Aerial view of a rural area with a pond, harvested fields, and a road with traffic. The second image zooms in on the road intersection and adjacent green fields, confirming the spatial relationship between the main scene and the local crop.\",\n  \"evidence_visible\": [\n    \"Close-up of a paved road intersection with a crosswalk.\",\n    \"Vehicles including a blue truck, a red truck, and several cars are visible on the road.\",\n    \"Green leafy crops are growing in a field adjacent to the road.\",\n    \"A small white building and some trees are visible near the road.\"\n  ],\n  \"unclear\": [\n    \"Specific vehicle license plates.\",\n    \"Exact type of crops in the green field.\",\n    \"Identity of the people or specific activities at the intersection.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is not visible; the scene depicts a rural landscape with a pond, harvested fields, and a road with traffic, but no active demolition or structural damage to a building is evident.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the wide UAV image shows a rural landscape with a large rectangular pond, harvested agricultural fields, and a cluster of buildings with blue and grey roofs, while the zoomed-in view confirms the presence of a paved road with traffic and adjacent green fields.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is not visible; the scene depicts a rural landscape with a pond, harvested fields, and a road with traffic, but no active demolition or structural damage to a building is evident.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the wide UAV image shows a rural landscape with a large rectangular pond, harvested agricultural fields, and a cluster of buildings with blue and grey roofs, while the zoomed-in view confirms the presence of a paved road with traffic and adjacent green fields.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The wide UAV image displays a rural landscape containing a large rectangular pond, harvested fields, and a cluster of buildings with blue and grey roofs. The zoomed-in view confirms a paved road with traffic and adjacent green fields. All visual elements described in the statement are clearly present in the images.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible evidence of structural damage to a building. However, the buildings visible in the wide UAV image (the cluster with blue and grey roofs) appear structurally intact with no visible signs of damage, collapse, or destruction. The zoomed-in view focuses on the road and does not show any damaged structures. Therefore, the claim of visible structural damage is not supported by the visual evidence.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The wide UAV image displays a rural landscape containing a large rectangular pond, harvested fields, and a cluster of buildings with blue and grey roofs. The zoomed-in view confirms a paved road with traffic and adjacent green fields. All visual elements described in the statement are clearly present in the images.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible evidence of structural damage to a building. However, the buildings visible in the wide UAV image (the cluster with blue and grey roofs) appear structurally intact with no visible signs of damage, collapse, or destruction. The zoomed-in view focuses on the road and does not show any damaged structures. Therefore, the claim of visible structural damage is not supported by the visual evidence.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

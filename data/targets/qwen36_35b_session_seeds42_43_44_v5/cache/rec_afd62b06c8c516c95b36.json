@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_afd62b06c8c516c95b36",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0123-7743-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0123-7743-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a river running horizontally across the upper section.",
+      "A paved road runs vertically, crossing the river via a bridge.",
+      "Dense residential structures with varied roof colors (red, grey, blue) line the road.",
+      "Agricultural fields with visible crop rows are located in the upper left quadrant.",
+      "Patches of white snow are visible on rooftops and in open areas, indicating cold weather."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-resolution, top-down view of a specific cluster of buildings visible in the lower-left quadrant of the context image.",
+      "The large green tree in the crop corresponds to the prominent green tree located next to the road in the context image.",
+      "The white car visible on the right edge of the crop is situated on the vertical road seen in the context image."
+    ],
+    "description": "The context image shows a village with a river, road, and agricultural fields. The crop zooms in on a specific residential block near the road, revealing a large green tree, a white car, and rooftops with snow and blue corrugated metal sheets.",
+    "evidence_visible": [
+      "Top-down view of a residential cluster featuring a large, dense green tree.",
+      "A white sedan is parked on the paved surface to the right of the buildings.",
+      "Rooftops display a mix of materials: grey tiles, red metal sheets, and blue corrugated metal.",
+      "A glass-enclosed structure (sunroom) is attached to one of the buildings.",
+      "Patches of snow are visible on the ground and rooftops.",
+      "A blue rectangular object, possibly a container or tarp, is visible on the ground to the left."
+    ],
+    "unclear": [
+      "The specific contents of the glass-enclosed structure.",
+      "The exact nature of the blue object on the ground.",
+      "The identity of any people visible in the distance."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a river running horizontally across the upper section.\",\n    \"A paved road runs vertically, crossing the river via a bridge.\",\n    \"Dense residential structures with varied roof colors (red, grey, blue) line the road.\",\n    \"Agricultural fields with visible crop rows are located in the upper left quadrant.\",\n    \"Patches of white snow are visible on rooftops and in open areas, indicating cold weather.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-resolution, top-down view of a specific cluster of buildings visible in the lower-left quadrant of the context image.\",\n    \"The large green tree in the crop corresponds to the prominent green tree located next to the road in the context image.\",\n    \"The white car visible on the right edge of the crop is situated on the vertical road seen in the context image.\"\n  ],\n  \"description\": \"The context image shows a village with a river, road, and agricultural fields. The crop zooms in on a specific residential block near the road, revealing a large green tree, a white car, and rooftops with snow and blue corrugated metal sheets.\",\n  \"evidence_visible\": [\n    \"Top-down view of a residential cluster featuring a large, dense green tree.\",\n    \"A white sedan is parked on the paved surface to the right of the buildings.\",\n    \"Rooftops display a mix of materials: grey tiles, red metal sheets, and blue corrugated metal.\",\n    \"A glass-enclosed structure (sunroom) is attached to one of the buildings.\",\n    \"Patches of snow are visible on the ground and rooftops.\",\n    \"A blue rectangular object, possibly a container or tarp, is visible on the ground to the left.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the glass-enclosed structure.\",\n    \"The exact nature of the blue object on the ground.\",\n    \"The identity of any people visible in the distance.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the absence of active construction machinery, scaffolding, or unfinished structural elements typically associated with a general construction project.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a residential cluster with mixed roof materials, including grey tiles, red metal sheets, and blue corrugated metal, situated next to a large green tree and a white sedan on a paved road.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the absence of active construction machinery, scaffolding, or unfinished structural elements typically associated with a general construction project.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a residential cluster with mixed roof materials, including grey tiles, red metal sheets, and blue corrugated metal, situated next to a large green tree and a white sedan on a paved road.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image displays a static residential scene with no visible signs of demolition activity, such as debris piles, heavy machinery, or structural collapse. The buildings appear intact.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event building demolition is supported by the visible evidence of a residential cluster with mixed roof materials, including grey tiles, red metal sheets, and blue corrugated metal, situated next to a large green tree and a white sedan on a paved road."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a completed residential area with no active construction work, scaffolding, or building materials visible.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event project construction is supported: visible evidence shows an active general construction project."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image displays a static residential scene with no visible signs of demolition activity, such as debris piles, heavy machinery, or structural collapse. The buildings appear intact.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event building demolition is supported by the visible evidence of a residential cluster with mixed roof materials, including grey tiles, red metal sheets, and blue corrugated metal, situated next to a large green tree and a white sedan on a paved road.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a completed residential area with no active construction work, scaffolding, or building materials visible.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event project construction is supported: visible evidence shows an active general construction project.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

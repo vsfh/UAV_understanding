@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8c5adfa8b47bca1e3b05",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1017-8395-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1017-8395-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved multi-lane road with moving vehicles, including a white truck and a red truck.",
+      "Adjacent to the road is a landscaped green area with young trees.",
+      "A rectangular plot of land is covered by a large, light-blue mesh or tarp.",
+      "Surrounding the plot are buildings with blue and brown roofs, and a large area of rubble and debris.",
+      "A white building with a blue roof is situated to the right of the mesh-covered plot."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the rectangular plot covered by the light-blue mesh seen in the context image.",
+      "The white building with the blue roof is visible on the right edge of the crop, confirming its position relative to the mesh-covered area.",
+      "The paved road and green space are visible at the bottom of the crop, matching the bottom-left of the context image."
+    ],
+    "description": "Aerial imagery shows a rectangular plot covered by a light-blue mesh, situated between a paved road and a white building with a blue roof. The surrounding area includes other structures and a large field of rubble. The crop provides a closer view of the mesh-covered ground and the adjacent building.",
+    "evidence_visible": [
+      "Close-up of the rectangular plot covered by a light-blue, semi-transparent mesh or tarp.",
+      "The mesh covers an uneven surface, possibly soil or debris.",
+      "A white building with a blue roof is visible on the right side of the crop.",
+      "A paved path runs along the bottom edge of the mesh-covered area.",
+      "Green vegetation and trees are visible to the left and bottom of the plot."
+    ],
+    "unclear": [
+      "The exact material or purpose of the light-blue mesh is unclear.",
+      "The contents beneath the mesh are not visible.",
+      "The specific nature of the rubble in the background is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a paved multi-lane road with moving vehicles, including a white truck and a red truck.\",\n    \"Adjacent to the road is a landscaped green area with young trees.\",\n    \"A rectangular plot of land is covered by a large, light-blue mesh or tarp.\",\n    \"Surrounding the plot are buildings with blue and brown roofs, and a large area of rubble and debris.\",\n    \"A white building with a blue roof is situated to the right of the mesh-covered plot.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the rectangular plot covered by the light-blue mesh seen in the context image.\",\n    \"The white building with the blue roof is visible on the right edge of the crop, confirming its position relative to the mesh-covered area.\",\n    \"The paved road and green space are visible at the bottom of the crop, matching the bottom-left of the context image.\"\n  ],\n  \"description\": \"Aerial imagery shows a rectangular plot covered by a light-blue mesh, situated between a paved road and a white building with a blue roof. The surrounding area includes other structures and a large field of rubble. The crop provides a closer view of the mesh-covered ground and the adjacent building.\",\n  \"evidence_visible\": [\n    \"Close-up of the rectangular plot covered by a light-blue, semi-transparent mesh or tarp.\",\n    \"The mesh covers an uneven surface, possibly soil or debris.\",\n    \"A white building with a blue roof is visible on the right side of the crop.\",\n    \"A paved path runs along the bottom edge of the mesh-covered area.\",\n    \"Green vegetation and trees are visible to the left and bottom of the plot.\"\n  ],\n  \"unclear\": [\n    \"The exact material or purpose of the light-blue mesh is unclear.\",\n    \"The contents beneath the mesh are not visible.\",\n    \"The specific nature of the rubble in the background is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the mesh in the image provides a continuous, complete coverage over the plot, whereas incomplete soil cover would show visible gaps or exposed soil areas.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported by visible evidence of a rectangular plot of land completely covered by a large, light-blue mesh or tarp, situated adjacent to a paved road and a white building with a blue roof.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the mesh in the image provides a continuous, complete coverage over the plot, whereas incomplete soil cover would show visible gaps or exposed soil areas.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by visible evidence of a rectangular plot of land completely covered by a large, light-blue mesh or tarp, situated adjacent to a paved road and a white building with a blue roof.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a rectangular plot of land adjacent to a paved road and a white building with a blue roof. This plot is covered by a large, light-blue mesh or tarp (netting). The statement accurately describes the visible evidence.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a plot of land that is completely covered by a large, light-blue mesh or tarp. The statement claims the soil cover is 'visibly incomplete', which contradicts the visual evidence of a full, continuous covering over the rectangular area.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The protective covering is visibly incomplete."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a rectangular plot of land adjacent to a paved road and a white building with a blue roof. This plot is covered by a large, light-blue mesh or tarp (netting). The statement accurately describes the visible evidence.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a plot of land that is completely covered by a large, light-blue mesh or tarp. The statement claims the soil cover is 'visibly incomplete', which contradicts the visual evidence of a full, continuous covering over the rectangular area.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The protective covering is visibly incomplete.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

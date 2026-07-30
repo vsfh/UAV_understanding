@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d3e61545b6d2db718258",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0921-6195-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0921-6195-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multi-story residential buildings featuring red and grey tiled roofs.",
+      "A waterway covered in bright green algae or duckweed runs through the village.",
+      "Surrounding the settlement are large, vibrant green agricultural fields.",
+      "Dense green trees and vegetation are interspersed among the houses and along the waterway.",
+      "A narrow paved road runs vertically through the center of the village."
+    ],
+    "cross_view_relations": [
+      "The zoomed-in evidence crop corresponds to the left side of the wide context image.",
+      "The evidence view focuses on a specific section of the green waterway and the adjacent bank.",
+      "The red-roofed house visible in the evidence crop is located on the right bank of the waterway in the context view.",
+      "A structure with a blue roof is visible in the evidence crop, situated on the bank near the water."
+    ],
+    "description": "The images show a rural village with red-roofed houses and green fields. A waterway covered in green algae is a prominent feature. The evidence crop zooms in on a section of this waterway, revealing a blue-roofed structure and dense vegetation on the bank next to a residential building.",
+    "evidence_visible": [
+      "Close-up of the green waterway, showing a thick layer of surface vegetation.",
+      "A small structure with a blue roof is visible on the bank.",
+      "Dense green bushes and trees line the edge of the water.",
+      "A portion of a house with a red roof and beige walls is visible on the right.",
+      "The ground on the bank appears to be a mix of dirt and grass."
+    ],
+    "unclear": [
+      "The specific type of green vegetation on the water surface.",
+      "The exact function of the blue-roofed structure.",
+      "The number of people or vehicles present.",
+      "The specific crop type in the surrounding fields."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with multi-story residential buildings featuring red and grey tiled roofs.\",\n    \"A waterway covered in bright green algae or duckweed runs through the village.\",\n    \"Surrounding the settlement are large, vibrant green agricultural fields.\",\n    \"Dense green trees and vegetation are interspersed among the houses and along the waterway.\",\n    \"A narrow paved road runs vertically through the center of the village.\"\n  ],\n  \"cross_view_relations\": [\n    \"The zoomed-in evidence crop corresponds to the left side of the wide context image.\",\n    \"The evidence view focuses on a specific section of the green waterway and the adjacent bank.\",\n    \"The red-roofed house visible in the evidence crop is located on the right bank of the waterway in the context view.\",\n    \"A structure with a blue roof is visible in the evidence crop, situated on the bank near the water.\"\n  ],\n  \"description\": \"The images show a rural village with red-roofed houses and green fields. A waterway covered in green algae is a prominent feature. The evidence crop zooms in on a section of this waterway, revealing a blue-roofed structure and dense vegetation on the bank next to a residential building.\",\n  \"evidence_visible\": [\n    \"Close-up of the green waterway, showing a thick layer of surface vegetation.\",\n    \"A small structure with a blue roof is visible on the bank.\",\n    \"Dense green bushes and trees line the edge of the water.\",\n    \"A portion of a house with a red roof and beige walls is visible on the right.\",\n    \"The ground on the bank appears to be a mix of dirt and grass.\"\n  ],\n  \"unclear\": [\n    \"The specific type of green vegetation on the water surface.\",\n    \"The exact function of the blue-roofed structure.\",\n    \"The number of people or vehicles present.\",\n    \"The specific crop type in the surrounding fields.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence shows exposed soil patches and vegetation, but there is no visible evidence of 'dust-control netting' or any specific 'bare soil netting' material. The claim invents a specific object (netting) not present in the visual data.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The image evidence clearly shows areas of exposed brown earth (soil) adjacent to green vegetation and buildings. This constitutes visible evidence of soil for which protective covering (such as dense vegetation or pavement) is incomplete or absent.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence shows exposed soil patches and vegetation, but there is no visible evidence of 'dust-control netting' or any specific 'bare soil netting' material. The claim invents a specific object (netting) not present in the visual data.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence clearly shows areas of exposed brown earth (soil) adjacent to green vegetation and buildings. This constitutes visible evidence of soil for which protective covering (such as dense vegetation or pavement) is incomplete or absent.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_93fba753bc33ced918ee",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0814-3741-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0814-3741-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of an industrial zone with multiple large buildings featuring blue corrugated metal roofs.",
+      "A central facility with a large white roof, four tall cylindrical concrete silos, and a vertical processing tower.",
+      "A white truck is parked on the paved lot near the silos.",
+      "To the right, there are agricultural fields with rows of crops and green vegetation.",
+      "In the background, there is a cluster of residential buildings, some appearing to be under construction or in a state of disrepair."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the upper-left quadrant of the context image.",
+      "The large building with the blue roof in the context image is the primary subject of the crop image.",
+      "The cluster of dilapidated or unfinished residential buildings visible in the background of the context image is shown in detail in the crop image.",
+      "The paved road separating the industrial area from the residential area is visible in both views."
+    ],
+    "description": "Aerial imagery of an industrial site featuring a processing plant with four concrete silos and adjacent blue-roofed warehouses. A zoomed-in view highlights a specific blue-roofed building and a nearby cluster of damaged or unfinished residential structures, bordered by agricultural fields.",
+    "evidence_visible": [
+      "Close-up of a large industrial building with a bright blue corrugated metal roof.",
+      "A cluster of multi-story residential buildings showing signs of damage, debris, or incomplete construction.",
+      "A paved road runs between the industrial building and the residential area.",
+      "Green vegetation and small trees are visible along the property boundaries."
+    ],
+    "unclear": [
+      "The specific industrial process or business type of the facility.",
+      "The exact cause of the damage or incomplete state of the residential buildings.",
+      "The identity of the white truck or the contents of the silos."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of an industrial zone with multiple large buildings featuring blue corrugated metal roofs.\",\n    \"A central facility with a large white roof, four tall cylindrical concrete silos, and a vertical processing tower.\",\n    \"A white truck is parked on the paved lot near the silos.\",\n    \"To the right, there are agricultural fields with rows of crops and green vegetation.\",\n    \"In the background, there is a cluster of residential buildings, some appearing to be under construction or in a state of disrepair.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the upper-left quadrant of the context image.\",\n    \"The large building with the blue roof in the context image is the primary subject of the crop image.\",\n    \"The cluster of dilapidated or unfinished residential buildings visible in the background of the context image is shown in detail in the crop image.\",\n    \"The paved road separating the industrial area from the residential area is visible in both views.\"\n  ],\n  \"description\": \"Aerial imagery of an industrial site featuring a processing plant with four concrete silos and adjacent blue-roofed warehouses. A zoomed-in view highlights a specific blue-roofed building and a nearby cluster of damaged or unfinished residential structures, bordered by agricultural fields.\",\n  \"evidence_visible\": [\n    \"Close-up of a large industrial building with a bright blue corrugated metal roof.\",\n    \"A cluster of multi-story residential buildings showing signs of damage, debris, or incomplete construction.\",\n    \"A paved road runs between the industrial building and the residential area.\",\n    \"Green vegetation and small trees are visible along the property boundaries.\"\n  ],\n  \"unclear\": [\n    \"The specific industrial process or business type of the facility.\",\n    \"The exact cause of the damage or incomplete state of the residential buildings.\",\n    \"The identity of the white truck or the contents of the silos.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific presence of a visibly collapsed wall with associated debris, which is a subset of the broader category of building damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a cluster of multi-story residential buildings in the background exhibiting signs of structural failure, with debris scattered on the ground and walls visibly compromised.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific presence of a visibly collapsed wall with associated debris, which is a subset of the broader category of building damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a cluster of multi-story residential buildings in the background exhibiting signs of structural failure, with debris scattered on the ground and walls visibly compromised.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The wide image shows a cluster of multi-story residential buildings in the background. The linked local crop confirms these buildings exhibit severe structural failure, with walls collapsed, roofs missing, and significant debris scattered on the ground. This directly supports the claim of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The linked local crop clearly shows a building with visible structural damage, including collapsed walls and debris. This supports the claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The wide image shows a cluster of multi-story residential buildings in the background. The linked local crop confirms these buildings exhibit severe structural failure, with walls collapsed, roofs missing, and significant debris scattered on the ground. This directly supports the claim of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The linked local crop clearly shows a building with visible structural damage, including collapsed walls and debris. This supports the claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

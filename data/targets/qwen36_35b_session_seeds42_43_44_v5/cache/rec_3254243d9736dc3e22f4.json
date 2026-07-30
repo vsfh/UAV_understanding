@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_3254243d9736dc3e22f4",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0929-0586-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0929-0586-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a straight canal separating a large expanse of green agricultural fields on the left from a dense residential settlement on the right.",
+      "The settlement consists of multi-story buildings with grey tiled roofs, some equipped with solar panels.",
+      "The fields on the left are divided into rectangular plots with varying shades of green and yellow vegetation."
+    ],
+    "cross_view_relations": [
+      "The local crop view zooms in on the residential area adjacent to the canal, showing the interface between the built environment and small garden plots.",
+      "The canal edge visible in the wide context corresponds to the left boundary of the local crop view.",
+      "The local view reveals details of the settlement's infrastructure, including paved roads, parked vehicles, and rooftop structures not visible in the wide shot."
+    ],
+    "description": "The wide image shows a canal dividing green fields from a village. The local crop details the village edge, revealing houses with grey roofs, solar panels, and small garden plots near the water. A white car is parked on a road, and various rooftop structures are visible.",
+    "evidence_visible": [
+      "A white sedan parked on a paved road next to a building.",
+      "A small garden plot with green vegetation and yellow flowers adjacent to a building with a white roof.",
+      "A building with a grey tiled roof and a flat roof section covered in translucent panels.",
+      "A blue tarp or sheet covering a section of a garden or yard.",
+      "Various rooftop items including what appears to be a water tank and solar panels."
+    ],
+    "unclear": [
+      "The specific type of crops in the fields and gardens.",
+      "The exact function of the translucent panels on the flat roof.",
+      "The identity of the people or activities within the scene."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a straight canal separating a large expanse of green agricultural fields on the left from a dense residential settlement on the right.\",\n    \"The settlement consists of multi-story buildings with grey tiled roofs, some equipped with solar panels.\",\n    \"The fields on the left are divided into rectangular plots with varying shades of green and yellow vegetation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view zooms in on the residential area adjacent to the canal, showing the interface between the built environment and small garden plots.\",\n    \"The canal edge visible in the wide context corresponds to the left boundary of the local crop view.\",\n    \"The local view reveals details of the settlement's infrastructure, including paved roads, parked vehicles, and rooftop structures not visible in the wide shot.\"\n  ],\n  \"description\": \"The wide image shows a canal dividing green fields from a village. The local crop details the village edge, revealing houses with grey roofs, solar panels, and small garden plots near the water. A white car is parked on a road, and various rooftop structures are visible.\",\n  \"evidence_visible\": [\n    \"A white sedan parked on a paved road next to a building.\",\n    \"A small garden plot with green vegetation and yellow flowers adjacent to a building with a white roof.\",\n    \"A building with a grey tiled roof and a flat roof section covered in translucent panels.\",\n    \"A blue tarp or sheet covering a section of a garden or yard.\",\n    \"Various rooftop items including what appears to be a water tank and solar panels.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the fields and gardens.\",\n    \"The exact function of the translucent panels on the flat roof.\",\n    \"The identity of the people or activities within the scene.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a blue tarp covering the soil; the image does not show soil for which protective covering is visibly incomplete.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the local crop view shows a small garden plot adjacent to a building with a white roof, where a blue tarp or sheet is visibly covering a section of the ground.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a blue tarp covering the soil; the image does not show soil for which protective covering is visibly incomplete.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the local crop view shows a small garden plot adjacent to a building with a white roof, where a blue tarp or sheet is visibly covering a section of the ground.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a small garden plot adjacent to a building with a white roof. Within this plot, a blue tarp or sheet is visibly covering a section of the ground, directly supporting the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a garden plot where a blue tarp covers only a portion of the ground, leaving other sections of soil exposed. This visual arrangement confirms that the protective covering is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a small garden plot adjacent to a building with a white roof. Within this plot, a blue tarp or sheet is visibly covering a section of the ground, directly supporting the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a garden plot where a blue tarp covers only a portion of the ground, leaving other sections of soil exposed. This visual arrangement confirms that the protective covering is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

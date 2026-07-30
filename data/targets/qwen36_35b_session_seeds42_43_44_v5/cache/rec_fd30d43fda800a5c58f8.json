@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_fd30d43fda800a5c58f8",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0326-5641-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0326-5641-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a mix of multi-story residential buildings and agricultural land.",
+      "Large fields of bright yellow flowering crops (likely rapeseed) and green crops are visible.",
+      "A paved road runs horizontally across the lower portion of the frame.",
+      "A water canal or river runs along the left side.",
+      "Several buildings have blue solar water heaters on their roofs."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a zoomed-in view of the central-right section of the context image.",
+      "The evidence view focuses on a cluster of buildings adjacent to a yellow crop field and a small waterway.",
+      "The spatial arrangement of the white building with the blue heater and the grey brick building is consistent between both views."
+    ],
+    "description": "The images show a rural village with residential buildings interspersed with agricultural fields of yellow and green crops. The evidence crop provides a closer look at a specific cluster of houses, including a white building with a blue roof heater and a grey brick structure, situated next to a yellow crop patch and a small canal.",
+    "evidence_visible": [
+      "Close-up of a white multi-story building with a blue solar water heater on the roof.",
+      "Adjacent to the white building is a grey brick building with a flat roof and a smaller, lower structure with a tiled roof.",
+      "A patch of yellow flowering crops is visible behind the buildings.",
+      "A small waterway or canal runs in front of the buildings.",
+      "A black vehicle is parked on a rooftop in the bottom right corner."
+    ],
+    "unclear": [
+      "The specific type of yellow crop is not definitively identifiable from the pixels alone.",
+      "The exact number of floors in the grey brick building is unclear due to the angle.",
+      "The purpose of the structures in the foreground near the canal is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a mix of multi-story residential buildings and agricultural land.\",\n    \"Large fields of bright yellow flowering crops (likely rapeseed) and green crops are visible.\",\n    \"A paved road runs horizontally across the lower portion of the frame.\",\n    \"A water canal or river runs along the left side.\",\n    \"Several buildings have blue solar water heaters on their roofs.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a zoomed-in view of the central-right section of the context image.\",\n    \"The evidence view focuses on a cluster of buildings adjacent to a yellow crop field and a small waterway.\",\n    \"The spatial arrangement of the white building with the blue heater and the grey brick building is consistent between both views.\"\n  ],\n  \"description\": \"The images show a rural village with residential buildings interspersed with agricultural fields of yellow and green crops. The evidence crop provides a closer look at a specific cluster of houses, including a white building with a blue roof heater and a grey brick structure, situated next to a yellow crop patch and a small canal.\",\n  \"evidence_visible\": [\n    \"Close-up of a white multi-story building with a blue solar water heater on the roof.\",\n    \"Adjacent to the white building is a grey brick building with a flat roof and a smaller, lower structure with a tiled roof.\",\n    \"A patch of yellow flowering crops is visible behind the buildings.\",\n    \"A small waterway or canal runs in front of the buildings.\",\n    \"A black vehicle is parked on a rooftop in the bottom right corner.\"\n  ],\n  \"unclear\": [\n    \"The specific type of yellow crop is not definitively identifiable from the pixels alone.\",\n    \"The exact number of floors in the grey brick building is unclear due to the angle.\",\n    \"The purpose of the structures in the foreground near the canal is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between building demolition and building damage is not explicitly visible; the grey brick building shows signs of structural damage or disrepair, but there is no clear evidence of active demolition machinery or the specific process of demolition.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the evidence image shows a grey brick building with a flat roof that appears to be in a state of disrepair or partial collapse, adjacent to a white building with a blue solar water heater and a patch of yellow flowering crops.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is not explicitly visible; the grey brick building shows signs of structural damage or disrepair, but there is no clear evidence of active demolition machinery or the specific process of demolition.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the evidence image shows a grey brick building with a flat roof that appears to be in a state of disrepair or partial collapse, adjacent to a white building with a blue solar water heater and a patch of yellow flowering crops.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a grey brick building with a flat roof that appears to be in a state of disrepair or partial collapse. It is located adjacent to a white building with a blue solar water heater and a patch of yellow flowering crops, matching the description in the statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible structural damage to a building. The evidence image shows a grey brick building with a flat roof that appears to be in a state of disrepair or partial collapse, which constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a grey brick building with a flat roof that appears to be in a state of disrepair or partial collapse. It is located adjacent to a white building with a blue solar water heater and a patch of yellow flowering crops, matching the description in the statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible structural damage to a building. The evidence image shows a grey brick building with a flat roof that appears to be in a state of disrepair or partial collapse, which constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

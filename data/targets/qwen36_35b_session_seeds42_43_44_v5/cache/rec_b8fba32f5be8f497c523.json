@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b8fba32f5be8f497c523",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1026-1279-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1026-1279-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multiple residential buildings, paved roads, and surrounding agricultural fields.",
+      "Fields display varying states: some are golden-yellow indicating mature crops, others are tilled brown earth.",
+      "Several houses feature solar panels on their roofs.",
+      "Dense green vegetation and trees are interspersed between the structures and fields."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a high-magnification view of a specific plot of land visible in the lower-left quadrant of the context image.",
+      "In the context image, this plot appears as a rectangular patch of brown, tilled soil situated between a cluster of trees and a building with a grey roof.",
+      "The spatial relationship confirms the evidence crop is a localized detail of the broader agricultural landscape shown in the context."
+    ],
+    "description": "The context image shows a rural village with houses, roads, and mixed agricultural fields. The evidence crop isolates a specific rectangular plot of tilled brown soil located near a building and trees, confirming it as a prepared agricultural area within the wider landscape.",
+    "evidence_visible": [
+      "A rectangular plot of tilled brown soil with visible furrows.",
+      "A small patch of green netting or tarp lying on the ground near the edge of the plot.",
+      "A building with a grey shingled roof is adjacent to the plot.",
+      "Dense green trees border the top of the plot.",
+      "A paved path or road curves along the right side of the plot."
+    ],
+    "unclear": [
+      "The specific type of crop previously or currently grown in the tilled soil.",
+      "The purpose of the green netting/tarp.",
+      "The exact date of the imagery.",
+      "The ownership of the buildings or land."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with multiple residential buildings, paved roads, and surrounding agricultural fields.\",\n    \"Fields display varying states: some are golden-yellow indicating mature crops, others are tilled brown earth.\",\n    \"Several houses feature solar panels on their roofs.\",\n    \"Dense green vegetation and trees are interspersed between the structures and fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a high-magnification view of a specific plot of land visible in the lower-left quadrant of the context image.\",\n    \"In the context image, this plot appears as a rectangular patch of brown, tilled soil situated between a cluster of trees and a building with a grey roof.\",\n    \"The spatial relationship confirms the evidence crop is a localized detail of the broader agricultural landscape shown in the context.\"\n  ],\n  \"description\": \"The context image shows a rural village with houses, roads, and mixed agricultural fields. The evidence crop isolates a specific rectangular plot of tilled brown soil located near a building and trees, confirming it as a prepared agricultural area within the wider landscape.\",\n  \"evidence_visible\": [\n    \"A rectangular plot of tilled brown soil with visible furrows.\",\n    \"A small patch of green netting or tarp lying on the ground near the edge of the plot.\",\n    \"A building with a grey shingled roof is adjacent to the plot.\",\n    \"Dense green trees border the top of the plot.\",\n    \"A paved path or road curves along the right side of the plot.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop previously or currently grown in the tilled soil.\",\n    \"The purpose of the green netting/tarp.\",\n    \"The exact date of the imagery.\",\n    \"The ownership of the buildings or land.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of the green netting on the plot; the netting is present but covers only a small portion of the soil, which is the visible factor separating the two.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular plot of tilled brown soil with a small patch of green netting or tarp lying on the ground near the edge of the plot.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of the green netting on the plot; the netting is present but covers only a small portion of the soil, which is the visible factor separating the two.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular plot of tilled brown soil with a small patch of green netting or tarp lying on the ground near the edge of the plot.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a rectangular plot of tilled brown soil with a small patch of green netting or tarp lying on the ground near the edge of the plot, directly supporting the description.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a plot of bare soil with only a small, isolated patch of green netting, which visually constitutes incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a rectangular plot of tilled brown soil with a small patch of green netting or tarp lying on the ground near the edge of the plot, directly supporting the description.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a plot of bare soil with only a small, isolated patch of green netting, which visually constitutes incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

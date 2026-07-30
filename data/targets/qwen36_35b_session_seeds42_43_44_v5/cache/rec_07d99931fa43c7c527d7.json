@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_07d99931fa43c7c527d7",
+    "source_class": "construction_waste",
+    "negative_label": "construction_materials",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/construction_waste/original/0104-4387-construction_waste.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/construction_waste/cropped/0104-4387-construction_waste.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a river separating agricultural fields on the left from a residential area on the right.",
+      "The riverbank on the right side features a dense accumulation of debris, makeshift structures, and vegetation.",
+      "Large plots of tilled earth and green crops are visible in the fields.",
+      "A greenhouse structure is located near the riverbank in the lower section."
+    ],
+    "cross_view_relations": [
+      "The crop provides a zoomed-in perspective of the riverbank area visible in the lower-right quadrant of the context image.",
+      "The crop confirms the presence of a cluttered shoreline with scattered materials adjacent to the water.",
+      "The spatial relationship shows the debris and structures are situated directly between the river and the cultivated green fields."
+    ],
+    "description": "The images show a riverbank area cluttered with debris, makeshift structures, and scattered materials. The wider view places this zone between agricultural fields and a residential district, while the close-up reveals the density of the shoreline accumulation and its proximity to the water and adjacent crops.",
+    "evidence_visible": [
+      "A shoreline densely packed with debris, including white and blue tarps, plastic sheeting, and miscellaneous refuse.",
+      "A red rectangular object is visible among the debris near the water's edge.",
+      "Green leafy crops are planted in organized rows immediately adjacent to the cluttered bank.",
+      "Tall, dry reeds or grasses grow along the water's edge, interspersed with the debris."
+    ],
+    "unclear": [
+      "The specific contents of the debris piles.",
+      "The exact nature or function of the makeshift structures.",
+      "The identity of any individuals present."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a river separating agricultural fields on the left from a residential area on the right.\",\n    \"The riverbank on the right side features a dense accumulation of debris, makeshift structures, and vegetation.\",\n    \"Large plots of tilled earth and green crops are visible in the fields.\",\n    \"A greenhouse structure is located near the riverbank in the lower section.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop provides a zoomed-in perspective of the riverbank area visible in the lower-right quadrant of the context image.\",\n    \"The crop confirms the presence of a cluttered shoreline with scattered materials adjacent to the water.\",\n    \"The spatial relationship shows the debris and structures are situated directly between the river and the cultivated green fields.\"\n  ],\n  \"description\": \"The images show a riverbank area cluttered with debris, makeshift structures, and scattered materials. The wider view places this zone between agricultural fields and a residential district, while the close-up reveals the density of the shoreline accumulation and its proximity to the water and adjacent crops.\",\n  \"evidence_visible\": [\n    \"A shoreline densely packed with debris, including white and blue tarps, plastic sheeting, and miscellaneous refuse.\",\n    \"A red rectangular object is visible among the debris near the water's edge.\",\n    \"Green leafy crops are planted in organized rows immediately adjacent to the cluttered bank.\",\n    \"Tall, dry reeds or grasses grow along the water's edge, interspersed with the debris.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the debris piles.\",\n    \"The exact nature or function of the makeshift structures.\",\n    \"The identity of any individuals present.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "construction_materials"
+      ],
+      "evidence": "The event construction materials is supported: visible evidence shows stored materials intended for construction.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating construction waste from construction materials is the disorganized, scattered nature of the debris and refuse, which contrasts with the orderly storage of materials intended for construction.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "construction_waste"
+      ],
+      "evidence": "The event construction waste is supported: visible evidence shows a dense accumulation of discarded mixed debris, including white and blue tarps, plastic sheeting, and miscellaneous refuse, situated along the riverbank.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"construction_materials\"\n    ],\n    \"evidence\": \"The event construction materials is supported: visible evidence shows stored materials intended for construction.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating construction waste from construction materials is the disorganized, scattered nature of the debris and refuse, which contrasts with the orderly storage of materials intended for construction.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"construction_waste\"\n    ],\n    \"evidence\": \"The event construction waste is supported: visible evidence shows a dense accumulation of discarded mixed debris, including white and blue tarps, plastic sheeting, and miscellaneous refuse, situated along the riverbank.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a dense accumulation of discarded mixed debris, including white and blue tarps, plastic sheeting, and miscellaneous refuse, situated along the riverbank. This visual content directly supports the description of construction waste.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The visible materials are disorganized, dirty, and mixed with refuse, which contradicts the claim of 'stored materials intended for construction'. The items appear to be discarded waste rather than organized supplies.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The materials are stored",
+        "The materials are intended for construction"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a dense accumulation of discarded mixed debris, including white and blue tarps, plastic sheeting, and miscellaneous refuse, situated along the riverbank. This visual content directly supports the description of construction waste.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The visible materials are disorganized, dirty, and mixed with refuse, which contradicts the claim of 'stored materials intended for construction'. The items appear to be discarded waste rather than organized supplies.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The materials are stored\",\n      \"The materials are intended for construction\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

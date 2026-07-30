@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_764f8c2da660d0f85513",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0122-2872-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0122-2872-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape featuring rectangular agricultural plots with green crops and bare soil.",
+      "A network of straight canals and roads divides the fields.",
+      "In the upper left, large blue rectangular structures, likely solar panels or greenhouses, are visible.",
+      "A residential area with houses featuring red and grey roofs lines the bottom edge of the frame.",
+      "The terrain is flat and the lighting suggests a clear day."
+    ],
+    "cross_view_relations": [
+      "The local crop view shows a specific section of the agricultural land seen in the wide context.",
+      "The concrete canal and adjacent garden plots in the crop view correspond to the linear waterways and field divisions visible in the wider image.",
+      "The residential structures in the crop view match the architectural style and density of the village seen at the bottom of the context image."
+    ],
+    "description": "Aerial imagery of a rural agricultural zone with organized field plots and a canal network. A local crop view highlights a specific garden plot adjacent to a concrete waterway and residential buildings, confirming the land use and infrastructure layout visible in the wider context.",
+    "evidence_visible": [
+      "A rectangular garden plot containing rows of low-growing green vegetation.",
+      "A concrete canal or drainage ditch runs parallel to the garden.",
+      "A paved path or road separates the garden from a building with a white roof.",
+      "Shadows indicate the sun is positioned to the left.",
+      "Some white objects, possibly debris or agricultural materials, are scattered near the canal."
+    ],
+    "unclear": [
+      "Specific crop species",
+      "Exact date of the image",
+      "Identity of the person visible in the crop view",
+      "Purpose of the white objects near the canal"
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape featuring rectangular agricultural plots with green crops and bare soil.\",\n    \"A network of straight canals and roads divides the fields.\",\n    \"In the upper left, large blue rectangular structures, likely solar panels or greenhouses, are visible.\",\n    \"A residential area with houses featuring red and grey roofs lines the bottom edge of the frame.\",\n    \"The terrain is flat and the lighting suggests a clear day.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view shows a specific section of the agricultural land seen in the wide context.\",\n    \"The concrete canal and adjacent garden plots in the crop view correspond to the linear waterways and field divisions visible in the wider image.\",\n    \"The residential structures in the crop view match the architectural style and density of the village seen at the bottom of the context image.\"\n  ],\n  \"description\": \"Aerial imagery of a rural agricultural zone with organized field plots and a canal network. A local crop view highlights a specific garden plot adjacent to a concrete waterway and residential buildings, confirming the land use and infrastructure layout visible in the wider context.\",\n  \"evidence_visible\": [\n    \"A rectangular garden plot containing rows of low-growing green vegetation.\",\n    \"A concrete canal or drainage ditch runs parallel to the garden.\",\n    \"A paved path or road separates the garden from a building with a white roof.\",\n    \"Shadows indicate the sun is positioned to the left.\",\n    \"Some white objects, possibly debris or agricultural materials, are scattered near the canal.\"\n  ],\n  \"unclear\": [\n    \"Specific crop species\",\n    \"Exact date of the image\",\n    \"Identity of the person visible in the crop view\",\n    \"Purpose of the white objects near the canal\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the absence of active construction machinery or structural assembly in the local crop view.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a rectangular garden plot adjacent to a concrete canal and residential buildings, with no active construction machinery or structural assembly visible.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the absence of active construction machinery or structural assembly in the local crop view.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a rectangular garden plot adjacent to a concrete canal and residential buildings, with no active construction machinery or structural assembly visible.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a static scene of a garden plot and canal with no visible activity. There is no evidence of demolition, debris, or structural removal; the scene is consistent with a normal residential garden.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows a rectangular garden plot adjacent to a concrete canal and residential buildings",
+        "no active construction machinery or structural assembly visible"
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a static scene of a garden and canal. There is no visible evidence of an active construction project, such as workers, machinery, or building materials.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a static scene of a garden plot and canal with no visible activity. There is no evidence of demolition, debris, or structural removal; the scene is consistent with a normal residential garden.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows a rectangular garden plot adjacent to a concrete canal and residential buildings\",\n      \"no active construction machinery or structural assembly visible\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a static scene of a garden and canal. There is no visible evidence of an active construction project, such as workers, machinery, or building materials.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

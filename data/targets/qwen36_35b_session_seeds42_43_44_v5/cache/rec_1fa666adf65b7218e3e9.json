@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_1fa666adf65b7218e3e9",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1030-1791-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1030-1791-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with residential buildings and agricultural fields.",
+      "Large fields of golden-yellow crops in the background, likely mature grain.",
+      "Smaller plots of green vegetables in the foreground and between houses.",
+      "A distinct rectangular plot of land with a grey, paved surface is visible in the central area of the village.",
+      "Surrounding vegetation includes trees and shrubs."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a magnified view of the rectangular paved plot identified in the context image.",
+      "The spatial relationship confirms the plot is located within the village, adjacent to a building with a green-trimmed roof and a dirt path.",
+      "The white patches visible in the crop are consistent with the lighter areas on the grey surface in the context view."
+    ],
+    "description": "An aerial view of a rural village shows residential homes surrounded by agricultural fields of golden grain and green vegetables. A specific rectangular plot with a grey paved surface and scattered white patches is highlighted, situated next to a building and a dirt path.",
+    "evidence_visible": [
+      "Close-up of a rectangular plot with a grey, paved surface.",
+      "The surface has a grid-like pattern of cracks or joints.",
+      "There are irregular white patches scattered across the grey surface.",
+      "A building with a green-trimmed roof and windows is visible at the top edge.",
+      "A dirt path runs along the bottom edge, and a small green bush is present on the left."
+    ],
+    "unclear": [
+      "The specific material of the white patches (e.g., salt, lime, paint, or residue).",
+      "The purpose of the paved plot (e.g., drying area, storage, or construction).",
+      "The exact type of crop in the background fields."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with residential buildings and agricultural fields.\",\n    \"Large fields of golden-yellow crops in the background, likely mature grain.\",\n    \"Smaller plots of green vegetables in the foreground and between houses.\",\n    \"A distinct rectangular plot of land with a grey, paved surface is visible in the central area of the village.\",\n    \"Surrounding vegetation includes trees and shrubs.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a magnified view of the rectangular paved plot identified in the context image.\",\n    \"The spatial relationship confirms the plot is located within the village, adjacent to a building with a green-trimmed roof and a dirt path.\",\n    \"The white patches visible in the crop are consistent with the lighter areas on the grey surface in the context view.\"\n  ],\n  \"description\": \"An aerial view of a rural village shows residential homes surrounded by agricultural fields of golden grain and green vegetables. A specific rectangular plot with a grey paved surface and scattered white patches is highlighted, situated next to a building and a dirt path.\",\n  \"evidence_visible\": [\n    \"Close-up of a rectangular plot with a grey, paved surface.\",\n    \"The surface has a grid-like pattern of cracks or joints.\",\n    \"There are irregular white patches scattered across the grey surface.\",\n    \"A building with a green-trimmed roof and windows is visible at the top edge.\",\n    \"A dirt path runs along the bottom edge, and a small green bush is present on the left.\"\n  ],\n  \"unclear\": [\n    \"The specific material of the white patches (e.g., salt, lime, paint, or residue).\",\n    \"The purpose of the paved plot (e.g., drying area, storage, or construction).\",\n    \"The exact type of crop in the background fields.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is not visible; the surface appears to be a paved or concrete slab rather than exposed soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular plot of land with a grey paved surface covered by irregular white patches, situated adjacent to a building and a dirt path.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is not visible; the surface appears to be a paved or concrete slab rather than exposed soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular plot of land with a grey paved surface covered by irregular white patches, situated adjacent to a building and a dirt path.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a rectangular plot with a grey paved surface covered by irregular white patches, situated next to a building and a dirt path. This visual evidence directly supports the description in the statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims the evidence shows 'soil for which protective covering is visibly incomplete'. However, the evidence image shows a paved concrete surface with white patches, not bare soil. The claim misidentifies the material (pavement vs. soil) and the nature of the white patches (which appear to be a covering or residue, not 'incomplete soil cover').",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image shows soil.",
+        "The image shows protective covering that is incomplete."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a rectangular plot with a grey paved surface covered by irregular white patches, situated next to a building and a dirt path. This visual evidence directly supports the description in the statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims the evidence shows 'soil for which protective covering is visibly incomplete'. However, the evidence image shows a paved concrete surface with white patches, not bare soil. The claim misidentifies the material (pavement vs. soil) and the nature of the white patches (which appear to be a covering or residue, not 'incomplete soil cover').\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image shows soil.\",\n      \"The image shows protective covering that is incomplete.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

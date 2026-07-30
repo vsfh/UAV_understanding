@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_f840de7bb9e2e16a3172",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0814-4469-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0814-4469-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multi-story residential buildings featuring red, grey, and blue roofs.",
+      "Large rectangular plots of vibrant green crops, likely rice paddies, arranged in a grid pattern.",
+      "A canal or river runs along the top edge of the frame, with a construction site containing piles of grey earth and an orange excavator visible on the far bank.",
+      "A small pond is situated near the houses on the right side."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the upper-right quadrant of the context image.",
+      "The crop focuses on the cluster of houses adjacent to the canal and the construction site.",
+      "The orange excavator and the grey earth piles are clearly visible in the crop but appear as a small detail in the context view.",
+      "Solar panels are visible on the roof of a white house in the crop, which is part of the larger village seen in the context."
+    ],
+    "description": "The images show a rural village with green agricultural fields and residential buildings. A canal borders the settlement, where a construction site with an orange excavator and earth piles is located. The crop view highlights specific houses, including one with solar panels, and the nearby construction activity.",
+    "evidence_visible": [
+      "A cluster of residential buildings with varied roof colors (red, grey, blue).",
+      "A white two-story house with solar panels installed on its roof.",
+      "A construction area with disturbed grey soil and an orange excavator.",
+      "Vegetation and small garden plots between the houses.",
+      "A paved road or path winding through the residential area."
+    ],
+    "unclear": [
+      "The specific type of crop in the fields.",
+      "The exact purpose of the construction site.",
+      "The identity of any individuals or vehicles.",
+      "The legal status of the construction or land use."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with multi-story residential buildings featuring red, grey, and blue roofs.\",\n    \"Large rectangular plots of vibrant green crops, likely rice paddies, arranged in a grid pattern.\",\n    \"A canal or river runs along the top edge of the frame, with a construction site containing piles of grey earth and an orange excavator visible on the far bank.\",\n    \"A small pond is situated near the houses on the right side.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the upper-right quadrant of the context image.\",\n    \"The crop focuses on the cluster of houses adjacent to the canal and the construction site.\",\n    \"The orange excavator and the grey earth piles are clearly visible in the crop but appear as a small detail in the context view.\",\n    \"Solar panels are visible on the roof of a white house in the crop, which is part of the larger village seen in the context.\"\n  ],\n  \"description\": \"The images show a rural village with green agricultural fields and residential buildings. A canal borders the settlement, where a construction site with an orange excavator and earth piles is located. The crop view highlights specific houses, including one with solar panels, and the nearby construction activity.\",\n  \"evidence_visible\": [\n    \"A cluster of residential buildings with varied roof colors (red, grey, blue).\",\n    \"A white two-story house with solar panels installed on its roof.\",\n    \"A construction area with disturbed grey soil and an orange excavator.\",\n    \"Vegetation and small garden plots between the houses.\",\n    \"A paved road or path winding through the residential area.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the fields.\",\n    \"The exact purpose of the construction site.\",\n    \"The identity of any individuals or vehicles.\",\n    \"The legal status of the construction or land use.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the total structural failure of the wall into a pile of debris, whereas building damage implies visible structural damage to a building that remains standing.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a house wall that has visibly collapsed, specifically the structure on the far right of the residential cluster which appears as a pile of rubble and debris rather than an intact building.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the total structural failure of the wall into a pile of debris, whereas building damage implies visible structural damage to a building that remains standing.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a house wall that has visibly collapsed, specifically the structure on the far right of the residential cluster which appears as a pile of rubble and debris rather than an intact building.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a residential area with intact buildings. There is no visible evidence of a collapsed house wall, nor is there a pile of rubble or debris on the far right of the residential cluster. The structures appear to be standing and complete.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows a house wall that has visibly collapsed",
+        "structure on the far right of the residential cluster which appears as a pile of rubble and debris"
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a village with multiple buildings that appear structurally sound. There is no visible evidence of structural damage, such as broken walls, missing roofs, or leaning structures, to support the claim of building damage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a residential area with intact buildings. There is no visible evidence of a collapsed house wall, nor is there a pile of rubble or debris on the far right of the residential cluster. The structures appear to be standing and complete.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows a house wall that has visibly collapsed\",\n      \"structure on the far right of the residential cluster which appears as a pile of rubble and debris\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a village with multiple buildings that appear structurally sound. There is no visible evidence of structural damage, such as broken walls, missing roofs, or leaning structures, to support the claim of building damage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

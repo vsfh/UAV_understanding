@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_712eb1967fd03aa3147b",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0324-3092-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0324-3092-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a large cluster of parallel plastic-covered greenhouses in the foreground.",
+      "Surrounding the greenhouses are vibrant green agricultural fields, likely rice paddies, and a paved road running horizontally.",
+      "To the left, a residential area with multi-story houses is visible.",
+      "A small, dilapidated structure with a grey roof sits adjacent to the greenhouses near the road."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the area immediately north of the greenhouse cluster shown in the first image.",
+      "The dilapidated structure and the eastern edge of the greenhouses are the primary subjects of the second image.",
+      "The paved road and utility poles visible in the first image are clearly depicted in the second image.",
+      "The green fields to the east of the greenhouses are consistent in both views."
+    ],
+    "description": "The images show a rural agricultural site with a large array of plastic greenhouses adjacent to green fields and a road. A zoomed-in view highlights a small, dilapidated building with a grey roof located between the greenhouses and the road, surrounded by debris and brick remnants.",
+    "evidence_visible": [
+      "A small, single-story structure with a grey, possibly tiled, roof.",
+      "The structure is surrounded by a rectangular area of disturbed earth, rubble, and low brick walls.",
+      "Debris is scattered on the ground within the perimeter of the structure.",
+      "The building appears to be in a state of disrepair or demolition.",
+      "A utility pole stands near the road adjacent to the structure."
+    ],
+    "unclear": [
+      "The specific purpose of the dilapidated structure (e.g., storage, residence, abandoned farm building).",
+      "The exact nature of the debris and rubble.",
+      "The timeline of the structure's condition.",
+      "The identity of any individuals or vehicles (none clearly visible)."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a large cluster of parallel plastic-covered greenhouses in the foreground.\",\n    \"Surrounding the greenhouses are vibrant green agricultural fields, likely rice paddies, and a paved road running horizontally.\",\n    \"To the left, a residential area with multi-story houses is visible.\",\n    \"A small, dilapidated structure with a grey roof sits adjacent to the greenhouses near the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the area immediately north of the greenhouse cluster shown in the first image.\",\n    \"The dilapidated structure and the eastern edge of the greenhouses are the primary subjects of the second image.\",\n    \"The paved road and utility poles visible in the first image are clearly depicted in the second image.\",\n    \"The green fields to the east of the greenhouses are consistent in both views.\"\n  ],\n  \"description\": \"The images show a rural agricultural site with a large array of plastic greenhouses adjacent to green fields and a road. A zoomed-in view highlights a small, dilapidated building with a grey roof located between the greenhouses and the road, surrounded by debris and brick remnants.\",\n  \"evidence_visible\": [\n    \"A small, single-story structure with a grey, possibly tiled, roof.\",\n    \"The structure is surrounded by a rectangular area of disturbed earth, rubble, and low brick walls.\",\n    \"Debris is scattered on the ground within the perimeter of the structure.\",\n    \"The building appears to be in a state of disrepair or demolition.\",\n    \"A utility pole stands near the road adjacent to the structure.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the dilapidated structure (e.g., storage, residence, abandoned farm building).\",\n    \"The exact nature of the debris and rubble.\",\n    \"The timeline of the structure's condition.\",\n    \"The identity of any individuals or vehicles (none clearly visible).\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a rectangular perimeter of low brick walls and extensive ground-level rubble and debris surrounding the structure, which indicates a demolition process rather than just structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a small structure with a grey roof surrounded by a rectangular area of disturbed earth, rubble, and low brick walls, indicating active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a rectangular perimeter of low brick walls and extensive ground-level rubble and debris surrounding the structure, which indicates a demolition process rather than just structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a small structure with a grey roof surrounded by a rectangular area of disturbed earth, rubble, and low brick walls, indicating active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a small structure with a grey roof standing intact within a rectangular area of disturbed earth and rubble. The surrounding area contains low brick walls and debris, which visually supports the description of a demolition site or recent demolition activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a building with a grey roof that appears structurally intact, not damaged. The surrounding area is a demolition site with rubble and low walls, but the specific building mentioned is not visibly damaged.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a small structure with a grey roof standing intact within a rectangular area of disturbed earth and rubble. The surrounding area contains low brick walls and debris, which visually supports the description of a demolition site or recent demolition activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a building with a grey roof that appears structurally intact, not damaged. The surrounding area is a demolition site with rubble and low walls, but the specific building mentioned is not visibly damaged.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

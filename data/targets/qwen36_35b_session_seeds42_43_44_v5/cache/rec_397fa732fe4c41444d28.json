@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_397fa732fe4c41444d28",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/collapsed_house_wall/original/0331-5669-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/collapsed_house_wall/cropped/0331-5669-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with dense housing and agricultural plots.",
+      "Large fields of yellow flowering crops (likely rapeseed) occupy the upper-left quadrant.",
+      "A paved parking area with multiple white vehicles is visible near the center.",
+      "Houses feature varied roofing materials including grey tiles, red metal sheets, and flat concrete.",
+      "A steep, forested hillside borders the right edge of the settlement."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a high-magnification view of a specific residential structure within the wider context.",
+      "The red gabled roof in the evidence crop matches the architectural style and color of the houses in the lower-right section of the context image.",
+      "The grey tiled roof to the left of the red roof in the evidence crop corresponds to the adjacent building in the context view.",
+      "The flat concrete roof with skylights in the evidence crop is visible in the context image to the right of the red-roofed house."
+    ],
+    "description": "The context image shows a village with yellow crop fields and mixed housing. The evidence image provides a close-up of a specific house with a red gabled roof and a cluttered backyard, situated between a grey-tiled roof and a flat concrete roof, confirming its location within the broader settlement.",
+    "evidence_visible": [
+      "A house with a reddish-brown gabled roof and grey walls.",
+      "A cluttered backyard area containing various items, possibly debris or stored goods.",
+      "Adjacent structures include a building with a grey tiled roof and another with a flat concrete roof featuring skylights.",
+      "A blue corrugated metal structure is partially visible on the far right edge.",
+      "The ground in the backyard appears unpaved and uneven."
+    ],
+    "unclear": [
+      "The specific identity of the items in the backyard.",
+      "The exact nature of the blue structure on the right edge.",
+      "Whether the yellow crops are still present in the immediate vicinity of the evidence crop (as the crop view is zoomed in on buildings)."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with dense housing and agricultural plots.\",\n    \"Large fields of yellow flowering crops (likely rapeseed) occupy the upper-left quadrant.\",\n    \"A paved parking area with multiple white vehicles is visible near the center.\",\n    \"Houses feature varied roofing materials including grey tiles, red metal sheets, and flat concrete.\",\n    \"A steep, forested hillside borders the right edge of the settlement.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a high-magnification view of a specific residential structure within the wider context.\",\n    \"The red gabled roof in the evidence crop matches the architectural style and color of the houses in the lower-right section of the context image.\",\n    \"The grey tiled roof to the left of the red roof in the evidence crop corresponds to the adjacent building in the context view.\",\n    \"The flat concrete roof with skylights in the evidence crop is visible in the context image to the right of the red-roofed house.\"\n  ],\n  \"description\": \"The context image shows a village with yellow crop fields and mixed housing. The evidence image provides a close-up of a specific house with a red gabled roof and a cluttered backyard, situated between a grey-tiled roof and a flat concrete roof, confirming its location within the broader settlement.\",\n  \"evidence_visible\": [\n    \"A house with a reddish-brown gabled roof and grey walls.\",\n    \"A cluttered backyard area containing various items, possibly debris or stored goods.\",\n    \"Adjacent structures include a building with a grey tiled roof and another with a flat concrete roof featuring skylights.\",\n    \"A blue corrugated metal structure is partially visible on the far right edge.\",\n    \"The ground in the backyard appears unpaved and uneven.\"\n  ],\n  \"unclear\": [\n    \"The specific identity of the items in the backyard.\",\n    \"The exact nature of the blue structure on the right edge.\",\n    \"Whether the yellow crops are still present in the immediate vicinity of the evidence crop (as the crop view is zoomed in on buildings).\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The event collapsed house wall is distinguished from building damage by the specific nature of the failure: the evidence shows a complete structural collapse of a wall exposing the interior/backyard, whereas building damage is a broader category of visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence image shows a house with a reddish-brown gabled roof where the rear wall has visibly collapsed, exposing a cluttered backyard area containing debris and stored goods.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The event collapsed house wall is distinguished from building damage by the specific nature of the failure: the evidence shows a complete structural collapse of a wall exposing the interior/backyard, whereas building damage is a broader category of visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence image shows a house with a reddish-brown gabled roof where the rear wall has visibly collapsed, exposing a cluttered backyard area containing debris and stored goods.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image shows a house with a reddish-brown gabled roof. The rear of the house is open to the sky, revealing a cluttered backyard area with debris, chairs, and stored goods. This visual evidence directly supports the claim that the rear wall has collapsed or is missing, exposing the interior/backyard.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays a building with a missing rear wall, exposing the interior space and clutter. This constitutes visible structural damage to the building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image shows a house with a reddish-brown gabled roof. The rear of the house is open to the sky, revealing a cluttered backyard area with debris, chairs, and stored goods. This visual evidence directly supports the claim that the rear wall has collapsed or is missing, exposing the interior/backyard.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a building with a missing rear wall, exposing the interior space and clutter. This constitutes visible structural damage to the building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

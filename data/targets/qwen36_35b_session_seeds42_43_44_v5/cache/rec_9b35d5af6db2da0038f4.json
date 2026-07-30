@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_9b35d5af6db2da0038f4",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0814-4111-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0814-4111-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area containing large industrial buildings with blue and grey roofs, a paved road, and a central cluster of residential structures.",
+      "The central cluster shows varying states of construction and demolition, with some buildings intact and others reduced to concrete frames.",
+      "Vegetation, including trees and garden plots, is interspersed among the buildings."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the central residential cluster visible in the wide context image.",
+      "The spatial arrangement of the multi-story concrete frames and the adjacent intact grey-roofed house is consistent between the two views.",
+      "The blue truck visible in the crop is located in the same relative position within the cluster as seen in the context image."
+    ],
+    "description": "Aerial imagery shows a central cluster of residential buildings in various states of demolition and construction, surrounded by industrial structures and vegetation. The crop details concrete frames, an intact grey-roofed house, and a blue truck parked near the structures.",
+    "evidence_visible": [
+      "Close-up of several multi-story buildings reduced to concrete shell frames with exposed rebar and missing walls.",
+      "An adjacent two-story building with a grey tiled roof and white walls appears structurally intact.",
+      "A blue truck is parked on the ground near the concrete frames.",
+      "Piles of rubble and construction debris are visible on the ground and rooftops.",
+      "Green vegetation and garden plots surround the buildings."
+    ],
+    "unclear": [
+      "The specific purpose of the concrete frames (abandoned construction vs. demolition site).",
+      "The exact date of the images.",
+      "The legal status or ownership of the properties."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area containing large industrial buildings with blue and grey roofs, a paved road, and a central cluster of residential structures.\",\n    \"The central cluster shows varying states of construction and demolition, with some buildings intact and others reduced to concrete frames.\",\n    \"Vegetation, including trees and garden plots, is interspersed among the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the central residential cluster visible in the wide context image.\",\n    \"The spatial arrangement of the multi-story concrete frames and the adjacent intact grey-roofed house is consistent between the two views.\",\n    \"The blue truck visible in the crop is located in the same relative position within the cluster as seen in the context image.\"\n  ],\n  \"description\": \"Aerial imagery shows a central cluster of residential buildings in various states of demolition and construction, surrounded by industrial structures and vegetation. The crop details concrete frames, an intact grey-roofed house, and a blue truck parked near the structures.\",\n  \"evidence_visible\": [\n    \"Close-up of several multi-story buildings reduced to concrete shell frames with exposed rebar and missing walls.\",\n    \"An adjacent two-story building with a grey tiled roof and white walls appears structurally intact.\",\n    \"A blue truck is parked on the ground near the concrete frames.\",\n    \"Piles of rubble and construction debris are visible on the ground and rooftops.\",\n    \"Green vegetation and garden plots surround the buildings.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the concrete frames (abandoned construction vs. demolition site).\",\n    \"The exact date of the images.\",\n    \"The legal status or ownership of the properties.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the complete failure and absence of the wall structure in the concrete frames, indicating collapse rather than general damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the close-up evidence shows multiple residential structures reduced to concrete shell frames with missing walls and exposed rebar, consistent with a visibly collapsed house wall.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the complete failure and absence of the wall structure in the concrete frames, indicating collapse rather than general damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the close-up evidence shows multiple residential structures reduced to concrete shell frames with missing walls and exposed rebar, consistent with a visibly collapsed house wall.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows multiple residential structures that are reduced to concrete shell frames with missing walls and exposed rebar, which directly supports the claim of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays visible structural damage to the buildings, including missing walls and exposed rebar, which supports the claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows multiple residential structures that are reduced to concrete shell frames with missing walls and exposed rebar, which directly supports the claim of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays visible structural damage to the buildings, including missing walls and exposed rebar, which supports the claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

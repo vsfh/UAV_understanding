@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_933091a57f5618f8f24e",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/original/0228-0543-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/cropped/0228-0543-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a grid of green agricultural fields, a cluster of residential buildings with red and grey roofs, and a large rectangular pond with a blue-roofed structure nearby.",
+      "A paved road runs horizontally across the upper section of the image.",
+      "The fields show distinct rows of crops, indicating active cultivation."
+    ],
+    "cross_view_relations": [
+      "The crop view is a high-magnification detail of the central residential cluster visible in the context image.",
+      "The red-roofed building on the left of the crop corresponds to the house with the red roof in the center-left of the context view.",
+      "The grey-roofed building in the center of the crop matches the adjacent structure in the context view.",
+      "The green field with vertical rows in the crop is the field immediately north of the houses in the context view."
+    ],
+    "description": "The images show a rural settlement surrounded by green agricultural fields. The context view provides a wide overview of the area, including a pond and a road. The crop view zooms in on a specific group of houses, revealing details of their red and grey roofs, flat terraces, and the adjacent cultivated land.",
+    "evidence_visible": [
+      "A cluster of single-story residential buildings with flat roofs.",
+      "Two prominent buildings have red metal roofing; one central building has a grey tiled roof.",
+      "The central building has an open, walled courtyard or terrace area.",
+      "A small garden plot with green vegetables is visible in the bottom right corner of the crop.",
+      "A paved road runs along the top edge of the crop, bordering the green field."
+    ],
+    "unclear": [
+      "The specific type of crops in the fields.",
+      "The exact number of people or vehicles present.",
+      "The legal status or ownership of the properties.",
+      "The specific contents of the open terrace area."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a grid of green agricultural fields, a cluster of residential buildings with red and grey roofs, and a large rectangular pond with a blue-roofed structure nearby.\",\n    \"A paved road runs horizontally across the upper section of the image.\",\n    \"The fields show distinct rows of crops, indicating active cultivation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop view is a high-magnification detail of the central residential cluster visible in the context image.\",\n    \"The red-roofed building on the left of the crop corresponds to the house with the red roof in the center-left of the context view.\",\n    \"The grey-roofed building in the center of the crop matches the adjacent structure in the context view.\",\n    \"The green field with vertical rows in the crop is the field immediately north of the houses in the context view.\"\n  ],\n  \"description\": \"The images show a rural settlement surrounded by green agricultural fields. The context view provides a wide overview of the area, including a pond and a road. The crop view zooms in on a specific group of houses, revealing details of their red and grey roofs, flat terraces, and the adjacent cultivated land.\",\n  \"evidence_visible\": [\n    \"A cluster of single-story residential buildings with flat roofs.\",\n    \"Two prominent buildings have red metal roofing; one central building has a grey tiled roof.\",\n    \"The central building has an open, walled courtyard or terrace area.\",\n    \"A small garden plot with green vegetables is visible in the bottom right corner of the crop.\",\n    \"A paved road runs along the top edge of the crop, bordering the green field.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the fields.\",\n    \"The exact number of people or vehicles present.\",\n    \"The legal status or ownership of the properties.\",\n    \"The specific contents of the open terrace area.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific structural failure mode; the image evidence explicitly shows a wall or roof section that has fallen in (collapsed), whereas building damage is a broader category of visible structural harm.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-magnification crop view reveals a central single-story building with a grey tiled roof that features a visibly collapsed section of its wall or roof structure, creating an open, walled courtyard area.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific structural failure mode; the image evidence explicitly shows a wall or roof section that has fallen in (collapsed), whereas building damage is a broader category of visible structural harm.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-magnification crop view reveals a central single-story building with a grey tiled roof that features a visibly collapsed section of its wall or roof structure, creating an open, walled courtyard area.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification crop clearly shows a central single-story building with a grey tiled roof. A significant portion of the roof and wall structure is missing, creating an open, walled courtyard area. This visual evidence directly supports the description of a collapsed section.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a building with a missing roof section and exposed interior, which constitutes visible structural damage. The claim is supported by the visual evidence of the damaged structure.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification crop clearly shows a central single-story building with a grey tiled roof. A significant portion of the roof and wall structure is missing, creating an open, walled courtyard area. This visual evidence directly supports the description of a collapsed section.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a building with a missing roof section and exposed interior, which constitutes visible structural damage. The claim is supported by the visual evidence of the damaged structure.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_305f1a2675b5095fa772",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0225-1425-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0225-1425-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a dense urban residential area with mixed roof types, including grey tiles, red metal sheets, and blue tarps. A large white rectangular building is visible in the upper right. Narrow streets and alleys separate the structures."
+    ],
+    "cross_view_relations": [
+      "The crop is a high-magnification view of a specific cluster of buildings within the wider context image, focusing on a rooftop terrace area situated between structures with red and grey roofs."
+    ],
+    "description": "The images show a dense residential area with varied roofing materials. The crop reveals a rooftop terrace cluttered with solar panels, metal frames, and miscellaneous items. Laundry hangs on a line to the left, and a narrow alleyway runs between the buildings.",
+    "evidence_visible": [
+      "Close-up of a rooftop terrace containing multiple solar panels, some appearing reflective or damaged. Metal framework structures are present. To the left, laundry hangs on a line. A narrow passage between buildings contains stacked items and vegetation."
+    ],
+    "unclear": [
+      "Specific function of the metal frames on the roof, exact condition of the solar panels, identity of objects in the alleyway."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a dense urban residential area with mixed roof types, including grey tiles, red metal sheets, and blue tarps. A large white rectangular building is visible in the upper right. Narrow streets and alleys separate the structures.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a high-magnification view of a specific cluster of buildings within the wider context image, focusing on a rooftop terrace area situated between structures with red and grey roofs.\"\n  ],\n  \"description\": \"The images show a dense residential area with varied roofing materials. The crop reveals a rooftop terrace cluttered with solar panels, metal frames, and miscellaneous items. Laundry hangs on a line to the left, and a narrow alleyway runs between the buildings.\",\n  \"evidence_visible\": [\n    \"Close-up of a rooftop terrace containing multiple solar panels, some appearing reflective or damaged. Metal framework structures are present. To the left, laundry hangs on a line. A narrow passage between buildings contains stacked items and vegetation.\"\n  ],\n  \"unclear\": [\n    \"Specific function of the metal frames on the roof, exact condition of the solar panels, identity of objects in the alleyway.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of the exposed metal framework structures and the systematic stripping of the roof surface, which indicates a deliberate demolition process rather than incidental structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a rooftop terrace that has been stripped of its original roofing material, leaving behind a cluttered arrangement of exposed metal framework structures and debris, consistent with active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of the exposed metal framework structures and the systematic stripping of the roof surface, which indicates a deliberate demolition process rather than incidental structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a rooftop terrace that has been stripped of its original roofing material, leaving behind a cluttered arrangement of exposed metal framework structures and debris, consistent with active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a rooftop terrace cluttered with various items, including what appears to be metal framework, solar panels, and debris. However, the structures appear to be installed or accumulated over time rather than the result of a demolition event. The 'exposed metal framework' is likely part of a structure (like a greenhouse or storage rack) rather than the remains of a stripped roof. There is no visual evidence of active demolition or the specific state of 'stripped of original roofing material' described; the roof surface is simply covered in objects.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The rooftop terrace has been stripped of its original roofing material.",
+        "The arrangement of exposed metal framework structures and debris is consistent with active or recent demolition."
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a dense cluster of buildings. While there is clutter on the rooftops, there is no clear, unambiguous visual evidence of structural damage (such as collapsed walls, missing roof sections, or exposed beams) to a specific building that would support the claim of 'building damage'. The scene depicts a lived-in, cluttered urban environment rather than a damaged one.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "Visible evidence shows visible structural damage to a building."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a rooftop terrace cluttered with various items, including what appears to be metal framework, solar panels, and debris. However, the structures appear to be installed or accumulated over time rather than the result of a demolition event. The 'exposed metal framework' is likely part of a structure (like a greenhouse or storage rack) rather than the remains of a stripped roof. There is no visual evidence of active demolition or the specific state of 'stripped of original roofing material' described; the roof surface is simply covered in objects.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The rooftop terrace has been stripped of its original roofing material.\",\n      \"The arrangement of exposed metal framework structures and debris is consistent with active or recent demolition.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a dense cluster of buildings. While there is clutter on the rooftops, there is no clear, unambiguous visual evidence of structural damage (such as collapsed walls, missing roof sections, or exposed beams) to a specific building that would support the claim of 'building damage'. The scene depicts a lived-in, cluttered urban environment rather than a damaged one.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"Visible evidence shows visible structural damage to a building.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

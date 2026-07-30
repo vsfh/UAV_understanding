@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_625c07ee348dd10b9f3a",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/original/0414-7554-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/cropped/0414-7554-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a dense urban area with mixed building types, including multi-story residential blocks and older structures with grey tiled roofs.",
+      "A parking lot with numerous vehicles is visible in the upper left quadrant.",
+      "Green trees are interspersed between buildings, and a street runs along the left edge.",
+      "A building on the right side of the context image features blue solar panels on its roof."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-resolution, top-down view of the two buildings located in the lower right quadrant of the context image.",
+      "The building on the left in the crop corresponds to the structure with the dark grey flat roof in the context image.",
+      "The building on the right in the crop corresponds to the taller beige building with the dark grey roof and solar panels in the context image.",
+      "The narrow alleyway separating the two buildings in the crop is visible as a gap between the structures in the context view."
+    ],
+    "description": "The images show a dense urban neighborhood with mixed architecture. The context view reveals a parking lot and tree-lined streets, while the linked crop provides a detailed top-down perspective of two adjacent buildings separated by a narrow alley. The buildings feature flat grey roofs, with one displaying multiple solar water heaters and the other showing scattered rooftop equipment.",
+    "evidence_visible": [
+      "Two rectangular buildings with dark grey flat roofs are separated by a narrow, paved alleyway.",
+      "The building on the right has multiple solar water heater units with red frames and glass tubes installed on its roof.",
+      "The building on the left has a large expanse of dark roofing material with scattered white objects and a circular vent.",
+      "The alleyway contains debris, a small patch of vegetation, and what appears to be a parked scooter.",
+      "The building on the right has external air conditioning units mounted on the side wall."
+    ],
+    "unclear": [
+      "The specific type of white objects on the left roof in the crop.",
+      "The exact nature of the debris in the alleyway.",
+      "The number of people or specific activities occurring in the alleyway."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a dense urban area with mixed building types, including multi-story residential blocks and older structures with grey tiled roofs.\",\n    \"A parking lot with numerous vehicles is visible in the upper left quadrant.\",\n    \"Green trees are interspersed between buildings, and a street runs along the left edge.\",\n    \"A building on the right side of the context image features blue solar panels on its roof.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-resolution, top-down view of the two buildings located in the lower right quadrant of the context image.\",\n    \"The building on the left in the crop corresponds to the structure with the dark grey flat roof in the context image.\",\n    \"The building on the right in the crop corresponds to the taller beige building with the dark grey roof and solar panels in the context image.\",\n    \"The narrow alleyway separating the two buildings in the crop is visible as a gap between the structures in the context view.\"\n  ],\n  \"description\": \"The images show a dense urban neighborhood with mixed architecture. The context view reveals a parking lot and tree-lined streets, while the linked crop provides a detailed top-down perspective of two adjacent buildings separated by a narrow alley. The buildings feature flat grey roofs, with one displaying multiple solar water heaters and the other showing scattered rooftop equipment.\",\n  \"evidence_visible\": [\n    \"Two rectangular buildings with dark grey flat roofs are separated by a narrow, paved alleyway.\",\n    \"The building on the right has multiple solar water heater units with red frames and glass tubes installed on its roof.\",\n    \"The building on the left has a large expanse of dark roofing material with scattered white objects and a circular vent.\",\n    \"The alleyway contains debris, a small patch of vegetation, and what appears to be a parked scooter.\",\n    \"The building on the right has external air conditioning units mounted on the side wall.\"\n  ],\n  \"unclear\": [\n    \"The specific type of white objects on the left roof in the crop.\",\n    \"The exact nature of the debris in the alleyway.\",\n    \"The number of people or specific activities occurring in the alleyway.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of a debris-filled alleyway and a small excavator, which indicates site clearance and demolition activity rather than the assembly of new structural elements typical of a general construction project.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a narrow alleyway between two buildings containing a significant accumulation of rubble, debris, and what appears to be a small excavator or construction vehicle, indicating active demolition or site clearance work.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of a debris-filled alleyway and a small excavator, which indicates site clearance and demolition activity rather than the assembly of new structural elements typical of a general construction project.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a narrow alleyway between two buildings containing a significant accumulation of rubble, debris, and what appears to be a small excavator or construction vehicle, indicating active demolition or site clearance work.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence directly supports the claim of demolition. The narrow alleyway between the two buildings contains a large pile of grey rubble and debris, and a small yellow excavator is visible amidst the destruction, which is consistent with active demolition or site clearance.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The claim of general construction is not supported because the visible activity is clearly demolition. The presence of a large pile of rubble and a small excavator working within a confined space between existing structures indicates site clearance rather than the erection of new structures or general construction.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence directly supports the claim of demolition. The narrow alleyway between the two buildings contains a large pile of grey rubble and debris, and a small yellow excavator is visible amidst the destruction, which is consistent with active demolition or site clearance.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The claim of general construction is not supported because the visible activity is clearly demolition. The presence of a large pile of rubble and a small excavator working within a confined space between existing structures indicates site clearance rather than the erection of new structures or general construction.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

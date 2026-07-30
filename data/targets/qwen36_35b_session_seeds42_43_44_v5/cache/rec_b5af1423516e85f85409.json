@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b5af1423516e85f85409",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-1949-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-1949-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area containing a large industrial building with a grey roof on the left, a cluster of residential houses, and extensive green agricultural fields.",
+      "A central plot of land is covered in a large pile of red brick rubble and debris, indicating demolition or construction activity.",
+      "Several houses in the cluster have rooftop solar panels and blue water tanks.",
+      "A paved road runs along the bottom right edge with parked vehicles."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the central area in the context image.",
+      "The crop focuses specifically on the cluster of buildings situated immediately behind the large pile of rubble.",
+      "The spatial relationship confirms the rubble is in the foreground relative to the damaged buildings in the crop."
+    ],
+    "description": "The images show a cluster of residential buildings adjacent to a large field of red brick rubble. The buildings appear damaged, with exposed concrete frames and missing roof sections. The wider context reveals these structures are surrounded by green agricultural fields and a large industrial facility.",
+    "evidence_visible": [
+      "Close-up of three main structures showing significant structural damage.",
+      "The building on the left has an exposed concrete skeleton with no roof covering.",
+      "The central building has a partially collapsed roof with visible blue tarp or material.",
+      "The building on the right is a multi-story structure with a flat roof and visible window openings.",
+      "A large accumulation of red brick debris and grey concrete rubble lies directly in front of these structures."
+    ],
+    "unclear": [
+      "The specific cause of the damage (demolition vs. destruction).",
+      "The current occupancy status of the damaged buildings.",
+      "The exact date of the event."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area containing a large industrial building with a grey roof on the left, a cluster of residential houses, and extensive green agricultural fields.\",\n    \"A central plot of land is covered in a large pile of red brick rubble and debris, indicating demolition or construction activity.\",\n    \"Several houses in the cluster have rooftop solar panels and blue water tanks.\",\n    \"A paved road runs along the bottom right edge with parked vehicles.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the central area in the context image.\",\n    \"The crop focuses specifically on the cluster of buildings situated immediately behind the large pile of rubble.\",\n    \"The spatial relationship confirms the rubble is in the foreground relative to the damaged buildings in the crop.\"\n  ],\n  \"description\": \"The images show a cluster of residential buildings adjacent to a large field of red brick rubble. The buildings appear damaged, with exposed concrete frames and missing roof sections. The wider context reveals these structures are surrounded by green agricultural fields and a large industrial facility.\",\n  \"evidence_visible\": [\n    \"Close-up of three main structures showing significant structural damage.\",\n    \"The building on the left has an exposed concrete skeleton with no roof covering.\",\n    \"The central building has a partially collapsed roof with visible blue tarp or material.\",\n    \"The building on the right is a multi-story structure with a flat roof and visible window openings.\",\n    \"A large accumulation of red brick debris and grey concrete rubble lies directly in front of these structures.\"\n  ],\n  \"unclear\": [\n    \"The specific cause of the damage (demolition vs. destruction).\",\n    \"The current occupancy status of the damaged buildings.\",\n    \"The exact date of the event.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific visual evidence of a wall that has visibly collapsed, as opposed to general structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence shows a building with a visibly collapsed wall and exposed concrete skeleton, adjacent to a large pile of red brick rubble.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific visual evidence of a wall that has visibly collapsed, as opposed to general structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence shows a building with a visibly collapsed wall and exposed concrete skeleton, adjacent to a large pile of red brick rubble.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a building with a visibly collapsed wall and exposed concrete skeleton, adjacent to a large pile of red brick rubble. This directly supports the description of the event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a building with a visibly collapsed wall and exposed concrete skeleton, adjacent to a large pile of red brick rubble. This constitutes visible structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a building with a visibly collapsed wall and exposed concrete skeleton, adjacent to a large pile of red brick rubble. This directly supports the description of the event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a building with a visibly collapsed wall and exposed concrete skeleton, adjacent to a large pile of red brick rubble. This constitutes visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

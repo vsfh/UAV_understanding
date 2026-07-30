@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0339a6c4f651a208b83b",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0123-6575-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0123-6575-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a densely built-up settlement situated on a peninsula or river bend.",
+      "Houses feature varied roofing materials, including red tiles, grey slate, and corrugated metal.",
+      "A large body of water surrounds the settlement on the right and bottom.",
+      "A small boat is moored near the shore in the lower center.",
+      "Patches of white material, likely snow or ice, are visible on the ground and rooftops.",
+      "A multi-story building is visible on the far right edge."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the upper-left quadrant of the context image.",
+      "The crop focuses on the riverbank area where the settlement meets the water.",
+      "The cluster of buildings with blue and grey roofs in the crop corresponds to the structures on the left side of the context image.",
+      "The water body in the crop is the same river section visible in the context image."
+    ],
+    "description": "The images show a dense riverside settlement with mixed roofing. The context view reveals the overall layout, while the crop highlights a specific bank area cluttered with debris and vegetation. Patches of snow or ice are present on the ground and roofs, and a small boat is moored nearby.",
+    "evidence_visible": [
+      "Close-up of the riverbank showing a mix of residential structures and open ground.",
+      "A significant amount of debris, possibly construction waste or discarded materials, is scattered along the water's edge.",
+      "Vegetation appears dormant or brown, consistent with winter.",
+      "White patches on the ground and a rooftop in the foreground suggest snow or ice.",
+      "The water is murky and brown.",
+      "A small concrete structure or pier extends into the water on the left side of the crop."
+    ],
+    "unclear": [
+      "The exact nature of the debris along the bank (e.g., construction waste, trash, natural debris).",
+      "The specific type of white material on the roofs (snow vs. ice vs. other material).",
+      "The purpose of the small concrete structure in the crop.",
+      "The exact date or season, though visual cues suggest winter."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a densely built-up settlement situated on a peninsula or river bend.\",\n    \"Houses feature varied roofing materials, including red tiles, grey slate, and corrugated metal.\",\n    \"A large body of water surrounds the settlement on the right and bottom.\",\n    \"A small boat is moored near the shore in the lower center.\",\n    \"Patches of white material, likely snow or ice, are visible on the ground and rooftops.\",\n    \"A multi-story building is visible on the far right edge.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the upper-left quadrant of the context image.\",\n    \"The crop focuses on the riverbank area where the settlement meets the water.\",\n    \"The cluster of buildings with blue and grey roofs in the crop corresponds to the structures on the left side of the context image.\",\n    \"The water body in the crop is the same river section visible in the context image.\"\n  ],\n  \"description\": \"The images show a dense riverside settlement with mixed roofing. The context view reveals the overall layout, while the crop highlights a specific bank area cluttered with debris and vegetation. Patches of snow or ice are present on the ground and roofs, and a small boat is moored nearby.\",\n  \"evidence_visible\": [\n    \"Close-up of the riverbank showing a mix of residential structures and open ground.\",\n    \"A significant amount of debris, possibly construction waste or discarded materials, is scattered along the water's edge.\",\n    \"Vegetation appears dormant or brown, consistent with winter.\",\n    \"White patches on the ground and a rooftop in the foreground suggest snow or ice.\",\n    \"The water is murky and brown.\",\n    \"A small concrete structure or pier extends into the water on the left side of the crop.\"\n  ],\n  \"unclear\": [\n    \"The exact nature of the debris along the bank (e.g., construction waste, trash, natural debris).\",\n    \"The specific type of white material on the roofs (snow vs. ice vs. other material).\",\n    \"The purpose of the small concrete structure in the crop.\",\n    \"The exact date or season, though visual cues suggest winter.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of a pile of rubble and debris along the riverbank, which indicates the destruction of a structure rather than the assembly of a new one.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by visible evidence of a building undergoing active or recent demolition, specifically the presence of a large pile of rubble and debris along the riverbank in the crop image, which contrasts with the intact structures nearby.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of a pile of rubble and debris along the riverbank, which indicates the destruction of a structure rather than the assembly of a new one.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by visible evidence of a building undergoing active or recent demolition, specifically the presence of a large pile of rubble and debris along the riverbank in the crop image, which contrasts with the intact structures nearby.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The crop image clearly shows a building that has been reduced to a pile of rubble and debris along the riverbank, contrasting with the intact structures nearby. This visual evidence supports the claim of a building undergoing active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a building that has been demolished, evidenced by the large pile of rubble and debris. There is no visible evidence of an active general construction project, such as cranes, scaffolding, or workers building a new structure.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The crop image clearly shows a building that has been reduced to a pile of rubble and debris along the riverbank, contrasting with the intact structures nearby. This visual evidence supports the claim of a building undergoing active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a building that has been demolished, evidenced by the large pile of rubble and debris. There is no visible evidence of an active general construction project, such as cranes, scaffolding, or workers building a new structure.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

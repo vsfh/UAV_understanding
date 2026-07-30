@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4e1cd545b7b3be40cb62",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-10051-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-10051-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a mixed-use area with large industrial buildings on the left and right, and a central zone of small-scale agricultural plots and dirt paths.",
+      "A large area of bare earth covered with green mesh is visible in the upper right.",
+      "A cluster of small structures and garden plots is located in the lower right quadrant.",
+      "A narrow paved road winds through the agricultural plots."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of a specific plot located in the lower right section of the context image.",
+      "The plot is situated immediately adjacent to a paved road and next to a small building with a grey roof.",
+      "The spatial arrangement of the plot, road, and building in the crop matches the surrounding features in the context image."
+    ],
+    "description": "The context image shows a mixed industrial and agricultural landscape. The linked crop provides a detailed view of a specific garden plot within this area, highlighting a large green tarp covering a section of the ground next to a paved road and a small building.",
+    "evidence_visible": [
+      "A rectangular plot of land containing rows of low-lying green vegetation.",
+      "A large, bright green tarp or netting covering a significant portion of the plot.",
+      "A paved road running diagonally along the right side of the plot.",
+      "A small building with a grey roof is visible in the upper right corner of the crop.",
+      "Debris and bare earth are visible on the periphery of the plot."
+    ],
+    "unclear": [
+      "The specific type of crops being grown.",
+      "The purpose of the green tarp (e.g., weed control, frost protection).",
+      "The identity of the small building or its function."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a mixed-use area with large industrial buildings on the left and right, and a central zone of small-scale agricultural plots and dirt paths.\",\n    \"A large area of bare earth covered with green mesh is visible in the upper right.\",\n    \"A cluster of small structures and garden plots is located in the lower right quadrant.\",\n    \"A narrow paved road winds through the agricultural plots.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of a specific plot located in the lower right section of the context image.\",\n    \"The plot is situated immediately adjacent to a paved road and next to a small building with a grey roof.\",\n    \"The spatial arrangement of the plot, road, and building in the crop matches the surrounding features in the context image.\"\n  ],\n  \"description\": \"The context image shows a mixed industrial and agricultural landscape. The linked crop provides a detailed view of a specific garden plot within this area, highlighting a large green tarp covering a section of the ground next to a paved road and a small building.\",\n  \"evidence_visible\": [\n    \"A rectangular plot of land containing rows of low-lying green vegetation.\",\n    \"A large, bright green tarp or netting covering a significant portion of the plot.\",\n    \"A paved road running diagonally along the right side of the plot.\",\n    \"A small building with a grey roof is visible in the upper right corner of the crop.\",\n    \"Debris and bare earth are visible on the periphery of the plot.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops being grown.\",\n    \"The purpose of the green tarp (e.g., weed control, frost protection).\",\n    \"The identity of the small building or its function.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the netting in the image appears to be a complete, continuous layer covering the designated area, whereas incomplete soil cover would imply visible gaps or missing sections of the protective material.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the evidence image shows a plot of land where a significant portion of the ground is covered by a large, continuous sheet of green mesh netting, consistent with dust-control measures.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the netting in the image appears to be a complete, continuous layer covering the designated area, whereas incomplete soil cover would imply visible gaps or missing sections of the protective material.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the evidence image shows a plot of land where a significant portion of the ground is covered by a large, continuous sheet of green mesh netting, consistent with dust-control measures.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a large, continuous sheet of green mesh netting covering a significant portion of the ground, which directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a plot of land where a large area is covered by green mesh, but there are adjacent sections of bare soil and vegetation that are not covered by the mesh. This visual evidence confirms that the soil cover is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a large, continuous sheet of green mesh netting covering a significant portion of the ground, which directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a plot of land where a large area is covered by green mesh, but there are adjacent sections of bare soil and vegetation that are not covered by the mesh. This visual evidence confirms that the soil cover is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

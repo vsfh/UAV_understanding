@@ -1,0 +1,77 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_889fe77af21d67b8a739",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1030-8740-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1030-8740-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape featuring a village with white buildings, yellow harvested fields, and numerous water bodies.",
+      "Several ponds are covered in thick green algae or aquatic vegetation.",
+      "A paved road runs through the village, and a dirt path leads towards the foreground.",
+      "In the lower right, a concrete rooftop is visible with a small, rectangular patch of bright green material."
+    ],
+    "cross_view_relations": [
+      "The bright green material on the rooftop in the wide image corresponds spatially to the green mesh seen in the cropped close-up.",
+      "The close-up view confirms the material is a blue-green netting draped over a small structure or pile on the roof.",
+      "The surrounding vegetation in the close-up matches the greenery and water bodies seen in the wider context."
+    ],
+    "description": "Aerial imagery of a rural village with yellow fields and algae-covered ponds. A close-up crop reveals a blue-green mesh netting draped over a rooftop structure, situated next to a concrete surface and adjacent to green vegetation and water.",
+    "evidence_visible": [
+      "Close-up view of a rooftop area adjacent to a body of water covered in green algae.",
+      "A blue-green mesh net is draped over a small, undefined object or structure on the roof.",
+      "A small tree with yellowing leaves stands near the edge of the property.",
+      "A concrete surface is visible in the foreground with a white object, possibly a chair or fixture."
+    ],
+    "unclear": [
+      "The specific purpose of the mesh netting is unclear.",
+      "The identity of the white object on the roof is unclear.",
+      "The exact contents under the mesh are not visible."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape featuring a village with white buildings, yellow harvested fields, and numerous water bodies.\",\n    \"Several ponds are covered in thick green algae or aquatic vegetation.\",\n    \"A paved road runs through the village, and a dirt path leads towards the foreground.\",\n    \"In the lower right, a concrete rooftop is visible with a small, rectangular patch of bright green material.\"\n  ],\n  \"cross_view_relations\": [\n    \"The bright green material on the rooftop in the wide image corresponds spatially to the green mesh seen in the cropped close-up.\",\n    \"The close-up view confirms the material is a blue-green netting draped over a small structure or pile on the roof.\",\n    \"The surrounding vegetation in the close-up matches the greenery and water bodies seen in the wider context.\"\n  ],\n  \"description\": \"Aerial imagery of a rural village with yellow fields and algae-covered ponds. A close-up crop reveals a blue-green mesh netting draped over a rooftop structure, situated next to a concrete surface and adjacent to green vegetation and water.\",\n  \"evidence_visible\": [\n    \"Close-up view of a rooftop area adjacent to a body of water covered in green algae.\",\n    \"A blue-green mesh net is draped over a small, undefined object or structure on the roof.\",\n    \"A small tree with yellowing leaves stands near the edge of the property.\",\n    \"A concrete surface is visible in the foreground with a white object, possibly a chair or fixture.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the mesh netting is unclear.\",\n    \"The identity of the white object on the roof is unclear.\",\n    \"The exact contents under the mesh are not visible.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the target object by the mesh, whereas incomplete soil cover would imply visible gaps in the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a blue-green mesh netting draped over a small structure on a rooftop, situated adjacent to a concrete surface and green vegetation.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the target object by the mesh, whereas incomplete soil cover would imply visible gaps in the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a blue-green mesh netting draped over a small structure on a rooftop, situated adjacent to a concrete surface and green vegetation.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification_failed_attempts": [
+    {
+      "attempt": 0,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a blue-green mesh netting draped over a small structure adjacent to a concrete surface and green vegetation, which directly supports the description in statement A. Statement B is also supported as the netting is visibly incomplete, leaving some soil exposed.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a blue-green mesh netting that is not fully covering the area, leaving some soil exposed. This supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+      "error": "counterfactual verdict contains cross-candidate meta-commentary"
+    },
+    {
+      "attempt": 1,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a blue-green mesh netting draped over a small structure adjacent to a concrete surface and green vegetation, which directly supports the description in statement A.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a blue-green mesh netting that is not fully covering the area, leaving some soil exposed. This supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+      "error": "counterfactual verdict contains cross-candidate meta-commentary"
+    },
+    {
+      "attempt": 2,
+      "raw": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a blue-green mesh netting draped over a small structure adjacent to a concrete surface and green vegetation, which directly supports the description in statement A.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a blue-green mesh netting that is not fully covering the area, leaving some soil exposed. This supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+      "error": "counterfactual verdict contains cross-candidate meta-commentary"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_943390974ee289187c30",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-07-01_2025-07-31/collapsed_house_wall/original/0728-1885-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-07-01_2025-07-31/collapsed_house_wall/cropped/0728-1885-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multi-story residential buildings, paved roads, and a central canal.",
+      "Surrounding agricultural land includes green fields and large rectangular ponds, likely for aquaculture.",
+      "Vegetation is dense and green, indicating a growing season."
+    ],
+    "cross_view_relations": [
+      "The evidence image shows a specific plot of land adjacent to a canal, consistent with the agricultural and residential layout seen in the context image.",
+      "The evidence image provides a closer view of the types of structures and vegetation found in the wider context.",
+      "The canal in the evidence image appears to be a segment of the waterway network visible in the context image."
+    ],
+    "description": "The context image displays a rural village with houses, roads, and canals surrounded by green fields and ponds. The evidence image shows a closer view of a similar area, featuring a small brick structure with a damaged roof next to a canal and cultivated plots. Both images depict a landscape of agriculture and residential development.",
+    "evidence_visible": [
+      "A small, single-story brick building with a partially collapsed or damaged flat roof.",
+      "The building is situated next to a narrow canal or drainage ditch.",
+      "Surrounding the building are various plots of green vegetation, including what appears to be crops and taller, bushy plants.",
+      "A dirt path runs alongside the canal."
+    ],
+    "unclear": [
+      "The exact type of crops or plants in the evidence image.",
+      "The specific location of the evidence image within the context image.",
+      "The purpose of the small brick building.",
+      "The cause of the damage to the building's roof."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with multi-story residential buildings, paved roads, and a central canal.\",\n    \"Surrounding agricultural land includes green fields and large rectangular ponds, likely for aquaculture.\",\n    \"Vegetation is dense and green, indicating a growing season.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image shows a specific plot of land adjacent to a canal, consistent with the agricultural and residential layout seen in the context image.\",\n    \"The evidence image provides a closer view of the types of structures and vegetation found in the wider context.\",\n    \"The canal in the evidence image appears to be a segment of the waterway network visible in the context image.\"\n  ],\n  \"description\": \"The context image displays a rural village with houses, roads, and canals surrounded by green fields and ponds. The evidence image shows a closer view of a similar area, featuring a small brick structure with a damaged roof next to a canal and cultivated plots. Both images depict a landscape of agriculture and residential development.\",\n  \"evidence_visible\": [\n    \"A small, single-story brick building with a partially collapsed or damaged flat roof.\",\n    \"The building is situated next to a narrow canal or drainage ditch.\",\n    \"Surrounding the building are various plots of green vegetation, including what appears to be crops and taller, bushy plants.\",\n    \"A dirt path runs alongside the canal.\"\n  ],\n  \"unclear\": [\n    \"The exact type of crops or plants in the evidence image.\",\n    \"The specific location of the evidence image within the context image.\",\n    \"The purpose of the small brick building.\",\n    \"The cause of the damage to the building's roof.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is that the evidence image explicitly shows a structural failure where the roof has caved in, whereas building damage is a broader category that does not necessarily imply a collapse.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence image shows a small brick building with a visibly damaged and partially collapsed roof structure situated next to a canal.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is that the evidence image explicitly shows a structural failure where the roof has caved in, whereas building damage is a broader category that does not necessarily imply a collapse.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence image shows a small brick building with a visibly damaged and partially collapsed roof structure situated next to a canal.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a small brick structure with a severely damaged roof and missing walls situated next to a canal. This visual evidence directly supports the description of a collapsed house wall and damaged roof structure.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a building with significant structural damage, specifically a collapsed roof and missing walls. This confirms the claim of visible structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a small brick structure with a severely damaged roof and missing walls situated next to a canal. This visual evidence directly supports the description of a collapsed house wall and damaged roof structure.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a building with significant structural damage, specifically a collapsed roof and missing walls. This confirms the claim of visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

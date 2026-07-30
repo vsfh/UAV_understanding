@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_9f1be6432b435728fc4a",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0304-1933-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0304-1933-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with rectangular green agricultural fields separated by dirt paths and small waterways.",
+      "A cluster of buildings including a two-story structure with a blue roof on the left and a multi-story building with a grey roof near the center.",
+      "A paved road runs vertically through the center, connecting the buildings to the surrounding fields."
+    ],
+    "cross_view_relations": [
+      "The crop view is a high-magnification detail of the area immediately adjacent to the grey-roofed building seen in the center of the context image.",
+      "The waterway visible in the crop runs parallel to the dirt path that extends south from the grey-roofed building in the context view."
+    ],
+    "description": "The context image shows a rural area with green fields and scattered buildings. The crop provides a detailed view of a concrete structure and debris situated on the bank of a waterway next to a building with a grey roof, confirming the location of the debris field relative to the main structures.",
+    "evidence_visible": [
+      "A concrete structure, possibly a dock or foundation, extends into a dark waterway.",
+      "A pile of construction debris, including white panels and rubble, is located on the bank next to the concrete structure.",
+      "A building with an orange/yellow roof is partially visible in the bottom left corner of the crop.",
+      "Bare tree branches overhang the water and debris area."
+    ],
+    "unclear": [
+      "The specific contents of the debris pile.",
+      "The exact function of the concrete structure.",
+      "The identity of the building with the orange roof."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape with rectangular green agricultural fields separated by dirt paths and small waterways.\",\n    \"A cluster of buildings including a two-story structure with a blue roof on the left and a multi-story building with a grey roof near the center.\",\n    \"A paved road runs vertically through the center, connecting the buildings to the surrounding fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop view is a high-magnification detail of the area immediately adjacent to the grey-roofed building seen in the center of the context image.\",\n    \"The waterway visible in the crop runs parallel to the dirt path that extends south from the grey-roofed building in the context view.\"\n  ],\n  \"description\": \"The context image shows a rural area with green fields and scattered buildings. The crop provides a detailed view of a concrete structure and debris situated on the bank of a waterway next to a building with a grey roof, confirming the location of the debris field relative to the main structures.\",\n  \"evidence_visible\": [\n    \"A concrete structure, possibly a dock or foundation, extends into a dark waterway.\",\n    \"A pile of construction debris, including white panels and rubble, is located on the bank next to the concrete structure.\",\n    \"A building with an orange/yellow roof is partially visible in the bottom left corner of the crop.\",\n    \"Bare tree branches overhang the water and debris area.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the debris pile.\",\n    \"The exact function of the concrete structure.\",\n    \"The identity of the building with the orange roof.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between building demolition and building damage is the presence of a distinct pile of construction debris and rubble on the ground, which indicates active or recent demolition rather than just visible structural damage to the building itself.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the crop image shows a concrete structure and a pile of construction debris, including white panels and rubble, situated on the bank of a waterway adjacent to a building with a grey roof.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is the presence of a distinct pile of construction debris and rubble on the ground, which indicates active or recent demolition rather than just visible structural damage to the building itself.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the crop image shows a concrete structure and a pile of construction debris, including white panels and rubble, situated on the bank of a waterway adjacent to a building with a grey roof.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The crop image clearly shows a concrete structure with a pile of construction debris, including white panels and rubble, situated on the bank of a waterway adjacent to a building with a grey roof. This visual evidence directly supports the claim of building demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The crop image shows a building with a grey roof adjacent to a pile of construction debris. While the debris suggests damage or demolition, the building itself appears structurally intact in the visible portion. The claim of 'visible structural damage to a building' is not clearly supported as the building's structure is not visibly compromised in the frame.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The crop image clearly shows a concrete structure with a pile of construction debris, including white panels and rubble, situated on the bank of a waterway adjacent to a building with a grey roof. This visual evidence directly supports the claim of building demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The crop image shows a building with a grey roof adjacent to a pile of construction debris. While the debris suggests damage or demolition, the building itself appears structurally intact in the visible portion. The claim of 'visible structural damage to a building' is not clearly supported as the building's structure is not visibly compromised in the frame.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

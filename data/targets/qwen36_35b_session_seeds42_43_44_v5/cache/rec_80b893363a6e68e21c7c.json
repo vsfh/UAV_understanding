@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_80b893363a6e68e21c7c",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0121-6411-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0121-6411-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a grid of rectangular aquaculture ponds separated by earthen dikes.",
+      "A cluster of residential buildings with snow-covered roofs and yards situated along the water's edge.",
+      "Distant agricultural fields and a hazy horizon indicating a flat terrain.",
+      "Vegetation appears dormant, with brown reeds and leafless trees visible along the banks."
+    ],
+    "cross_view_relations": [
+      "The local crop image is a high-magnification view of the residential cluster visible in the lower foreground of the wide context image.",
+      "The spatial arrangement of the white multi-story house and adjacent single-story structures with snow-covered roofs is consistent across both views.",
+      "The water body and shoreline vegetation in the crop correspond to the pond edge seen in the wider context."
+    ],
+    "description": "Aerial imagery of a rural settlement adjacent to a network of rectangular aquaculture ponds. The scene shows residential buildings with snow-covered roofs and yards, bordered by water and dormant vegetation. The local crop provides a detailed view of the housing cluster and shoreline infrastructure.",
+    "evidence_visible": [
+      "Close-up of a white, two-story residential building with a dark, snow-dusted roof.",
+      "Adjacent single-story structures with white and blue roofing materials.",
+      "Snow accumulation on the ground in the yards and along the concrete embankment.",
+      "A small white boat moored at the water's edge near a wooden dock.",
+      "Several vehicles, including a white van, parked near the buildings.",
+      "Dense, brown reeds and leafless trees along the water bank."
+    ],
+    "unclear": [
+      "Specific identity of the vehicles or contents of the buildings.",
+      "Exact date of the snowfall or current water temperature.",
+      "Ownership or legal status of the properties and ponds."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a grid of rectangular aquaculture ponds separated by earthen dikes.\",\n    \"A cluster of residential buildings with snow-covered roofs and yards situated along the water's edge.\",\n    \"Distant agricultural fields and a hazy horizon indicating a flat terrain.\",\n    \"Vegetation appears dormant, with brown reeds and leafless trees visible along the banks.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop image is a high-magnification view of the residential cluster visible in the lower foreground of the wide context image.\",\n    \"The spatial arrangement of the white multi-story house and adjacent single-story structures with snow-covered roofs is consistent across both views.\",\n    \"The water body and shoreline vegetation in the crop correspond to the pond edge seen in the wider context.\"\n  ],\n  \"description\": \"Aerial imagery of a rural settlement adjacent to a network of rectangular aquaculture ponds. The scene shows residential buildings with snow-covered roofs and yards, bordered by water and dormant vegetation. The local crop provides a detailed view of the housing cluster and shoreline infrastructure.\",\n  \"evidence_visible\": [\n    \"Close-up of a white, two-story residential building with a dark, snow-dusted roof.\",\n    \"Adjacent single-story structures with white and blue roofing materials.\",\n    \"Snow accumulation on the ground in the yards and along the concrete embankment.\",\n    \"A small white boat moored at the water's edge near a wooden dock.\",\n    \"Several vehicles, including a white van, parked near the buildings.\",\n    \"Dense, brown reeds and leafless trees along the water bank.\"\n  ],\n  \"unclear\": [\n    \"Specific identity of the vehicles or contents of the buildings.\",\n    \"Exact date of the snowfall or current water temperature.\",\n    \"Ownership or legal status of the properties and ponds.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the absence of structural damage; the building in the local crop image appears intact, whereas building damage requires visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the local crop image shows a white two-story residential building with a dark, snow-dusted roof that appears structurally intact, with no visible signs of active or recent demolition.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the absence of structural damage; the building in the local crop image appears intact, whereas building damage requires visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the local crop image shows a white two-story residential building with a dark, snow-dusted roof that appears structurally intact, with no visible signs of active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The local crop image clearly shows a white two-story building with a dark roof that is structurally intact. There are no visible signs of active or recent demolition, such as piles of rubble, exposed rebar, or heavy machinery engaged in destruction. The building appears to be a standard residential structure in a winter setting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The visual evidence in the local crop image shows a building that is structurally sound. There is no visible damage to the walls, roof, or foundation that would support a claim of building damage. The claim of visible structural damage is contradicted by the clear view of the intact building.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The local crop image clearly shows a white two-story building with a dark roof that is structurally intact. There are no visible signs of active or recent demolition, such as piles of rubble, exposed rebar, or heavy machinery engaged in destruction. The building appears to be a standard residential structure in a winter setting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The visual evidence in the local crop image shows a building that is structurally sound. There is no visible damage to the walls, roof, or foundation that would support a claim of building damage. The claim of visible structural damage is contradicted by the clear view of the intact building.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

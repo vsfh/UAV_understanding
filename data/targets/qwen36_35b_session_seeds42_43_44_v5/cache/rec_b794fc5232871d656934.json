@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b794fc5232871d656934",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0922-4939-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0922-4939-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape containing a large agricultural field with green crops on the left and a cluster of long, parallel plastic tunnel greenhouses on the right.",
+      "A paved two-lane road with white lane markings runs along the bottom right edge.",
+      "A dense line of trees and vegetation separates the green field from the greenhouses and the road.",
+      "Power lines and poles are visible running through the vegetation and near the road."
+    ],
+    "cross_view_relations": [
+      "The cropped evidence image corresponds to the area immediately adjacent to the greenhouses and the tree line seen in the context image.",
+      "The green plastic sheeting and the specific arrangement of the greenhouse tunnels in the evidence match the structures visible in the context view.",
+      "The power lines visible in the bottom right of the evidence image align with the infrastructure seen in the context image."
+    ],
+    "description": "The images show an agricultural site with plastic tunnel greenhouses and a green crop field. The evidence view zooms in on the edge of the greenhouses, revealing a green tarp on the ground and a person in red clothing near a patch of yellow flowers, situated next to a tree line and power lines.",
+    "evidence_visible": [
+      "Close-up of the ends of several plastic-covered tunnel greenhouses.",
+      "A rectangular green tarp or sheet lying on the bare ground.",
+      "A person wearing a red top is visible on the far left edge of the frame.",
+      "A patch of yellow flowers or crops is visible near the person.",
+      "Overhead power lines and a utility pole are visible in the foreground."
+    ],
+    "unclear": [
+      "The specific type of crop inside the greenhouses or in the field.",
+      "The exact activity of the person in red.",
+      "The contents of the greenhouses."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape containing a large agricultural field with green crops on the left and a cluster of long, parallel plastic tunnel greenhouses on the right.\",\n    \"A paved two-lane road with white lane markings runs along the bottom right edge.\",\n    \"A dense line of trees and vegetation separates the green field from the greenhouses and the road.\",\n    \"Power lines and poles are visible running through the vegetation and near the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped evidence image corresponds to the area immediately adjacent to the greenhouses and the tree line seen in the context image.\",\n    \"The green plastic sheeting and the specific arrangement of the greenhouse tunnels in the evidence match the structures visible in the context view.\",\n    \"The power lines visible in the bottom right of the evidence image align with the infrastructure seen in the context image.\"\n  ],\n  \"description\": \"The images show an agricultural site with plastic tunnel greenhouses and a green crop field. The evidence view zooms in on the edge of the greenhouses, revealing a green tarp on the ground and a person in red clothing near a patch of yellow flowers, situated next to a tree line and power lines.\",\n  \"evidence_visible\": [\n    \"Close-up of the ends of several plastic-covered tunnel greenhouses.\",\n    \"A rectangular green tarp or sheet lying on the bare ground.\",\n    \"A person wearing a red top is visible on the far left edge of the frame.\",\n    \"A patch of yellow flowers or crops is visible near the person.\",\n    \"Overhead power lines and a utility pole are visible in the foreground.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop inside the greenhouses or in the field.\",\n    \"The exact activity of the person in red.\",\n    \"The contents of the greenhouses.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous sheet of green netting covering the soil, whereas incomplete soil cover would show gaps or missing sections of the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular green plastic sheet lying on the bare ground adjacent to the plastic tunnel greenhouses, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous sheet of green netting covering the soil, whereas incomplete soil cover would show gaps or missing sections of the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular green plastic sheet lying on the bare ground adjacent to the plastic tunnel greenhouses, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence explicitly shows a rectangular green plastic sheet lying on the bare ground adjacent to the plastic tunnel greenhouses. This directly contradicts the claim that the event is 'bare soil netting' (implying no netting is present). The visual presence of the sheet refutes the 'bare' aspect of the claim.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event is bare soil netting",
+        "No netting is visible on the bare ground"
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a plot of brown earth (bare soil) situated between the greenhouses and the trees. A green plastic sheet is lying on this soil, but it is not covering the entire area, leaving a significant portion of the soil exposed. This visual evidence supports the description of 'incomplete soil cover'.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence explicitly shows a rectangular green plastic sheet lying on the bare ground adjacent to the plastic tunnel greenhouses. This directly contradicts the claim that the event is 'bare soil netting' (implying no netting is present). The visual presence of the sheet refutes the 'bare' aspect of the claim.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event is bare soil netting\",\n      \"No netting is visible on the bare ground\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a plot of brown earth (bare soil) situated between the greenhouses and the trees. A green plastic sheet is lying on this soil, but it is not covering the entire area, leaving a significant portion of the soil exposed. This visual evidence supports the description of 'incomplete soil cover'.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

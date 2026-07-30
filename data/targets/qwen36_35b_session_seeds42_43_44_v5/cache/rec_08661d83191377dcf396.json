@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_08661d83191377dcf396",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1026-0652-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1026-0652-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved two-lane road running vertically through a rural area.",
+      "To the left, multi-story white buildings with flat roofs and surrounding vegetation.",
+      "To the right, a narrow canal or drainage ditch lined with trees, adjacent to yellow agricultural fields.",
+      "Several vehicles, including cars and motorcycles, are visible on the road."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a zoomed-in section of the road area shown in the wider context image.",
+      "The green rectangular object on the road in the crop corresponds to a specific location on the road visible in the context image.",
+      "The vehicles and road markings in the crop align with the road infrastructure seen in the context view."
+    ],
+    "description": "Aerial imagery shows a paved road flanked by buildings and agricultural fields. A zoomed-in view reveals a large, rectangular green object, appearing to be a tarp or netting, spread across the road surface. Several vehicles, including cars and motorcycles, are present on the road near the object.",
+    "evidence_visible": [
+      "A large, rectangular green object, likely a tarp or netting, is spread across the road surface.",
+      "The object covers a significant portion of one lane.",
+      "Several vehicles are visible on the road: a white car, a dark car, and at least two motorcycles or scooters.",
+      "A person is visible walking near the green object.",
+      "The object appears to be lying flat on the asphalt."
+    ],
+    "unclear": [
+      "The exact purpose of the green object (e.g., covering something, drying material, road work).",
+      "The specific type of material the green object is made of.",
+      "The identity or actions of the people near the object.",
+      "The specific make and model of the vehicles."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a paved two-lane road running vertically through a rural area.\",\n    \"To the left, multi-story white buildings with flat roofs and surrounding vegetation.\",\n    \"To the right, a narrow canal or drainage ditch lined with trees, adjacent to yellow agricultural fields.\",\n    \"Several vehicles, including cars and motorcycles, are visible on the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a zoomed-in section of the road area shown in the wider context image.\",\n    \"The green rectangular object on the road in the crop corresponds to a specific location on the road visible in the context image.\",\n    \"The vehicles and road markings in the crop align with the road infrastructure seen in the context view.\"\n  ],\n  \"description\": \"Aerial imagery shows a paved road flanked by buildings and agricultural fields. A zoomed-in view reveals a large, rectangular green object, appearing to be a tarp or netting, spread across the road surface. Several vehicles, including cars and motorcycles, are present on the road near the object.\",\n  \"evidence_visible\": [\n    \"A large, rectangular green object, likely a tarp or netting, is spread across the road surface.\",\n    \"The object covers a significant portion of one lane.\",\n    \"Several vehicles are visible on the road: a white car, a dark car, and at least two motorcycles or scooters.\",\n    \"A person is visible walking near the green object.\",\n    \"The object appears to be lying flat on the asphalt.\"\n  ],\n  \"unclear\": [\n    \"The exact purpose of the green object (e.g., covering something, drying material, road work).\",\n    \"The specific type of material the green object is made of.\",\n    \"The identity or actions of the people near the object.\",\n    \"The specific make and model of the vehicles.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible, as the netting is spread across a paved road rather than exposed soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large, rectangular green object, appearing to be a dust-control netting, spread across the paved road surface.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible, as the netting is spread across a paved road rather than exposed soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large, rectangular green object, appearing to be a dust-control netting, spread across the paved road surface.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence directly contradicts the claim of bare soil. The visual data shows a large, rectangular green object (netting) spread across the road surface, which is a form of covering, not bare soil.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows bare soil",
+        "protective covering is visibly incomplete"
+      ]
+    },
+    "positive": {
+      "reason": "The image evidence supports the claim. A large, rectangular green object, consistent with dust-control netting, is clearly visible spread across the paved road surface in the provided images.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence directly contradicts the claim of bare soil. The visual data shows a large, rectangular green object (netting) spread across the road surface, which is a form of covering, not bare soil.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows bare soil\",\n      \"protective covering is visibly incomplete\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence supports the claim. A large, rectangular green object, consistent with dust-control netting, is clearly visible spread across the paved road surface in the provided images.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d21d3affb3cc58d009cf",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0917-0875-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0917-0875-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a mixed-use area with a residential cluster on the left, a large industrial building with a blue roof on the right, and a central plot of subdivided agricultural land.",
+      "A paved road runs vertically through the left side of the frame, separating the houses from the fields.",
+      "The central fields contain various crops, some covered with blue netting, and a tall metal lattice tower stands in the upper section."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of a specific section of the central agricultural plot visible in the wide image.",
+      "The white sedan and the blue tarp-covered mound in the crop correspond to features located in the lower-left quadrant of the central field area in the wide image.",
+      "The road visible on the left edge of the crop aligns with the main vertical road in the wide image."
+    ],
+    "description": "Aerial imagery shows a residential and industrial zone with a central agricultural plot. A zoomed-in view details a section of this plot, revealing a white sedan parked on a dirt path next to a mound covered in blue tarp, surrounded by green vegetation and other field plots.",
+    "evidence_visible": [
+      "A white sedan is parked on a dirt surface adjacent to a paved road.",
+      "A large mound is covered by a blue tarp, with some green vegetation growing over or around it.",
+      "A small brick structure is visible in the upper right of the crop.",
+      "The ground is a mix of dirt, grass, and cultivated patches."
+    ],
+    "unclear": [
+      "The specific contents of the blue tarp-covered mound.",
+      "The exact species of the surrounding vegetation.",
+      "The identity of the vehicle's occupants."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a mixed-use area with a residential cluster on the left, a large industrial building with a blue roof on the right, and a central plot of subdivided agricultural land.\",\n    \"A paved road runs vertically through the left side of the frame, separating the houses from the fields.\",\n    \"The central fields contain various crops, some covered with blue netting, and a tall metal lattice tower stands in the upper section.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of a specific section of the central agricultural plot visible in the wide image.\",\n    \"The white sedan and the blue tarp-covered mound in the crop correspond to features located in the lower-left quadrant of the central field area in the wide image.\",\n    \"The road visible on the left edge of the crop aligns with the main vertical road in the wide image.\"\n  ],\n  \"description\": \"Aerial imagery shows a residential and industrial zone with a central agricultural plot. A zoomed-in view details a section of this plot, revealing a white sedan parked on a dirt path next to a mound covered in blue tarp, surrounded by green vegetation and other field plots.\",\n  \"evidence_visible\": [\n    \"A white sedan is parked on a dirt surface adjacent to a paved road.\",\n    \"A large mound is covered by a blue tarp, with some green vegetation growing over or around it.\",\n    \"A small brick structure is visible in the upper right of the crop.\",\n    \"The ground is a mix of dirt, grass, and cultivated patches.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the blue tarp-covered mound.\",\n    \"The exact species of the surrounding vegetation.\",\n    \"The identity of the vehicle's occupants.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous blue tarp covering the mound, whereas incomplete soil cover would show visible gaps or exposed soil within the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large mound covered by a blue dust-control netting in the central agricultural plot.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous blue tarp covering the mound, whereas incomplete soil cover would show visible gaps or exposed soil within the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large mound covered by a blue dust-control netting in the central agricultural plot.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large mound covered by blue netting in the central plot, which directly contradicts the claim that this event is unsupported.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The claim that the event is unsupported is contradicted by the visible blue netting."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows multiple plots of bare soil and vegetation where protective covering is either absent or visibly incomplete, supporting the claim.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large mound covered by blue netting in the central plot, which directly contradicts the claim that this event is unsupported.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The claim that the event is unsupported is contradicted by the visible blue netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows multiple plots of bare soil and vegetation where protective covering is either absent or visibly incomplete, supporting the claim.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

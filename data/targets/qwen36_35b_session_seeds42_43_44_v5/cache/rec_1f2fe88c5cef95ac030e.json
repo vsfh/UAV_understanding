@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_1f2fe88c5cef95ac030e",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1021-4720-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1021-4720-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a river on the left and a road running horizontally.",
+      "A large, dense orchard of green trees occupies the center.",
+      "Residential houses with red and grey roofs are scattered throughout.",
+      "A large industrial or storage yard is visible in the upper right, adjacent to the river.",
+      "Agricultural plots with tilled soil and crops are visible near the houses."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the industrial yard located in the upper right quadrant of the context image.",
+      "The road visible in the crop runs along the bottom edge of the yard, separating it from the agricultural plots seen in the context image.",
+      "The river bank is visible at the top of the crop, matching the river on the left side of the context image."
+    ],
+    "description": "The context image shows a rural landscape with a river, residential houses, and a large orchard. The crop provides a detailed view of a storage yard in the upper right corner, containing piles of materials, a blue tarp, and yellow construction equipment near the riverbank.",
+    "evidence_visible": [
+      "A large, open dirt yard adjacent to a river.",
+      "Piles of grey gravel or sand and a large blue tarp covering a section of the ground.",
+      "A yellow front-end loader is positioned on the dirt surface.",
+      "A large pile of rusted metal scrap or debris is visible on the right side.",
+      "Several small structures with blue and red roofs are present.",
+      "A white van and a motorcycle are on the road in the foreground."
+    ],
+    "unclear": [
+      "The specific type of materials in the piles (e.g., sand vs. gravel).",
+      "The exact activity of the machinery (e.g., loading vs. moving).",
+      "The identity of the people on the motorcycle."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a river on the left and a road running horizontally.\",\n    \"A large, dense orchard of green trees occupies the center.\",\n    \"Residential houses with red and grey roofs are scattered throughout.\",\n    \"A large industrial or storage yard is visible in the upper right, adjacent to the river.\",\n    \"Agricultural plots with tilled soil and crops are visible near the houses.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the industrial yard located in the upper right quadrant of the context image.\",\n    \"The road visible in the crop runs along the bottom edge of the yard, separating it from the agricultural plots seen in the context image.\",\n    \"The river bank is visible at the top of the crop, matching the river on the left side of the context image.\"\n  ],\n  \"description\": \"The context image shows a rural landscape with a river, residential houses, and a large orchard. The crop provides a detailed view of a storage yard in the upper right corner, containing piles of materials, a blue tarp, and yellow construction equipment near the riverbank.\",\n  \"evidence_visible\": [\n    \"A large, open dirt yard adjacent to a river.\",\n    \"Piles of grey gravel or sand and a large blue tarp covering a section of the ground.\",\n    \"A yellow front-end loader is positioned on the dirt surface.\",\n    \"A large pile of rusted metal scrap or debris is visible on the right side.\",\n    \"Several small structures with blue and red roofs are present.\",\n    \"A white van and a motorcycle are on the road in the foreground.\"\n  ],\n  \"unclear\": [\n    \"The specific type of materials in the piles (e.g., sand vs. gravel).\",\n    \"The exact activity of the machinery (e.g., loading vs. moving).\",\n    \"The identity of the people on the motorcycle.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a large, continuous blue tarp covering a significant portion of the exposed soil, whereas incomplete soil cover would imply the protective covering is visibly insufficient or fragmented.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large industrial yard adjacent to a river containing piles of grey gravel or sand and a large blue tarp covering a section of the ground, alongside a yellow front-end loader.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a large, continuous blue tarp covering a significant portion of the exposed soil, whereas incomplete soil cover would imply the protective covering is visibly insufficient or fragmented.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large industrial yard adjacent to a river containing piles of grey gravel or sand and a large blue tarp covering a section of the ground, alongside a yellow front-end loader.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The wide image shows a large industrial yard adjacent to a river. The zoomed-in evidence confirms the presence of piles of grey gravel or sand, a large blue tarp covering a section of the ground, and a yellow front-end loader. All specific visual details in the statement are present.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible evidence shows soil for which protective covering is visibly incomplete. While the image shows a blue tarp covering part of the ground, the statement implies a general state of 'incomplete soil cover' as the primary subject. The image shows a specific industrial yard with gravel piles and a tarp, not a general agricultural or construction site characterized by 'incomplete soil cover' as a distinct event or state. The phrasing 'incomplete soil cover' is a high-level abstraction not directly supported by the specific visual content of a gravel yard with a tarp. The visual evidence is of a specific scene (gravel yard), not the abstract concept of incomplete cover.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image shows a specific industrial yard with gravel and a tarp, not a general scene of 'incomplete soil cover' as a distinct event."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The wide image shows a large industrial yard adjacent to a river. The zoomed-in evidence confirms the presence of piles of grey gravel or sand, a large blue tarp covering a section of the ground, and a yellow front-end loader. All specific visual details in the statement are present.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible evidence shows soil for which protective covering is visibly incomplete. While the image shows a blue tarp covering part of the ground, the statement implies a general state of 'incomplete soil cover' as the primary subject. The image shows a specific industrial yard with gravel piles and a tarp, not a general agricultural or construction site characterized by 'incomplete soil cover' as a distinct event or state. The phrasing 'incomplete soil cover' is a high-level abstraction not directly supported by the specific visual content of a gravel yard with a tarp. The visual evidence is of a specific scene (gravel yard), not the abstract concept of incomplete cover.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image shows a specific industrial yard with gravel and a tarp, not a general scene of 'incomplete soil cover' as a distinct event.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

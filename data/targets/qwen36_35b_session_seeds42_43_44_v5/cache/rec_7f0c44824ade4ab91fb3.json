@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_7f0c44824ade4ab91fb3",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1001-10332-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1001-10332-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area with green agricultural fields, a large dense tree cluster, and a road network.",
+      "A building complex on the right side of the frame features a prominent blue solar panel array on a flat roof.",
+      "A paved road runs horizontally across the upper section of the image, separating the fields from the residential structures."
+    ],
+    "cross_view_relations": [
+      "The crop view corresponds to the building complex located on the right side of the context image.",
+      "The blue solar panel array visible in the context image is located immediately adjacent to the area shown in the crop.",
+      "The road visible in the upper portion of the crop matches the road running through the upper section of the context image."
+    ],
+    "description": "The context image shows a rural landscape with fields and a building complex featuring a blue solar array. The crop provides a closer view of the complex's courtyard, revealing construction materials, green netting, and a white truck on the adjacent road.",
+    "evidence_visible": [
+      "A paved road with a white truck parked or moving along it.",
+      "A building structure with a red roof section and green safety netting covering part of the facade.",
+      "A courtyard area containing stacked materials, possibly concrete blocks or construction debris.",
+      "A blue container or object near the building wall."
+    ],
+    "unclear": [
+      "The specific contents of the stacked materials in the courtyard.",
+      "The exact nature of the activity occurring in the courtyard.",
+      "The identity of the white truck."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural area with green agricultural fields, a large dense tree cluster, and a road network.\",\n    \"A building complex on the right side of the frame features a prominent blue solar panel array on a flat roof.\",\n    \"A paved road runs horizontally across the upper section of the image, separating the fields from the residential structures.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop view corresponds to the building complex located on the right side of the context image.\",\n    \"The blue solar panel array visible in the context image is located immediately adjacent to the area shown in the crop.\",\n    \"The road visible in the upper portion of the crop matches the road running through the upper section of the context image.\"\n  ],\n  \"description\": \"The context image shows a rural landscape with fields and a building complex featuring a blue solar array. The crop provides a closer view of the complex's courtyard, revealing construction materials, green netting, and a white truck on the adjacent road.\",\n  \"evidence_visible\": [\n    \"A paved road with a white truck parked or moving along it.\",\n    \"A building structure with a red roof section and green safety netting covering part of the facade.\",\n    \"A courtyard area containing stacked materials, possibly concrete blocks or construction debris.\",\n    \"A blue container or object near the building wall.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the stacked materials in the courtyard.\",\n    \"The exact nature of the activity occurring in the courtyard.\",\n    \"The identity of the white truck.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a building complex with green safety netting covering part of the facade and stacked materials in the courtyard.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a building complex with green safety netting covering part of the facade and stacked materials in the courtyard.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a building complex with green safety netting covering part of the facade and stacked materials in the courtyard, which directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a building complex with green safety netting covering part of the facade and stacked materials in the courtyard. While there is visible soil, the specific claim of 'incomplete soil cover' is not the primary visual feature; the dominant feature is the construction activity with netting. The statement focuses on 'incomplete soil cover' which is not the main subject of the evidence image.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a building complex with green safety netting covering part of the facade and stacked materials in the courtyard, which directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a building complex with green safety netting covering part of the facade and stacked materials in the courtyard. While there is visible soil, the specific claim of 'incomplete soil cover' is not the primary visual feature; the dominant feature is the construction activity with netting. The statement focuses on 'incomplete soil cover' which is not the main subject of the evidence image.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

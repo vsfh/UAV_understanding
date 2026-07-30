@@ -1,0 +1,6 @@
+{
+  "record_uid": "rec_43edd8a381101529688d",
+  "source_class": "building_demolition",
+  "error_type": "TeacherGenerationError",
+  "error": "Teacher failed after 3 attempts: Rewrite keys must be ['counterfactual_target', 'distinction', 'missing_required_factors', 'target'], got ['counterfactual_target', 'distinction', 'events', 'missing_required_factors'] | Target events must be exactly ['building_demolition'] | Target events must be exactly ['building_damage']"
+}

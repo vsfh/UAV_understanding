@@ -1,0 +1,15 @@
+{
+  "comparison": "outputs/evidence_label_seed42/val_predictions.jsonl - outputs/context_label_seed42/val_predictions.jsonl",
+  "num_rows": 2384,
+  "num_groups": 329,
+  "macro_f1_difference": 0.3622441902002811,
+  "macro_f1_difference_ci95": [
+    0.31570806236109406,
+    0.40181066894022494
+  ],
+  "micro_f1_difference": 0.3011744966442953,
+  "micro_f1_difference_ci95": [
+    0.26915431053242117,
+    0.3357463195606677
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_6e5e9243d3f3c96185d7",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0813-5633-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0813-5633-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a grid of rectangular agricultural fields with vibrant green crops.",
+      "Scattered residential buildings with grey and red roofs are interspersed among the fields.",
+      "A cluster of concrete structures in the foreground appears to be under construction or in a state of disrepair.",
+      "Narrow paved roads and dirt paths separate the plots of land and connect the buildings."
+    ],
+    "cross_view_relations": [
+      "The evidence image provides a high-resolution, top-down view of the dense vegetation located in the bottom-right corner of the context image.",
+      "The evidence view confirms the presence of a small, rectangular plot of tilled soil adjacent to the larger, denser green patches seen in the context.",
+      "The concrete structures visible in the bottom-left of the evidence image correspond to the unfinished buildings in the foreground of the context image."
+    ],
+    "description": "The images depict a rural area with organized green crop fields and scattered housing. The context view shows the broader layout, while the evidence view zooms in on a specific patch of dense vegetation and a small tilled plot near unfinished concrete structures, confirming the agricultural nature of the land.",
+    "evidence_visible": [
+      "A close-up, top-down perspective of dense, leafy green vegetation covering multiple irregular plots.",
+      "A small, rectangular patch of bare, tilled earth is visible within the greenery.",
+      "A concrete utility pole stands on the left side of the frame.",
+      "The edge of a concrete building structure is visible at the bottom."
+    ],
+    "unclear": [
+      "The specific species of the green crops or vegetation.",
+      "The exact stage of growth or health of the plants.",
+      "The purpose of the unfinished concrete structures."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a grid of rectangular agricultural fields with vibrant green crops.\",\n    \"Scattered residential buildings with grey and red roofs are interspersed among the fields.\",\n    \"A cluster of concrete structures in the foreground appears to be under construction or in a state of disrepair.\",\n    \"Narrow paved roads and dirt paths separate the plots of land and connect the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image provides a high-resolution, top-down view of the dense vegetation located in the bottom-right corner of the context image.\",\n    \"The evidence view confirms the presence of a small, rectangular plot of tilled soil adjacent to the larger, denser green patches seen in the context.\",\n    \"The concrete structures visible in the bottom-left of the evidence image correspond to the unfinished buildings in the foreground of the context image.\"\n  ],\n  \"description\": \"The images depict a rural area with organized green crop fields and scattered housing. The context view shows the broader layout, while the evidence view zooms in on a specific patch of dense vegetation and a small tilled plot near unfinished concrete structures, confirming the agricultural nature of the land.\",\n  \"evidence_visible\": [\n    \"A close-up, top-down perspective of dense, leafy green vegetation covering multiple irregular plots.\",\n    \"A small, rectangular patch of bare, tilled earth is visible within the greenery.\",\n    \"A concrete utility pole stands on the left side of the frame.\",\n    \"The edge of a concrete building structure is visible at the bottom.\"\n  ],\n  \"unclear\": [\n    \"The specific species of the green crops or vegetation.\",\n    \"The exact stage of growth or health of the plants.\",\n    \"The purpose of the unfinished concrete structures.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the visible factor of structural collapse or disrepair of the house wall itself, as opposed to general structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the context image shows a cluster of concrete structures in the foreground that appear to be in a state of disrepair with visible structural gaps, and the evidence image confirms the presence of these unfinished concrete building edges adjacent to the vegetation.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the visible factor of structural collapse or disrepair of the house wall itself, as opposed to general structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the context image shows a cluster of concrete structures in the foreground that appear to be in a state of disrepair with visible structural gaps, and the evidence image confirms the presence of these unfinished concrete building edges adjacent to the vegetation.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The context image displays a cluster of concrete structures in the foreground that appear to be in a state of disrepair with visible structural gaps, and the evidence image confirms the presence of these unfinished concrete building edges adjacent to the vegetation.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible evidence of structural damage to a building. While the context image shows buildings that appear unfinished or dilapidated, the evidence image primarily shows vegetation and a small patch of concrete, failing to clearly show a 'building' with 'visible structural damage'. The evidence image is too zoomed in on vegetation to support the claim.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The evidence image does not clearly show a building with visible structural damage."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The context image displays a cluster of concrete structures in the foreground that appear to be in a state of disrepair with visible structural gaps, and the evidence image confirms the presence of these unfinished concrete building edges adjacent to the vegetation.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible evidence of structural damage to a building. While the context image shows buildings that appear unfinished or dilapidated, the evidence image primarily shows vegetation and a small patch of concrete, failing to clearly show a 'building' with 'visible structural damage'. The evidence image is too zoomed in on vegetation to support the claim.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The evidence image does not clearly show a building with visible structural damage.\"\n    ]\n  }\n}",
+  "verification_retries": 1,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

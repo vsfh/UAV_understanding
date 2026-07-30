@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8284f5ec2112276d4662",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0328-8930-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0328-8930-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to a river and green agricultural fields.",
+      "Houses feature varied roofing materials, including grey tiles, red tiles, and blue solar panels.",
+      "A paved road runs along the boundary between the residential area and the fields.",
+      "Vegetation includes green crops in the fields and deciduous trees with bare branches near the river."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a high-magnification view of a specific cluster of buildings located in the central-right portion of the wide context image.",
+      "The cropped view isolates a grey-tiled building and an adjacent structure with a reddish roof, situated next to the road and fields visible in the wider shot."
+    ],
+    "description": "The wide image shows a rural village with mixed housing and solar panels near a river and fields. The crop zooms in on a specific group of buildings along the road, highlighting a grey-tiled structure and a reddish-roofed house adjacent to the green agricultural land.",
+    "evidence_visible": [
+      "A building with a grey, pitched roof and a flat, walled courtyard area.",
+      "An adjacent structure with a reddish-brown tiled roof.",
+      "A paved road running horizontally behind the buildings.",
+      "Green crop fields extending beyond the road.",
+      "A bare tree visible in the foreground of the crop."
+    ],
+    "unclear": [
+      "The specific function or occupancy of the buildings.",
+      "The exact species of the green crops.",
+      "The presence of people or vehicles within the courtyard."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to a river and green agricultural fields.\",\n    \"Houses feature varied roofing materials, including grey tiles, red tiles, and blue solar panels.\",\n    \"A paved road runs along the boundary between the residential area and the fields.\",\n    \"Vegetation includes green crops in the fields and deciduous trees with bare branches near the river.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a high-magnification view of a specific cluster of buildings located in the central-right portion of the wide context image.\",\n    \"The cropped view isolates a grey-tiled building and an adjacent structure with a reddish roof, situated next to the road and fields visible in the wider shot.\"\n  ],\n  \"description\": \"The wide image shows a rural village with mixed housing and solar panels near a river and fields. The crop zooms in on a specific group of buildings along the road, highlighting a grey-tiled structure and a reddish-roofed house adjacent to the green agricultural land.\",\n  \"evidence_visible\": [\n    \"A building with a grey, pitched roof and a flat, walled courtyard area.\",\n    \"An adjacent structure with a reddish-brown tiled roof.\",\n    \"A paved road running horizontally behind the buildings.\",\n    \"Green crop fields extending beyond the road.\",\n    \"A bare tree visible in the foreground of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific function or occupancy of the buildings.\",\n    \"The exact species of the green crops.\",\n    \"The presence of people or vehicles within the courtyard.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the state of the structures; the image shows existing residential buildings with intact roofs and courtyards, whereas project construction would require visible signs of active general construction such as cranes, scaffolding, or unfinished structural frames.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the cropped evidence image shows a building with a grey pitched roof and an adjacent structure with a reddish-brown tiled roof situated next to a paved road and green fields, consistent with the context of a rural settlement undergoing structural changes.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the state of the structures; the image shows existing residential buildings with intact roofs and courtyards, whereas project construction would require visible signs of active general construction such as cranes, scaffolding, or unfinished structural frames.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the cropped evidence image shows a building with a grey pitched roof and an adjacent structure with a reddish-brown tiled roof situated next to a paved road and green fields, consistent with the context of a rural settlement undergoing structural changes.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image displays a rural settlement with a grey pitched roof and an adjacent structure with a reddish-brown tiled roof situated next to a paved road and green fields. These visual elements are consistent with the description of a rural settlement undergoing structural changes.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a static scene of buildings and fields. There are no visible signs of active construction, such as cranes, scaffolding, construction workers, or building materials being assembled. The claim of an active general construction project is not supported by the visual data.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image displays a rural settlement with a grey pitched roof and an adjacent structure with a reddish-brown tiled roof situated next to a paved road and green fields. These visual elements are consistent with the description of a rural settlement undergoing structural changes.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a static scene of buildings and fields. There are no visible signs of active construction, such as cranes, scaffolding, construction workers, or building materials being assembled. The claim of an active general construction project is not supported by the visual data.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

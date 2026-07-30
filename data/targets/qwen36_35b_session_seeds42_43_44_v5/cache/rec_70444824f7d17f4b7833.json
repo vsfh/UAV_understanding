@@ -1,0 +1,92 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_70444824f7d17f4b7833",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1024-3000-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1024-3000-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved road separating a large industrial building with a blue roof from agricultural fields.",
+      "The fields contain rectangular plots of yellow and green crops.",
+      "A small structure with a blue roof is visible in the lower right corner of the field area."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in view of a specific plot within the agricultural area shown in the first image.",
+      "The blue rectangular object in the crop field is the same object seen in the wider context."
+    ],
+    "description": "Aerial imagery shows a paved road dividing an industrial facility from adjacent agricultural fields. A close-up view of the fields reveals a rectangular blue tarp or cover laid out on the ground between plots of yellow and green crops.",
+    "evidence_visible": [
+      "A rectangular blue object, appearing to be a tarp or plastic sheet, is laid flat on the ground.",
+      "The object is positioned between plots of yellow and green crops.",
+      "The object has a slightly reflective surface and is bordered by dirt paths."
+    ],
+    "unclear": [
+      "The specific contents or purpose of the blue tarp.",
+      "The exact type of crop in the fields.",
+      "The identity of the industrial building."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a paved road separating a large industrial building with a blue roof from agricultural fields.\",\n    \"The fields contain rectangular plots of yellow and green crops.\",\n    \"A small structure with a blue roof is visible in the lower right corner of the field area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in view of a specific plot within the agricultural area shown in the first image.\",\n    \"The blue rectangular object in the crop field is the same object seen in the wider context.\"\n  ],\n  \"description\": \"Aerial imagery shows a paved road dividing an industrial facility from adjacent agricultural fields. A close-up view of the fields reveals a rectangular blue tarp or cover laid out on the ground between plots of yellow and green crops.\",\n  \"evidence_visible\": [\n    \"A rectangular blue object, appearing to be a tarp or plastic sheet, is laid flat on the ground.\",\n    \"The object is positioned between plots of yellow and green crops.\",\n    \"The object has a slightly reflective surface and is bordered by dirt paths.\"\n  ],\n  \"unclear\": [\n    \"The specific contents or purpose of the blue tarp.\",\n    \"The exact type of crop in the fields.\",\n    \"The identity of the industrial building.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular blue tarp or plastic sheet laid flat on the ground between plots of yellow and green crops.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular blue tarp or plastic sheet laid flat on the ground between plots of yellow and green crops.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a rectangular blue plastic sheet or tarp laid flat on the ground between plots of yellow and green crops. This matches the description of 'bare soil netting' (interpreted as a covering) and the specific visual details provided.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a blue tarp covering a specific rectangular area of ground. The claim of 'incomplete soil cover' implies a state where the soil is not fully covered or the covering is broken/insufficient. The image shows a deliberate, complete covering of a specific patch, not a general state of incomplete coverage or a broken protective layer.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image shows a complete blue tarp covering a specific area, not a state of 'incomplete' soil cover or a broken protective layer."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a rectangular blue plastic sheet or tarp laid flat on the ground between plots of yellow and green crops. This matches the description of 'bare soil netting' (interpreted as a covering) and the specific visual details provided.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a blue tarp covering a specific rectangular area of ground. The claim of 'incomplete soil cover' implies a state where the soil is not fully covered or the covering is broken/insufficient. The image shows a deliberate, complete covering of a specific patch, not a general state of incomplete coverage or a broken protective layer.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image shows a complete blue tarp covering a specific area, not a state of 'incomplete' soil cover or a broken protective layer.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

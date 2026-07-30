@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8ea5cfe5c1f5a1b1b679",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/original/0212-2917-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/cropped/0212-2917-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a cluster of residential buildings with grey tiled roofs in the upper left.",
+      "Extensive agricultural fields with green crops planted in distinct rows.",
+      "A dry, brown vegetation area in the foreground containing a group of white, dome-shaped structures.",
+      "A paved road running along the right edge and a smaller path traversing the fields.",
+      "A small blue vehicle is visible on a path near the buildings."
+    ],
+    "cross_view_relations": [
+      "The second image provides a magnified view of the residential cluster seen in the upper left of the first image.",
+      "The green crop field visible to the right of the buildings in the second image corresponds to the agricultural area in the first image.",
+      "The spatial arrangement of the houses and the adjacent road is consistent between the wide context and the local crop."
+    ],
+    "description": "The images show a rural area with grey-roofed houses and green crop fields. A local crop view confirms the building layout and adjacent vegetation. The wider context reveals a dry foreground area with white dome structures and a road network.",
+    "evidence_visible": [
+      "Close-up of a multi-story residential building with a grey tiled roof and concrete courtyard.",
+      "A blue vehicle is parked on the road adjacent to the building.",
+      "Green crops are visible in the field immediately next to the building's courtyard.",
+      "Construction materials or debris are visible on the ground near the building."
+    ],
+    "unclear": [
+      "The specific function of the white dome structures in the foreground.",
+      "The exact species of the green crops.",
+      "The legal status or ownership of the buildings."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a cluster of residential buildings with grey tiled roofs in the upper left.\",\n    \"Extensive agricultural fields with green crops planted in distinct rows.\",\n    \"A dry, brown vegetation area in the foreground containing a group of white, dome-shaped structures.\",\n    \"A paved road running along the right edge and a smaller path traversing the fields.\",\n    \"A small blue vehicle is visible on a path near the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image provides a magnified view of the residential cluster seen in the upper left of the first image.\",\n    \"The green crop field visible to the right of the buildings in the second image corresponds to the agricultural area in the first image.\",\n    \"The spatial arrangement of the houses and the adjacent road is consistent between the wide context and the local crop.\"\n  ],\n  \"description\": \"The images show a rural area with grey-roofed houses and green crop fields. A local crop view confirms the building layout and adjacent vegetation. The wider context reveals a dry foreground area with white dome structures and a road network.\",\n  \"evidence_visible\": [\n    \"Close-up of a multi-story residential building with a grey tiled roof and concrete courtyard.\",\n    \"A blue vehicle is parked on the road adjacent to the building.\",\n    \"Green crops are visible in the field immediately next to the building's courtyard.\",\n    \"Construction materials or debris are visible on the ground near the building.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the white dome structures in the foreground.\",\n    \"The exact species of the green crops.\",\n    \"The legal status or ownership of the buildings.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is that the visible evidence shows the building structure is intact, whereas building damage requires visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the local crop view shows a multi-story residential building with a grey tiled roof where the structure appears intact and continuous, with no visible evidence of a wall collapse.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is that the visible evidence shows the building structure is intact, whereas building damage requires visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the local crop view shows a multi-story residential building with a grey tiled roof where the structure appears intact and continuous, with no visible evidence of a wall collapse.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The visual evidence in the linked local crop shows a multi-story residential building with a grey tiled roof. The structure appears intact and continuous, with no visible evidence of a wall collapse or structural failure. The claim that the building is intact directly contradicts the premise of a collapsed wall.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event collapsed house wall is supported"
+      ]
+    },
+    "positive": {
+      "reason": "The visual evidence in the linked local crop shows a multi-story residential building with a grey tiled roof. The structure appears intact and continuous, with no visible evidence of structural damage. The claim of visible structural damage is contradicted by the image.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event building damage is supported",
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The visual evidence in the linked local crop shows a multi-story residential building with a grey tiled roof. The structure appears intact and continuous, with no visible evidence of a wall collapse or structural failure. The claim that the building is intact directly contradicts the premise of a collapsed wall.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event collapsed house wall is supported\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The visual evidence in the linked local crop shows a multi-story residential building with a grey tiled roof. The structure appears intact and continuous, with no visible evidence of structural damage. The claim of visible structural damage is contradicted by the image.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event building damage is supported\",\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

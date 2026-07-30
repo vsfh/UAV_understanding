@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d51bf04e7b508ba6ca0a",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1003-2051-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1003-2051-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with residential buildings featuring solar panels and red or grey roofs.",
+      "Surrounding agricultural fields with yellow crops, indicating a harvest season.",
+      "A tall metal lattice tower casting a long shadow across a field.",
+      "A concrete drying yard located between the residential area and the fields."
+    ],
+    "cross_view_relations": [
+      "The close-up crop view corresponds to the concrete drying yard visible in the center of the wide context image.",
+      "The spatial arrangement of the drying patches and the surrounding buildings matches between the two views."
+    ],
+    "description": "Aerial imagery shows a rural village with solar-equipped homes and yellow fields. A concrete yard is used for drying harvested crops spread in rectangular patches. The close-up view confirms the presence of loose grain on tarps and the ground, with visible shadows of overhead power lines.",
+    "evidence_visible": [
+      "Top-down view of a concrete surface with multiple piles of yellow grain.",
+      "Grain is spread on green and blue tarps, as well as directly on the concrete.",
+      "Shadows of overhead cables and poles are cast across the drying area.",
+      "Small figures are visible near the grain piles, appearing to be tending to the crop."
+    ],
+    "unclear": [
+      "Specific type of grain (e.g., rice, wheat, corn).",
+      "Exact identity or number of people present.",
+      "Whether the activity is for personal consumption or commercial sale."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with residential buildings featuring solar panels and red or grey roofs.\",\n    \"Surrounding agricultural fields with yellow crops, indicating a harvest season.\",\n    \"A tall metal lattice tower casting a long shadow across a field.\",\n    \"A concrete drying yard located between the residential area and the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The close-up crop view corresponds to the concrete drying yard visible in the center of the wide context image.\",\n    \"The spatial arrangement of the drying patches and the surrounding buildings matches between the two views.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural village with solar-equipped homes and yellow fields. A concrete yard is used for drying harvested crops spread in rectangular patches. The close-up view confirms the presence of loose grain on tarps and the ground, with visible shadows of overhead power lines.\",\n  \"evidence_visible\": [\n    \"Top-down view of a concrete surface with multiple piles of yellow grain.\",\n    \"Grain is spread on green and blue tarps, as well as directly on the concrete.\",\n    \"Shadows of overhead cables and poles are cast across the drying area.\",\n    \"Small figures are visible near the grain piles, appearing to be tending to the crop.\"\n  ],\n  \"unclear\": [\n    \"Specific type of grain (e.g., rice, wheat, corn).\",\n    \"Exact identity or number of people present.\",\n    \"Whether the activity is for personal consumption or commercial sale.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of harvested grain on tarps rather than exposed soil covered by dust-control netting.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a concrete drying yard where harvested grain is spread on green and blue tarps, with small figures tending to the crop.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of harvested grain on tarps rather than exposed soil covered by dust-control netting.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a concrete drying yard where harvested grain is spread on green and blue tarps, with small figures tending to the crop.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a concrete drying yard with harvested grain spread on green and blue tarps, and small figures (people) are visible tending to the crop. This directly supports the description of the event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims 'incomplete soil cover' is supported by visible evidence of soil with incomplete protective covering. However, the image shows a concrete surface (drying yard), not bare soil. The 'protective covering' refers to tarps on the concrete, not soil cover. The premise of 'soil' is contradicted by the visible concrete.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image shows bare soil.",
+        "The protective covering is on soil."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a concrete drying yard with harvested grain spread on green and blue tarps, and small figures (people) are visible tending to the crop. This directly supports the description of the event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims 'incomplete soil cover' is supported by visible evidence of soil with incomplete protective covering. However, the image shows a concrete surface (drying yard), not bare soil. The 'protective covering' refers to tarps on the concrete, not soil cover. The premise of 'soil' is contradicted by the visible concrete.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image shows bare soil.\",\n      \"The protective covering is on soil.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

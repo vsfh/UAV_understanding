@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_ab383fc3a49f3a34ff41",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-11098-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-11098-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with a paved road running vertically on the left.",
+      "Agricultural fields with varying states of cultivation, including bare soil and green crops.",
+      "A body of water (pond) in the lower right quadrant.",
+      "A building with a red roof on the far left edge.",
+      "A blue vehicle and a white vehicle on the road.",
+      "A tractor is visible on the road near the top left."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a zoomed-in view of the upper-left section of the context image.",
+      "The tractor seen in the context image is clearly visible in the cropped image, positioned on the road next to a field.",
+      "The blue tarp covering a portion of the field in the cropped image corresponds to the green/blue patch in the upper center of the context image.",
+      "The road and field boundaries align perfectly between the two views."
+    ],
+    "description": "The images show a rural agricultural area with a paved road and fields. A blue tractor is parked on the road next to a field covered partially by a blue tarp. The cropped view provides a detailed look at the tractor and the tarp-covered field section, confirming their location relative to the road and surrounding farmland.",
+    "evidence_visible": [
+      "A blue tractor is parked on the paved road, facing left.",
+      "A large blue tarp covers a rectangular section of the adjacent field.",
+      "The field next to the tarp shows tilled soil with visible furrows.",
+      "A narrow strip of green vegetation runs between the road and the tilled field.",
+      "The tarp appears to be covering a mound or pile of material, though the exact content is unclear."
+    ],
+    "unclear": [
+      "The specific type of crop or material under the blue tarp.",
+      "The exact model or make of the tractor.",
+      "The purpose of the tarp (e.g., weed control, soil protection, covering harvested material).",
+      "The identity of the people or vehicles in the wider context image."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape with a paved road running vertically on the left.\",\n    \"Agricultural fields with varying states of cultivation, including bare soil and green crops.\",\n    \"A body of water (pond) in the lower right quadrant.\",\n    \"A building with a red roof on the far left edge.\",\n    \"A blue vehicle and a white vehicle on the road.\",\n    \"A tractor is visible on the road near the top left.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a zoomed-in view of the upper-left section of the context image.\",\n    \"The tractor seen in the context image is clearly visible in the cropped image, positioned on the road next to a field.\",\n    \"The blue tarp covering a portion of the field in the cropped image corresponds to the green/blue patch in the upper center of the context image.\",\n    \"The road and field boundaries align perfectly between the two views.\"\n  ],\n  \"description\": \"The images show a rural agricultural area with a paved road and fields. A blue tractor is parked on the road next to a field covered partially by a blue tarp. The cropped view provides a detailed look at the tractor and the tarp-covered field section, confirming their location relative to the road and surrounding farmland.\",\n  \"evidence_visible\": [\n    \"A blue tractor is parked on the paved road, facing left.\",\n    \"A large blue tarp covers a rectangular section of the adjacent field.\",\n    \"The field next to the tarp shows tilled soil with visible furrows.\",\n    \"A narrow strip of green vegetation runs between the road and the tilled field.\",\n    \"The tarp appears to be covering a mound or pile of material, though the exact content is unclear.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop or material under the blue tarp.\",\n    \"The exact model or make of the tractor.\",\n    \"The purpose of the tarp (e.g., weed control, soil protection, covering harvested material).\",\n    \"The identity of the people or vehicles in the wider context image.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous sheet of netting covering the target area, whereas incomplete soil cover would show gaps or missing sections of the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large rectangular section of exposed soil covered by a blue dust-control netting, situated adjacent to a paved road.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous sheet of netting covering the target area, whereas incomplete soil cover would show gaps or missing sections of the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large rectangular section of exposed soil covered by a blue dust-control netting, situated adjacent to a paved road.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence explicitly shows a large rectangular section of exposed soil covered by a blue dust-control netting, situated adjacent to a paved road. This directly contradicts the claim that the event is unsupported.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The claim that the event is unsupported is contradicted by the visible blue netting."
+      ]
+    },
+    "positive": {
+      "reason": "The image evidence shows a large rectangular section of exposed soil covered by a blue dust-control netting, situated adjacent to a paved road. This matches the description of the event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence explicitly shows a large rectangular section of exposed soil covered by a blue dust-control netting, situated adjacent to a paved road. This directly contradicts the claim that the event is unsupported.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The claim that the event is unsupported is contradicted by the visible blue netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows a large rectangular section of exposed soil covered by a blue dust-control netting, situated adjacent to a paved road. This matches the description of the event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

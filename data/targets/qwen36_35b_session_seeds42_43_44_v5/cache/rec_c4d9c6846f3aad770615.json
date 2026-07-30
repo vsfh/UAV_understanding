@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_c4d9c6846f3aad770615",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0123-7768-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0123-7768-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a dense urban area with a mix of low-rise residential buildings and taller apartment blocks.",
+      "A paved road with white lane markings runs diagonally through the scene.",
+      "Several rooftops are covered with blue tarps or sheets.",
+      "Shadows indicate sunlight coming from the left side of the frame."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the building complex located in the lower-left quadrant of the context image.",
+      "The building with the long grey roof and adjacent blue tarp area in the crop corresponds to the structure situated next to the road in the context image.",
+      "The white diamond road markings visible in the crop are part of the road network seen in the context image."
+    ],
+    "description": "The images show a building complex adjacent to a paved road. The structure features a long grey roof and an adjacent area covered in blue material. The wider view reveals a dense neighborhood with similar rooftops, while the crop highlights the specific geometry of the building and its proximity to the road markings.",
+    "evidence_visible": [
+      "A long, rectangular building with a grey, possibly tiled or shingled roof.",
+      "An adjacent section of the roof or ground is covered with bright blue material, likely a tarp.",
+      "A paved road with white diamond-shaped markings runs parallel to the building.",
+      "A small courtyard area with red and white striped awnings is visible on the right side of the building.",
+      "Debris or construction materials are scattered near the blue-covered area."
+    ],
+    "unclear": [
+      "The exact nature of the blue material (e.g., tarp, roofing sheet, plastic covering).",
+      "The specific contents of the courtyard or the function of the building.",
+      "The identity of the small objects near the awnings."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a dense urban area with a mix of low-rise residential buildings and taller apartment blocks.\",\n    \"A paved road with white lane markings runs diagonally through the scene.\",\n    \"Several rooftops are covered with blue tarps or sheets.\",\n    \"Shadows indicate sunlight coming from the left side of the frame.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the building complex located in the lower-left quadrant of the context image.\",\n    \"The building with the long grey roof and adjacent blue tarp area in the crop corresponds to the structure situated next to the road in the context image.\",\n    \"The white diamond road markings visible in the crop are part of the road network seen in the context image.\"\n  ],\n  \"description\": \"The images show a building complex adjacent to a paved road. The structure features a long grey roof and an adjacent area covered in blue material. The wider view reveals a dense neighborhood with similar rooftops, while the crop highlights the specific geometry of the building and its proximity to the road markings.\",\n  \"evidence_visible\": [\n    \"A long, rectangular building with a grey, possibly tiled or shingled roof.\",\n    \"An adjacent section of the roof or ground is covered with bright blue material, likely a tarp.\",\n    \"A paved road with white diamond-shaped markings runs parallel to the building.\",\n    \"A small courtyard area with red and white striped awnings is visible on the right side of the building.\",\n    \"Debris or construction materials are scattered near the blue-covered area.\"\n  ],\n  \"unclear\": [\n    \"The exact nature of the blue material (e.g., tarp, roofing sheet, plastic covering).\",\n    \"The specific contents of the courtyard or the function of the building.\",\n    \"The identity of the small objects near the awnings.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of debris and scattered materials near the blue-covered area, which indicates demolition activity rather than the organized active general construction project defined for the neighbor.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a building complex adjacent to a paved road where the structure features a long grey roof and an adjacent area covered in blue material, with debris or construction materials scattered near the blue-covered area.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of debris and scattered materials near the blue-covered area, which indicates demolition activity rather than the organized active general construction project defined for the neighbor.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a building complex adjacent to a paved road where the structure features a long grey roof and an adjacent area covered in blue material, with debris or construction materials scattered near the blue-covered area.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence directly supports the description in the statement. The crop shows a building complex adjacent to a paved road. The main structure has a long grey roof, and the adjacent area is covered in blue material (likely tarps or construction sheeting). There is visible debris and scattered materials near the blue-covered area, consistent with demolition or construction activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible evidence of an 'active general construction project'. While the scene shows a building complex with blue coverings and debris (which could be demolition or construction), the visual evidence is ambiguous regarding the specific nature of the work. It is impossible to distinguish between demolition, renovation, or new construction based solely on the static image. Therefore, the specific claim of 'active general construction' is not definitively supported by the pixels, as the activity could be interpreted as demolition.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The activity is definitively 'construction' rather than demolition or renovation."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence directly supports the description in the statement. The crop shows a building complex adjacent to a paved road. The main structure has a long grey roof, and the adjacent area is covered in blue material (likely tarps or construction sheeting). There is visible debris and scattered materials near the blue-covered area, consistent with demolition or construction activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible evidence of an 'active general construction project'. While the scene shows a building complex with blue coverings and debris (which could be demolition or construction), the visual evidence is ambiguous regarding the specific nature of the work. It is impossible to distinguish between demolition, renovation, or new construction based solely on the static image. Therefore, the specific claim of 'active general construction' is not definitively supported by the pixels, as the activity could be interpreted as demolition.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The activity is definitively 'construction' rather than demolition or renovation.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

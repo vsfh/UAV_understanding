@@ -1,0 +1,90 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_07af57f23b8824175b4e",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0327-10441-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0327-10441-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed industrial and agricultural zone. Large rectangular buildings with blue corrugated metal roofs are prominent. The roof of the central building is covered with dark rectangular solar panels. Adjacent to the buildings are plots of land with bright yellow flowering crops and bare soil. A paved road separates the industrial structures from the agricultural plots. In the foreground, another large blue-roofed building has multiple white ventilation units on top."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a zoomed-in view of the upper-right quadrant of the context image. It focuses on the area where the paved road meets the agricultural plots, specifically showing the transition from the road to the fields containing yellow crops and green tarps."
+    ],
+    "description": "Aerial view showing industrial buildings with blue roofs and solar panels adjacent to agricultural plots with yellow crops. The evidence view zooms in on the boundary between the road and fields, revealing green tarps covering sections of the ground near a small structure.",
+    "evidence_visible": [
+      "Close-up of the agricultural area next to the road. Several plots are covered with green mesh tarps. A small, single-story structure with a grey roof is visible near the tarps. Patches of yellow flowering crops are present alongside the tarped areas. The ground appears to be a mix of soil and vegetation."
+    ],
+    "unclear": [
+      "The specific type of yellow flowers",
+      "The purpose of the green tarps",
+      "The exact contents of the industrial buildings",
+      "The condition of the small structure in the evidence view"
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a mixed industrial and agricultural zone. Large rectangular buildings with blue corrugated metal roofs are prominent. The roof of the central building is covered with dark rectangular solar panels. Adjacent to the buildings are plots of land with bright yellow flowering crops and bare soil. A paved road separates the industrial structures from the agricultural plots. In the foreground, another large blue-roofed building has multiple white ventilation units on top.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a zoomed-in view of the upper-right quadrant of the context image. It focuses on the area where the paved road meets the agricultural plots, specifically showing the transition from the road to the fields containing yellow crops and green tarps.\"\n  ],\n  \"description\": \"Aerial view showing industrial buildings with blue roofs and solar panels adjacent to agricultural plots with yellow crops. The evidence view zooms in on the boundary between the road and fields, revealing green tarps covering sections of the ground near a small structure.\",\n  \"evidence_visible\": [\n    \"Close-up of the agricultural area next to the road. Several plots are covered with green mesh tarps. A small, single-story structure with a grey roof is visible near the tarps. Patches of yellow flowering crops are present alongside the tarped areas. The ground appears to be a mix of soil and vegetation.\"\n  ],\n  \"unclear\": [\n    \"The specific type of yellow flowers\",\n    \"The purpose of the green tarps\",\n    \"The exact contents of the industrial buildings\",\n    \"The condition of the small structure in the evidence view\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of the green mesh tarps covering the ground around the structure, which indicates an active demolition or site clearance process rather than just visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a small, single-story structure with a grey roof situated adjacent to agricultural plots covered in green mesh tarps, which is consistent with a building undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of the green mesh tarps covering the ground around the structure, which indicates an active demolition or site clearance process rather than just visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a small, single-story structure with a grey roof situated adjacent to agricultural plots covered in green mesh tarps, which is consistent with a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a small, single-story structure with a grey roof adjacent to agricultural plots covered in green mesh tarps. The structure appears intact and does not show visible signs of active or recent demolition (e.g., rubble, exposed framing, or partial collapse). The claim of demolition is not supported by visual evidence.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The building is undergoing active or recent demolition."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a building with a grey roof adjacent to agricultural plots covered in green mesh tarps. There is no visible structural damage to this building or any other building in the image. The claim of visible structural damage is not supported by visual evidence.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "Visible evidence shows visible structural damage to a building."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a small, single-story structure with a grey roof adjacent to agricultural plots covered in green mesh tarps. The structure appears intact and does not show visible signs of active or recent demolition (e.g., rubble, exposed framing, or partial collapse). The claim of demolition is not supported by visual evidence.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The building is undergoing active or recent demolition.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a building with a grey roof adjacent to agricultural plots covered in green mesh tarps. There is no visible structural damage to this building or any other building in the image. The claim of visible structural damage is not supported by visual evidence.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"Visible evidence shows visible structural damage to a building.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

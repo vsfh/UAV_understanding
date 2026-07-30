@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_26a8c68119f2ada36a9b",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0121-6495-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0121-6495-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a densely packed residential area with snow on the ground and rooftops.",
+      "Numerous single-story and two-story buildings with varied roof materials, including corrugated metal and tiles.",
+      "Rectangular plots of green vegetation, likely vegetable gardens, located in the lower-left quadrant.",
+      "A paved road runs horizontally through the lower section of the image.",
+      "Piles of debris or construction materials are visible in open spaces between buildings."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in section of the upper-left quadrant of the context image.",
+      "The crop focuses on a cluster of buildings with blue corrugated metal roofs situated near the vegetable gardens.",
+      "The spatial relationship between the gardens, the road, and the specific cluster of buildings is consistent between both views."
+    ],
+    "description": "The images show a snowy residential area with mixed housing and small agricultural plots. The crop highlights a specific group of structures with blue metal roofs adjacent to the gardens, providing a detailed view of the roof textures and surrounding debris piles visible in the wider context.",
+    "evidence_visible": [
+      "Close-up of several buildings with blue corrugated metal roofs.",
+      "A white vehicle is parked on the road near the buildings.",
+      "A large pile of mixed debris or trash is visible in the yard of one property.",
+      "Details of the roof surfaces, including snow accumulation and weathering, are clearly visible.",
+      "Adjacent structures show different roof types, including reddish-brown tiles and grey concrete."
+    ],
+    "unclear": [
+      "The specific contents of the debris piles.",
+      "The exact condition of the roofs beyond visible weathering.",
+      "The identity of the white vehicle.",
+      "The specific type of vegetation in the garden plots."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a densely packed residential area with snow on the ground and rooftops.\",\n    \"Numerous single-story and two-story buildings with varied roof materials, including corrugated metal and tiles.\",\n    \"Rectangular plots of green vegetation, likely vegetable gardens, located in the lower-left quadrant.\",\n    \"A paved road runs horizontally through the lower section of the image.\",\n    \"Piles of debris or construction materials are visible in open spaces between buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in section of the upper-left quadrant of the context image.\",\n    \"The crop focuses on a cluster of buildings with blue corrugated metal roofs situated near the vegetable gardens.\",\n    \"The spatial relationship between the gardens, the road, and the specific cluster of buildings is consistent between both views.\"\n  ],\n  \"description\": \"The images show a snowy residential area with mixed housing and small agricultural plots. The crop highlights a specific group of structures with blue metal roofs adjacent to the gardens, providing a detailed view of the roof textures and surrounding debris piles visible in the wider context.\",\n  \"evidence_visible\": [\n    \"Close-up of several buildings with blue corrugated metal roofs.\",\n    \"A white vehicle is parked on the road near the buildings.\",\n    \"A large pile of mixed debris or trash is visible in the yard of one property.\",\n    \"Details of the roof surfaces, including snow accumulation and weathering, are clearly visible.\",\n    \"Adjacent structures show different roof types, including reddish-brown tiles and grey concrete.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the debris piles.\",\n    \"The exact condition of the roofs beyond visible weathering.\",\n    \"The identity of the white vehicle.\",\n    \"The specific type of vegetation in the garden plots.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a large, distinct pile of mixed debris and construction materials in the yard, which is not visible in the confusion neighbor definition.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a large pile of mixed debris and construction materials in the yard of a property, indicating active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a large, distinct pile of mixed debris and construction materials in the yard, which is not visible in the confusion neighbor definition.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a large pile of mixed debris and construction materials in the yard of a property, indicating active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a large pile of mixed debris, rubble, and construction materials in the yard of a property (visible in both the wide context and the local crop). This visual content directly supports the claim of demolition activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The claim of 'visible structural damage' is vague and not supported by the visual evidence. The buildings in the image appear structurally intact with no obvious signs of collapse, broken walls, or roof failure. The debris pile is located in a yard, not on a building structure itself.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a large pile of mixed debris, rubble, and construction materials in the yard of a property (visible in both the wide context and the local crop). This visual content directly supports the claim of demolition activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The claim of 'visible structural damage' is vague and not supported by the visual evidence. The buildings in the image appear structurally intact with no obvious signs of collapse, broken walls, or roof failure. The debris pile is located in a yard, not on a building structure itself.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

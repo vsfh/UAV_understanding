@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_1496c10044b57d1e8af5",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2565-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2565-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to large rectangular aquaculture ponds.",
+      "The settlement contains a mix of residential structures with red, grey, and blue roofs.",
+      "A large industrial building with a blue roof is visible in the lower left foreground.",
+      "Green vegetation and trees separate the built-up area from the water bodies.",
+      "A paved road runs through the settlement, with a white vehicle visible in the distance."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a high-magnification view of a specific cluster of buildings located in the central-right portion of the context image.",
+      "The white road visible on the right edge of the evidence crop corresponds to the road running vertically through the settlement in the context view.",
+      "The large grey building with the red roof in the evidence crop is situated directly next to the blue-roofed industrial building seen in the context view."
+    ],
+    "description": "The images show a rural settlement bordering aquaculture ponds. The context view provides a wide overview of the area, while the evidence crop zooms in on a specific group of residential and utility buildings. Visible features include varied roof colors (red, grey, blue), concrete yards, and surrounding vegetation.",
+    "evidence_visible": [
+      "A cluster of single-story buildings with mixed roofing materials, including grey corrugated metal and red tiles.",
+      "A large grey building with a weathered red roof stands centrally in the crop.",
+      "Concrete paved areas and yards are visible between the structures.",
+      "Green trees and vegetation are present in the lower left and between buildings.",
+      "A white paved road runs along the right side of the frame.",
+      "Various objects, possibly construction materials or debris, are scattered on the ground."
+    ],
+    "unclear": [
+      "The specific function or business type of the buildings is not visually determinable.",
+      "The exact condition of the roofing materials (e.g., rust, damage) is unclear due to resolution.",
+      "The identity of any vehicles or people is not visible."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to large rectangular aquaculture ponds.\",\n    \"The settlement contains a mix of residential structures with red, grey, and blue roofs.\",\n    \"A large industrial building with a blue roof is visible in the lower left foreground.\",\n    \"Green vegetation and trees separate the built-up area from the water bodies.\",\n    \"A paved road runs through the settlement, with a white vehicle visible in the distance.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a high-magnification view of a specific cluster of buildings located in the central-right portion of the context image.\",\n    \"The white road visible on the right edge of the evidence crop corresponds to the road running vertically through the settlement in the context view.\",\n    \"The large grey building with the red roof in the evidence crop is situated directly next to the blue-roofed industrial building seen in the context view.\"\n  ],\n  \"description\": \"The images show a rural settlement bordering aquaculture ponds. The context view provides a wide overview of the area, while the evidence crop zooms in on a specific group of residential and utility buildings. Visible features include varied roof colors (red, grey, blue), concrete yards, and surrounding vegetation.\",\n  \"evidence_visible\": [\n    \"A cluster of single-story buildings with mixed roofing materials, including grey corrugated metal and red tiles.\",\n    \"A large grey building with a weathered red roof stands centrally in the crop.\",\n    \"Concrete paved areas and yards are visible between the structures.\",\n    \"Green trees and vegetation are present in the lower left and between buildings.\",\n    \"A white paved road runs along the right side of the frame.\",\n    \"Various objects, possibly construction materials or debris, are scattered on the ground.\"\n  ],\n  \"unclear\": [\n    \"The specific function or business type of the buildings is not visually determinable.\",\n    \"The exact condition of the roofing materials (e.g., rust, damage) is unclear due to resolution.\",\n    \"The identity of any vehicles or people is not visible.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the image shows a total structural failure of the roof/wall assembly (collapse) rather than general damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence crop shows a building with a visibly collapsed roof structure, exposing the internal framework and debris, consistent with a house wall that has visibly collapsed.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the image shows a total structural failure of the roof/wall assembly (collapse) rather than general damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence crop shows a building with a visibly collapsed roof structure, exposing the internal framework and debris, consistent with a house wall that has visibly collapsed.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence crop shows a building with a damaged roof where tiles are missing, exposing the underlying wooden framework and rafters. This visual evidence directly supports the description of a 'visibly collapsed roof structure' and 'exposing the internal framework'.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence crop clearly displays a building with significant structural damage, specifically a partially collapsed roof exposing the internal structure. This confirms the claim of visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence crop shows a building with a damaged roof where tiles are missing, exposing the underlying wooden framework and rafters. This visual evidence directly supports the description of a 'visibly collapsed roof structure' and 'exposing the internal framework'.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence crop clearly displays a building with significant structural damage, specifically a partially collapsed roof exposing the internal structure. This confirms the claim of visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

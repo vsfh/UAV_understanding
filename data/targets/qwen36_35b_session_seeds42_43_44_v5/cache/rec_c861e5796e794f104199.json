@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_c861e5796e794f104199",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-2260-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-2260-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area with four long, parallel blue plastic-covered greenhouses in the foreground.",
+      "A canal or river runs along the right side, separating the agricultural plots from multi-story residential buildings.",
+      "A paved road runs parallel to the water, with parked white vehicles visible.",
+      "A white tent-like structure is located near the greenhouses.",
+      "The surrounding land includes patches of green crops and dry, brown vegetation."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the area immediately to the right of the blue greenhouses, along the canal bank.",
+      "The white car parked on the road in the crop image corresponds to the vehicles visible on the road in the context image.",
+      "The green patches in the crop image are part of the agricultural plots adjacent to the blue greenhouses."
+    ],
+    "description": "Aerial view showing four long blue plastic greenhouses next to a canal and residential buildings. A zoomed crop reveals small garden plots with green coverings and dry vegetation along the water's edge, adjacent to a road with parked white cars.",
+    "evidence_visible": [
+      "Close-up of the canal bank showing several small rectangular garden plots.",
+      "Two plots are covered with bright green material, possibly netting or plastic.",
+      "One plot has a greyish square covering.",
+      "Dry, brown reeds or tall grass line the immediate edge of the water.",
+      "A paved road and the corner of a red brick building are visible on the right.",
+      "Two white cars are parked on the road."
+    ],
+    "unclear": [
+      "The specific type of crops growing in the green plots.",
+      "The exact purpose of the green coverings (e.g., pest control, frost protection).",
+      "The identity of the people or activities within the greenhouses."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area with four long, parallel blue plastic-covered greenhouses in the foreground.\",\n    \"A canal or river runs along the right side, separating the agricultural plots from multi-story residential buildings.\",\n    \"A paved road runs parallel to the water, with parked white vehicles visible.\",\n    \"A white tent-like structure is located near the greenhouses.\",\n    \"The surrounding land includes patches of green crops and dry, brown vegetation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the area immediately to the right of the blue greenhouses, along the canal bank.\",\n    \"The white car parked on the road in the crop image corresponds to the vehicles visible on the road in the context image.\",\n    \"The green patches in the crop image are part of the agricultural plots adjacent to the blue greenhouses.\"\n  ],\n  \"description\": \"Aerial view showing four long blue plastic greenhouses next to a canal and residential buildings. A zoomed crop reveals small garden plots with green coverings and dry vegetation along the water's edge, adjacent to a road with parked white cars.\",\n  \"evidence_visible\": [\n    \"Close-up of the canal bank showing several small rectangular garden plots.\",\n    \"Two plots are covered with bright green material, possibly netting or plastic.\",\n    \"One plot has a greyish square covering.\",\n    \"Dry, brown reeds or tall grass line the immediate edge of the water.\",\n    \"A paved road and the corner of a red brick building are visible on the right.\",\n    \"Two white cars are parked on the road.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops growing in the green plots.\",\n    \"The exact purpose of the green coverings (e.g., pest control, frost protection).\",\n    \"The identity of the people or activities within the greenhouses.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows small rectangular garden plots adjacent to the canal bank covered with bright green material, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows small rectangular garden plots adjacent to the canal bank covered with bright green material, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows small rectangular garden plots adjacent to the canal bank covered with bright green material. This visual evidence directly supports the claim of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows small rectangular garden plots adjacent to the canal bank covered with bright green material. This visual evidence directly supports the claim of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows small rectangular garden plots adjacent to the canal bank covered with bright green material. This visual evidence directly supports the claim of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows small rectangular garden plots adjacent to the canal bank covered with bright green material. This visual evidence directly supports the claim of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

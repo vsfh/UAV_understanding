@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_ed6d394aeffca834896d",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1028-8297-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1028-8297-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with rectangular agricultural plots showing harvested stubble and green crops.",
+      "Multiple residential buildings with varied roof colors (red, grey, white) and solar panels on one roof.",
+      "A network of paved roads and narrow waterways or canals.",
+      "Vegetation including trees and small garden patches near houses."
+    ],
+    "cross_view_relations": [
+      "The local crop view shows a specific section of the rural landscape visible in the wider context, likely near a waterway.",
+      "Both views show similar rural infrastructure, including buildings, paved surfaces, and agricultural land.",
+      "The local view provides a closer look at the types of structures and vegetation seen in the broader context."
+    ],
+    "description": "Aerial imagery of a rural area featuring residential buildings, agricultural fields with harvested and growing crops, and waterways. A closer view highlights a specific location near a canal with a boat, netting, and vegetation, consistent with the broader rural setting.",
+    "evidence_visible": [
+      "A narrow waterway or canal with green algae or vegetation on the surface.",
+      "A small wooden boat moored alongside the canal.",
+      "Green netting or mesh covering a small garden or plot of land.",
+      "Various plants and vegetation growing near the water's edge and on the land.",
+      "A paved or concrete area adjacent to the garden.",
+      "A red object, possibly a container or vehicle part, on the paved area.",
+      "A blue object, possibly a small vehicle or container, near the red object."
+    ],
+    "unclear": [
+      "The specific type of crops in the fields.",
+      "The exact purpose of the green netting.",
+      "The identity of the red and blue objects.",
+      "The specific location within the broader context where the local view is taken."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with rectangular agricultural plots showing harvested stubble and green crops.\",\n    \"Multiple residential buildings with varied roof colors (red, grey, white) and solar panels on one roof.\",\n    \"A network of paved roads and narrow waterways or canals.\",\n    \"Vegetation including trees and small garden patches near houses.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view shows a specific section of the rural landscape visible in the wider context, likely near a waterway.\",\n    \"Both views show similar rural infrastructure, including buildings, paved surfaces, and agricultural land.\",\n    \"The local view provides a closer look at the types of structures and vegetation seen in the broader context.\"\n  ],\n  \"description\": \"Aerial imagery of a rural area featuring residential buildings, agricultural fields with harvested and growing crops, and waterways. A closer view highlights a specific location near a canal with a boat, netting, and vegetation, consistent with the broader rural setting.\",\n  \"evidence_visible\": [\n    \"A narrow waterway or canal with green algae or vegetation on the surface.\",\n    \"A small wooden boat moored alongside the canal.\",\n    \"Green netting or mesh covering a small garden or plot of land.\",\n    \"Various plants and vegetation growing near the water's edge and on the land.\",\n    \"A paved or concrete area adjacent to the garden.\",\n    \"A red object, possibly a container or vehicle part, on the paved area.\",\n    \"A blue object, possibly a small vehicle or container, near the red object.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the fields.\",\n    \"The exact purpose of the green netting.\",\n    \"The identity of the red and blue objects.\",\n    \"The specific location within the broader context where the local view is taken.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete green mesh covering the plot in the local view, whereas the neighbor definition requires visibly incomplete protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a small garden plot covered by green netting or mesh, consistent with protective covering for exposed soil.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete green mesh covering the plot in the local view, whereas the neighbor definition requires visibly incomplete protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a small garden plot covered by green netting or mesh, consistent with protective covering for exposed soil.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a small garden plot covered by green netting or mesh, which directly supports the claim of bare soil netting being present.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a garden plot where the green netting covers only a portion of the area, leaving other parts of the soil exposed. This visual evidence supports the claim that the soil cover is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a small garden plot covered by green netting or mesh, which directly supports the claim of bare soil netting being present.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a garden plot where the green netting covers only a portion of the area, leaving other parts of the soil exposed. This visual evidence supports the claim that the soil cover is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

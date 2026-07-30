@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_1c188ba9367939756de3",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-2424-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-2424-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring large rectangular agricultural fields with brown, harvested stubble.",
+      "A winding waterway or canal runs vertically through the right side of the frame.",
+      "A paved road runs parallel to the waterway on its eastern bank.",
+      "Several small, white rectangular structures are situated along the road.",
+      "A larger body of water is visible in the upper right corner."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the area along the waterway and road shown in the first image.",
+      "The green crops and white structures visible in the second image correspond to the same features seen in the context image.",
+      "The spatial relationship between the waterway, the road, and the adjacent fields is consistent across both views."
+    ],
+    "description": "The images show an aerial view of agricultural land with harvested fields and a waterway. A road runs alongside the water, bordered by small white structures and patches of green crops. The second image provides a closer look at these specific features along the canal bank.",
+    "evidence_visible": [
+      "Close-up view of green leafy crops planted in distinct rectangular plots.",
+      "Several small, white, rectangular structures are located immediately adjacent to the green crops.",
+      "The crops are situated between the waterway and the paved road.",
+      "The ground around the crops appears to be bare soil or dried vegetation."
+    ],
+    "unclear": [
+      "The specific type of green crop is unclear.",
+      "The exact function of the white structures is unclear.",
+      "The condition of the water in the canal is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring large rectangular agricultural fields with brown, harvested stubble.\",\n    \"A winding waterway or canal runs vertically through the right side of the frame.\",\n    \"A paved road runs parallel to the waterway on its eastern bank.\",\n    \"Several small, white rectangular structures are situated along the road.\",\n    \"A larger body of water is visible in the upper right corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the area along the waterway and road shown in the first image.\",\n    \"The green crops and white structures visible in the second image correspond to the same features seen in the context image.\",\n    \"The spatial relationship between the waterway, the road, and the adjacent fields is consistent across both views.\"\n  ],\n  \"description\": \"The images show an aerial view of agricultural land with harvested fields and a waterway. A road runs alongside the water, bordered by small white structures and patches of green crops. The second image provides a closer look at these specific features along the canal bank.\",\n  \"evidence_visible\": [\n    \"Close-up view of green leafy crops planted in distinct rectangular plots.\",\n    \"Several small, white, rectangular structures are located immediately adjacent to the green crops.\",\n    \"The crops are situated between the waterway and the paved road.\",\n    \"The ground around the crops appears to be bare soil or dried vegetation.\"\n  ],\n  \"unclear\": [\n    \"The specific type of green crop is unclear.\",\n    \"The exact function of the white structures is unclear.\",\n    \"The condition of the water in the canal is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting along the waterway bank.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting along the waterway bank.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a waterway bank with brown, withered vegetation and bare soil, but there is no visible evidence of netting, mesh, or any dust-control material covering the soil. The claim of 'netting' is an object hallucination not supported by the visual data.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting",
+        "The event bare soil netting is supported"
+      ]
+    },
+    "positive": {
+      "reason": "The image clearly shows a waterway bank where the ground is exposed and brown, contrasting with the adjacent green crops. This visual evidence supports the description of 'incomplete soil cover' as the soil is visible and lacks the protective vegetation or covering seen in the neighboring fields.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a waterway bank with brown, withered vegetation and bare soil, but there is no visible evidence of netting, mesh, or any dust-control material covering the soil. The claim of 'netting' is an object hallucination not supported by the visual data.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\",\n      \"The event bare soil netting is supported\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image clearly shows a waterway bank where the ground is exposed and brown, contrasting with the adjacent green crops. This visual evidence supports the description of 'incomplete soil cover' as the soil is visible and lacks the protective vegetation or covering seen in the neighboring fields.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

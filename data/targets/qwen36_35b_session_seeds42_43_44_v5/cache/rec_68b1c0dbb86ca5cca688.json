@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_68b1c0dbb86ca5cca688",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0919-4965-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0919-4965-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a river flowing through a built-up area with multi-story buildings and a bridge in the distance.",
+      "A paved road runs parallel to the river on the left bank, separated by a strip of vegetation and a long structure with a reddish-brown roof.",
+      "The right bank is densely populated with residential structures featuring red and grey roofs.",
+      "The water is murky green-grey, and the banks are lined with vegetation."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the riverbank on the left side of the main image.",
+      "The grey paved path visible in the crop corresponds to the path running alongside the long reddish-brown roofed structure in the context image.",
+      "The vegetation and small structures in the crop match the green strip between the road and the river on the left bank in the context image."
+    ],
+    "description": "The images show a river scene with a paved path and a long building with a reddish-brown roof on the left bank. The crop details a section of this bank, revealing dense green vegetation, a small patch of tilled soil, and a green tarp near the water's edge, situated between the path and the river.",
+    "evidence_visible": [
+      "A narrow paved path runs along the left edge of the crop.",
+      "Dense green bushes and trees occupy the central area of the bank.",
+      "A small rectangular plot of brown, tilled soil is visible near the water.",
+      "A bright green tarp or sheet lies on the ground near the soil patch.",
+      "A small concrete structure or step leads down to the water.",
+      "The river water is calm and grey-green."
+    ],
+    "unclear": [
+      "The specific contents of the small plot of soil.",
+      "The purpose of the green tarp.",
+      "The exact nature of the small concrete structure at the water's edge.",
+      "The identity of any objects on the path."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a river flowing through a built-up area with multi-story buildings and a bridge in the distance.\",\n    \"A paved road runs parallel to the river on the left bank, separated by a strip of vegetation and a long structure with a reddish-brown roof.\",\n    \"The right bank is densely populated with residential structures featuring red and grey roofs.\",\n    \"The water is murky green-grey, and the banks are lined with vegetation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the riverbank on the left side of the main image.\",\n    \"The grey paved path visible in the crop corresponds to the path running alongside the long reddish-brown roofed structure in the context image.\",\n    \"The vegetation and small structures in the crop match the green strip between the road and the river on the left bank in the context image.\"\n  ],\n  \"description\": \"The images show a river scene with a paved path and a long building with a reddish-brown roof on the left bank. The crop details a section of this bank, revealing dense green vegetation, a small patch of tilled soil, and a green tarp near the water's edge, situated between the path and the river.\",\n  \"evidence_visible\": [\n    \"A narrow paved path runs along the left edge of the crop.\",\n    \"Dense green bushes and trees occupy the central area of the bank.\",\n    \"A small rectangular plot of brown, tilled soil is visible near the water.\",\n    \"A bright green tarp or sheet lies on the ground near the soil patch.\",\n    \"A small concrete structure or step leads down to the water.\",\n    \"The river water is calm and grey-green.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the small plot of soil.\",\n    \"The purpose of the green tarp.\",\n    \"The exact nature of the small concrete structure at the water's edge.\",\n    \"The identity of any objects on the path.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a small rectangular plot of brown, tilled soil situated on the riverbank, adjacent to a bright green tarp or sheet lying on the ground.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a small rectangular plot of brown, tilled soil situated on the riverbank, adjacent to a bright green tarp or sheet lying on the ground.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a rectangular plot of brown, tilled soil on the riverbank. Adjacent to this plot, there is a distinct bright green sheet or tarp lying on the ground. The description accurately reflects these visible elements.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a plot of bare soil that is not fully covered by vegetation or other materials, which visually supports the description of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a rectangular plot of brown, tilled soil on the riverbank. Adjacent to this plot, there is a distinct bright green sheet or tarp lying on the ground. The description accurately reflects these visible elements.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a plot of bare soil that is not fully covered by vegetation or other materials, which visually supports the description of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

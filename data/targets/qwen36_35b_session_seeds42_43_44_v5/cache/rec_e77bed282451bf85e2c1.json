@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e77bed282451bf85e2c1",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0225-3163-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0225-3163-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area featuring a large water treatment facility with six circular clarifier tanks in the upper section.",
+      "Extensive agricultural plots containing green crops and long, white plastic-covered greenhouses.",
+      "A dirt road runs vertically through the farmland, and a body of water borders the left side.",
+      "A small blue boat is moored near the shore."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the lower-left quadrant of the first image.",
+      "The second image provides higher resolution of the riverbank, the blue boat, and the specific arrangement of the greenhouses and fields.",
+      "The water treatment facility is excluded from the second image."
+    ],
+    "description": "Aerial imagery of a rural landscape featuring a water treatment plant and adjacent agricultural fields with greenhouses. A zoomed-in view highlights the riverbank, a moored blue boat, and the layout of the crop plots and dirt road.",
+    "evidence_visible": [
+      "The linked crop image isolates the area along the water's edge.",
+      "Visible elements include a blue boat, a dirt path, and rectangular plots of green crops and white plastic tunnels.",
+      "The soil appears dark and tilled in several sections."
+    ],
+    "unclear": [
+      "Specific crop species",
+      "Exact date of capture",
+      "Operational status of the water treatment plant"
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural area featuring a large water treatment facility with six circular clarifier tanks in the upper section.\",\n    \"Extensive agricultural plots containing green crops and long, white plastic-covered greenhouses.\",\n    \"A dirt road runs vertically through the farmland, and a body of water borders the left side.\",\n    \"A small blue boat is moored near the shore.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the lower-left quadrant of the first image.\",\n    \"The second image provides higher resolution of the riverbank, the blue boat, and the specific arrangement of the greenhouses and fields.\",\n    \"The water treatment facility is excluded from the second image.\"\n  ],\n  \"description\": \"Aerial imagery of a rural landscape featuring a water treatment plant and adjacent agricultural fields with greenhouses. A zoomed-in view highlights the riverbank, a moored blue boat, and the layout of the crop plots and dirt road.\",\n  \"evidence_visible\": [\n    \"The linked crop image isolates the area along the water's edge.\",\n    \"Visible elements include a blue boat, a dirt path, and rectangular plots of green crops and white plastic tunnels.\",\n    \"The soil appears dark and tilled in several sections.\"\n  ],\n  \"unclear\": [\n    \"Specific crop species\",\n    \"Exact date of capture\",\n    \"Operational status of the water treatment plant\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the absence of any construction activity or demolition debris; the site contains a functioning water treatment plant and agricultural fields, not a construction site.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is not visibly established. The aerial imagery displays a functional water treatment facility with operational clarifier tanks and extensive agricultural plots with greenhouses. There is no visible evidence of a building undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the absence of any construction activity or demolition debris; the site contains a functioning water treatment plant and agricultural fields, not a construction site.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is not visibly established. The aerial imagery displays a functional water treatment facility with operational clarifier tanks and extensive agricultural plots with greenhouses. There is no visible evidence of a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The aerial imagery clearly displays a functional water treatment facility with operational clarifier tanks and extensive agricultural plots with greenhouses. There is no visible evidence of a building undergoing active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a functional water treatment plant and agricultural fields. There is no visible evidence of an active general construction project.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The aerial imagery clearly displays a functional water treatment facility with operational clarifier tanks and extensive agricultural plots with greenhouses. There is no visible evidence of a building undergoing active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a functional water treatment plant and agricultural fields. There is no visible evidence of an active general construction project.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

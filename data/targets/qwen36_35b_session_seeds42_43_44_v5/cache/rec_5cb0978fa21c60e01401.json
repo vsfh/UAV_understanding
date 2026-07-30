@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_5cb0978fa21c60e01401",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1005-6283-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1005-6283-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of agricultural land with large rectangular fields of yellow-green crops, likely rice, showing distinct rows.",
+      "A cluster of white rectangular structures, possibly beehives, situated within a dense grove of green trees in the lower center.",
+      "A paved road separates the tree grove from a section of fields covered in long, parallel rows of plastic mulch.",
+      "Several buildings with white walls and dark roofs are visible in the upper right, adjacent to greenhouse structures with translucent blue and white coverings."
+    ],
+    "cross_view_relations": [
+      "The second image provides a zoomed-in view of the area to the right of the tree grove in the first image.",
+      "The greenhouse structures and the white building seen in the upper right of the first image are clearly visible in the upper portion of the second image.",
+      "The long rows of plastic-covered fields in the first image correspond to the detailed rows of plastic mulch seen in the lower portion of the second image."
+    ],
+    "description": "The images show an agricultural landscape with fields of yellow-green crops, a grove of trees containing white rectangular structures, and adjacent fields covered in plastic mulch. Greenhouses and residential-style buildings are present. The second image offers a closer view of the plastic-covered fields and nearby structures.",
+    "evidence_visible": [
+      "The linked crop image shows a close-up of the plastic-covered fields and the white building seen in the wider context image.",
+      "The plastic mulch is arranged in long, parallel rows across the field.",
+      "A greenhouse with a blue-tinted translucent roof is visible next to the plastic-covered fields.",
+      "A white, multi-story building with a dark roof is situated near the fields.",
+      "Some blue netting or tarps are visible on the ground within the plastic-covered field area."
+    ],
+    "unclear": [
+      "The specific type of crop in the yellow-green fields.",
+      "The exact contents of the white rectangular structures in the tree grove.",
+      "The specific type of produce grown in the plastic-covered fields.",
+      "The purpose of the blue netting/tarps in the plastic-covered field.",
+      "The exact date the images were taken."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of agricultural land with large rectangular fields of yellow-green crops, likely rice, showing distinct rows.\",\n    \"A cluster of white rectangular structures, possibly beehives, situated within a dense grove of green trees in the lower center.\",\n    \"A paved road separates the tree grove from a section of fields covered in long, parallel rows of plastic mulch.\",\n    \"Several buildings with white walls and dark roofs are visible in the upper right, adjacent to greenhouse structures with translucent blue and white coverings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image provides a zoomed-in view of the area to the right of the tree grove in the first image.\",\n    \"The greenhouse structures and the white building seen in the upper right of the first image are clearly visible in the upper portion of the second image.\",\n    \"The long rows of plastic-covered fields in the first image correspond to the detailed rows of plastic mulch seen in the lower portion of the second image.\"\n  ],\n  \"description\": \"The images show an agricultural landscape with fields of yellow-green crops, a grove of trees containing white rectangular structures, and adjacent fields covered in plastic mulch. Greenhouses and residential-style buildings are present. The second image offers a closer view of the plastic-covered fields and nearby structures.\",\n  \"evidence_visible\": [\n    \"The linked crop image shows a close-up of the plastic-covered fields and the white building seen in the wider context image.\",\n    \"The plastic mulch is arranged in long, parallel rows across the field.\",\n    \"A greenhouse with a blue-tinted translucent roof is visible next to the plastic-covered fields.\",\n    \"A white, multi-story building with a dark roof is situated near the fields.\",\n    \"Some blue netting or tarps are visible on the ground within the plastic-covered field area.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the yellow-green fields.\",\n    \"The exact contents of the white rectangular structures in the tree grove.\",\n    \"The specific type of produce grown in the plastic-covered fields.\",\n    \"The purpose of the blue netting/tarps in the plastic-covered field.\",\n    \"The exact date the images were taken.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of continuous, long parallel rows of plastic mulch and netting covering the soil, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting, specifically seen as long, parallel rows of plastic mulch and blue netting or tarps on the ground within the field area.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of continuous, long parallel rows of plastic mulch and netting covering the soil, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting, specifically seen as long, parallel rows of plastic mulch and blue netting or tarps on the ground within the field area.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence directly contradicts the claim of 'dust-control netting'. The visible materials are clearly agricultural plastic mulch (white strips) and blue shade cloth or tarps used for crop protection, not dust control. The description of 'long, parallel rows of plastic mulch' is accurate, but the functional label 'dust-control' is unsupported.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The netting is for dust control."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows agricultural fields where the ground cover is not uniform. Specifically, there are rows of white plastic mulch and blue tarps that are not fully covering the soil, and other areas where the soil is exposed or covered with dry residue. This visual evidence supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence directly contradicts the claim of 'dust-control netting'. The visible materials are clearly agricultural plastic mulch (white strips) and blue shade cloth or tarps used for crop protection, not dust control. The description of 'long, parallel rows of plastic mulch' is accurate, but the functional label 'dust-control' is unsupported.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The netting is for dust control.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows agricultural fields where the ground cover is not uniform. Specifically, there are rows of white plastic mulch and blue tarps that are not fully covering the soil, and other areas where the soil is exposed or covered with dry residue. This visual evidence supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

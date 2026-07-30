@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_c26d894814917b8039dc",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0216-2473-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0216-2473-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a mixed-use urban area with multi-story residential buildings, a large facility with a blue roof, and agricultural plots in the foreground.",
+      "A paved road runs vertically through the center of the frame, separating the agricultural area from the residential zone.",
+      "The background shows a denser cityscape with taller buildings and a body of water in the distance."
+    ],
+    "cross_view_relations": [
+      "The crop view is a zoomed-in section of the lower-right quadrant of the context image.",
+      "The red-roofed houses and the adjacent debris field visible in the crop correspond to the area located just to the right of the central road in the context image.",
+      "The spatial relationship confirms the debris field is situated between the residential structures and the main thoroughfare."
+    ],
+    "description": "The images show a mixed urban and agricultural landscape. The context view reveals a broad cityscape with residential blocks, a blue-roofed facility, and green plots. The linked crop focuses on a specific area where a large pile of construction debris and rubble is situated adjacent to houses with red and grey roofs, located near a central road.",
+    "evidence_visible": [
+      "A significant accumulation of debris, including rubble, dirt, and scattered materials, occupies a plot of land.",
+      "Several residential buildings with red and grey tiled roofs are visible immediately to the left of the debris field.",
+      "A small structure with a blue roof is present near the edge of the debris pile.",
+      "The ground in the debris area appears uneven and disturbed, contrasting with the paved surfaces of the nearby road and building foundations."
+    ],
+    "unclear": [
+      "The specific composition of the debris (e.g., concrete, wood, metal) is unclear.",
+      "The origin of the debris (e.g., demolition, construction waste) cannot be determined.",
+      "The exact status of the land (e.g., vacant, under construction) is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a mixed-use urban area with multi-story residential buildings, a large facility with a blue roof, and agricultural plots in the foreground.\",\n    \"A paved road runs vertically through the center of the frame, separating the agricultural area from the residential zone.\",\n    \"The background shows a denser cityscape with taller buildings and a body of water in the distance.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop view is a zoomed-in section of the lower-right quadrant of the context image.\",\n    \"The red-roofed houses and the adjacent debris field visible in the crop correspond to the area located just to the right of the central road in the context image.\",\n    \"The spatial relationship confirms the debris field is situated between the residential structures and the main thoroughfare.\"\n  ],\n  \"description\": \"The images show a mixed urban and agricultural landscape. The context view reveals a broad cityscape with residential blocks, a blue-roofed facility, and green plots. The linked crop focuses on a specific area where a large pile of construction debris and rubble is situated adjacent to houses with red and grey roofs, located near a central road.\",\n  \"evidence_visible\": [\n    \"A significant accumulation of debris, including rubble, dirt, and scattered materials, occupies a plot of land.\",\n    \"Several residential buildings with red and grey tiled roofs are visible immediately to the left of the debris field.\",\n    \"A small structure with a blue roof is present near the edge of the debris pile.\",\n    \"The ground in the debris area appears uneven and disturbed, contrasting with the paved surfaces of the nearby road and building foundations.\"\n  ],\n  \"unclear\": [\n    \"The specific composition of the debris (e.g., concrete, wood, metal) is unclear.\",\n    \"The origin of the debris (e.g., demolition, construction waste) cannot be determined.\",\n    \"The exact status of the land (e.g., vacant, under construction) is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a large, distinct pile of loose debris and rubble on the ground, rather than visible structural damage to a standing building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a large accumulation of rubble, dirt, and scattered construction debris occupying a plot of land adjacent to residential structures.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a large, distinct pile of loose debris and rubble on the ground, rather than visible structural damage to a standing building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a large accumulation of rubble, dirt, and scattered construction debris occupying a plot of land adjacent to residential structures.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a plot of land adjacent to residential buildings that is covered in a large accumulation of rubble, dirt, and scattered construction debris, consistent with a demolition site.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a plot of land filled with debris and rubble, but there are no visible buildings that are structurally damaged; the surrounding intact buildings show no signs of damage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a plot of land adjacent to residential buildings that is covered in a large accumulation of rubble, dirt, and scattered construction debris, consistent with a demolition site.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a plot of land filled with debris and rubble, but there are no visible buildings that are structurally damaged; the surrounding intact buildings show no signs of damage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

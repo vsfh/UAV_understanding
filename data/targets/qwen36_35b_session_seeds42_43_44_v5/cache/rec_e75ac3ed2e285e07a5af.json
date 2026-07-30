@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e75ac3ed2e285e07a5af",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/collapsed_house_wall/original/1021-6751-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/collapsed_house_wall/cropped/1021-6751-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with dense housing and surrounding agricultural fields.",
+      "Fields are predominantly yellow-gold, indicating mature crops ready for harvest.",
+      "Houses feature grey tiled roofs, with many having solar panels installed.",
+      "A paved road runs horizontally through the middle of the scene.",
+      "Small garden plots and green vegetation are interspersed between buildings."
+    ],
+    "cross_view_relations": [
+      "The local crop view shows a specific residential structure with a grey tiled roof and a small vegetable garden.",
+      "This structure is consistent with the architectural style and density seen in the wider context image.",
+      "The surrounding yellow fields in the context image provide the environmental setting for the local crop.",
+      "The local view confirms the presence of small-scale agriculture (vegetable patches) within the residential area."
+    ],
+    "description": "Aerial view of a rural village with yellow-gold agricultural fields and houses featuring grey tiled roofs and solar panels. The local crop view highlights a specific residence with a small vegetable garden, consistent with the surrounding settlement's architecture and land use patterns.",
+    "evidence_visible": [
+      "Close-up of a residential building with a grey tiled roof and white walls.",
+      "A small, cultivated vegetable garden with rows of green plants is visible next to the house.",
+      "A brick wall and a small pond or water feature are adjacent to the property.",
+      "Other houses with similar grey tiled roofs are visible nearby.",
+      "Vegetation includes trees and shrubs around the buildings."
+    ],
+    "unclear": [
+      "Specific type of crop in the yellow fields (e.g., rice, wheat).",
+      "Exact identity of the vegetable plants in the local crop view.",
+      "Number of residents or specific activities occurring.",
+      "Precise location within the larger settlement."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with dense housing and surrounding agricultural fields.\",\n    \"Fields are predominantly yellow-gold, indicating mature crops ready for harvest.\",\n    \"Houses feature grey tiled roofs, with many having solar panels installed.\",\n    \"A paved road runs horizontally through the middle of the scene.\",\n    \"Small garden plots and green vegetation are interspersed between buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view shows a specific residential structure with a grey tiled roof and a small vegetable garden.\",\n    \"This structure is consistent with the architectural style and density seen in the wider context image.\",\n    \"The surrounding yellow fields in the context image provide the environmental setting for the local crop.\",\n    \"The local view confirms the presence of small-scale agriculture (vegetable patches) within the residential area.\"\n  ],\n  \"description\": \"Aerial view of a rural village with yellow-gold agricultural fields and houses featuring grey tiled roofs and solar panels. The local crop view highlights a specific residence with a small vegetable garden, consistent with the surrounding settlement's architecture and land use patterns.\",\n  \"evidence_visible\": [\n    \"Close-up of a residential building with a grey tiled roof and white walls.\",\n    \"A small, cultivated vegetable garden with rows of green plants is visible next to the house.\",\n    \"A brick wall and a small pond or water feature are adjacent to the property.\",\n    \"Other houses with similar grey tiled roofs are visible nearby.\",\n    \"Vegetation includes trees and shrubs around the buildings.\"\n  ],\n  \"unclear\": [\n    \"Specific type of crop in the yellow fields (e.g., rice, wheat).\",\n    \"Exact identity of the vegetable plants in the local crop view.\",\n    \"Number of residents or specific activities occurring.\",\n    \"Precise location within the larger settlement.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific state of the wall having fallen down, whereas building damage is a broader term that may include cracks or partial damage without total collapse.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the local crop view shows a residential structure where a brick wall has visibly collapsed, with debris scattered on the ground and the roof structure compromised.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific state of the wall having fallen down, whereas building damage is a broader term that may include cracks or partial damage without total collapse.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the local crop view shows a residential structure where a brick wall has visibly collapsed, with debris scattered on the ground and the roof structure compromised.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The local crop image clearly shows a residential structure with a collapsed red brick wall and debris on the ground, directly supporting the description of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The local crop image displays a building with a collapsed wall and debris, which constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The local crop image clearly shows a residential structure with a collapsed red brick wall and debris on the ground, directly supporting the description of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The local crop image displays a building with a collapsed wall and debris, which constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_6ab2f43ce46efa8d7356",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-12-01_2025-12-31/collapsed_house_wall/original/1226-1117-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-12-01_2025-12-31/collapsed_house_wall/cropped/1226-1117-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to a straight canal.",
+      "Agricultural fields with green crops on the left and harvested brown fields on the right.",
+      "A row of residential buildings with red and grey roofs lining a paved road.",
+      "Solar panels installed on multiple rooftops.",
+      "Long shadows cast by trees and buildings, indicating low sun angle."
+    ],
+    "cross_view_relations": [
+      "The crop view is a high-magnification detail of the central cluster of buildings in the context image.",
+      "The white building with the red roof in the crop corresponds to the structure located in the middle-left of the context image.",
+      "The solar panel array in the crop matches the specific panel installation visible on the roof of the white building in the context view."
+    ],
+    "description": "The images show a rural village scene with a canal and agricultural fields. The crop provides a detailed view of a specific white residential building with a red roof and rooftop solar panels, confirming the presence of these features within the broader settlement context.",
+    "evidence_visible": [
+      "Close-up of a white multi-story building with a red roof.",
+      "A large grid of solar panels installed on a flat roof section.",
+      "A blue bicycle parked on a lower roof or balcony area.",
+      "A pile of dry branches or wood on a lower roof.",
+      "A blue bin or container on the ground level.",
+      "A small green tree or bush near the building base."
+    ],
+    "unclear": [
+      "Exact number of people or specific activities.",
+      "Specific crop type in the fields.",
+      "Ownership or legal status of the buildings."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to a straight canal.\",\n    \"Agricultural fields with green crops on the left and harvested brown fields on the right.\",\n    \"A row of residential buildings with red and grey roofs lining a paved road.\",\n    \"Solar panels installed on multiple rooftops.\",\n    \"Long shadows cast by trees and buildings, indicating low sun angle.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop view is a high-magnification detail of the central cluster of buildings in the context image.\",\n    \"The white building with the red roof in the crop corresponds to the structure located in the middle-left of the context image.\",\n    \"The solar panel array in the crop matches the specific panel installation visible on the roof of the white building in the context view.\"\n  ],\n  \"description\": \"The images show a rural village scene with a canal and agricultural fields. The crop provides a detailed view of a specific white residential building with a red roof and rooftop solar panels, confirming the presence of these features within the broader settlement context.\",\n  \"evidence_visible\": [\n    \"Close-up of a white multi-story building with a red roof.\",\n    \"A large grid of solar panels installed on a flat roof section.\",\n    \"A blue bicycle parked on a lower roof or balcony area.\",\n    \"A pile of dry branches or wood on a lower roof.\",\n    \"A blue bin or container on the ground level.\",\n    \"A small green tree or bush near the building base.\"\n  ],\n  \"unclear\": [\n    \"Exact number of people or specific activities.\",\n    \"Specific crop type in the fields.\",\n    \"Ownership or legal status of the buildings.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a localized structural collapse of a lower roof section into a debris pile, whereas building damage is a broader category of visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-magnification crop view reveals a section of a lower roof or wall structure that has visibly collapsed, characterized by a chaotic pile of dry branches and debris, distinct from the intact solar panel array on the adjacent upper roof.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows a localized structural collapse of a lower roof section into a debris pile, whereas building damage is a broader category of visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-magnification crop view reveals a section of a lower roof or wall structure that has visibly collapsed, characterized by a chaotic pile of dry branches and debris, distinct from the intact solar panel array on the adjacent upper roof.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification crop clearly shows a building with a collapsed roof or wall structure, evidenced by a chaotic pile of dry branches and debris. This is distinct from the intact solar panel array on the adjacent roof, supporting the claim of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The high-magnification crop shows visible structural damage to a building, specifically a collapsed roof or wall section with debris. This supports the claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification crop clearly shows a building with a collapsed roof or wall structure, evidenced by a chaotic pile of dry branches and debris. This is distinct from the intact solar panel array on the adjacent roof, supporting the claim of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The high-magnification crop shows visible structural damage to a building, specifically a collapsed roof or wall section with debris. This supports the claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

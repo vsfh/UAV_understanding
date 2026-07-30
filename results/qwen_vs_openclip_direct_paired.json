@@ -1,0 +1,15 @@
+{
+  "comparison": "outputs/qwen_direct_context_val.jsonl - outputs/openclip_direct_session_val.json",
+  "num_rows": 2384,
+  "num_groups": 329,
+  "macro_f1_difference": -0.006904257945078193,
+  "macro_f1_difference_ci95": [
+    -0.02774181439474834,
+    0.015358308626736011
+  ],
+  "micro_f1_difference": 0.022529789202752448,
+  "micro_f1_difference_ci95": [
+    -0.049319621873350025,
+    0.08896895238779264
+  ]
+}

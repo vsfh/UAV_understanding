@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e3767d1a8ce845002d3a",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0324-7066-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0324-7066-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural aquaculture facility with large rectangular ponds separated by earthen dikes.",
+      "Multiple aerators are active in the water, creating white circular disturbances.",
+      "A cluster of residential buildings with white walls and grey or red roofs is located along the top edge.",
+      "Green agricultural fields are visible in the background.",
+      "A small blue-roofed structure and parked vehicles are situated on a dike near the center."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the area located between the central pond and the residential buildings in the wide image.",
+      "The dilapidated brick structures in the crop are situated on the bank adjacent to the pond shown in the wide image.",
+      "The tall, dry reeds visible in the crop are located on the slope directly behind the ruined buildings."
+    ],
+    "description": "The images depict a rural aquaculture site with active fish ponds and nearby housing. The detailed view highlights a cluster of dilapidated brick structures with collapsed roofs and overgrown vegetation situated on the bank between the water and the residential area.",
+    "evidence_visible": [
+      "Three small structures are visible on a grassy bank.",
+      "The central structure is a single-story brick building with a partially collapsed roof and exposed red brick walls.",
+      "To the left is a smaller, intact building with a grey tiled roof.",
+      "To the right is a larger building with a grey tiled roof.",
+      "Tall, dry reeds and green vegetation surround the structures.",
+      "Debris and rubble are scattered on the ground around the central ruined building."
+    ],
+    "unclear": [
+      "The specific cause of the roof collapse is unclear.",
+      "The current occupancy status of the buildings cannot be determined.",
+      "The exact function of the small blue-roofed structure in the wide view is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a rural aquaculture facility with large rectangular ponds separated by earthen dikes.\",\n    \"Multiple aerators are active in the water, creating white circular disturbances.\",\n    \"A cluster of residential buildings with white walls and grey or red roofs is located along the top edge.\",\n    \"Green agricultural fields are visible in the background.\",\n    \"A small blue-roofed structure and parked vehicles are situated on a dike near the center.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the area located between the central pond and the residential buildings in the wide image.\",\n    \"The dilapidated brick structures in the crop are situated on the bank adjacent to the pond shown in the wide image.\",\n    \"The tall, dry reeds visible in the crop are located on the slope directly behind the ruined buildings.\"\n  ],\n  \"description\": \"The images depict a rural aquaculture site with active fish ponds and nearby housing. The detailed view highlights a cluster of dilapidated brick structures with collapsed roofs and overgrown vegetation situated on the bank between the water and the residential area.\",\n  \"evidence_visible\": [\n    \"Three small structures are visible on a grassy bank.\",\n    \"The central structure is a single-story brick building with a partially collapsed roof and exposed red brick walls.\",\n    \"To the left is a smaller, intact building with a grey tiled roof.\",\n    \"To the right is a larger building with a grey tiled roof.\",\n    \"Tall, dry reeds and green vegetation surround the structures.\",\n    \"Debris and rubble are scattered on the ground around the central ruined building.\"\n  ],\n  \"unclear\": [\n    \"The specific cause of the roof collapse is unclear.\",\n    \"The current occupancy status of the buildings cannot be determined.\",\n    \"The exact function of the small blue-roofed structure in the wide view is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a completely collapsed roof and significant debris scattered on the ground around the structure, which indicates a total structural failure or demolition rather than just visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the local crop image shows a central single-story brick structure with a completely collapsed roof and exposed red brick walls, surrounded by scattered debris and rubble on the ground, indicating active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a completely collapsed roof and significant debris scattered on the ground around the structure, which indicates a total structural failure or demolition rather than just visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the local crop image shows a central single-story brick structure with a completely collapsed roof and exposed red brick walls, surrounded by scattered debris and rubble on the ground, indicating active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The local crop image clearly shows a central single-story brick structure with a completely collapsed roof and exposed red brick walls. The ground around it is covered in scattered debris and rubble, which visually supports the claim of active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The local crop image displays a building with significant structural damage, specifically a collapsed roof and exposed walls. This visual evidence directly supports the claim of visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The local crop image clearly shows a central single-story brick structure with a completely collapsed roof and exposed red brick walls. The ground around it is covered in scattered debris and rubble, which visually supports the claim of active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The local crop image displays a building with significant structural damage, specifically a collapsed roof and exposed walls. This visual evidence directly supports the claim of visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

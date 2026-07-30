@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_c7894b542f3301d1f0fa",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-05-01_2026-05-31/building_demolition/original/0514-7630-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-05-01_2026-05-31/building_demolition/cropped/0514-7630-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape containing multiple rectangular aquaculture ponds with varying water colors (dark, green, and algae-covered).",
+      "Large plots of green crops arranged in a grid pattern separated by dirt paths.",
+      "A paved road running horizontally across the middle of the frame with a small bridge crossing a waterway.",
+      "A cluster of multi-story residential buildings on the left side with solar panels on the roof.",
+      "A small white building situated on a strip of land between two ponds."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of the area on the far left of the context image, specifically focusing on the space between the residential buildings and the green pond.",
+      "The white building with solar panels visible in the context image is the primary structure on the left edge of the crop image.",
+      "The green algae-covered pond in the context image corresponds to the water body running vertically along the right side of the crop image."
+    ],
+    "description": "The context image shows a rural area with fish ponds, green fields, and a road. The crop image provides a close-up of the left side, revealing a white multi-story building with solar panels adjacent to a narrow waterway covered in green algae and a small, dilapidated structure.",
+    "evidence_visible": [
+      "A white multi-story building with a red-tiled section and solar panels on the roof.",
+      "A narrow waterway filled with bright green algae or duckweed.",
+      "A small, weathered structure with a reddish roof located near the water's edge.",
+      "Piles of debris or materials on the ground near the small structure.",
+      "Vegetation and grass growing on the banks of the waterway."
+    ],
+    "unclear": [
+      "The specific contents of the debris piles.",
+      "The exact function of the small weathered structure.",
+      "The specific type of crops in the fields.",
+      "The identity of any people or vehicles."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape containing multiple rectangular aquaculture ponds with varying water colors (dark, green, and algae-covered).\",\n    \"Large plots of green crops arranged in a grid pattern separated by dirt paths.\",\n    \"A paved road running horizontally across the middle of the frame with a small bridge crossing a waterway.\",\n    \"A cluster of multi-story residential buildings on the left side with solar panels on the roof.\",\n    \"A small white building situated on a strip of land between two ponds.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of the area on the far left of the context image, specifically focusing on the space between the residential buildings and the green pond.\",\n    \"The white building with solar panels visible in the context image is the primary structure on the left edge of the crop image.\",\n    \"The green algae-covered pond in the context image corresponds to the water body running vertically along the right side of the crop image.\"\n  ],\n  \"description\": \"The context image shows a rural area with fish ponds, green fields, and a road. The crop image provides a close-up of the left side, revealing a white multi-story building with solar panels adjacent to a narrow waterway covered in green algae and a small, dilapidated structure.\",\n  \"evidence_visible\": [\n    \"A white multi-story building with a red-tiled section and solar panels on the roof.\",\n    \"A narrow waterway filled with bright green algae or duckweed.\",\n    \"A small, weathered structure with a reddish roof located near the water's edge.\",\n    \"Piles of debris or materials on the ground near the small structure.\",\n    \"Vegetation and grass growing on the banks of the waterway.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the debris piles.\",\n    \"The exact function of the small weathered structure.\",\n    \"The specific type of crops in the fields.\",\n    \"The identity of any people or vehicles.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between building demolition and building damage is the state of the structure; the target event is building demolition, whereas the neighbor event is building damage, which is defined as visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a small, weathered structure with a reddish roof located near the water's edge that appears to be a dilapidated ruin or undergoing demolition, situated adjacent to a narrow waterway filled with bright green algae.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is the state of the structure; the target event is building demolition, whereas the neighbor event is building damage, which is defined as visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a small, weathered structure with a reddish roof located near the water's edge that appears to be a dilapidated ruin or undergoing demolition, situated adjacent to a narrow waterway filled with bright green algae.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a small, dilapidated structure with a reddish roof situated next to a waterway covered in bright green algae. The structure appears weathered and is located near the water's edge, supporting the description of a ruin or demolition site.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible structural damage to a building. While the small ruin near the water shows signs of disrepair, the larger multi-story building on the left side of the image appears structurally intact with no visible damage. The claim is too broad and not fully supported by the visual evidence of the main building.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "Visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "```json\n{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a small, dilapidated structure with a reddish roof situated next to a waterway covered in bright green algae. The structure appears weathered and is located near the water's edge, supporting the description of a ruin or demolition site.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible structural damage to a building. While the small ruin near the water shows signs of disrepair, the larger multi-story building on the left side of the image appears structurally intact with no visible damage. The claim is too broad and not fully supported by the visual evidence of the main building.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"Visible structural damage to a building\"\n    ]\n  }\n}\n```",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

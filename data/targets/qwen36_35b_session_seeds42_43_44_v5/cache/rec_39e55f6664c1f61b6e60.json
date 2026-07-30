@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_39e55f6664c1f61b6e60",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/collapsed_house_wall/original/0415-10124-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/collapsed_house_wall/cropped/0415-10124-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with mixed residential structures, including buildings with red and grey tiled roofs.",
+      "Surrounding landscape features green agricultural fields, some with yellow flowering crops, and a large pond in the upper right.",
+      "A network of narrow paved roads and waterways connects the properties.",
+      "Vegetation includes mature trees and smaller garden plots."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of a specific cluster of buildings located in the lower-left quadrant of the context image.",
+      "The grey-tiled building in the crop corresponds to the structure with the grey roof situated near the bottom center of the context image.",
+      "The waterway visible in the crop matches the pond or canal section located to the left of the central building cluster in the context view."
+    ],
+    "description": "The context image shows a rural village with mixed housing and agriculture. The crop provides a detailed view of a specific property within this area, featuring a grey-tiled building, a smaller concrete structure, and a pile of wood near a waterway. A person is visible on the path in the crop.",
+    "evidence_visible": [
+      "A two-story building with a grey tiled roof and a flat rooftop terrace containing a satellite dish.",
+      "An adjacent, smaller structure made of grey concrete blocks, appearing unfinished or in a state of disrepair.",
+      "A pile of cut branches or wood logs stacked near the water's edge.",
+      "A narrow paved path running between the buildings and the water.",
+      "A single person wearing dark clothing is standing on the path near the wood pile.",
+      "A small boat is moored in the water near the wood pile."
+    ],
+    "unclear": [
+      "The specific activity of the person on the path.",
+      "The exact construction status of the concrete block structure.",
+      "The contents of the small boat."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with mixed residential structures, including buildings with red and grey tiled roofs.\",\n    \"Surrounding landscape features green agricultural fields, some with yellow flowering crops, and a large pond in the upper right.\",\n    \"A network of narrow paved roads and waterways connects the properties.\",\n    \"Vegetation includes mature trees and smaller garden plots.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of a specific cluster of buildings located in the lower-left quadrant of the context image.\",\n    \"The grey-tiled building in the crop corresponds to the structure with the grey roof situated near the bottom center of the context image.\",\n    \"The waterway visible in the crop matches the pond or canal section located to the left of the central building cluster in the context view.\"\n  ],\n  \"description\": \"The context image shows a rural village with mixed housing and agriculture. The crop provides a detailed view of a specific property within this area, featuring a grey-tiled building, a smaller concrete structure, and a pile of wood near a waterway. A person is visible on the path in the crop.\",\n  \"evidence_visible\": [\n    \"A two-story building with a grey tiled roof and a flat rooftop terrace containing a satellite dish.\",\n    \"An adjacent, smaller structure made of grey concrete blocks, appearing unfinished or in a state of disrepair.\",\n    \"A pile of cut branches or wood logs stacked near the water's edge.\",\n    \"A narrow paved path running between the buildings and the water.\",\n    \"A single person wearing dark clothing is standing on the path near the wood pile.\",\n    \"A small boat is moored in the water near the wood pile.\"\n  ],\n  \"unclear\": [\n    \"The specific activity of the person on the path.\",\n    \"The exact construction status of the concrete block structure.\",\n    \"The contents of the small boat.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The event collapsed house wall is distinguished from building damage by the specific nature of the structural failure; the evidence shows a complete loss of structural integrity and form (collapse) of a smaller outbuilding, rather than general surface damage or partial defects to a standing main structure.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-magnification crop view reveals a small, adjacent structure made of grey concrete blocks that has visibly collapsed or is in a state of severe structural disrepair, with its roof and walls partially missing.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The event collapsed house wall is distinguished from building damage by the specific nature of the structural failure; the evidence shows a complete loss of structural integrity and form (collapse) of a smaller outbuilding, rather than general surface damage or partial defects to a standing main structure.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-magnification crop view reveals a small, adjacent structure made of grey concrete blocks that has visibly collapsed or is in a state of severe structural disrepair, with its roof and walls partially missing.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification crop clearly shows a small, adjacent structure made of grey concrete blocks that has visibly collapsed or is in a state of severe structural disrepair, with its roof and walls partially missing.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The high-magnification crop clearly shows visible structural damage to a building, specifically a collapsed grey block structure.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification crop clearly shows a small, adjacent structure made of grey concrete blocks that has visibly collapsed or is in a state of severe structural disrepair, with its roof and walls partially missing.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The high-magnification crop clearly shows visible structural damage to a building, specifically a collapsed grey block structure.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

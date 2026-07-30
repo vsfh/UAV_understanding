@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_434bc8e194670c674da6",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0801-2089-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0801-2089-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed industrial and agricultural landscape.",
+      "Large industrial buildings with flat roofs, some covered in blue solar panels.",
+      "A blue-roofed warehouse structure in the foreground.",
+      "A yard containing piles of scrap metal, tires, and debris.",
+      "Green agricultural fields and white plastic greenhouses.",
+      "A two-story residential building with a grey tiled roof situated near the fields."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the upper-right quadrant of the context image.",
+      "The residential building and the specific rectangular field plots visible in the crop are located in the background of the context image.",
+      "The paved road running past the house in the crop is visible in the context image separating the fields from the industrial site."
+    ],
+    "description": "The context image shows an industrial complex with solar panels and a scrap yard adjacent to agricultural fields. The crop image provides a detailed view of a specific section of these fields, highlighting a two-story house and green crops. The spatial relationship confirms the house is located near the boundary of the industrial and agricultural zones.",
+    "evidence_visible": [
+      "Rectangular plots of green crops with visible soil strips.",
+      "A two-story residential building with a grey tiled roof and an unfinished or open upper section.",
+      "A paved road running alongside the fields.",
+      "A white vehicle parked near the house.",
+      "Utility poles and wires running through the fields."
+    ],
+    "unclear": [
+      "Specific type of crops growing in the fields.",
+      "Occupancy status of the residential building.",
+      "Exact nature of the materials in the scrap yard.",
+      "Identity of the vehicles."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed industrial and agricultural landscape.\",\n    \"Large industrial buildings with flat roofs, some covered in blue solar panels.\",\n    \"A blue-roofed warehouse structure in the foreground.\",\n    \"A yard containing piles of scrap metal, tires, and debris.\",\n    \"Green agricultural fields and white plastic greenhouses.\",\n    \"A two-story residential building with a grey tiled roof situated near the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the upper-right quadrant of the context image.\",\n    \"The residential building and the specific rectangular field plots visible in the crop are located in the background of the context image.\",\n    \"The paved road running past the house in the crop is visible in the context image separating the fields from the industrial site.\"\n  ],\n  \"description\": \"The context image shows an industrial complex with solar panels and a scrap yard adjacent to agricultural fields. The crop image provides a detailed view of a specific section of these fields, highlighting a two-story house and green crops. The spatial relationship confirms the house is located near the boundary of the industrial and agricultural zones.\",\n  \"evidence_visible\": [\n    \"Rectangular plots of green crops with visible soil strips.\",\n    \"A two-story residential building with a grey tiled roof and an unfinished or open upper section.\",\n    \"A paved road running alongside the fields.\",\n    \"A white vehicle parked near the house.\",\n    \"Utility poles and wires running through the fields.\"\n  ],\n  \"unclear\": [\n    \"Specific type of crops growing in the fields.\",\n    \"Occupancy status of the residential building.\",\n    \"Exact nature of the materials in the scrap yard.\",\n    \"Identity of the vehicles.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific structural failure of the upper-story wall on the residential building, which is a distinct instance of the broader category building damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported by the visible evidence of a two-story residential building in the agricultural fields where the upper-level wall has visibly collapsed, exposing the interior.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific structural failure of the upper-story wall on the residential building, which is a distinct instance of the broader category building damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported by the visible evidence of a two-story residential building in the agricultural fields where the upper-level wall has visibly collapsed, exposing the interior.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a two-story residential building in the agricultural fields. The upper level of this building is visibly unfinished or damaged, with missing walls and exposed interior framing, which supports the claim of a collapsed or missing upper-level wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a building with visible structural damage, specifically the upper level of the residential house which appears to be under construction or partially collapsed, exposing the interior.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a two-story residential building in the agricultural fields. The upper level of this building is visibly unfinished or damaged, with missing walls and exposed interior framing, which supports the claim of a collapsed or missing upper-level wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a building with visible structural damage, specifically the upper level of the residential house which appears to be under construction or partially collapsed, exposing the interior.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

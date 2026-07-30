@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_056dbf3157c585740369",
+    "source_class": "construction_waste",
+    "negative_label": "construction_materials",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/construction_waste/original/0207-2689-construction_waste.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/construction_waste/cropped/0207-2689-construction_waste.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of agricultural fields with green crops and dry soil rows.",
+      "A paved road runs horizontally across the middle of the frame.",
+      "Greenhouse structures are visible in the top left corner.",
+      "A wooded area with trees and a pile of debris is located in the bottom right quadrant."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in view of the debris pile and green-roofed structure seen in the bottom right of the first image.",
+      "The spatial relationship confirms the debris is situated adjacent to the agricultural fields and trees."
+    ],
+    "description": "The images show an agricultural landscape with fields and a road. A specific area in the bottom right contains a green-roofed structure and a large accumulation of grey rubble, concrete blocks, and miscellaneous debris mixed with vegetation.",
+    "evidence_visible": [
+      "A green corrugated roof is visible in the bottom left of the crop.",
+      "A large pile of grey rubble, broken concrete, and rocks is scattered on the ground.",
+      "Additional debris includes white pipes, dark blocks, and wooden planks.",
+      "The debris is surrounded by green trees and dry grass."
+    ],
+    "unclear": [
+      "The specific type of construction waste (e.g., concrete vs. stone).",
+      "The origin or destination of the debris.",
+      "The exact contents of the dark blocks.",
+      "The purpose of the green-roofed structure."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of agricultural fields with green crops and dry soil rows.\",\n    \"A paved road runs horizontally across the middle of the frame.\",\n    \"Greenhouse structures are visible in the top left corner.\",\n    \"A wooded area with trees and a pile of debris is located in the bottom right quadrant.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in view of the debris pile and green-roofed structure seen in the bottom right of the first image.\",\n    \"The spatial relationship confirms the debris is situated adjacent to the agricultural fields and trees.\"\n  ],\n  \"description\": \"The images show an agricultural landscape with fields and a road. A specific area in the bottom right contains a green-roofed structure and a large accumulation of grey rubble, concrete blocks, and miscellaneous debris mixed with vegetation.\",\n  \"evidence_visible\": [\n    \"A green corrugated roof is visible in the bottom left of the crop.\",\n    \"A large pile of grey rubble, broken concrete, and rocks is scattered on the ground.\",\n    \"Additional debris includes white pipes, dark blocks, and wooden planks.\",\n    \"The debris is surrounded by green trees and dry grass.\"\n  ],\n  \"unclear\": [\n    \"The specific type of construction waste (e.g., concrete vs. stone).\",\n    \"The origin or destination of the debris.\",\n    \"The exact contents of the dark blocks.\",\n    \"The purpose of the green-roofed structure.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "construction_materials"
+      ],
+      "evidence": "The event construction materials is supported: visible evidence shows stored materials intended for construction.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating construction waste from construction materials is the disorganized, scattered nature of the rubble and mixed debris, which indicates discarded material rather than stored materials intended for construction.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "construction_waste"
+      ],
+      "evidence": "The event construction waste is supported: visible evidence shows a large accumulation of grey rubble, broken concrete, rocks, white pipes, and miscellaneous debris scattered on the ground adjacent to a green-roofed structure.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"construction_materials\"\n    ],\n    \"evidence\": \"The event construction materials is supported: visible evidence shows stored materials intended for construction.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating construction waste from construction materials is the disorganized, scattered nature of the rubble and mixed debris, which indicates discarded material rather than stored materials intended for construction.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"construction_waste\"\n    ],\n    \"evidence\": \"The event construction waste is supported: visible evidence shows a large accumulation of grey rubble, broken concrete, rocks, white pipes, and miscellaneous debris scattered on the ground adjacent to a green-roofed structure.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image explicitly shows a large accumulation of grey rubble, broken concrete, rocks, white pipes, and miscellaneous debris scattered on the ground adjacent to a green-roofed structure. This visual evidence directly supports the description of construction waste.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays disorganized piles of rubble, broken concrete, and mixed debris, which constitutes waste rather than organized stored materials. The claim of 'stored materials' is contradicted by the chaotic nature of the debris.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows stored materials intended for construction"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image explicitly shows a large accumulation of grey rubble, broken concrete, rocks, white pipes, and miscellaneous debris scattered on the ground adjacent to a green-roofed structure. This visual evidence directly supports the description of construction waste.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays disorganized piles of rubble, broken concrete, and mixed debris, which constitutes waste rather than organized stored materials. The claim of 'stored materials' is contradicted by the chaotic nature of the debris.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows stored materials intended for construction\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": true,
+    "requires_human_review": true
+  }
+}

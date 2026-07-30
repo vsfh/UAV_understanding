@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_ccbe639e56a8fe78302f",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-4741-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-4741-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a lake with a pier and buildings on the far shore.",
+      "A dirt path runs along the right bank of the lake.",
+      "The immediate foreground shows a paved area with a small structure and a blue tarp.",
+      "The area to the right of the paved section is disturbed earth with dark patches and dry vegetation."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the disturbed earth area on the right bank of the lake.",
+      "The orange machinery visible in the crop is located on the dirt path seen in the context image.",
+      "The green mesh and single tree in the crop are situated on the slope between the path and the paved foreground area."
+    ],
+    "description": "The images show a lakeside area with a dirt path and disturbed ground. The crop reveals an orange construction vehicle on the path, adjacent to a slope containing a single tree and a strip of green mesh laid over the soil.",
+    "evidence_visible": [
+      "An orange piece of heavy machinery, likely a small excavator, is positioned on a dirt track.",
+      "A strip of green mesh or netting is laid out on the ground next to the track.",
+      "A single green tree stands on the slope near the mesh.",
+      "The ground consists of bare earth, tire tracks, and scattered dark patches of soil or debris."
+    ],
+    "unclear": [
+      "The specific type of the orange machinery.",
+      "The purpose of the green mesh.",
+      "The nature of the dark patches on the ground."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a lake with a pier and buildings on the far shore.\",\n    \"A dirt path runs along the right bank of the lake.\",\n    \"The immediate foreground shows a paved area with a small structure and a blue tarp.\",\n    \"The area to the right of the paved section is disturbed earth with dark patches and dry vegetation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the disturbed earth area on the right bank of the lake.\",\n    \"The orange machinery visible in the crop is located on the dirt path seen in the context image.\",\n    \"The green mesh and single tree in the crop are situated on the slope between the path and the paved foreground area.\"\n  ],\n  \"description\": \"The images show a lakeside area with a dirt path and disturbed ground. The crop reveals an orange construction vehicle on the path, adjacent to a slope containing a single tree and a strip of green mesh laid over the soil.\",\n  \"evidence_visible\": [\n    \"An orange piece of heavy machinery, likely a small excavator, is positioned on a dirt track.\",\n    \"A strip of green mesh or netting is laid out on the ground next to the track.\",\n    \"A single green tree stands on the slope near the mesh.\",\n    \"The ground consists of bare earth, tire tracks, and scattered dark patches of soil or debris.\"\n  ],\n  \"unclear\": [\n    \"The specific type of the orange machinery.\",\n    \"The purpose of the green mesh.\",\n    \"The nature of the dark patches on the ground.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the visible green mesh is a distinct, continuous strip of netting laid over the soil, whereas incomplete soil cover would imply a lack of visible protective covering or a fragmented application that fails to cover the soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting, specifically a strip of green mesh laid out on the ground next to a dirt track where an orange piece of heavy machinery is positioned.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the visible green mesh is a distinct, continuous strip of netting laid over the soil, whereas incomplete soil cover would imply a lack of visible protective covering or a fragmented application that fails to cover the soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting, specifically a strip of green mesh laid out on the ground next to a dirt track where an orange piece of heavy machinery is positioned.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image explicitly shows green mesh netting laid out on the ground next to a dirt track, and an orange piece of heavy machinery is visible in the bottom right corner. The statement accurately describes these visible elements.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a large area of bare soil and a dirt track. While there is a strip of green netting, the vast majority of the disturbed earth is uncovered, meaning the protective covering is visibly incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image explicitly shows green mesh netting laid out on the ground next to a dirt track, and an orange piece of heavy machinery is visible in the bottom right corner. The statement accurately describes these visible elements.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a large area of bare soil and a dirt track. While there is a strip of green netting, the vast majority of the disturbed earth is uncovered, meaning the protective covering is visibly incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

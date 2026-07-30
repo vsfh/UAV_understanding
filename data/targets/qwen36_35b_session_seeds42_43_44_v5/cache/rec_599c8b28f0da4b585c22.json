@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_599c8b28f0da4b585c22",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2556-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2556-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape dominated by rectangular plots of vibrant green crops, likely rice paddies, separated by narrow earthen ridges.",
+      "A straight, light-colored paved road runs vertically through the right side of the frame.",
+      "A dark, narrow canal or drainage ditch runs parallel to the road on the left.",
+      "A cluster of residential buildings with red and grey roofs is situated in the upper left quadrant.",
+      "A river or wider waterway is visible in the top left corner, bordered by dense vegetation."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in view of the residential cluster seen in the top left of the first image.",
+      "The spatial relationship confirms the houses are located immediately adjacent to the green crop fields and the waterway.",
+      "The canal visible in the first image appears to connect to the water network surrounding the houses in the second image."
+    ],
+    "description": "The images show a rural agricultural area with extensive green crop fields, a paved road, and a canal. A cluster of houses with red and grey roofs is visible near a river. The second image provides a closer view of these residential structures and their immediate surroundings.",
+    "evidence_visible": [
+      "A cluster of multi-story residential buildings with flat or slightly pitched roofs.",
+      "Roof colors include distinct red tiles and grey concrete.",
+      "A small yellow vehicle is parked on the concrete surface in front of the central red-roofed building.",
+      "A narrow water channel runs between the houses and the green fields.",
+      "Vegetation and trees are interspersed among the buildings and along the water banks."
+    ],
+    "unclear": [
+      "The specific type of crop in the fields.",
+      "The exact number of people or activities occurring.",
+      "The legal status or ownership of the properties.",
+      "The specific date of the imagery."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape dominated by rectangular plots of vibrant green crops, likely rice paddies, separated by narrow earthen ridges.\",\n    \"A straight, light-colored paved road runs vertically through the right side of the frame.\",\n    \"A dark, narrow canal or drainage ditch runs parallel to the road on the left.\",\n    \"A cluster of residential buildings with red and grey roofs is situated in the upper left quadrant.\",\n    \"A river or wider waterway is visible in the top left corner, bordered by dense vegetation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in view of the residential cluster seen in the top left of the first image.\",\n    \"The spatial relationship confirms the houses are located immediately adjacent to the green crop fields and the waterway.\",\n    \"The canal visible in the first image appears to connect to the water network surrounding the houses in the second image.\"\n  ],\n  \"description\": \"The images show a rural agricultural area with extensive green crop fields, a paved road, and a canal. A cluster of houses with red and grey roofs is visible near a river. The second image provides a closer view of these residential structures and their immediate surroundings.\",\n  \"evidence_visible\": [\n    \"A cluster of multi-story residential buildings with flat or slightly pitched roofs.\",\n    \"Roof colors include distinct red tiles and grey concrete.\",\n    \"A small yellow vehicle is parked on the concrete surface in front of the central red-roofed building.\",\n    \"A narrow water channel runs between the houses and the green fields.\",\n    \"Vegetation and trees are interspersed among the buildings and along the water banks.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the fields.\",\n    \"The exact number of people or activities occurring.\",\n    \"The legal status or ownership of the properties.\",\n    \"The specific date of the imagery.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a total collapse of the roof/wall structure into a pile of debris, whereas building damage is a broader category that could include partial damage or non-collapsing structural issues.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the second image shows a cluster of residential buildings where the structure on the far left exhibits a visibly collapsed or heavily damaged roof and wall section, appearing as a pile of debris rather than an intact building.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a total collapse of the roof/wall structure into a pile of debris, whereas building damage is a broader category that could include partial damage or non-collapsing structural issues.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the second image shows a cluster of residential buildings where the structure on the far left exhibits a visibly collapsed or heavily damaged roof and wall section, appearing as a pile of debris rather than an intact building.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a cluster of residential buildings with intact roofs and walls. There is no visible evidence of a collapsed house wall, debris, or structural damage on the far left or anywhere else in the frame.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The structure on the far left exhibits a visibly collapsed or heavily damaged roof and wall section.",
+        "The structure appears as a pile of debris rather than an intact building."
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a cluster of residential buildings that appear structurally intact. There is no visible evidence of structural damage, such as broken walls, collapsed roofs, or debris, to support the claim.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "Visible evidence shows visible structural damage to a building."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a cluster of residential buildings with intact roofs and walls. There is no visible evidence of a collapsed house wall, debris, or structural damage on the far left or anywhere else in the frame.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The structure on the far left exhibits a visibly collapsed or heavily damaged roof and wall section.\",\n      \"The structure appears as a pile of debris rather than an intact building.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a cluster of residential buildings that appear structurally intact. There is no visible evidence of structural damage, such as broken walls, collapsed roofs, or debris, to support the claim.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"Visible evidence shows visible structural damage to a building.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

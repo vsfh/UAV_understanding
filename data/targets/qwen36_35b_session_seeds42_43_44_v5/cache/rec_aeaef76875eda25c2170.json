@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_aeaef76875eda25c2170",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1002-1695-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1002-1695-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a wide, murky river with a vegetated bank on the right.",
+      "Two vessels are visible on the water: a large barge in the upper left and a smaller tugboat in the center.",
+      "The water surface shows ripples and wakes indicating vessel movement."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of the large barge seen in the upper left of the context image.",
+      "The crop confirms the barge is carrying a load covered by green netting.",
+      "The context image establishes the barge's position relative to the riverbank and the smaller vessel."
+    ],
+    "description": "An aerial view shows a long cargo barge navigating a wide river alongside a smaller tugboat. The barge carries a load covered by green netting, with a blue tarp visible on a forward section. The riverbank on the right is lined with dense green vegetation.",
+    "evidence_visible": [
+      "Close-up of the barge showing a reddish-brown hull and a black cabin structure at the stern.",
+      "The cargo hold contains multiple mounds covered by green mesh netting.",
+      "A blue rectangular cover is visible on the deck near the bow.",
+      "The water around the hull shows slight turbulence."
+    ],
+    "unclear": [
+      "The specific type of cargo beneath the netting.",
+      "The exact identity or registration of the vessels.",
+      "The direction of the current."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a wide, murky river with a vegetated bank on the right.\",\n    \"Two vessels are visible on the water: a large barge in the upper left and a smaller tugboat in the center.\",\n    \"The water surface shows ripples and wakes indicating vessel movement.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of the large barge seen in the upper left of the context image.\",\n    \"The crop confirms the barge is carrying a load covered by green netting.\",\n    \"The context image establishes the barge's position relative to the riverbank and the smaller vessel.\"\n  ],\n  \"description\": \"An aerial view shows a long cargo barge navigating a wide river alongside a smaller tugboat. The barge carries a load covered by green netting, with a blue tarp visible on a forward section. The riverbank on the right is lined with dense green vegetation.\",\n  \"evidence_visible\": [\n    \"Close-up of the barge showing a reddish-brown hull and a black cabin structure at the stern.\",\n    \"The cargo hold contains multiple mounds covered by green mesh netting.\",\n    \"A blue rectangular cover is visible on the deck near the bow.\",\n    \"The water around the hull shows slight turbulence.\"\n  ],\n  \"unclear\": [\n    \"The specific type of cargo beneath the netting.\",\n    \"The exact identity or registration of the vessels.\",\n    \"The direction of the current.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the netting in the image appears to fully cover the cargo mounds, whereas incomplete soil cover would show exposed areas of the material.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a cargo barge carrying a load of material covered by green mesh netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the netting in the image appears to fully cover the cargo mounds, whereas incomplete soil cover would show exposed areas of the material.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a cargo barge carrying a load of material covered by green mesh netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a cargo barge with a load covered by green mesh netting. The statement accurately describes the visible evidence of a cargo barge carrying material covered by green mesh.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims 'incomplete soil cover' and 'soil for which protective covering is visibly incomplete'. While the image shows green netting, it is covering mounds of material (likely sand or gravel, not necessarily soil) and appears to be fully covering the visible mounds. There is no visual evidence of 'incomplete' cover or exposed soil. The term 'soil' is also an assumption not strictly supported by the visual texture which looks more like aggregate.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The material is soil.",
+        "The protective covering is incomplete.",
+        "There is visible exposed soil."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a cargo barge with a load covered by green mesh netting. The statement accurately describes the visible evidence of a cargo barge carrying material covered by green mesh.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims 'incomplete soil cover' and 'soil for which protective covering is visibly incomplete'. While the image shows green netting, it is covering mounds of material (likely sand or gravel, not necessarily soil) and appears to be fully covering the visible mounds. There is no visual evidence of 'incomplete' cover or exposed soil. The term 'soil' is also an assumption not strictly supported by the visual texture which looks more like aggregate.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The material is soil.\",\n      \"The protective covering is incomplete.\",\n      \"There is visible exposed soil.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

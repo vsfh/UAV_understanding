@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d398bdfd12dbd056990f",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0204-8693-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0204-8693-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with agricultural fields, a rectangular pond, and a road network.",
+      "Houses with red and blue roofs are situated along the road.",
+      "Vegetation includes bare deciduous trees and green crops.",
+      "A small stream or drainage ditch runs through the residential area."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a high-magnification view of the area in the lower-left quadrant of the context image.",
+      "The flat roof in the evidence crop corresponds to the building with the flat roof located near the stream in the context image.",
+      "The bare trees and vegetation in the evidence crop match the cluster of trees near the pond and houses in the context image."
+    ],
+    "description": "The context image shows a rural landscape with fields, a pond, and houses. The evidence crop zooms in on a specific section of the residential area, showing a flat roof, a stream, and bare trees. The spatial relationship confirms the crop is a detailed view of the lower-left portion of the wider scene.",
+    "evidence_visible": [
+      "A flat concrete roof with a low parapet wall.",
+      "A narrow stream or ditch running adjacent to the building.",
+      "Bare trees and dry vegetation along the bank of the stream.",
+      "A person wearing blue clothing is visible near the stream bank.",
+      "A pile of debris or materials is visible on the ground near the trees.",
+      "A patch of green leafy plants is visible in the upper right of the crop."
+    ],
+    "unclear": [
+      "The specific activity of the person in blue.",
+      "The exact nature of the debris pile.",
+      "The identity of the person.",
+      "The specific type of green plants."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with agricultural fields, a rectangular pond, and a road network.\",\n    \"Houses with red and blue roofs are situated along the road.\",\n    \"Vegetation includes bare deciduous trees and green crops.\",\n    \"A small stream or drainage ditch runs through the residential area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a high-magnification view of the area in the lower-left quadrant of the context image.\",\n    \"The flat roof in the evidence crop corresponds to the building with the flat roof located near the stream in the context image.\",\n    \"The bare trees and vegetation in the evidence crop match the cluster of trees near the pond and houses in the context image.\"\n  ],\n  \"description\": \"The context image shows a rural landscape with fields, a pond, and houses. The evidence crop zooms in on a specific section of the residential area, showing a flat roof, a stream, and bare trees. The spatial relationship confirms the crop is a detailed view of the lower-left portion of the wider scene.\",\n  \"evidence_visible\": [\n    \"A flat concrete roof with a low parapet wall.\",\n    \"A narrow stream or ditch running adjacent to the building.\",\n    \"Bare trees and dry vegetation along the bank of the stream.\",\n    \"A person wearing blue clothing is visible near the stream bank.\",\n    \"A pile of debris or materials is visible on the ground near the trees.\",\n    \"A patch of green leafy plants is visible in the upper right of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific activity of the person in blue.\",\n    \"The exact nature of the debris pile.\",\n    \"The identity of the person.\",\n    \"The specific type of green plants.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between building demolition and building damage is that the former implies an active process or recent completion of dismantling (supported by the presence of a person and debris pile), whereas the latter refers to visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the evidence crop shows a flat concrete roof with a low parapet wall adjacent to a narrow stream, with a person in blue clothing and a pile of debris visible on the ground near bare trees, consistent with a building undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is that the former implies an active process or recent completion of dismantling (supported by the presence of a person and debris pile), whereas the latter refers to visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the evidence crop shows a flat concrete roof with a low parapet wall adjacent to a narrow stream, with a person in blue clothing and a pile of debris visible on the ground near bare trees, consistent with a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence crop shows a flat concrete roof with a low parapet wall adjacent to a narrow stream. A person in blue clothing is visible on the ground near bare trees, and there is a pile of debris nearby. This visual evidence is consistent with a building undergoing active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence crop shows a flat concrete roof with a low parapet wall adjacent to a narrow stream. A person in blue clothing is visible on the ground near bare trees, and there is a pile of debris nearby. This visual evidence is consistent with a building undergoing active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence crop shows a flat concrete roof with a low parapet wall adjacent to a narrow stream. A person in blue clothing is visible on the ground near bare trees, and there is a pile of debris nearby. This visual evidence is consistent with a building undergoing active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence crop shows a flat concrete roof with a low parapet wall adjacent to a narrow stream. A person in blue clothing is visible on the ground near bare trees, and there is a pile of debris nearby. This visual evidence is consistent with a building undergoing active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

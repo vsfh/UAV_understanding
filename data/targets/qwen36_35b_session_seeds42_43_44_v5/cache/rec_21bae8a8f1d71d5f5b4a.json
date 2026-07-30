@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_21bae8a8f1d71d5f5b4a",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1028-4270-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1028-4270-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "A wide aerial view of a rural-urban interface featuring a multi-lane highway, residential clusters, and industrial buildings with blue roofs.",
+      "Large fields of golden-yellow crops in the background.",
+      "A rectangular construction site with orange safety netting on the left side of the highway.",
+      "A large building with a solar panel array on its roof near the center."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a magnified view of the area located to the right of the central highway and below the industrial buildings in the context image.",
+      "The evidence view isolates a specific excavation site containing large piles of earth and sand that are visible as a cluster of green and brown patches in the wider context shot."
+    ],
+    "description": "The context image shows a highway dividing a landscape of fields and buildings. The evidence crop zooms in on a specific excavation site adjacent to the road, revealing large mounds of earth and sand covered with green mesh netting, situated between the highway and nearby residential structures.",
+    "evidence_visible": [
+      "A large, excavated area containing multiple piles of brown earth and sand.",
+      "Green mesh netting covering several of the earth mounds.",
+      "A yellow construction vehicle (loader or excavator) positioned on the dirt ground.",
+      "Surrounding vegetation and trees bordering the excavation site.",
+      "Residential houses and a road visible in the background of the crop."
+    ],
+    "unclear": [
+      "The specific type of material in the piles (e.g., sand, gravel, soil).",
+      "The exact operational status of the construction vehicle.",
+      "The legal status or specific purpose of the excavation site."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"A wide aerial view of a rural-urban interface featuring a multi-lane highway, residential clusters, and industrial buildings with blue roofs.\",\n    \"Large fields of golden-yellow crops in the background.\",\n    \"A rectangular construction site with orange safety netting on the left side of the highway.\",\n    \"A large building with a solar panel array on its roof near the center.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a magnified view of the area located to the right of the central highway and below the industrial buildings in the context image.\",\n    \"The evidence view isolates a specific excavation site containing large piles of earth and sand that are visible as a cluster of green and brown patches in the wider context shot.\"\n  ],\n  \"description\": \"The context image shows a highway dividing a landscape of fields and buildings. The evidence crop zooms in on a specific excavation site adjacent to the road, revealing large mounds of earth and sand covered with green mesh netting, situated between the highway and nearby residential structures.\",\n  \"evidence_visible\": [\n    \"A large, excavated area containing multiple piles of brown earth and sand.\",\n    \"Green mesh netting covering several of the earth mounds.\",\n    \"A yellow construction vehicle (loader or excavator) positioned on the dirt ground.\",\n    \"Surrounding vegetation and trees bordering the excavation site.\",\n    \"Residential houses and a road visible in the background of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific type of material in the piles (e.g., sand, gravel, soil).\",\n    \"The exact operational status of the construction vehicle.\",\n    \"The legal status or specific purpose of the excavation site.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the netting in the image appears to fully cover the surface of the earth mounds, whereas incomplete soil cover would imply visible gaps or exposed soil areas.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows large piles of exposed earth and sand covered by green mesh netting, situated adjacent to a highway and residential buildings.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the netting in the image appears to fully cover the surface of the earth mounds, whereas incomplete soil cover would imply visible gaps or exposed soil areas.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows large piles of exposed earth and sand covered by green mesh netting, situated adjacent to a highway and residential buildings.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows large piles of exposed earth and sand covered by green mesh netting, situated adjacent to a highway and residential buildings. This directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows piles of soil where the green mesh netting is present but does not completely cover the entire surface area of the piles, leaving some exposed earth visible. This supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows large piles of exposed earth and sand covered by green mesh netting, situated adjacent to a highway and residential buildings. This directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows piles of soil where the green mesh netting is present but does not completely cover the entire surface area of the piles, leaving some exposed earth visible. This supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

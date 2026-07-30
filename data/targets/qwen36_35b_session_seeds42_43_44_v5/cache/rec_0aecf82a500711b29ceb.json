@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0aecf82a500711b29ceb",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0123-4448-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0123-4448-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multi-story residential buildings featuring red and grey roofs.",
+      "Large rectangular agricultural fields with visible soil furrows and crop rows.",
+      "A paved road running horizontally across the lower third, bordered by a dense line of green trees.",
+      "Blue tarps or plastic sheeting covering objects along the roadside tree line.",
+      "Vehicles visible on the road."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the upper-left quadrant of the context image.",
+      "The crop focuses on the cluster of houses and the adjacent field patches.",
+      "The blue plastic sheeting visible in the context image along the road is visible in the lower-left of the crop.",
+      "The solar panels on the roof of a house in the crop are visible in the upper-left of the context image."
+    ],
+    "description": "Aerial view of a rural village with residential buildings and agricultural fields. A road with trees and blue tarps runs through the scene. The crop zooms in on the houses and adjacent fields, showing details like solar panels and small garden plots.",
+    "evidence_visible": [
+      "Close-up of residential buildings with grey and red roofs.",
+      "Solar panels installed on the roof of a white building.",
+      "Small garden plots with green vegetation adjacent to the houses.",
+      "Blue plastic sheeting covering objects near the road.",
+      "Paved road surface and a small tree."
+    ],
+    "unclear": [
+      "Exact type of crops in the fields.",
+      "Specific contents under the blue tarps.",
+      "Number of people or specific activities.",
+      "Exact location or address."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with multi-story residential buildings featuring red and grey roofs.\",\n    \"Large rectangular agricultural fields with visible soil furrows and crop rows.\",\n    \"A paved road running horizontally across the lower third, bordered by a dense line of green trees.\",\n    \"Blue tarps or plastic sheeting covering objects along the roadside tree line.\",\n    \"Vehicles visible on the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the upper-left quadrant of the context image.\",\n    \"The crop focuses on the cluster of houses and the adjacent field patches.\",\n    \"The blue plastic sheeting visible in the context image along the road is visible in the lower-left of the crop.\",\n    \"The solar panels on the roof of a house in the crop are visible in the upper-left of the context image.\"\n  ],\n  \"description\": \"Aerial view of a rural village with residential buildings and agricultural fields. A road with trees and blue tarps runs through the scene. The crop zooms in on the houses and adjacent fields, showing details like solar panels and small garden plots.\",\n  \"evidence_visible\": [\n    \"Close-up of residential buildings with grey and red roofs.\",\n    \"Solar panels installed on the roof of a white building.\",\n    \"Small garden plots with green vegetation adjacent to the houses.\",\n    \"Blue plastic sheeting covering objects near the road.\",\n    \"Paved road surface and a small tree.\"\n  ],\n  \"unclear\": [\n    \"Exact type of crops in the fields.\",\n    \"Specific contents under the blue tarps.\",\n    \"Number of people or specific activities.\",\n    \"Exact location or address.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the absence of structural collapse or debris; the buildings in the image are standing and intact, whereas building damage would require visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the aerial evidence shows a rural settlement with multi-story residential buildings that appear structurally intact, with no visible signs of active or recent demolition.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the absence of structural collapse or debris; the buildings in the image are standing and intact, whereas building damage would require visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the aerial evidence shows a rural settlement with multi-story residential buildings that appear structurally intact, with no visible signs of active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The aerial evidence shows a rural settlement with multi-story residential buildings that appear structurally intact, with no visible signs of active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The visible evidence shows no structural damage to any building; all structures appear intact.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The aerial evidence shows a rural settlement with multi-story residential buildings that appear structurally intact, with no visible signs of active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The visible evidence shows no structural damage to any building; all structures appear intact.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

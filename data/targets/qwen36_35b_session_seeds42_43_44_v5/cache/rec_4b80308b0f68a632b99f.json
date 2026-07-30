@@ -1,0 +1,92 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4b80308b0f68a632b99f",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/collapsed_house_wall/original/0115-2977-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/collapsed_house_wall/cropped/0115-2977-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a settlement with a river and bridge in the foreground, transitioning to agricultural fields in the distance.",
+      "A cluster of industrial or commercial buildings with varied roof colors (blue, red, grey) is situated near the riverbank.",
+      "A yellow crane structure is visible within a fenced yard area among the buildings."
+    ],
+    "cross_view_relations": [
+      "The crop is a magnified view of the specific building cluster and yard area visible in the lower-left quadrant of the wide context image.",
+      "The yellow crane and the adjacent long building with a grey roof are spatially consistent between the wide view and the crop.",
+      "The river and bridge visible in the context image are located to the right of the area shown in the crop."
+    ],
+    "description": "The images show a riverside settlement with mixed residential and industrial structures. The crop details a specific yard containing a yellow crane, stacked metal beams, and adjacent buildings with varied roofing, including solar panels and damaged sections, confirming the location within the wider aerial view.",
+    "evidence_visible": [
+      "A yellow lattice boom crane stands in a dirt yard next to a pile of long, dark metal beams.",
+      "A long, single-story building with a grey roof and a section of red roofing is visible.",
+      "Adjacent structures include a building with solar panels on the roof and another with a damaged or open roof structure.",
+      "A narrow paved road separates the yard area from a row of residential-style buildings on the right."
+    ],
+    "unclear": [
+      "The specific type of metal beams or their intended use.",
+      "The exact condition or occupancy status of the damaged roof structures.",
+      "The identity of the people visible on the rooftops in the crop."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a settlement with a river and bridge in the foreground, transitioning to agricultural fields in the distance.\",\n    \"A cluster of industrial or commercial buildings with varied roof colors (blue, red, grey) is situated near the riverbank.\",\n    \"A yellow crane structure is visible within a fenced yard area among the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a magnified view of the specific building cluster and yard area visible in the lower-left quadrant of the wide context image.\",\n    \"The yellow crane and the adjacent long building with a grey roof are spatially consistent between the wide view and the crop.\",\n    \"The river and bridge visible in the context image are located to the right of the area shown in the crop.\"\n  ],\n  \"description\": \"The images show a riverside settlement with mixed residential and industrial structures. The crop details a specific yard containing a yellow crane, stacked metal beams, and adjacent buildings with varied roofing, including solar panels and damaged sections, confirming the location within the wider aerial view.\",\n  \"evidence_visible\": [\n    \"A yellow lattice boom crane stands in a dirt yard next to a pile of long, dark metal beams.\",\n    \"A long, single-story building with a grey roof and a section of red roofing is visible.\",\n    \"Adjacent structures include a building with solar panels on the roof and another with a damaged or open roof structure.\",\n    \"A narrow paved road separates the yard area from a row of residential-style buildings on the right.\"\n  ],\n  \"unclear\": [\n    \"The specific type of metal beams or their intended use.\",\n    \"The exact condition or occupancy status of the damaged roof structures.\",\n    \"The identity of the people visible on the rooftops in the crop.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the extent of structural failure; the image shows a complete collapse of the roof and wall structure, which is a specific subset of building damage characterized by total structural loss rather than general damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported by the visible evidence of a long, single-story building with a grey roof and a section of red roofing where the roof and wall structure have visibly collapsed, leaving the interior exposed.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the extent of structural failure; the image shows a complete collapse of the roof and wall structure, which is a specific subset of building damage characterized by total structural loss rather than general damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported by the visible evidence of a long, single-story building with a grey roof and a section of red roofing where the roof and wall structure have visibly collapsed, leaving the interior exposed.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 2,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a long, single-story building with a grey roof and a distinct section of red roofing where the roof and wall structure have visibly collapsed, leaving the interior exposed. This matches the description in the statement perfectly.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image evidence shows visible structural damage to a building, specifically the collapsed section of the long single-story building described in the other statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a long, single-story building with a grey roof and a distinct section of red roofing where the roof and wall structure have visibly collapsed, leaving the interior exposed. This matches the description in the statement perfectly.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows visible structural damage to a building, specifically the collapsed section of the long single-story building described in the other statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

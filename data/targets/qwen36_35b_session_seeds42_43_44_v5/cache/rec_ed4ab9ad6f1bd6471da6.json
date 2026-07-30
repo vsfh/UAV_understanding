@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_ed4ab9ad6f1bd6471da6",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0813-4613-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0813-4613-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with rectangular green agricultural fields, likely rice paddies, separated by narrow dirt paths.",
+      "Multiple multi-story residential structures are scattered throughout the area, surrounded by dense vegetation and trees.",
+      "A small body of water with green algae or duckweed is visible in the lower right quadrant.",
+      "The buildings appear to be in various states of construction or disrepair, with exposed concrete and missing roof sections."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the central cluster of buildings visible in the wider context image.",
+      "The spatial arrangement of the three main structures in the crop matches the layout in the center of the context image.",
+      "The surrounding green fields and vegetation in the crop correspond to the immediate environment of the central buildings in the context view."
+    ],
+    "description": "Aerial imagery shows a rural settlement with unfinished multi-story concrete buildings amidst green agricultural fields. The close-up view confirms the structures are skeletal, with exposed rebar, missing roofs, and overgrown vegetation, indicating a state of abandonment or halted construction.",
+    "evidence_visible": [
+      "Three primary multi-story structures are visible, constructed from grey concrete.",
+      "The buildings are skeletal frames with open window spaces and no visible roofing or exterior finishes.",
+      "Vegetation, including small trees and grass, is growing on the roofs and within the open floor plans.",
+      "A paved courtyard area with a grid pattern is visible in front of the leftmost structure.",
+      "A blue tarp or banner is visible on the facade of the central building.",
+      "Debris and rubble are scattered on the ground and rooftops."
+    ],
+    "unclear": [
+      "The specific type of crop in the fields (e.g., rice, wheat) cannot be definitively identified from the pixels.",
+      "The exact reason for the construction halt (e.g., financial, legal, abandoned) is not visible.",
+      "The current occupancy status of the buildings cannot be determined.",
+      "The specific location or address is not visible."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape with rectangular green agricultural fields, likely rice paddies, separated by narrow dirt paths.\",\n    \"Multiple multi-story residential structures are scattered throughout the area, surrounded by dense vegetation and trees.\",\n    \"A small body of water with green algae or duckweed is visible in the lower right quadrant.\",\n    \"The buildings appear to be in various states of construction or disrepair, with exposed concrete and missing roof sections.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the central cluster of buildings visible in the wider context image.\",\n    \"The spatial arrangement of the three main structures in the crop matches the layout in the center of the context image.\",\n    \"The surrounding green fields and vegetation in the crop correspond to the immediate environment of the central buildings in the context view.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural settlement with unfinished multi-story concrete buildings amidst green agricultural fields. The close-up view confirms the structures are skeletal, with exposed rebar, missing roofs, and overgrown vegetation, indicating a state of abandonment or halted construction.\",\n  \"evidence_visible\": [\n    \"Three primary multi-story structures are visible, constructed from grey concrete.\",\n    \"The buildings are skeletal frames with open window spaces and no visible roofing or exterior finishes.\",\n    \"Vegetation, including small trees and grass, is growing on the roofs and within the open floor plans.\",\n    \"A paved courtyard area with a grid pattern is visible in front of the leftmost structure.\",\n    \"A blue tarp or banner is visible on the facade of the central building.\",\n    \"Debris and rubble are scattered on the ground and rooftops.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the fields (e.g., rice, wheat) cannot be definitively identified from the pixels.\",\n    \"The exact reason for the construction halt (e.g., financial, legal, abandoned) is not visible.\",\n    \"The current occupancy status of the buildings cannot be determined.\",\n    \"The specific location or address is not visible.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the visible state of the structures; the evidence shows skeletal frames with missing roofs and exposed rebar, which constitutes a collapsed house wall, whereas building damage is a broader category of visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-magnification view of the central building cluster reveals skeletal concrete structures with missing roof sections and exposed rebar, indicating that the walls have visibly collapsed or the structures are abandoned skeletal frames.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the visible state of the structures; the evidence shows skeletal frames with missing roofs and exposed rebar, which constitutes a collapsed house wall, whereas building damage is a broader category of visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-magnification view of the central building cluster reveals skeletal concrete structures with missing roof sections and exposed rebar, indicating that the walls have visibly collapsed or the structures are abandoned skeletal frames.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification view of the central building cluster clearly shows skeletal concrete structures with missing roof sections and exposed rebar, indicating that the walls have visibly collapsed or the structures are abandoned skeletal frames.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The high-magnification view of the central building cluster clearly shows skeletal concrete structures with missing roof sections and exposed rebar, indicating that the walls have visibly collapsed or the structures are abandoned skeletal frames.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification view of the central building cluster clearly shows skeletal concrete structures with missing roof sections and exposed rebar, indicating that the walls have visibly collapsed or the structures are abandoned skeletal frames.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The high-magnification view of the central building cluster clearly shows skeletal concrete structures with missing roof sections and exposed rebar, indicating that the walls have visibly collapsed or the structures are abandoned skeletal frames.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

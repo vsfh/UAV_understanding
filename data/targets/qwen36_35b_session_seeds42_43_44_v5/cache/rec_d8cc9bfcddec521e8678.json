@@ -1,0 +1,83 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d8cc9bfcddec521e8678",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1013-2641-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1013-2641-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "A wide aerial view of a rural landscape featuring a large white industrial building with solar panels on the roof, adjacent to a dirt construction site covered in green mesh. A road separates the industrial area from a residential cluster and extensive golden agricultural fields under a blue sky."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a zoomed-in perspective of the area shown in the wide context image, specifically focusing on the transition zone between the white industrial building, the dirt lot, and the nearby residential houses."
+    ],
+    "description": "Aerial imagery shows a large white industrial facility with rooftop solar panels adjacent to a cleared dirt lot covered in green mesh. A road separates this industrial zone from a cluster of residential houses and extensive golden agricultural fields.",
+    "evidence_visible": [
+      "A close-up view of the white industrial building's side wall and roof, showing solar panel arrays. Adjacent is a large patch of bare earth covered with green construction mesh. A paved road with streetlights runs parallel to the site, separating it from residential houses with grey and blue roofs."
+    ],
+    "unclear": [
+      "Specific crop type in the fields, exact building function, legal status of the construction, and identity of vehicles."
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"A wide aerial view of a rural landscape featuring a large white industrial building with solar panels on the roof, adjacent to a dirt construction site covered in green mesh. A road separates the industrial area from a residential cluster and extensive golden agricultural fields under a blue sky.\"\n],\n\"cross_view_relations\": [\n\"The local crop view is a zoomed-in perspective of the area shown in the wide context image, specifically focusing on the transition zone between the white industrial building, the dirt lot, and the nearby residential houses.\"\n],\n\"description\": \"Aerial imagery shows a large white industrial facility with rooftop solar panels adjacent to a cleared dirt lot covered in green mesh. A road separates this industrial zone from a cluster of residential houses and extensive golden agricultural fields.\",\n\"evidence_visible\": [\n\"A close-up view of the white industrial building's side wall and roof, showing solar panel arrays. Adjacent is a large patch of bare earth covered with green construction mesh. A paved road with streetlights runs parallel to the site, separating it from residential houses with grey and blue roofs.\"\n],\n\"unclear\": [\n\"Specific crop type in the fields, exact building function, legal status of the construction, and identity of vehicles.\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large cleared dirt lot adjacent to a white industrial building covered in green construction mesh.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large cleared dirt lot adjacent to a white industrial building covered in green construction mesh.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large cleared dirt lot adjacent to a white industrial building. This lot is covered with green construction mesh (bare soil netting). The claim is fully supported by the visual evidence.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a large area of bare soil covered by green mesh. While the mesh is present, it is not a continuous, solid sheet; it is laid in patches or sections, leaving visible gaps of brown earth between the green sections. This constitutes 'incomplete soil cover' as the protective covering is visibly incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large cleared dirt lot adjacent to a white industrial building. This lot is covered with green construction mesh (bare soil netting). The claim is fully supported by the visual evidence.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a large area of bare soil covered by green mesh. While the mesh is present, it is not a continuous, solid sheet; it is laid in patches or sections, leaving visible gaps of brown earth between the green sections. This constitutes 'incomplete soil cover' as the protective covering is visibly incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

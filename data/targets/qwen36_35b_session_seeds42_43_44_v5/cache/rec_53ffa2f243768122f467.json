@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_53ffa2f243768122f467",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1010-0502-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1010-0502-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area with multi-story residential buildings on the left and traditional houses on the right.",
+      "A large plot of tilled agricultural land with distinct furrows occupies the foreground.",
+      "A low brick wall separates the residential area from the agricultural fields.",
+      "A blue tarp is visible on the ground within the tilled field."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in crop of the blue tarp and surrounding furrows seen in the bottom center of the first image.",
+      "The brick wall visible in the first image runs along the top edge of the field in the second image."
+    ],
+    "description": "An aerial view shows a tilled field adjacent to residential buildings. A blue tarp lies on the ground within the furrows. A close-up confirms the tarp's position relative to the brick boundary wall and the texture of the soil.",
+    "evidence_visible": [
+      "Close-up of a blue tarp lying flat on the ground.",
+      "The tarp covers a rectangular section of the tilled soil.",
+      "Parallel furrows run perpendicular to the tarp.",
+      "A red brick wall borders the field at the top of the frame."
+    ],
+    "unclear": [
+      "The specific contents or purpose of the blue tarp.",
+      "The exact type of crop or soil condition.",
+      "The identity of any individuals or vehicles."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area with multi-story residential buildings on the left and traditional houses on the right.\",\n    \"A large plot of tilled agricultural land with distinct furrows occupies the foreground.\",\n    \"A low brick wall separates the residential area from the agricultural fields.\",\n    \"A blue tarp is visible on the ground within the tilled field.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in crop of the blue tarp and surrounding furrows seen in the bottom center of the first image.\",\n    \"The brick wall visible in the first image runs along the top edge of the field in the second image.\"\n  ],\n  \"description\": \"An aerial view shows a tilled field adjacent to residential buildings. A blue tarp lies on the ground within the furrows. A close-up confirms the tarp's position relative to the brick boundary wall and the texture of the soil.\",\n  \"evidence_visible\": [\n    \"Close-up of a blue tarp lying flat on the ground.\",\n    \"The tarp covers a rectangular section of the tilled soil.\",\n    \"Parallel furrows run perpendicular to the tarp.\",\n    \"A red brick wall borders the field at the top of the frame.\"\n  ],\n  \"unclear\": [\n    \"The specific contents or purpose of the blue tarp.\",\n    \"The exact type of crop or soil condition.\",\n    \"The identity of any individuals or vehicles.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous blue tarp covering the specific rectangular section of soil, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by a blue dust-control netting sheet within a tilled field.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous blue tarp covering the specific rectangular section of soil, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by a blue dust-control netting sheet within a tilled field.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a blue sheet covering a portion of the tilled soil, which directly contradicts the claim that the soil is bare.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by a blue dust-control netting sheet"
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a blue sheet covering only a small section of the tilled field, leaving the majority of the soil exposed. This visually confirms that the protective covering is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a blue sheet covering a portion of the tilled soil, which directly contradicts the claim that the soil is bare.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by a blue dust-control netting sheet\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a blue sheet covering only a small section of the tilled field, leaving the majority of the soil exposed. This visually confirms that the protective covering is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

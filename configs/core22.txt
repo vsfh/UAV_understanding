@@ -1,0 +1,23 @@
+# Classes with at least 30/10/10 pair rows in session_disjoint train/val/test.
+bare_soil_netting
+building_demolition
+cargo_ship
+collapsed_house_wall
+construction_waste
+crop_lodging
+dangerous_building
+exposed_garbage
+floating_garbage
+garbage_collection_point
+glass_greenhouse
+grain_drying_road
+green_algae_duckweed
+open_storage_construction
+open_storage_factory
+outbuilding_materials
+piled_materials_factory
+project_construction
+rural_house_construction
+suspected_fire_smoke
+unclean_water_surface
+waterside_garbage

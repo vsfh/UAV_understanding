@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b9628f2a3c8fe6ca2afa",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0928-16415-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0928-16415-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a central road and surrounding agricultural fields.",
+      "Large plots of green crops, likely rice paddies, occupy the left side of the frame.",
+      "A cluster of residential buildings with varied roof colors (grey, red, blue) lines the right side.",
+      "Vegetation and trees are interspersed between the buildings and fields."
+    ],
+    "cross_view_relations": [
+      "The crop view is a high-magnification section of the main image.",
+      "The blue corrugated metal roof in the crop corresponds to the structure located in the central cluster of houses.",
+      "The green mesh netting in the crop is visible in the main image as a rectangular patch adjacent to the blue-roofed building.",
+      "The grey tiled roof in the bottom left of the crop matches the building situated just south of the blue-roofed structure."
+    ],
+    "description": "The images show a rural village with agricultural fields and residential buildings. The crop view details a specific cluster of structures, highlighting a blue corrugated metal roof, adjacent grey tiled roofs, and green mesh netting covering a ground area. The spatial arrangement confirms the crop is a zoomed-in section of the wider settlement.",
+    "evidence_visible": [
+      "A building with a blue corrugated metal roof.",
+      "A building with a grey tiled roof in the foreground.",
+      "Green mesh netting laid out on the ground.",
+      "A dark, possibly black, tarp or netting on the ground.",
+      "A reddish-brown corrugated roof.",
+      "Concrete ground surfaces and small garden plots."
+    ],
+    "unclear": [
+      "The specific type of crop in the fields.",
+      "The purpose of the green and black netting.",
+      "The exact contents of the buildings."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a central road and surrounding agricultural fields.\",\n    \"Large plots of green crops, likely rice paddies, occupy the left side of the frame.\",\n    \"A cluster of residential buildings with varied roof colors (grey, red, blue) lines the right side.\",\n    \"Vegetation and trees are interspersed between the buildings and fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop view is a high-magnification section of the main image.\",\n    \"The blue corrugated metal roof in the crop corresponds to the structure located in the central cluster of houses.\",\n    \"The green mesh netting in the crop is visible in the main image as a rectangular patch adjacent to the blue-roofed building.\",\n    \"The grey tiled roof in the bottom left of the crop matches the building situated just south of the blue-roofed structure.\"\n  ],\n  \"description\": \"The images show a rural village with agricultural fields and residential buildings. The crop view details a specific cluster of structures, highlighting a blue corrugated metal roof, adjacent grey tiled roofs, and green mesh netting covering a ground area. The spatial arrangement confirms the crop is a zoomed-in section of the wider settlement.\",\n  \"evidence_visible\": [\n    \"A building with a blue corrugated metal roof.\",\n    \"A building with a grey tiled roof in the foreground.\",\n    \"Green mesh netting laid out on the ground.\",\n    \"A dark, possibly black, tarp or netting on the ground.\",\n    \"A reddish-brown corrugated roof.\",\n    \"Concrete ground surfaces and small garden plots.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the fields.\",\n    \"The purpose of the green and black netting.\",\n    \"The exact contents of the buildings.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the continuity of the covering; the visible green mesh forms a complete, unbroken layer over the soil, whereas incomplete soil cover would show gaps or torn sections.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular plot of exposed soil covered by a continuous sheet of green mesh netting, situated adjacent to a building with a blue corrugated metal roof.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the continuity of the covering; the visible green mesh forms a complete, unbroken layer over the soil, whereas incomplete soil cover would show gaps or torn sections.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular plot of exposed soil covered by a continuous sheet of green mesh netting, situated adjacent to a building with a blue corrugated metal roof.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence explicitly shows a rectangular plot of exposed soil covered by a continuous sheet of green mesh netting. This plot is situated adjacent to a building with a blue corrugated metal roof. The statement accurately describes these visible elements.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image evidence shows a plot of soil covered by a continuous sheet of green mesh netting. The statement claims the protective covering is 'visibly incomplete', which contradicts the visual evidence of a complete, continuous sheet covering the plot.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The protective covering is visibly incomplete."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence explicitly shows a rectangular plot of exposed soil covered by a continuous sheet of green mesh netting. This plot is situated adjacent to a building with a blue corrugated metal roof. The statement accurately describes these visible elements.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows a plot of soil covered by a continuous sheet of green mesh netting. The statement claims the protective covering is 'visibly incomplete', which contradicts the visual evidence of a complete, continuous sheet covering the plot.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The protective covering is visibly incomplete.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

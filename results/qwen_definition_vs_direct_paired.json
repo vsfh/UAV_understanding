@@ -1,0 +1,15 @@
+{
+  "comparison": "outputs/qwen_definition_context_val.jsonl - outputs/qwen_direct_context_val.jsonl",
+  "num_rows": 2384,
+  "num_groups": 329,
+  "macro_f1_difference": -0.00026823125373273693,
+  "macro_f1_difference_ci95": [
+    -0.013381116849788785,
+    0.012206731443550892
+  ],
+  "micro_f1_difference": -0.0009447623826983609,
+  "micro_f1_difference_ci95": [
+    -0.01929954958536042,
+    0.016651503004789635
+  ]
+}

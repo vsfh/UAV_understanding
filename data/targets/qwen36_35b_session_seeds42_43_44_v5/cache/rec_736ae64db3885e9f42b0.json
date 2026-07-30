@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_736ae64db3885e9f42b0",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-2323-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-2323-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a densely populated residential area with multi-story houses featuring red, grey, and blue roofs.",
+      "Agricultural plots with green crops located in the lower-left foreground.",
+      "A paved road network separating the housing blocks.",
+      "A small green sports court visible in the bottom-left corner."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the area in the bottom-left corner of the context image.",
+      "The green sports court and the adjacent light-grey paved area in the crop correspond to the features visible in the lower-left of the context image.",
+      "The agricultural plots in the crop are situated immediately adjacent to the housing structures seen in the context image."
+    ],
+    "description": "The images show a residential village with agricultural plots. The context view displays a dense cluster of houses with varied roof colors and a small green court in the foreground. The crop provides a detailed view of this court, a paved area, and surrounding vegetable gardens, confirming the proximity of farming land to the built environment.",
+    "evidence_visible": [
+      "A green sports court with painted lines and white poles.",
+      "A light-grey paved area with a geometric shape.",
+      "Multiple rectangular garden plots containing green crops.",
+      "White and green plastic sheeting covering sections of the garden plots.",
+      "A pile of debris or construction materials near a wall.",
+      "A white vehicle parked near the garden plots."
+    ],
+    "unclear": [
+      "The specific type of crops in the garden plots.",
+      "The purpose of the white poles on the sports court.",
+      "The contents of the debris pile.",
+      "The identity of the white vehicle."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a densely populated residential area with multi-story houses featuring red, grey, and blue roofs.\",\n    \"Agricultural plots with green crops located in the lower-left foreground.\",\n    \"A paved road network separating the housing blocks.\",\n    \"A small green sports court visible in the bottom-left corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the area in the bottom-left corner of the context image.\",\n    \"The green sports court and the adjacent light-grey paved area in the crop correspond to the features visible in the lower-left of the context image.\",\n    \"The agricultural plots in the crop are situated immediately adjacent to the housing structures seen in the context image.\"\n  ],\n  \"description\": \"The images show a residential village with agricultural plots. The context view displays a dense cluster of houses with varied roof colors and a small green court in the foreground. The crop provides a detailed view of this court, a paved area, and surrounding vegetable gardens, confirming the proximity of farming land to the built environment.\",\n  \"evidence_visible\": [\n    \"A green sports court with painted lines and white poles.\",\n    \"A light-grey paved area with a geometric shape.\",\n    \"Multiple rectangular garden plots containing green crops.\",\n    \"White and green plastic sheeting covering sections of the garden plots.\",\n    \"A pile of debris or construction materials near a wall.\",\n    \"A white vehicle parked near the garden plots.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the garden plots.\",\n    \"The purpose of the white poles on the sports court.\",\n    \"The contents of the debris pile.\",\n    \"The identity of the white vehicle.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows multiple rectangular garden plots containing green crops, with white and green plastic sheeting covering sections of the soil.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows multiple rectangular garden plots containing green crops, with white and green plastic sheeting covering sections of the soil.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows multiple rectangular garden plots containing green crops, with white and green plastic sheeting covering sections of the soil. This directly contradicts the claim that the event is 'bare soil netting' (implying no crops or netting).",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event is bare soil netting."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows agricultural plots where protective covering (white and green plastic sheeting) is visibly incomplete, as it covers only sections of the soil rather than the entire area.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows multiple rectangular garden plots containing green crops, with white and green plastic sheeting covering sections of the soil. This directly contradicts the claim that the event is 'bare soil netting' (implying no crops or netting).\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event is bare soil netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows agricultural plots where protective covering (white and green plastic sheeting) is visibly incomplete, as it covers only sections of the soil rather than the entire area.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

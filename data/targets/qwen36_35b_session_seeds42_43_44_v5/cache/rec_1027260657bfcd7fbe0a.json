@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_1027260657bfcd7fbe0a",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-8621-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-8621-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a residential area with multi-story apartment buildings featuring blue and red roofs.",
+      "A curved river or canal runs through the scene, bordered by a paved road and a green sports court.",
+      "A roundabout with a central fountain is visible in the lower foreground.",
+      "Vegetation includes green trees and deciduous trees with brown leaves, suggesting autumn or winter."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the area located between the apartment buildings on the left and the river on the right.",
+      "The crop specifically highlights the green sports court situated on the riverbank and the adjacent road section.",
+      "The spatial relationship confirms the court is adjacent to the water and separated from the buildings by a road and a small wall."
+    ],
+    "description": "The images show a residential district with a river and sports court. The wide view establishes the layout of apartment blocks and the roundabout, while the crop focuses on the green court on the riverbank and the road separating it from the buildings.",
+    "evidence_visible": [
+      "A rectangular green sports court with white markings is visible on the riverbank.",
+      "A paved road with white lane markings runs parallel to the river.",
+      "A low wall separates the road from the sports court area.",
+      "The roof of a building with a blue tiled surface is visible in the foreground.",
+      "A small blue structure is visible near the building on the left."
+    ],
+    "unclear": [
+      "The specific type of sports played on the court (e.g., basketball, tennis) is unclear due to resolution.",
+      "The exact condition of the road surface (e.g., wetness) is unclear.",
+      "The presence of people or vehicles on the court is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a residential area with multi-story apartment buildings featuring blue and red roofs.\",\n    \"A curved river or canal runs through the scene, bordered by a paved road and a green sports court.\",\n    \"A roundabout with a central fountain is visible in the lower foreground.\",\n    \"Vegetation includes green trees and deciduous trees with brown leaves, suggesting autumn or winter.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the area located between the apartment buildings on the left and the river on the right.\",\n    \"The crop specifically highlights the green sports court situated on the riverbank and the adjacent road section.\",\n    \"The spatial relationship confirms the court is adjacent to the water and separated from the buildings by a road and a small wall.\"\n  ],\n  \"description\": \"The images show a residential district with a river and sports court. The wide view establishes the layout of apartment blocks and the roundabout, while the crop focuses on the green court on the riverbank and the road separating it from the buildings.\",\n  \"evidence_visible\": [\n    \"A rectangular green sports court with white markings is visible on the riverbank.\",\n    \"A paved road with white lane markings runs parallel to the river.\",\n    \"A low wall separates the road from the sports court area.\",\n    \"The roof of a building with a blue tiled surface is visible in the foreground.\",\n    \"A small blue structure is visible near the building on the left.\"\n  ],\n  \"unclear\": [\n    \"The specific type of sports played on the court (e.g., basketball, tennis) is unclear due to resolution.\",\n    \"The exact condition of the road surface (e.g., wetness) is unclear.\",\n    \"The presence of people or vehicles on the court is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large area of ground covered by green netting, which directly contradicts the claim that the soil is bare or exposed.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a large patch of ground covered in green netting, but the edges of the netting are irregular and do not fully cover the entire rectangular area, leaving visible patches of brown soil. This supports the description of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large area of ground covered by green netting, which directly contradicts the claim that the soil is bare or exposed.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a large patch of ground covered in green netting, but the edges of the netting are irregular and do not fully cover the entire rectangular area, leaving visible patches of brown soil. This supports the description of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

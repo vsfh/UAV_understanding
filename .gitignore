@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# CLEAR-UAV local artifacts
+models/
+outputs/

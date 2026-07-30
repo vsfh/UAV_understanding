@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0ad7419ad75cf2161977",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-8049-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-8049-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area containing two large rectangular aquaculture ponds with green water.",
+      "Ponds are separated by a dirt embankment equipped with mechanical aerators.",
+      "To the right, there are large plowed agricultural fields with visible furrows.",
+      "To the left, a large white industrial building with a solar panel array on the roof.",
+      "A small structure with a blue roof is located near the bottom right corner of the pond complex."
+    ],
+    "cross_view_relations": [
+      "The close-up evidence view corresponds to the embankment separating the two large ponds visible in the context image.",
+      "The green rectangular mats seen in the evidence view are located on the bank between the upper and lower ponds.",
+      "The white boat visible in the evidence view is positioned in the shallow water area at the bottom of the context image."
+    ],
+    "description": "The images show an aquaculture facility with two large rectangular ponds separated by a dirt embankment. The close-up view details green rectangular mats laid out on the bank and a white boat in the adjacent shallow water. The wider context places these ponds next to plowed fields and a large industrial building with solar panels.",
+    "evidence_visible": [
+      "Close-up of a concrete or dirt embankment bordering a body of water.",
+      "Several green rectangular mats or nets are laid out in a row on the bank.",
+      "A white, open-hulled boat is floating in shallow, murky water near the bank.",
+      "Mechanical equipment, likely aerators, is visible at the water's edge.",
+      "The ground appears dry and cracked in areas."
+    ],
+    "unclear": [
+      "The specific contents of the green mats.",
+      "The exact species of fish or aquatic life being farmed.",
+      "The operational status of the machinery.",
+      "The identity of the industrial building."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural area containing two large rectangular aquaculture ponds with green water.\",\n    \"Ponds are separated by a dirt embankment equipped with mechanical aerators.\",\n    \"To the right, there are large plowed agricultural fields with visible furrows.\",\n    \"To the left, a large white industrial building with a solar panel array on the roof.\",\n    \"A small structure with a blue roof is located near the bottom right corner of the pond complex.\"\n  ],\n  \"cross_view_relations\": [\n    \"The close-up evidence view corresponds to the embankment separating the two large ponds visible in the context image.\",\n    \"The green rectangular mats seen in the evidence view are located on the bank between the upper and lower ponds.\",\n    \"The white boat visible in the evidence view is positioned in the shallow water area at the bottom of the context image.\"\n  ],\n  \"description\": \"The images show an aquaculture facility with two large rectangular ponds separated by a dirt embankment. The close-up view details green rectangular mats laid out on the bank and a white boat in the adjacent shallow water. The wider context places these ponds next to plowed fields and a large industrial building with solar panels.\",\n  \"evidence_visible\": [\n    \"Close-up of a concrete or dirt embankment bordering a body of water.\",\n    \"Several green rectangular mats or nets are laid out in a row on the bank.\",\n    \"A white, open-hulled boat is floating in shallow, murky water near the bank.\",\n    \"Mechanical equipment, likely aerators, is visible at the water's edge.\",\n    \"The ground appears dry and cracked in areas.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the green mats.\",\n    \"The exact species of fish or aquatic life being farmed.\",\n    \"The operational status of the machinery.\",\n    \"The identity of the industrial building.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the green mats; the mats are fully deployed and cover the specific sections of the bank, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows green rectangular mats laid out in a row on the dirt embankment separating the aquaculture ponds.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the green mats; the mats are fully deployed and cover the specific sections of the bank, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows green rectangular mats laid out in a row on the dirt embankment separating the aquaculture ponds.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows green rectangular mats laid out in a row on the dirt embankment. This directly contradicts the claim that the mats are missing or that the event is 'bare soil netting' without them.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The mats are not visible.",
+        "The event is bare soil netting."
+      ]
+    },
+    "positive": {
+      "reason": "The evidence image shows green rectangular mats laid out on the embankment, but they do not cover the entire surface. There are visible sections of bare dirt and other materials between and around the mats, supporting the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows green rectangular mats laid out in a row on the dirt embankment. This directly contradicts the claim that the mats are missing or that the event is 'bare soil netting' without them.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The mats are not visible.\",\n      \"The event is bare soil netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows green rectangular mats laid out on the embankment, but they do not cover the entire surface. There are visible sections of bare dirt and other materials between and around the mats, supporting the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

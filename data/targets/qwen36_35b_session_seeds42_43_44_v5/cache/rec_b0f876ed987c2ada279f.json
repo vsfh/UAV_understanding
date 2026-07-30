@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b0f876ed987c2ada279f",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-11-01_2025-11-30/collapsed_house_wall/original/1102-1247-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-11-01_2025-11-30/collapsed_house_wall/cropped/1102-1247-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a paved road, agricultural fields, and mixed residential structures.",
+      "A cluster of buildings in the center includes a long structure with a white roof and a blue corrugated metal section.",
+      "Adjacent to this long structure is a smaller building with a traditional grey tiled roof.",
+      "Vegetation includes trees, shrubs, and cultivated garden plots."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of the central building cluster in the context image.",
+      "The long building with the white and blue roof in the context image corresponds to the structure with the white roof and blue section in the crop.",
+      "The grey tiled roof building in the context image corresponds to the damaged structure in the crop.",
+      "The solar panels visible on a roof in the context image are also visible in the crop."
+    ],
+    "description": "The images show a rural settlement with agricultural fields and mixed housing. A long building with a white roof and blue section is adjacent to a smaller structure with a grey tiled roof. The crop reveals the grey-tiled structure has a collapsed roof with exposed internal beams and debris, while the adjacent long building appears intact.",
+    "evidence_visible": [
+      "A building with a grey tiled roof has a significant portion of its roof collapsed, exposing dark internal beams and debris.",
+      "Adjacent to the damaged building is a long structure with a white roof and a blue corrugated metal section.",
+      "To the right, another roof features installed solar panels.",
+      "Vegetation surrounds the buildings."
+    ],
+    "unclear": [
+      "The exact cause of the roof damage (e.g., weather, structural failure, demolition).",
+      "The specific type of crops in the fields.",
+      "The exact date of the imagery."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a paved road, agricultural fields, and mixed residential structures.\",\n    \"A cluster of buildings in the center includes a long structure with a white roof and a blue corrugated metal section.\",\n    \"Adjacent to this long structure is a smaller building with a traditional grey tiled roof.\",\n    \"Vegetation includes trees, shrubs, and cultivated garden plots.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of the central building cluster in the context image.\",\n    \"The long building with the white and blue roof in the context image corresponds to the structure with the white roof and blue section in the crop.\",\n    \"The grey tiled roof building in the context image corresponds to the damaged structure in the crop.\",\n    \"The solar panels visible on a roof in the context image are also visible in the crop.\"\n  ],\n  \"description\": \"The images show a rural settlement with agricultural fields and mixed housing. A long building with a white roof and blue section is adjacent to a smaller structure with a grey tiled roof. The crop reveals the grey-tiled structure has a collapsed roof with exposed internal beams and debris, while the adjacent long building appears intact.\",\n  \"evidence_visible\": [\n    \"A building with a grey tiled roof has a significant portion of its roof collapsed, exposing dark internal beams and debris.\",\n    \"Adjacent to the damaged building is a long structure with a white roof and a blue corrugated metal section.\",\n    \"To the right, another roof features installed solar panels.\",\n    \"Vegetation surrounds the buildings.\"\n  ],\n  \"unclear\": [\n    \"The exact cause of the roof damage (e.g., weather, structural failure, demolition).\",\n    \"The specific type of crops in the fields.\",\n    \"The exact date of the imagery.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the image explicitly shows a total collapse of the roof structure with exposed internal beams, whereas building damage is a broader category that could include partial damage or non-collapse structural issues.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a building with a grey tiled roof has a significant portion of its roof collapsed, exposing dark internal beams and debris.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the image explicitly shows a total collapse of the roof structure with exposed internal beams, whereas building damage is a broader category that could include partial damage or non-collapse structural issues.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a building with a grey tiled roof has a significant portion of its roof collapsed, exposing dark internal beams and debris.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a building with a grey tiled roof where a significant portion of the roof structure has collapsed, exposing dark internal beams and debris. This directly supports the claim of a collapsed house wall/roof.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays a building with a grey tiled roof that has suffered significant structural failure, with the roof partially caved in and internal beams exposed. This constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a building with a grey tiled roof where a significant portion of the roof structure has collapsed, exposing dark internal beams and debris. This directly supports the claim of a collapsed house wall/roof.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a building with a grey tiled roof that has suffered significant structural failure, with the roof partially caved in and internal beams exposed. This constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e205a4842adabd18bc10",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-11083-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-11083-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved parking lot with multiple white and dark vehicles.",
+      "Adjacent to the lot is a long, single-story building with a red-tiled roof and a smaller structure with a blue roof and solar panels.",
+      "A multi-lane highway runs along the top edge with visible traffic.",
+      "To the right of a central fence line is a dirt area containing a large mound covered by a green mesh tarp.",
+      "A yellow construction vehicle is visible in the lower right corner of the dirt area."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in crop of the large mound covered in green mesh located in the dirt area on the right side of the first image.",
+      "The spatial relationship confirms the mound is situated between a line of trees and a pile of dark material."
+    ],
+    "description": "The images show an industrial or commercial site with a parking lot and buildings next to a highway. A dirt area contains a large mound covered by a green mesh tarp, which is shown in detail in the second image. A yellow construction vehicle is present nearby.",
+    "evidence_visible": [
+      "Close-up of a large, irregular mound of earth or sand.",
+      "The mound is partially covered by a green, semi-transparent mesh or tarp.",
+      "Surrounding the mound are dry, brown vegetation, small trees, and a pile of dark material to the right.",
+      "A white vehicle is visible in the background near the tree line."
+    ],
+    "unclear": [
+      "The specific material contained under the green mesh.",
+      "The exact function of the site (e.g., construction, storage, agriculture).",
+      "The identity of the vehicles or the specific location."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a paved parking lot with multiple white and dark vehicles.\",\n    \"Adjacent to the lot is a long, single-story building with a red-tiled roof and a smaller structure with a blue roof and solar panels.\",\n    \"A multi-lane highway runs along the top edge with visible traffic.\",\n    \"To the right of a central fence line is a dirt area containing a large mound covered by a green mesh tarp.\",\n    \"A yellow construction vehicle is visible in the lower right corner of the dirt area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in crop of the large mound covered in green mesh located in the dirt area on the right side of the first image.\",\n    \"The spatial relationship confirms the mound is situated between a line of trees and a pile of dark material.\"\n  ],\n  \"description\": \"The images show an industrial or commercial site with a parking lot and buildings next to a highway. A dirt area contains a large mound covered by a green mesh tarp, which is shown in detail in the second image. A yellow construction vehicle is present nearby.\",\n  \"evidence_visible\": [\n    \"Close-up of a large, irregular mound of earth or sand.\",\n    \"The mound is partially covered by a green, semi-transparent mesh or tarp.\",\n    \"Surrounding the mound are dry, brown vegetation, small trees, and a pile of dark material to the right.\",\n    \"A white vehicle is visible in the background near the tree line.\"\n  ],\n  \"unclear\": [\n    \"The specific material contained under the green mesh.\",\n    \"The exact function of the site (e.g., construction, storage, agriculture).\",\n    \"The identity of the vehicles or the specific location.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous green mesh covering the majority of the mound, whereas incomplete soil cover would show significant exposed soil areas.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large mound of exposed soil covered by a green mesh tarp, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous green mesh covering the majority of the mound, whereas incomplete soil cover would show significant exposed soil areas.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large mound of exposed soil covered by a green mesh tarp, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large mound of exposed soil covered by a green mesh tarp, which directly supports the claim of bare soil netting. The claim that this is not supported is contradicted by the visible evidence.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image does not show a large mound of exposed soil covered by a green mesh tarp."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a large mound of exposed soil covered by a green mesh tarp. The covering is visibly incomplete, as a significant portion of the soil is exposed. This directly supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large mound of exposed soil covered by a green mesh tarp, which directly supports the claim of bare soil netting. The claim that this is not supported is contradicted by the visible evidence.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image does not show a large mound of exposed soil covered by a green mesh tarp.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a large mound of exposed soil covered by a green mesh tarp. The covering is visibly incomplete, as a significant portion of the soil is exposed. This directly supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

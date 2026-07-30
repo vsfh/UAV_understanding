@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_95425c8f84741dcd4187",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0922-3337-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0922-3337-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with rectangular green agricultural fields separated by narrow waterways and dirt paths.",
+      "A large industrial building with a blue corrugated metal roof and a concrete apron is situated on the right side.",
+      "A residential house with a red tiled roof and a small courtyard is located on the left side, adjacent to a paved road.",
+      "Power lines run horizontally across the scene, crossing over the road and fields."
+    ],
+    "cross_view_relations": [
+      "The house with the red roof and white walls in the context image is the same structure shown in the evidence image.",
+      "The evidence image provides a closer view of the house, revealing a flat-roofed extension and a blue container in the yard.",
+      "The green fields surrounding the house in the evidence image match the vegetation and layout of the fields in the context image."
+    ],
+    "description": "The images show a rural area with green fields, a canal, and a large blue-roofed building. A specific house with a red roof and white walls is visible in both views, with the evidence image offering a closer look at its yard and flat-roofed extension.",
+    "evidence_visible": [
+      "A single-story house with white walls and a red pitched roof.",
+      "An attached flat-roofed section with dark window openings.",
+      "A small blue container or shed in the yard.",
+      "Surrounding green fields and a paved driveway."
+    ],
+    "unclear": [
+      "The specific type of crop growing in the fields.",
+      "The function or business type of the large blue-roofed building.",
+      "The exact date the images were taken."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape with rectangular green agricultural fields separated by narrow waterways and dirt paths.\",\n    \"A large industrial building with a blue corrugated metal roof and a concrete apron is situated on the right side.\",\n    \"A residential house with a red tiled roof and a small courtyard is located on the left side, adjacent to a paved road.\",\n    \"Power lines run horizontally across the scene, crossing over the road and fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The house with the red roof and white walls in the context image is the same structure shown in the evidence image.\",\n    \"The evidence image provides a closer view of the house, revealing a flat-roofed extension and a blue container in the yard.\",\n    \"The green fields surrounding the house in the evidence image match the vegetation and layout of the fields in the context image.\"\n  ],\n  \"description\": \"The images show a rural area with green fields, a canal, and a large blue-roofed building. A specific house with a red roof and white walls is visible in both views, with the evidence image offering a closer look at its yard and flat-roofed extension.\",\n  \"evidence_visible\": [\n    \"A single-story house with white walls and a red pitched roof.\",\n    \"An attached flat-roofed section with dark window openings.\",\n    \"A small blue container or shed in the yard.\",\n    \"Surrounding green fields and a paved driveway.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop growing in the fields.\",\n    \"The function or business type of the large blue-roofed building.\",\n    \"The exact date the images were taken.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence shows extensive green vegetation covering the fields, not bare soil. The visible structures are greenhouses or agricultural tunnels, not dust-control netting. There is no visual evidence of exposed soil covered by dust-control netting.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The image evidence shows fields covered in green crops and agricultural structures (greenhouses/tunnels). There is no visible evidence of soil for which protective covering is incomplete; the fields appear fully vegetated or covered by structures.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence shows extensive green vegetation covering the fields, not bare soil. The visible structures are greenhouses or agricultural tunnels, not dust-control netting. There is no visual evidence of exposed soil covered by dust-control netting.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows fields covered in green crops and agricultural structures (greenhouses/tunnels). There is no visible evidence of soil for which protective covering is incomplete; the fields appear fully vegetated or covered by structures.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

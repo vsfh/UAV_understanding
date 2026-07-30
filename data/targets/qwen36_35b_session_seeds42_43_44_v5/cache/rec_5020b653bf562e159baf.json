@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_5020b653bf562e159baf",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1008-6702-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1008-6702-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a large industrial building with a blue roof covered in solar panels.",
+      "A paved road runs vertically through the scene.",
+      "To the right of the road, there is a large open yard containing piles of dark material.",
+      "Green mesh netting is placed over sections of the dark material piles.",
+      "A white truck is parked near the building, and several cars are parked in a lot.",
+      "Agricultural fields are visible in the upper left corner."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the area to the right of the road in the context image.",
+      "The green mesh netting and the dark material piles in the crop correspond to the same features in the context image.",
+      "The road edge and the line of trees separating the road from the yard are visible in both views."
+    ],
+    "description": "An aerial view shows a large industrial building with solar panels next to a road. Adjacent to the road is a yard containing large piles of dark material, partially covered by green mesh netting. The crop provides a closer look at the texture of the material and the placement of the netting.",
+    "evidence_visible": [
+      "Close-up of a large pile of dark, granular material.",
+      "Green mesh netting is draped over specific sections of the pile.",
+      "A line of green trees separates the material pile from a paved road with white lane markings.",
+      "Some white debris or bags are visible near the edge of the pile by the trees."
+    ],
+    "unclear": [
+      "The specific type of dark material (e.g., coal, soil, gravel).",
+      "The purpose of the green netting (e.g., dust control, erosion prevention).",
+      "The exact dimensions of the piles.",
+      "The identity of the white bags/debris."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a large industrial building with a blue roof covered in solar panels.\",\n    \"A paved road runs vertically through the scene.\",\n    \"To the right of the road, there is a large open yard containing piles of dark material.\",\n    \"Green mesh netting is placed over sections of the dark material piles.\",\n    \"A white truck is parked near the building, and several cars are parked in a lot.\",\n    \"Agricultural fields are visible in the upper left corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the area to the right of the road in the context image.\",\n    \"The green mesh netting and the dark material piles in the crop correspond to the same features in the context image.\",\n    \"The road edge and the line of trees separating the road from the yard are visible in both views.\"\n  ],\n  \"description\": \"An aerial view shows a large industrial building with solar panels next to a road. Adjacent to the road is a yard containing large piles of dark material, partially covered by green mesh netting. The crop provides a closer look at the texture of the material and the placement of the netting.\",\n  \"evidence_visible\": [\n    \"Close-up of a large pile of dark, granular material.\",\n    \"Green mesh netting is draped over specific sections of the pile.\",\n    \"A line of green trees separates the material pile from a paved road with white lane markings.\",\n    \"Some white debris or bags are visible near the edge of the pile by the trees.\"\n  ],\n  \"unclear\": [\n    \"The specific type of dark material (e.g., coal, soil, gravel).\",\n    \"The purpose of the green netting (e.g., dust control, erosion prevention).\",\n    \"The exact dimensions of the piles.\",\n    \"The identity of the white bags/debris.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the former implies the presence of the netting as a feature, while the latter implies a failure of coverage; visually, the netting is present and deployed over the piles, distinguishing it from a state of incomplete cover.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large yard containing piles of dark material, partially covered by green mesh netting, adjacent to a paved road.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the former implies the presence of the netting as a feature, while the latter implies a failure of coverage; visually, the netting is present and deployed over the piles, distinguishing it from a state of incomplete cover.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large yard containing piles of dark material, partially covered by green mesh netting, adjacent to a paved road.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a large yard with piles of dark material adjacent to a paved road. Portions of these piles are covered by green mesh netting, while other parts remain exposed. This visual evidence directly supports the description of bare soil netting in a yard with dark material piles.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays piles of dark material where the green protective covering is not continuous. There are visible gaps where the material is exposed, confirming that the soil cover is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a large yard with piles of dark material adjacent to a paved road. Portions of these piles are covered by green mesh netting, while other parts remain exposed. This visual evidence directly supports the description of bare soil netting in a yard with dark material piles.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays piles of dark material where the green protective covering is not continuous. There are visible gaps where the material is exposed, confirming that the soil cover is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

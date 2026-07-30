@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b5984ce5aafb3c4502e5",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0104-3014-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0104-3014-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a network of rectangular agricultural fields with green crops and brown soil.",
+      "A winding river or canal runs through the right side of the frame.",
+      "A dense cluster of multi-story residential buildings is situated in the upper-left quadrant.",
+      "Narrow paved roads separate the fields and connect the residential areas.",
+      "A small rectangular pond is visible on the far left edge."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a high-magnification view of the residential cluster located in the upper-left section of the wide context image.",
+      "The straight road running vertically through the center of the crop corresponds to the road network visible in the wider shot.",
+      "The green fields in the background of the crop match the agricultural plots seen in the context image."
+    ],
+    "description": "The wide image shows a rural area with fields, a river, and a village. The crop zooms in on the village, revealing multi-story houses with varied roof colors, including blue and red, alongside narrow roads and small garden plots.",
+    "evidence_visible": [
+      "A cluster of residential buildings, mostly 2-3 stories high.",
+      "Houses feature flat or slightly pitched roofs in colors including white, grey, red, and blue.",
+      "Solar water heaters are visible on the roof of a white building in the center.",
+      "A narrow paved road runs vertically through the center of the frame.",
+      "Small garden plots with green vegetation are visible in the foreground.",
+      "Construction materials or debris are piled near a house with a blue roof."
+    ],
+    "unclear": [
+      "Specific activities or events occurring on the roads.",
+      "Exact number of people or vehicles.",
+      "Legal status or ownership of the properties.",
+      "Specific crop types in the fields."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a network of rectangular agricultural fields with green crops and brown soil.\",\n    \"A winding river or canal runs through the right side of the frame.\",\n    \"A dense cluster of multi-story residential buildings is situated in the upper-left quadrant.\",\n    \"Narrow paved roads separate the fields and connect the residential areas.\",\n    \"A small rectangular pond is visible on the far left edge.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a high-magnification view of the residential cluster located in the upper-left section of the wide context image.\",\n    \"The straight road running vertically through the center of the crop corresponds to the road network visible in the wider shot.\",\n    \"The green fields in the background of the crop match the agricultural plots seen in the context image.\"\n  ],\n  \"description\": \"The wide image shows a rural area with fields, a river, and a village. The crop zooms in on the village, revealing multi-story houses with varied roof colors, including blue and red, alongside narrow roads and small garden plots.\",\n  \"evidence_visible\": [\n    \"A cluster of residential buildings, mostly 2-3 stories high.\",\n    \"Houses feature flat or slightly pitched roofs in colors including white, grey, red, and blue.\",\n    \"Solar water heaters are visible on the roof of a white building in the center.\",\n    \"A narrow paved road runs vertically through the center of the frame.\",\n    \"Small garden plots with green vegetation are visible in the foreground.\",\n    \"Construction materials or debris are piled near a house with a blue roof.\"\n  ],\n  \"unclear\": [\n    \"Specific activities or events occurring on the roads.\",\n    \"Exact number of people or vehicles.\",\n    \"Legal status or ownership of the properties.\",\n    \"Specific crop types in the fields.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a distinct pile of construction materials and debris at the site, which indicates an active demolition process rather than just structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a house with a blue roof surrounded by a pile of construction materials and debris, indicating active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a distinct pile of construction materials and debris at the site, which indicates an active demolition process rather than just structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a house with a blue roof surrounded by a pile of construction materials and debris, indicating active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence explicitly shows a house with a blue roof surrounded by a pile of construction materials and debris, which directly supports the claim of active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image evidence shows a house with a blue roof surrounded by a pile of construction materials and debris, which directly supports the claim of active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence explicitly shows a house with a blue roof surrounded by a pile of construction materials and debris, which directly supports the claim of active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows a house with a blue roof surrounded by a pile of construction materials and debris, which directly supports the claim of active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

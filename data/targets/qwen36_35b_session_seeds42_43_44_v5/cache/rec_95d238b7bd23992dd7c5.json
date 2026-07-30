@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_95d238b7bd23992dd7c5",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0801-4241-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0801-4241-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with rectangular green agricultural fields separated by earthen ridges.",
+      "A paved road runs diagonally through the fields, lined with small trees and utility poles.",
+      "A residential cluster with multi-story houses is visible in the upper left corner.",
+      "A small structure with a blue base and a brown roof is situated on the roadside.",
+      "A body of water is visible in the upper right corner."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the specific roadside structure seen in the first image.",
+      "The spatial relationship between the structure, the road, and the adjacent fields is consistent across both views."
+    ],
+    "description": "The images show a rural agricultural area with green fields and a paved road. A small roadside structure with a blue base and brown roof is visible. The second image provides a closer view of this structure, revealing a white container-like object and some equipment on the blue platform, situated next to a row of trees.",
+    "evidence_visible": [
+      "A small, rectangular structure with a blue base and a brown, sloped roof.",
+      "A white, box-like object, possibly a container, is placed on the blue base.",
+      "Some indistinct equipment or materials are visible on the blue platform.",
+      "The structure is located on a grassy verge next to a paved road and a row of trees."
+    ],
+    "unclear": [
+      "The specific function or business category of the roadside structure.",
+      "The exact contents of the white container or equipment.",
+      "The ownership or legal status of the structure."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape with rectangular green agricultural fields separated by earthen ridges.\",\n    \"A paved road runs diagonally through the fields, lined with small trees and utility poles.\",\n    \"A residential cluster with multi-story houses is visible in the upper left corner.\",\n    \"A small structure with a blue base and a brown roof is situated on the roadside.\",\n    \"A body of water is visible in the upper right corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the specific roadside structure seen in the first image.\",\n    \"The spatial relationship between the structure, the road, and the adjacent fields is consistent across both views.\"\n  ],\n  \"description\": \"The images show a rural agricultural area with green fields and a paved road. A small roadside structure with a blue base and brown roof is visible. The second image provides a closer view of this structure, revealing a white container-like object and some equipment on the blue platform, situated next to a row of trees.\",\n  \"evidence_visible\": [\n    \"A small, rectangular structure with a blue base and a brown, sloped roof.\",\n    \"A white, box-like object, possibly a container, is placed on the blue base.\",\n    \"Some indistinct equipment or materials are visible on the blue platform.\",\n    \"The structure is located on a grassy verge next to a paved road and a row of trees.\"\n  ],\n  \"unclear\": [\n    \"The specific function or business category of the roadside structure.\",\n    \"The exact contents of the white container or equipment.\",\n    \"The ownership or legal status of the structure.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific nature of the structure; the image shows a small roadside structure that resembles a collapsed wall, whereas building damage is a broader category of structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a small roadside structure with a blue base and brown roof that appears to be a collapsed or damaged wall.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific nature of the structure; the image shows a small roadside structure that resembles a collapsed wall, whereas building damage is a broader category of structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a small roadside structure with a blue base and brown roof that appears to be a collapsed or damaged wall.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a small roadside structure with a blue base and a brown roof. The structure appears intact and upright, not collapsed. There is no visual evidence of a collapsed house wall.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The structure is a collapsed house wall.",
+        "The structure is damaged."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a small roadside structure with a blue base and a brown roof. The structure appears intact and upright, not damaged. There is no visual evidence of structural damage to a building.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The structure is a building.",
+        "The structure has visible structural damage."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a small roadside structure with a blue base and a brown roof. The structure appears intact and upright, not collapsed. There is no visual evidence of a collapsed house wall.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The structure is a collapsed house wall.\",\n      \"The structure is damaged.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a small roadside structure with a blue base and a brown roof. The structure appears intact and upright, not damaged. There is no visual evidence of structural damage to a building.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The structure is a building.\",\n      \"The structure has visible structural damage.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

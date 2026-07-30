@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_579623c825b534baae65",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1028-1172-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1028-1172-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a paved road running vertically on the left and a canal on the right.",
+      "Residential buildings with grey and red roofs are clustered along the road.",
+      "Agricultural plots with brown soil and green vegetation are situated between the road and the canal.",
+      "A large building complex with a blue tarp on the roof is visible in the lower center.",
+      "Trees line the canal and the road."
+    ],
+    "cross_view_relations": [
+      "The crop image shows a specific plot of tilled brown land adjacent to a paved road with utility poles.",
+      "This plot corresponds to the agricultural area located between the road and the canal in the wider context image.",
+      "The blue tarp visible in the crop is located on a structure within the larger building complex seen in the context image.",
+      "The road in the crop matches the road on the left side of the context image."
+    ],
+    "description": "The images show a rural area with a road, canal, and agricultural plots. The crop highlights a tilled field next to the road and a blue tarp on a nearby structure, which are visible in the wider context view.",
+    "evidence_visible": [
+      "A rectangular plot of tilled brown soil.",
+      "A small blue structure or tarp on the ground within the plot.",
+      "A paved road with white lane markings and utility poles running along the right edge of the plot.",
+      "Green vegetation and trees bordering the plot on the left.",
+      "A pile of debris or construction materials in the lower right corner."
+    ],
+    "unclear": [
+      "The specific type of crops or plants in the agricultural plots.",
+      "The exact purpose of the blue tarp or structure.",
+      "The contents of the debris pile.",
+      "The specific location or address of the scene."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a paved road running vertically on the left and a canal on the right.\",\n    \"Residential buildings with grey and red roofs are clustered along the road.\",\n    \"Agricultural plots with brown soil and green vegetation are situated between the road and the canal.\",\n    \"A large building complex with a blue tarp on the roof is visible in the lower center.\",\n    \"Trees line the canal and the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image shows a specific plot of tilled brown land adjacent to a paved road with utility poles.\",\n    \"This plot corresponds to the agricultural area located between the road and the canal in the wider context image.\",\n    \"The blue tarp visible in the crop is located on a structure within the larger building complex seen in the context image.\",\n    \"The road in the crop matches the road on the left side of the context image.\"\n  ],\n  \"description\": \"The images show a rural area with a road, canal, and agricultural plots. The crop highlights a tilled field next to the road and a blue tarp on a nearby structure, which are visible in the wider context view.\",\n  \"evidence_visible\": [\n    \"A rectangular plot of tilled brown soil.\",\n    \"A small blue structure or tarp on the ground within the plot.\",\n    \"A paved road with white lane markings and utility poles running along the right edge of the plot.\",\n    \"Green vegetation and trees bordering the plot on the left.\",\n    \"A pile of debris or construction materials in the lower right corner.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops or plants in the agricultural plots.\",\n    \"The exact purpose of the blue tarp or structure.\",\n    \"The contents of the debris pile.\",\n    \"The specific location or address of the scene.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue structure or tarp on the ground within the plot, which is consistent with dust-control netting rather than merely incomplete protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular plot of tilled brown soil adjacent to a paved road with utility poles, containing a distinct blue structure or tarp on the ground.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue structure or tarp on the ground within the plot, which is consistent with dust-control netting rather than merely incomplete protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular plot of tilled brown soil adjacent to a paved road with utility poles, containing a distinct blue structure or tarp on the ground.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a rectangular plot of tilled brown soil adjacent to a paved road with utility poles. Within this plot, there is a distinct blue structure (likely a shed) and a blue tarp on the ground, which directly supports the description in the statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a plot of bare brown soil with only a small section covered by a blue tarp. This visual evidence supports the claim that the soil cover is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a rectangular plot of tilled brown soil adjacent to a paved road with utility poles. Within this plot, there is a distinct blue structure (likely a shed) and a blue tarp on the ground, which directly supports the description in the statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a plot of bare brown soil with only a small section covered by a blue tarp. This visual evidence supports the claim that the soil cover is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

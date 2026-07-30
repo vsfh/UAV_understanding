@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_2ba60758464ee08ee787",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0308-4870-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0308-4870-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a residential area with a central paved road running vertically.",
+      "Rows of multi-story houses with red and grey pitched roofs line both sides of the street.",
+      "Numerous vehicles, including cars and vans, are parked along the road and in driveways.",
+      "Solar panels are visible on several rooftops.",
+      "A large rectangular plot of land with exposed earth is situated on the right side of the road."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the central section of the context image.",
+      "The crop focuses on the road segment and the buildings immediately adjacent to it.",
+      "The large rectangular plot of land visible in the context image is located just above the top edge of the crop frame.",
+      "The building with the grey roof and solar panels on the left side of the road is fully contained within the crop."
+    ],
+    "description": "The images show a high-angle aerial view of a residential street lined with houses featuring red and grey roofs. The crop provides a detailed look at the road surface, parked vehicles, and a building with solar panels on the left. A large, empty rectangular plot of land is visible in the wider context but sits just outside the crop's upper boundary.",
+    "evidence_visible": [
+      "Close-up of the asphalt road with yellow center lines.",
+      "A white car and a black car are parked on the left side of the road.",
+      "A red car is parked further up on the left.",
+      "A building with a grey roof and solar panels is visible on the left edge.",
+      "A building with a red roof and a curved glass structure on the ground floor is visible at the bottom.",
+      "A white van is parked on the right side of the road.",
+      "A small patch of green vegetation is visible in the bottom right corner."
+    ],
+    "unclear": [
+      "The specific license plate numbers of the vehicles.",
+      "The exact number of people inside the vehicles.",
+      "The specific type of construction or material of the empty plot of land.",
+      "The names or brands of any vehicles."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a residential area with a central paved road running vertically.\",\n    \"Rows of multi-story houses with red and grey pitched roofs line both sides of the street.\",\n    \"Numerous vehicles, including cars and vans, are parked along the road and in driveways.\",\n    \"Solar panels are visible on several rooftops.\",\n    \"A large rectangular plot of land with exposed earth is situated on the right side of the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the central section of the context image.\",\n    \"The crop focuses on the road segment and the buildings immediately adjacent to it.\",\n    \"The large rectangular plot of land visible in the context image is located just above the top edge of the crop frame.\",\n    \"The building with the grey roof and solar panels on the left side of the road is fully contained within the crop.\"\n  ],\n  \"description\": \"The images show a high-angle aerial view of a residential street lined with houses featuring red and grey roofs. The crop provides a detailed look at the road surface, parked vehicles, and a building with solar panels on the left. A large, empty rectangular plot of land is visible in the wider context but sits just outside the crop's upper boundary.\",\n  \"evidence_visible\": [\n    \"Close-up of the asphalt road with yellow center lines.\",\n    \"A white car and a black car are parked on the left side of the road.\",\n    \"A red car is parked further up on the left.\",\n    \"A building with a grey roof and solar panels is visible on the left edge.\",\n    \"A building with a red roof and a curved glass structure on the ground floor is visible at the bottom.\",\n    \"A white van is parked on the right side of the road.\",\n    \"A small patch of green vegetation is visible in the bottom right corner.\"\n  ],\n  \"unclear\": [\n    \"The specific license plate numbers of the vehicles.\",\n    \"The exact number of people inside the vehicles.\",\n    \"The specific type of construction or material of the empty plot of land.\",\n    \"The names or brands of any vehicles.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the absence of active construction equipment, scaffolding, or new structural elements on the site, which instead shows a cleared area of exposed earth.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a large rectangular plot of land with exposed earth and debris situated on the right side of the road, indicating a building has been removed.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the absence of active construction equipment, scaffolding, or new structural elements on the site, which instead shows a cleared area of exposed earth.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a large rectangular plot of land with exposed earth and debris situated on the right side of the road, indicating a building has been removed.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large rectangular plot of land situated on the right side of the road (relative to the vertical orientation of the street). This plot contains exposed earth, rubble, and debris, which visually confirms that a building has been removed or demolished.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image does not show an active general construction project. While there is a demolition site (empty lot with debris), there are no visible signs of active construction such as cranes, scaffolding, or workers building new structures. The surrounding buildings appear finished and occupied.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large rectangular plot of land situated on the right side of the road (relative to the vertical orientation of the street). This plot contains exposed earth, rubble, and debris, which visually confirms that a building has been removed or demolished.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image does not show an active general construction project. While there is a demolition site (empty lot with debris), there are no visible signs of active construction such as cranes, scaffolding, or workers building new structures. The surrounding buildings appear finished and occupied.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_cfd3b75ac7346fc50dcd",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0917-3233-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0917-3233-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring large rectangular plots of dense green crops, likely rice paddies, separated by dirt paths. A paved road runs horizontally through the center. Several residential buildings with red and grey roofs are situated on the right side, surrounded by trees and vegetation. A narrow waterway or canal is visible in the upper section."
+    ],
+    "cross_view_relations": [
+      "The context image provides the geographic setting for the evidence image. The evidence image appears to be a zoomed-in view of the area on the right side of the context image, specifically focusing on the cluster of houses and the adjacent vegetation."
+    ],
+    "description": "Aerial view of a rural area with green agricultural fields and residential buildings. The evidence image shows a closer view of the houses and surrounding trees, confirming the presence of a built-up area within the agricultural landscape.",
+    "evidence_visible": [
+      "Close-up view of a residential area with grey-tiled roofs. A concrete path or driveway is visible. Dense green trees and bushes surround the buildings. A patch of bare earth is visible near the vegetation. A blue tarp or plastic sheet is partially visible among the trees."
+    ],
+    "unclear": [
+      "Specific crop type in the fields",
+      "Exact number of buildings",
+      "Identity of people or vehicles (none clearly visible)",
+      "Specific purpose of the blue tarp"
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"Aerial view of a rural landscape featuring large rectangular plots of dense green crops, likely rice paddies, separated by dirt paths. A paved road runs horizontally through the center. Several residential buildings with red and grey roofs are situated on the right side, surrounded by trees and vegetation. A narrow waterway or canal is visible in the upper section.\"\n],\n\"cross_view_relations\": [\n\"The context image provides the geographic setting for the evidence image. The evidence image appears to be a zoomed-in view of the area on the right side of the context image, specifically focusing on the cluster of houses and the adjacent vegetation.\"\n],\n\"description\": \"Aerial view of a rural area with green agricultural fields and residential buildings. The evidence image shows a closer view of the houses and surrounding trees, confirming the presence of a built-up area within the agricultural landscape.\",\n\"evidence_visible\": [\n\"Close-up view of a residential area with grey-tiled roofs. A concrete path or driveway is visible. Dense green trees and bushes surround the buildings. A patch of bare earth is visible near the vegetation. A blue tarp or plastic sheet is partially visible among the trees.\"\n],\n\"unclear\": [\n\"Specific crop type in the fields\",\n\"Exact number of buildings\",\n\"Identity of people or vehicles (none clearly visible)\",\n\"Specific purpose of the blue tarp\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue netting material itself; the distinction is that the netting is present, whereas incomplete soil cover would imply a lack of such covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a patch of bare earth adjacent to a residential building and dense vegetation, partially covered by a blue plastic sheet or netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue netting material itself; the distinction is that the netting is present, whereas incomplete soil cover would imply a lack of such covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a patch of bare earth adjacent to a residential building and dense vegetation, partially covered by a blue plastic sheet or netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a patch of bare earth adjacent to a building and vegetation. A blue plastic sheet or netting is visible on the ground near the vegetation, partially covering the area. This matches the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a patch of bare earth. While there is a blue sheet nearby, it does not fully cover the soil patch, and the soil itself is exposed. This supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a patch of bare earth adjacent to a building and vegetation. A blue plastic sheet or netting is visible on the ground near the vegetation, partially covering the area. This matches the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a patch of bare earth. While there is a blue sheet nearby, it does not fully cover the soil patch, and the soil itself is exposed. This supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

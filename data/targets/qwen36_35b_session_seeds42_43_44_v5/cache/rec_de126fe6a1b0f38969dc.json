@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_de126fe6a1b0f38969dc",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/original/0204-4664-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/cropped/0204-4664-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape featuring a large rectangular agricultural field with rows of low-lying green crops.",
+      "A network of waterways and ponds surrounds the field, with a prominent canal running horizontally across the upper section.",
+      "Tall, dry reeds line the banks of the waterways.",
+      "A building with a blue roof is partially visible in the bottom right corner.",
+      "A small white structure is visible on a bank in the upper left quadrant."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a high-magnification view of the small white structure located on the bank in the upper left of the context image.",
+      "The cropped view confirms the structure is a small, rectangular building with a flat roof, situated on a patch of bare earth next to the canal.",
+      "The surrounding vegetation in the crop matches the dry reeds seen in the context image."
+    ],
+    "description": "An aerial view of a rural area with a large cultivated field and surrounding waterways. A cropped detail highlights a small, isolated white building situated on a bank next to a canal, surrounded by dry reeds and bare earth.",
+    "evidence_visible": [
+      "A small, single-story white building with a flat roof.",
+      "The building is situated on a rectangular plot of bare, brown earth.",
+      "A concrete path or foundation edge runs along the left side of the plot.",
+      "The structure is adjacent to a body of water lined with tall, dry reeds.",
+      "A utility pole is visible near the building."
+    ],
+    "unclear": [
+      "The specific architectural style or function of the small white building.",
+      "The exact condition of the building's interior or roof details.",
+      "The identity of any objects near the utility pole."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape featuring a large rectangular agricultural field with rows of low-lying green crops.\",\n    \"A network of waterways and ponds surrounds the field, with a prominent canal running horizontally across the upper section.\",\n    \"Tall, dry reeds line the banks of the waterways.\",\n    \"A building with a blue roof is partially visible in the bottom right corner.\",\n    \"A small white structure is visible on a bank in the upper left quadrant.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a high-magnification view of the small white structure located on the bank in the upper left of the context image.\",\n    \"The cropped view confirms the structure is a small, rectangular building with a flat roof, situated on a patch of bare earth next to the canal.\",\n    \"The surrounding vegetation in the crop matches the dry reeds seen in the context image.\"\n  ],\n  \"description\": \"An aerial view of a rural area with a large cultivated field and surrounding waterways. A cropped detail highlights a small, isolated white building situated on a bank next to a canal, surrounded by dry reeds and bare earth.\",\n  \"evidence_visible\": [\n    \"A small, single-story white building with a flat roof.\",\n    \"The building is situated on a rectangular plot of bare, brown earth.\",\n    \"A concrete path or foundation edge runs along the left side of the plot.\",\n    \"The structure is adjacent to a body of water lined with tall, dry reeds.\",\n    \"A utility pole is visible near the building.\"\n  ],\n  \"unclear\": [\n    \"The specific architectural style or function of the small white building.\",\n    \"The exact condition of the building's interior or roof details.\",\n    \"The identity of any objects near the utility pole.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows the total structural failure and caving in of the roof and walls (collapse), rather than just visible damage to the structure.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the cropped evidence image shows a small white building where the roof and upper walls have visibly caved in, leaving a structure with a flat, damaged profile.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the evidence shows the total structural failure and caving in of the roof and walls (collapse), rather than just visible damage to the structure.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the cropped evidence image shows a small white building where the roof and upper walls have visibly caved in, leaving a structure with a flat, damaged profile.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a small white building with a collapsed roof and upper walls, matching the description of a 'collapsed house wall' and a 'flat, damaged profile'.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays a building with significant structural damage, specifically a collapsed roof and walls, which supports the claim of visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a small white building with a collapsed roof and upper walls, matching the description of a 'collapsed house wall' and a 'flat, damaged profile'.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a building with significant structural damage, specifically a collapsed roof and walls, which supports the claim of visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

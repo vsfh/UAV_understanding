@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8b289aff8431594186ff",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1008-3457-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1008-3457-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area with large rectangular plots of green crops, likely rice paddies, separated by narrow dirt paths.",
+      "A paved road runs vertically through the center, intersecting with a horizontal road.",
+      "Several residential buildings with varying roof styles (grey tiles, red tiles, flat roofs) are visible.",
+      "A house with solar panels on its roof is located near the road intersection.",
+      "Vegetation includes trees lining the roads and small garden patches near houses."
+    ],
+    "cross_view_relations": [
+      "The zoomed-in crop shows a specific house with a black tiled roof and a small adjacent structure covered in green netting, located near the road intersection seen in the wide image.",
+      "The black car parked in the zoomed-in view is situated on a concrete pad next to a house with solar panels, which corresponds to the house visible in the wide image near the intersection.",
+      "The green crop field in the zoomed-in view is adjacent to the house with the black roof, matching the spatial arrangement in the wide image."
+    ],
+    "description": "The wide image shows a rural landscape with green crop fields, roads, and houses. The zoomed-in image focuses on a specific house with a black tiled roof, a small structure covered in green netting, and a black car parked nearby. This house is located near the road intersection visible in the wide image, confirming the spatial relationship between the structures and the surrounding agricultural land.",
+    "evidence_visible": [
+      "A house with a black tiled roof is visible.",
+      "A small, rectangular structure next to the house is covered with green netting or tarp.",
+      "A black car is parked on a concrete surface near a house with solar panels.",
+      "Green vegetation and crops are visible in the immediate vicinity of the houses.",
+      "A utility pole is present near the road."
+    ],
+    "unclear": [
+      "The exact type of crop in the fields.",
+      "The purpose of the structure covered in green netting.",
+      "The identity of the people or vehicles.",
+      "The specific location or address."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural area with large rectangular plots of green crops, likely rice paddies, separated by narrow dirt paths.\",\n    \"A paved road runs vertically through the center, intersecting with a horizontal road.\",\n    \"Several residential buildings with varying roof styles (grey tiles, red tiles, flat roofs) are visible.\",\n    \"A house with solar panels on its roof is located near the road intersection.\",\n    \"Vegetation includes trees lining the roads and small garden patches near houses.\"\n  ],\n  \"cross_view_relations\": [\n    \"The zoomed-in crop shows a specific house with a black tiled roof and a small adjacent structure covered in green netting, located near the road intersection seen in the wide image.\",\n    \"The black car parked in the zoomed-in view is situated on a concrete pad next to a house with solar panels, which corresponds to the house visible in the wide image near the intersection.\",\n    \"The green crop field in the zoomed-in view is adjacent to the house with the black roof, matching the spatial arrangement in the wide image.\"\n  ],\n  \"description\": \"The wide image shows a rural landscape with green crop fields, roads, and houses. The zoomed-in image focuses on a specific house with a black tiled roof, a small structure covered in green netting, and a black car parked nearby. This house is located near the road intersection visible in the wide image, confirming the spatial relationship between the structures and the surrounding agricultural land.\",\n  \"evidence_visible\": [\n    \"A house with a black tiled roof is visible.\",\n    \"A small, rectangular structure next to the house is covered with green netting or tarp.\",\n    \"A black car is parked on a concrete surface near a house with solar panels.\",\n    \"Green vegetation and crops are visible in the immediate vicinity of the houses.\",\n    \"A utility pole is present near the road.\"\n  ],\n  \"unclear\": [\n    \"The exact type of crop in the fields.\",\n    \"The purpose of the structure covered in green netting.\",\n    \"The identity of the people or vehicles.\",\n    \"The specific location or address.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the completeness of the coverage; the structure in the image is fully enclosed by the green netting, whereas incomplete soil cover would show exposed soil areas.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a small rectangular structure adjacent to a house with a black tiled roof that is completely covered by green netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the completeness of the coverage; the structure in the image is fully enclosed by the green netting, whereas incomplete soil cover would show exposed soil areas.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a small rectangular structure adjacent to a house with a black tiled roof that is completely covered by green netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a small rectangular structure adjacent to a house with a black tiled roof. However, the structure is not completely covered by green netting; the netting is draped over only a portion of the roof, leaving other parts exposed.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The structure is completely covered by green netting."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a small rectangular structure adjacent to a house with a black tiled roof. The structure has green netting covering only a portion of its roof, while other parts of the roof are exposed, indicating incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a small rectangular structure adjacent to a house with a black tiled roof. However, the structure is not completely covered by green netting; the netting is draped over only a portion of the roof, leaving other parts exposed.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The structure is completely covered by green netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a small rectangular structure adjacent to a house with a black tiled roof. The structure has green netting covering only a portion of its roof, while other parts of the roof are exposed, indicating incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

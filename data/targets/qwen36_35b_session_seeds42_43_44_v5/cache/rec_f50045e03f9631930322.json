@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_f50045e03f9631930322",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0108-1261-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0108-1261-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved parking lot adjacent to a residential area with agricultural fields in the background.",
+      "A multi-story building with a flat roof is situated on the left side of the lot.",
+      "A large rectangular shadow is cast across the pavement, indicating a tall structure nearby.",
+      "A road with moving traffic and a pedestrian crossing is visible at the bottom of the frame."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the flat-roofed building located on the left side of the parking lot in the context image.",
+      "The shadow cast by the building in the crop matches the large shadow visible in the context image.",
+      "The white and black cars parked near the building in the crop correspond to the vehicles visible in the context image."
+    ],
+    "description": "An aerial view shows a flat-roofed building next to a parking lot. The roof surface contains a rectangular area filled with rubble, bricks, and construction debris. Several vehicles are parked nearby, and a large shadow is cast across the pavement.",
+    "evidence_visible": [
+      "Top-down view of a flat concrete roof.",
+      "A rectangular section of the roof is filled with a pile of reddish bricks, broken concrete chunks, and rubble.",
+      "A white coiled hose or cable lies on the roof surface near the debris.",
+      "A white rectangular frame or object sits on the roof to the left of the debris pile.",
+      "Four vehicles (two white, two black) are parked in a row adjacent to the building wall.",
+      "A blue corrugated metal structure is visible on the ground to the right of the building."
+    ],
+    "unclear": [
+      "The specific purpose of the debris pile (e.g., construction, demolition, storage).",
+      "The identity of the vehicles.",
+      "The exact dimensions of the roof area."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a paved parking lot adjacent to a residential area with agricultural fields in the background.\",\n    \"A multi-story building with a flat roof is situated on the left side of the lot.\",\n    \"A large rectangular shadow is cast across the pavement, indicating a tall structure nearby.\",\n    \"A road with moving traffic and a pedestrian crossing is visible at the bottom of the frame.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the flat-roofed building located on the left side of the parking lot in the context image.\",\n    \"The shadow cast by the building in the crop matches the large shadow visible in the context image.\",\n    \"The white and black cars parked near the building in the crop correspond to the vehicles visible in the context image.\"\n  ],\n  \"description\": \"An aerial view shows a flat-roofed building next to a parking lot. The roof surface contains a rectangular area filled with rubble, bricks, and construction debris. Several vehicles are parked nearby, and a large shadow is cast across the pavement.\",\n  \"evidence_visible\": [\n    \"Top-down view of a flat concrete roof.\",\n    \"A rectangular section of the roof is filled with a pile of reddish bricks, broken concrete chunks, and rubble.\",\n    \"A white coiled hose or cable lies on the roof surface near the debris.\",\n    \"A white rectangular frame or object sits on the roof to the left of the debris pile.\",\n    \"Four vehicles (two white, two black) are parked in a row adjacent to the building wall.\",\n    \"A blue corrugated metal structure is visible on the ground to the right of the building.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the debris pile (e.g., construction, demolition, storage).\",\n    \"The identity of the vehicles.\",\n    \"The exact dimensions of the roof area.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between building demolition and building damage is the presence of a concentrated pile of loose rubble and debris on the roof surface, which indicates an active or recent demolition process rather than just visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the evidence shows a flat-roofed building with a rectangular section of the roof filled with a pile of reddish bricks, broken concrete chunks, and rubble, indicating active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is the presence of a concentrated pile of loose rubble and debris on the roof surface, which indicates an active or recent demolition process rather than just visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the evidence shows a flat-roofed building with a rectangular section of the roof filled with a pile of reddish bricks, broken concrete chunks, and rubble, indicating active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a flat-roofed building with a rectangular section of the roof filled with a pile of reddish bricks, broken concrete chunks, and rubble. This visual evidence directly supports the claim of active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a building with a flat roof that has a large section filled with rubble, bricks, and broken concrete. This constitutes visible structural damage to the building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a flat-roofed building with a rectangular section of the roof filled with a pile of reddish bricks, broken concrete chunks, and rubble. This visual evidence directly supports the claim of active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a building with a flat roof that has a large section filled with rubble, bricks, and broken concrete. This constitutes visible structural damage to the building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

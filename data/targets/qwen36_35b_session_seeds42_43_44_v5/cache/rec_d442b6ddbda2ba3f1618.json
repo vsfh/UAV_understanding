@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d442b6ddbda2ba3f1618",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0306-0446-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0306-0446-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multi-story residential buildings, paved roads, and a canal.",
+      "Large green agricultural fields with visible crop rows on the left side of the image.",
+      "Scattered vegetable gardens and small plots of land between the houses."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the central cluster of buildings and gardens seen in the context image.",
+      "The blue-roofed house and the red-roofed house in the crop correspond to the central structures in the context view.",
+      "The canal visible on the right side of the context image runs along the eastern edge of the area shown in the crop."
+    ],
+    "description": "The images show a rural village with residential buildings, roads, and a canal. The context view reveals surrounding green agricultural fields, while the linked crop provides a detailed view of the central residential cluster, highlighting vegetable gardens, a blue-roofed house, and a red-roofed house.",
+    "evidence_visible": [
+      "A two-story building with a blue tiled roof and a solar water heater on the roof.",
+      "A single-story building with a red corrugated roof.",
+      "A two-story building with a grey tiled roof and an open balcony area.",
+      "Several rectangular garden plots containing green leafy vegetables.",
+      "A patch of dry, brown vegetation or thatch in the center of the plot.",
+      "A white car parked near the blue-roofed building.",
+      "Various construction materials and debris scattered on the ground."
+    ],
+    "unclear": [
+      "The specific type of vegetables in the garden plots.",
+      "The exact condition of the building with the grey roof (e.g., under construction vs. abandoned).",
+      "The contents of the scattered debris and materials."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with multi-story residential buildings, paved roads, and a canal.\",\n    \"Large green agricultural fields with visible crop rows on the left side of the image.\",\n    \"Scattered vegetable gardens and small plots of land between the houses.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the central cluster of buildings and gardens seen in the context image.\",\n    \"The blue-roofed house and the red-roofed house in the crop correspond to the central structures in the context view.\",\n    \"The canal visible on the right side of the context image runs along the eastern edge of the area shown in the crop.\"\n  ],\n  \"description\": \"The images show a rural village with residential buildings, roads, and a canal. The context view reveals surrounding green agricultural fields, while the linked crop provides a detailed view of the central residential cluster, highlighting vegetable gardens, a blue-roofed house, and a red-roofed house.\",\n  \"evidence_visible\": [\n    \"A two-story building with a blue tiled roof and a solar water heater on the roof.\",\n    \"A single-story building with a red corrugated roof.\",\n    \"A two-story building with a grey tiled roof and an open balcony area.\",\n    \"Several rectangular garden plots containing green leafy vegetables.\",\n    \"A patch of dry, brown vegetation or thatch in the center of the plot.\",\n    \"A white car parked near the blue-roofed building.\",\n    \"Various construction materials and debris scattered on the ground.\"\n  ],\n  \"unclear\": [\n    \"The specific type of vegetables in the garden plots.\",\n    \"The exact condition of the building with the grey roof (e.g., under construction vs. abandoned).\",\n    \"The contents of the scattered debris and materials.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "the visible factor separating building demolition from building damage, or an explicit statement that it is not visible",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a two-story building with a grey tiled roof and an open balcony area that appears to be undergoing active or recent demolition, characterized by exposed structural elements and a lack of finished interior walls.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"the visible factor separating building demolition from building damage, or an explicit statement that it is not visible\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a two-story building with a grey tiled roof and an open balcony area that appears to be undergoing active or recent demolition, characterized by exposed structural elements and a lack of finished interior walls.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a two-story building with a grey tiled roof and an open balcony area. The structure appears intact with no visible signs of active demolition, exposed structural elements, or lack of finished interior walls. The claim of demolition is contradicted by the visual evidence of a standing, finished building.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The building is undergoing active or recent demolition.",
+        "The building is characterized by exposed structural elements.",
+        "The building lacks finished interior walls."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a two-story building with a grey tiled roof and an open balcony area. The structure appears intact with no visible signs of structural damage. The claim of visible structural damage is contradicted by the visual evidence of a standing, finished building.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The building has visible structural damage."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a two-story building with a grey tiled roof and an open balcony area. The structure appears intact with no visible signs of active demolition, exposed structural elements, or lack of finished interior walls. The claim of demolition is contradicted by the visual evidence of a standing, finished building.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The building is undergoing active or recent demolition.\",\n      \"The building is characterized by exposed structural elements.\",\n      \"The building lacks finished interior walls.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a two-story building with a grey tiled roof and an open balcony area. The structure appears intact with no visible signs of structural damage. The claim of visible structural damage is contradicted by the visual evidence of a standing, finished building.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The building has visible structural damage.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

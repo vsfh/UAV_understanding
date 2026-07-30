@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a5b7ac9df47acfba6dfa",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0313-6561-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0313-6561-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a large, rectangular, green-water pond surrounded by a paved road.",
+      "Extensive green agricultural fields with visible crop rows.",
+      "A cluster of buildings with blue and grey roofs situated near the pond.",
+      "A narrow waterway or canal running through the fields.",
+      "A paved road intersects the scene, crossing over the waterway via a small bridge."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a zoomed-in view of the area located at the bottom center of the context image.",
+      "The evidence view focuses on the bridge crossing the waterway and the buildings situated immediately to the right of the canal.",
+      "The orange object visible in the evidence view corresponds to the roof of the building complex seen in the context view."
+    ],
+    "description": "The images show a rural area with a large pond and green fields. The evidence view zooms in on a bridge crossing a narrow canal, adjacent to a building with an orange roof and a concrete structure. The surrounding fields contain green crops and yellow flowers.",
+    "evidence_visible": [
+      "A narrow, dark waterway with visible banks.",
+      "A small bridge crossing the waterway.",
+      "A building with a bright orange roof and a flat concrete roof section.",
+      "Green crops planted in rectangular plots next to the waterway.",
+      "Yellow flowers (likely rapeseed) in the upper right corner.",
+      "Bare trees along the waterway bank."
+    ],
+    "unclear": [
+      "The specific type of crops in the fields.",
+      "The exact function of the buildings.",
+      "The water quality or depth of the pond and canal.",
+      "The presence of people or vehicles on the bridge."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a large, rectangular, green-water pond surrounded by a paved road.\",\n    \"Extensive green agricultural fields with visible crop rows.\",\n    \"A cluster of buildings with blue and grey roofs situated near the pond.\",\n    \"A narrow waterway or canal running through the fields.\",\n    \"A paved road intersects the scene, crossing over the waterway via a small bridge.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a zoomed-in view of the area located at the bottom center of the context image.\",\n    \"The evidence view focuses on the bridge crossing the waterway and the buildings situated immediately to the right of the canal.\",\n    \"The orange object visible in the evidence view corresponds to the roof of the building complex seen in the context view.\"\n  ],\n  \"description\": \"The images show a rural area with a large pond and green fields. The evidence view zooms in on a bridge crossing a narrow canal, adjacent to a building with an orange roof and a concrete structure. The surrounding fields contain green crops and yellow flowers.\",\n  \"evidence_visible\": [\n    \"A narrow, dark waterway with visible banks.\",\n    \"A small bridge crossing the waterway.\",\n    \"A building with a bright orange roof and a flat concrete roof section.\",\n    \"Green crops planted in rectangular plots next to the waterway.\",\n    \"Yellow flowers (likely rapeseed) in the upper right corner.\",\n    \"Bare trees along the waterway bank.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the fields.\",\n    \"The exact function of the buildings.\",\n    \"The water quality or depth of the pond and canal.\",\n    \"The presence of people or vehicles on the bridge.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the state of the structure; the building appears to be a static, possibly ruined or abandoned structure rather than an active construction site with cranes, scaffolding, or new materials.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the evidence image shows a building with a bright orange roof and a flat concrete roof section situated next to a narrow waterway, appearing as a structure in a state of disrepair or partial demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the state of the structure; the building appears to be a static, possibly ruined or abandoned structure rather than an active construction site with cranes, scaffolding, or new materials.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the evidence image shows a building with a bright orange roof and a flat concrete roof section situated next to a narrow waterway, appearing as a structure in a state of disrepair or partial demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a building with a bright orange roof and a flat concrete roof section situated next to a narrow waterway. The structure appears to be in a state of disrepair or partial demolition, consistent with the description.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image does not show an active general construction project. Instead, it depicts a building in a state of disrepair or partial demolition next to a waterway. There are no visible signs of active construction such as cranes, scaffolding, or workers.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a building with a bright orange roof and a flat concrete roof section situated next to a narrow waterway. The structure appears to be in a state of disrepair or partial demolition, consistent with the description.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image does not show an active general construction project. Instead, it depicts a building in a state of disrepair or partial demolition next to a waterway. There are no visible signs of active construction such as cranes, scaffolding, or workers.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

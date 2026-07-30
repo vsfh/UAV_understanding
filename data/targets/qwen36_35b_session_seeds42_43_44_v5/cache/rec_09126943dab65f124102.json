@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_09126943dab65f124102",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0327-2745-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0327-2745-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a network of waterways and roads.",
+      "Fields of bright yellow flowers (rapeseed) and green crops surround the buildings.",
+      "Houses feature varied roofing materials, including red tiles, grey tiles, and flat concrete.",
+      "A large pond is visible in the upper right quadrant.",
+      "Vegetation includes deciduous trees with bare branches and evergreen shrubs."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the central cluster of buildings in the context image.",
+      "The specific house with the reddish-brown roof and the adjacent grey-roofed structure in the crop correspond to the buildings located centrally in the wide view.",
+      "The road running horizontally across the crop is the same road segment visible in the middle of the context image.",
+      "The yellow flower field to the right of the road in the crop matches the field in the upper right of the context image."
+    ],
+    "description": "The images depict a rural village with mixed residential structures and agricultural land. The wide view shows the layout of houses, waterways, and yellow rapeseed fields. The cropped view provides a detailed look at a specific cluster of buildings, highlighting a house with a reddish roof, a grey-roofed structure, and a pile of wood and debris in the foreground.",
+    "evidence_visible": [
+      "A house with a reddish-brown pitched roof stands next to a structure with a grey tiled roof.",
+      "A pile of wooden planks and debris is visible in the lower right corner of the crop.",
+      "A blue three-wheeled vehicle is parked on the road.",
+      "Construction materials or debris are scattered on the flat roof of a central building.",
+      "A concrete wall runs along the road, separating the properties from the street.",
+      "Yellow flowers are growing in a field adjacent to the road."
+    ],
+    "unclear": [
+      "The specific activity of the people near the blue vehicle is unclear.",
+      "The exact nature of the debris on the flat roof is unclear.",
+      "The ownership or legal status of the buildings is not visible."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a network of waterways and roads.\",\n    \"Fields of bright yellow flowers (rapeseed) and green crops surround the buildings.\",\n    \"Houses feature varied roofing materials, including red tiles, grey tiles, and flat concrete.\",\n    \"A large pond is visible in the upper right quadrant.\",\n    \"Vegetation includes deciduous trees with bare branches and evergreen shrubs.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the central cluster of buildings in the context image.\",\n    \"The specific house with the reddish-brown roof and the adjacent grey-roofed structure in the crop correspond to the buildings located centrally in the wide view.\",\n    \"The road running horizontally across the crop is the same road segment visible in the middle of the context image.\",\n    \"The yellow flower field to the right of the road in the crop matches the field in the upper right of the context image.\"\n  ],\n  \"description\": \"The images depict a rural village with mixed residential structures and agricultural land. The wide view shows the layout of houses, waterways, and yellow rapeseed fields. The cropped view provides a detailed look at a specific cluster of buildings, highlighting a house with a reddish roof, a grey-roofed structure, and a pile of wood and debris in the foreground.\",\n  \"evidence_visible\": [\n    \"A house with a reddish-brown pitched roof stands next to a structure with a grey tiled roof.\",\n    \"A pile of wooden planks and debris is visible in the lower right corner of the crop.\",\n    \"A blue three-wheeled vehicle is parked on the road.\",\n    \"Construction materials or debris are scattered on the flat roof of a central building.\",\n    \"A concrete wall runs along the road, separating the properties from the street.\",\n    \"Yellow flowers are growing in a field adjacent to the road.\"\n  ],\n  \"unclear\": [\n    \"The specific activity of the people near the blue vehicle is unclear.\",\n    \"The exact nature of the debris on the flat roof is unclear.\",\n    \"The ownership or legal status of the buildings is not visible.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a completely collapsed roof structure and the accumulation of debris on the ground, which indicates a total structural failure or intentional dismantling rather than partial damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the central structure in the crop exhibits a collapsed roof with exposed internal framing and scattered debris, indicating active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a completely collapsed roof structure and the accumulation of debris on the ground, which indicates a total structural failure or intentional dismantling rather than partial damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the central structure in the crop exhibits a collapsed roof with exposed internal framing and scattered debris, indicating active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The crop image clearly shows a building with a collapsed roof, exposed internal framing, and scattered debris on the ground, which visually supports the claim of active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The crop image shows a building with a collapsed roof and scattered debris, which constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The crop image clearly shows a building with a collapsed roof, exposed internal framing, and scattered debris on the ground, which visually supports the claim of active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The crop image shows a building with a collapsed roof and scattered debris, which constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b5cf26327b2eec2b9522",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1028-10947-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1028-10947-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape featuring extensive agricultural fields, some golden and some green, indicating different crop stages or types.",
+      "Two long, parallel white plastic greenhouses are situated in the lower right quadrant.",
+      "A network of paved roads and utility poles intersects the fields.",
+      "A cluster of residential buildings is visible in the middle distance.",
+      "A hazy skyline with tall structures is visible on the horizon."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a high-magnification detail of the bottom-left corner of the wide context image.",
+      "The green mesh tarp in the crop view corresponds to the small blue-green square visible in the lower-left field of the context image.",
+      "The utility poles and road junction in the crop view align with the infrastructure seen in the lower-left section of the context image."
+    ],
+    "description": "The wide image shows a rural agricultural area with fields, greenhouses, and a distant city skyline. The crop view zooms in on the bottom-left corner, revealing a green mesh tarp on a patch of bare ground near a road and utility poles, adjacent to a green field.",
+    "evidence_visible": [
+      "A square piece of green mesh or netting lies on a patch of bare, brown earth.",
+      "The ground is uneven and scattered with small debris.",
+      "Two utility poles cast long shadows across the scene.",
+      "A paved road runs horizontally above the patch.",
+      "A green field is visible to the left of the road."
+    ],
+    "unclear": [
+      "The specific contents or purpose of the green mesh tarp.",
+      "The identity of the small dark objects near the poles.",
+      "The exact type of crop in the adjacent green field."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape featuring extensive agricultural fields, some golden and some green, indicating different crop stages or types.\",\n    \"Two long, parallel white plastic greenhouses are situated in the lower right quadrant.\",\n    \"A network of paved roads and utility poles intersects the fields.\",\n    \"A cluster of residential buildings is visible in the middle distance.\",\n    \"A hazy skyline with tall structures is visible on the horizon.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a high-magnification detail of the bottom-left corner of the wide context image.\",\n    \"The green mesh tarp in the crop view corresponds to the small blue-green square visible in the lower-left field of the context image.\",\n    \"The utility poles and road junction in the crop view align with the infrastructure seen in the lower-left section of the context image.\"\n  ],\n  \"description\": \"The wide image shows a rural agricultural area with fields, greenhouses, and a distant city skyline. The crop view zooms in on the bottom-left corner, revealing a green mesh tarp on a patch of bare ground near a road and utility poles, adjacent to a green field.\",\n  \"evidence_visible\": [\n    \"A square piece of green mesh or netting lies on a patch of bare, brown earth.\",\n    \"The ground is uneven and scattered with small debris.\",\n    \"Two utility poles cast long shadows across the scene.\",\n    \"A paved road runs horizontally above the patch.\",\n    \"A green field is visible to the left of the road.\"\n  ],\n  \"unclear\": [\n    \"The specific contents or purpose of the green mesh tarp.\",\n    \"The identity of the small dark objects near the poles.\",\n    \"The exact type of crop in the adjacent green field.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, square-shaped green mesh covering the soil patch, whereas incomplete soil cover would imply a visibly fragmented or insufficient protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a square piece of green mesh or netting lying on a patch of bare, brown earth near a road and utility poles.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, square-shaped green mesh covering the soil patch, whereas incomplete soil cover would imply a visibly fragmented or insufficient protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a square piece of green mesh or netting lying on a patch of bare, brown earth near a road and utility poles.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a square piece of green mesh or netting lying on a patch of bare, brown earth near a road and utility poles, which directly supports the description in the statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims 'incomplete soil cover' is supported by evidence of soil for which protective covering is visibly incomplete. While the image shows bare soil, the statement implies a state of 'incompleteness' regarding a covering, which is a subjective interpretation not explicitly supported by the visual evidence of a single square net. The visual evidence is better described as a specific object (netting) on bare soil rather than a general state of incomplete cover.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image shows soil for which protective covering is visibly incomplete."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a square piece of green mesh or netting lying on a patch of bare, brown earth near a road and utility poles, which directly supports the description in the statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims 'incomplete soil cover' is supported by evidence of soil for which protective covering is visibly incomplete. While the image shows bare soil, the statement implies a state of 'incompleteness' regarding a covering, which is a subjective interpretation not explicitly supported by the visual evidence of a single square net. The visual evidence is better described as a specific object (netting) on bare soil rather than a general state of incomplete cover.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image shows soil for which protective covering is visibly incomplete.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

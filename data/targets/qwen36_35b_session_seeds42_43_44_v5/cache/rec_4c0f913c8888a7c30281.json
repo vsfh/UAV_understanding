@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4c0f913c8888a7c30281",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0121-4540-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0121-4540-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural or semi-urban area with a paved road on the left and a canal running vertically through the center.",
+      "The landscape includes agricultural plots covered in white plastic sheeting, likely greenhouses or frost protection.",
+      "Several buildings with corrugated metal roofs are visible along the canal banks.",
+      "Patches of snow are present on the ground, indicating cold weather conditions."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a high-magnification crop of the building with the grey corrugated metal roof located in the lower-left quadrant of the context image.",
+      "The canal visible in the evidence image corresponds to the waterway running vertically through the center of the context image.",
+      "The agricultural plots with white sheeting in the evidence image are part of the larger field area seen to the right of the canal in the context image."
+    ],
+    "description": "Aerial view of a rural area with a canal, agricultural plots covered in white sheeting, and buildings with metal roofs. A specific building with a grey corrugated roof and adjacent brown roof is shown in detail, situated next to the canal and snow-dusted ground.",
+    "evidence_visible": [
+      "Close-up of a long building with a grey corrugated metal roof.",
+      "Adjacent to the grey roof is a structure with a brown, possibly rusted, corrugated roof.",
+      "A small blue and white object, possibly a tank or container, is located on the ground between the buildings.",
+      "The canal bank is visible with dry vegetation and snow patches.",
+      "Agricultural plots with white sheeting are visible to the right of the canal."
+    ],
+    "unclear": [
+      "The specific contents of the buildings are not visible.",
+      "The exact nature of the blue and white object is unclear.",
+      "The specific type of crops under the white sheeting cannot be determined."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural or semi-urban area with a paved road on the left and a canal running vertically through the center.\",\n    \"The landscape includes agricultural plots covered in white plastic sheeting, likely greenhouses or frost protection.\",\n    \"Several buildings with corrugated metal roofs are visible along the canal banks.\",\n    \"Patches of snow are present on the ground, indicating cold weather conditions.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a high-magnification crop of the building with the grey corrugated metal roof located in the lower-left quadrant of the context image.\",\n    \"The canal visible in the evidence image corresponds to the waterway running vertically through the center of the context image.\",\n    \"The agricultural plots with white sheeting in the evidence image are part of the larger field area seen to the right of the canal in the context image.\"\n  ],\n  \"description\": \"Aerial view of a rural area with a canal, agricultural plots covered in white sheeting, and buildings with metal roofs. A specific building with a grey corrugated roof and adjacent brown roof is shown in detail, situated next to the canal and snow-dusted ground.\",\n  \"evidence_visible\": [\n    \"Close-up of a long building with a grey corrugated metal roof.\",\n    \"Adjacent to the grey roof is a structure with a brown, possibly rusted, corrugated roof.\",\n    \"A small blue and white object, possibly a tank or container, is located on the ground between the buildings.\",\n    \"The canal bank is visible with dry vegetation and snow patches.\",\n    \"Agricultural plots with white sheeting are visible to the right of the canal.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the buildings are not visible.\",\n    \"The exact nature of the blue and white object is unclear.\",\n    \"The specific type of crops under the white sheeting cannot be determined.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between building demolition and building damage is not explicitly visible in the provided images, as the specific state of the structures (active demolition vs. damage) cannot be definitively determined from the visual evidence alone.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a building with a grey corrugated metal roof and an adjacent structure with a brown roof situated next to a canal, consistent with the context of a rural area undergoing changes.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is not explicitly visible in the provided images, as the specific state of the structures (active demolition vs. damage) cannot be definitively determined from the visual evidence alone.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a building with a grey corrugated metal roof and an adjacent structure with a brown roof situated next to a canal, consistent with the context of a rural area undergoing changes.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a building with a grey corrugated metal roof and an adjacent structure with a brown roof situated next to a canal. The buildings appear structurally intact with no visible signs of demolition or damage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event building demolition is supported by the visible presence of a building with a grey corrugated metal roof and an adjacent structure with a brown roof situated next to a canal, consistent with the context of a rural area undergoing changes.",
+        "The event building damage is supported: visible evidence shows visible structural damage to a building."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a building with a grey corrugated metal roof and an adjacent structure with a brown roof situated next to a canal. The buildings appear structurally intact with no visible signs of demolition or damage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event building demolition is supported by the visible presence of a building with a grey corrugated metal roof and an adjacent structure with a brown roof situated next to a canal, consistent with the context of a rural area undergoing changes.",
+        "The event building damage is supported: visible evidence shows visible structural damage to a building."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a building with a grey corrugated metal roof and an adjacent structure with a brown roof situated next to a canal. The buildings appear structurally intact with no visible signs of demolition or damage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event building demolition is supported by the visible presence of a building with a grey corrugated metal roof and an adjacent structure with a brown roof situated next to a canal, consistent with the context of a rural area undergoing changes.\",\n      \"The event building damage is supported: visible evidence shows visible structural damage to a building.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a building with a grey corrugated metal roof and an adjacent structure with a brown roof situated next to a canal. The buildings appear structurally intact with no visible signs of demolition or damage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event building demolition is supported by the visible presence of a building with a grey corrugated metal roof and an adjacent structure with a brown roof situated next to a canal, consistent with the context of a rural area undergoing changes.\",\n      \"The event building damage is supported: visible evidence shows visible structural damage to a building.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

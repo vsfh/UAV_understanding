@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_14f04243dfd995e0a14e",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-2373-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-2373-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a long, rectangular concrete canal or reservoir with green water.",
+      "A paved road runs parallel to the canal on the left, with vehicles visible.",
+      "Agricultural fields and bare trees surround the water body.",
+      "A concrete pier structure extends from the right bank into the water.",
+      "A cluster of buildings with grey roofs is located at the bottom right of the canal."
+    ],
+    "cross_view_relations": [
+      "The crop is a magnified view of the area immediately to the right of the concrete pier structure visible in the center of the context image.",
+      "The vertical concrete edge in the crop corresponds to the side of the pier seen in the context view."
+    ],
+    "description": "The context image shows a wide aerial view of a concrete canal and adjacent road. The linked crop provides a close-up of the right bank, revealing a large, grey, plastic-covered greenhouse structure situated next to the concrete pier and surrounded by small plots of green vegetation.",
+    "evidence_visible": [
+      "A large, arched structure covered in grey plastic sheeting (greenhouse).",
+      "A smaller, rectangular structure covered in green mesh or fabric.",
+      "A blue tarp or sheet on the ground near the top right.",
+      "Two large, dark green bushes or trees in the foreground.",
+      "An orange object, possibly a vehicle or container, at the bottom edge.",
+      "Small white objects scattered on the ground near the greenhouse."
+    ],
+    "unclear": [
+      "The specific contents of the greenhouse.",
+      "The identity of the orange object.",
+      "The exact type of crops in the surrounding plots."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a long, rectangular concrete canal or reservoir with green water.\",\n    \"A paved road runs parallel to the canal on the left, with vehicles visible.\",\n    \"Agricultural fields and bare trees surround the water body.\",\n    \"A concrete pier structure extends from the right bank into the water.\",\n    \"A cluster of buildings with grey roofs is located at the bottom right of the canal.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a magnified view of the area immediately to the right of the concrete pier structure visible in the center of the context image.\",\n    \"The vertical concrete edge in the crop corresponds to the side of the pier seen in the context view.\"\n  ],\n  \"description\": \"The context image shows a wide aerial view of a concrete canal and adjacent road. The linked crop provides a close-up of the right bank, revealing a large, grey, plastic-covered greenhouse structure situated next to the concrete pier and surrounded by small plots of green vegetation.\",\n  \"evidence_visible\": [\n    \"A large, arched structure covered in grey plastic sheeting (greenhouse).\",\n    \"A smaller, rectangular structure covered in green mesh or fabric.\",\n    \"A blue tarp or sheet on the ground near the top right.\",\n    \"Two large, dark green bushes or trees in the foreground.\",\n    \"An orange object, possibly a vehicle or container, at the bottom edge.\",\n    \"Small white objects scattered on the ground near the greenhouse.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the greenhouse.\",\n    \"The identity of the orange object.\",\n    \"The exact type of crops in the surrounding plots.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, enclosed covering (the greenhouse and mesh structure) versus exposed soil with only partial or missing protection.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported by the visible presence of a large, arched structure covered in grey plastic sheeting (greenhouse) and a smaller rectangular structure covered in green mesh or fabric situated on the ground next to the concrete pier.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, enclosed covering (the greenhouse and mesh structure) versus exposed soil with only partial or missing protection.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible presence of a large, arched structure covered in grey plastic sheeting (greenhouse) and a smaller rectangular structure covered in green mesh or fabric situated on the ground next to the concrete pier.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large arched structure covered in grey plastic sheeting and a smaller rectangular structure covered in green mesh situated next to the concrete pier, directly supporting the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a large arched structure covered in grey plastic sheeting and a smaller rectangular structure covered in green mesh. These are specific types of protective coverings, not evidence of 'incomplete' soil cover.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large arched structure covered in grey plastic sheeting and a smaller rectangular structure covered in green mesh situated next to the concrete pier, directly supporting the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a large arched structure covered in grey plastic sheeting and a smaller rectangular structure covered in green mesh. These are specific types of protective coverings, not evidence of 'incomplete' soil cover.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

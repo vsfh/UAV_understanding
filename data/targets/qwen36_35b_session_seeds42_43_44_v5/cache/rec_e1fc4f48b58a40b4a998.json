@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e1fc4f48b58a40b4a998",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1028-3492-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1028-3492-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use landscape featuring a large industrial yard in the foreground and agricultural fields in the background.",
+      "The industrial yard contains a long, open-sided structure with a green corrugated roof, surrounded by multiple large piles of dark granular material.",
+      "To the right of the yard, there is a cluster of white, tunnel-shaped greenhouses.",
+      "A network of waterways and rectangular ponds separates the industrial area from the distant fields.",
+      "A city skyline is visible on the horizon."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in view of the green-roofed structure and the surrounding material piles seen in the lower-left quadrant of the first image.",
+      "The waterway visible in the background of the second image corresponds to the canal running along the edge of the industrial site in the first image.",
+      "The blue container and machinery visible in the first image are located just outside the frame of the second image."
+    ],
+    "description": "The images show an industrial storage yard adjacent to agricultural land. A long, open-sided shed with a green roof sits amidst large piles of dark granular material. A waterway borders the site, and white greenhouses are visible nearby. The second image provides a closer view of the shed and material piles.",
+    "evidence_visible": [
+      "A close-up of the long, open-sided structure with a green corrugated roof.",
+      "The structure is supported by vertical columns and has no side walls.",
+      "Large mounds of dark, granular material are piled on the ground surrounding the structure.",
+      "A waterway with vegetation on the banks is visible in the background.",
+      "A paved or hard-packed surface surrounds the piles and structure."
+    ],
+    "unclear": [
+      "The specific type of granular material (e.g., coal, gravel, sand).",
+      "The specific contents stored inside the open-sided structure.",
+      "The operational status of the site (active vs. inactive).",
+      "The identity of the machinery visible in the wider context view."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use landscape featuring a large industrial yard in the foreground and agricultural fields in the background.\",\n    \"The industrial yard contains a long, open-sided structure with a green corrugated roof, surrounded by multiple large piles of dark granular material.\",\n    \"To the right of the yard, there is a cluster of white, tunnel-shaped greenhouses.\",\n    \"A network of waterways and rectangular ponds separates the industrial area from the distant fields.\",\n    \"A city skyline is visible on the horizon.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in view of the green-roofed structure and the surrounding material piles seen in the lower-left quadrant of the first image.\",\n    \"The waterway visible in the background of the second image corresponds to the canal running along the edge of the industrial site in the first image.\",\n    \"The blue container and machinery visible in the first image are located just outside the frame of the second image.\"\n  ],\n  \"description\": \"The images show an industrial storage yard adjacent to agricultural land. A long, open-sided shed with a green roof sits amidst large piles of dark granular material. A waterway borders the site, and white greenhouses are visible nearby. The second image provides a closer view of the shed and material piles.\",\n  \"evidence_visible\": [\n    \"A close-up of the long, open-sided structure with a green corrugated roof.\",\n    \"The structure is supported by vertical columns and has no side walls.\",\n    \"Large mounds of dark, granular material are piled on the ground surrounding the structure.\",\n    \"A waterway with vegetation on the banks is visible in the background.\",\n    \"A paved or hard-packed surface surrounds the piles and structure.\"\n  ],\n  \"unclear\": [\n    \"The specific type of granular material (e.g., coal, gravel, sand).\",\n    \"The specific contents stored inside the open-sided structure.\",\n    \"The operational status of the site (active vs. inactive).\",\n    \"The identity of the machinery visible in the wider context view.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous, uniform layer of netting covering the material piles, whereas incomplete soil cover would show visible gaps or bare patches within the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows large mounds of dark granular material and exposed ground surfaces that are covered by a fine, greyish dust-control netting, particularly visible in the close-up view of the industrial yard.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous, uniform layer of netting covering the material piles, whereas incomplete soil cover would show visible gaps or bare patches within the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows large mounds of dark granular material and exposed ground surfaces that are covered by a fine, greyish dust-control netting, particularly visible in the close-up view of the industrial yard.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows large mounds of dark granular material (likely sand or gravel) and a paved or hard-packed industrial yard. The claim that the ground is covered by 'fine, greyish dust-control netting' is visually contradicted; the surfaces are bare material or concrete, not covered by a net.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The ground surfaces are covered by a fine, greyish dust-control netting."
+      ]
+    },
+    "positive": {
+      "reason": "The image displays an industrial yard with large piles of dark granular material and exposed ground. There is no visible protective covering (such as tarps or netting) on these mounds or the surrounding ground, which visually supports the description of 'incomplete soil cover' (i.e., the cover is absent or incomplete).",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows large mounds of dark granular material (likely sand or gravel) and a paved or hard-packed industrial yard. The claim that the ground is covered by 'fine, greyish dust-control netting' is visually contradicted; the surfaces are bare material or concrete, not covered by a net.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The ground surfaces are covered by a fine, greyish dust-control netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays an industrial yard with large piles of dark granular material and exposed ground. There is no visible protective covering (such as tarps or netting) on these mounds or the surrounding ground, which visually supports the description of 'incomplete soil cover' (i.e., the cover is absent or incomplete).\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

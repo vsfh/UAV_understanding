@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8f3ad4533f32d8c66426",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0929-5002-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0929-5002-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved road intersection with white lane markings and crosswalks.",
+      "Surrounding area includes multi-story residential buildings, smaller houses, and agricultural plots.",
+      "A large, blue, triangular metal frame structure stands on a grassy patch near the road.",
+      "Several vehicles, including cars and a motorcycle, are visible on the road."
+    ],
+    "cross_view_relations": [
+      "The crop is a magnified view of the agricultural plots located to the left of the main road in the context image.",
+      "The blue rectangular object in the crop corresponds to the blue triangular frame structure seen in the context image.",
+      "The white fence and parked cars in the crop are visible in the upper-left section of the context image."
+    ],
+    "description": "An aerial view shows a road intersection bordered by residential buildings and agricultural plots. A magnified crop focuses on a specific plot containing a blue rectangular frame structure, a white fence, and parked cars, confirming the spatial relationship between the road infrastructure and the adjacent land use.",
+    "evidence_visible": [
+      "A close-up of a tilled agricultural plot with a blue rectangular frame structure lying on the ground.",
+      "A white fence runs along the edge of the plot, separating it from a paved area with parked cars.",
+      "A small blue shed-like structure is visible in the background of the crop.",
+      "Green vegetation and trees are present around the plot."
+    ],
+    "unclear": [
+      "The specific purpose of the blue frame structure is unclear.",
+      "The exact contents of the blue shed are not visible.",
+      "The identity of the people or vehicles is not discernible."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a paved road intersection with white lane markings and crosswalks.\",\n    \"Surrounding area includes multi-story residential buildings, smaller houses, and agricultural plots.\",\n    \"A large, blue, triangular metal frame structure stands on a grassy patch near the road.\",\n    \"Several vehicles, including cars and a motorcycle, are visible on the road.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a magnified view of the agricultural plots located to the left of the main road in the context image.\",\n    \"The blue rectangular object in the crop corresponds to the blue triangular frame structure seen in the context image.\",\n    \"The white fence and parked cars in the crop are visible in the upper-left section of the context image.\"\n  ],\n  \"description\": \"An aerial view shows a road intersection bordered by residential buildings and agricultural plots. A magnified crop focuses on a specific plot containing a blue rectangular frame structure, a white fence, and parked cars, confirming the spatial relationship between the road infrastructure and the adjacent land use.\",\n  \"evidence_visible\": [\n    \"A close-up of a tilled agricultural plot with a blue rectangular frame structure lying on the ground.\",\n    \"A white fence runs along the edge of the plot, separating it from a paved area with parked cars.\",\n    \"A small blue shed-like structure is visible in the background of the crop.\",\n    \"Green vegetation and trees are present around the plot.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the blue frame structure is unclear.\",\n    \"The exact contents of the blue shed are not visible.\",\n    \"The identity of the people or vehicles is not discernible.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous netting structure covering the soil, whereas incomplete soil cover would show visible gaps or missing sections of the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large, rectangular blue netting structure laid out on a tilled agricultural plot, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous netting structure covering the soil, whereas incomplete soil cover would show visible gaps or missing sections of the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large, rectangular blue netting structure laid out on a tilled agricultural plot, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence directly contradicts the claim of 'bare soil netting'. The visual data shows a rectangular blue structure that is clearly a rigid, three-dimensional frame (likely a billboard or sign) standing on legs, not a netting laid flat on the ground. The agricultural plots nearby are bare soil, but the blue object is not netting.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The blue object is a netting structure.",
+        "The blue object is laid out on the plot.",
+        "The blue object is consistent with dust-control netting."
+      ]
+    },
+    "positive": {
+      "reason": "The image evidence supports the claim of incomplete soil cover. The agricultural plots in the vicinity of the blue structure show large areas of exposed, tilled brown earth without any vegetation or protective covering, fitting the description of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence directly contradicts the claim of 'bare soil netting'. The visual data shows a rectangular blue structure that is clearly a rigid, three-dimensional frame (likely a billboard or sign) standing on legs, not a netting laid flat on the ground. The agricultural plots nearby are bare soil, but the blue object is not netting.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The blue object is a netting structure.\",\n      \"The blue object is laid out on the plot.\",\n      \"The blue object is consistent with dust-control netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence supports the claim of incomplete soil cover. The agricultural plots in the vicinity of the blue structure show large areas of exposed, tilled brown earth without any vegetation or protective covering, fitting the description of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

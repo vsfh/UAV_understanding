@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4fe826818dd812fcf915",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2576-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2576-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring rectangular aquaculture ponds with white aeration bubbles, a large green rice paddy with visible row markings, and a cluster of small structures including a white-roofed building and a red-roofed shed.",
+      "Vegetation includes dense green reeds and trees along waterways and field boundaries.",
+      "A dirt path runs adjacent to the structures and the rice paddy."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the central area in the first image, focusing on the cluster of buildings situated between the rice paddy and a dark water pond.",
+      "The spatial arrangement of the white-roofed structure, the red-roofed shed, and the row of rectangular concrete tanks remains consistent across both views."
+    ],
+    "description": "The images show a rural agricultural site with a green rice paddy and aquaculture ponds. A cluster of small buildings, including a white-roofed structure and a red-roofed shed, sits adjacent to a row of rectangular concrete tanks. The second image provides a closer view of these structures and the immediate surrounding vegetation.",
+    "evidence_visible": [
+      "A cluster of small, low-rise structures with varying roof colors (white, red, blue).",
+      "A row of rectangular, open-top concrete tanks or basins arranged in a line.",
+      "A white-roofed building with blue trim.",
+      "A red-roofed shed-like structure.",
+      "Dirt ground surface around the structures.",
+      "Green vegetation and a dark water body immediately adjacent to the structures."
+    ],
+    "unclear": [
+      "The specific function or contents of the rectangular concrete tanks.",
+      "The exact type of crop in the green field (though visually consistent with rice).",
+      "The identity or purpose of the buildings.",
+      "Any human activity or presence."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring rectangular aquaculture ponds with white aeration bubbles, a large green rice paddy with visible row markings, and a cluster of small structures including a white-roofed building and a red-roofed shed.\",\n    \"Vegetation includes dense green reeds and trees along waterways and field boundaries.\",\n    \"A dirt path runs adjacent to the structures and the rice paddy.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the central area in the first image, focusing on the cluster of buildings situated between the rice paddy and a dark water pond.\",\n    \"The spatial arrangement of the white-roofed structure, the red-roofed shed, and the row of rectangular concrete tanks remains consistent across both views.\"\n  ],\n  \"description\": \"The images show a rural agricultural site with a green rice paddy and aquaculture ponds. A cluster of small buildings, including a white-roofed structure and a red-roofed shed, sits adjacent to a row of rectangular concrete tanks. The second image provides a closer view of these structures and the immediate surrounding vegetation.\",\n  \"evidence_visible\": [\n    \"A cluster of small, low-rise structures with varying roof colors (white, red, blue).\",\n    \"A row of rectangular, open-top concrete tanks or basins arranged in a line.\",\n    \"A white-roofed building with blue trim.\",\n    \"A red-roofed shed-like structure.\",\n    \"Dirt ground surface around the structures.\",\n    \"Green vegetation and a dark water body immediately adjacent to the structures.\"\n  ],\n  \"unclear\": [\n    \"The specific function or contents of the rectangular concrete tanks.\",\n    \"The exact type of crop in the green field (though visually consistent with rice).\",\n    \"The identity or purpose of the buildings.\",\n    \"Any human activity or presence.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific structural failure of the tank walls resulting in open basins, whereas building damage is a broader category of visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a row of rectangular concrete tanks where the structural walls have visibly collapsed, leaving open-top basins.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific structural failure of the tank walls resulting in open basins, whereas building damage is a broader category of visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a row of rectangular concrete tanks where the structural walls have visibly collapsed, leaving open-top basins.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a row of rectangular concrete structures that appear to be open-top basins or tanks. The walls are intact and vertical, forming the sides of these basins. There is no visual evidence of a 'collapsed house wall' or structural failure where walls have fallen down; rather, the structures appear to be functional agricultural or aquaculture tanks.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "A row of rectangular concrete tanks where the structural walls have visibly collapsed",
+        "The walls have left open-top basins due to collapse"
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a cluster of buildings near the rice paddies. Specifically, the long rectangular structure (likely a shed or barn) has a roof that appears damaged or partially missing, and the white building next to it has a blue tarp or covering that suggests repair or damage. This constitutes visible structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a row of rectangular concrete structures that appear to be open-top basins or tanks. The walls are intact and vertical, forming the sides of these basins. There is no visual evidence of a 'collapsed house wall' or structural failure where walls have fallen down; rather, the structures appear to be functional agricultural or aquaculture tanks.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"A row of rectangular concrete tanks where the structural walls have visibly collapsed\",\n      \"The walls have left open-top basins due to collapse\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a cluster of buildings near the rice paddies. Specifically, the long rectangular structure (likely a shed or barn) has a roof that appears damaged or partially missing, and the white building next to it has a blue tarp or covering that suggests repair or damage. This constitutes visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

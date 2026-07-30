@@ -1,0 +1,6 @@
+{
+  "record_uid": "rec_82c181c9c78b14f681c7",
+  "source_class": "building_demolition",
+  "error_type": "TeacherGenerationError",
+  "error": "Teacher failed after 3 attempts: Teacher response does not contain a valid JSON object | Teacher response does not contain a valid JSON object | Teacher response does not contain a valid JSON object"
+}

@@ -1,0 +1,83 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_6740047fcdef10550d54",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-5002-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-5002-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "A wide aerial view of a rural landscape featuring a river and bridge in the background. The foreground consists of agricultural plots, some covered with greenhouses and others with bare soil. A dirt road runs through the area, and a blue truck is visible on the road."
+    ],
+    "cross_view_relations": [
+      "The close-up view corresponds to a section of the agricultural plots seen in the wide image. The blue truck visible on the road in the wide image is also present in the close-up view, positioned next to a plot covered with a blue tarp."
+    ],
+    "description": "Aerial view of a rural agricultural area with a river and bridge. Plots are covered with greenhouses and tarps. A blue truck is parked on a dirt road next to a plot with a blue tarp. The close-up confirms the truck's position relative to the tarp-covered plot.",
+    "evidence_visible": [
+      "A close-up of an agricultural plot. A blue truck is parked on a dirt path next to a rectangular plot covered with a blue tarp. Adjacent plots show bare soil and some green vegetation. A white circular object is visible on the ground near the truck."
+    ],
+    "unclear": [
+      "Specific crop types, exact location, vehicle license plate, purpose of the white circular object."
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"A wide aerial view of a rural landscape featuring a river and bridge in the background. The foreground consists of agricultural plots, some covered with greenhouses and others with bare soil. A dirt road runs through the area, and a blue truck is visible on the road.\"\n],\n\"cross_view_relations\": [\n\"The close-up view corresponds to a section of the agricultural plots seen in the wide image. The blue truck visible on the road in the wide image is also present in the close-up view, positioned next to a plot covered with a blue tarp.\"\n],\n\"description\": \"Aerial view of a rural agricultural area with a river and bridge. Plots are covered with greenhouses and tarps. A blue truck is parked on a dirt road next to a plot with a blue tarp. The close-up confirms the truck's position relative to the tarp-covered plot.\",\n\"evidence_visible\": [\n\"A close-up of an agricultural plot. A blue truck is parked on a dirt path next to a rectangular plot covered with a blue tarp. Adjacent plots show bare soil and some green vegetation. A white circular object is visible on the ground near the truck.\"\n],\n\"unclear\": [\n\"Specific crop types, exact location, vehicle license plate, purpose of the white circular object.\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a blue truck parked on a dirt path next to a rectangular plot covered with a blue dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a blue truck parked on a dirt path next to a rectangular plot covered with a blue dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a blue truck parked on a dirt path adjacent to a rectangular plot covered with a blue netting. This visual evidence directly supports the description of the event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays a plot covered by a blue netting that is visibly incomplete, as the netting does not cover the entire rectangular area of the soil. This supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a blue truck parked on a dirt path adjacent to a rectangular plot covered with a blue netting. This visual evidence directly supports the description of the event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a plot covered by a blue netting that is visibly incomplete, as the netting does not cover the entire rectangular area of the soil. This supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

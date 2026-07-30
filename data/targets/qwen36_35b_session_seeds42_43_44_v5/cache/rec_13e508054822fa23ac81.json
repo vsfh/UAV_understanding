@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_13e508054822fa23ac81",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0219-1893-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0219-1893-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area with a grid of agricultural fields, some green and some brown, separated by dirt roads and a paved road.",
+      "A cluster of residential buildings with grey and red roofs on the left side.",
+      "A large industrial-style building with a blue roof in the upper right quadrant.",
+      "A white sedan is visible on the paved road near the center."
+    ],
+    "cross_view_relations": [
+      "The blue-roofed building in the context image corresponds to the structure with the blue roof in the evidence crop.",
+      "The white sedan on the road in the context image is the same vehicle parked in front of the blue-roofed building in the evidence crop.",
+      "The evidence crop shows a closer view of the area immediately south of the blue-roofed building, revealing a dirt lot and a row of small trees."
+    ],
+    "description": "The images show a rural landscape with agricultural fields and buildings. A white sedan is visible on a road in the wide view and parked near a blue-roofed building in the crop. The crop provides a closer look at the area adjacent to the blue-roofed structure, showing a dirt lot and a row of small trees.",
+    "evidence_visible": [
+      "A building with a bright blue metal roof and white walls.",
+      "A white sedan parked on a paved area in front of the blue-roofed building.",
+      "A dirt lot with faint tire tracks and a strip of green vegetation.",
+      "A row of small, dark green trees or bushes lining a wall or fence.",
+      "A red flag or banner is visible on a pole to the left of the blue-roofed building.",
+      "Other buildings with grey roofs and some debris or materials are visible in the background."
+    ],
+    "unclear": [
+      "The specific type of crops in the fields.",
+      "The exact purpose of the blue-roofed building.",
+      "The identity of the people or vehicles not clearly visible.",
+      "The exact date or time the images were taken."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural area with a grid of agricultural fields, some green and some brown, separated by dirt roads and a paved road.\",\n    \"A cluster of residential buildings with grey and red roofs on the left side.\",\n    \"A large industrial-style building with a blue roof in the upper right quadrant.\",\n    \"A white sedan is visible on the paved road near the center.\"\n  ],\n  \"cross_view_relations\": [\n    \"The blue-roofed building in the context image corresponds to the structure with the blue roof in the evidence crop.\",\n    \"The white sedan on the road in the context image is the same vehicle parked in front of the blue-roofed building in the evidence crop.\",\n    \"The evidence crop shows a closer view of the area immediately south of the blue-roofed building, revealing a dirt lot and a row of small trees.\"\n  ],\n  \"description\": \"The images show a rural landscape with agricultural fields and buildings. A white sedan is visible on a road in the wide view and parked near a blue-roofed building in the crop. The crop provides a closer look at the area adjacent to the blue-roofed structure, showing a dirt lot and a row of small trees.\",\n  \"evidence_visible\": [\n    \"A building with a bright blue metal roof and white walls.\",\n    \"A white sedan parked on a paved area in front of the blue-roofed building.\",\n    \"A dirt lot with faint tire tracks and a strip of green vegetation.\",\n    \"A row of small, dark green trees or bushes lining a wall or fence.\",\n    \"A red flag or banner is visible on a pole to the left of the blue-roofed building.\",\n    \"Other buildings with grey roofs and some debris or materials are visible in the background.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the fields.\",\n    \"The exact purpose of the blue-roofed building.\",\n    \"The identity of the people or vehicles not clearly visible.\",\n    \"The exact date or time the images were taken.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the state of the structure: the blue-roofed building shows signs of being torn down or abandoned (demolition), whereas project construction would show new materials, scaffolding, or active building processes.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a building with a bright blue metal roof and white walls that appears to be in a state of disrepair or partial collapse, with debris visible in the background and a generally dilapidated appearance consistent with active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the state of the structure: the blue-roofed building shows signs of being torn down or abandoned (demolition), whereas project construction would show new materials, scaffolding, or active building processes.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a building with a bright blue metal roof and white walls that appears to be in a state of disrepair or partial collapse, with debris visible in the background and a generally dilapidated appearance consistent with active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a building with a bright blue metal roof and white walls. The structure adjacent to it appears to be a ruin or in a state of disrepair, with visible debris and a generally dilapidated appearance. This visual evidence directly supports the description of a building in a state of disrepair or partial collapse consistent with demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a building that appears to be in a state of disrepair or demolition, not active construction. There are no visible signs of an active general construction project, such as cranes, scaffolding, or workers building a new structure. The scene depicts a ruin or a building being demolished, which contradicts the claim of active construction.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a building with a bright blue metal roof and white walls. The structure adjacent to it appears to be a ruin or in a state of disrepair, with visible debris and a generally dilapidated appearance. This visual evidence directly supports the description of a building in a state of disrepair or partial collapse consistent with demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a building that appears to be in a state of disrepair or demolition, not active construction. There are no visible signs of an active general construction project, such as cranes, scaffolding, or workers building a new structure. The scene depicts a ruin or a building being demolished, which contradicts the claim of active construction.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_6d7980f3ac18b4b97b2c",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0310-4243-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0310-4243-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a dense urban area adjacent to a wide canal or river.",
+      "The area contains a mix of multi-story buildings with flat roofs and lower structures with pitched roofs.",
+      "Several rooftops are equipped with solar panels.",
+      "A paved road runs along the left edge with visible vehicles.",
+      "The riverbank on the right features concrete embankments and yellow floating structures."
+    ],
+    "cross_view_relations": [
+      "The crop is a high-magnification view of a specific cluster of buildings located in the central-left portion of the wide image.",
+      "The red pitched roof and the blue corrugated metal roof visible in the crop correspond to the structures in the middle of the wide image.",
+      "The solar panels seen in the crop are part of the larger group of solar installations visible in the wide context."
+    ],
+    "description": "The wide image shows a dense settlement next to a river, featuring mixed residential and commercial structures with solar panels. The crop provides a detailed view of a specific building cluster, highlighting a red pitched roof, a blue metal roof, and a flat rooftop area containing debris and construction materials.",
+    "evidence_visible": [
+      "A building with a red pitched roof and solar panels on an adjacent flat roof.",
+      "A building with a bright blue corrugated metal roof.",
+      "A flat concrete rooftop area containing scattered debris, white containers, and what appears to be construction materials.",
+      "A small courtyard or patio area with potted plants.",
+      "Grey tiled roofs on adjacent structures."
+    ],
+    "unclear": [
+      "The specific nature of the debris on the flat roof (e.g., construction waste vs. stored items).",
+      "The exact function of the building with the red roof.",
+      "The identity of the objects on the flat roof."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a dense urban area adjacent to a wide canal or river.\",\n    \"The area contains a mix of multi-story buildings with flat roofs and lower structures with pitched roofs.\",\n    \"Several rooftops are equipped with solar panels.\",\n    \"A paved road runs along the left edge with visible vehicles.\",\n    \"The riverbank on the right features concrete embankments and yellow floating structures.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a high-magnification view of a specific cluster of buildings located in the central-left portion of the wide image.\",\n    \"The red pitched roof and the blue corrugated metal roof visible in the crop correspond to the structures in the middle of the wide image.\",\n    \"The solar panels seen in the crop are part of the larger group of solar installations visible in the wide context.\"\n  ],\n  \"description\": \"The wide image shows a dense settlement next to a river, featuring mixed residential and commercial structures with solar panels. The crop provides a detailed view of a specific building cluster, highlighting a red pitched roof, a blue metal roof, and a flat rooftop area containing debris and construction materials.\",\n  \"evidence_visible\": [\n    \"A building with a red pitched roof and solar panels on an adjacent flat roof.\",\n    \"A building with a bright blue corrugated metal roof.\",\n    \"A flat concrete rooftop area containing scattered debris, white containers, and what appears to be construction materials.\",\n    \"A small courtyard or patio area with potted plants.\",\n    \"Grey tiled roofs on adjacent structures.\"\n  ],\n  \"unclear\": [\n    \"The specific nature of the debris on the flat roof (e.g., construction waste vs. stored items).\",\n    \"The exact function of the building with the red roof.\",\n    \"The identity of the objects on the flat roof.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a pile of loose rubble and construction debris on the flat roof, which indicates a demolition event, whereas building damage would typically manifest as structural failure, cracks, or missing roof sections rather than a pile of debris.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the high-magnification crop reveals a flat concrete rooftop area containing a significant accumulation of scattered debris, rubble, and construction materials, which is consistent with the aftermath of a building undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a pile of loose rubble and construction debris on the flat roof, which indicates a demolition event, whereas building damage would typically manifest as structural failure, cracks, or missing roof sections rather than a pile of debris.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the high-magnification crop reveals a flat concrete rooftop area containing a significant accumulation of scattered debris, rubble, and construction materials, which is consistent with the aftermath of a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification crop clearly shows a flat concrete rooftop area containing a significant accumulation of scattered debris, rubble, and construction materials. This visual evidence is consistent with the aftermath of a building undergoing active or recent demolition, supporting the claim.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The high-magnification crop shows a flat concrete rooftop area containing a significant accumulation of scattered debris, rubble, and construction materials. This visual evidence is consistent with the aftermath of a building undergoing active or recent demolition, supporting the claim.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification crop clearly shows a flat concrete rooftop area containing a significant accumulation of scattered debris, rubble, and construction materials. This visual evidence is consistent with the aftermath of a building undergoing active or recent demolition, supporting the claim.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The high-magnification crop shows a flat concrete rooftop area containing a significant accumulation of scattered debris, rubble, and construction materials. This visual evidence is consistent with the aftermath of a building undergoing active or recent demolition, supporting the claim.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

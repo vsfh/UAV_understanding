@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8cbe3700d223dd136add",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2550-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2550-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with mixed residential and industrial structures.",
+      "Large rectangular plots of vibrant green crops, likely rice paddies, surrounding the buildings.",
+      "A cluster of buildings with reddish-brown corrugated metal roofs on the left side.",
+      "A network of small waterways or canals running through the village.",
+      "Trees and vegetation interspersed between the fields and houses."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the central-left portion of the first image.",
+      "The second image focuses specifically on the cluster of buildings with reddish-brown roofs and the adjacent green fields.",
+      "The spatial arrangement of the buildings and the road leading to them is consistent between both views."
+    ],
+    "description": "The images show a rural landscape with green agricultural fields and a mix of residential and industrial buildings. The second image provides a closer view of a specific cluster of structures with reddish-brown roofs, situated next to the fields and a small road.",
+    "evidence_visible": [
+      "Zoomed-in view of the buildings with reddish-brown corrugated metal roofs.",
+      "Clearer view of the green crop fields adjacent to the buildings.",
+      "A white vehicle and a red truck are visible on the road near the buildings.",
+      "Details of the building structures, including windows and smaller outbuildings, are more distinct."
+    ],
+    "unclear": [
+      "The specific type of crop growing in the fields.",
+      "The exact function or business type of the buildings with reddish-brown roofs.",
+      "The names or identities of the people or vehicles present.",
+      "The precise date or time the images were taken."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with mixed residential and industrial structures.\",\n    \"Large rectangular plots of vibrant green crops, likely rice paddies, surrounding the buildings.\",\n    \"A cluster of buildings with reddish-brown corrugated metal roofs on the left side.\",\n    \"A network of small waterways or canals running through the village.\",\n    \"Trees and vegetation interspersed between the fields and houses.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the central-left portion of the first image.\",\n    \"The second image focuses specifically on the cluster of buildings with reddish-brown roofs and the adjacent green fields.\",\n    \"The spatial arrangement of the buildings and the road leading to them is consistent between both views.\"\n  ],\n  \"description\": \"The images show a rural landscape with green agricultural fields and a mix of residential and industrial buildings. The second image provides a closer view of a specific cluster of structures with reddish-brown roofs, situated next to the fields and a small road.\",\n  \"evidence_visible\": [\n    \"Zoomed-in view of the buildings with reddish-brown corrugated metal roofs.\",\n    \"Clearer view of the green crop fields adjacent to the buildings.\",\n    \"A white vehicle and a red truck are visible on the road near the buildings.\",\n    \"Details of the building structures, including windows and smaller outbuildings, are more distinct.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop growing in the fields.\",\n    \"The exact function or business type of the buildings with reddish-brown roofs.\",\n    \"The names or identities of the people or vehicles present.\",\n    \"The precise date or time the images were taken.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a localized collapse of the roof and wall structure of a specific building, whereas building damage is a broader category of visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a house wall that has visibly collapsed, specifically the large structure with reddish-brown corrugated metal roofs on the left side of the image where the roof surface appears uneven and partially sunken.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a localized collapse of the roof and wall structure of a specific building, whereas building damage is a broader category of visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a house wall that has visibly collapsed, specifically the large structure with reddish-brown corrugated metal roofs on the left side of the image where the roof surface appears uneven and partially sunken.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image displays a rural landscape with intact buildings and agricultural fields. There is no visible evidence of a collapsed house wall, nor is there any structural damage to the large structure with reddish-brown roofs or any other building. The roofs appear flat and continuous, and the walls are vertical and intact.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows a house wall that has visibly collapsed",
+        "the roof surface appears uneven and partially sunken",
+        "visible structural damage to a building"
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a standard rural scene with no signs of disaster or damage. The claim of building damage is contradicted by the visual evidence of intact structures.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image displays a rural landscape with intact buildings and agricultural fields. There is no visible evidence of a collapsed house wall, nor is there any structural damage to the large structure with reddish-brown roofs or any other building. The roofs appear flat and continuous, and the walls are vertical and intact.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows a house wall that has visibly collapsed\",\n      \"the roof surface appears uneven and partially sunken\",\n      \"visible structural damage to a building\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a standard rural scene with no signs of disaster or damage. The claim of building damage is contradicted by the visual evidence of intact structures.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

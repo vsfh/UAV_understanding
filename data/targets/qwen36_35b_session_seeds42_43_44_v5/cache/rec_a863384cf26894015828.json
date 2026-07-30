@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a863384cf26894015828",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-10088-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-10088-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a paved road running vertically on the left.",
+      "A cluster of residential buildings with varied roof colors (grey, red, blue) situated to the right of the road.",
+      "Large agricultural fields to the right of the village, appearing as tilled brown soil.",
+      "A distinct area of bright green ground cover or netting located to the left of the road.",
+      "Vegetation including trees and small garden plots interspersed among the houses."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a zoomed-in view of the upper-left quadrant of the context image.",
+      "The paved road and the bright green field in the crop correspond to the same features on the left side of the context image.",
+      "A construction vehicle is visible in the crop on the dirt path bordering the green field, a detail not resolvable in the wider context view."
+    ],
+    "description": "Aerial imagery of a rural village bordered by a road and agricultural fields. A zoomed-in view highlights a construction vehicle operating on a dirt path adjacent to a field covered in bright green material, likely netting or crops, situated to the left of the main road.",
+    "evidence_visible": [
+      "Close-up of a paved road flanked by a line of trees.",
+      "A field covered in bright green material, possibly agricultural netting or dense low vegetation.",
+      "A yellow construction vehicle (excavator) positioned on a dirt track at the edge of the green field.",
+      "A small structure with a grey roof and a white building visible in the lower right of the crop."
+    ],
+    "unclear": [
+      "The specific type of green material (netting vs. crop) is unclear.",
+      "The exact model of the construction vehicle is unclear.",
+      "The specific activity of the vehicle is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a paved road running vertically on the left.\",\n    \"A cluster of residential buildings with varied roof colors (grey, red, blue) situated to the right of the road.\",\n    \"Large agricultural fields to the right of the village, appearing as tilled brown soil.\",\n    \"A distinct area of bright green ground cover or netting located to the left of the road.\",\n    \"Vegetation including trees and small garden plots interspersed among the houses.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a zoomed-in view of the upper-left quadrant of the context image.\",\n    \"The paved road and the bright green field in the crop correspond to the same features on the left side of the context image.\",\n    \"A construction vehicle is visible in the crop on the dirt path bordering the green field, a detail not resolvable in the wider context view.\"\n  ],\n  \"description\": \"Aerial imagery of a rural village bordered by a road and agricultural fields. A zoomed-in view highlights a construction vehicle operating on a dirt path adjacent to a field covered in bright green material, likely netting or crops, situated to the left of the main road.\",\n  \"evidence_visible\": [\n    \"Close-up of a paved road flanked by a line of trees.\",\n    \"A field covered in bright green material, possibly agricultural netting or dense low vegetation.\",\n    \"A yellow construction vehicle (excavator) positioned on a dirt track at the edge of the green field.\",\n    \"A small structure with a grey roof and a white building visible in the lower right of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific type of green material (netting vs. crop) is unclear.\",\n    \"The exact model of the construction vehicle is unclear.\",\n    \"The specific activity of the vehicle is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the uniform coverage of the field by the green material, whereas incomplete soil cover would show visible gaps in the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported by the visible presence of a large field covered in bright green material, consistent with dust-control netting, situated adjacent to a paved road and a construction vehicle.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the uniform coverage of the field by the green material, whereas incomplete soil cover would show visible gaps in the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible presence of a large field covered in bright green material, consistent with dust-control netting, situated adjacent to a paved road and a construction vehicle.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large field covered in bright green material adjacent to a paved road and a construction vehicle, directly contradicting the claim that this evidence is absent.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event bare soil netting is not supported by the visible presence of a large field covered in bright green material",
+        "There is no construction vehicle situated adjacent to a paved road"
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a large field covered in bright green material (netting) adjacent to a paved road and a construction vehicle. This visual evidence directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large field covered in bright green material adjacent to a paved road and a construction vehicle, directly contradicting the claim that this evidence is absent.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event bare soil netting is not supported by the visible presence of a large field covered in bright green material\",\n      \"There is no construction vehicle situated adjacent to a paved road\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a large field covered in bright green material (netting) adjacent to a paved road and a construction vehicle. This visual evidence directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

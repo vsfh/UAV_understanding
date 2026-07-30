@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_836441d35e4a707bc18e",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/original/0227-5758-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/collapsed_house_wall/cropped/0227-5758-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural area with green agricultural fields in the background and a cluster of multi-story residential buildings with tiled roofs.",
+      "Large rectangular ponds or flooded fields occupy the foreground, separated by earthen dikes.",
+      "A small structure with a blue roof and a parked vehicle are visible near the edge of a pond.",
+      "A large area of dark, disturbed earth or mud is present in the lower right quadrant."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of a specific cluster of three small structures located in the upper central portion of the context image.",
+      "These structures are situated between the residential buildings and the large flooded fields.",
+      "The surrounding vegetation in the crop matches the brown, dry grass patches visible in the context image."
+    ],
+    "description": "The context image shows a rural landscape with residential housing and agricultural ponds. The linked crop provides a detailed view of three small, single-story structures with grey and red brick walls and tiled roofs, situated amidst dry vegetation and adjacent to a small pond.",
+    "evidence_visible": [
+      "Three small, rectangular structures with pitched roofs are visible.",
+      "The leftmost structure has a grey exterior and a dark grey tiled roof.",
+      "The central structure appears to be constructed of red brick with a flat or damaged roof surface.",
+      "The rightmost structure has a dark grey tiled roof and a small attached shed.",
+      "The ground around the structures is uneven, consisting of bare earth and dry, brown vegetation.",
+      "A small pond is visible to the left of the structures."
+    ],
+    "unclear": [
+      "The specific function or occupancy status of the three small structures.",
+      "The exact condition of the central structure's roof (flat vs. damaged).",
+      "The identity of any individuals or vehicles present."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural area with green agricultural fields in the background and a cluster of multi-story residential buildings with tiled roofs.\",\n    \"Large rectangular ponds or flooded fields occupy the foreground, separated by earthen dikes.\",\n    \"A small structure with a blue roof and a parked vehicle are visible near the edge of a pond.\",\n    \"A large area of dark, disturbed earth or mud is present in the lower right quadrant.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of a specific cluster of three small structures located in the upper central portion of the context image.\",\n    \"These structures are situated between the residential buildings and the large flooded fields.\",\n    \"The surrounding vegetation in the crop matches the brown, dry grass patches visible in the context image.\"\n  ],\n  \"description\": \"The context image shows a rural landscape with residential housing and agricultural ponds. The linked crop provides a detailed view of three small, single-story structures with grey and red brick walls and tiled roofs, situated amidst dry vegetation and adjacent to a small pond.\",\n  \"evidence_visible\": [\n    \"Three small, rectangular structures with pitched roofs are visible.\",\n    \"The leftmost structure has a grey exterior and a dark grey tiled roof.\",\n    \"The central structure appears to be constructed of red brick with a flat or damaged roof surface.\",\n    \"The rightmost structure has a dark grey tiled roof and a small attached shed.\",\n    \"The ground around the structures is uneven, consisting of bare earth and dry, brown vegetation.\",\n    \"A small pond is visible to the left of the structures.\"\n  ],\n  \"unclear\": [\n    \"The specific function or occupancy status of the three small structures.\",\n    \"The exact condition of the central structure's roof (flat vs. damaged).\",\n    \"The identity of any individuals or vehicles present.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the image shows a total structural failure of a wall component (collapsed house wall) rather than general surface or minor structural damage (building damage).",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the central structure in the crop image exhibits a visibly collapsed wall section, exposing the interior red brickwork and leaving the roof structure incomplete.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the image shows a total structural failure of a wall component (collapsed house wall) rather than general surface or minor structural damage (building damage).\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the central structure in the crop image exhibits a visibly collapsed wall section, exposing the interior red brickwork and leaving the roof structure incomplete.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The central structure in the evidence image clearly shows a building with a missing wall section, exposing red brickwork and an incomplete roof. This visual evidence directly supports the claim of a collapsed wall and structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image displays a building with significant structural damage, including a missing wall and roof issues. This supports the general claim of visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The central structure in the evidence image clearly shows a building with a missing wall section, exposing red brickwork and an incomplete roof. This visual evidence directly supports the claim of a collapsed wall and structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a building with significant structural damage, including a missing wall and roof issues. This supports the general claim of visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

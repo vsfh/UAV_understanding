@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b20d79c4bd04927d1981",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1010-10733-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1010-10733-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a wide river or canal with green algae on the surface.",
+      "Large rectangular fields of yellow crops, likely rice, in the background.",
+      "A paved road with streetlights and a white vehicle runs parallel to the fields.",
+      "A small boat is docked on the near bank in the lower-left corner."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in view of the landmass located between the river and the road in the first image.",
+      "The boat visible in the lower-left of the first image is the same boat shown in detail in the second image.",
+      "The dense vegetation and dirt clearing in the second image correspond to the patch of green and brown terrain adjacent to the water in the first image."
+    ],
+    "description": "The images show a riverbank area with a docked wooden boat and dense vegetation. The wider view places this site next to a road and large yellow crop fields, while the close-up reveals the boat's structure and a cleared dirt patch surrounded by greenery.",
+    "evidence_visible": [
+      "A weathered wooden boat with a flat deck is moored at the water's edge.",
+      "A second, smaller boat is partially visible to the right of the main vessel.",
+      "A patch of bare earth is cleared within the vegetation near the boat.",
+      "Green netting is visible on the ground near the bottom edge of the frame.",
+      "The vegetation consists of tall, dense green plants and reeds."
+    ],
+    "unclear": [
+      "The specific type of crop in the background fields.",
+      "The purpose of the green netting.",
+      "The condition of the boats' interiors.",
+      "The exact dimensions of the cleared dirt patch."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a wide river or canal with green algae on the surface.\",\n    \"Large rectangular fields of yellow crops, likely rice, in the background.\",\n    \"A paved road with streetlights and a white vehicle runs parallel to the fields.\",\n    \"A small boat is docked on the near bank in the lower-left corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in view of the landmass located between the river and the road in the first image.\",\n    \"The boat visible in the lower-left of the first image is the same boat shown in detail in the second image.\",\n    \"The dense vegetation and dirt clearing in the second image correspond to the patch of green and brown terrain adjacent to the water in the first image.\"\n  ],\n  \"description\": \"The images show a riverbank area with a docked wooden boat and dense vegetation. The wider view places this site next to a road and large yellow crop fields, while the close-up reveals the boat's structure and a cleared dirt patch surrounded by greenery.\",\n  \"evidence_visible\": [\n    \"A weathered wooden boat with a flat deck is moored at the water's edge.\",\n    \"A second, smaller boat is partially visible to the right of the main vessel.\",\n    \"A patch of bare earth is cleared within the vegetation near the boat.\",\n    \"Green netting is visible on the ground near the bottom edge of the frame.\",\n    \"The vegetation consists of tall, dense green plants and reeds.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the background fields.\",\n    \"The purpose of the green netting.\",\n    \"The condition of the boats' interiors.\",\n    \"The exact dimensions of the cleared dirt patch.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is not visible because the specific coverage status of the soil is not clearly established in the image.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a patch of bare earth cleared within the vegetation near the boat, with green netting visible on the ground near the bottom edge of the frame.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is not visible because the specific coverage status of the soil is not clearly established in the image.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a patch of bare earth cleared within the vegetation near the boat, with green netting visible on the ground near the bottom edge of the frame.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a patch of bare earth cleared within the vegetation near the boat, and green netting is visible on the ground near the bottom edge of the frame. This directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a patch of bare earth cleared within the vegetation near the boat, and green netting is visible on the ground near the bottom edge of the frame. This directly supports the description of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a patch of bare earth cleared within the vegetation near the boat, and green netting is visible on the ground near the bottom edge of the frame. This directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a patch of bare earth cleared within the vegetation near the boat, and green netting is visible on the ground near the bottom edge of the frame. This directly supports the description of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

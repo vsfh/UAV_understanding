@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_3df3b3088e56294558cd",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-2811-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-2811-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a river separating two distinct zones.",
+      "Upper zone: A paved road with vehicles, a large building complex with a swimming pool, and manicured trees.",
+      "Lower zone: A dense cluster of older buildings with grey tiled roofs and a large rectangular plot covered in green mesh netting.",
+      "The river water is green and calm.",
+      "Vegetation along the riverbank includes bare deciduous trees and some evergreens."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a zoomed-in view of the lower-left section of the context image.",
+      "The green mesh-covered plot in the context image corresponds to the large area in the foreground of the evidence crop.",
+      "The row of older buildings along the riverbank in the context image is shown in greater detail in the evidence crop.",
+      "The white wall separating the buildings from the mesh-covered plot is visible in both views."
+    ],
+    "description": "An aerial view shows a river dividing a modern area with a pool from an older village. A large plot near the village is covered in green mesh. The evidence crop zooms in on this mesh-covered area and the adjacent grey-roofed buildings, highlighting the contrast between the two zones.",
+    "evidence_visible": [
+      "Close-up of a large rectangular plot covered with green construction mesh or netting.",
+      "The mesh is laid over uneven ground, possibly soil or rubble.",
+      "Adjacent to the mesh plot is a row of single-story buildings with grey tiled roofs.",
+      "Some roofs show signs of wear or damage, with missing tiles or exposed structures.",
+      "A white wall runs along the edge of the mesh plot, separating it from the buildings.",
+      "A small paved path or road runs alongside the riverbank, parallel to the buildings.",
+      "Trees with bare branches are visible along the riverbank behind the buildings."
+    ],
+    "unclear": [
+      "The exact purpose of the green mesh (e.g., construction site, agricultural use, erosion control).",
+      "The condition of the buildings (e.g., abandoned, under renovation, occupied).",
+      "The specific type of vegetation.",
+      "The exact date of the images."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a river separating two distinct zones.\",\n    \"Upper zone: A paved road with vehicles, a large building complex with a swimming pool, and manicured trees.\",\n    \"Lower zone: A dense cluster of older buildings with grey tiled roofs and a large rectangular plot covered in green mesh netting.\",\n    \"The river water is green and calm.\",\n    \"Vegetation along the riverbank includes bare deciduous trees and some evergreens.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a zoomed-in view of the lower-left section of the context image.\",\n    \"The green mesh-covered plot in the context image corresponds to the large area in the foreground of the evidence crop.\",\n    \"The row of older buildings along the riverbank in the context image is shown in greater detail in the evidence crop.\",\n    \"The white wall separating the buildings from the mesh-covered plot is visible in both views.\"\n  ],\n  \"description\": \"An aerial view shows a river dividing a modern area with a pool from an older village. A large plot near the village is covered in green mesh. The evidence crop zooms in on this mesh-covered area and the adjacent grey-roofed buildings, highlighting the contrast between the two zones.\",\n  \"evidence_visible\": [\n    \"Close-up of a large rectangular plot covered with green construction mesh or netting.\",\n    \"The mesh is laid over uneven ground, possibly soil or rubble.\",\n    \"Adjacent to the mesh plot is a row of single-story buildings with grey tiled roofs.\",\n    \"Some roofs show signs of wear or damage, with missing tiles or exposed structures.\",\n    \"A white wall runs along the edge of the mesh plot, separating it from the buildings.\",\n    \"A small paved path or road runs alongside the riverbank, parallel to the buildings.\",\n    \"Trees with bare branches are visible along the riverbank behind the buildings.\"\n  ],\n  \"unclear\": [\n    \"The exact purpose of the green mesh (e.g., construction site, agricultural use, erosion control).\",\n    \"The condition of the buildings (e.g., abandoned, under renovation, occupied).\",\n    \"The specific type of vegetation.\",\n    \"The exact date of the images.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the mesh in the image appears to fully cover the designated plot area, whereas incomplete soil cover would require visible gaps in the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the evidence crop shows a large rectangular plot of ground completely covered by green mesh netting, consistent with dust-control measures.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the mesh in the image appears to fully cover the designated plot area, whereas incomplete soil cover would require visible gaps in the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the evidence crop shows a large rectangular plot of ground completely covered by green mesh netting, consistent with dust-control measures.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence crop clearly shows a large rectangular plot of ground completely covered by green mesh netting. This directly contradicts the claim that the soil cover is incomplete or missing.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    },
+    "positive": {
+      "reason": "The evidence crop displays a large rectangular plot of ground completely covered by green mesh netting, which is consistent with dust-control measures.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence crop clearly shows a large rectangular plot of ground completely covered by green mesh netting. This directly contradicts the claim that the soil cover is incomplete or missing.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The evidence crop displays a large rectangular plot of ground completely covered by green mesh netting, which is consistent with dust-control measures.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

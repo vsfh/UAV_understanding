@@ -1,0 +1,40 @@
+{
+  "configuration_fingerprint": "fa25548f5f2364f8f0a79109f11b29f71d7af0dccfc7238b0bdf52928773b5f7",
+  "configuration": {
+    "prompt_version": "clear-uav-teacher-v5",
+    "teacher_model_path": "/media/4tb/feihong/hf_cache/models--Qwen--Qwen3.6-35B-A3B-FP8/snapshots/95a723d08a9490559dae23d0cff1d9466213d989",
+    "teacher_config_sha256": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+    "fp8_kernel_path": "/home/feihong/.cache/huggingface/hub/kernels--kernels-community--finegrained-fp8/snapshots/13d2d7021a8854a5b767daf6513875ab9eb6c09d",
+    "fp8_kernel_metadata_sha256": "8f04faa1f5730040b2967fc4dedcf0430016e0ffb5447859557876909287242f",
+    "data_root": "/media/data1/feihong/uav_understanding_data",
+    "train_csv": "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
+    "train_csv_sha256": "4db75b98e94ee0328441e7bab51b72af8b6bad9ab8dd57b256eb573262802cfd",
+    "ontology": "/media/data1/feihong/UAV_understanding/configs/ontology.yaml",
+    "ontology_sha256": "ab14973dfac198b57043af0a9267a17241b1a427a7206f2751c27a3217ce54c1",
+    "labels_file": "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
+    "labels_file_sha256": "cd168b82efd9a8dc3d7a61a99fb5d034d8043141d5c8fd5653e269db7aba76ff",
+    "evidence_cards_jsonl": null,
+    "evidence_cards_sha256": null,
+    "max_per_class": 250,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "max_samples": null,
+    "sample_count": 5270,
+    "max_pixels": 262144,
+    "max_new_tokens": {
+      "perception": 512,
+      "rewrite": 640,
+      "verification": 384
+    },
+    "positive_threshold": 0.65,
+    "counterfactual_threshold": 0.5,
+    "generation": {
+      "do_sample": false,
+      "enable_thinking": false,
+      "max_retries": 2
+    }
+  }
+}

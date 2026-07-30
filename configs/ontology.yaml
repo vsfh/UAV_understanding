@@ -1,0 +1,123 @@
+# Compact visual definitions used by prompts and graph-negative sampling.
+# Replace or extend these with the adjudicated evidence-card definitions before main runs.
+events:
+  - {name: abandoned_building, definition: "an apparently unused or derelict building"}
+  - {name: accumulated_building_material, definition: "building material accumulated in an outdoor pile"}
+  - {name: algal_bloom_scum, definition: "dense surface scum consistent with an algal bloom"}
+  - {name: balloon_banner, definition: "a balloon-supported advertising banner"}
+  - {name: banner, definition: "a freestanding or attached outdoor banner"}
+  - {name: bare_soil_netting, definition: "exposed soil covered by dust-control netting"}
+  - {name: black_odorous_water, definition: "visibly dark polluted-looking water"}
+  - {name: blue_tarp_shed, definition: "a makeshift shed covered by blue tarpaulin"}
+  - {name: building_damage, definition: "visible structural damage to a building"}
+  - {name: building_demolition, definition: "a building undergoing active or recent demolition"}
+  - {name: building_materials_factory, definition: "outdoor building-material stock at an industrial facility"}
+  - {name: burning_marks_grass, definition: "burn marks visible on grass or low vegetation"}
+  - {name: cargo_ship, definition: "a cargo-carrying vessel on the water"}
+  - {name: collapsed_house_wall, definition: "a house wall that has visibly collapsed"}
+  - {name: construction_materials, definition: "stored materials intended for construction"}
+  - {name: construction_site_pile, definition: "a material pile located within a construction site"}
+  - {name: construction_vehicle, definition: "a vehicle visibly used for construction work"}
+  - {name: construction_waste, definition: "discarded mixed debris from construction or demolition"}
+  - {name: crop_lodging, definition: "a crop area visibly flattened or lodged"}
+  - {name: crowd_gathering, definition: "a concentrated gathering of people"}
+  - {name: dangerous_building, definition: "a building with visible features suggesting structural danger"}
+  - {name: dead_pine_tree, definition: "a pine tree with visibly dead or brown canopy"}
+  - {name: disorderly_materials, definition: "materials stored in a visibly disorderly arrangement"}
+  - {name: embankment_structure, definition: "a constructed structure along an embankment"}
+  - {name: excavator, definition: "an excavator machine"}
+  - {name: exposed_garbage, definition: "garbage exposed on land in the open"}
+  - {name: farmland_building, definition: "a building occupying or adjoining cultivated farmland"}
+  - {name: fire_lane_obstruction, definition: "objects or vehicles obstructing a marked fire lane"}
+  - {name: floating_garbage, definition: "garbage floating on the water surface"}
+  - {name: garbage_collection_point, definition: "a designated-looking point where garbage is collected"}
+  - {name: glass_greenhouse, definition: "a greenhouse with transparent glass-like roofing"}
+  - {name: grain_drying_road, definition: "grain spread across a road for drying"}
+  - {name: green_algae_duckweed, definition: "green algae or duckweed covering part of the water surface"}
+  - {name: hillside_excavation, definition: "visible excavation cut into a hillside"}
+  - {name: incomplete_soil_cover, definition: "soil for which protective covering is visibly incomplete"}
+  - {name: land_use_change, definition: "visible conversion or disturbance suggesting changed land use"}
+  - {name: landscaping_construction, definition: "active construction associated with landscaping work"}
+  - {name: landslide_risk, definition: "a visibly unstable slope or slide-prone area"}
+  - {name: messy_green_space, definition: "a green space with visibly unmanaged clutter or waste"}
+  - {name: muck_truck, definition: "a truck used to carry soil or construction spoil"}
+  - {name: muck_truck_covered, definition: "a muck truck whose load is covered"}
+  - {name: muck_truck_uncovered, definition: "a muck truck whose load is visibly uncovered"}
+  - {name: nighttime_fireworks, definition: "visible fireworks occurring at night"}
+  - {name: open_storage_construction, definition: "open storage of materials at a construction setting"}
+  - {name: open_storage_factory, definition: "open storage of materials at a factory setting"}
+  - {name: open_storage_residential, definition: "open storage of materials in a residential setting"}
+  - {name: outbuilding_materials, definition: "materials associated with an outbuilding or unauthorized shed"}
+  - {name: outdoor_business, definition: "commercial activity occupying an outdoor public area"}
+  - {name: piled_materials_factory, definition: "piled materials located at a factory"}
+  - {name: project_construction, definition: "an active general construction project"}
+  - {name: river_construction, definition: "construction activity within or directly beside a river"}
+  - {name: road_occupying_pile, definition: "a material pile occupying part of a road"}
+  - {name: rural_house_construction, definition: "active construction of a house in a rural setting"}
+  - {name: sand_gravel_plant, definition: "an industrial site processing or storing sand and gravel"}
+  - {name: shoreline_structure, definition: "a man-made structure located along a shoreline"}
+  - {name: smoke_emission, definition: "visible smoke emitted from a fixed or industrial source"}
+  - {name: straw_burning, definition: "visible active burning of crop straw"}
+  - {name: straw_burning_marks, definition: "ground marks left by recent straw burning"}
+  - {name: street_vendor, definition: "an individual street-vending setup"}
+  - {name: street_vendor_canopy, definition: "a street-vending setup identified by a sales canopy"}
+  - {name: street_vendor_clustered, definition: "multiple street vendors clustered together"}
+  - {name: street_vendor_vehicle, definition: "street vending conducted from or beside a vehicle"}
+  - {name: suspected_fire_smoke, definition: "smoke whose scene context suggests a possible open fire"}
+  - {name: swimmer, definition: "a person swimming in open water"}
+  - {name: unclean_water_surface, definition: "a water surface visibly affected by pollution or debris"}
+  - {name: water_discoloration, definition: "a localized or broad abnormal change in water color"}
+  - {name: waterside_garbage, definition: "garbage deposited on land at the water edge"}
+
+confusion_edges:
+  - [abandoned_building, dangerous_building]
+  - [building_damage, collapsed_house_wall]
+  - [building_damage, building_demolition]
+  - [building_demolition, project_construction]
+  - [farmland_building, rural_house_construction]
+  - [blue_tarp_shed, outbuilding_materials]
+  - [accumulated_building_material, construction_materials]
+  - [construction_materials, construction_waste]
+  - [construction_site_pile, road_occupying_pile]
+  - [disorderly_materials, accumulated_building_material]
+  - [building_materials_factory, piled_materials_factory]
+  - [piled_materials_factory, sand_gravel_plant]
+  - [open_storage_construction, open_storage_factory]
+  - [open_storage_factory, open_storage_residential]
+  - [incomplete_soil_cover, bare_soil_netting]
+  - [construction_vehicle, excavator]
+  - [muck_truck, muck_truck_covered]
+  - [muck_truck_covered, muck_truck_uncovered]
+  - [project_construction, landscaping_construction]
+  - [project_construction, rural_house_construction]
+  - [river_construction, shoreline_structure]
+  - [hillside_excavation, landslide_risk]
+  - [land_use_change, hillside_excavation]
+  - [crop_lodging, grain_drying_road]
+  - [dead_pine_tree, messy_green_space]
+  - [messy_green_space, exposed_garbage]
+  - [exposed_garbage, garbage_collection_point]
+  - [exposed_garbage, waterside_garbage]
+  - [waterside_garbage, floating_garbage]
+  - [floating_garbage, unclean_water_surface]
+  - [unclean_water_surface, water_discoloration]
+  - [water_discoloration, black_odorous_water]
+  - [green_algae_duckweed, algal_bloom_scum]
+  - [algal_bloom_scum, unclean_water_surface]
+  - [cargo_ship, swimmer]
+  - [cargo_ship, shoreline_structure]
+  - [smoke_emission, suspected_fire_smoke]
+  - [suspected_fire_smoke, straw_burning]
+  - [straw_burning, straw_burning_marks]
+  - [straw_burning_marks, burning_marks_grass]
+  - [suspected_fire_smoke, nighttime_fireworks]
+  - [outdoor_business, street_vendor]
+  - [street_vendor, street_vendor_canopy]
+  - [street_vendor, street_vendor_clustered]
+  - [street_vendor, street_vendor_vehicle]
+  - [street_vendor_clustered, crowd_gathering]
+  - [banner, balloon_banner]
+  - [fire_lane_obstruction, road_occupying_pile]
+  - [glass_greenhouse, farmland_building]
+  - [embankment_structure, shoreline_structure]
+

@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_9d9372b43b05fff01897",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1008-3970-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1008-3970-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of an industrial or semi-rural area with large warehouse buildings featuring blue and grey roofs.",
+      "A central plot of land divided into rectangular agricultural plots with varying soil conditions and vegetation.",
+      "A tall metal electrical transmission tower stands near the center of the agricultural area.",
+      "A small, single-story building with a grey roof is located on the left side, adjacent to a paved road.",
+      "A distinct blue tarp covers a pile of material near the small building and some trees."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the area immediately surrounding the small building and the blue tarp seen in the context image.",
+      "The paved road visible on the left of the context image runs along the left edge of the crop image.",
+      "The agricultural plots to the right of the small building in the context image correspond to the field rows visible on the right edge of the crop image."
+    ],
+    "description": "The images show an agricultural plot adjacent to industrial buildings. A small grey building sits near a road, next to a large pile of debris or soil covered by a blue tarp. The crop view confirms the tarp's texture and the presence of scattered white objects on the ground nearby.",
+    "evidence_visible": [
+      "A large, irregular blue tarp covers a mound of earth or debris.",
+      "The tarp is surrounded by green vegetation, trees, and a paved road.",
+      "White, rectangular objects are scattered on the ground near the tarp and trees.",
+      "The ground appears to be a mix of dirt, gravel, and grass.",
+      "A concrete wall or fence segment is visible on the right edge of the crop."
+    ],
+    "unclear": [
+      "The specific contents of the pile under the blue tarp.",
+      "The identity of the white objects scattered on the ground.",
+      "The exact nature of the small building (residential, storage, etc.).",
+      "Whether the blue tarp is covering waste, construction materials, or harvested crops."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of an industrial or semi-rural area with large warehouse buildings featuring blue and grey roofs.\",\n    \"A central plot of land divided into rectangular agricultural plots with varying soil conditions and vegetation.\",\n    \"A tall metal electrical transmission tower stands near the center of the agricultural area.\",\n    \"A small, single-story building with a grey roof is located on the left side, adjacent to a paved road.\",\n    \"A distinct blue tarp covers a pile of material near the small building and some trees.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the area immediately surrounding the small building and the blue tarp seen in the context image.\",\n    \"The paved road visible on the left of the context image runs along the left edge of the crop image.\",\n    \"The agricultural plots to the right of the small building in the context image correspond to the field rows visible on the right edge of the crop image.\"\n  ],\n  \"description\": \"The images show an agricultural plot adjacent to industrial buildings. A small grey building sits near a road, next to a large pile of debris or soil covered by a blue tarp. The crop view confirms the tarp's texture and the presence of scattered white objects on the ground nearby.\",\n  \"evidence_visible\": [\n    \"A large, irregular blue tarp covers a mound of earth or debris.\",\n    \"The tarp is surrounded by green vegetation, trees, and a paved road.\",\n    \"White, rectangular objects are scattered on the ground near the tarp and trees.\",\n    \"The ground appears to be a mix of dirt, gravel, and grass.\",\n    \"A concrete wall or fence segment is visible on the right edge of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the pile under the blue tarp.\",\n    \"The identity of the white objects scattered on the ground.\",\n    \"The exact nature of the small building (residential, storage, etc.).\",\n    \"Whether the blue tarp is covering waste, construction materials, or harvested crops.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the mound by the blue tarp; the tarp fully encloses the material, whereas incomplete soil cover would show exposed soil areas.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large mound of earth or debris completely covered by a blue tarp, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the mound by the blue tarp; the tarp fully encloses the material, whereas incomplete soil cover would show exposed soil areas.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large mound of earth or debris completely covered by a blue tarp, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large mound covered by a blue tarp, which directly supports the description of bare soil netting or dust-control netting. The claim is visually verified.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The blue tarp covering the mound is visibly torn, displaced, and incomplete, leaving significant portions of the underlying soil or debris exposed. This supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large mound covered by a blue tarp, which directly supports the description of bare soil netting or dust-control netting. The claim is visually verified.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The blue tarp covering the mound is visibly torn, displaced, and incomplete, leaving significant portions of the underlying soil or debris exposed. This supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

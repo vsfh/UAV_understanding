@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_9d4c51fb30e6031fa00b",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0801-4224-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0801-4224-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with large rectangular green agricultural fields.",
+      "Multiple residential buildings with red and grey tiled roofs.",
+      "Paved roads and concrete courtyards connecting the structures.",
+      "A body of water visible in the lower right corner.",
+      "Vegetation patches located between buildings and along field boundaries."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a high-magnification view of the central cluster of buildings seen in the context image.",
+      "The red-roofed house in the center of the evidence crop corresponds to the building with the red roof located centrally in the context view.",
+      "The grey-roofed building to the right in the evidence crop matches the structure immediately adjacent to the central red-roofed house in the context view.",
+      "The green vegetation patch in the evidence crop is situated between the red-roofed house and the grey-roofed building, consistent with the spatial layout in the context image."
+    ],
+    "description": "The images show a rural village with green fields and residential buildings. The evidence crop zooms in on a specific cluster of houses, highlighting a red-roofed building and an adjacent grey-roofed structure separated by a small plot of dense green vegetation. Roads and courtyards are visible around the buildings.",
+    "evidence_visible": [
+      "Close-up of a residential compound with concrete paving.",
+      "A two-story building with a red metal roof on the left.",
+      "A single-story structure with a red roof in the center.",
+      "A two-story building with a grey tiled roof on the right.",
+      "A small, dark-roofed shed-like structure in the center.",
+      "A rectangular plot of dense green leafy vegetation between the central red-roofed structure and the right-side grey-roofed building.",
+      "Solar water heaters visible on some rooftops."
+    ],
+    "unclear": [
+      "Specific crop species in the vegetation patches.",
+      "Occupancy status of the buildings.",
+      "Exact dimensions of the structures.",
+      "Identity of any individuals or vehicles (too small/blurry)."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with large rectangular green agricultural fields.\",\n    \"Multiple residential buildings with red and grey tiled roofs.\",\n    \"Paved roads and concrete courtyards connecting the structures.\",\n    \"A body of water visible in the lower right corner.\",\n    \"Vegetation patches located between buildings and along field boundaries.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a high-magnification view of the central cluster of buildings seen in the context image.\",\n    \"The red-roofed house in the center of the evidence crop corresponds to the building with the red roof located centrally in the context view.\",\n    \"The grey-roofed building to the right in the evidence crop matches the structure immediately adjacent to the central red-roofed house in the context view.\",\n    \"The green vegetation patch in the evidence crop is situated between the red-roofed house and the grey-roofed building, consistent with the spatial layout in the context image.\"\n  ],\n  \"description\": \"The images show a rural village with green fields and residential buildings. The evidence crop zooms in on a specific cluster of houses, highlighting a red-roofed building and an adjacent grey-roofed structure separated by a small plot of dense green vegetation. Roads and courtyards are visible around the buildings.\",\n  \"evidence_visible\": [\n    \"Close-up of a residential compound with concrete paving.\",\n    \"A two-story building with a red metal roof on the left.\",\n    \"A single-story structure with a red roof in the center.\",\n    \"A two-story building with a grey tiled roof on the right.\",\n    \"A small, dark-roofed shed-like structure in the center.\",\n    \"A rectangular plot of dense green leafy vegetation between the central red-roofed structure and the right-side grey-roofed building.\",\n    \"Solar water heaters visible on some rooftops.\"\n  ],\n  \"unclear\": [\n    \"Specific crop species in the vegetation patches.\",\n    \"Occupancy status of the buildings.\",\n    \"Exact dimensions of the structures.\",\n    \"Identity of any individuals or vehicles (too small/blurry).\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The event collapsed house wall is distinguished from building damage by the specific nature of the failure; the evidence shows a total structural collapse of a roof and wall section (a void), whereas building damage is a broader category that could include superficial cracks or partial damage without total collapse.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence image shows a small, dark-roofed shed-like structure in the center of the residential cluster where the roof and upper walls have visibly collapsed, leaving a dark void in the structure.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The event collapsed house wall is distinguished from building damage by the specific nature of the failure; the evidence shows a total structural collapse of a roof and wall section (a void), whereas building damage is a broader category that could include superficial cracks or partial damage without total collapse.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence image shows a small, dark-roofed shed-like structure in the center of the residential cluster where the roof and upper walls have visibly collapsed, leaving a dark void in the structure.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a small, dark-roofed structure in the center of the residential cluster where the roof and upper walls have visibly collapsed, leaving a dark void in the structure. This directly supports the claim of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows visible structural damage to a building, specifically the collapsed roof and walls of the small shed-like structure. This supports the claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a small, dark-roofed structure in the center of the residential cluster where the roof and upper walls have visibly collapsed, leaving a dark void in the structure. This directly supports the claim of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows visible structural damage to a building, specifically the collapsed roof and walls of the small shed-like structure. This supports the claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

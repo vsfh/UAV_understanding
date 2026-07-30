@@ -1,0 +1,102 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_9957df83542f862b15cf",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0310-8583-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0310-8583-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a semi-urban area with a mix of multi-story residential buildings and agricultural fields.",
+      "A paved road runs horizontally through the middle of the frame, separating the built-up area from the green fields.",
+      "The fields are divided into rectangular plots with visible crop rows.",
+      "Buildings feature flat and pitched roofs, some with solar panels or water tanks.",
+      "Vehicles are parked along the roadside and in front of buildings."
+    ],
+    "cross_view_relations": [
+      "The context image provides the spatial location of the building shown in the evidence crop.",
+      "The evidence crop is a zoomed-in view of a specific building's roof and side, located within the broader scene shown in the context image.",
+      "The green field visible to the right of the building in the evidence crop corresponds to the agricultural plots seen in the context image."
+    ],
+    "description": "The context image shows a wide aerial view of a town with buildings and green fields. The evidence crop zooms in on a specific building's roof, revealing a rusty metal sheet, a solar water heater, and an air conditioning unit mounted on the side wall, adjacent to a paved path and a green field.",
+    "evidence_visible": [
+      "A building roof with a large section of reddish-brown, rusted corrugated metal sheeting.",
+      "A solar water heater with a cylindrical tank and evacuated tubes is mounted on a flat, light-colored section of the roof.",
+      "An air conditioning unit is mounted on the exterior wall of the building.",
+      "A paved path or walkway runs alongside the building.",
+      "Green vegetation, likely crops, is visible in the field adjacent to the building."
+    ],
+    "unclear": [
+      "The exact type of crop in the fields.",
+      "The specific condition or functionality of the solar water heater.",
+      "The identity of any objects on the roof.",
+      "The exact address or ownership of the building."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a semi-urban area with a mix of multi-story residential buildings and agricultural fields.\",\n    \"A paved road runs horizontally through the middle of the frame, separating the built-up area from the green fields.\",\n    \"The fields are divided into rectangular plots with visible crop rows.\",\n    \"Buildings feature flat and pitched roofs, some with solar panels or water tanks.\",\n    \"Vehicles are parked along the roadside and in front of buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The context image provides the spatial location of the building shown in the evidence crop.\",\n    \"The evidence crop is a zoomed-in view of a specific building's roof and side, located within the broader scene shown in the context image.\",\n    \"The green field visible to the right of the building in the evidence crop corresponds to the agricultural plots seen in the context image.\"\n  ],\n  \"description\": \"The context image shows a wide aerial view of a town with buildings and green fields. The evidence crop zooms in on a specific building's roof, revealing a rusty metal sheet, a solar water heater, and an air conditioning unit mounted on the side wall, adjacent to a paved path and a green field.\",\n  \"evidence_visible\": [\n    \"A building roof with a large section of reddish-brown, rusted corrugated metal sheeting.\",\n    \"A solar water heater with a cylindrical tank and evacuated tubes is mounted on a flat, light-colored section of the roof.\",\n    \"An air conditioning unit is mounted on the exterior wall of the building.\",\n    \"A paved path or walkway runs alongside the building.\",\n    \"Green vegetation, likely crops, is visible in the field adjacent to the building.\"\n  ],\n  \"unclear\": [\n    \"The exact type of crop in the fields.\",\n    \"The specific condition or functionality of the solar water heater.\",\n    \"The identity of any objects on the roof.\",\n    \"The exact address or ownership of the building.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between building demolition and building damage is the presence of the rusted corrugated metal sheeting on the roof, which is cited as the primary evidence for the demolition event.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the evidence image shows a building roof with a large section of reddish-brown, rusted corrugated metal sheeting, which is consistent with the structural degradation or dismantling associated with demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is the presence of the rusted corrugated metal sheeting on the roof, which is cited as the primary evidence for the demolition event.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the evidence image shows a building roof with a large section of reddish-brown, rusted corrugated metal sheeting, which is consistent with the structural degradation or dismantling associated with demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image shows a building roof with reddish-brown corrugated metal sheeting. While the color suggests rust or weathering, there is no visual evidence of structural degradation, dismantling, or demolition activity (e.g., debris, missing sections, heavy machinery). The roof appears intact and continuous.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event building demolition is supported",
+        "The evidence image shows a building roof with a large section of reddish-brown, rusted corrugated metal sheeting, which is consistent with the structural degradation or dismantling associated with demolition."
+      ]
+    },
+    "positive": {
+      "reason": "The evidence image shows a building roof with reddish-brown corrugated metal sheeting. While the color suggests rust or weathering, there is no visual evidence of structural damage (e.g., holes, collapse, missing sections). The roof appears intact and continuous.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event building damage is supported",
+        "visible evidence shows visible structural damage to a building."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image shows a building roof with reddish-brown corrugated metal sheeting. While the color suggests rust or weathering, there is no visual evidence of structural degradation, dismantling, or demolition activity (e.g., debris, missing sections, heavy machinery). The roof appears intact and continuous.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event building demolition is supported\",\n      \"The evidence image shows a building roof with a large section of reddish-brown, rusted corrugated metal sheeting, which is consistent with the structural degradation or dismantling associated with demolition.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a building roof with reddish-brown corrugated metal sheeting. While the color suggests rust or weathering, there is no visual evidence of structural damage (e.g., holes, collapse, missing sections). The roof appears intact and continuous.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event building damage is supported\",\n      \"visible evidence shows visible structural damage to a building.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

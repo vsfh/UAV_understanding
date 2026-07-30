@@ -1,0 +1,15 @@
+{
+  "comparison": "outputs/evidence_label_seed42/val_closed_set.json - outputs/context_label_seed42/val_closed_set.json",
+  "num_rows": 2384,
+  "num_groups": 329,
+  "macro_f1_difference": 0.2707120686178559,
+  "macro_f1_difference_ci95": [
+    0.23563515501016943,
+    0.30421246257243806
+  ],
+  "micro_f1_difference": 0.25997225394183854,
+  "micro_f1_difference_ci95": [
+    0.24163870998189552,
+    0.2798345406455036
+  ]
+}

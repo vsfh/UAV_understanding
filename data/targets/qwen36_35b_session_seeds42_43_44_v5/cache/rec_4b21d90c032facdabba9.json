@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4b21d90c032facdabba9",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0917-3041-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0917-3041-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multi-story residential buildings, paved roads, and surrounding agricultural fields.",
+      "Large areas of green crops, likely rice paddies, border the village.",
+      "Several buildings have solar panels installed on their roofs.",
+      "Small garden plots are visible between houses.",
+      "A dirt path runs along the right side of the image, separating the village from the fields."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a high-magnification view of a specific plot of land located in the lower-left quadrant of the context image.",
+      "The concrete path visible on the left edge of the evidence image corresponds to the road network within the village shown in the context image.",
+      "The large green field in the upper-left of the evidence image matches the adjacent rice paddy seen in the context image."
+    ],
+    "description": "The context image shows a rural village surrounded by green agricultural fields. The evidence image provides a detailed view of a specific garden plot within this area, featuring tilled soil, a small blue rectangular object, and a black tarp-covered structure near a concrete path.",
+    "evidence_visible": [
+      "A rectangular plot of tilled brown soil divided into sections.",
+      "A small, bright blue rectangular object lying on the ground within the plot.",
+      "A black tarp or sheet covering a small structure or pile of materials.",
+      "A white pole or frame structure standing near the black tarp.",
+      "Green vegetation and grass bordering the tilled soil.",
+      "A concrete path running along the left edge of the frame."
+    ],
+    "unclear": [
+      "The specific type of crop or plant in the green areas.",
+      "The exact contents under the black tarp.",
+      "The purpose of the blue rectangular object.",
+      "The identity of the person or object near the black tarp (if any).",
+      "The specific type of solar panels on the roofs."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with multi-story residential buildings, paved roads, and surrounding agricultural fields.\",\n    \"Large areas of green crops, likely rice paddies, border the village.\",\n    \"Several buildings have solar panels installed on their roofs.\",\n    \"Small garden plots are visible between houses.\",\n    \"A dirt path runs along the right side of the image, separating the village from the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a high-magnification view of a specific plot of land located in the lower-left quadrant of the context image.\",\n    \"The concrete path visible on the left edge of the evidence image corresponds to the road network within the village shown in the context image.\",\n    \"The large green field in the upper-left of the evidence image matches the adjacent rice paddy seen in the context image.\"\n  ],\n  \"description\": \"The context image shows a rural village surrounded by green agricultural fields. The evidence image provides a detailed view of a specific garden plot within this area, featuring tilled soil, a small blue rectangular object, and a black tarp-covered structure near a concrete path.\",\n  \"evidence_visible\": [\n    \"A rectangular plot of tilled brown soil divided into sections.\",\n    \"A small, bright blue rectangular object lying on the ground within the plot.\",\n    \"A black tarp or sheet covering a small structure or pile of materials.\",\n    \"A white pole or frame structure standing near the black tarp.\",\n    \"Green vegetation and grass bordering the tilled soil.\",\n    \"A concrete path running along the left edge of the frame.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop or plant in the green areas.\",\n    \"The exact contents under the black tarp.\",\n    \"The purpose of the blue rectangular object.\",\n    \"The identity of the person or object near the black tarp (if any).\",\n    \"The specific type of solar panels on the roofs.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of a complete, continuous black covering over the specific area in question, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported by the visible presence of a black sheet or tarp covering a small structure or pile of materials within a tilled garden plot, adjacent to a concrete path and green vegetation.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of a complete, continuous black covering over the specific area in question, whereas incomplete soil cover would imply visible gaps or missing sections of the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported by the visible presence of a black sheet or tarp covering a small structure or pile of materials within a tilled garden plot, adjacent to a concrete path and green vegetation.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The wide image shows a black sheet covering a structure, and the evidence image shows a black sheet covering a pile of materials. Both instances clearly depict a covering that is present and complete over the specific object or area it is intended to cover, rather than being 'bare' or 'incomplete'.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The black sheet is described as 'bare soil netting' which contradicts the visual of a solid tarp.",
+        "The covering is described as 'incomplete' or 'incomplete soil cover', but the visual evidence shows a complete covering over the specific pile/structure."
+      ]
+    },
+    "positive": {
+      "reason": "The evidence image displays a tilled plot where a black sheet covers only a portion of the area, leaving adjacent soil exposed. This visual arrangement directly supports the claim of 'incomplete soil cover' as the protective covering is visibly not covering the entire plot.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The wide image shows a black sheet covering a structure, and the evidence image shows a black sheet covering a pile of materials. Both instances clearly depict a covering that is present and complete over the specific object or area it is intended to cover, rather than being 'bare' or 'incomplete'.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The black sheet is described as 'bare soil netting' which contradicts the visual of a solid tarp.\",\n      \"The covering is described as 'incomplete' or 'incomplete soil cover', but the visual evidence shows a complete covering over the specific pile/structure.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image displays a tilled plot where a black sheet covers only a portion of the area, leaving adjacent soil exposed. This visual arrangement directly supports the claim of 'incomplete soil cover' as the protective covering is visibly not covering the entire plot.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

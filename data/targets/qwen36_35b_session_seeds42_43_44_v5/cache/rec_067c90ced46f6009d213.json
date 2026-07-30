@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_067c90ced46f6009d213",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0928-20563-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0928-20563-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a meandering waterway, residential buildings with blue and grey roofs, and extensive agricultural fields.",
+      "The fields are divided into rectangular plots containing green crops and bare soil.",
+      "A paved road runs along the bottom left, adjacent to the water and buildings."
+    ],
+    "cross_view_relations": [
+      "The local crop image is a high-magnification view of the agricultural plots located in the lower-left quadrant of the wide context image.",
+      "The spatial arrangement of the blue and green rectangular sheets in the crop view matches the specific pattern seen in the context view.",
+      "The white road visible at the bottom of the crop view corresponds to the road running along the bottom edge of the context image."
+    ],
+    "description": "The images show a rural agricultural area with a waterway and houses. The local crop view zooms in on specific field plots covered with blue and green rectangular sheets, likely plastic or fabric, arranged in rows on the soil. These sheets are clearly visible in the lower-left section of the wider context image.",
+    "evidence_visible": [
+      "Rectangular plots of tilled brown soil.",
+      "Two distinct rectangular areas covered with blue and green material, appearing to be plastic sheeting or fabric.",
+      "Surrounding plots contain low-growing green vegetation.",
+      "A white paved road edge is visible at the bottom of the frame."
+    ],
+    "unclear": [
+      "The specific type of crop or plant growing in the green areas.",
+      "The exact material composition of the blue and green sheets (e.g., plastic, fabric, tarp).",
+      "The purpose of the sheets (e.g., mulch, weed control, protection).",
+      "The specific location or address of the scene."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a meandering waterway, residential buildings with blue and grey roofs, and extensive agricultural fields.\",\n    \"The fields are divided into rectangular plots containing green crops and bare soil.\",\n    \"A paved road runs along the bottom left, adjacent to the water and buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop image is a high-magnification view of the agricultural plots located in the lower-left quadrant of the wide context image.\",\n    \"The spatial arrangement of the blue and green rectangular sheets in the crop view matches the specific pattern seen in the context view.\",\n    \"The white road visible at the bottom of the crop view corresponds to the road running along the bottom edge of the context image.\"\n  ],\n  \"description\": \"The images show a rural agricultural area with a waterway and houses. The local crop view zooms in on specific field plots covered with blue and green rectangular sheets, likely plastic or fabric, arranged in rows on the soil. These sheets are clearly visible in the lower-left section of the wider context image.\",\n  \"evidence_visible\": [\n    \"Rectangular plots of tilled brown soil.\",\n    \"Two distinct rectangular areas covered with blue and green material, appearing to be plastic sheeting or fabric.\",\n    \"Surrounding plots contain low-growing green vegetation.\",\n    \"A white paved road edge is visible at the bottom of the frame.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop or plant growing in the green areas.\",\n    \"The exact material composition of the blue and green sheets (e.g., plastic, fabric, tarp).\",\n    \"The purpose of the sheets (e.g., mulch, weed control, protection).\",\n    \"The specific location or address of the scene.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the visible blue and green sheets appear to fully cover the rectangular soil plots, whereas incomplete soil cover would show visible gaps or missing sections of the protective material.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows rectangular plots of exposed brown soil covered by distinct blue and green rectangular sheets, appearing to be plastic or fabric material.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the visible blue and green sheets appear to fully cover the rectangular soil plots, whereas incomplete soil cover would show visible gaps or missing sections of the protective material.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows rectangular plots of exposed brown soil covered by distinct blue and green rectangular sheets, appearing to be plastic or fabric material.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays rectangular plots of exposed brown soil covered by distinct blue and green rectangular sheets. These sheets appear to be plastic or fabric material, directly supporting the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows plots where the soil is covered by blue and green sheets, but there are also adjacent plots of exposed brown soil and patches of green vegetation. This indicates that the protective covering is not applied to the entire area, making the cover visibly incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays rectangular plots of exposed brown soil covered by distinct blue and green rectangular sheets. These sheets appear to be plastic or fabric material, directly supporting the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows plots where the soil is covered by blue and green sheets, but there are also adjacent plots of exposed brown soil and patches of green vegetation. This indicates that the protective covering is not applied to the entire area, making the cover visibly incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

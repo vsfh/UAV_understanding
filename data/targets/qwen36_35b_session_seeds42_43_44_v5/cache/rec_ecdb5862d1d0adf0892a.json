@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_ecdb5862d1d0adf0892a",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1006-3068-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1006-3068-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area with agricultural fields in the foreground and industrial buildings in the background.",
+      "A paved road runs vertically through the center, separating the fields from the industrial zone.",
+      "The industrial zone contains multiple buildings with blue and grey roofs, large open storage yards, and stacked materials.",
+      "The agricultural area features tilled soil plots and green vegetation.",
+      "A small, rectangular, bright blue object is visible on the ground within the agricultural field area."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of the small, rectangular blue object located in the agricultural field in the main image.",
+      "The surrounding vegetation and tilled soil patterns in the crop match the field area in the main image.",
+      "The object appears to be a flat, rectangular sheet or container resting on the ground."
+    ],
+    "description": "An aerial view shows a rural-industrial interface with a road dividing agricultural fields from factory buildings. A small, bright blue rectangular object is visible in the field. A cropped, zoomed-in view confirms this object is a flat, rectangular item, possibly a tarp or container, lying on the tilled soil amidst green vegetation.",
+    "evidence_visible": [
+      "A close-up of a small, rectangular, bright blue object.",
+      "The object is lying on tilled, brown soil.",
+      "Surrounded by green vegetation, including some taller plants with white flowers.",
+      "The object appears to be a flat sheet or a low-profile container.",
+      "The surface of the object has some lighter markings or reflections, but the details are unclear."
+    ],
+    "unclear": [
+      "The exact nature of the blue object (e.g., tarp, container, piece of plastic).",
+      "The contents of the blue object if it is a container.",
+      "The purpose of the blue object.",
+      "The specific type of crops or plants in the field.",
+      "The specific type of materials stored in the industrial yard."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area with agricultural fields in the foreground and industrial buildings in the background.\",\n    \"A paved road runs vertically through the center, separating the fields from the industrial zone.\",\n    \"The industrial zone contains multiple buildings with blue and grey roofs, large open storage yards, and stacked materials.\",\n    \"The agricultural area features tilled soil plots and green vegetation.\",\n    \"A small, rectangular, bright blue object is visible on the ground within the agricultural field area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of the small, rectangular blue object located in the agricultural field in the main image.\",\n    \"The surrounding vegetation and tilled soil patterns in the crop match the field area in the main image.\",\n    \"The object appears to be a flat, rectangular sheet or container resting on the ground.\"\n  ],\n  \"description\": \"An aerial view shows a rural-industrial interface with a road dividing agricultural fields from factory buildings. A small, bright blue rectangular object is visible in the field. A cropped, zoomed-in view confirms this object is a flat, rectangular item, possibly a tarp or container, lying on the tilled soil amidst green vegetation.\",\n  \"evidence_visible\": [\n    \"A close-up of a small, rectangular, bright blue object.\",\n    \"The object is lying on tilled, brown soil.\",\n    \"Surrounded by green vegetation, including some taller plants with white flowers.\",\n    \"The object appears to be a flat sheet or a low-profile container.\",\n    \"The surface of the object has some lighter markings or reflections, but the details are unclear.\"\n  ],\n  \"unclear\": [\n    \"The exact nature of the blue object (e.g., tarp, container, piece of plastic).\",\n    \"The contents of the blue object if it is a container.\",\n    \"The purpose of the blue object.\",\n    \"The specific type of crops or plants in the field.\",\n    \"The specific type of materials stored in the industrial yard.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of a complete, distinct covering object (the blue sheet) versus merely exposed soil lacking such a cover.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a small, rectangular, bright blue sheet lying on exposed, tilled soil within an agricultural field, consistent with dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of a complete, distinct covering object (the blue sheet) versus merely exposed soil lacking such a cover.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a small, rectangular, bright blue sheet lying on exposed, tilled soil within an agricultural field, consistent with dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence explicitly shows a bright blue rectangular sheet lying on the tilled soil. This directly contradicts the claim that the soil is bare and that the sheet is consistent with dust-control netting (which is typically green or black mesh, not a solid blue sheet).",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The soil is bare.",
+        "The blue sheet is consistent with dust-control netting."
+      ]
+    },
+    "positive": {
+      "reason": "The image shows a plot of tilled soil where a large portion is covered by a bright blue sheet, while the surrounding grid of soil remains exposed. This visual evidence supports the claim that the protective covering is incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence explicitly shows a bright blue rectangular sheet lying on the tilled soil. This directly contradicts the claim that the soil is bare and that the sheet is consistent with dust-control netting (which is typically green or black mesh, not a solid blue sheet).\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The soil is bare.\",\n      \"The blue sheet is consistent with dust-control netting.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a plot of tilled soil where a large portion is covered by a bright blue sheet, while the surrounding grid of soil remains exposed. This visual evidence supports the claim that the protective covering is incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

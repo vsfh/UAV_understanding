@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d19ed4241f6082692e0a",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-07-01_2025-07-31/collapsed_house_wall/original/0716-4547-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-07-01_2025-07-31/collapsed_house_wall/cropped/0716-4547-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with dense housing, green agricultural fields, and a pond.",
+      "Multiple residential rooftops are equipped with photovoltaic solar panels.",
+      "Houses feature a mix of grey tiled roofs and flat concrete surfaces.",
+      "Vegetation includes cultivated garden plots and scattered trees."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of a specific building within the wider context image.",
+      "The building in the crop corresponds to the structure located in the upper-left quadrant of the context image, adjacent to a large green field.",
+      "The flat concrete roof with the solar panel visible in the crop matches the visual characteristics of the surrounding rooftops in the context view."
+    ],
+    "description": "The images show a rural village with agricultural fields and residential buildings. The context view displays a settlement with numerous solar panels on rooftops. The crop provides a detailed view of a specific house with a flat concrete roof and a solar panel, situated next to a garden plot and a large green field.",
+    "evidence_visible": [
+      "A single-story building with a flat concrete roof.",
+      "A rectangular solar panel mounted on the roof surface.",
+      "An adjacent walled garden plot containing green crops and yellow flowers.",
+      "A brick structure with a partially collapsed or open roof nearby.",
+      "A grey tiled roof on an adjacent building."
+    ],
+    "unclear": [
+      "The specific type of crops in the garden plot.",
+      "The exact contents of the brick structure.",
+      "The operational status of the solar panel."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with dense housing, green agricultural fields, and a pond.\",\n    \"Multiple residential rooftops are equipped with photovoltaic solar panels.\",\n    \"Houses feature a mix of grey tiled roofs and flat concrete surfaces.\",\n    \"Vegetation includes cultivated garden plots and scattered trees.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of a specific building within the wider context image.\",\n    \"The building in the crop corresponds to the structure located in the upper-left quadrant of the context image, adjacent to a large green field.\",\n    \"The flat concrete roof with the solar panel visible in the crop matches the visual characteristics of the surrounding rooftops in the context view.\"\n  ],\n  \"description\": \"The images show a rural village with agricultural fields and residential buildings. The context view displays a settlement with numerous solar panels on rooftops. The crop provides a detailed view of a specific house with a flat concrete roof and a solar panel, situated next to a garden plot and a large green field.\",\n  \"evidence_visible\": [\n    \"A single-story building with a flat concrete roof.\",\n    \"A rectangular solar panel mounted on the roof surface.\",\n    \"An adjacent walled garden plot containing green crops and yellow flowers.\",\n    \"A brick structure with a partially collapsed or open roof nearby.\",\n    \"A grey tiled roof on an adjacent building.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the garden plot.\",\n    \"The exact contents of the brick structure.\",\n    \"The operational status of the solar panel.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a roof that has collapsed or is open, whereas building damage is a broader category of visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a brick structure with a partially collapsed or open roof adjacent to a walled garden plot.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a roof that has collapsed or is open, whereas building damage is a broader category of visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a brick structure with a partially collapsed or open roof adjacent to a walled garden plot.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a brick structure with a partially collapsed or open roof adjacent to a walled garden plot, which directly supports the description of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a brick structure with a partially collapsed or open roof, which constitutes visible structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a brick structure with a partially collapsed or open roof adjacent to a walled garden plot, which directly supports the description of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a brick structure with a partially collapsed or open roof, which constitutes visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

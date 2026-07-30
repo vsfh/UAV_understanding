@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_1ea54e549ad31c77fa60",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0206-0574-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0206-0574-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a river separating two distinct zones.",
+      "North bank: Paved road with moving vehicles, modern buildings with grey roofs, and a rectangular swimming pool.",
+      "South bank: Dense cluster of older single-story structures with grey tiled roofs.",
+      "South bank foreground: Large area of exposed brown earth covered with blue mesh netting, indicating construction or excavation."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the lower-left quadrant of the context image.",
+      "The crop focuses specifically on the boundary between the blue-meshed construction site and the older residential buildings.",
+      "Both views confirm the spatial adjacency of the cleared land to the existing structures."
+    ],
+    "description": "Aerial imagery shows a river dividing a modern road and building complex from a dense area of older, grey-roofed structures. The foreground features a cleared plot of land covered in blue construction mesh, situated directly adjacent to the older buildings.",
+    "evidence_visible": [
+      "Close-up of the interface between the blue-meshed ground and the older buildings.",
+      "Visible details of the older structures include grey tiled roofs, some with rusted metal sheeting.",
+      "A white wall runs along the perimeter of the older buildings, separating them from the cleared land.",
+      "A small white excavator arm is visible on the far left edge of the cleared area."
+    ],
+    "unclear": [
+      "The specific purpose of the blue mesh (e.g., dust control vs. erosion control).",
+      "The exact date of the construction activity.",
+      "The legal status or ownership of the land parcels."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a river separating two distinct zones.\",\n    \"North bank: Paved road with moving vehicles, modern buildings with grey roofs, and a rectangular swimming pool.\",\n    \"South bank: Dense cluster of older single-story structures with grey tiled roofs.\",\n    \"South bank foreground: Large area of exposed brown earth covered with blue mesh netting, indicating construction or excavation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the lower-left quadrant of the context image.\",\n    \"The crop focuses specifically on the boundary between the blue-meshed construction site and the older residential buildings.\",\n    \"Both views confirm the spatial adjacency of the cleared land to the existing structures.\"\n  ],\n  \"description\": \"Aerial imagery shows a river dividing a modern road and building complex from a dense area of older, grey-roofed structures. The foreground features a cleared plot of land covered in blue construction mesh, situated directly adjacent to the older buildings.\",\n  \"evidence_visible\": [\n    \"Close-up of the interface between the blue-meshed ground and the older buildings.\",\n    \"Visible details of the older structures include grey tiled roofs, some with rusted metal sheeting.\",\n    \"A white wall runs along the perimeter of the older buildings, separating them from the cleared land.\",\n    \"A small white excavator arm is visible on the far left edge of the cleared area.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the blue mesh (e.g., dust control vs. erosion control).\",\n    \"The exact date of the construction activity.\",\n    \"The legal status or ownership of the land parcels.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a cleared construction site with blue mesh and an excavator, rather than visible structural damage to a standing building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a large area of exposed brown earth covered with blue mesh netting situated directly adjacent to older single-story structures, with a small white excavator arm visible on the far left edge of the cleared land.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a cleared construction site with blue mesh and an excavator, rather than visible structural damage to a standing building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a large area of exposed brown earth covered with blue mesh netting situated directly adjacent to older single-story structures, with a small white excavator arm visible on the far left edge of the cleared land.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large area of exposed brown earth covered with blue mesh netting adjacent to older single-story structures. A small white excavator arm is visible on the far left edge of the cleared land, supporting the description of demolition activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible structural damage to a building. The image shows intact buildings with standard roofs and walls. There is no visible evidence of structural damage (e.g., collapsed walls, missing roofs, debris) to any specific building; the 'damage' is limited to the cleared land which is an empty lot, not a building.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large area of exposed brown earth covered with blue mesh netting adjacent to older single-story structures. A small white excavator arm is visible on the far left edge of the cleared land, supporting the description of demolition activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible structural damage to a building. The image shows intact buildings with standard roofs and walls. There is no visible evidence of structural damage (e.g., collapsed walls, missing roofs, debris) to any specific building; the 'damage' is limited to the cleared land which is an empty lot, not a building.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

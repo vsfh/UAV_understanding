@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_7834603e2e628389f1c3",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0922-0559-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0922-0559-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring large, rectangular plots of vibrant green crops.",
+      "A paved road runs vertically through the right side of the frame, separating the fields.",
+      "Several buildings with red and grey roofs are visible in the upper and lower left corners.",
+      "A body of water is present in the upper left background.",
+      "Vegetation and trees line the edges of the fields and roads."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of a specific section of the first image.",
+      "The view focuses on the paved road and the adjacent field plot located in the lower right quadrant of the wide image.",
+      "The spatial relationship confirms the green mesh is situated on the ground next to the road, bordered by a strip of taller vegetation."
+    ],
+    "description": "The images show a rural agricultural area with green fields and a paved road. A close-up view highlights a rectangular patch of bright green mesh or netting laid on the ground adjacent to the road and a row of vegetation. The scene includes surrounding buildings and water, indicating a farming environment.",
+    "evidence_visible": [
+      "A rectangular area covered with a bright green, textured material, likely mesh or netting.",
+      "The material is laid flat on the ground, parallel to a paved road.",
+      "A strip of taller, darker green vegetation separates the mesh from the road.",
+      "The mesh is surrounded by the same green crop field seen in the wider context."
+    ],
+    "unclear": [
+      "The specific purpose of the green mesh (e.g., weed control, crop protection, temporary storage).",
+      "The exact type of crop in the fields.",
+      "The material composition of the green mesh.",
+      "The identity of the buildings or the specific location."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring large, rectangular plots of vibrant green crops.\",\n    \"A paved road runs vertically through the right side of the frame, separating the fields.\",\n    \"Several buildings with red and grey roofs are visible in the upper and lower left corners.\",\n    \"A body of water is present in the upper left background.\",\n    \"Vegetation and trees line the edges of the fields and roads.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of a specific section of the first image.\",\n    \"The view focuses on the paved road and the adjacent field plot located in the lower right quadrant of the wide image.\",\n    \"The spatial relationship confirms the green mesh is situated on the ground next to the road, bordered by a strip of taller vegetation.\"\n  ],\n  \"description\": \"The images show a rural agricultural area with green fields and a paved road. A close-up view highlights a rectangular patch of bright green mesh or netting laid on the ground adjacent to the road and a row of vegetation. The scene includes surrounding buildings and water, indicating a farming environment.\",\n  \"evidence_visible\": [\n    \"A rectangular area covered with a bright green, textured material, likely mesh or netting.\",\n    \"The material is laid flat on the ground, parallel to a paved road.\",\n    \"A strip of taller, darker green vegetation separates the mesh from the road.\",\n    \"The mesh is surrounded by the same green crop field seen in the wider context.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the green mesh (e.g., weed control, crop protection, temporary storage).\",\n    \"The exact type of crop in the fields.\",\n    \"The material composition of the green mesh.\",\n    \"The identity of the buildings or the specific location.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the rectangular area by the green mesh; the mesh is fully intact and covers the entire plot without visible gaps or exposed soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular patch of bright green mesh or netting laid flat on the ground adjacent to a paved road and a strip of vegetation.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the complete coverage of the rectangular area by the green mesh; the mesh is fully intact and covers the entire plot without visible gaps or exposed soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular patch of bright green mesh or netting laid flat on the ground adjacent to a paved road and a strip of vegetation.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a rectangular patch of bright green mesh or netting laid flat on the ground. This patch is situated directly adjacent to a paved road and a strip of vegetation, matching the description in the statement.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims visible evidence of 'incomplete soil cover'. However, the image shows a field covered in green crops and a specific patch covered by green netting. There is no visible bare soil or evidence of a covering that is 'incomplete' (e.g., torn or partially removed). The visual evidence contradicts the claim of incomplete cover.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a rectangular patch of bright green mesh or netting laid flat on the ground. This patch is situated directly adjacent to a paved road and a strip of vegetation, matching the description in the statement.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims visible evidence of 'incomplete soil cover'. However, the image shows a field covered in green crops and a specific patch covered by green netting. There is no visible bare soil or evidence of a covering that is 'incomplete' (e.g., torn or partially removed). The visual evidence contradicts the claim of incomplete cover.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

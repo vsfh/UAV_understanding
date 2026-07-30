@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_84ec8b606b86a01c9fcd",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2585-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2585-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with dense residential housing in the background and agricultural fields in the foreground.",
+      "A network of waterways and canals runs through the area.",
+      "A small, roofless brick structure stands isolated within the green fields.",
+      "Utility poles are visible throughout the agricultural area."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the central agricultural section of the first image.",
+      "The roofless brick structure and the surrounding rectangular plots of crops are identical in both images.",
+      "The spatial arrangement of the fields relative to the structure is consistent across both views."
+    ],
+    "description": "Aerial imagery of a rural landscape featuring a residential area bordering agricultural plots. A roofless brick structure is situated centrally within the fields. The second image provides a closer view of this structure and the surrounding green crops, confirming the spatial layout of the farmland.",
+    "evidence_visible": [
+      "Close-up view of the roofless brick structure with exposed walls and no roof.",
+      "Surrounding rectangular plots of green crops with varying shades of green.",
+      "Utility poles positioned near the structure and within the fields.",
+      "A waterway visible at the top edge of the frame."
+    ],
+    "unclear": [
+      "The specific type of crops planted in the fields.",
+      "The reason for the structure being roofless (abandoned, under construction, or demolition).",
+      "The exact date of the imagery.",
+      "The ownership or legal status of the land and structures."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with dense residential housing in the background and agricultural fields in the foreground.\",\n    \"A network of waterways and canals runs through the area.\",\n    \"A small, roofless brick structure stands isolated within the green fields.\",\n    \"Utility poles are visible throughout the agricultural area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the central agricultural section of the first image.\",\n    \"The roofless brick structure and the surrounding rectangular plots of crops are identical in both images.\",\n    \"The spatial arrangement of the fields relative to the structure is consistent across both views.\"\n  ],\n  \"description\": \"Aerial imagery of a rural landscape featuring a residential area bordering agricultural plots. A roofless brick structure is situated centrally within the fields. The second image provides a closer view of this structure and the surrounding green crops, confirming the spatial layout of the farmland.\",\n  \"evidence_visible\": [\n    \"Close-up view of the roofless brick structure with exposed walls and no roof.\",\n    \"Surrounding rectangular plots of green crops with varying shades of green.\",\n    \"Utility poles positioned near the structure and within the fields.\",\n    \"A waterway visible at the top edge of the frame.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops planted in the fields.\",\n    \"The reason for the structure being roofless (abandoned, under construction, or demolition).\",\n    \"The exact date of the imagery.\",\n    \"The ownership or legal status of the land and structures.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a roofless structure with exposed walls (collapsed house wall), whereas building damage is a broader category of visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence shows a small, isolated brick structure in the agricultural fields that is roofless with exposed walls, consistent with a visibly collapsed house wall.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a roofless structure with exposed walls (collapsed house wall), whereas building damage is a broader category of visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence shows a small, isolated brick structure in the agricultural fields that is roofless with exposed walls, consistent with a visibly collapsed house wall.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a small, isolated brick structure in the fields that is roofless with exposed walls, which visually supports the description of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a small brick structure in the fields that is missing its roof and has exposed walls, which constitutes visible structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a small, isolated brick structure in the fields that is roofless with exposed walls, which visually supports the description of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a small brick structure in the fields that is missing its roof and has exposed walls, which constitutes visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0d1bbb3db758193a55cd",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0921-8457-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0921-8457-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape dominated by rectangular plots of vibrant green crops, likely rice paddies.",
+      "A paved road runs vertically through the left-center, intersected by smaller dirt paths.",
+      "Utility poles and power lines traverse the fields.",
+      "Clusters of deciduous trees are scattered throughout the scene, particularly in the upper right and lower right quadrants.",
+      "A small structure is visible in the top left corner."
+    ],
+    "cross_view_relations": [
+      "The local crop image is a zoomed-in view of the tree cluster located in the upper right quadrant of the context image.",
+      "The paved road visible in the context image runs horizontally across the bottom of the local crop image.",
+      "The surrounding green fields in the local crop match the texture and color of the fields in the context image."
+    ],
+    "description": "The context image shows a rural agricultural area with green fields, roads, and trees. The local crop image provides a closer view of a specific tree cluster adjacent to the road, revealing several rectangular plots covered with green and blue materials situated among the vegetation.",
+    "evidence_visible": [
+      "A cluster of green trees adjacent to a paved road.",
+      "Several rectangular plots on the ground covered with green and blue materials.",
+      "White rectangular objects, possibly containers or structures, are visible near the trees.",
+      "The ground around the plots appears to be dirt or dry grass.",
+      "The surrounding area consists of the same green crops seen in the context image."
+    ],
+    "unclear": [
+      "The specific identity of the green and blue materials covering the plots.",
+      "The purpose of the white rectangular objects.",
+      "The exact type of crop in the fields.",
+      "Any activity or people present in the scene."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape dominated by rectangular plots of vibrant green crops, likely rice paddies.\",\n    \"A paved road runs vertically through the left-center, intersected by smaller dirt paths.\",\n    \"Utility poles and power lines traverse the fields.\",\n    \"Clusters of deciduous trees are scattered throughout the scene, particularly in the upper right and lower right quadrants.\",\n    \"A small structure is visible in the top left corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop image is a zoomed-in view of the tree cluster located in the upper right quadrant of the context image.\",\n    \"The paved road visible in the context image runs horizontally across the bottom of the local crop image.\",\n    \"The surrounding green fields in the local crop match the texture and color of the fields in the context image.\"\n  ],\n  \"description\": \"The context image shows a rural agricultural area with green fields, roads, and trees. The local crop image provides a closer view of a specific tree cluster adjacent to the road, revealing several rectangular plots covered with green and blue materials situated among the vegetation.\",\n  \"evidence_visible\": [\n    \"A cluster of green trees adjacent to a paved road.\",\n    \"Several rectangular plots on the ground covered with green and blue materials.\",\n    \"White rectangular objects, possibly containers or structures, are visible near the trees.\",\n    \"The ground around the plots appears to be dirt or dry grass.\",\n    \"The surrounding area consists of the same green crops seen in the context image.\"\n  ],\n  \"unclear\": [\n    \"The specific identity of the green and blue materials covering the plots.\",\n    \"The purpose of the white rectangular objects.\",\n    \"The exact type of crop in the fields.\",\n    \"Any activity or people present in the scene.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of complete coverage by the netting material in the observed plots, whereas incomplete soil cover would require visible gaps in the protective layer.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows rectangular plots of exposed soil covered by green and blue dust-control netting situated among a cluster of trees adjacent to a paved road.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of complete coverage by the netting material in the observed plots, whereas incomplete soil cover would require visible gaps in the protective layer.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows rectangular plots of exposed soil covered by green and blue dust-control netting situated among a cluster of trees adjacent to a paved road.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows rectangular plots of soil covered by green and blue netting adjacent to trees and a road, which directly supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows plots of soil covered by green and blue netting. The claim of 'incomplete soil cover' implies that the soil is not fully covered or the covering is failing, but the visible evidence shows the soil is fully enclosed by the netting within the defined rectangular boundaries. There is no visual evidence of the covering being incomplete or failing.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The protective covering is visibly incomplete."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows rectangular plots of soil covered by green and blue netting adjacent to trees and a road, which directly supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows plots of soil covered by green and blue netting. The claim of 'incomplete soil cover' implies that the soil is not fully covered or the covering is failing, but the visible evidence shows the soil is fully enclosed by the netting within the defined rectangular boundaries. There is no visual evidence of the covering being incomplete or failing.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The protective covering is visibly incomplete.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

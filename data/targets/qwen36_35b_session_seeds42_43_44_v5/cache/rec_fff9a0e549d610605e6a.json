@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_fff9a0e549d610605e6a",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0303-1907-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0303-1907-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a grid of rectangular agricultural fields planted with low-growing green crops.",
+      "A network of paved roads intersects the fields, connecting clusters of residential buildings with varying roof colors (red, grey, blue).",
+      "A waterway runs along the right edge of the frame.",
+      "The fields show distinct linear patterns, indicating organized planting rows."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in view of the upper-left quadrant of the first image.",
+      "The T-intersection of the road in the second image corresponds to the junction visible in the top-left section of the first image.",
+      "The cluster of houses with red and grey roofs in the second image matches the buildings located at the top-left corner of the first image.",
+      "The specific field with dense green crops in the foreground of the second image is one of the large rectangular plots seen in the first image."
+    ],
+    "description": "The images show a rural area with a grid of green crop fields and residential buildings. The second image provides a closer view of a specific T-intersection and adjacent houses found in the top-left of the first image. The fields contain low-growing green vegetation arranged in rows, bordered by roads and a waterway.",
+    "evidence_visible": [
+      "A close-up view of a T-intersection where a paved road meets a field boundary.",
+      "A field of dense, low-growing green crops with visible row lines.",
+      "A cluster of multi-story residential buildings with red and grey tiled roofs.",
+      "A pile of debris or construction materials is visible near one of the houses.",
+      "Utility poles and wires run along the road and field edges."
+    ],
+    "unclear": [
+      "The specific species of the green crop is unclear.",
+      "The exact nature of the debris pile is unclear.",
+      "The purpose of the blue tarp on the roof is unclear."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a grid of rectangular agricultural fields planted with low-growing green crops.\",\n    \"A network of paved roads intersects the fields, connecting clusters of residential buildings with varying roof colors (red, grey, blue).\",\n    \"A waterway runs along the right edge of the frame.\",\n    \"The fields show distinct linear patterns, indicating organized planting rows.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in view of the upper-left quadrant of the first image.\",\n    \"The T-intersection of the road in the second image corresponds to the junction visible in the top-left section of the first image.\",\n    \"The cluster of houses with red and grey roofs in the second image matches the buildings located at the top-left corner of the first image.\",\n    \"The specific field with dense green crops in the foreground of the second image is one of the large rectangular plots seen in the first image.\"\n  ],\n  \"description\": \"The images show a rural area with a grid of green crop fields and residential buildings. The second image provides a closer view of a specific T-intersection and adjacent houses found in the top-left of the first image. The fields contain low-growing green vegetation arranged in rows, bordered by roads and a waterway.\",\n  \"evidence_visible\": [\n    \"A close-up view of a T-intersection where a paved road meets a field boundary.\",\n    \"A field of dense, low-growing green crops with visible row lines.\",\n    \"A cluster of multi-story residential buildings with red and grey tiled roofs.\",\n    \"A pile of debris or construction materials is visible near one of the houses.\",\n    \"Utility poles and wires run along the road and field edges.\"\n  ],\n  \"unclear\": [\n    \"The specific species of the green crop is unclear.\",\n    \"The exact nature of the debris pile is unclear.\",\n    \"The purpose of the blue tarp on the roof is unclear.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of a debris pile and the lack of active construction equipment or new structural assembly.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a pile of debris and construction materials near a residential building, indicating active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of a debris pile and the lack of active construction equipment or new structural assembly.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a pile of debris and construction materials near a residential building, indicating active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The wide image shows a rural landscape with green fields and houses. The local crop image reveals a specific residential building with a pile of reddish-brown debris and construction materials in its yard. This visual evidence directly supports the claim of demolition or construction activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The wide image shows a rural landscape with green fields and houses. The local crop image reveals a specific residential building with a pile of reddish-brown debris and construction materials in its yard. This visual evidence directly supports the claim of demolition or construction activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The wide image shows a rural landscape with green fields and houses. The local crop image reveals a specific residential building with a pile of reddish-brown debris and construction materials in its yard. This visual evidence directly supports the claim of demolition or construction activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The wide image shows a rural landscape with green fields and houses. The local crop image reveals a specific residential building with a pile of reddish-brown debris and construction materials in its yard. This visual evidence directly supports the claim of demolition or construction activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

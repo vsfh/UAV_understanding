@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_85a6a46616b1fb978deb",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0117-5588-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0117-5588-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a paved two-lane road with vehicles, flanked by industrial buildings with blue roofs on the left and agricultural plots on the right.",
+      "The agricultural area contains rectangular plots of green crops and several large, irregular patches covered by bright cyan-green mesh netting.",
+      "A small structure with a blue awning is visible near the road edge."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the agricultural area on the right side of the context image.",
+      "The cyan-green mesh patches in the crop correspond to the same colored patches seen in the wider context view.",
+      "The grey building with a dark roof visible in the center of the crop is located within the agricultural zone adjacent to the road in the context image."
+    ],
+    "description": "The images show a rural-industrial interface with a road and adjacent farmland. The crop view details large areas of ground covered in cyan-green mesh netting interspersed with green crops and a grey building. The material appears to be a synthetic fabric, likely used for agricultural protection or construction dust control.",
+    "evidence_visible": [
+      "Close-up view of multiple large, irregular patches of cyan-green mesh netting laid over the ground.",
+      "A grey, two-story building with a dark, pitched roof is situated among the netted areas.",
+      "Small plots of green leafy crops are visible between the netted sections.",
+      "The netting appears to be a synthetic fabric, possibly polyethylene, draped over the terrain."
+    ],
+    "unclear": [
+      "The specific type of crop being grown.",
+      "The exact purpose of the cyan-green netting (e.g., dust control, crop protection, construction site cover).",
+      "The legal status or ownership of the land and buildings.",
+      "The specific date the images were taken."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a paved two-lane road with vehicles, flanked by industrial buildings with blue roofs on the left and agricultural plots on the right.\",\n    \"The agricultural area contains rectangular plots of green crops and several large, irregular patches covered by bright cyan-green mesh netting.\",\n    \"A small structure with a blue awning is visible near the road edge.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the agricultural area on the right side of the context image.\",\n    \"The cyan-green mesh patches in the crop correspond to the same colored patches seen in the wider context view.\",\n    \"The grey building with a dark roof visible in the center of the crop is located within the agricultural zone adjacent to the road in the context image.\"\n  ],\n  \"description\": \"The images show a rural-industrial interface with a road and adjacent farmland. The crop view details large areas of ground covered in cyan-green mesh netting interspersed with green crops and a grey building. The material appears to be a synthetic fabric, likely used for agricultural protection or construction dust control.\",\n  \"evidence_visible\": [\n    \"Close-up view of multiple large, irregular patches of cyan-green mesh netting laid over the ground.\",\n    \"A grey, two-story building with a dark, pitched roof is situated among the netted areas.\",\n    \"Small plots of green leafy crops are visible between the netted sections.\",\n    \"The netting appears to be a synthetic fabric, possibly polyethylene, draped over the terrain.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop being grown.\",\n    \"The exact purpose of the cyan-green netting (e.g., dust control, crop protection, construction site cover).\",\n    \"The legal status or ownership of the land and buildings.\",\n    \"The specific date the images were taken.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of a grey building amidst cleared ground and debris netting, which indicates a demolition site rather than an active general construction project.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by visible evidence of a grey two-story building situated within an area of cleared land and large patches of cyan-green mesh netting, consistent with a site undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of a grey building amidst cleared ground and debris netting, which indicates a demolition site rather than an active general construction project.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by visible evidence of a grey two-story building situated within an area of cleared land and large patches of cyan-green mesh netting, consistent with a site undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence explicitly shows a grey two-story building that is partially collapsed or demolished, surrounded by cleared land and large patches of cyan-green mesh netting. This visual content directly supports the description of a demolition event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image depicts a demolition site rather than an active construction project. There are no visible signs of new construction activity, such as cranes, scaffolding, or building materials being assembled. The primary visual evidence is the destruction of an existing structure and the presence of debris and protective netting, which contradicts the claim of a general construction project.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence explicitly shows a grey two-story building that is partially collapsed or demolished, surrounded by cleared land and large patches of cyan-green mesh netting. This visual content directly supports the description of a demolition event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image depicts a demolition site rather than an active construction project. There are no visible signs of new construction activity, such as cranes, scaffolding, or building materials being assembled. The primary visual evidence is the destruction of an existing structure and the presence of debris and protective netting, which contradicts the claim of a general construction project.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

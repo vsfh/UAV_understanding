@@ -1,0 +1,103 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e340d236d6866d0a7194",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2557-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2557-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a dense cluster of multi-story residential buildings featuring grey tiled and red roofs.",
+      "Large rectangular agricultural fields with vibrant green crops and distinct yellow curved patterns, likely from machinery.",
+      "A paved road runs vertically along the left side of the frame.",
+      "A small body of water is visible in the upper right background.",
+      "Several rooftops are equipped with dark rectangular solar panels."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a zoomed-in view of the upper-left quadrant of the context image.",
+      "The cluster of houses with solar panels and the adjacent green field in the evidence view correspond to the area in the top-left of the context view.",
+      "The road visible on the left edge of the context view is not present in the evidence view.",
+      "The large open fields in the center of the context view are excluded from the evidence view."
+    ],
+    "description": "The images show a rural village with multi-story houses, many featuring rooftop solar panels, surrounded by green agricultural fields with yellow machinery tracks. The evidence view zooms in on the residential cluster and a nearby field, while the context view reveals the broader layout including a road and additional farmland.",
+    "evidence_visible": [
+      "Close-up of residential buildings with grey and red roofs.",
+      "Multiple houses have dark, grid-patterned solar panels installed on their roofs.",
+      "A green field is visible in the lower right corner of the evidence frame.",
+      "A pond or small lake is visible in the upper left background.",
+      "Vegetation and trees are interspersed between the buildings."
+    ],
+    "unclear": [
+      "Specific crop species in the fields.",
+      "Exact number of solar panels per roof.",
+      "Occupancy status of the buildings.",
+      "Identity of the machinery creating the yellow tracks."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a dense cluster of multi-story residential buildings featuring grey tiled and red roofs.\",\n    \"Large rectangular agricultural fields with vibrant green crops and distinct yellow curved patterns, likely from machinery.\",\n    \"A paved road runs vertically along the left side of the frame.\",\n    \"A small body of water is visible in the upper right background.\",\n    \"Several rooftops are equipped with dark rectangular solar panels.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a zoomed-in view of the upper-left quadrant of the context image.\",\n    \"The cluster of houses with solar panels and the adjacent green field in the evidence view correspond to the area in the top-left of the context view.\",\n    \"The road visible on the left edge of the context view is not present in the evidence view.\",\n    \"The large open fields in the center of the context view are excluded from the evidence view.\"\n  ],\n  \"description\": \"The images show a rural village with multi-story houses, many featuring rooftop solar panels, surrounded by green agricultural fields with yellow machinery tracks. The evidence view zooms in on the residential cluster and a nearby field, while the context view reveals the broader layout including a road and additional farmland.\",\n  \"evidence_visible\": [\n    \"Close-up of residential buildings with grey and red roofs.\",\n    \"Multiple houses have dark, grid-patterned solar panels installed on their roofs.\",\n    \"A green field is visible in the lower right corner of the evidence frame.\",\n    \"A pond or small lake is visible in the upper left background.\",\n    \"Vegetation and trees are interspersed between the buildings.\"\n  ],\n  \"unclear\": [\n    \"Specific crop species in the fields.\",\n    \"Exact number of solar panels per roof.\",\n    \"Occupancy status of the buildings.\",\n    \"Identity of the machinery creating the yellow tracks.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the failure; the image shows a total structural failure of a wall (collapse) rather than general damage like cracks or broken windows.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence image shows a residential building with a visibly collapsed wall, exposing the interior structure and debris.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the failure; the image shows a total structural failure of a wall (collapse) rather than general damage like cracks or broken windows.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence image shows a residential building with a visibly collapsed wall, exposing the interior structure and debris.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image displays a residential area with intact buildings. There is no visible evidence of a collapsed wall, exposed interior structure, or debris as described in the claim.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The evidence image shows a residential building with a visibly collapsed wall.",
+        "The image shows exposed interior structure.",
+        "The image shows debris."
+      ]
+    },
+    "positive": {
+      "reason": "The evidence image shows a village with standard residential buildings. All visible structures appear intact with no signs of structural damage, collapse, or destruction.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "Visible evidence shows visible structural damage to a building."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image displays a residential area with intact buildings. There is no visible evidence of a collapsed wall, exposed interior structure, or debris as described in the claim.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The evidence image shows a residential building with a visibly collapsed wall.\",\n      \"The image shows exposed interior structure.\",\n      \"The image shows debris.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a village with standard residential buildings. All visible structures appear intact with no signs of structural damage, collapse, or destruction.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"Visible evidence shows visible structural damage to a building.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

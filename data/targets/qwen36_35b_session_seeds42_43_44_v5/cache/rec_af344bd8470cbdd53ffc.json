@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_af344bd8470cbdd53ffc",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-2169-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-2169-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a densely populated residential area with multi-story buildings featuring red, grey, and blue roofs.",
+      "Green agricultural fields are visible in the lower-left corner.",
+      "Narrow paved roads and pathways separate the structures.",
+      "The scene is captured under overcast lighting conditions."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of a specific section within the wider context image.",
+      "The building with the blue roof and white facade in the crop corresponds to the structure located in the lower-left quadrant of the context image.",
+      "The paved area with white objects in the crop aligns with the ground space adjacent to the blue-roofed building in the context view."
+    ],
+    "description": "The context image shows a dense village with varied roof colors and adjacent farmland. The crop provides a detailed view of a specific building with a blue roof and a paved yard containing numerous small white objects, likely poultry, situated next to a structure with a reddish-brown roof.",
+    "evidence_visible": [
+      "A building with a bright blue corrugated metal roof and white exterior walls.",
+      "A paved courtyard area containing a large flock of small white objects, appearing to be birds.",
+      "A green mesh fence or netting separating the paved area from a dirt patch.",
+      "A reddish-brown roof of an adjacent building.",
+      "Air conditioning units mounted on the exterior walls."
+    ],
+    "unclear": [
+      "The specific species of the white objects in the yard.",
+      "The exact function of the building (residential vs. commercial).",
+      "The identity of the people or vehicles in the wider context image."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a densely populated residential area with multi-story buildings featuring red, grey, and blue roofs.\",\n    \"Green agricultural fields are visible in the lower-left corner.\",\n    \"Narrow paved roads and pathways separate the structures.\",\n    \"The scene is captured under overcast lighting conditions.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of a specific section within the wider context image.\",\n    \"The building with the blue roof and white facade in the crop corresponds to the structure located in the lower-left quadrant of the context image.\",\n    \"The paved area with white objects in the crop aligns with the ground space adjacent to the blue-roofed building in the context view.\"\n  ],\n  \"description\": \"The context image shows a dense village with varied roof colors and adjacent farmland. The crop provides a detailed view of a specific building with a blue roof and a paved yard containing numerous small white objects, likely poultry, situated next to a structure with a reddish-brown roof.\",\n  \"evidence_visible\": [\n    \"A building with a bright blue corrugated metal roof and white exterior walls.\",\n    \"A paved courtyard area containing a large flock of small white objects, appearing to be birds.\",\n    \"A green mesh fence or netting separating the paved area from a dirt patch.\",\n    \"A reddish-brown roof of an adjacent building.\",\n    \"Air conditioning units mounted on the exterior walls.\"\n  ],\n  \"unclear\": [\n    \"The specific species of the white objects in the yard.\",\n    \"The exact function of the building (residential vs. commercial).\",\n    \"The identity of the people or vehicles in the wider context image.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the installed green mesh netting itself, which is clearly visible in the crop image.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a green mesh netting installed along the boundary of a dirt patch adjacent to a building with a blue roof.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the installed green mesh netting itself, which is clearly visible in the crop image.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a green mesh netting installed along the boundary of a dirt patch adjacent to a building with a blue roof.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly shows a green mesh netting installed along the boundary of a dirt patch adjacent to a building with a blue roof. The claim is fully supported by the visual evidence.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a dirt patch where the green mesh netting covers only a portion of the soil, leaving other areas exposed. This constitutes incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly shows a green mesh netting installed along the boundary of a dirt patch adjacent to a building with a blue roof. The claim is fully supported by the visual evidence.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a dirt patch where the green mesh netting covers only a portion of the soil, leaving other areas exposed. This constitutes incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

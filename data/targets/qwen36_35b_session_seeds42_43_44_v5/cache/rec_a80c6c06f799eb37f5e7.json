@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a80c6c06f799eb37f5e7",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-12-01_2025-12-31/collapsed_house_wall/original/1227-4207-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-12-01_2025-12-31/collapsed_house_wall/cropped/1227-4207-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a residential area with rows of single-story houses featuring red and grey roofs.",
+      "Agricultural plots with green crops located in the upper left quadrant.",
+      "A paved road running horizontally through the middle, with several white vehicles parked along it.",
+      "A dense stand of tall, leafless trees on the far right edge.",
+      "Shadows indicate sunlight coming from the left."
+    ],
+    "cross_view_relations": [
+      "The evidence crop is a high-magnification view of a specific building within the context image.",
+      "The building in the evidence crop corresponds to the structure located in the central row of houses, positioned between a grey-roofed building and a red-roofed building.",
+      "The red roof on the right side of the evidence crop matches the red roof of the adjacent house in the context view.",
+      "The grey roof on the left side of the evidence crop matches the grey roof of the adjacent house in the context view."
+    ],
+    "description": "The context image shows a village with red-roofed houses and adjacent farmland. The evidence crop zooms in on a specific residence in the central row, revealing a flat grey roof, a small red-roofed structure, and a cluttered courtyard area containing debris and a green object.",
+    "evidence_visible": [
+      "A building with a flat, grey concrete roof.",
+      "A small, square structure with a red tiled roof attached to the main building.",
+      "A courtyard or open area containing scattered debris, white blocks, and a green rectangular object.",
+      "A solar water heater mounted on the roof of the adjacent red-roofed building.",
+      "A blue tarp or sheet visible on the roof of the adjacent grey-roofed building."
+    ],
+    "unclear": [
+      "The specific nature of the debris in the courtyard.",
+      "The exact contents of the windows or interior spaces.",
+      "The identity of the vehicles on the road."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a residential area with rows of single-story houses featuring red and grey roofs.\",\n    \"Agricultural plots with green crops located in the upper left quadrant.\",\n    \"A paved road running horizontally through the middle, with several white vehicles parked along it.\",\n    \"A dense stand of tall, leafless trees on the far right edge.\",\n    \"Shadows indicate sunlight coming from the left.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop is a high-magnification view of a specific building within the context image.\",\n    \"The building in the evidence crop corresponds to the structure located in the central row of houses, positioned between a grey-roofed building and a red-roofed building.\",\n    \"The red roof on the right side of the evidence crop matches the red roof of the adjacent house in the context view.\",\n    \"The grey roof on the left side of the evidence crop matches the grey roof of the adjacent house in the context view.\"\n  ],\n  \"description\": \"The context image shows a village with red-roofed houses and adjacent farmland. The evidence crop zooms in on a specific residence in the central row, revealing a flat grey roof, a small red-roofed structure, and a cluttered courtyard area containing debris and a green object.\",\n  \"evidence_visible\": [\n    \"A building with a flat, grey concrete roof.\",\n    \"A small, square structure with a red tiled roof attached to the main building.\",\n    \"A courtyard or open area containing scattered debris, white blocks, and a green rectangular object.\",\n    \"A solar water heater mounted on the roof of the adjacent red-roofed building.\",\n    \"A blue tarp or sheet visible on the roof of the adjacent grey-roofed building.\"\n  ],\n  \"unclear\": [\n    \"The specific nature of the debris in the courtyard.\",\n    \"The exact contents of the windows or interior spaces.\",\n    \"The identity of the vehicles on the road.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The event collapsed house wall is distinguished from building damage by the specific presence of a pile of rubble and debris in the courtyard, indicating a structural collapse, whereas building damage is a broader category of visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the evidence crop shows a building with a flat grey roof and an adjacent courtyard area containing a significant accumulation of rubble, white blocks, and debris, consistent with a visibly collapsed wall.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The event collapsed house wall is distinguished from building damage by the specific presence of a pile of rubble and debris in the courtyard, indicating a structural collapse, whereas building damage is a broader category of visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the evidence crop shows a building with a flat grey roof and an adjacent courtyard area containing a significant accumulation of rubble, white blocks, and debris, consistent with a visibly collapsed wall.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence crop clearly shows a building with a flat grey roof and an adjacent courtyard area containing a significant accumulation of rubble, white blocks, and debris. This visual evidence directly supports the description of a collapsed wall and the resulting debris field.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence crop displays a building with a flat grey roof and an adjacent courtyard area containing a significant accumulation of rubble, white blocks, and debris. This visual evidence directly supports the description of a collapsed wall and the resulting debris field.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence crop clearly shows a building with a flat grey roof and an adjacent courtyard area containing a significant accumulation of rubble, white blocks, and debris. This visual evidence directly supports the description of a collapsed wall and the resulting debris field.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence crop displays a building with a flat grey roof and an adjacent courtyard area containing a significant accumulation of rubble, white blocks, and debris. This visual evidence directly supports the description of a collapsed wall and the resulting debris field.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

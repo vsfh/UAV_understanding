@@ -1,0 +1,83 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_be9cb6e3565f58040cb0",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0105-4873-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0105-4873-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a canal running vertically through the left side. A paved road crosses the canal via a bridge in the upper section. The area contains residential buildings with varied roof colors (blue, red, grey) and multiple rectangular agricultural plots with green crops. A body of water is visible in the bottom right corner."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a magnified section of the agricultural plots located in the lower right quadrant of the wide context image, specifically adjacent to the water body and the cluster of houses with blue and grey roofs."
+    ],
+    "description": "The images show a rural village with a canal and agricultural plots. The detailed view confirms rectangular garden beds containing green crops, bordered by concrete paths, situated next to a water body and residential structures with blue and grey roofs.",
+    "evidence_visible": [
+      "Rectangular garden plots divided by concrete borders containing green leafy crops. A green mesh or tarp is visible on one plot. Adjacent to the plots are buildings with blue corrugated metal and grey tiled roofs. A concrete path runs along the left side of the plots, and a muddy bank borders the water on the right."
+    ],
+    "unclear": [
+      "Specific crop species, exact number of people, vehicle license plates, and precise property boundaries."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a canal running vertically through the left side. A paved road crosses the canal via a bridge in the upper section. The area contains residential buildings with varied roof colors (blue, red, grey) and multiple rectangular agricultural plots with green crops. A body of water is visible in the bottom right corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a magnified section of the agricultural plots located in the lower right quadrant of the wide context image, specifically adjacent to the water body and the cluster of houses with blue and grey roofs.\"\n  ],\n  \"description\": \"The images show a rural village with a canal and agricultural plots. The detailed view confirms rectangular garden beds containing green crops, bordered by concrete paths, situated next to a water body and residential structures with blue and grey roofs.\",\n  \"evidence_visible\": [\n    \"Rectangular garden plots divided by concrete borders containing green leafy crops. A green mesh or tarp is visible on one plot. Adjacent to the plots are buildings with blue corrugated metal and grey tiled roofs. A concrete path runs along the left side of the plots, and a muddy bank borders the water on the right.\"\n  ],\n  \"unclear\": [\n    \"Specific crop species, exact number of people, vehicle license plates, and precise property boundaries.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a green mesh or tarp covering the soil in the detailed view, whereas incomplete soil cover would imply the protective covering is visibly incomplete.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows rectangular garden plots containing green crops, with a green mesh or tarp covering a section of the soil in the detailed view.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a green mesh or tarp covering the soil in the detailed view, whereas incomplete soil cover would imply the protective covering is visibly incomplete.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows rectangular garden plots containing green crops, with a green mesh or tarp covering a section of the soil in the detailed view.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The detailed view clearly shows rectangular garden plots containing green crops. A green mesh or tarp is visibly covering a specific section of the soil within these plots, directly supporting the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays garden plots where the soil is not fully covered by crops; there are visible patches of bare earth between the green plants. Additionally, a green mesh is only partially covering a section of the soil, leaving other parts of that section exposed. This visual evidence supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The detailed view clearly shows rectangular garden plots containing green crops. A green mesh or tarp is visibly covering a specific section of the soil within these plots, directly supporting the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays garden plots where the soil is not fully covered by crops; there are visible patches of bare earth between the green plants. Additionally, a green mesh is only partially covering a section of the soil, leaving other parts of that section exposed. This visual evidence supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

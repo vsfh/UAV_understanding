@@ -1,0 +1,86 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_fb791986b50d3e7fa62e",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0221-1623-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0221-1623-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a riverine settlement with multi-story residential buildings featuring red and grey roofs, some with solar panels. A highway with a truck runs along the upper left. The foreground contains a plot of land with organized agricultural rows and a small structure with a collapsed roof.",
+      "Vegetation includes bare deciduous trees and reeds along the waterways, and green crops in the foreground plot."
+    ],
+    "cross_view_relations": [
+      "The foreground plot in the wide image corresponds to the detailed view of the agricultural area. The structure with the collapsed roof and the specific arrangement of green and yellow crops are visible in both images."
+    ],
+    "description": "Aerial imagery of a riverside village showing residential buildings and a highway. The foreground features a cultivated plot with rows of green and yellow crops and a small building with a damaged roof. The detailed view confirms the agricultural layout and the state of the structure.",
+    "evidence_visible": [
+      "Close-up of a cultivated plot with distinct rows of green leafy vegetables and yellow flowering crops. A small rectangular structure with a partially collapsed roof and exposed wooden beams is present. The ground is bare soil with some debris. A paved path runs along the right edge."
+    ],
+    "unclear": [
+      "Specific crop species, exact date, ownership, and legal status of the structures."
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"Aerial view of a riverine settlement with multi-story residential buildings featuring red and grey roofs, some with solar panels. A highway with a truck runs along the upper left. The foreground contains a plot of land with organized agricultural rows and a small structure with a collapsed roof.\",\n\"Vegetation includes bare deciduous trees and reeds along the waterways, and green crops in the foreground plot.\"\n],\n\"cross_view_relations\": [\n\"The foreground plot in the wide image corresponds to the detailed view of the agricultural area. The structure with the collapsed roof and the specific arrangement of green and yellow crops are visible in both images.\"\n],\n\"description\": \"Aerial imagery of a riverside village showing residential buildings and a highway. The foreground features a cultivated plot with rows of green and yellow crops and a small building with a damaged roof. The detailed view confirms the agricultural layout and the state of the structure.\",\n\"evidence_visible\": [\n\"Close-up of a cultivated plot with distinct rows of green leafy vegetables and yellow flowering crops. A small rectangular structure with a partially collapsed roof and exposed wooden beams is present. The ground is bare soil with some debris. A paved path runs along the right edge.\"\n],\n\"unclear\": [\n\"Specific crop species, exact date, ownership, and legal status of the structures.\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the state of the structure: the roof is collapsed and beams are exposed, which is characteristic of demolition, whereas project construction would show an active building process.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible evidence of a small rectangular structure with a partially collapsed roof and exposed wooden beams, indicating active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the state of the structure: the roof is collapsed and beams are exposed, which is characteristic of demolition, whereas project construction would show an active building process.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible evidence of a small rectangular structure with a partially collapsed roof and exposed wooden beams, indicating active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a small rectangular structure with a partially collapsed roof and exposed wooden beams, which visually supports the claim of demolition activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a structure in a state of disrepair or demolition (collapsed roof, exposed beams), not an active construction project. There is no visible evidence of new building materials, scaffolding, or active construction work.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a small rectangular structure with a partially collapsed roof and exposed wooden beams, which visually supports the claim of demolition activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a structure in a state of disrepair or demolition (collapsed roof, exposed beams), not an active construction project. There is no visible evidence of new building materials, scaffolding, or active construction work.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e70672cb22273c82d480",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1007-6080-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1007-6080-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape featuring large rectangular fields of green crops, a dense green forest strip, a canal, and a dirt road.",
+      "A cluster of residential buildings with grey roofs is visible in the upper right corner.",
+      "The fields in the main view appear lush and green, indicating active vegetation."
+    ],
+    "cross_view_relations": [
+      "The zoomed-in evidence view corresponds to the area in the upper right of the context image, specifically the fields adjacent to the canal and the residential cluster.",
+      "The context view shows these fields as green, while the evidence view shows them as brown and harvested, indicating a temporal difference or a different section of the same location.",
+      "The dirt road and the canal are visible in both views, serving as spatial anchors."
+    ],
+    "description": "The context image shows a wide rural scene with green fields, a forest, and a canal. The evidence image zooms in on the area near the canal and houses, revealing brown, harvested fields with blue tarps, contrasting with the green fields in the wider view.",
+    "evidence_visible": [
+      "Close-up view of agricultural plots with brown, harvested soil.",
+      "Several rectangular blue tarps are laid out on the ground in the fields.",
+      "A cluster of houses with grey roofs and a dirt road are visible.",
+      "The fields are adjacent to a canal and a line of trees."
+    ],
+    "unclear": [
+      "The exact date of the images is not visible.",
+      "The specific type of crop in the green fields is unclear.",
+      "The purpose of the blue tarps is unclear (e.g., drying, covering).",
+      "The exact location or address is not identifiable."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape featuring large rectangular fields of green crops, a dense green forest strip, a canal, and a dirt road.\",\n    \"A cluster of residential buildings with grey roofs is visible in the upper right corner.\",\n    \"The fields in the main view appear lush and green, indicating active vegetation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The zoomed-in evidence view corresponds to the area in the upper right of the context image, specifically the fields adjacent to the canal and the residential cluster.\",\n    \"The context view shows these fields as green, while the evidence view shows them as brown and harvested, indicating a temporal difference or a different section of the same location.\",\n    \"The dirt road and the canal are visible in both views, serving as spatial anchors.\"\n  ],\n  \"description\": \"The context image shows a wide rural scene with green fields, a forest, and a canal. The evidence image zooms in on the area near the canal and houses, revealing brown, harvested fields with blue tarps, contrasting with the green fields in the wider view.\",\n  \"evidence_visible\": [\n    \"Close-up view of agricultural plots with brown, harvested soil.\",\n    \"Several rectangular blue tarps are laid out on the ground in the fields.\",\n    \"A cluster of houses with grey roofs and a dirt road are visible.\",\n    \"The fields are adjacent to a canal and a line of trees.\"\n  ],\n  \"unclear\": [\n    \"The exact date of the images is not visible.\",\n    \"The specific type of crop in the green fields is unclear.\",\n    \"The purpose of the blue tarps is unclear (e.g., drying, covering).\",\n    \"The exact location or address is not identifiable.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the blue tarps in the evidence image appear as distinct, complete rectangular coverings on the soil, rather than showing visibly incomplete protective coverage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the evidence image displays agricultural plots with exposed brown soil where several rectangular blue tarps are laid out on the ground, consistent with the definition of exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the blue tarps in the evidence image appear as distinct, complete rectangular coverings on the soil, rather than showing visibly incomplete protective coverage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the evidence image displays agricultural plots with exposed brown soil where several rectangular blue tarps are laid out on the ground, consistent with the definition of exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays rectangular blue tarps laid out on the ground within the agricultural plots. This visual evidence directly contradicts the claim that the soil is 'bare' or 'exposed' without covering.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The evidence image displays agricultural plots with exposed brown soil where several rectangular blue tarps are laid out on the ground",
+        "consistent with the definition of exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The evidence image shows agricultural plots where the ground is covered by brown soil and distinct rectangular blue tarps. The presence of these tarps indicates that the soil is covered, but the coverage is not continuous or complete across the entire field, supporting the description of 'incomplete soil cover'.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays rectangular blue tarps laid out on the ground within the agricultural plots. This visual evidence directly contradicts the claim that the soil is 'bare' or 'exposed' without covering.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The evidence image displays agricultural plots with exposed brown soil where several rectangular blue tarps are laid out on the ground\",\n      \"consistent with the definition of exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows agricultural plots where the ground is covered by brown soil and distinct rectangular blue tarps. The presence of these tarps indicates that the soil is covered, but the coverage is not continuous or complete across the entire field, supporting the description of 'incomplete soil cover'.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

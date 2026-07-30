@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0ea45de079c0ec801e50",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0327-1828-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0327-1828-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring a winding waterway, a large rectangular pond, and agricultural plots.",
+      "Bright yellow flowering crops are planted in rectangular beds along the left bank of the waterway.",
+      "A building with a blue corrugated metal roof is visible in the lower-left foreground.",
+      "The surrounding terrain consists of green vegetation and dry, brown reeds or grasses."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a magnified section of the waterway and yellow crops seen on the left side of the context image.",
+      "The spatial arrangement of the yellow crop beds relative to the water channel is consistent between both views."
+    ],
+    "description": "The images show a rural waterway bordered by agricultural plots containing bright yellow flowering crops. A blue-roofed structure is visible in the wider context, while the crop view details the vegetation along the water's edge.",
+    "evidence_visible": [
+      "Close-up of the water channel showing surface ripples and reflections.",
+      "Rectangular patches of bright yellow flowers are planted on the bank adjacent to the water.",
+      "Green vegetation and a narrow dirt path or bank edge are visible next to the yellow crops."
+    ],
+    "unclear": [
+      "Specific species of the yellow flowering plants.",
+      "Identity of the small white objects floating in the water in the crop view.",
+      "Exact purpose of the structures on the far bank in the crop view."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring a winding waterway, a large rectangular pond, and agricultural plots.\",\n    \"Bright yellow flowering crops are planted in rectangular beds along the left bank of the waterway.\",\n    \"A building with a blue corrugated metal roof is visible in the lower-left foreground.\",\n    \"The surrounding terrain consists of green vegetation and dry, brown reeds or grasses.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a magnified section of the waterway and yellow crops seen on the left side of the context image.\",\n    \"The spatial arrangement of the yellow crop beds relative to the water channel is consistent between both views.\"\n  ],\n  \"description\": \"The images show a rural waterway bordered by agricultural plots containing bright yellow flowering crops. A blue-roofed structure is visible in the wider context, while the crop view details the vegetation along the water's edge.\",\n  \"evidence_visible\": [\n    \"Close-up of the water channel showing surface ripples and reflections.\",\n    \"Rectangular patches of bright yellow flowers are planted on the bank adjacent to the water.\",\n    \"Green vegetation and a narrow dirt path or bank edge are visible next to the yellow crops.\"\n  ],\n  \"unclear\": [\n    \"Specific species of the yellow flowering plants.\",\n    \"Identity of the small white objects floating in the water in the crop view.\",\n    \"Exact purpose of the structures on the far bank in the crop view.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the state of the structure; the blue-roofed building appears to be a demolition site rather than an active general construction project.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a building with a blue corrugated metal roof in the lower-left foreground of the context image, which appears to be a structure undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the state of the structure; the blue-roofed building appears to be a demolition site rather than an active general construction project.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a building with a blue corrugated metal roof in the lower-left foreground of the context image, which appears to be a structure undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a building with a blue corrugated metal roof in the lower-left foreground. The structure appears intact, with a complete roof and walls. There are no visible signs of active demolition, such as rubble, heavy machinery, or structural collapse. The claim that the building is undergoing active or recent demolition is contradicted by the visual evidence of a standing, intact structure.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The building is undergoing active or recent demolition."
+      ]
+    },
+    "positive": {
+      "reason": "The image displays a rural landscape with agricultural fields, a river, and a few buildings. There is no visible evidence of an active general construction project, such as cranes, scaffolding, piles of raw materials, or workers. The scene depicts existing infrastructure and agriculture rather than new construction.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "Visible evidence shows an active general construction project."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a building with a blue corrugated metal roof in the lower-left foreground. The structure appears intact, with a complete roof and walls. There are no visible signs of active demolition, such as rubble, heavy machinery, or structural collapse. The claim that the building is undergoing active or recent demolition is contradicted by the visual evidence of a standing, intact structure.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The building is undergoing active or recent demolition.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a rural landscape with agricultural fields, a river, and a few buildings. There is no visible evidence of an active general construction project, such as cranes, scaffolding, piles of raw materials, or workers. The scene depicts existing infrastructure and agriculture rather than new construction.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"Visible evidence shows an active general construction project.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_8f1e504aecaf19a6a5b1",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1008-3984-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1008-3984-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to large agricultural fields.",
+      "The fields are divided into rectangular plots containing green and yellow crops.",
+      "A cluster of residential buildings with grey tiled roofs is situated on the left.",
+      "Vegetation, including trees and tall grasses, separates the housing from the fields.",
+      "A dirt path runs vertically through the center of the image."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the area immediately surrounding the main cluster of houses seen in the first image.",
+      "The large yellow field in the upper left of the second image corresponds to the field section in the upper right of the first image.",
+      "The blue tarps visible in the second image are located in the garden plots between the houses and the main field.",
+      "The spatial arrangement of the houses and the adjacent field remains consistent between the wide and close-up views."
+    ],
+    "description": "Aerial imagery of a rural village bordered by agricultural land. The scene features residential structures with grey roofs and adjacent plots containing green and yellow crops. A zoomed-in view highlights blue tarps covering sections of the garden area near the houses, confirming the proximity of the settlement to the cultivated fields.",
+    "evidence_visible": [
+      "Close-up view of the residential cluster and adjacent garden plots.",
+      "Two distinct rectangular patches covered in bright blue tarps are visible on the ground.",
+      "The tarps are laid over soil within a fenced or defined garden area.",
+      "A large field of yellow crops is visible in the background, separated from the houses by a line of trees and vegetation.",
+      "The houses have grey tiled roofs and concrete or paved driveways."
+    ],
+    "unclear": [
+      "The specific contents stored under the blue tarps.",
+      "The exact species of the crops in the fields.",
+      "The legal status or ownership of the land.",
+      "The specific purpose of the blue tarps (e.g., drying, protection, storage)."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to large agricultural fields.\",\n    \"The fields are divided into rectangular plots containing green and yellow crops.\",\n    \"A cluster of residential buildings with grey tiled roofs is situated on the left.\",\n    \"Vegetation, including trees and tall grasses, separates the housing from the fields.\",\n    \"A dirt path runs vertically through the center of the image.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the area immediately surrounding the main cluster of houses seen in the first image.\",\n    \"The large yellow field in the upper left of the second image corresponds to the field section in the upper right of the first image.\",\n    \"The blue tarps visible in the second image are located in the garden plots between the houses and the main field.\",\n    \"The spatial arrangement of the houses and the adjacent field remains consistent between the wide and close-up views.\"\n  ],\n  \"description\": \"Aerial imagery of a rural village bordered by agricultural land. The scene features residential structures with grey roofs and adjacent plots containing green and yellow crops. A zoomed-in view highlights blue tarps covering sections of the garden area near the houses, confirming the proximity of the settlement to the cultivated fields.\",\n  \"evidence_visible\": [\n    \"Close-up view of the residential cluster and adjacent garden plots.\",\n    \"Two distinct rectangular patches covered in bright blue tarps are visible on the ground.\",\n    \"The tarps are laid over soil within a fenced or defined garden area.\",\n    \"A large field of yellow crops is visible in the background, separated from the houses by a line of trees and vegetation.\",\n    \"The houses have grey tiled roofs and concrete or paved driveways.\"\n  ],\n  \"unclear\": [\n    \"The specific contents stored under the blue tarps.\",\n    \"The exact species of the crops in the fields.\",\n    \"The legal status or ownership of the land.\",\n    \"The specific purpose of the blue tarps (e.g., drying, protection, storage).\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the blue netting in the image appears to fully cover the specific rectangular soil plots it is applied to, whereas incomplete soil cover would imply visible gaps or exposed soil within the covered area.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows rectangular patches of ground covered by bright blue netting or tarps within the garden plots adjacent to the residential buildings.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the blue netting in the image appears to fully cover the specific rectangular soil plots it is applied to, whereas incomplete soil cover would imply visible gaps or exposed soil within the covered area.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows rectangular patches of ground covered by bright blue netting or tarps within the garden plots adjacent to the residential buildings.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows rectangular patches of bright blue material covering the ground in the garden plots adjacent to the houses. This directly contradicts the claim that the soil is uncovered or that the covering is incomplete.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    },
+    "positive": {
+      "reason": "The image displays distinct rectangular areas within the garden plots next to the residential buildings that are covered by bright blue netting or tarps. This visual evidence supports the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows rectangular patches of bright blue material covering the ground in the garden plots adjacent to the houses. This directly contradicts the claim that the soil is uncovered or that the covering is incomplete.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays distinct rectangular areas within the garden plots next to the residential buildings that are covered by bright blue netting or tarps. This visual evidence supports the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

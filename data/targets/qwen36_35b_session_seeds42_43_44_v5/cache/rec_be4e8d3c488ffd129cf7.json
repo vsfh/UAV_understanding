@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_be4e8d3c488ffd129cf7",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1010-9871-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1010-9871-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape dominated by rectangular agricultural fields with yellow-green vegetation.",
+      "A paved road runs horizontally across the upper third of the frame, intersected by a vertical dirt path.",
+      "A square, grey concrete pad is situated in the lower-left quadrant, surrounded by the fields.",
+      "Trees and vegetation line the road and field boundaries.",
+      "A blue truck is parked on the right edge of the concrete pad.",
+      "A red excavator is parked on the left edge of the concrete pad."
+    ],
+    "cross_view_relations": [
+      "The second image is a high-magnification crop of the square concrete pad visible in the lower-left of the first image.",
+      "The spatial relationship between the red excavator, the blue truck, and the central machinery is consistent across both views.",
+      "The surrounding field texture and the dirt path to the right of the pad align perfectly between the wide and cropped views."
+    ],
+    "description": "Aerial imagery shows a square concrete pad within agricultural fields. The pad contains two red drilling rigs, a red excavator, and a blue truck. The surrounding area consists of yellow-green crops and a paved road. The equipment appears stationary on the grey surface.",
+    "evidence_visible": [
+      "Close-up of the concrete pad showing two red drilling rigs mounted on concrete bases.",
+      "A red excavator is parked on the left side of the pad.",
+      "A blue truck is parked on the right side of the pad.",
+      "A small white structure or container is visible near the top edge of the pad.",
+      "The ground surface is grey concrete, contrasting with the surrounding soil and vegetation."
+    ],
+    "unclear": [
+      "The specific type of drilling operation (e.g., water well, geotechnical, oil) is unclear.",
+      "The operational status of the machinery (active vs. idle) cannot be determined.",
+      "The identity of the company or ownership of the equipment is not visible.",
+      "The exact date of the image is not visible."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape dominated by rectangular agricultural fields with yellow-green vegetation.\",\n    \"A paved road runs horizontally across the upper third of the frame, intersected by a vertical dirt path.\",\n    \"A square, grey concrete pad is situated in the lower-left quadrant, surrounded by the fields.\",\n    \"Trees and vegetation line the road and field boundaries.\",\n    \"A blue truck is parked on the right edge of the concrete pad.\",\n    \"A red excavator is parked on the left edge of the concrete pad.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a high-magnification crop of the square concrete pad visible in the lower-left of the first image.\",\n    \"The spatial relationship between the red excavator, the blue truck, and the central machinery is consistent across both views.\",\n    \"The surrounding field texture and the dirt path to the right of the pad align perfectly between the wide and cropped views.\"\n  ],\n  \"description\": \"Aerial imagery shows a square concrete pad within agricultural fields. The pad contains two red drilling rigs, a red excavator, and a blue truck. The surrounding area consists of yellow-green crops and a paved road. The equipment appears stationary on the grey surface.\",\n  \"evidence_visible\": [\n    \"Close-up of the concrete pad showing two red drilling rigs mounted on concrete bases.\",\n    \"A red excavator is parked on the left side of the pad.\",\n    \"A blue truck is parked on the right side of the pad.\",\n    \"A small white structure or container is visible near the top edge of the pad.\",\n    \"The ground surface is grey concrete, contrasting with the surrounding soil and vegetation.\"\n  ],\n  \"unclear\": [\n    \"The specific type of drilling operation (e.g., water well, geotechnical, oil) is unclear.\",\n    \"The operational status of the machinery (active vs. idle) cannot be determined.\",\n    \"The identity of the company or ownership of the equipment is not visible.\",\n    \"The exact date of the image is not visible.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible; the image shows a concrete pad with machinery rather than exposed soil with netting.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a square concrete pad containing two red drilling rigs, a red excavator, and a blue truck, surrounded by yellow-green agricultural fields.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible; the image shows a concrete pad with machinery rather than exposed soil with netting.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a square concrete pad containing two red drilling rigs, a red excavator, and a blue truck, surrounded by yellow-green agricultural fields.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a square concrete pad containing two red drilling rigs, a red excavator, and a blue truck, surrounded by yellow-green agricultural fields. This matches the description in the statement exactly.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The statement claims 'incomplete soil cover' is supported by 'soil for which protective covering is visibly incomplete'. The image shows a concrete pad (a form of covering) that is complete and intact. There is no visual evidence of 'incomplete' covering or 'soil' that is exposed in a way that suggests a failure of protective covering. The surrounding fields are covered in crops, not bare soil requiring protective covering in the context of the construction site.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The image shows a complete concrete pad, not incomplete soil cover.",
+        "There is no visible evidence of 'protective covering' being 'incomplete' on any soil.",
+        "The surrounding fields are covered in crops, not bare soil requiring protective covering."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a square concrete pad containing two red drilling rigs, a red excavator, and a blue truck, surrounded by yellow-green agricultural fields. This matches the description in the statement exactly.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The statement claims 'incomplete soil cover' is supported by 'soil for which protective covering is visibly incomplete'. The image shows a concrete pad (a form of covering) that is complete and intact. There is no visual evidence of 'incomplete' covering or 'soil' that is exposed in a way that suggests a failure of protective covering. The surrounding fields are covered in crops, not bare soil requiring protective covering in the context of the construction site.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The image shows a complete concrete pad, not incomplete soil cover.\",\n      \"There is no visible evidence of 'protective covering' being 'incomplete' on any soil.\",\n      \"The surrounding fields are covered in crops, not bare soil requiring protective covering.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

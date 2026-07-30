@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b031485cf303bb020bcb",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0814-4689-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0814-4689-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area containing large industrial buildings with blue and grey roofs, smaller residential structures, and agricultural plots.",
+      "A prominent building with a large blue roof and a dark grey section is situated centrally, surrounded by a paved yard with parked vehicles.",
+      "A road runs horizontally through the middle of the scene, separating the industrial zone from a row of residential houses.",
+      "Vegetation, including trees and garden plots, is interspersed between the buildings."
+    ],
+    "cross_view_relations": [
+      "The crop image displays a cluster of residential buildings with red, blue, and grey roofs that are spatially consistent with the residential area visible in the lower-left quadrant of the context image.",
+      "The specific arrangement of the red-roofed house, the adjacent blue-roofed structure, and the surrounding vegetation in the crop matches the visual features found in the wider context view."
+    ],
+    "description": "The context image shows a mixed industrial and residential area with large factory buildings and smaller homes. The crop provides a closer view of a specific residential cluster, highlighting a red-roofed house and a blue-roofed structure amidst dense greenery, which corresponds to the housing area seen in the wider aerial shot.",
+    "evidence_visible": [
+      "A cluster of residential buildings with varying roof colors, including a distinct red metal roof and a bright blue roof.",
+      "A grey concrete courtyard or driveway area between the houses.",
+      "Dense green vegetation and trees surrounding the structures.",
+      "A grey tiled roof on a building to the right of the red-roofed house.",
+      "A small blue corrugated structure or shed visible near the bottom of the frame."
+    ],
+    "unclear": [
+      "The specific function of the buildings (e.g., residential vs. storage).",
+      "The exact date of the images.",
+      "The legal status or ownership of the properties."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area containing large industrial buildings with blue and grey roofs, smaller residential structures, and agricultural plots.\",\n    \"A prominent building with a large blue roof and a dark grey section is situated centrally, surrounded by a paved yard with parked vehicles.\",\n    \"A road runs horizontally through the middle of the scene, separating the industrial zone from a row of residential houses.\",\n    \"Vegetation, including trees and garden plots, is interspersed between the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image displays a cluster of residential buildings with red, blue, and grey roofs that are spatially consistent with the residential area visible in the lower-left quadrant of the context image.\",\n    \"The specific arrangement of the red-roofed house, the adjacent blue-roofed structure, and the surrounding vegetation in the crop matches the visual features found in the wider context view.\"\n  ],\n  \"description\": \"The context image shows a mixed industrial and residential area with large factory buildings and smaller homes. The crop provides a closer view of a specific residential cluster, highlighting a red-roofed house and a blue-roofed structure amidst dense greenery, which corresponds to the housing area seen in the wider aerial shot.\",\n  \"evidence_visible\": [\n    \"A cluster of residential buildings with varying roof colors, including a distinct red metal roof and a bright blue roof.\",\n    \"A grey concrete courtyard or driveway area between the houses.\",\n    \"Dense green vegetation and trees surrounding the structures.\",\n    \"A grey tiled roof on a building to the right of the red-roofed house.\",\n    \"A small blue corrugated structure or shed visible near the bottom of the frame.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the buildings (e.g., residential vs. storage).\",\n    \"The exact date of the images.\",\n    \"The legal status or ownership of the properties.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific nature of the structural failure; the evidence shows a complete wall collapse rather than general visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the local crop image shows a residential structure with a red roof where the wall appears to have visibly collapsed, exposing the interior and debris, which is consistent with the residential cluster visible in the wider context image.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific nature of the structural failure; the evidence shows a complete wall collapse rather than general visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the local crop image shows a residential structure with a red roof where the wall appears to have visibly collapsed, exposing the interior and debris, which is consistent with the residential cluster visible in the wider context image.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The local crop image shows a residential area with red and blue roofs. While there is a flat roof with some dark patches (possibly tar or wear) and a small shed with a blue roof, there is no visual evidence of a 'collapsed house wall' or 'exposed interior and debris' as described. The structures appear intact.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The local crop image shows a residential structure with a red roof where the wall appears to have visibly collapsed.",
+        "The wall collapse exposes the interior and debris."
+      ]
+    },
+    "positive": {
+      "reason": "The local crop image displays a building with a flat roof that has significant dark discoloration and patching, which constitutes visible structural damage or wear. This supports the general claim of visible structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The local crop image shows a residential area with red and blue roofs. While there is a flat roof with some dark patches (possibly tar or wear) and a small shed with a blue roof, there is no visual evidence of a 'collapsed house wall' or 'exposed interior and debris' as described. The structures appear intact.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The local crop image shows a residential structure with a red roof where the wall appears to have visibly collapsed.\",\n      \"The wall collapse exposes the interior and debris.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The local crop image displays a building with a flat roof that has significant dark discoloration and patching, which constitutes visible structural damage or wear. This supports the general claim of visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

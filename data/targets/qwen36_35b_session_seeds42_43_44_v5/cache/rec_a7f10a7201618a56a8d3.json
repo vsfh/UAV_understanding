@@ -1,0 +1,92 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a7f10a7201618a56a8d3",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-07-01_2025-07-31/collapsed_house_wall/original/0715-4597-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-07-01_2025-07-31/collapsed_house_wall/cropped/0715-4597-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multi-story residential buildings, red and grey roofs, and surrounding green agricultural fields.",
+      "Small garden plots are visible adjacent to the houses.",
+      "Utility poles and wires are present throughout the area.",
+      "A small pond is visible in the upper right quadrant."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of the central cluster of buildings in the context image.",
+      "Specifically, the crop focuses on the houses with red roofs and the adjacent vegetable gardens located in the middle of the village layout."
+    ],
+    "description": "Aerial view of a rural village with residential buildings and agricultural plots. The linked crop provides a closer look at the central cluster of houses, highlighting red roofs, grey tiled structures, and adjacent green garden patches.",
+    "evidence_visible": [
+      "Close-up of residential structures with red and grey roofs.",
+      "Green vegetable patches are clearly visible in the yards and between buildings.",
+      "Construction materials include concrete walls and tiled roofing.",
+      "Blue tarps are visible on the ground near one of the buildings."
+    ],
+    "unclear": [
+      "Exact number of residents or occupants.",
+      "Specific type of crops grown in the gardens.",
+      "Legal status or ownership of the properties."
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"Aerial view of a rural settlement with multi-story residential buildings, red and grey roofs, and surrounding green agricultural fields.\",\n\"Small garden plots are visible adjacent to the houses.\",\n\"Utility poles and wires are present throughout the area.\",\n\"A small pond is visible in the upper right quadrant.\"\n],\n\"cross_view_relations\": [\n\"The crop image is a magnified view of the central cluster of buildings in the context image.\",\n\"Specifically, the crop focuses on the houses with red roofs and the adjacent vegetable gardens located in the middle of the village layout.\"\n],\n\"description\": \"Aerial view of a rural village with residential buildings and agricultural plots. The linked crop provides a closer look at the central cluster of houses, highlighting red roofs, grey tiled structures, and adjacent green garden patches.\",\n\"evidence_visible\": [\n\"Close-up of residential structures with red and grey roofs.\",\n\"Green vegetable patches are clearly visible in the yards and between buildings.\",\n\"Construction materials include concrete walls and tiled roofing.\",\n\"Blue tarps are visible on the ground near one of the buildings.\"\n],\n\"unclear\": [\n\"Exact number of residents or occupants.\",\n\"Specific type of crops grown in the gardens.\",\n\"Legal status or ownership of the properties.\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific state of the wall having fallen down, whereas building damage is a broader category that does not necessarily imply a total collapse.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a house wall that has visibly collapsed, with debris scattered on the ground adjacent to the standing structure.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific state of the wall having fallen down, whereas building damage is a broader category that does not necessarily imply a total collapse.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a house wall that has visibly collapsed, with debris scattered on the ground adjacent to the standing structure.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a building with significant structural damage. Specifically, a section of the roof and wall appears to have collapsed, and there is a pile of debris (likely construction materials or rubble) on the ground next to the house. This directly supports the claim of a collapsed wall and debris.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image evidence shows a building with visible structural damage, specifically a collapsed roof section and debris, which supports the claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a building with significant structural damage. Specifically, a section of the roof and wall appears to have collapsed, and there is a pile of debris (likely construction materials or rubble) on the ground next to the house. This directly supports the claim of a collapsed wall and debris.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows a building with visible structural damage, specifically a collapsed roof section and debris, which supports the claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_56a366104b380b190d8f",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1001-6732-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1001-6732-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement surrounded by agricultural fields with varying shades of green and yellow.",
+      "A cluster of residential buildings with grey and red roofs, many equipped with solar panels.",
+      "A paved road runs horizontally across the lower portion of the frame.",
+      "A large electrical transmission tower is visible on the left side near a body of water."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the central building complex in the context image.",
+      "The red-roofed structure and the solar panel array in the crop correspond to the buildings in the center of the context image.",
+      "The white vehicles and green tarp visible in the crop are located in the concrete courtyard of the central building cluster."
+    ],
+    "description": "The images show a rural residential area with solar panels and agricultural fields. The crop view details a concrete courtyard containing two white vehicles, a green tarp, and a red-roofed building adjacent to a solar array.",
+    "evidence_visible": [
+      "A concrete courtyard area adjacent to a building with a red roof and a large solar panel array.",
+      "Two white vehicles are parked in the courtyard; one is near the top and one near the bottom.",
+      "A bright green tarp is spread on the ground between the vehicles.",
+      "A white utility pole stands on the right edge of the courtyard.",
+      "A small patch of grass or vegetation is visible in the bottom left corner of the courtyard."
+    ],
+    "unclear": [
+      "The specific make and model of the white vehicles.",
+      "The contents of the green tarp.",
+      "The exact function of the courtyard (e.g., parking, storage).",
+      "The identity of the people or objects near the utility pole."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement surrounded by agricultural fields with varying shades of green and yellow.\",\n    \"A cluster of residential buildings with grey and red roofs, many equipped with solar panels.\",\n    \"A paved road runs horizontally across the lower portion of the frame.\",\n    \"A large electrical transmission tower is visible on the left side near a body of water.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the central building complex in the context image.\",\n    \"The red-roofed structure and the solar panel array in the crop correspond to the buildings in the center of the context image.\",\n    \"The white vehicles and green tarp visible in the crop are located in the concrete courtyard of the central building cluster.\"\n  ],\n  \"description\": \"The images show a rural residential area with solar panels and agricultural fields. The crop view details a concrete courtyard containing two white vehicles, a green tarp, and a red-roofed building adjacent to a solar array.\",\n  \"evidence_visible\": [\n    \"A concrete courtyard area adjacent to a building with a red roof and a large solar panel array.\",\n    \"Two white vehicles are parked in the courtyard; one is near the top and one near the bottom.\",\n    \"A bright green tarp is spread on the ground between the vehicles.\",\n    \"A white utility pole stands on the right edge of the courtyard.\",\n    \"A small patch of grass or vegetation is visible in the bottom left corner of the courtyard.\"\n  ],\n  \"unclear\": [\n    \"The specific make and model of the white vehicles.\",\n    \"The contents of the green tarp.\",\n    \"The exact function of the courtyard (e.g., parking, storage).\",\n    \"The identity of the people or objects near the utility pole.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous green netting sheet covering the ground, whereas incomplete soil cover would show exposed soil patches.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a bright green dust-control netting spread on the ground in the concrete courtyard.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a complete, continuous green netting sheet covering the ground, whereas incomplete soil cover would show exposed soil patches.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a bright green dust-control netting spread on the ground in the concrete courtyard.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a bright green mesh netting spread out on the concrete surface of the courtyard, adjacent to the solar panels. This visual feature directly supports the description of bare soil netting (or ground cover netting) being present.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a concrete courtyard where the ground is largely exposed. While there is a green netting present, it is not covering the entire surface, and there are no other visible protective coverings (like mulch or plastic sheeting) on the ground. The visible ground is bare concrete, which fits the description of soil/ground for which protective covering is visibly incomplete.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a bright green mesh netting spread out on the concrete surface of the courtyard, adjacent to the solar panels. This visual feature directly supports the description of bare soil netting (or ground cover netting) being present.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a concrete courtyard where the ground is largely exposed. While there is a green netting present, it is not covering the entire surface, and there are no other visible protective coverings (like mulch or plastic sheeting) on the ground. The visible ground is bare concrete, which fits the description of soil/ground for which protective covering is visibly incomplete.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

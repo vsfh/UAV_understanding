@@ -1,0 +1,93 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a2e38f16d7c72df44a3b",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/collapsed_house_wall/original/0417-3207-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/collapsed_house_wall/cropped/0417-3207-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring large green agricultural fields, a cluster of residential houses with varied roof colors, and a canal running horizontally across the lower section.",
+      "A small, isolated brick structure with a damaged roof is situated in a grassy area adjacent to a paved path and vegetable plots.",
+      "The surrounding area includes dense vegetation, trees, and other small-scale agricultural plots."
+    ],
+    "cross_view_relations": [
+      "The cropped image provides a zoomed-in view of the isolated brick structure visible in the lower-left quadrant of the wide context image.",
+      "The spatial relationship confirms the structure is located between a large green field and a residential area, near a narrow path.",
+      "The damaged roof and surrounding vegetation are consistent in both views."
+    ],
+    "description": "Aerial imagery shows a rural setting with green fields and houses. A small, isolated brick building with a partially collapsed roof stands near a path and garden plots. The structure appears abandoned or under construction, surrounded by grass and vegetation, with no visible human activity.",
+    "evidence_visible": [
+      "Close-up of a small, rectangular brick structure with a flat roof that is partially collapsed, exposing the interior.",
+      "The building has open window spaces without glass and appears to be made of red brick.",
+      "Surrounding the structure are patches of green vegetation, yellow flowering plants, and a narrow concrete path.",
+      "To the left, there is a fenced area with dark material, possibly a greenhouse or storage."
+    ],
+    "unclear": [
+      "The exact purpose of the brick structure (e.g., storage, shelter, abandoned construction).",
+      "The identity or activity of any potential occupants.",
+      "The specific type of crops in the surrounding fields.",
+      "The date of the image or the timeline of the roof damage."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring large green agricultural fields, a cluster of residential houses with varied roof colors, and a canal running horizontally across the lower section.\",\n    \"A small, isolated brick structure with a damaged roof is situated in a grassy area adjacent to a paved path and vegetable plots.\",\n    \"The surrounding area includes dense vegetation, trees, and other small-scale agricultural plots.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image provides a zoomed-in view of the isolated brick structure visible in the lower-left quadrant of the wide context image.\",\n    \"The spatial relationship confirms the structure is located between a large green field and a residential area, near a narrow path.\",\n    \"The damaged roof and surrounding vegetation are consistent in both views.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural setting with green fields and houses. A small, isolated brick building with a partially collapsed roof stands near a path and garden plots. The structure appears abandoned or under construction, surrounded by grass and vegetation, with no visible human activity.\",\n  \"evidence_visible\": [\n    \"Close-up of a small, rectangular brick structure with a flat roof that is partially collapsed, exposing the interior.\",\n    \"The building has open window spaces without glass and appears to be made of red brick.\",\n    \"Surrounding the structure are patches of green vegetation, yellow flowering plants, and a narrow concrete path.\",\n    \"To the left, there is a fenced area with dark material, possibly a greenhouse or storage.\"\n  ],\n  \"unclear\": [\n    \"The exact purpose of the brick structure (e.g., storage, shelter, abandoned construction).\",\n    \"The identity or activity of any potential occupants.\",\n    \"The specific type of crops in the surrounding fields.\",\n    \"The date of the image or the timeline of the roof damage.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific structural failure of the roof and upper walls of the isolated brick structure, which constitutes a collapse rather than general damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a small isolated brick structure with a partially collapsed roof and exposed interior, consistent with a house wall that has visibly collapsed.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific structural failure of the roof and upper walls of the isolated brick structure, which constitutes a collapse rather than general damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a small isolated brick structure with a partially collapsed roof and exposed interior, consistent with a house wall that has visibly collapsed.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a small brick structure with a roof that has partially collapsed, exposing the interior. This visual evidence directly supports the description of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a building with visible structural damage, specifically a partially collapsed roof and exposed interior, which supports the claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a small brick structure with a roof that has partially collapsed, exposing the interior. This visual evidence directly supports the description of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a building with visible structural damage, specifically a partially collapsed roof and exposed interior, which supports the claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

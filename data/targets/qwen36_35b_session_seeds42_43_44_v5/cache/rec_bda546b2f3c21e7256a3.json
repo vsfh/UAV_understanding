@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_bda546b2f3c21e7256a3",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0216-2222-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0216-2222-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a mixed-use area with agricultural fields on the left and industrial buildings with blue roofs on the right.",
+      "A paved road runs vertically through the right side of the frame.",
+      "A cluster of residential houses with grey and red roofs is situated between the fields and the road.",
+      "A red vehicle is visible on the road near the residential area."
+    ],
+    "cross_view_relations": [
+      "The crop is a high-angle, zoomed-in view of the residential cluster and the adjacent road seen in the lower-right quadrant of the context image.",
+      "The red vehicle in the crop matches the red vehicle on the road in the context image.",
+      "The agricultural plots and the specific house with the blue roof in the crop correspond to the structures visible in the context image."
+    ],
+    "description": "The context image shows a rural-industrial landscape with fields, houses, and factories. The crop provides a detailed view of a specific residential cluster and the adjacent road, highlighting a red vehicle, a greenhouse, and a small shed with a yellow excavator nearby.",
+    "evidence_visible": [
+      "A paved road with a red car and a black car parked or stopped.",
+      "A cluster of houses with grey tiled roofs and one with a blue roof.",
+      "A small, rectangular shed with a white or light-colored roof.",
+      "A yellow excavator parked next to the shed.",
+      "A long, arched greenhouse structure covered in plastic sheeting.",
+      "Green agricultural plots adjacent to the houses and road.",
+      "Piles of debris or materials near the shed and excavator."
+    ],
+    "unclear": [
+      "The specific type of crops in the fields.",
+      "The exact contents of the debris piles.",
+      "The operational status of the excavator.",
+      "The identity of the people or vehicles."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a mixed-use area with agricultural fields on the left and industrial buildings with blue roofs on the right.\",\n    \"A paved road runs vertically through the right side of the frame.\",\n    \"A cluster of residential houses with grey and red roofs is situated between the fields and the road.\",\n    \"A red vehicle is visible on the road near the residential area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a high-angle, zoomed-in view of the residential cluster and the adjacent road seen in the lower-right quadrant of the context image.\",\n    \"The red vehicle in the crop matches the red vehicle on the road in the context image.\",\n    \"The agricultural plots and the specific house with the blue roof in the crop correspond to the structures visible in the context image.\"\n  ],\n  \"description\": \"The context image shows a rural-industrial landscape with fields, houses, and factories. The crop provides a detailed view of a specific residential cluster and the adjacent road, highlighting a red vehicle, a greenhouse, and a small shed with a yellow excavator nearby.\",\n  \"evidence_visible\": [\n    \"A paved road with a red car and a black car parked or stopped.\",\n    \"A cluster of houses with grey tiled roofs and one with a blue roof.\",\n    \"A small, rectangular shed with a white or light-colored roof.\",\n    \"A yellow excavator parked next to the shed.\",\n    \"A long, arched greenhouse structure covered in plastic sheeting.\",\n    \"Green agricultural plots adjacent to the houses and road.\",\n    \"Piles of debris or materials near the shed and excavator.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the fields.\",\n    \"The exact contents of the debris piles.\",\n    \"The operational status of the excavator.\",\n    \"The identity of the people or vehicles.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of debris piles and a shed in a state of disassembly, whereas project construction would involve the assembly of new materials and structures.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a small shed with a white roof surrounded by piles of debris and a yellow excavator parked immediately adjacent to the structure, indicating active or recent demolition work.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of debris piles and a shed in a state of disassembly, whereas project construction would involve the assembly of new materials and structures.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a small shed with a white roof surrounded by piles of debris and a yellow excavator parked immediately adjacent to the structure, indicating active or recent demolition work.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a small shed with a white roof, a yellow excavator, and piles of debris, which visually supports the description of a demolition event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The visible evidence depicts a demolition site (debris, excavator, shed) rather than a general construction project. While demolition is a form of construction activity, the specific claim of 'active general construction' is contradicted by the visual evidence of destruction and debris removal.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The scene depicts an active general construction project rather than demolition."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a small shed with a white roof, a yellow excavator, and piles of debris, which visually supports the description of a demolition event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The visible evidence depicts a demolition site (debris, excavator, shed) rather than a general construction project. While demolition is a form of construction activity, the specific claim of 'active general construction' is contradicted by the visual evidence of destruction and debris removal.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The scene depicts an active general construction project rather than demolition.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

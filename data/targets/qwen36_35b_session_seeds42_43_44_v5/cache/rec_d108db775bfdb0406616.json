@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d108db775bfdb0406616",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0309-5475-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0309-5475-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a waterway with a docked barge on the left and a reed bed on the right.",
+      "A paved road runs parallel to the water, with a white vehicle visible.",
+      "The foreground contains a mix of residential structures with tiled roofs and agricultural plots with bright yellow flowers.",
+      "A curved paved path winds through a grove of trees with bare branches."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the bottom-right corner of the context image.",
+      "The curved path and the specific arrangement of yellow flower beds in the crop match the corresponding area in the context image.",
+      "The building with the reddish-brown roof in the crop is the same structure seen in the lower right of the context image."
+    ],
+    "description": "The images show a rural landscape featuring a waterway, a road with a white vehicle, and agricultural plots with yellow flowers. The crop view details a building with a reddish-brown roof and a yard containing scattered debris, including blue tarps and wooden planks, situated next to the flower beds.",
+    "evidence_visible": [
+      "A building with a reddish-brown roof and a flat, unfinished concrete surface.",
+      "A yard area containing scattered debris, including blue tarps, wooden planks, and other construction-like materials.",
+      "Bright yellow flowers growing in a patch adjacent to the building.",
+      "A paved path running along the top edge of the frame, bordered by trees with bare branches."
+    ],
+    "unclear": [
+      "The specific nature of the debris (e.g., construction waste vs. stored materials).",
+      "The exact date of the images.",
+      "The legal status or ownership of the property."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a waterway with a docked barge on the left and a reed bed on the right.\",\n    \"A paved road runs parallel to the water, with a white vehicle visible.\",\n    \"The foreground contains a mix of residential structures with tiled roofs and agricultural plots with bright yellow flowers.\",\n    \"A curved paved path winds through a grove of trees with bare branches.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the bottom-right corner of the context image.\",\n    \"The curved path and the specific arrangement of yellow flower beds in the crop match the corresponding area in the context image.\",\n    \"The building with the reddish-brown roof in the crop is the same structure seen in the lower right of the context image.\"\n  ],\n  \"description\": \"The images show a rural landscape featuring a waterway, a road with a white vehicle, and agricultural plots with yellow flowers. The crop view details a building with a reddish-brown roof and a yard containing scattered debris, including blue tarps and wooden planks, situated next to the flower beds.\",\n  \"evidence_visible\": [\n    \"A building with a reddish-brown roof and a flat, unfinished concrete surface.\",\n    \"A yard area containing scattered debris, including blue tarps, wooden planks, and other construction-like materials.\",\n    \"Bright yellow flowers growing in a patch adjacent to the building.\",\n    \"A paved path running along the top edge of the frame, bordered by trees with bare branches.\"\n  ],\n  \"unclear\": [\n    \"The specific nature of the debris (e.g., construction waste vs. stored materials).\",\n    \"The exact date of the images.\",\n    \"The legal status or ownership of the property.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the presence of scattered debris and blue tarps in the yard, which suggests demolition rather than the organized materials and active work typical of a general construction project.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the crop image shows a building with a reddish-brown roof and a flat concrete surface, surrounded by a yard containing scattered debris, including blue tarps and wooden planks, which indicates active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the presence of scattered debris and blue tarps in the yard, which suggests demolition rather than the organized materials and active work typical of a general construction project.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the crop image shows a building with a reddish-brown roof and a flat concrete surface, surrounded by a yard containing scattered debris, including blue tarps and wooden planks, which indicates active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The crop image clearly shows a building structure with a reddish-brown perimeter wall and a flat concrete surface. The surrounding yard contains scattered debris, including blue tarps and wooden planks, which visually supports the description of a demolition or construction site.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a building site with debris and a partially constructed or demolished structure. While this could be part of a construction project, the specific claim of an 'active general construction project' is not fully supported as the scene looks more like a demolition site or a stalled project with no active workers or machinery visible. The term 'active' implies ongoing work which is not visually confirmed.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The project is 'active' (no workers or machinery visible)",
+        "It is a 'general construction project' (could be demolition or abandoned site)"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The crop image clearly shows a building structure with a reddish-brown perimeter wall and a flat concrete surface. The surrounding yard contains scattered debris, including blue tarps and wooden planks, which visually supports the description of a demolition or construction site.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a building site with debris and a partially constructed or demolished structure. While this could be part of a construction project, the specific claim of an 'active general construction project' is not fully supported as the scene looks more like a demolition site or a stalled project with no active workers or machinery visible. The term 'active' implies ongoing work which is not visually confirmed.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The project is 'active' (no workers or machinery visible)\",\n      \"It is a 'general construction project' (could be demolition or abandoned site)\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

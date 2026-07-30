@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_b93403b7359e87540910",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/collapsed_house_wall/original/0328-8981-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/collapsed_house_wall/cropped/0328-8981-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to large agricultural fields.",
+      "Fields contain vibrant green crops and patches of yellow flowering plants.",
+      "A canal runs horizontally through the lower section of the image.",
+      "Houses feature varied roofing materials, including grey tiles and red/brown metal sheets.",
+      "A utility pole with a cross-arm is visible near the center of the settlement."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a high-magnification view of the central cluster of buildings in the context image.",
+      "The utility pole in the crop corresponds to the pole visible in the context image.",
+      "The green field in the background of the crop matches the field directly north of the houses in the context image.",
+      "The yellow flowering patch to the right of the houses in the crop matches the patch in the context image."
+    ],
+    "description": "The images show a rural village bordered by green and yellow agricultural fields. The crop view details a specific cluster of residential structures with grey and red roofs, a utility pole, and a dirt yard containing a blue tarp and scattered materials, situated next to a canal.",
+    "evidence_visible": [
+      "Close-up of a cluster of buildings with grey tiled roofs and one red metal roof.",
+      "A utility pole stands vertically near the center of the cluster.",
+      "A dirt yard contains a blue tarp, wooden planks, and a pile of debris.",
+      "A patch of yellow flowers is visible to the right of the buildings.",
+      "A green field is visible in the background."
+    ],
+    "unclear": [
+      "The specific contents of the debris pile in the yard.",
+      "The exact function of the small structures within the cluster.",
+      "The identity of any individuals or vehicles."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to large agricultural fields.\",\n    \"Fields contain vibrant green crops and patches of yellow flowering plants.\",\n    \"A canal runs horizontally through the lower section of the image.\",\n    \"Houses feature varied roofing materials, including grey tiles and red/brown metal sheets.\",\n    \"A utility pole with a cross-arm is visible near the center of the settlement.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a high-magnification view of the central cluster of buildings in the context image.\",\n    \"The utility pole in the crop corresponds to the pole visible in the context image.\",\n    \"The green field in the background of the crop matches the field directly north of the houses in the context image.\",\n    \"The yellow flowering patch to the right of the houses in the crop matches the patch in the context image.\"\n  ],\n  \"description\": \"The images show a rural village bordered by green and yellow agricultural fields. The crop view details a specific cluster of residential structures with grey and red roofs, a utility pole, and a dirt yard containing a blue tarp and scattered materials, situated next to a canal.\",\n  \"evidence_visible\": [\n    \"Close-up of a cluster of buildings with grey tiled roofs and one red metal roof.\",\n    \"A utility pole stands vertically near the center of the cluster.\",\n    \"A dirt yard contains a blue tarp, wooden planks, and a pile of debris.\",\n    \"A patch of yellow flowers is visible to the right of the buildings.\",\n    \"A green field is visible in the background.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the debris pile in the yard.\",\n    \"The exact function of the small structures within the cluster.\",\n    \"The identity of any individuals or vehicles.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a complete wall collapse rather than general surface damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-magnification view of the central building cluster reveals a structure with a visibly collapsed wall, exposing the interior and debris, situated next to a utility pole and a dirt yard.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the evidence shows a complete wall collapse rather than general surface damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-magnification view of the central building cluster reveals a structure with a visibly collapsed wall, exposing the interior and debris, situated next to a utility pole and a dirt yard.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification view of the central building cluster clearly shows a structure with a visibly collapsed wall, exposing the interior and debris, situated next to a utility pole and a dirt yard.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The high-magnification view of the central building cluster clearly shows a structure with a visibly collapsed wall, exposing the interior and debris, situated next to a utility pole and a dirt yard.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification view of the central building cluster clearly shows a structure with a visibly collapsed wall, exposing the interior and debris, situated next to a utility pole and a dirt yard.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The high-magnification view of the central building cluster clearly shows a structure with a visibly collapsed wall, exposing the interior and debris, situated next to a utility pole and a dirt yard.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

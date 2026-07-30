@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_614649dae78414f5f531",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1009-3734-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1009-3734-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with rectangular agricultural plots containing yellow-green crops.",
+      "A paved road runs horizontally across the lower third, with a red vehicle visible.",
+      "A large pond is situated on the right side.",
+      "A cluster of buildings with blue and grey roofs is located in the upper center.",
+      "Greenhouses with arched frames are visible in the upper left corner."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a cropped, zoomed-in view of the upper-left quadrant of the context image.",
+      "The paved road in the evidence image corresponds to the road segment running vertically in the upper left of the context image.",
+      "The arched greenhouse structures in the evidence image match the greenhouses seen in the top-left corner of the context image."
+    ],
+    "description": "The images show a rural agricultural area with yellow-green crops and a paved road. The evidence view zooms in on the upper-left section, revealing arched greenhouse frames and a pile of blue material next to the road, confirming the spatial location within the wider context.",
+    "evidence_visible": [
+      "A paved road runs diagonally from top-right to bottom-left.",
+      "To the left of the road, there are multiple arched greenhouse frames.",
+      "A pile of blue material, possibly tarps or bags, is stacked near the road edge.",
+      "To the right of the road, a field of yellow-green crops shows distinct curved patterns or tracks."
+    ],
+    "unclear": [
+      "The specific type of crop is unclear.",
+      "The contents of the blue pile are unclear.",
+      "The purpose of the curved patterns in the crop field is unclear."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape with rectangular agricultural plots containing yellow-green crops.\",\n    \"A paved road runs horizontally across the lower third, with a red vehicle visible.\",\n    \"A large pond is situated on the right side.\",\n    \"A cluster of buildings with blue and grey roofs is located in the upper center.\",\n    \"Greenhouses with arched frames are visible in the upper left corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a cropped, zoomed-in view of the upper-left quadrant of the context image.\",\n    \"The paved road in the evidence image corresponds to the road segment running vertically in the upper left of the context image.\",\n    \"The arched greenhouse structures in the evidence image match the greenhouses seen in the top-left corner of the context image.\"\n  ],\n  \"description\": \"The images show a rural agricultural area with yellow-green crops and a paved road. The evidence view zooms in on the upper-left section, revealing arched greenhouse frames and a pile of blue material next to the road, confirming the spatial location within the wider context.\",\n  \"evidence_visible\": [\n    \"A paved road runs diagonally from top-right to bottom-left.\",\n    \"To the left of the road, there are multiple arched greenhouse frames.\",\n    \"A pile of blue material, possibly tarps or bags, is stacked near the road edge.\",\n    \"To the right of the road, a field of yellow-green crops shows distinct curved patterns or tracks.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop is unclear.\",\n    \"The contents of the blue pile are unclear.\",\n    \"The purpose of the curved patterns in the crop field is unclear.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue material pile and greenhouse frames, which are not features of the incomplete soil cover definition.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows arched greenhouse frames and a pile of blue material, possibly tarps or bags, stacked near the road edge in the upper-left quadrant of the context image.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the blue material pile and greenhouse frames, which are not features of the incomplete soil cover definition.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows arched greenhouse frames and a pile of blue material, possibly tarps or bags, stacked near the road edge in the upper-left quadrant of the context image.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The context image clearly shows arched greenhouse frames and a pile of blue material near the road in the upper-left quadrant, which matches the description of bare soil netting support.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The claim of 'incomplete soil cover' is vague and subjective. While the image shows green crops and some bare soil areas, there is no visual evidence of a specific 'protective covering' that is 'incomplete'. The term 'incomplete soil cover' is not a standard visual descriptor for the visible agricultural practices (greenhouses, open fields).",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The context image clearly shows arched greenhouse frames and a pile of blue material near the road in the upper-left quadrant, which matches the description of bare soil netting support.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The claim of 'incomplete soil cover' is vague and subjective. While the image shows green crops and some bare soil areas, there is no visual evidence of a specific 'protective covering' that is 'incomplete'. The term 'incomplete soil cover' is not a standard visual descriptor for the visible agricultural practices (greenhouses, open fields).\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

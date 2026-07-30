@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_7a4c3c7d443eb0aaf257",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0929-2510-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0929-2510-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a mix of residential buildings and agricultural land.",
+      "Large fields of green crops, likely rice paddies, occupy the upper and left portions of the frame.",
+      "A paved road runs horizontally through the middle, separating the fields from a cluster of houses.",
+      "The houses feature varied roof colors, including red, grey, and blue, with some having solar panels.",
+      "A body of water is visible in the bottom right corner, bordered by dense vegetation."
+    ],
+    "cross_view_relations": [
+      "The evidence image is a zoomed-in view of the area in the bottom right corner of the context image.",
+      "The rectangular plot covered in colored tarps in the evidence image is located adjacent to the water body and the tall green vegetation seen in the context image.",
+      "The surrounding trees and the edge of the water in the evidence image match the features in the bottom right of the context image."
+    ],
+    "description": "The context image shows a rural landscape with fields and houses. The evidence image provides a close-up of a specific plot of land near a water body in the bottom right corner. This plot is covered with black, blue, and white tarps, surrounded by tall green plants and trees.",
+    "evidence_visible": [
+      "A rectangular plot of land is covered with three distinct sections of material: black, blue, and white tarps.",
+      "The plot is bordered by tall, dense green vegetation on the left and trees on the right.",
+      "A body of water is visible along the bottom left edge of the plot.",
+      "The ground appears to be soil or dirt, partially covered by the tarps."
+    ],
+    "unclear": [
+      "The specific contents or purpose of the covered plot.",
+      "The exact type of crops in the surrounding fields.",
+      "The identity of any individuals or vehicles.",
+      "The legal status or ownership of the land."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with a mix of residential buildings and agricultural land.\",\n    \"Large fields of green crops, likely rice paddies, occupy the upper and left portions of the frame.\",\n    \"A paved road runs horizontally through the middle, separating the fields from a cluster of houses.\",\n    \"The houses feature varied roof colors, including red, grey, and blue, with some having solar panels.\",\n    \"A body of water is visible in the bottom right corner, bordered by dense vegetation.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence image is a zoomed-in view of the area in the bottom right corner of the context image.\",\n    \"The rectangular plot covered in colored tarps in the evidence image is located adjacent to the water body and the tall green vegetation seen in the context image.\",\n    \"The surrounding trees and the edge of the water in the evidence image match the features in the bottom right of the context image.\"\n  ],\n  \"description\": \"The context image shows a rural landscape with fields and houses. The evidence image provides a close-up of a specific plot of land near a water body in the bottom right corner. This plot is covered with black, blue, and white tarps, surrounded by tall green plants and trees.\",\n  \"evidence_visible\": [\n    \"A rectangular plot of land is covered with three distinct sections of material: black, blue, and white tarps.\",\n    \"The plot is bordered by tall, dense green vegetation on the left and trees on the right.\",\n    \"A body of water is visible along the bottom left edge of the plot.\",\n    \"The ground appears to be soil or dirt, partially covered by the tarps.\"\n  ],\n  \"unclear\": [\n    \"The specific contents or purpose of the covered plot.\",\n    \"The exact type of crops in the surrounding fields.\",\n    \"The identity of any individuals or vehicles.\",\n    \"The legal status or ownership of the land.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of a complete, continuous covering of tarps over the plot in the actual image, whereas the neighbor definition requires the protective covering to be visibly incomplete.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular plot of land adjacent to a water body and dense vegetation, which is covered by distinct sections of black, blue, and white tarps.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of a complete, continuous covering of tarps over the plot in the actual image, whereas the neighbor definition requires the protective covering to be visibly incomplete.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular plot of land adjacent to a water body and dense vegetation, which is covered by distinct sections of black, blue, and white tarps.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a rectangular plot of land adjacent to a water body and dense vegetation. This plot is distinctly covered by sections of black, blue, and white tarps, directly supporting the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a plot of land where the soil is covered by tarps, but the coverage is not uniform or complete across the entire area. There are visible sections of black, blue, and white material, leaving parts of the plot or the edges exposed, which supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a rectangular plot of land adjacent to a water body and dense vegetation. This plot is distinctly covered by sections of black, blue, and white tarps, directly supporting the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a plot of land where the soil is covered by tarps, but the coverage is not uniform or complete across the entire area. There are visible sections of black, blue, and white material, leaving parts of the plot or the edges exposed, which supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e2e206c485f12f3a68e7",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1026-0523-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1026-0523-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with rectangular agricultural fields in varying shades of green and yellow. A paved road runs vertically through the center. In the lower right, a paved area contains a blue and pink basketball court. A small cluster of buildings and a pond are visible in the lower left.",
+      "Close-up of the paved road and the adjacent basketball court. The court surface shows significant wear and peeling paint. A white metal frame structure stands on the grassy verge between the road and the field."
+    ],
+    "cross_view_relations": [
+      "The basketball court and the road in the context image correspond directly to the detailed view in the evidence image, confirming the location of the court relative to the agricultural fields.",
+      "The white metal frame visible in the evidence image is located on the edge of the field adjacent to the road seen in the context image."
+    ],
+    "description": "Aerial imagery of a rural area featuring agricultural fields and a paved road. A blue and pink basketball court is situated next to the road, showing visible surface wear. A white metal frame stands on the field's edge. The scene includes a pond and small structures in the lower left.",
+    "evidence_visible": [
+      "Close-up of a blue and pink basketball court with peeling paint and white boundary lines. A paved road with yellow center markings runs parallel to the court. A white metal frame structure is positioned on the grass between the road and the field. A narrow water channel borders the field on the right.",
+      "Visible texture of the green crop field adjacent to the road."
+    ],
+    "unclear": [
+      "Exact crop species",
+      "Condition of the white metal frame",
+      "Ownership of the land or court"
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"Aerial view of a rural landscape with rectangular agricultural fields in varying shades of green and yellow. A paved road runs vertically through the center. In the lower right, a paved area contains a blue and pink basketball court. A small cluster of buildings and a pond are visible in the lower left.\",\n\"Close-up of the paved road and the adjacent basketball court. The court surface shows significant wear and peeling paint. A white metal frame structure stands on the grassy verge between the road and the field.\"\n],\n\"cross_view_relations\": [\n\"The basketball court and the road in the context image correspond directly to the detailed view in the evidence image, confirming the location of the court relative to the agricultural fields.\",\n\"The white metal frame visible in the evidence image is located on the edge of the field adjacent to the road seen in the context image.\"\n],\n\"description\": \"Aerial imagery of a rural area featuring agricultural fields and a paved road. A blue and pink basketball court is situated next to the road, showing visible surface wear. A white metal frame stands on the field's edge. The scene includes a pond and small structures in the lower left.\",\n\"evidence_visible\": [\n\"Close-up of a blue and pink basketball court with peeling paint and white boundary lines. A paved road with yellow center markings runs parallel to the court. A white metal frame structure is positioned on the grass between the road and the field. A narrow water channel borders the field on the right.\",\n\"Visible texture of the green crop field adjacent to the road.\"\n],\n\"unclear\": [\n\"Exact crop species\",\n\"Condition of the white metal frame\",\n\"Ownership of the land or court\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows agricultural fields with crops (likely rice) in various stages of growth and harvest. There is no visible evidence of 'bare soil netting' or 'dust-control netting' as described. The fields are covered by vegetation or harvested stubble, not bare soil with netting.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows exposed soil covered by dust-control netting"
+      ]
+    },
+    "positive": {
+      "reason": "The image displays agricultural fields where the crop cover is not uniform. Some fields are fully green, some are yellowing (mature), and some are harvested (brown stubble). This variation represents 'incomplete soil cover' in the sense that the ground is not uniformly covered by a single type of vegetation or is in transition, fitting the description of soil for which protective covering (in a broad agricultural sense) is visibly incomplete or variable.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows agricultural fields with crops (likely rice) in various stages of growth and harvest. There is no visible evidence of 'bare soil netting' or 'dust-control netting' as described. The fields are covered by vegetation or harvested stubble, not bare soil with netting.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows exposed soil covered by dust-control netting\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image displays agricultural fields where the crop cover is not uniform. Some fields are fully green, some are yellowing (mature), and some are harvested (brown stubble). This variation represents 'incomplete soil cover' in the sense that the ground is not uniformly covered by a single type of vegetation or is in transition, fitting the description of soil for which protective covering (in a broad agricultural sense) is visibly incomplete or variable.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

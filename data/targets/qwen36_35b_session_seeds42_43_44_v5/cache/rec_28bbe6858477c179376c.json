@@ -1,0 +1,100 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_28bbe6858477c179376c",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1007-8006-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1007-8006-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a river or canal flowing through a residential area with multi-story buildings.",
+      "A bridge spans the water in the background.",
+      "The riverbanks are lined with vegetation and structures.",
+      "A road runs along the left bank with a vehicle visible.",
+      "The water is murky green."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the riverbank on the right side of the main image.",
+      "The green floating barriers in the crop correspond to the structures visible along the right bank in the context image.",
+      "The building in the crop matches the building located just upstream of the green barriers in the context image."
+    ],
+    "description": "The images show a river flowing through a built-up area. The context view provides a wide perspective of the waterway, bridge, and surrounding buildings. The evidence crop zooms in on a specific section of the right bank, revealing green floating barriers or enclosures in the water adjacent to the vegetation and a building.",
+    "evidence_visible": [
+      "Close-up of the riverbank showing dense green vegetation.",
+      "Green floating barriers or netting structures are present in the water near the bank.",
+      "A concrete or paved area is visible behind the vegetation.",
+      "Part of a multi-story building with a flat roof is visible at the top of the crop.",
+      "Some debris or materials are scattered on the ground near the building."
+    ],
+    "unclear": [
+      "The specific purpose of the green floating barriers (e.g., aquaculture, pollution control, construction).",
+      "The exact nature of the materials on the ground near the building.",
+      "The condition of the floating barriers (intact, damaged, etc.)."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a river or canal flowing through a residential area with multi-story buildings.\",\n    \"A bridge spans the water in the background.\",\n    \"The riverbanks are lined with vegetation and structures.\",\n    \"A road runs along the left bank with a vehicle visible.\",\n    \"The water is murky green.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the riverbank on the right side of the main image.\",\n    \"The green floating barriers in the crop correspond to the structures visible along the right bank in the context image.\",\n    \"The building in the crop matches the building located just upstream of the green barriers in the context image.\"\n  ],\n  \"description\": \"The images show a river flowing through a built-up area. The context view provides a wide perspective of the waterway, bridge, and surrounding buildings. The evidence crop zooms in on a specific section of the right bank, revealing green floating barriers or enclosures in the water adjacent to the vegetation and a building.\",\n  \"evidence_visible\": [\n    \"Close-up of the riverbank showing dense green vegetation.\",\n    \"Green floating barriers or netting structures are present in the water near the bank.\",\n    \"A concrete or paved area is visible behind the vegetation.\",\n    \"Part of a multi-story building with a flat roof is visible at the top of the crop.\",\n    \"Some debris or materials are scattered on the ground near the building.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the green floating barriers (e.g., aquaculture, pollution control, construction).\",\n    \"The exact nature of the materials on the ground near the building.\",\n    \"The condition of the floating barriers (intact, damaged, etc.).\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of the green floating netting structures in the water, which are clearly visible in the evidence crop.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows green floating barriers or netting structures installed in the water adjacent to the riverbank, consistent with the definition of exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of the green floating netting structures in the water, which are clearly visible in the evidence crop.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows green floating barriers or netting structures installed in the water adjacent to the riverbank, consistent with the definition of exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows green floating barriers or netting structures installed in the water adjacent to the riverbank. This directly contradicts the claim that the event is 'bare soil netting' (which implies dust control on land) or that the soil cover is 'incomplete' (as the netting is visibly present and installed).",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The event is bare soil netting",
+        "Visible evidence shows exposed soil covered by dust-control netting",
+        "The event is incomplete soil cover",
+        "Visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    },
+    "positive": {
+      "reason": "The image shows green floating barriers or netting structures installed in the water adjacent to the riverbank. This visual evidence supports the description of 'green floating barriers or netting structures installed in the water adjacent to the riverbank'.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows green floating barriers or netting structures installed in the water adjacent to the riverbank. This directly contradicts the claim that the event is 'bare soil netting' (which implies dust control on land) or that the soil cover is 'incomplete' (as the netting is visibly present and installed).\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The event is bare soil netting\",\n      \"Visible evidence shows exposed soil covered by dust-control netting\",\n      \"The event is incomplete soil cover\",\n      \"Visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows green floating barriers or netting structures installed in the water adjacent to the riverbank. This visual evidence supports the description of 'green floating barriers or netting structures installed in the water adjacent to the riverbank'.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

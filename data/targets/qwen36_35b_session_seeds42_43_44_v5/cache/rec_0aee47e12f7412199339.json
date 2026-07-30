@@ -1,0 +1,38 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0aee47e12f7412199339",
+    "source_class": "construction_waste",
+    "negative_label": "construction_materials",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/construction_waste/original/0305-9711-construction_waste.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/construction_waste/cropped/0305-9711-construction_waste.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a large industrial facility with four circular clarifier tanks and rectangular basins.",
+      "Adjacent to the facility are agricultural fields containing rows of green crops and long, white plastic greenhouses.",
+      "A paved road separates the industrial site from the agricultural plots.",
+      "Several small structures with blue and white roofs are visible within the farmland area."
+    ],
+    "cross_view_relations": [
+      "The crop image is a magnified view of a specific cluster of structures located in the agricultural zone to the right of the industrial facility.",
+      "The blue-roofed structure and the pile of debris shown in the crop are situated between the paved road and the white greenhouses in the wider context.",
+      "The spatial relationship confirms the debris pile is located within the farming area, adjacent to the main facility."
+    ],
+    "description": "Aerial imagery shows an industrial water treatment plant adjacent to agricultural fields. A zoomed-in view highlights a pile of mixed debris and a blue-roofed structure located within the farmland, situated between a road and white plastic greenhouses.",
+    "evidence_visible": [
+      "A disorganized pile of debris containing white panels, wood, and miscellaneous materials.",
+      "A small structure with a bright blue roof and a rusted corrugated metal roof section.",
+      "Surrounding agricultural plots with green crops and long, white plastic-covered greenhouses.",
+      "A dirt or paved path running alongside the debris pile."
+    ],
+    "unclear": [
+      "The specific contents of the debris pile (e.g., construction waste vs. household trash).",
+      "The legal status or purpose of the blue-roofed structure.",
+      "The exact date of the imagery or the timeline of the debris accumulation."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a large industrial facility with four circular clarifier tanks and rectangular basins.\",\n    \"Adjacent to the facility are agricultural fields containing rows of green crops and long, white plastic greenhouses.\",\n    \"A paved road separates the industrial site from the agricultural plots.\",\n    \"Several small structures with blue and white roofs are visible within the farmland area.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a magnified view of a specific cluster of structures located in the agricultural zone to the right of the industrial facility.\",\n    \"The blue-roofed structure and the pile of debris shown in the crop are situated between the paved road and the white greenhouses in the wider context.\",\n    \"The spatial relationship confirms the debris pile is located within the farming area, adjacent to the main facility.\"\n  ],\n  \"description\": \"Aerial imagery shows an industrial water treatment plant adjacent to agricultural fields. A zoomed-in view highlights a pile of mixed debris and a blue-roofed structure located within the farmland, situated between a road and white plastic greenhouses.\",\n  \"evidence_visible\": [\n    \"A disorganized pile of debris containing white panels, wood, and miscellaneous materials.\",\n    \"A small structure with a bright blue roof and a rusted corrugated metal roof section.\",\n    \"Surrounding agricultural plots with green crops and long, white plastic-covered greenhouses.\",\n    \"A dirt or paved path running alongside the debris pile.\"\n  ],\n  \"unclear\": [\n    \"The specific contents of the debris pile (e.g., construction waste vs. household trash).\",\n    \"The legal status or purpose of the blue-roofed structure.\",\n    \"The exact date of the imagery or the timeline of the debris accumulation.\"\n  ]\n}\n```",
+  "perception_retries": 0
+}

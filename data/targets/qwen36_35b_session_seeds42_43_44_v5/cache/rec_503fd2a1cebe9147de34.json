@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_503fd2a1cebe9147de34",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1027-12168-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1027-12168-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with a village in the background.",
+      "Large rectangular agricultural fields, some golden-yellow and others brown.",
+      "A large rectangular structure covered in blue material (likely plastic sheeting) is visible in the upper-left quadrant.",
+      "A dirt road runs vertically, separating the fields.",
+      "A smaller cluster of greenhouses is visible at the bottom edge of the frame."
+    ],
+    "cross_view_relations": [
+      "The close-up view corresponds to the bottom-left section of the wide image.",
+      "The long, parallel rows of plastic-covered structures in the close-up match the greenhouses seen at the bottom edge of the wide image.",
+      "The brown, tilled field with white residue in the close-up matches the large field immediately to the right of the greenhouses in the wide image.",
+      "The dirt road and drainage ditch visible in the close-up align with the vertical divider seen in the wide image."
+    ],
+    "description": "The images show agricultural fields adjacent to a village. The close-up view details long, parallel plastic-covered tunnels (greenhouses) and a tilled field with white residue, situated next to a dirt road and drainage ditch. These features correspond to the bottom-left section of the wider aerial view, which also shows a large blue-covered structure and harvested fields.",
+    "evidence_visible": [
+      "Three long, parallel structures covered in translucent plastic sheeting.",
+      "White, curved hoops or supports are visible underneath the plastic sheeting.",
+      "The ground between the structures appears to be tilled soil with some green vegetation.",
+      "A dirt path runs alongside the structures, with a drainage ditch containing water.",
+      "White debris or residue is scattered on the tilled soil."
+    ],
+    "unclear": [
+      "The specific crop type inside the plastic tunnels.",
+      "The exact material of the blue covering in the wide image (plastic vs. solar panels).",
+      "The purpose of the white residue on the tilled soil.",
+      "The exact date of the images."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape with a village in the background.\",\n    \"Large rectangular agricultural fields, some golden-yellow and others brown.\",\n    \"A large rectangular structure covered in blue material (likely plastic sheeting) is visible in the upper-left quadrant.\",\n    \"A dirt road runs vertically, separating the fields.\",\n    \"A smaller cluster of greenhouses is visible at the bottom edge of the frame.\"\n  ],\n  \"cross_view_relations\": [\n    \"The close-up view corresponds to the bottom-left section of the wide image.\",\n    \"The long, parallel rows of plastic-covered structures in the close-up match the greenhouses seen at the bottom edge of the wide image.\",\n    \"The brown, tilled field with white residue in the close-up matches the large field immediately to the right of the greenhouses in the wide image.\",\n    \"The dirt road and drainage ditch visible in the close-up align with the vertical divider seen in the wide image.\"\n  ],\n  \"description\": \"The images show agricultural fields adjacent to a village. The close-up view details long, parallel plastic-covered tunnels (greenhouses) and a tilled field with white residue, situated next to a dirt road and drainage ditch. These features correspond to the bottom-left section of the wider aerial view, which also shows a large blue-covered structure and harvested fields.\",\n  \"evidence_visible\": [\n    \"Three long, parallel structures covered in translucent plastic sheeting.\",\n    \"White, curved hoops or supports are visible underneath the plastic sheeting.\",\n    \"The ground between the structures appears to be tilled soil with some green vegetation.\",\n    \"A dirt path runs alongside the structures, with a drainage ditch containing water.\",\n    \"White debris or residue is scattered on the tilled soil.\"\n  ],\n  \"unclear\": [\n    \"The specific crop type inside the plastic tunnels.\",\n    \"The exact material of the blue covering in the wide image (plastic vs. solar panels).\",\n    \"The purpose of the white residue on the tilled soil.\",\n    \"The exact date of the images.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of continuous, intact plastic sheeting covering the entire length of the visible structures, whereas incomplete soil cover would show exposed soil gaps within the covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows long, parallel agricultural structures covered in translucent plastic sheeting with white curved hoops, situated next to a dirt road and drainage ditch.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of continuous, intact plastic sheeting covering the entire length of the visible structures, whereas incomplete soil cover would show exposed soil gaps within the covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows long, parallel agricultural structures covered in translucent plastic sheeting with white curved hoops, situated next to a dirt road and drainage ditch.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly displays long, parallel agricultural structures covered in translucent plastic sheeting with white curved hoops, situated next to a dirt road and drainage ditch. This visual evidence directly supports the description of bare soil netting structures.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows agricultural fields where the soil is not fully covered by crops or protective sheeting. Specifically, the large field on the right side of the image consists of bare, harvested soil with no visible protective covering, supporting the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly displays long, parallel agricultural structures covered in translucent plastic sheeting with white curved hoops, situated next to a dirt road and drainage ditch. This visual evidence directly supports the description of bare soil netting structures.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows agricultural fields where the soil is not fully covered by crops or protective sheeting. Specifically, the large field on the right side of the image consists of bare, harvested soil with no visible protective covering, supporting the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

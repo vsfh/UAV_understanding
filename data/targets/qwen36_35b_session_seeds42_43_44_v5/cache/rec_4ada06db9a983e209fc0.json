@@ -1,0 +1,83 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_4ada06db9a983e209fc0",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1010-4152-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1010-4152-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape with large rectangular fields of yellow-green crops, likely rice, separated by dirt roads and concrete paths. A residential area with clustered houses is visible in the upper right. A tall metal lattice tower stands near the fields. A small pond with vegetation is in the lower right corner."
+    ],
+    "cross_view_relations": [
+      "The second image is a cropped, zoomed-in view of the central area in the first image, specifically focusing on the intersection of dirt roads and the adjacent small plots of land."
+    ],
+    "description": "The images show a rural agricultural area with large fields of yellow-green crops and a nearby village. The second image provides a closer view of a road intersection where small garden plots are covered with green, red, and white tarps, situated next to tilled brown soil.",
+    "evidence_visible": [
+      "A close-up view of a dirt road intersection. Adjacent to the road are several small, rectangular plots of land. Some plots are covered with green, red, and white tarps. Other plots show tilled brown soil or low-growing green vegetation. A utility pole is visible next to the road."
+    ],
+    "unclear": [
+      "The specific type of crops in the large fields and small plots. The purpose of the tarps (e.g., for shade, weed control, or protecting harvested goods). The exact contents of the small plots."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape with large rectangular fields of yellow-green crops, likely rice, separated by dirt roads and concrete paths. A residential area with clustered houses is visible in the upper right. A tall metal lattice tower stands near the fields. A small pond with vegetation is in the lower right corner.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a cropped, zoomed-in view of the central area in the first image, specifically focusing on the intersection of dirt roads and the adjacent small plots of land.\"\n  ],\n  \"description\": \"The images show a rural agricultural area with large fields of yellow-green crops and a nearby village. The second image provides a closer view of a road intersection where small garden plots are covered with green, red, and white tarps, situated next to tilled brown soil.\",\n  \"evidence_visible\": [\n    \"A close-up view of a dirt road intersection. Adjacent to the road are several small, rectangular plots of land. Some plots are covered with green, red, and white tarps. Other plots show tilled brown soil or low-growing green vegetation. A utility pole is visible next to the road.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the large fields and small plots. The purpose of the tarps (e.g., for shade, weed control, or protecting harvested goods). The exact contents of the small plots.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of tarps covering the soil; the tarps are present and appear to cover the plots, whereas incomplete soil cover would imply the protective covering is visibly incomplete or absent.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows small rectangular plots of land adjacent to a dirt road intersection covered with green, red, and white tarps, situated next to exposed brown soil.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of tarps covering the soil; the tarps are present and appear to cover the plots, whereas incomplete soil cover would imply the protective covering is visibly incomplete or absent.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows small rectangular plots of land adjacent to a dirt road intersection covered with green, red, and white tarps, situated next to exposed brown soil.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows small rectangular plots adjacent to a dirt road intersection covered with green, red, and white tarps. These plots are situated next to exposed brown soil areas. The description accurately reflects the visible content.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows small plots covered with tarps (green, red, white) next to bare soil. While the tarps cover specific plots, the surrounding areas are bare soil, and the tarps themselves appear to be covering only parts of the plots (e.g., some sections are uncovered or the tarps are laid out in a way that suggests partial coverage). This can be interpreted as 'incomplete soil cover' in the sense that not all soil is covered by protective material, or that the protective covering is not continuous over the entire area. However, the term 'incomplete' is slightly ambiguous. A more precise description would be 'partial soil cover' or 'soil covered by tarps in some areas'. Given the strict requirement for literal visible support, the claim 'incomplete soil cover' is a reasonable interpretation of the visual evidence where tarps cover some plots but not others, and even within covered plots, the coverage might not be 100% (though hard to verify at this resolution). The key is that there is soil visible that is not covered, and there is covering present. This fits the description.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows small rectangular plots adjacent to a dirt road intersection covered with green, red, and white tarps. These plots are situated next to exposed brown soil areas. The description accurately reflects the visible content.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows small plots covered with tarps (green, red, white) next to bare soil. While the tarps cover specific plots, the surrounding areas are bare soil, and the tarps themselves appear to be covering only parts of the plots (e.g., some sections are uncovered or the tarps are laid out in a way that suggests partial coverage). This can be interpreted as 'incomplete soil cover' in the sense that not all soil is covered by protective material, or that the protective covering is not continuous over the entire area. However, the term 'incomplete' is slightly ambiguous. A more precise description would be 'partial soil cover' or 'soil covered by tarps in some areas'. Given the strict requirement for literal visible support, the claim 'incomplete soil cover' is a reasonable interpretation of the visual evidence where tarps cover some plots but not others, and even within covered plots, the coverage might not be 100% (though hard to verify at this resolution). The key is that there is soil visible that is not covered, and there is covering present. This fits the description.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

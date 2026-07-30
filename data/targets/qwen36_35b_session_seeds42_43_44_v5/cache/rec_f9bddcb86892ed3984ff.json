@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_f9bddcb86892ed3984ff",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1028-10812-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1028-10812-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape with a mix of agricultural fields and industrial buildings.",
+      "Fields display varying colors, including golden-yellow and green, indicating different crop stages or types.",
+      "A cluster of multi-story residential houses is situated in the middle ground, surrounded by fields.",
+      "Large white industrial warehouses are visible in the background.",
+      "A network of dirt and paved roads separates the fields and properties."
+    ],
+    "cross_view_relations": [
+      "The local crop view is a zoomed-in section of the middle ground in the context image.",
+      "The specific house with the grey roof and white balcony in the crop view corresponds to the central house in the cluster seen in the context image.",
+      "The harvested golden field in the foreground of the crop view matches the texture and color of the fields surrounding that house in the context view."
+    ],
+    "description": "Aerial imagery shows a rural area with industrial buildings and residential clusters. The local crop view zooms in on a specific house with a grey roof and white balcony, situated next to a harvested golden field. A white plastic greenhouse and green mats are visible on the property's concrete yard.",
+    "evidence_visible": [
+      "A two-story house with a grey roof and white balcony.",
+      "A white, arched plastic greenhouse structure located on a concrete pad.",
+      "Green rectangular mats or tarps laid out on the ground near the greenhouse.",
+      "A harvested field with golden stubble in the immediate foreground.",
+      "A single-story building with a grey roof to the right of the main house."
+    ],
+    "unclear": [
+      "The specific type of crop in the fields.",
+      "The contents of the greenhouse.",
+      "The purpose of the green mats.",
+      "The exact number of people or vehicles present."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape with a mix of agricultural fields and industrial buildings.\",\n    \"Fields display varying colors, including golden-yellow and green, indicating different crop stages or types.\",\n    \"A cluster of multi-story residential houses is situated in the middle ground, surrounded by fields.\",\n    \"Large white industrial warehouses are visible in the background.\",\n    \"A network of dirt and paved roads separates the fields and properties.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop view is a zoomed-in section of the middle ground in the context image.\",\n    \"The specific house with the grey roof and white balcony in the crop view corresponds to the central house in the cluster seen in the context image.\",\n    \"The harvested golden field in the foreground of the crop view matches the texture and color of the fields surrounding that house in the context view.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural area with industrial buildings and residential clusters. The local crop view zooms in on a specific house with a grey roof and white balcony, situated next to a harvested golden field. A white plastic greenhouse and green mats are visible on the property's concrete yard.\",\n  \"evidence_visible\": [\n    \"A two-story house with a grey roof and white balcony.\",\n    \"A white, arched plastic greenhouse structure located on a concrete pad.\",\n    \"Green rectangular mats or tarps laid out on the ground near the greenhouse.\",\n    \"A harvested field with golden stubble in the immediate foreground.\",\n    \"A single-story building with a grey roof to the right of the main house.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop in the fields.\",\n    \"The contents of the greenhouse.\",\n    \"The purpose of the green mats.\",\n    \"The exact number of people or vehicles present.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of a complete, enclosed plastic greenhouse structure versus exposed soil with only partial or fragmented protective covering.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a white, arched plastic greenhouse structure located on a concrete pad adjacent to a harvested field.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of a complete, enclosed plastic greenhouse structure versus exposed soil with only partial or fragmented protective covering.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a white, arched plastic greenhouse structure located on a concrete pad adjacent to a harvested field.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a white, arched plastic greenhouse structure situated on a concrete pad next to a harvested field, directly supporting the description of bare soil netting.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a harvested field with no visible protective covering (such as plastic sheeting or netting) on the soil, which supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a white, arched plastic greenhouse structure situated on a concrete pad next to a harvested field, directly supporting the description of bare soil netting.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a harvested field with no visible protective covering (such as plastic sheeting or netting) on the soil, which supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

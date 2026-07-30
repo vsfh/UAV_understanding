@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d211aaea87d71c04a742",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0303-6032-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0303-6032-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a mixed-use area with high-rise residential buildings, a central park with a fountain, and a canal.",
+      "A large field of yellow flowering crops (likely rapeseed) is situated between the modern buildings and a cluster of older, low-rise structures.",
+      "The older structures have varied roofing materials, including red tiles, grey slate, and blue corrugated sheets.",
+      "A pile of debris and trash is visible on the ground near the canal bank, adjacent to the older buildings."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the area in the lower-left quadrant of the context image.",
+      "The canal, the pile of debris, and the specific cluster of low-rise buildings with solar panels are visible in both images.",
+      "The spatial relationship between the canal, the debris pile, and the adjacent buildings is consistent across both views."
+    ],
+    "description": "The images show a canal bank adjacent to a mix of modern high-rises and older low-rise buildings. A large pile of mixed debris and trash is situated on the ground between the buildings and the water. A field of yellow flowers borders the area. Solar panels are visible on a nearby roof.",
+    "evidence_visible": [
+      "Close-up of a canal with murky green water.",
+      "A significant pile of debris, including white bags, wood, and other unidentifiable refuse, is on the bank.",
+      "A small blue boat is moored near the debris pile.",
+      "Adjacent buildings have grey and red roofs; one roof has solar panels.",
+      "A patch of yellow flowers is visible on the right edge.",
+      "A small, dark, shed-like structure is near the debris."
+    ],
+    "unclear": [
+      "The exact composition of the debris pile.",
+      "The identity of any people visible in the distance.",
+      "The specific type of yellow flowers.",
+      "The purpose of the small shed-like structure."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a mixed-use area with high-rise residential buildings, a central park with a fountain, and a canal.\",\n    \"A large field of yellow flowering crops (likely rapeseed) is situated between the modern buildings and a cluster of older, low-rise structures.\",\n    \"The older structures have varied roofing materials, including red tiles, grey slate, and blue corrugated sheets.\",\n    \"A pile of debris and trash is visible on the ground near the canal bank, adjacent to the older buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the area in the lower-left quadrant of the context image.\",\n    \"The canal, the pile of debris, and the specific cluster of low-rise buildings with solar panels are visible in both images.\",\n    \"The spatial relationship between the canal, the debris pile, and the adjacent buildings is consistent across both views.\"\n  ],\n  \"description\": \"The images show a canal bank adjacent to a mix of modern high-rises and older low-rise buildings. A large pile of mixed debris and trash is situated on the ground between the buildings and the water. A field of yellow flowers borders the area. Solar panels are visible on a nearby roof.\",\n  \"evidence_visible\": [\n    \"Close-up of a canal with murky green water.\",\n    \"A significant pile of debris, including white bags, wood, and other unidentifiable refuse, is on the bank.\",\n    \"A small blue boat is moored near the debris pile.\",\n    \"Adjacent buildings have grey and red roofs; one roof has solar panels.\",\n    \"A patch of yellow flowers is visible on the right edge.\",\n    \"A small, dark, shed-like structure is near the debris.\"\n  ],\n  \"unclear\": [\n    \"The exact composition of the debris pile.\",\n    \"The identity of any people visible in the distance.\",\n    \"The specific type of yellow flowers.\",\n    \"The purpose of the small shed-like structure.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a large, concentrated pile of mixed debris and trash on the ground, which indicates the active or recent demolition of structures, whereas building damage would typically show visible structural damage to a standing building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a large pile of mixed debris and trash situated on the ground near the canal bank, adjacent to older low-rise structures, indicating active or recent demolition activity.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a large, concentrated pile of mixed debris and trash on the ground, which indicates the active or recent demolition of structures, whereas building damage would typically show visible structural damage to a standing building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a large pile of mixed debris and trash situated on the ground near the canal bank, adjacent to older low-rise structures, indicating active or recent demolition activity.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large accumulation of mixed debris, trash, and rubble on the ground near the canal bank, adjacent to older low-rise structures. This visual evidence directly supports the claim of demolition activity.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image displays a large pile of debris and trash on the ground, but there is no visible evidence of a standing building with structural damage (such as cracks, collapsed walls, or exposed beams). The claim of 'building damage' is not supported by the visual content.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large accumulation of mixed debris, trash, and rubble on the ground near the canal bank, adjacent to older low-rise structures. This visual evidence directly supports the claim of demolition activity.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image displays a large pile of debris and trash on the ground, but there is no visible evidence of a standing building with structural damage (such as cracks, collapsed walls, or exposed beams). The claim of 'building damage' is not supported by the visual content.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

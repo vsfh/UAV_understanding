@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0c15a2c8c92919295fcd",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/collapsed_house_wall/original/1030-8179-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/collapsed_house_wall/cropped/1030-8179-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring rectangular agricultural fields with yellow and brown crops, intersected by green waterways.",
+      "A small white building with a damaged roof is situated on a patch of bare earth near a canal bend.",
+      "A red tractor is parked on the dirt ground adjacent to the building.",
+      "Dense green vegetation lines the banks of the waterways.",
+      "A paved road runs along the bottom edge of the frame, separated from the water by a thick hedge."
+    ],
+    "cross_view_relations": [
+      "The cropped image provides a zoomed-in perspective of the white building and red tractor seen in the wider context image.",
+      "The spatial relationship confirms the building is located on a dirt clearing between the waterway and a field of tall green crops.",
+      "The roof damage visible in the crop is consistent with the structure seen in the wider view."
+    ],
+    "description": "An aerial view shows a rural area with agricultural fields and waterways. A white building with a damaged roof and a red tractor are located on a dirt patch near a canal. The scene includes dense vegetation along the water banks and a road in the foreground.",
+    "evidence_visible": [
+      "Close-up of a single-story white structure with a partially collapsed or missing roof, exposing the interior.",
+      "A red tractor with a trailer attachment is parked on the dirt ground to the left of the building.",
+      "The building is surrounded by green trees and bushes on one side and a field of tall green crops on the other.",
+      "The ground is bare earth, contrasting with the surrounding vegetation."
+    ],
+    "unclear": [
+      "The specific type of crops in the fields.",
+      "The exact nature of the damage to the roof.",
+      "The purpose of the building or the tractor.",
+      "The identity of any individuals present."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring rectangular agricultural fields with yellow and brown crops, intersected by green waterways.\",\n    \"A small white building with a damaged roof is situated on a patch of bare earth near a canal bend.\",\n    \"A red tractor is parked on the dirt ground adjacent to the building.\",\n    \"Dense green vegetation lines the banks of the waterways.\",\n    \"A paved road runs along the bottom edge of the frame, separated from the water by a thick hedge.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image provides a zoomed-in perspective of the white building and red tractor seen in the wider context image.\",\n    \"The spatial relationship confirms the building is located on a dirt clearing between the waterway and a field of tall green crops.\",\n    \"The roof damage visible in the crop is consistent with the structure seen in the wider view.\"\n  ],\n  \"description\": \"An aerial view shows a rural area with agricultural fields and waterways. A white building with a damaged roof and a red tractor are located on a dirt patch near a canal. The scene includes dense vegetation along the water banks and a road in the foreground.\",\n  \"evidence_visible\": [\n    \"Close-up of a single-story white structure with a partially collapsed or missing roof, exposing the interior.\",\n    \"A red tractor with a trailer attachment is parked on the dirt ground to the left of the building.\",\n    \"The building is surrounded by green trees and bushes on one side and a field of tall green crops on the other.\",\n    \"The ground is bare earth, contrasting with the surrounding vegetation.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the fields.\",\n    \"The exact nature of the damage to the roof.\",\n    \"The purpose of the building or the tractor.\",\n    \"The identity of any individuals present.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a roof collapse and interior exposure rather than general wall damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a white building with a partially collapsed roof and exposed interior structure situated on a dirt patch near a canal.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "```json\n{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a roof collapse and interior exposure rather than general wall damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a white building with a partially collapsed roof and exposed interior structure situated on a dirt patch near a canal.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}\n```",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence clearly shows a white building with a damaged roof and exposed interior structure located on a dirt patch next to a canal. This directly supports the description of a collapsed house wall and exposed interior.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image evidence shows a building with a damaged roof and exposed interior, which constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence clearly shows a white building with a damaged roof and exposed interior structure located on a dirt patch next to a canal. This directly supports the description of a collapsed house wall and exposed interior.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows a building with a damaged roof and exposed interior, which constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_633c6f286474c30395a2",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0921-3216-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0921-3216-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with green agricultural fields, a central pond, and scattered residential buildings with varied roof colors (red, grey, blue).",
+      "A paved road runs through the village, connecting clusters of houses and fields.",
+      "Vegetation includes trees and shrubs interspersed among the buildings and along the water bodies."
+    ],
+    "cross_view_relations": [
+      "The zoomed-in crop view corresponds to the upper-right quadrant of the wide context image.",
+      "The crop focuses on a specific cluster of buildings and a sports court visible in the wider shot.",
+      "The spatial relationship confirms the location of the sports court and the adjacent white building with solar panels within the broader village layout."
+    ],
+    "description": "The images show a rural village with green fields, houses, and a pond. The zoomed view highlights a sports court, a white building with solar panels, and a paved road, confirming their position within the wider settlement layout.",
+    "evidence_visible": [
+      "A rectangular sports court with blue and pink surfaces is visible, surrounded by a fence.",
+      "A white two-story building with a grey roof is adjacent to the court.",
+      "Solar panels are installed on the roof of a building next to the court.",
+      "A paved road with yellow center lines runs alongside the court and buildings.",
+      "A white car and a black car are parked near the building with solar panels.",
+      "A concrete playground area with exercise equipment is visible in the lower left of the crop."
+    ],
+    "unclear": [
+      "The specific type of crops in the fields.",
+      "The exact number of people or their activities.",
+      "The specific purpose of the building with solar panels (residential vs. commercial).",
+      "The exact date or time of the images."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with green agricultural fields, a central pond, and scattered residential buildings with varied roof colors (red, grey, blue).\",\n    \"A paved road runs through the village, connecting clusters of houses and fields.\",\n    \"Vegetation includes trees and shrubs interspersed among the buildings and along the water bodies.\"\n  ],\n  \"cross_view_relations\": [\n    \"The zoomed-in crop view corresponds to the upper-right quadrant of the wide context image.\",\n    \"The crop focuses on a specific cluster of buildings and a sports court visible in the wider shot.\",\n    \"The spatial relationship confirms the location of the sports court and the adjacent white building with solar panels within the broader village layout.\"\n  ],\n  \"description\": \"The images show a rural village with green fields, houses, and a pond. The zoomed view highlights a sports court, a white building with solar panels, and a paved road, confirming their position within the wider settlement layout.\",\n  \"evidence_visible\": [\n    \"A rectangular sports court with blue and pink surfaces is visible, surrounded by a fence.\",\n    \"A white two-story building with a grey roof is adjacent to the court.\",\n    \"Solar panels are installed on the roof of a building next to the court.\",\n    \"A paved road with yellow center lines runs alongside the court and buildings.\",\n    \"A white car and a black car are parked near the building with solar panels.\",\n    \"A concrete playground area with exercise equipment is visible in the lower left of the crop.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the fields.\",\n    \"The exact number of people or their activities.\",\n    \"The specific purpose of the building with solar panels (residential vs. commercial).\",\n    \"The exact date or time of the images.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is not visible because the event bare soil netting is not present in the image.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is not supported: the visible evidence shows a rural settlement with green agricultural fields, a central pond, residential buildings, and a sports court, but no exposed soil covered by dust-control netting is visible.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is not visible because the event bare soil netting is not present in the image.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is not supported: the visible evidence shows a rural settlement with green agricultural fields, a central pond, residential buildings, and a sports court, but no exposed soil covered by dust-control netting is visible.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image displays a rural settlement with green agricultural fields, residential buildings, and a sports court. There is no visible evidence of bare soil covered by dust-control netting, which is the specific subject of the claim. The claim describes a scene that is not present in the image.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows a rural settlement with green agricultural fields, a central pond, residential buildings, and a sports court, but no exposed soil covered by dust-control netting is visible"
+      ]
+    },
+    "positive": {
+      "reason": "The image shows agricultural fields that are fully covered with green crops. There is no visible evidence of soil for which protective covering is incomplete; the fields appear to be in a state of full vegetation cover.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image displays a rural settlement with green agricultural fields, residential buildings, and a sports court. There is no visible evidence of bare soil covered by dust-control netting, which is the specific subject of the claim. The claim describes a scene that is not present in the image.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows a rural settlement with green agricultural fields, a central pond, residential buildings, and a sports court, but no exposed soil covered by dust-control netting is visible\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image shows agricultural fields that are fully covered with green crops. There is no visible evidence of soil for which protective covering is incomplete; the fields appear to be in a state of full vegetation cover.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

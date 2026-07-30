@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0a8441940cf893408bc5",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0808-4541-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0808-4541-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of an industrial zone with large buildings featuring blue and grey roofs.",
+      "A central facility with four large vertical silos and a processing tower.",
+      "Agricultural fields with dry, brown vegetation in the foreground.",
+      "A cluster of residential buildings in the background, one of which appears damaged or demolished.",
+      "Paved roads and parking areas with several vehicles."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the upper-right quadrant of the context image.",
+      "The damaged residential building visible in the context image is the primary subject of the crop.",
+      "The blue-roofed building on the left edge of the crop corresponds to the large blue-roofed structure in the upper-left of the context image.",
+      "The road separating the industrial site from the residential area is visible in both views."
+    ],
+    "description": "Aerial imagery of an industrial complex with silos adjacent to agricultural fields. A zoomed-in view focuses on a cluster of residential buildings, highlighting one structure with a collapsed roof and scattered debris, situated near a blue-roofed warehouse.",
+    "evidence_visible": [
+      "A multi-story residential building with a partially collapsed roof and exposed interior.",
+      "A large pile of white and grey rubble/debris on the ground next to the damaged building.",
+      "Adjacent intact residential buildings with grey tiled roofs.",
+      "A paved road running between the residential area and a large blue-roofed industrial building.",
+      "Green vegetation and trees surrounding the buildings."
+    ],
+    "unclear": [
+      "The specific cause of the roof damage (e.g., demolition, storm, structural failure).",
+      "The exact date of the event.",
+      "The identity of the businesses or residents.",
+      "The legal status of the demolition or construction."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of an industrial zone with large buildings featuring blue and grey roofs.\",\n    \"A central facility with four large vertical silos and a processing tower.\",\n    \"Agricultural fields with dry, brown vegetation in the foreground.\",\n    \"A cluster of residential buildings in the background, one of which appears damaged or demolished.\",\n    \"Paved roads and parking areas with several vehicles.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the upper-right quadrant of the context image.\",\n    \"The damaged residential building visible in the context image is the primary subject of the crop.\",\n    \"The blue-roofed building on the left edge of the crop corresponds to the large blue-roofed structure in the upper-left of the context image.\",\n    \"The road separating the industrial site from the residential area is visible in both views.\"\n  ],\n  \"description\": \"Aerial imagery of an industrial complex with silos adjacent to agricultural fields. A zoomed-in view focuses on a cluster of residential buildings, highlighting one structure with a collapsed roof and scattered debris, situated near a blue-roofed warehouse.\",\n  \"evidence_visible\": [\n    \"A multi-story residential building with a partially collapsed roof and exposed interior.\",\n    \"A large pile of white and grey rubble/debris on the ground next to the damaged building.\",\n    \"Adjacent intact residential buildings with grey tiled roofs.\",\n    \"A paved road running between the residential area and a large blue-roofed industrial building.\",\n    \"Green vegetation and trees surrounding the buildings.\"\n  ],\n  \"unclear\": [\n    \"The specific cause of the roof damage (e.g., demolition, storm, structural failure).\",\n    \"The exact date of the event.\",\n    \"The identity of the businesses or residents.\",\n    \"The legal status of the demolition or construction.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the presence of a partially collapsed roof and a large pile of rubble, indicating a structural collapse rather than general damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a multi-story residential building with a partially collapsed roof and a large pile of white and grey rubble on the ground next to it.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the presence of a partially collapsed roof and a large pile of rubble, indicating a structural collapse rather than general damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a multi-story residential building with a partially collapsed roof and a large pile of white and grey rubble on the ground next to it.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The wide image shows intact industrial buildings and fields. The local crop image clearly shows a multi-story residential building with a partially collapsed roof and a large pile of white and grey rubble on the ground next to it, directly supporting the description of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The local crop image shows a building with a partially collapsed roof and a large pile of rubble next to it. This constitutes visible structural damage to a building.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The wide image shows intact industrial buildings and fields. The local crop image clearly shows a multi-story residential building with a partially collapsed roof and a large pile of white and grey rubble on the ground next to it, directly supporting the description of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The local crop image shows a building with a partially collapsed roof and a large pile of rubble next to it. This constitutes visible structural damage to a building.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

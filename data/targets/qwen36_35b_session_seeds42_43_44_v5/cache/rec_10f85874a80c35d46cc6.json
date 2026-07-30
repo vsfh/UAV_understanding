@@ -1,0 +1,99 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_10f85874a80c35d46cc6",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0309-4800-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0309-4800-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement featuring multiple rectangular and irregular ponds, likely aquaculture or irrigation basins.",
+      "Surrounding the water bodies are agricultural fields with green crops and patches of yellow flowers.",
+      "Several residential buildings with grey and red roofs are situated along the edges of the fields and water.",
+      "Bare deciduous trees are visible along the banks of the ponds and roads.",
+      "A dirt or paved road runs along the left side of the image near the water."
+    ],
+    "cross_view_relations": [
+      "The local crop shows a detailed view of a specific white, two-story residential building with a grey tiled roof and a large blue-framed window.",
+      "This building is located within the cluster of houses visible in the upper central portion of the wide context image.",
+      "The context image provides the spatial setting for the building shown in the crop, confirming its location within a village surrounded by water and fields."
+    ],
+    "description": "The wide image displays a rural landscape with ponds, green fields, and scattered houses. The crop zooms in on a specific white two-story house with a grey roof and blue windows, situated among other residential structures. The scene depicts a typical agricultural village environment with mixed land use.",
+    "evidence_visible": [
+      "A two-story white building with a grey tiled roof.",
+      "A large, multi-paned window with a blue frame on the upper floor.",
+      "A smaller window on the ground floor.",
+      "A solar water heater is visible on the flat section of the roof.",
+      "The building is surrounded by other houses with red and grey roofs.",
+      "Vegetation and a dirt path are visible in the foreground near the building."
+    ],
+    "unclear": [
+      "The specific type of crops in the fields.",
+      "The exact number of people or vehicles.",
+      "The specific contents of the ponds.",
+      "The precise address or ownership of the buildings."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement featuring multiple rectangular and irregular ponds, likely aquaculture or irrigation basins.\",\n    \"Surrounding the water bodies are agricultural fields with green crops and patches of yellow flowers.\",\n    \"Several residential buildings with grey and red roofs are situated along the edges of the fields and water.\",\n    \"Bare deciduous trees are visible along the banks of the ponds and roads.\",\n    \"A dirt or paved road runs along the left side of the image near the water.\"\n  ],\n  \"cross_view_relations\": [\n    \"The local crop shows a detailed view of a specific white, two-story residential building with a grey tiled roof and a large blue-framed window.\",\n    \"This building is located within the cluster of houses visible in the upper central portion of the wide context image.\",\n    \"The context image provides the spatial setting for the building shown in the crop, confirming its location within a village surrounded by water and fields.\"\n  ],\n  \"description\": \"The wide image displays a rural landscape with ponds, green fields, and scattered houses. The crop zooms in on a specific white two-story house with a grey roof and blue windows, situated among other residential structures. The scene depicts a typical agricultural village environment with mixed land use.\",\n  \"evidence_visible\": [\n    \"A two-story white building with a grey tiled roof.\",\n    \"A large, multi-paned window with a blue frame on the upper floor.\",\n    \"A smaller window on the ground floor.\",\n    \"A solar water heater is visible on the flat section of the roof.\",\n    \"The building is surrounded by other houses with red and grey roofs.\",\n    \"Vegetation and a dirt path are visible in the foreground near the building.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the fields.\",\n    \"The exact number of people or vehicles.\",\n    \"The specific contents of the ponds.\",\n    \"The precise address or ownership of the buildings.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the structural integrity of the white two-story building; it is fully constructed and occupied, whereas project construction would require visible signs of active building assembly.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: visible evidence shows a two-story white residential building with a grey tiled roof and blue-framed windows that appears structurally intact and occupied, lacking any signs of active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the structural integrity of the white two-story building; it is fully constructed and occupied, whereas project construction would require visible signs of active building assembly.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: visible evidence shows a two-story white residential building with a grey tiled roof and blue-framed windows that appears structurally intact and occupied, lacking any signs of active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence shows a two-story white residential building with a grey tiled roof and blue-framed windows that appears structurally intact and occupied, lacking any signs of active or recent demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image evidence shows a residential building that appears structurally intact and occupied, lacking any signs of active or recent construction.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence shows a two-story white residential building with a grey tiled roof and blue-framed windows that appears structurally intact and occupied, lacking any signs of active or recent demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence shows a residential building that appears structurally intact and occupied, lacking any signs of active or recent construction.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

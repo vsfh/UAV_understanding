@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e4bdd7cf643791f9c32a",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/original/0423-9870-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-04-01_2026-04-30/building_demolition/cropped/0423-9870-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring rectangular aquaculture ponds with murky water, separated by earthen dikes.",
+      "A straight, paved road runs vertically through the center, flanked by utility poles.",
+      "To the left of the road, there is a narrow canal and a cluster of buildings with grey tiled roofs surrounded by dense green vegetation and cultivated fields.",
+      "The fields show distinct rows of crops, including a patch of tall, light-green plants."
+    ],
+    "cross_view_relations": [
+      "The second image is a high-magnification view of the building cluster located to the left of the road in the first image.",
+      "The tall, light-green crops visible in the context image are clearly identifiable as corn stalks in the evidence image.",
+      "The grey tiled roofs and surrounding vegetation match spatially between the two views."
+    ],
+    "description": "Aerial imagery shows a rural area with aquaculture ponds and a central road. A cluster of buildings with grey tiled roofs sits beside a canal and fields. The close-up view confirms the presence of a cornfield adjacent to the structures, which are surrounded by trees and vegetation.",
+    "evidence_visible": [
+      "Close-up of a residential or utility compound with multiple structures.",
+      "Buildings feature grey, weathered tiled roofs and brick or concrete walls.",
+      "A distinct plot of tall, green corn stalks is planted immediately next to the buildings.",
+      "A blue vehicle is partially visible parked near the rear of the structures.",
+      "The ground is unpaved and uneven, with scattered vegetation."
+    ],
+    "unclear": [
+      "The specific function of the buildings (residential vs. agricultural storage).",
+      "The exact species of the smaller green crops in the lower-left field of the context image.",
+      "The condition of the roof on the foreground building in the evidence image (appears damaged or unfinished)."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring rectangular aquaculture ponds with murky water, separated by earthen dikes.\",\n    \"A straight, paved road runs vertically through the center, flanked by utility poles.\",\n    \"To the left of the road, there is a narrow canal and a cluster of buildings with grey tiled roofs surrounded by dense green vegetation and cultivated fields.\",\n    \"The fields show distinct rows of crops, including a patch of tall, light-green plants.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a high-magnification view of the building cluster located to the left of the road in the first image.\",\n    \"The tall, light-green crops visible in the context image are clearly identifiable as corn stalks in the evidence image.\",\n    \"The grey tiled roofs and surrounding vegetation match spatially between the two views.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural area with aquaculture ponds and a central road. A cluster of buildings with grey tiled roofs sits beside a canal and fields. The close-up view confirms the presence of a cornfield adjacent to the structures, which are surrounded by trees and vegetation.\",\n  \"evidence_visible\": [\n    \"Close-up of a residential or utility compound with multiple structures.\",\n    \"Buildings feature grey, weathered tiled roofs and brick or concrete walls.\",\n    \"A distinct plot of tall, green corn stalks is planted immediately next to the buildings.\",\n    \"A blue vehicle is partially visible parked near the rear of the structures.\",\n    \"The ground is unpaved and uneven, with scattered vegetation.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the buildings (residential vs. agricultural storage).\",\n    \"The exact species of the smaller green crops in the lower-left field of the context image.\",\n    \"The condition of the roof on the foreground building in the evidence image (appears damaged or unfinished).\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between building demolition and building damage is the intent and completeness of the destruction; the visible evidence shows a building that has been stripped of its roof structure, indicating demolition rather than incidental damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the evidence image shows a building with a roof that appears partially collapsed or stripped, exposing the interior structure, which is consistent with active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is the intent and completeness of the destruction; the visible evidence shows a building that has been stripped of its roof structure, indicating demolition rather than incidental damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the evidence image shows a building with a roof that appears partially collapsed or stripped, exposing the interior structure, which is consistent with active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image shows a building with a missing roof section and an exposed concrete frame, which visually supports the claim of partial collapse or stripping consistent with demolition.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image clearly displays a building with a missing roof and exposed structural elements, which constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image shows a building with a missing roof section and an exposed concrete frame, which visually supports the claim of partial collapse or stripping consistent with demolition.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image clearly displays a building with a missing roof and exposed structural elements, which constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

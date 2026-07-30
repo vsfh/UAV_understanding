@@ -1,0 +1,94 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_0456eea454b804fcbf36",
+    "source_class": "building_demolition",
+    "negative_label": "project_construction",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0121-5601-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0121-5601-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to a large body of water and extensive rectangular aquaculture ponds.",
+      "The settlement consists of densely packed residential buildings with varied roof colors (blue, red, grey).",
+      "Patches of white snow are visible on rooftops and the ground, indicating cold weather conditions.",
+      "A yellow construction vehicle is parked on a dirt patch near the water's edge in the foreground."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the specific cluster of buildings and the yellow vehicle seen in the lower-left quadrant of the wide context image.",
+      "The spatial arrangement of the houses and the position of the yellow excavator are consistent between the wide shot and the cropped detail."
+    ],
+    "description": "Aerial imagery of a residential area bordering aquaculture ponds, showing snow-covered rooftops and a yellow excavator parked on a dirt lot. The crop confirms the presence of the construction vehicle and details the layout of the adjacent houses.",
+    "evidence_visible": [
+      "Close-up view of a yellow excavator parked on a dirt surface next to a paved road.",
+      "The excavator is positioned between a two-story building with a blue roof and a smaller structure with a grey tiled roof.",
+      "Snow is visible on the ground and rooftops in the immediate vicinity of the vehicle.",
+      "A white vehicle is partially visible in the upper right corner of the crop."
+    ],
+    "unclear": [
+      "The operational status of the yellow excavator (active vs. parked).",
+      "The specific model or brand of the construction equipment.",
+      "The exact nature of the activity occurring on the dirt patch."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to a large body of water and extensive rectangular aquaculture ponds.\",\n    \"The settlement consists of densely packed residential buildings with varied roof colors (blue, red, grey).\",\n    \"Patches of white snow are visible on rooftops and the ground, indicating cold weather conditions.\",\n    \"A yellow construction vehicle is parked on a dirt patch near the water's edge in the foreground.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the specific cluster of buildings and the yellow vehicle seen in the lower-left quadrant of the wide context image.\",\n    \"The spatial arrangement of the houses and the position of the yellow excavator are consistent between the wide shot and the cropped detail.\"\n  ],\n  \"description\": \"Aerial imagery of a residential area bordering aquaculture ponds, showing snow-covered rooftops and a yellow excavator parked on a dirt lot. The crop confirms the presence of the construction vehicle and details the layout of the adjacent houses.\",\n  \"evidence_visible\": [\n    \"Close-up view of a yellow excavator parked on a dirt surface next to a paved road.\",\n    \"The excavator is positioned between a two-story building with a blue roof and a smaller structure with a grey tiled roof.\",\n    \"Snow is visible on the ground and rooftops in the immediate vicinity of the vehicle.\",\n    \"A white vehicle is partially visible in the upper right corner of the crop.\"\n  ],\n  \"unclear\": [\n    \"The operational status of the yellow excavator (active vs. parked).\",\n    \"The specific model or brand of the construction equipment.\",\n    \"The exact nature of the activity occurring on the dirt patch.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "project_construction"
+      ],
+      "evidence": "The event project construction is supported: visible evidence shows an active general construction project.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from project construction is the specific context of the excavator's placement on a dirt patch next to a residential structure, which aligns with demolition activity rather than the broader scope of an active general construction project.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported by the visible presence of a yellow excavator parked on a dirt patch adjacent to a residential building, consistent with the activity of a building undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"project_construction\"\n    ],\n    \"evidence\": \"The event project construction is supported: visible evidence shows an active general construction project.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from project construction is the specific context of the excavator's placement on a dirt patch next to a residential structure, which aligns with demolition activity rather than the broader scope of an active general construction project.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported by the visible presence of a yellow excavator parked on a dirt patch adjacent to a residential building, consistent with the activity of a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence explicitly shows a yellow excavator parked on a dirt patch next to a residential building. The surrounding area contains piles of debris and rubble, which visually supports the claim of demolition activity rather than new construction.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The visible scene depicts a demolition site characterized by a parked excavator and piles of rubble/debris, not an active general construction project. There is no visible evidence of new building erection, scaffolding, or structural assembly.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows an active general construction project"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence explicitly shows a yellow excavator parked on a dirt patch next to a residential building. The surrounding area contains piles of debris and rubble, which visually supports the claim of demolition activity rather than new construction.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The visible scene depicts a demolition site characterized by a parked excavator and piles of rubble/debris, not an active general construction project. There is no visible evidence of new building erection, scaffolding, or structural assembly.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows an active general construction project\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

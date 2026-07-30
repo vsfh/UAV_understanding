@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_deb9b4f57863a01daaeb",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-2579-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-2579-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape featuring extensive green agricultural fields, likely rice paddies, divided by earthen bunds.",
+      "A meandering waterway runs along the left side, bordered by dense vegetation.",
+      "A residential settlement is situated in the foreground and background, characterized by houses with red, grey, and blue roofs.",
+      "Solar panels are visible on the roofs of several buildings in the lower right section.",
+      "A tall construction crane is visible in the upper right quadrant of the fields."
+    ],
+    "cross_view_relations": [
+      "The crop image is a high-magnification view of the residential cluster located in the lower-left quadrant of the wide context image.",
+      "The waterway visible on the left edge of the crop corresponds to the river running along the left side of the context image.",
+      "The specific house with the red roof and white walls in the crop is identifiable within the wider settlement pattern."
+    ],
+    "description": "The images depict a rural settlement adjacent to green agricultural fields and a waterway. The context view shows the broader layout of the village and farmland, while the evidence crop provides a detailed look at the housing density, roof materials, and small garden plots within the residential area.",
+    "evidence_visible": [
+      "Close-up view of a cluster of residential buildings with varying roof types, including red tiles, grey tiles, and flat concrete surfaces.",
+      "Small, cultivated garden plots containing green crops are visible in the yards between houses.",
+      "A waterway with green vegetation along its bank is visible on the left side of the frame.",
+      "A house with a red roof and white walls stands near the water.",
+      "A structure with a damaged or partially open grey roof is visible in the center of the cluster."
+    ],
+    "unclear": [
+      "The specific type of crops in the garden plots and fields.",
+      "The exact construction status of the damaged roof structure.",
+      "The identity of the people or activities within the yards."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape featuring extensive green agricultural fields, likely rice paddies, divided by earthen bunds.\",\n    \"A meandering waterway runs along the left side, bordered by dense vegetation.\",\n    \"A residential settlement is situated in the foreground and background, characterized by houses with red, grey, and blue roofs.\",\n    \"Solar panels are visible on the roofs of several buildings in the lower right section.\",\n    \"A tall construction crane is visible in the upper right quadrant of the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a high-magnification view of the residential cluster located in the lower-left quadrant of the wide context image.\",\n    \"The waterway visible on the left edge of the crop corresponds to the river running along the left side of the context image.\",\n    \"The specific house with the red roof and white walls in the crop is identifiable within the wider settlement pattern.\"\n  ],\n  \"description\": \"The images depict a rural settlement adjacent to green agricultural fields and a waterway. The context view shows the broader layout of the village and farmland, while the evidence crop provides a detailed look at the housing density, roof materials, and small garden plots within the residential area.\",\n  \"evidence_visible\": [\n    \"Close-up view of a cluster of residential buildings with varying roof types, including red tiles, grey tiles, and flat concrete surfaces.\",\n    \"Small, cultivated garden plots containing green crops are visible in the yards between houses.\",\n    \"A waterway with green vegetation along its bank is visible on the left side of the frame.\",\n    \"A house with a red roof and white walls stands near the water.\",\n    \"A structure with a damaged or partially open grey roof is visible in the center of the cluster.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crops in the garden plots and fields.\",\n    \"The exact construction status of the damaged roof structure.\",\n    \"The identity of the people or activities within the yards.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a roof that has visibly collapsed, whereas building damage is a broader category of visible structural damage.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a structure with a damaged or partially open grey roof in the center of the residential cluster, indicating a visibly collapsed house wall.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the specific nature of the structural failure; the image shows a roof that has visibly collapsed, whereas building damage is a broader category of visible structural damage.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a structure with a damaged or partially open grey roof in the center of the residential cluster, indicating a visibly collapsed house wall.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence directly contradicts the claim of a collapsed house wall. The structure in the center of the residential cluster (visible in both the wide and local views) has a grey roof that is partially open or damaged, but the walls appear intact and standing. There is no visual evidence of a wall collapse.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The house wall is visibly collapsed."
+      ]
+    },
+    "positive": {
+      "reason": "The image evidence supports the claim of building damage. In the center of the residential cluster, there is a building with a grey roof that is clearly damaged, with a large section missing or open, exposing the interior structure. This constitutes visible structural damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence directly contradicts the claim of a collapsed house wall. The structure in the center of the residential cluster (visible in both the wide and local views) has a grey roof that is partially open or damaged, but the walls appear intact and standing. There is no visual evidence of a wall collapse.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The house wall is visibly collapsed.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image evidence supports the claim of building damage. In the center of the residential cluster, there is a building with a grey roof that is clearly damaged, with a large section missing or open, exposing the interior structure. This constitutes visible structural damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

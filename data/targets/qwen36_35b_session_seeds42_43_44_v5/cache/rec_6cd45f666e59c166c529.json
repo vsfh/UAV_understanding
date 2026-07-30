@@ -1,0 +1,102 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_6cd45f666e59c166c529",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/original/0204-7197-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-02-01_2026-02-28/building_demolition/cropped/0204-7197-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with agricultural fields and residential structures.",
+      "Multiple buildings feature red, grey, and blue roofs.",
+      "A paved road runs through the village.",
+      "Green crops are visible in rectangular plots.",
+      "A specific house with a grey tiled roof and solar panels is located near the center-right of the frame."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the house with the grey tiled roof and solar panels seen in the context image.",
+      "The spatial arrangement of the neighboring red-roofed house and the adjacent green field matches between the two views.",
+      "The solar panel array is clearly visible on the roof in the crop, confirming the feature seen in the context image."
+    ],
+    "description": "The context image shows a rural village with mixed housing and agriculture. The crop provides a detailed view of a specific house with a grey tiled roof and solar panels, situated next to a red-roofed building and green fields. The images are linked by this specific structure and its immediate surroundings.",
+    "evidence_visible": [
+      "Close-up of a house with a grey tiled roof.",
+      "A large array of solar panels is installed on the roof.",
+      "A white tarp or cover is on an adjacent flat roof section.",
+      "A red-roofed building is to the left.",
+      "A concrete courtyard or driveway is in front of the house.",
+      "Green vegetation is visible in the yard and surrounding fields.",
+      "A small outbuilding with a grey roof is to the right."
+    ],
+    "unclear": [
+      "The exact type of crops in the fields.",
+      "The number of people or specific activities in the courtyard.",
+      "The brand or model of the solar panels.",
+      "The legal status or ownership of the property."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with agricultural fields and residential structures.\",\n    \"Multiple buildings feature red, grey, and blue roofs.\",\n    \"A paved road runs through the village.\",\n    \"Green crops are visible in rectangular plots.\",\n    \"A specific house with a grey tiled roof and solar panels is located near the center-right of the frame.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the house with the grey tiled roof and solar panels seen in the context image.\",\n    \"The spatial arrangement of the neighboring red-roofed house and the adjacent green field matches between the two views.\",\n    \"The solar panel array is clearly visible on the roof in the crop, confirming the feature seen in the context image.\"\n  ],\n  \"description\": \"The context image shows a rural village with mixed housing and agriculture. The crop provides a detailed view of a specific house with a grey tiled roof and solar panels, situated next to a red-roofed building and green fields. The images are linked by this specific structure and its immediate surroundings.\",\n  \"evidence_visible\": [\n    \"Close-up of a house with a grey tiled roof.\",\n    \"A large array of solar panels is installed on the roof.\",\n    \"A white tarp or cover is on an adjacent flat roof section.\",\n    \"A red-roofed building is to the left.\",\n    \"A concrete courtyard or driveway is in front of the house.\",\n    \"Green vegetation is visible in the yard and surrounding fields.\",\n    \"A small outbuilding with a grey roof is to the right.\"\n  ],\n  \"unclear\": [\n    \"The exact type of crops in the fields.\",\n    \"The number of people or specific activities in the courtyard.\",\n    \"The brand or model of the solar panels.\",\n    \"The legal status or ownership of the property.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage is the presence of a white tarp on the flat roof section in the crop image, which indicates active work or recent demolition activity rather than just visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the context image shows a rural settlement with a specific house featuring a grey tiled roof and solar panels, and the crop image confirms the presence of this structure with a white tarp on an adjacent flat roof section, consistent with the verified definition of a building undergoing active or recent demolition.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage is the presence of a white tarp on the flat roof section in the crop image, which indicates active work or recent demolition activity rather than just visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the context image shows a rural settlement with a specific house featuring a grey tiled roof and solar panels, and the crop image confirms the presence of this structure with a white tarp on an adjacent flat roof section, consistent with the verified definition of a building undergoing active or recent demolition.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The context image shows a rural settlement with a specific house featuring a grey tiled roof and solar panels. The crop image confirms the presence of this structure with a white tarp on an adjacent flat roof section. However, the claim that this is consistent with a 'verified definition of a building undergoing active or recent demolition' is unsupported. The visible evidence shows a standard residential building with a courtyard, solar panels, and a tarp, but there are no visual indicators of demolition (e.g., rubble, structural collapse, heavy machinery).",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The building is undergoing active or recent demolition."
+      ]
+    },
+    "positive": {
+      "reason": "The images show a rural settlement with intact buildings, including one with solar panels and a courtyard. There is no visible evidence of structural damage such as collapsed walls, broken roofs, or debris. The buildings appear to be in normal condition.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "Visible evidence shows visible structural damage to a building."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The context image shows a rural settlement with a specific house featuring a grey tiled roof and solar panels. The crop image confirms the presence of this structure with a white tarp on an adjacent flat roof section. However, the claim that this is consistent with a 'verified definition of a building undergoing active or recent demolition' is unsupported. The visible evidence shows a standard residential building with a courtyard, solar panels, and a tarp, but there are no visual indicators of demolition (e.g., rubble, structural collapse, heavy machinery).\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The building is undergoing active or recent demolition.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The images show a rural settlement with intact buildings, including one with solar panels and a courtyard. There is no visible evidence of structural damage such as collapsed walls, broken roofs, or debris. The buildings appear to be in normal condition.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"Visible evidence shows visible structural damage to a building.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

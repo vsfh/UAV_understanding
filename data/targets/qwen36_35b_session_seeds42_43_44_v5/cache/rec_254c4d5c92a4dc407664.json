@@ -1,0 +1,95 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_254c4d5c92a4dc407664",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0803-1994-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0803-1994-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural landscape featuring large rectangular aquaculture ponds with visible netting structures, adjacent to vibrant green agricultural fields.",
+      "A paved road runs diagonally through the scene, separating the water bodies from the fields.",
+      "A cluster of buildings is situated along the road, including a large structure with a damaged or open roof and smaller residential buildings with blue and red roofing.",
+      "Vegetation includes dense trees along the waterways and cultivated crops in the fields."
+    ],
+    "cross_view_relations": [
+      "The cropped image is a high-magnification view of the specific building cluster located along the road in the wider context image.",
+      "The large grey building with the damaged roof in the crop corresponds to the structure seen in the lower-middle section of the context image.",
+      "The adjacent buildings with blue roofs and the road running alongside the canal are spatially consistent between both views."
+    ],
+    "description": "The images show a rural area with aquaculture ponds and green fields. A paved road separates these zones. A cluster of buildings sits along the road, including a large grey structure with a damaged roof and smaller houses with blue roofs. The crop provides a detailed view of this specific building group and the adjacent canal.",
+    "evidence_visible": [
+      "Close-up of a large, rectangular building with a grey roof that appears partially collapsed or open, revealing internal beams.",
+      "Adjacent to the large building is a smaller brick structure with a grey roof and a small opening.",
+      "To the right, buildings feature bright blue corrugated metal roofing sections.",
+      "A paved road runs parallel to a green canal on the left side of the frame.",
+      "Vegetation, including trees and grass, surrounds the buildings and lines the canal bank."
+    ],
+    "unclear": [
+      "The specific purpose of the large grey building (e.g., warehouse, factory, residence).",
+      "The exact nature of the damage to the grey roof (e.g., construction, decay, storm damage).",
+      "The identity of any people or vehicles present.",
+      "The specific type of crops in the fields or fish in the ponds."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Aerial view of a rural landscape featuring large rectangular aquaculture ponds with visible netting structures, adjacent to vibrant green agricultural fields.\",\n    \"A paved road runs diagonally through the scene, separating the water bodies from the fields.\",\n    \"A cluster of buildings is situated along the road, including a large structure with a damaged or open roof and smaller residential buildings with blue and red roofing.\",\n    \"Vegetation includes dense trees along the waterways and cultivated crops in the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image is a high-magnification view of the specific building cluster located along the road in the wider context image.\",\n    \"The large grey building with the damaged roof in the crop corresponds to the structure seen in the lower-middle section of the context image.\",\n    \"The adjacent buildings with blue roofs and the road running alongside the canal are spatially consistent between both views.\"\n  ],\n  \"description\": \"The images show a rural area with aquaculture ponds and green fields. A paved road separates these zones. A cluster of buildings sits along the road, including a large grey structure with a damaged roof and smaller houses with blue roofs. The crop provides a detailed view of this specific building group and the adjacent canal.\",\n  \"evidence_visible\": [\n    \"Close-up of a large, rectangular building with a grey roof that appears partially collapsed or open, revealing internal beams.\",\n    \"Adjacent to the large building is a smaller brick structure with a grey roof and a small opening.\",\n    \"To the right, buildings feature bright blue corrugated metal roofing sections.\",\n    \"A paved road runs parallel to a green canal on the left side of the frame.\",\n    \"Vegetation, including trees and grass, surrounds the buildings and lines the canal bank.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the large grey building (e.g., warehouse, factory, residence).\",\n    \"The exact nature of the damage to the grey roof (e.g., construction, decay, storm damage).\",\n    \"The identity of any people or vehicles present.\",\n    \"The specific type of crops in the fields or fish in the ponds.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific structural failure mode; the image shows a roof/wall section that has fallen in (collapsed), which is a specific instance of building damage, but the definition of building damage is broader and does not require the element of collapse.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the high-magnification view of the building cluster along the road clearly shows a large rectangular structure with a grey roof that has visibly collapsed, exposing internal beams and creating a large opening in the roofline.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific structural failure mode; the image shows a roof/wall section that has fallen in (collapsed), which is a specific instance of building damage, but the definition of building damage is broader and does not require the element of collapse.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the high-magnification view of the building cluster along the road clearly shows a large rectangular structure with a grey roof that has visibly collapsed, exposing internal beams and creating a large opening in the roofline.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The high-magnification view of the building cluster along the road clearly shows a large rectangular structure with a grey roof that has visibly collapsed, exposing internal beams and creating a large opening in the roofline. This visual evidence directly supports the claim of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The high-magnification view of the building cluster along the road clearly shows a large rectangular structure with a grey roof that has visibly collapsed, exposing internal beams and creating a large opening in the roofline. This visual evidence directly supports the claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The high-magnification view of the building cluster along the road clearly shows a large rectangular structure with a grey roof that has visibly collapsed, exposing internal beams and creating a large opening in the roofline. This visual evidence directly supports the claim of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The high-magnification view of the building cluster along the road clearly shows a large rectangular structure with a grey roof that has visibly collapsed, exposing internal beams and creating a large opening in the roofline. This visual evidence directly supports the claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

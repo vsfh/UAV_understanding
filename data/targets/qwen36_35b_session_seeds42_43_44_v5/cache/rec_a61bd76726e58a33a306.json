@@ -1,0 +1,91 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_a61bd76726e58a33a306",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1021-7673-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1021-7673-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a wide, murky river with a large barge and a smaller green boat.",
+      "A paved road runs parallel to the river on the right bank, separated by a dense row of trees.",
+      "Agricultural fields and buildings are visible on the far right bank.",
+      "A road with trees runs along the left bank."
+    ],
+    "cross_view_relations": [
+      "The crop image shows a specific plot of land with a green tarp and wooden stakes, which is consistent with the agricultural fields visible on the right bank of the river in the context image.",
+      "The crop is a magnified view of a section of the land adjacent to the tree-lined road on the right side of the river."
+    ],
+    "description": "An aerial view of a river with a barge and a road lined with trees. A linked crop shows a nearby agricultural plot with a green tarp and wooden stakes, located on the right bank adjacent to the road.",
+    "evidence_visible": [
+      "A rectangular plot of tilled brown earth.",
+      "A bright green tarp or netting covering a portion of the plot.",
+      "A row of thin wooden stakes or sticks arranged in a line along the edge of the plot.",
+      "Surrounding vegetation including green grass and trees."
+    ],
+    "unclear": [
+      "The specific type of crop or material being protected by the stakes and tarp.",
+      "The exact location of this plot relative to the road and river in the wider context image."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a wide, murky river with a large barge and a smaller green boat.\",\n    \"A paved road runs parallel to the river on the right bank, separated by a dense row of trees.\",\n    \"Agricultural fields and buildings are visible on the far right bank.\",\n    \"A road with trees runs along the left bank.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image shows a specific plot of land with a green tarp and wooden stakes, which is consistent with the agricultural fields visible on the right bank of the river in the context image.\",\n    \"The crop is a magnified view of a section of the land adjacent to the tree-lined road on the right side of the river.\"\n  ],\n  \"description\": \"An aerial view of a river with a barge and a road lined with trees. A linked crop shows a nearby agricultural plot with a green tarp and wooden stakes, located on the right bank adjacent to the road.\",\n  \"evidence_visible\": [\n    \"A rectangular plot of tilled brown earth.\",\n    \"A bright green tarp or netting covering a portion of the plot.\",\n    \"A row of thin wooden stakes or sticks arranged in a line along the edge of the plot.\",\n    \"Surrounding vegetation including green grass and trees.\"\n  ],\n  \"unclear\": [\n    \"The specific type of crop or material being protected by the stakes and tarp.\",\n    \"The exact location of this plot relative to the road and river in the wider context image.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous green tarp covering the majority of the plot, whereas incomplete soil cover would show significant gaps or missing sections of the protective material.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a rectangular plot of exposed brown earth covered by a bright green tarp or netting, secured by a row of thin wooden stakes along the edge.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is the presence of a continuous green tarp covering the majority of the plot, whereas incomplete soil cover would show significant gaps or missing sections of the protective material.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a rectangular plot of exposed brown earth covered by a bright green tarp or netting, secured by a row of thin wooden stakes along the edge.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a rectangular plot of exposed brown earth covered by a bright green tarp or netting, secured by a row of thin wooden stakes along the edge. This matches the description in the statement exactly.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a plot of soil that is largely covered by a green netting, but the netting does not cover the entire area (e.g., the top portion is bare). This supports the claim of incomplete soil cover.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a rectangular plot of exposed brown earth covered by a bright green tarp or netting, secured by a row of thin wooden stakes along the edge. This matches the description in the statement exactly.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a plot of soil that is largely covered by a green netting, but the netting does not cover the entire area (e.g., the top portion is bare). This supports the claim of incomplete soil cover.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

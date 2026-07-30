@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_106aec1eb0056af69da6",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/original/0123-6578-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/building_demolition/cropped/0123-6578-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a dense residential area with multiple multi-story apartment buildings.",
+      "Buildings have flat roofs with visible solar water heaters and ventilation units.",
+      "A paved road runs along the bottom edge with parked cars.",
+      "Green vegetation and trees are interspersed between the buildings."
+    ],
+    "cross_view_relations": [
+      "The crop is a zoomed-in view of the area on the left side of the context image.",
+      "The green mesh-covered area in the crop corresponds to the green patch visible in the context image.",
+      "The single-story structure and parked car in the crop are located adjacent to the main apartment blocks seen in the context."
+    ],
+    "description": "Aerial view of a residential complex showing multi-story apartment buildings with rooftop equipment. A single-story structure with a flat roof and a parked black car are visible in the foreground, adjacent to a green mesh-covered area and a paved road.",
+    "evidence_visible": [
+      "A single-story building with a flat roof featuring a large rectangular tank or cover.",
+      "A black sedan parked in a marked parking space next to the building.",
+      "A rectangular area covered in green mesh or netting, possibly a sports court or construction site.",
+      "A larger building with a dark, weathered roof is visible on the right edge of the crop.",
+      "Trees and dry grass surround the structures."
+    ],
+    "unclear": [
+      "The specific function of the green mesh area (e.g., tennis court, construction site).",
+      "The purpose of the tank-like structure on the single-story roof.",
+      "The exact condition of the dark roof on the right edge."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a dense residential area with multiple multi-story apartment buildings.\",\n    \"Buildings have flat roofs with visible solar water heaters and ventilation units.\",\n    \"A paved road runs along the bottom edge with parked cars.\",\n    \"Green vegetation and trees are interspersed between the buildings.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop is a zoomed-in view of the area on the left side of the context image.\",\n    \"The green mesh-covered area in the crop corresponds to the green patch visible in the context image.\",\n    \"The single-story structure and parked car in the crop are located adjacent to the main apartment blocks seen in the context.\"\n  ],\n  \"description\": \"Aerial view of a residential complex showing multi-story apartment buildings with rooftop equipment. A single-story structure with a flat roof and a parked black car are visible in the foreground, adjacent to a green mesh-covered area and a paved road.\",\n  \"evidence_visible\": [\n    \"A single-story building with a flat roof featuring a large rectangular tank or cover.\",\n    \"A black sedan parked in a marked parking space next to the building.\",\n    \"A rectangular area covered in green mesh or netting, possibly a sports court or construction site.\",\n    \"A larger building with a dark, weathered roof is visible on the right edge of the crop.\",\n    \"Trees and dry grass surround the structures.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the green mesh area (e.g., tennis court, construction site).\",\n    \"The purpose of the tank-like structure on the single-story roof.\",\n    \"The exact condition of the dark roof on the right edge.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between building demolition and building damage is that the former implies an active or recent process of tearing down a structure, whereas the latter refers to visible structural damage to a building. In this case, the small building appears to be a standalone structure potentially being cleared, rather than a damaged part of the larger apartment complex.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the single-story structure in the foreground appears to be a small, isolated building with a flat roof and a large tank, situated next to a green mesh-covered area, consistent with a small-scale demolition or site clearance operation.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between building demolition and building damage is that the former implies an active or recent process of tearing down a structure, whereas the latter refers to visible structural damage to a building. In this case, the small building appears to be a standalone structure potentially being cleared, rather than a damaged part of the larger apartment complex.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the single-story structure in the foreground appears to be a small, isolated building with a flat roof and a large tank, situated next to a green mesh-covered area, consistent with a small-scale demolition or site clearance operation.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a small, isolated single-story building with a flat roof and a large tank, situated next to a green mesh-covered area. This visual evidence supports the description of a small-scale demolition or site clearance operation.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image does not show visible structural damage to a building. The buildings appear intact, and the green mesh-covered area is likely a construction site or a covered area, not evidence of damage.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows visible structural damage to a building"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a small, isolated single-story building with a flat roof and a large tank, situated next to a green mesh-covered area. This visual evidence supports the description of a small-scale demolition or site clearance operation.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image does not show visible structural damage to a building. The buildings appear intact, and the green mesh-covered area is likely a construction site or a covered area, not evidence of damage.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows visible structural damage to a building\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

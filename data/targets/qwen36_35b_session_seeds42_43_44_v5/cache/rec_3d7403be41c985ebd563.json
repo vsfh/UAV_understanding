@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_3d7403be41c985ebd563",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/original/0919-6679-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-09-01_2025-09-30/bare_soil_netting/cropped/0919-6679-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a river crossing featuring a light blue truss bridge connecting two banks.",
+      "The left bank contains a cluster of multi-story buildings with grey tiled roofs, a paved plaza, and a parking area with several vehicles.",
+      "The right bank features a landscaped park with traditional-style pavilions and dense greenery.",
+      "A large green barge is docked at a pier on the left bank near the bridge approach."
+    ],
+    "cross_view_relations": [
+      "The crop provides a magnified view of the bridge approach and the adjacent waterfront buildings seen in the lower-left quadrant of the context image.",
+      "The spatial relationship confirms the buildings are situated immediately next to the riverbank and the bridge ramp.",
+      "The crop clarifies the layout of the docked green barge and the white vehicle parked near the building entrance."
+    ],
+    "description": "An aerial view shows a river crossing with a blue truss bridge. The left bank features a paved plaza, a parking lot, and multi-story buildings with grey roofs adjacent to a docked green barge. The right bank contains a park with traditional pavilions. The crop highlights the bridge approach and the waterfront structures.",
+    "evidence_visible": [
+      "Close-up of the bridge ramp leading to the truss structure.",
+      "A white car is visible on the bridge ramp.",
+      "A multi-story building with a flat roof section and grey tiled wings stands next to the water.",
+      "A large green barge with white superstructures is moored at a concrete pier.",
+      "Several cars are parked in a lot near the building and along the road."
+    ],
+    "unclear": [
+      "The specific function of the buildings (residential vs commercial).",
+      "The exact number of vehicles in the parking lot due to resolution limits.",
+      "The identity of the people visible on the bridge."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a river crossing featuring a light blue truss bridge connecting two banks.\",\n    \"The left bank contains a cluster of multi-story buildings with grey tiled roofs, a paved plaza, and a parking area with several vehicles.\",\n    \"The right bank features a landscaped park with traditional-style pavilions and dense greenery.\",\n    \"A large green barge is docked at a pier on the left bank near the bridge approach.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop provides a magnified view of the bridge approach and the adjacent waterfront buildings seen in the lower-left quadrant of the context image.\",\n    \"The spatial relationship confirms the buildings are situated immediately next to the riverbank and the bridge ramp.\",\n    \"The crop clarifies the layout of the docked green barge and the white vehicle parked near the building entrance.\"\n  ],\n  \"description\": \"An aerial view shows a river crossing with a blue truss bridge. The left bank features a paved plaza, a parking lot, and multi-story buildings with grey roofs adjacent to a docked green barge. The right bank contains a park with traditional pavilions. The crop highlights the bridge approach and the waterfront structures.\",\n  \"evidence_visible\": [\n    \"Close-up of the bridge ramp leading to the truss structure.\",\n    \"A white car is visible on the bridge ramp.\",\n    \"A multi-story building with a flat roof section and grey tiled wings stands next to the water.\",\n    \"A large green barge with white superstructures is moored at a concrete pier.\",\n    \"Several cars are parked in a lot near the building and along the road.\"\n  ],\n  \"unclear\": [\n    \"The specific function of the buildings (residential vs commercial).\",\n    \"The exact number of vehicles in the parking lot due to resolution limits.\",\n    \"The identity of the people visible on the bridge.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating bare soil netting from incomplete soil cover is not visible, as the scene depicts a river crossing with a bridge and a docked barge rather than a construction site with soil.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a large green barge docked at a pier on the riverbank, which is a water-based vessel and not exposed soil covered by dust-control netting.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating bare soil netting from incomplete soil cover is not visible, as the scene depicts a river crossing with a bridge and a docked barge rather than a construction site with soil.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a large green barge docked at a pier on the riverbank, which is a water-based vessel and not exposed soil covered by dust-control netting.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a large green barge docked at the riverbank, which is a water-based vessel. The statement correctly identifies this object and explicitly negates the presence of bare soil netting, making the description factually consistent with the visual evidence.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows paved roads, building rooftops, and dense vegetation. There is no visible area of bare soil, nor is there any evidence of protective covering (such as dust-control netting) that is incomplete. The claim relies on the existence of a specific ground condition that is not present in the image.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows soil for which protective covering is visibly incomplete"
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a large green barge docked at the riverbank, which is a water-based vessel. The statement correctly identifies this object and explicitly negates the presence of bare soil netting, making the description factually consistent with the visual evidence.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows paved roads, building rooftops, and dense vegetation. There is no visible area of bare soil, nor is there any evidence of protective covering (such as dust-control netting) that is incomplete. The claim relies on the existence of a specific ground condition that is not present in the image.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows soil for which protective covering is visibly incomplete\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

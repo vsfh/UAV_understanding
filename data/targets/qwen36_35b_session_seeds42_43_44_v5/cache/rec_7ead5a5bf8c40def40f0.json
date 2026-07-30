@@ -1,0 +1,83 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_7ead5a5bf8c40def40f0",
+    "source_class": "building_demolition",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/original/0304-0359-building_demolition.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/building_demolition/cropped/0304-0359-building_demolition.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with a network of waterways and rectangular agricultural plots. The area contains residential buildings with red and grey roofs, surrounded by green crops and bare soil. A paved road runs horizontally through the scene, and a large electrical transmission tower is visible in the upper right corner."
+    ],
+    "cross_view_relations": [
+      "The local crop view shows a specific house with a grey tiled roof and a small boat moored in the adjacent waterway. This structure and the surrounding yellow flowering crops correspond to the general settlement and agricultural patterns seen in the wider context image."
+    ],
+    "description": "Aerial imagery of a rural landscape featuring a network of canals, residential structures, and agricultural fields. The scene includes green crops, yellow flowering plants, and a paved road. A local view highlights a specific house with a grey roof and a small boat docked in the water.",
+    "evidence_visible": [
+      "A single-story building with a grey tiled roof and white-framed windows. A small white boat is moored in the water immediately adjacent to the structure. The surrounding land is cultivated with green leafy vegetables and patches of bright yellow flowers."
+    ],
+    "unclear": [
+      "Exact identity of the crops, specific legal status of the structures, and precise geographic location."
+    ]
+  },
+  "raw_perception": "{\n\"context_visible\": [\n\"Aerial view of a rural settlement with a network of waterways and rectangular agricultural plots. The area contains residential buildings with red and grey roofs, surrounded by green crops and bare soil. A paved road runs horizontally through the scene, and a large electrical transmission tower is visible in the upper right corner.\"\n],\n\"cross_view_relations\": [\n\"The local crop view shows a specific house with a grey tiled roof and a small boat moored in the adjacent waterway. This structure and the surrounding yellow flowering crops correspond to the general settlement and agricultural patterns seen in the wider context image.\"\n],\n\"description\": \"Aerial imagery of a rural landscape featuring a network of canals, residential structures, and agricultural fields. The scene includes green crops, yellow flowering plants, and a paved road. A local view highlights a specific house with a grey roof and a small boat docked in the water.\",\n\"evidence_visible\": [\n\"A single-story building with a grey tiled roof and white-framed windows. A small white boat is moored in the water immediately adjacent to the structure. The surrounding land is cultivated with green leafy vegetables and patches of bright yellow flowers.\"\n],\n\"unclear\": [\n\"Exact identity of the crops, specific legal status of the structures, and precise geographic location.\"\n]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating building demolition from building damage, or an explicit statement that it is not visible",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "building_demolition"
+      ],
+      "evidence": "The event building demolition is supported: the local crop view shows a single-story building with a grey tiled roof that appears structurally compromised, with a partially collapsed or missing roof section and exposed interior, situated next to a moored boat and cultivated plots.",
+      "factors": {},
+      "uncertain": true
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating building demolition from building damage, or an explicit statement that it is not visible\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"building_demolition\"\n    ],\n    \"evidence\": \"The event building demolition is supported: the local crop view shows a single-story building with a grey tiled roof that appears structurally compromised, with a partially collapsed or missing roof section and exposed interior, situated next to a moored boat and cultivated plots.\",\n    \"factors\": {},\n    \"uncertain\": true\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image evidence explicitly shows a building with a grey tiled roof that is structurally compromised, featuring a partially collapsed roof section and exposed interior. This building is situated next to a moored boat and cultivated plots, directly supporting the description of the event.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image clearly displays a building with visible structural damage, specifically a missing or collapsed roof section and exposed interior, confirming the claim.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image evidence explicitly shows a building with a grey tiled roof that is structurally compromised, featuring a partially collapsed roof section and exposed interior. This building is situated next to a moored boat and cultivated plots, directly supporting the description of the event.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image clearly displays a building with visible structural damage, specifically a missing or collapsed roof section and exposed interior, confirming the claim.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

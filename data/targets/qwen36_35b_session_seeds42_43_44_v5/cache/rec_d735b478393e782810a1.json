@@ -1,0 +1,96 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_d735b478393e782810a1",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/collapsed_house_wall/original/0328-1638-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-03-01_2026-03-31/collapsed_house_wall/cropped/0328-1638-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a rural landscape featuring a network of waterways, including a large pond and a canal covered in green algae.",
+      "Agricultural fields with varying crop densities are visible in the background.",
+      "A concrete path runs along the bank of the canal.",
+      "A small, dilapidated structure is situated on the grassy bank next to the canal.",
+      "A larger, intact building with a grey roof is visible further back near the fields."
+    ],
+    "cross_view_relations": [
+      "The cropped image provides a zoomed-in view of the small, dilapidated structure seen in the wider context image.",
+      "The spatial relationship confirms the structure is located on a grassy patch between a concrete path and the algae-covered canal.",
+      "The surrounding vegetation and water conditions match between the two views."
+    ],
+    "description": "Aerial imagery shows a rural area with waterways and fields. A small, roofless concrete structure sits on a grassy bank next to a canal covered in green algae. The close-up view confirms the building is dilapidated, with its roof missing and interior exposed, situated adjacent to a concrete path.",
+    "evidence_visible": [
+      "Close-up of a small, rectangular concrete building.",
+      "The roof is completely missing, exposing the interior to the elements.",
+      "The structure appears to be a single-story shed or small house.",
+      "It is located on a grassy bank next to a waterway covered in green algae.",
+      "A concrete path runs parallel to the structure."
+    ],
+    "unclear": [
+      "The specific purpose of the small structure (e.g., storage, shelter).",
+      "The exact date of the roof's removal.",
+      "The identity of any individuals or vehicles.",
+      "The specific type of crops in the background fields."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Wide aerial view of a rural landscape featuring a network of waterways, including a large pond and a canal covered in green algae.\",\n    \"Agricultural fields with varying crop densities are visible in the background.\",\n    \"A concrete path runs along the bank of the canal.\",\n    \"A small, dilapidated structure is situated on the grassy bank next to the canal.\",\n    \"A larger, intact building with a grey roof is visible further back near the fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The cropped image provides a zoomed-in view of the small, dilapidated structure seen in the wider context image.\",\n    \"The spatial relationship confirms the structure is located on a grassy patch between a concrete path and the algae-covered canal.\",\n    \"The surrounding vegetation and water conditions match between the two views.\"\n  ],\n  \"description\": \"Aerial imagery shows a rural area with waterways and fields. A small, roofless concrete structure sits on a grassy bank next to a canal covered in green algae. The close-up view confirms the building is dilapidated, with its roof missing and interior exposed, situated adjacent to a concrete path.\",\n  \"evidence_visible\": [\n    \"Close-up of a small, rectangular concrete building.\",\n    \"The roof is completely missing, exposing the interior to the elements.\",\n    \"The structure appears to be a single-story shed or small house.\",\n    \"It is located on a grassy bank next to a waterway covered in green algae.\",\n    \"A concrete path runs parallel to the structure.\"\n  ],\n  \"unclear\": [\n    \"The specific purpose of the small structure (e.g., storage, shelter).\",\n    \"The exact date of the roof's removal.\",\n    \"The identity of any individuals or vehicles.\",\n    \"The specific type of crops in the background fields.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between collapsed house wall and building damage is the total absence of the roof structure in the collapsed house wall, whereas building damage implies visible structural damage to a building that may still retain its roof.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: the close-up evidence shows a small concrete structure where the roof is completely missing and the interior is exposed, consistent with a visibly collapsed house wall.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between collapsed house wall and building damage is the total absence of the roof structure in the collapsed house wall, whereas building damage implies visible structural damage to a building that may still retain its roof.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: the close-up evidence shows a small concrete structure where the roof is completely missing and the interior is exposed, consistent with a visibly collapsed house wall.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The close-up evidence image clearly displays a small concrete structure with a completely missing roof and exposed interior, which visually supports the description of a collapsed house wall.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a building with significant structural damage, specifically a missing roof and exposed interior, which supports the claim of visible building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The close-up evidence image clearly displays a small concrete structure with a completely missing roof and exposed interior, which visually supports the description of a collapsed house wall.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a building with significant structural damage, specifically a missing roof and exposed interior, which supports the claim of visible building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

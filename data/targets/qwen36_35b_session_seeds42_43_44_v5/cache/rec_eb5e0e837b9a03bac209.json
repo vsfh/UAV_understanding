@@ -1,0 +1,97 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_eb5e0e837b9a03bac209",
+    "source_class": "collapsed_house_wall",
+    "negative_label": "building_damage",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/original/0804-4956-collapsed_house_wall.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-08-01_2025-08-31/collapsed_house_wall/cropped/0804-4956-collapsed_house_wall.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement with multiple residential buildings featuring red and grey roofs.",
+      "Extensive rectangular plots of vibrant green crops, likely rice paddies, separated by narrow earthen dikes.",
+      "A network of unpaved roads connecting the houses and fields.",
+      "Vegetation including trees and bushes interspersed among the buildings and fields."
+    ],
+    "cross_view_relations": [
+      "The second image is a zoomed-in view of a specific cluster of buildings and fields visible in the upper-left quadrant of the first image.",
+      "The large white house with a grey roof and the adjacent smaller structure with a dark roof in the second image correspond to the buildings located near the center-left of the first image.",
+      "The green crop field in the lower-left of the second image is part of the larger agricultural area seen in the first image."
+    ],
+    "description": "The images show a rural landscape with residential houses and green agricultural fields. The second image provides a closer view of a specific house with a grey roof and a smaller adjacent building, situated next to a green crop field. The wider view reveals a larger settlement with similar structures and extensive cultivated land.",
+    "evidence_visible": [
+      "A two-story white house with a grey tiled roof and a small attached structure with a dark roof.",
+      "A smaller, single-story building with a dark, possibly tiled, roof adjacent to the main house.",
+      "A patch of green crops to the left of the buildings.",
+      "Vegetation and trees surrounding the buildings.",
+      "A blue tarp or container visible near a neighboring house with a red roof."
+    ],
+    "unclear": [
+      "Exact type of crop in the fields.",
+      "Specific materials of the roofs beyond general appearance.",
+      "Occupancy status of the buildings.",
+      "Precise location or address."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement with multiple residential buildings featuring red and grey roofs.\",\n    \"Extensive rectangular plots of vibrant green crops, likely rice paddies, separated by narrow earthen dikes.\",\n    \"A network of unpaved roads connecting the houses and fields.\",\n    \"Vegetation including trees and bushes interspersed among the buildings and fields.\"\n  ],\n  \"cross_view_relations\": [\n    \"The second image is a zoomed-in view of a specific cluster of buildings and fields visible in the upper-left quadrant of the first image.\",\n    \"The large white house with a grey roof and the adjacent smaller structure with a dark roof in the second image correspond to the buildings located near the center-left of the first image.\",\n    \"The green crop field in the lower-left of the second image is part of the larger agricultural area seen in the first image.\"\n  ],\n  \"description\": \"The images show a rural landscape with residential houses and green agricultural fields. The second image provides a closer view of a specific house with a grey roof and a smaller adjacent building, situated next to a green crop field. The wider view reveals a larger settlement with similar structures and extensive cultivated land.\",\n  \"evidence_visible\": [\n    \"A two-story white house with a grey tiled roof and a small attached structure with a dark roof.\",\n    \"A smaller, single-story building with a dark, possibly tiled, roof adjacent to the main house.\",\n    \"A patch of green crops to the left of the buildings.\",\n    \"Vegetation and trees surrounding the buildings.\",\n    \"A blue tarp or container visible near a neighboring house with a red roof.\"\n  ],\n  \"unclear\": [\n    \"Exact type of crop in the fields.\",\n    \"Specific materials of the roofs beyond general appearance.\",\n    \"Occupancy status of the buildings.\",\n    \"Precise location or address.\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "building_damage"
+      ],
+      "evidence": "The event building damage is supported: visible evidence shows visible structural damage to a building.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The visible factor separating collapsed house wall from building damage is the specific structural failure of the wall or roof of the smaller adjacent building, whereas building damage is a broader category of visible structural damage to a building.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "collapsed_house_wall"
+      ],
+      "evidence": "The event collapsed house wall is supported: visible evidence shows a smaller, single-story building with a dark, possibly tiled, roof adjacent to the main house that has visibly collapsed.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"building_damage\"\n    ],\n    \"evidence\": \"The event building damage is supported: visible evidence shows visible structural damage to a building.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The visible factor separating collapsed house wall from building damage is the specific structural failure of the wall or roof of the smaller adjacent building, whereas building damage is a broader category of visible structural damage to a building.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"collapsed_house_wall\"\n    ],\n    \"evidence\": \"The event collapsed house wall is supported: visible evidence shows a smaller, single-story building with a dark, possibly tiled, roof adjacent to the main house that has visibly collapsed.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image shows a building with a damaged roof, but there is no evidence of a collapsed wall. The structure appears to be a two-story building, not a smaller single-story building adjacent to the main house as described.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "visible evidence shows a smaller, single-story building with a dark, possibly tiled, roof adjacent to the main house that has visibly collapsed."
+      ]
+    },
+    "positive": {
+      "reason": "The image clearly shows a building with visible structural damage, specifically to the roof, which supports the claim of building damage.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image shows a building with a damaged roof, but there is no evidence of a collapsed wall. The structure appears to be a two-story building, not a smaller single-story building adjacent to the main house as described.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"visible evidence shows a smaller, single-story building with a dark, possibly tiled, roof adjacent to the main house that has visibly collapsed.\"\n    ]\n  },\n  \"positive\": {\n    \"reason\": \"The image clearly shows a building with visible structural damage, specifically to the roof, which supports the claim of building damage.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": true,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": true,
+      "counterfactual_rejected": true,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 1.0,
+    "counterfactual_support_score": 0.0,
+    "counterfactual_susceptible": false,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e744d0b2b88796965649",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/original/1001-14195-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2025-10-01_2025-10-31/bare_soil_netting/cropped/1001-14195-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Wide aerial view of a mixed-use area with a large industrial park in the background, characterized by multiple large buildings with blue and grey roofs.",
+      "A dense band of green trees separates the industrial zone from the foreground.",
+      "The foreground contains agricultural fields with yellow-green crops, a small residential cluster with red and grey roofs, and a white building with solar panels.",
+      "A paved road runs along the base of the tree line.",
+      "The sky is clear and blue."
+    ],
+    "cross_view_relations": [
+      "The evidence crop shows a specific section of the tree line and road visible in the context image.",
+      "The large white building with many windows in the evidence crop corresponds to the industrial buildings seen in the background of the context image.",
+      "The green surface in the evidence crop is located within the wooded area that separates the industrial zone from the foreground fields."
+    ],
+    "description": "The context image displays a wide aerial view of an industrial park separated from agricultural fields by a dense tree line. The evidence crop zooms in on this boundary, revealing a green surface, possibly a sports court, nestled among the trees near a road and a large white industrial building.",
+    "evidence_visible": [
+      "A large, multi-story white building with a grid of windows and a red sign on the facade.",
+      "A paved road with white markings and streetlights running horizontally across the frame.",
+      "A dense area of green trees and vegetation.",
+      "A rectangular green surface, likely a sports court, partially obscured by trees.",
+      "A small structure with a white roof near the road."
+    ],
+    "unclear": [
+      "The exact type of the green surface (e.g., basketball court, tennis court).",
+      "The specific business or function of the white building.",
+      "The exact species of trees in the wooded area."
+    ]
+  },
+  "raw_perception": "{\n  \"context_visible\": [\n    \"Wide aerial view of a mixed-use area with a large industrial park in the background, characterized by multiple large buildings with blue and grey roofs.\",\n    \"A dense band of green trees separates the industrial zone from the foreground.\",\n    \"The foreground contains agricultural fields with yellow-green crops, a small residential cluster with red and grey roofs, and a white building with solar panels.\",\n    \"A paved road runs along the base of the tree line.\",\n    \"The sky is clear and blue.\"\n  ],\n  \"cross_view_relations\": [\n    \"The evidence crop shows a specific section of the tree line and road visible in the context image.\",\n    \"The large white building with many windows in the evidence crop corresponds to the industrial buildings seen in the background of the context image.\",\n    \"The green surface in the evidence crop is located within the wooded area that separates the industrial zone from the foreground fields.\"\n  ],\n  \"description\": \"The context image displays a wide aerial view of an industrial park separated from agricultural fields by a dense tree line. The evidence crop zooms in on this boundary, revealing a green surface, possibly a sports court, nestled among the trees near a road and a large white industrial building.\",\n  \"evidence_visible\": [\n    \"A large, multi-story white building with a grid of windows and a red sign on the facade.\",\n    \"A paved road with white markings and streetlights running horizontally across the frame.\",\n    \"A dense area of green trees and vegetation.\",\n    \"A rectangular green surface, likely a sports court, partially obscured by trees.\",\n    \"A small structure with a white roof near the road.\"\n  ],\n  \"unclear\": [\n    \"The exact type of the green surface (e.g., basketball court, tennis court).\",\n    \"The specific business or function of the white building.\",\n    \"The exact species of trees in the wooded area.\"\n  ]\n}",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is that the green surface in the evidence crop appears as a continuous, uniform sheet covering the ground, whereas incomplete soil cover would show visible gaps or patches of exposed earth.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: the evidence crop shows a rectangular green surface, consistent with dust-control netting, situated within the dense tree line that separates the industrial zone from the foreground fields.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is that the green surface in the evidence crop appears as a continuous, uniform sheet covering the ground, whereas incomplete soil cover would show visible gaps or patches of exposed earth.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: the evidence crop shows a rectangular green surface, consistent with dust-control netting, situated within the dense tree line that separates the industrial zone from the foreground fields.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The evidence image clearly displays a rectangular area covered by a green mesh or netting material, which visually corresponds to the description of 'bare soil netting' or dust-control netting. The statement accurately describes the visual features (rectangular green surface, location within the tree line) without making unsupported claims about the soil underneath.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The evidence image shows a rectangular area that is fully covered by a green netting material. The statement claims that the protective covering is 'visibly incomplete' and that 'soil' is visible. Since the green netting appears to completely cover the rectangular area in the image, the claim of incomplete cover is contradicted by the visual evidence.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The protective covering is visibly incomplete.",
+        "Visible evidence shows soil for which protective covering is incomplete."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The evidence image clearly displays a rectangular area covered by a green mesh or netting material, which visually corresponds to the description of 'bare soil netting' or dust-control netting. The statement accurately describes the visual features (rectangular green surface, location within the tree line) without making unsupported claims about the soil underneath.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The evidence image shows a rectangular area that is fully covered by a green netting material. The statement claims that the protective covering is 'visibly incomplete' and that 'soil' is visible. Since the green netting appears to completely cover the rectangular area in the image, the claim of incomplete cover is contradicted by the visual evidence.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The protective covering is visibly incomplete.\",\n      \"Visible evidence shows soil for which protective covering is incomplete.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}

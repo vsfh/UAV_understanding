@@ -1,0 +1,101 @@
+{
+  "prompt_version": "clear-uav-teacher-v5",
+  "identity": {
+    "record_uid": "rec_e7ea7f257ad9adfeb5ad",
+    "source_class": "bare_soil_netting",
+    "negative_label": "incomplete_soil_cover",
+    "context_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/original/0106-2378-bare_soil_netting.jpg",
+    "evidence_path": "/media/data1/feihong/uav_understanding_data/photos_2026-01-01_2026-01-31/bare_soil_netting/cropped/0106-2378-bare_soil_netting.jpg"
+  },
+  "verified_factors": {},
+  "perception": {
+    "context_visible": [
+      "Aerial view of a rural settlement adjacent to a multi-lane highway and a large body of water.",
+      "A cluster of residential buildings with red, grey, and white roofs situated on a peninsula-like landform.",
+      "A rectangular pond with green water is located to the right of the buildings.",
+      "A paved road runs parallel to the highway in the upper section of the image.",
+      "Vegetation appears dormant, with brown grass and leafless trees, suggesting a cooler season."
+    ],
+    "cross_view_relations": [
+      "The crop image is a zoomed-in view of the central cluster of buildings seen in the context image.",
+      "The red-roofed building in the lower right of the crop corresponds to the red-roofed structure in the context view.",
+      "The grey-roofed building in the foreground of the crop matches the grey-roofed structure in the context view.",
+      "The green water body in the crop is the same pond visible to the right of the houses in the context image."
+    ],
+    "description": "The images show a rural residential area near a highway and water bodies. The context view provides a wide perspective of the settlement, while the crop focuses on specific houses with red and grey roofs, a concrete yard, and a small garden plot adjacent to a green pond.",
+    "evidence_visible": [
+      "A concrete paved area or yard in front of the buildings.",
+      "A small rectangular garden plot with green crops or grass.",
+      "A bright green rectangular object, possibly a tarp or mat, lying on the ground.",
+      "A large, round, dark green bush or tree near the concrete area.",
+      "A white rectangular object, possibly a container or small structure, on the ground near the garden.",
+      "Some indistinct items or debris near the edge of the concrete area.",
+      "Tall, dry reeds or grasses growing near the water's edge."
+    ],
+    "unclear": [
+      "The exact nature of the items on the concrete yard.",
+      "The specific type of plants in the garden plot.",
+      "The purpose of the green rectangular object.",
+      "The identity of any individuals present (none clearly visible)."
+    ]
+  },
+  "raw_perception": "```json\n{\n  \"context_visible\": [\n    \"Aerial view of a rural settlement adjacent to a multi-lane highway and a large body of water.\",\n    \"A cluster of residential buildings with red, grey, and white roofs situated on a peninsula-like landform.\",\n    \"A rectangular pond with green water is located to the right of the buildings.\",\n    \"A paved road runs parallel to the highway in the upper section of the image.\",\n    \"Vegetation appears dormant, with brown grass and leafless trees, suggesting a cooler season.\"\n  ],\n  \"cross_view_relations\": [\n    \"The crop image is a zoomed-in view of the central cluster of buildings seen in the context image.\",\n    \"The red-roofed building in the lower right of the crop corresponds to the red-roofed structure in the context view.\",\n    \"The grey-roofed building in the foreground of the crop matches the grey-roofed structure in the context view.\",\n    \"The green water body in the crop is the same pond visible to the right of the houses in the context image.\"\n  ],\n  \"description\": \"The images show a rural residential area near a highway and water bodies. The context view provides a wide perspective of the settlement, while the crop focuses on specific houses with red and grey roofs, a concrete yard, and a small garden plot adjacent to a green pond.\",\n  \"evidence_visible\": [\n    \"A concrete paved area or yard in front of the buildings.\",\n    \"A small rectangular garden plot with green crops or grass.\",\n    \"A bright green rectangular object, possibly a tarp or mat, lying on the ground.\",\n    \"A large, round, dark green bush or tree near the concrete area.\",\n    \"A white rectangular object, possibly a container or small structure, on the ground near the garden.\",\n    \"Some indistinct items or debris near the edge of the concrete area.\",\n    \"Tall, dry reeds or grasses growing near the water's edge.\"\n  ],\n  \"unclear\": [\n    \"The exact nature of the items on the concrete yard.\",\n    \"The specific type of plants in the garden plot.\",\n    \"The purpose of the green rectangular object.\",\n    \"The identity of any individuals present (none clearly visible).\"\n  ]\n}\n```",
+  "perception_retries": 0,
+  "rewrite": {
+    "counterfactual_target": {
+      "events": [
+        "incomplete_soil_cover"
+      ],
+      "evidence": "The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.",
+      "factors": {},
+      "uncertain": true
+    },
+    "distinction": "The distinction between bare soil netting and incomplete soil cover is the presence of a clearly defined, continuous green netting sheet in the image, whereas incomplete soil cover would imply a lack of such visible protective material.",
+    "missing_required_factors": [],
+    "target": {
+      "events": [
+        "bare_soil_netting"
+      ],
+      "evidence": "The event bare soil netting is supported: visible evidence shows a bright green rectangular sheet of netting or tarp laid out on the ground adjacent to a garden plot and a concrete yard.",
+      "factors": {},
+      "uncertain": false
+    }
+  },
+  "raw_rewrite": "{\n  \"counterfactual_target\": {\n    \"events\": [\n      \"incomplete_soil_cover\"\n    ],\n    \"evidence\": \"The event incomplete soil cover is supported: visible evidence shows soil for which protective covering is visibly incomplete.\",\n    \"factors\": {},\n    \"uncertain\": true\n  },\n  \"distinction\": \"The distinction between bare soil netting and incomplete soil cover is the presence of a clearly defined, continuous green netting sheet in the image, whereas incomplete soil cover would imply a lack of such visible protective material.\",\n  \"missing_required_factors\": [],\n  \"target\": {\n    \"events\": [\n      \"bare_soil_netting\"\n    ],\n    \"evidence\": \"The event bare soil netting is supported: visible evidence shows a bright green rectangular sheet of netting or tarp laid out on the ground adjacent to a garden plot and a concrete yard.\",\n    \"factors\": {},\n    \"uncertain\": false\n  }\n}",
+  "rewrite_retries": 1,
+  "verification": {
+    "counterfactual": {
+      "reason": "The image clearly shows a bright green rectangular sheet of netting or tarp laid out on the ground adjacent to a garden plot and a concrete yard, which directly supports the claim.",
+      "support_score": 1.0,
+      "supported": true,
+      "unsupported_claims": []
+    },
+    "positive": {
+      "reason": "The image shows a bright green rectangular sheet of netting or tarp laid out on the ground adjacent to a garden plot and a concrete yard. This indicates that the soil cover is not incomplete but rather present and visible.",
+      "support_score": 0.0,
+      "supported": false,
+      "unsupported_claims": [
+        "The soil cover is visibly incomplete."
+      ]
+    }
+  },
+  "raw_verification": "{\n  \"counterfactual\": {\n    \"reason\": \"The image clearly shows a bright green rectangular sheet of netting or tarp laid out on the ground adjacent to a garden plot and a concrete yard, which directly supports the claim.\",\n    \"support_score\": 1.0,\n    \"supported\": true,\n    \"unsupported_claims\": []\n  },\n  \"positive\": {\n    \"reason\": \"The image shows a bright green rectangular sheet of netting or tarp laid out on the ground adjacent to a garden plot and a concrete yard. This indicates that the soil cover is not incomplete but rather present and visible.\",\n    \"support_score\": 0.0,\n    \"supported\": false,\n    \"unsupported_claims\": [\n      \"The soil cover is visibly incomplete.\"\n    ]\n  }\n}",
+  "verification_retries": 0,
+  "automatic_audit": {
+    "passed": false,
+    "checks": {
+      "event_phrase_present": true,
+      "confusion_neighbor_named": true,
+      "no_unsupported_named_entity": true,
+      "positive_entailment": false,
+      "counterfactual_rejected": false,
+      "uncertainty_consistent": true,
+      "counterfactual_event_phrase_present": true
+    },
+    "positive_support_score": 0.0,
+    "counterfactual_support_score": 1.0,
+    "counterfactual_susceptible": true,
+    "label_mentioned_in_label_agnostic_description": false,
+    "requires_human_review": true
+  }
+}
