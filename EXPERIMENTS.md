@@ -91,7 +91,7 @@ The immediate reproducible sequence is:
 
 1. Run the three-seed development matrix on `session_disjoint`.
 2. Review the generated comparison intervals for context, crop, and paired inputs.
-3. Replace definition-proxy targets with human-audited targets.
+3. Replace crop-teacher positives and proxy counterfactuals with human-audited targets.
 4. Complete the provenance gate and freeze the official manifests.
 5. Run official evaluation once across the three registered protocols.
 6. Add the still-manual assets listed under "Not automatable from current data".
@@ -133,10 +133,63 @@ bash runs/run_all_experiments.sh \
 
 Omit `--experiments` to run the full matrix.
 
-Development mode automatically creates a separate definition-proxy target file for each
-protocol and seed. Result names are prefixed with `proxy_`; they must not be presented as the
-full CLEAR method or as official test results. To use a separately prepared development target
-ledger, pass `--development-targets PATH`.
+Run the new per-crop teacher-caption baseline alone with:
+
+```bash
+bash runs/run_all_experiments.sh \
+  --profile development \
+  --protocols session_disjoint \
+  --experiments grounded_caption \
+  --cropped-captions-root description \
+  --seeds 42 43 44 \
+  --skip-zero-shot \
+  --resume
+```
+
+On a machine without a visible GPU, prepare and validate all three seed target files first:
+
+```bash
+bash runs/run_all_experiments.sh \
+  --profile development \
+  --protocols session_disjoint \
+  --experiments grounded_caption \
+  --cropped-captions-root description \
+  --seeds 42 43 44 \
+  --skip-zero-shot \
+  --prepare-only \
+  --resume
+```
+
+For each seed, the suite maps
+`description/<original-crop-relative-path>.json` into a grounded-caption target JSONL under
+`outputs/paper_suite/<protocol>/cropped_caption_targets/`. The student receives the context
+view, matching the registered grounded-caption row; the crop is the source of the teacher
+target. These generated targets are explicitly non-human-audited and therefore belong only in
+development results until review is complete.
+
+To run every currently executable paper-table row across all three protocols and three seeds,
+then export the five registered table schemas, use:
+
+```bash
+bash runs/30_run_paper_tables.sh
+```
+
+This launcher adopts the explicit development assumption that the existing crop captions are the
+grounded-caption targets. It writes generated tables to
+`results/paper_tables/paper_tables/` and a `table_manifest.json` explaining every still-unfilled
+cell. It does not overwrite `paper/table/*.tex` and does not relabel crop captions as human-audited.
+
+For the 49,140 MiB card, ordinary LoRA keeps train batch 2 / accumulation 8, while multi-loss
+random/graph/CLEAR runs use batch 1 / accumulation 16. Closed-set candidate batch is 2. The launcher
+refuses to start below 40,000 MiB free memory, enables expandable CUDA segments, omits unused
+model-internal loss computation, and projects logits only for answer tokens. Overall steps and
+long-running inner loops expose `tqdm` progress bars; closed-set progress also reports allocated and
+peak GPU memory. The same command resumes the failed step safely.
+
+Development random-negative and graph-neighbor rows reuse the same crop-caption positives as the
+grounded baseline. CLEAR rows merge those positives with a separate ontology-derived proxy
+counterfactual file for each protocol and seed; only those CLEAR result names retain the `proxy_`
+prefix. They must not be presented as the full audited CLEAR method or as official test results.
 
 ## Official run
 
@@ -187,8 +240,8 @@ Development mode runs:
 - OpenCLIP direct and definition prompts;
 - label-only LoRA with context, crop, and ordered context+crop;
 - LLM-only versus projector+LLM LoRA and the label-token-weighting ablation;
-- definition-proxy grounded-caption, random-negative, graph-neighbor,
-  CLEAR-without-dropout, and full-loss diagnostics;
+- crop-teacher grounded-caption positives for grounded-caption, random-negative, and
+  graph-neighbor rows, plus explicitly marked proxy-counterfactual CLEAR diagnostics;
 - free-generation and closed-set validation;
 - log-sum-exp and max set aggregation;
 - assigned-evidence versus size-matched non-assigned deletion from cached edge scores;
@@ -216,3 +269,7 @@ The runner records these limitations in every suite plan:
 
 These are input or scientific-design blockers, not values that should be inferred from the
 available validation predictions.
+
+The paper-only, table-by-table execution order and the complete missing-experiment inventory are
+in `EXPERIMENT_PLAN.md`. Its companion `configs/paper_experiment_paths.json` keeps all machine
+roots blank and records only assumed relative paths.

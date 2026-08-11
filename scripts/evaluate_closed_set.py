@@ -3,18 +3,24 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from collections import defaultdict
 from pathlib import Path
 
 import torch
 from peft import PeftModel
+from tqdm.auto import tqdm
 
 from clear_uav.data import cap_per_class, read_private_test_samples, read_samples
 from clear_uav.metrics import classification_metrics, pairwise_metrics, ranking_metrics
 from clear_uav.modeling import load_qwen
 from clear_uav.ontology import load_label_subset, load_ontology
 from clear_uav.prompts import closed_set_conversation
-from clear_uav.training import encode_assistant_batch, normalized_log_likelihood
+from clear_uav.training import (
+    aligned_normalized_log_likelihood,
+    encode_assistant_batch,
+    forward_answer_logits,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -36,6 +42,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--max-samples", type=int)
     parser.add_argument("--max-per-class", type=int)
+    parser.add_argument("--max-length", type=int, default=2048)
     parser.add_argument("--max-pixels", type=int, default=262_144)
     parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args()
@@ -110,6 +117,8 @@ def aggregate_sets(samples, score_rows, labels, temperature, aggregator):
 
 def main() -> None:
     args = parse_args()
+    if args.candidate_batch_size < 1:
+        raise ValueError("--candidate-batch-size must be positive")
     if args.fit_thresholds == bool(args.thresholds):
         raise ValueError("Choose exactly one of --fit-thresholds or --thresholds")
     ontology = load_ontology(args.ontology)
@@ -144,10 +153,38 @@ def main() -> None:
             raise FileNotFoundError(f"Missing local adapter_config.json: {adapter_path}")
         model = PeftModel.from_pretrained(model, adapter_path, local_files_only=True)
     model.eval()
+    model.config.use_cache = False
+    if torch.cuda.is_available():
+        device = next(model.parameters()).device
+        total_bytes = torch.cuda.get_device_properties(device).total_memory
+        if (
+            args.view == "pair"
+            and total_bytes <= 52 * 2**30
+            and args.candidate_batch_size > 4
+        ):
+            raise ValueError(
+                "Pair-view closed-set evaluation on a <=52 GiB GPU requires "
+                "--candidate-batch-size <= 4; use 2 for the 49140 MiB card"
+            )
+        torch.cuda.empty_cache()
+        free_bytes, _ = torch.cuda.mem_get_info(device)
+        print(
+            f"GPU memory after model load: {free_bytes / 2**30:.1f} GiB free / "
+            f"{total_bytes / 2**30:.1f} GiB total; candidate batch="
+            f"{args.candidate_batch_size}, view={args.view}",
+            flush=True,
+        )
 
     score_rows = []
-    with torch.inference_mode():
-        for sample in samples:
+    batches_per_pair = math.ceil(len(labels) / args.candidate_batch_size)
+    with torch.inference_mode(), tqdm(
+        total=len(samples) * batches_per_pair,
+        desc=f"closed-set {args.view}",
+        unit="cand-batch",
+        dynamic_ncols=True,
+        mininterval=0.5,
+    ) as progress:
+        for sample_index, sample in enumerate(samples, 1):
             scores = {}
             for start in range(0, len(labels), args.candidate_batch_size):
                 batch_labels = labels[start : start + args.candidate_batch_size]
@@ -164,13 +201,27 @@ def main() -> None:
                 encoded = encode_assistant_batch(
                     processor,
                     conversations,
-                    max_length=2048,
+                    max_length=args.max_length,
                     max_pixels=args.max_pixels,
                 )
                 encoded = {key: value.to(model.device) for key, value in encoded.items()}
-                outputs = model(**encoded)
-                values = normalized_log_likelihood(outputs.logits, encoded["labels"]).tolist()
+                outputs, answer_labels, _ = forward_answer_logits(model, encoded)
+                values = aligned_normalized_log_likelihood(
+                    outputs.logits, answer_labels
+                ).tolist()
                 scores.update(zip(batch_labels, values))
+                postfix = {
+                    "pair": f"{sample_index}/{len(samples)}",
+                    "labels": f"{min(start + len(batch_labels), len(labels))}/{len(labels)}",
+                }
+                if torch.cuda.is_available():
+                    postfix["GPU"] = (
+                        f"{torch.cuda.memory_allocated() / 2**30:.1f}G alloc/"
+                        f"{torch.cuda.max_memory_allocated() / 2**30:.1f}G peak"
+                    )
+                progress.set_postfix(postfix, refresh=False)
+                progress.update(1)
+                del encoded, outputs, answer_labels
             score_rows.append(scores)
 
     pair_targets = [{sample.label} for sample in samples]
@@ -244,6 +295,7 @@ def main() -> None:
                     "view": args.view,
                     "labels": labels,
                     "candidate_batch_size": args.candidate_batch_size,
+                    "max_length": args.max_length,
                     "set_temperature": args.set_temperature,
                     "set_aggregator": args.set_aggregator,
                     "max_pixels": args.max_pixels,

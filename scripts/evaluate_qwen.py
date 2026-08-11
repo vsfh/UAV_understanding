@@ -7,6 +7,7 @@ from pathlib import Path
 
 import torch
 from peft import PeftModel
+from tqdm.auto import tqdm
 
 from clear_uav.data import cap_per_class, read_private_test_samples, read_samples
 from clear_uav.metrics import classification_metrics, group_sets
@@ -107,7 +108,13 @@ def main() -> None:
     predictions: list[set[str]] = []
     invalid = 0
     with args.output.open("w", encoding="utf-8") as handle, torch.inference_mode():
-        for sample in samples:
+        for sample in tqdm(
+            samples,
+            desc=f"free-generation {args.view}/{args.prompt}",
+            unit="pair",
+            dynamic_ncols=True,
+            mininterval=0.5,
+        ):
             inputs = processor.apply_chat_template(
                 conversation(
                     sample.context_path,

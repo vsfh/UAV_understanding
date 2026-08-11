@@ -3,6 +3,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import torch
 
@@ -23,7 +24,13 @@ from clear_uav.teacher_targets import (
     validate_rewrite,
     validate_verification,
 )
-from clear_uav.training import normalized_log_likelihood, token_cross_entropy, unlikelihood_loss
+from clear_uav.training import (
+    aligned_normalized_log_likelihood,
+    forward_answer_logits,
+    normalized_log_likelihood,
+    token_cross_entropy,
+    unlikelihood_loss,
+)
 
 
 ROOT = Path(__file__).parents[1]
@@ -77,6 +84,36 @@ def test_losses_are_finite() -> None:
     assert torch.isfinite(token_cross_entropy(logits, labels))
     assert torch.isfinite(normalized_log_likelihood(logits, labels)).all()
     assert torch.isfinite(unlikelihood_loss(logits, labels))
+
+
+def test_answer_only_forward_matches_full_sequence_scores() -> None:
+    torch.manual_seed(0)
+    full_logits = torch.randn(2, 5, 7)
+    labels = torch.tensor(
+        [
+            [-100, -100, 1, 2, -100],
+            [-100, -100, -100, 3, 4],
+        ]
+    )
+
+    class DummyModel:
+        def __init__(self) -> None:
+            self.received_labels = False
+
+        def __call__(self, *, input_ids, logits_to_keep, **kwargs):
+            self.received_labels = "labels" in kwargs
+            return SimpleNamespace(logits=full_logits[:, logits_to_keep, :])
+
+    model = DummyModel()
+    outputs, selected_labels, positions = forward_answer_logits(
+        model,
+        {"input_ids": torch.ones_like(labels), "labels": labels},
+    )
+    optimized = aligned_normalized_log_likelihood(outputs.logits, selected_labels)
+    reference = normalized_log_likelihood(full_logits, labels)
+    assert positions.tolist() == [1, 2, 3]
+    assert not model.received_labels
+    assert torch.allclose(optimized, reference)
 
 
 def test_lora_scope_freezes_visual_blocks() -> None:

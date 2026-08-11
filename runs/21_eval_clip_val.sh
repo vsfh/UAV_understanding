@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DATA_ROOT="${1:-/media/data1/feihong/uav_understanding_data}"
-MODEL_PATH="${2:-./models/openclip}"
+MODEL_PATH="${2:-/media/data2/feihong/hf_cache/openclip}"
 PROMPT="${3:-definition}"
 OUTPUT="${4:-./outputs/openclip_session_val.json}"
 

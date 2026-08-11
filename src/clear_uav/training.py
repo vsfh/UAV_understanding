@@ -219,40 +219,86 @@ def token_cross_entropy(
     labels: torch.Tensor,
     weights: torch.Tensor | None = None,
 ) -> torch.Tensor:
-    shift_logits = logits[:, :-1].float()
     shift_labels = labels[:, 1:]
-    mask = shift_labels.ne(-100)
+    shift_weights = weights[:, 1:] if weights is not None else None
+    return aligned_token_cross_entropy(logits[:, :-1], shift_labels, shift_weights)
+
+
+def aligned_token_cross_entropy(
+    logits: torch.Tensor,
+    labels: torch.Tensor,
+    weights: torch.Tensor | None = None,
+) -> torch.Tensor:
+    """Cross entropy for aligned logits/labels without expanding masked image tokens."""
+    mask = labels.ne(-100)
+    if not mask.any():
+        raise ValueError("No answer tokens are available for cross entropy")
     losses = F.cross_entropy(
-        shift_logits.reshape(-1, shift_logits.shape[-1]),
-        shift_labels.clamp_min(0).reshape(-1),
+        logits[mask].float(),
+        labels[mask],
         reduction="none",
-    ).view_as(shift_labels)
-    if weights is None:
-        weights = torch.ones_like(losses)
-    else:
-        weights = weights[:, 1:]
-    return (losses * weights * mask).sum() / (weights * mask).sum()
+    )
+    selected_weights = (
+        weights[mask].to(losses.dtype)
+        if weights is not None
+        else torch.ones_like(losses)
+    )
+    return (losses * selected_weights).sum() / selected_weights.sum()
 
 
 def normalized_log_likelihood(logits: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
-    shift_logits = logits[:, :-1].float()
-    shift_labels = labels[:, 1:]
-    mask = shift_labels.ne(-100)
-    token_logp = shift_logits.log_softmax(-1).gather(
-        -1, shift_labels.clamp_min(0).unsqueeze(-1)
+    return aligned_normalized_log_likelihood(logits[:, :-1], labels[:, 1:])
+
+
+def aligned_normalized_log_likelihood(
+    logits: torch.Tensor, labels: torch.Tensor
+) -> torch.Tensor:
+    """Mean answer-token log likelihood while materializing FP32 only for answer tokens."""
+    mask = labels.ne(-100)
+    counts = mask.sum(-1)
+    if (counts == 0).any():
+        raise ValueError("Every scoring row must contain at least one answer token")
+    row_indices = mask.nonzero(as_tuple=False)[:, 0]
+    selected_logits = logits[mask].float()
+    selected_labels = labels[mask]
+    token_logp = selected_logits.log_softmax(-1).gather(
+        -1, selected_labels.unsqueeze(-1)
     ).squeeze(-1)
-    return (token_logp * mask).sum(-1) / mask.sum(-1)
+    totals = torch.zeros(
+        labels.shape[0], device=token_logp.device, dtype=token_logp.dtype
+    )
+    totals.scatter_add_(0, row_indices, token_logp)
+    return totals / counts.to(token_logp.dtype)
 
 
 def unlikelihood_loss(logits: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
-    shift_logits = logits[:, :-1].float()
-    shift_labels = labels[:, 1:]
-    mask = shift_labels.ne(-100)
-    token_probability = shift_logits.softmax(-1).gather(
-        -1, shift_labels.clamp_min(0).unsqueeze(-1)
+    return aligned_unlikelihood_loss(logits[:, :-1], labels[:, 1:])
+
+
+def aligned_unlikelihood_loss(logits: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
+    mask = labels.ne(-100)
+    if not mask.any():
+        raise ValueError("No answer tokens are available for unlikelihood loss")
+    selected_logits = logits[mask].float()
+    selected_labels = labels[mask]
+    token_probability = selected_logits.softmax(-1).gather(
+        -1, selected_labels.unsqueeze(-1)
     ).squeeze(-1)
     losses = -torch.log1p(-token_probability.clamp(max=1 - 1e-6))
-    return (losses * mask).sum() / mask.sum()
+    return losses.mean()
+
+
+def forward_answer_logits(model, inputs: dict[str, torch.Tensor]):
+    """Run Qwen while projecting only positions that predict supervised answer tokens."""
+    labels = inputs["labels"]
+    shifted_labels = labels[:, 1:]
+    positions = shifted_labels.ne(-100).any(dim=0).nonzero(as_tuple=False).flatten()
+    if not len(positions):
+        raise ValueError("No answer-token logit positions are available")
+    model_inputs = {key: value for key, value in inputs.items() if key != "labels"}
+    outputs = model(**model_inputs, logits_to_keep=positions)
+    selected_labels = shifted_labels.index_select(1, positions)
+    return outputs, selected_labels, positions
 
 
 class ClearTrainer(Trainer):
@@ -269,27 +315,36 @@ class ClearTrainer(Trainer):
         positive_score_inputs = inputs.pop("positive_score_inputs", None)
         negative_score_inputs = inputs.pop("negative_score_inputs", None)
         counterfactual_inputs = inputs.pop("counterfactual_inputs", None)
-        outputs = model(**inputs)
-        loss = token_cross_entropy(outputs.logits, inputs["labels"], weights)
+        outputs, answer_labels, answer_positions = forward_answer_logits(model, inputs)
+        answer_weights = weights[:, 1:].index_select(1, answer_positions)
+        loss = aligned_token_cross_entropy(
+            outputs.logits, answer_labels, answer_weights
+        )
 
         if self.lambda_neighbor:
             if positive_score_inputs is None or negative_score_inputs is None:
                 raise ValueError("Neighbor loss inputs are missing")
-            positive_outputs = model(**positive_score_inputs)
-            negative_outputs = model(**negative_score_inputs)
-            positive_score = normalized_log_likelihood(
-                positive_outputs.logits, positive_score_inputs["labels"]
+            positive_outputs, positive_labels, _ = forward_answer_logits(
+                model, positive_score_inputs
             )
-            negative_score = normalized_log_likelihood(
-                negative_outputs.logits, negative_score_inputs["labels"]
+            negative_outputs, negative_labels, _ = forward_answer_logits(
+                model, negative_score_inputs
+            )
+            positive_score = aligned_normalized_log_likelihood(
+                positive_outputs.logits, positive_labels
+            )
+            negative_score = aligned_normalized_log_likelihood(
+                negative_outputs.logits, negative_labels
             )
             neighbor_loss = F.relu(self.margin - positive_score + negative_score).mean()
             loss = loss + self.lambda_neighbor * neighbor_loss
         if self.lambda_cf:
             if counterfactual_inputs is None:
                 raise ValueError("Counterfactual loss inputs are missing")
-            counterfactual_outputs = model(**counterfactual_inputs)
-            loss = loss + self.lambda_cf * unlikelihood_loss(
-                counterfactual_outputs.logits, counterfactual_inputs["labels"]
+            counterfactual_outputs, counterfactual_labels, _ = forward_answer_logits(
+                model, counterfactual_inputs
+            )
+            loss = loss + self.lambda_cf * aligned_unlikelihood_loss(
+                counterfactual_outputs.logits, counterfactual_labels
             )
         return (loss, outputs) if return_outputs else loss

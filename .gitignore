@@ -220,3 +220,4 @@ __marimo__/
 # CLEAR-UAV local artifacts
 models/
 outputs/
+data/

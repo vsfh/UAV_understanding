@@ -75,8 +75,11 @@ def read_targets(path: Path) -> tuple[dict[str, str], dict[str, str], dict[str, 
             row = json.loads(line)
             uid = row["record_uid"]
             target = row["target"]
-            counterfactual = row["counterfactual_target"]
-            for name, value in (("target", target), ("counterfactual_target", counterfactual)):
+            counterfactual = row.get("counterfactual_target")
+            values = [("target", target)]
+            if counterfactual is not None:
+                values.append(("counterfactual_target", counterfactual))
+            for name, value in values:
                 parsed = json.loads(value) if isinstance(value, str) else value
                 if set(parsed) != {"events", "factors", "evidence", "uncertain"}:
                     raise ValueError(f"Invalid {name} schema at {path}:{line_number}")
@@ -89,12 +92,17 @@ def read_targets(path: Path) -> tuple[dict[str, str], dict[str, str], dict[str, 
                 separators=(",", ":"),
                 sort_keys=True,
             )
-            counterfactuals[uid] = json.dumps(
-                json.loads(counterfactual) if isinstance(counterfactual, str) else counterfactual,
-                ensure_ascii=False,
-                separators=(",", ":"),
-                sort_keys=True,
-            )
+            if counterfactual is not None:
+                counterfactuals[uid] = json.dumps(
+                    (
+                        json.loads(counterfactual)
+                        if isinstance(counterfactual, str)
+                        else counterfactual
+                    ),
+                    ensure_ascii=False,
+                    separators=(",", ":"),
+                    sort_keys=True,
+                )
     return targets, counterfactuals, tiers
 
 
@@ -122,7 +130,7 @@ def main() -> None:
         missing_targets = {sample.record_uid for sample in samples} - set(targets)
         if missing_targets:
             raise ValueError(
-                f"Audited target file is missing {len(missing_targets)} training records; "
+                f"Target file is missing {len(missing_targets)} training records; "
                 f"first={sorted(missing_targets)[0]}"
             )
         wrong_targets = [
@@ -131,7 +139,16 @@ def main() -> None:
             if sample.label not in json.loads(targets[sample.record_uid])["events"]
         ]
         if wrong_targets:
-            raise ValueError(f"Audited target omits its verified label: {wrong_targets[0]}")
+            raise ValueError(f"Target omits its verified label: {wrong_targets[0]}")
+        if args.lambda_cf:
+            missing_counterfactuals = {
+                sample.record_uid for sample in samples
+            } - set(counterfactuals)
+            if missing_counterfactuals:
+                raise ValueError(
+                    "Counterfactual loss requires counterfactual_target for every sample; "
+                    f"first={sorted(missing_counterfactuals)[0]}"
+                )
     if args.require_audited_targets:
         if targets is None:
             raise ValueError("--require-audited-targets requires --targets-jsonl")
@@ -161,6 +178,28 @@ def main() -> None:
         parameter.numel() for parameter in model.parameters() if parameter.requires_grad
     )
     total_parameters = sum(parameter.numel() for parameter in model.parameters())
+    if torch.cuda.is_available():
+        total_gpu_bytes = torch.cuda.get_device_properties(0).total_memory
+        if (
+            total_gpu_bytes <= 52 * 2**30
+            and args.view == "pair"
+            and (args.lambda_neighbor or args.lambda_cf)
+            and args.batch_size > 1
+        ):
+            raise ValueError(
+                "Pair-view multi-loss training on a <=52 GiB GPU requires "
+                "--batch-size 1; increase --gradient-accumulation to preserve the "
+                "effective batch size"
+            )
+        torch.cuda.empty_cache()
+        free_bytes, _ = torch.cuda.mem_get_info(0)
+        print(
+            f"GPU memory after model+LoRA load: {free_bytes / 2**30:.1f} GiB free / "
+            f"{total_gpu_bytes / 2**30:.1f} GiB total; train batch={args.batch_size}, "
+            f"gradient accumulation={args.gradient_accumulation}, view={args.view}, "
+            f"max_pixels={args.max_pixels}",
+            flush=True,
+        )
 
     collator = ClearCollator(
         processor=processor,

@@ -3,8 +3,12 @@
   "root": "/media/data1/feihong/UAV_understanding",
   "blockers_not_automated": [
     "GeoChat is not automated: its upstream custom inference stack is absent.",
-    "PEFT rows other than the implemented LLM-only and projector+LLM LoRA require separate architecture-specific training code and hardware.",
-    "Caption ratings, proposal/jitter crops, and challenge-slice annotations are not present; the suite cannot fabricate them."
+    "A compatible UAVIT-1M checkpoint and inference adapter are absent.",
+    "Linear-probe, projector-only, QLoRA, full-fine-tuning, and parameter-matched attention implementations are absent.",
+    "Human-audited caption ratings, factor/hierarchy annotations, and single-factor swap cases are absent.",
+    "Proposal, jittered, irrelevant, and crop-budget inputs plus small-evidence, adverse-capture, and complex-background slice annotations are absent.",
+    "Learning-curve group budgets, tail exemplars, six frozen prompt paraphrases, and shuffled/missing-crop evaluations are not yet wired into the suite.",
+    "Per-domain macro-F1, evidence-assignment accuracy, ECE, paired permutation/Holm tests, and the final heat-map/error-gallery workflow are not yet implemented."
   ],
   "steps": [
     {
@@ -33,1763 +37,86 @@
       "log": "/media/data1/feihong/UAV_understanding/results/paper_suite/logs/session_disjoint.validate.log"
     },
     {
-      "step_id": "session_disjoint.zero.qwen_direct.val",
-      "kind": "zero_shot",
+      "step_id": "session_disjoint.cropped_caption_targets.seed42",
+      "kind": "target_generation",
       "command": [
         "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--prompt",
-        "direct",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/qwen_direct_val.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/qwen_direct_val.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/qwen_direct_val.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "qwen_direct",
-        "seed": 0,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "running",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.zero.qwen_direct.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/qwen_direct_val.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/qwen_direct_val_analysis.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/qwen_direct_val_analysis.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "qwen_direct",
-        "seed": 0,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.zero.openclip_direct.val",
-      "kind": "zero_shot",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_clip.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/openclip",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--prompt",
-        "direct",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/openclip_direct_val.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/openclip_direct_val.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "openclip_direct",
-        "seed": 0,
-        "split": "val",
-        "decoder": "score"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.zero.openclip_direct.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/openclip_direct_val.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/openclip_direct_val_analysis.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/openclip_direct_val_analysis.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "openclip_direct",
-        "seed": 0,
-        "split": "val",
-        "decoder": "score"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.zero.qwen_definition.val",
-      "kind": "zero_shot",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--prompt",
-        "definition",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/qwen_definition_val.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/qwen_definition_val.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/qwen_definition_val.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "qwen_definition",
-        "seed": 0,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.zero.qwen_definition.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/qwen_definition_val.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/qwen_definition_val_analysis.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/qwen_definition_val_analysis.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "qwen_definition",
-        "seed": 0,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.zero.openclip_definition.val",
-      "kind": "zero_shot",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_clip.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/openclip",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--prompt",
-        "definition",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/openclip_definition_val.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/openclip_definition_val.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "openclip_definition",
-        "seed": 0,
-        "split": "val",
-        "decoder": "score"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.zero.openclip_definition.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/zero_shot/openclip_definition_val.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/openclip_definition_val_analysis.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/openclip_definition_val_analysis.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "openclip_definition",
-        "seed": 0,
-        "split": "val",
-        "decoder": "score"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed42.train",
-      "kind": "train",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/train_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
+        "/media/data1/feihong/UAV_understanding/scripts/build_cropped_caption_targets.py",
         "--data-root",
         "/media/data1/feihong/uav_understanding_data",
         "--train-csv",
         "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
-        "--output-dir",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42",
+        "--captions-root",
+        "/media/data1/feihong/uav_understanding_data/description",
         "--labels-file",
         "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
         "--max-per-class",
         "250",
-        "--view",
-        "context",
-        "--epochs",
-        "3.0",
-        "--batch-size",
-        "2",
-        "--gradient-accumulation",
-        "8",
-        "--seed",
-        "42"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/final/adapter_config.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/run_metadata.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 42,
-        "split": "train",
-        "decoder": "train"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed42.free.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 42,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed42.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed42_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed42_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 42,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed42.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_closed_set.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_closed_set.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 42,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed42.closed.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed42_val_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed42_val_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 42,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed42.set_max.val",
-      "kind": "set_rescore",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/rescore_sets.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_closed_set.json",
-        "--aggregator",
-        "max",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_set_max.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_set_max.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_set_max.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 42,
-        "split": "val",
-        "decoder": "set_max"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed43.train",
-      "kind": "train",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/train_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--train-csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
-        "--output-dir",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--max-per-class",
-        "250",
-        "--view",
-        "context",
-        "--epochs",
-        "3.0",
-        "--batch-size",
-        "2",
-        "--gradient-accumulation",
-        "8",
-        "--seed",
-        "43"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/final/adapter_config.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/run_metadata.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 43,
-        "split": "train",
-        "decoder": "train"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed43.free.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 43,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed43.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed43_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed43_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 43,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed43.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_closed_set.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_closed_set.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 43,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed43.closed.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed43_val_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed43_val_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 43,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed43.set_max.val",
-      "kind": "set_rescore",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/rescore_sets.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_closed_set.json",
-        "--aggregator",
-        "max",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_set_max.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_set_max.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_set_max.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 43,
-        "split": "val",
-        "decoder": "set_max"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed44.train",
-      "kind": "train",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/train_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--train-csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
-        "--output-dir",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--max-per-class",
-        "250",
-        "--view",
-        "context",
-        "--epochs",
-        "3.0",
-        "--batch-size",
-        "2",
-        "--gradient-accumulation",
-        "8",
-        "--seed",
-        "44"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/final/adapter_config.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/run_metadata.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 44,
-        "split": "train",
-        "decoder": "train"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed44.free.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 44,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed44.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed44_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed44_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 44,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed44.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_closed_set.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_closed_set.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 44,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed44.closed.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed44_val_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_context/seed44_val_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 44,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_context.seed44.set_max.val",
-      "kind": "set_rescore",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/rescore_sets.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_closed_set.json",
-        "--aggregator",
-        "max",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_set_max.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_set_max.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_set_max.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_context",
-        "seed": 44,
-        "split": "val",
-        "decoder": "set_max"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed42.train",
-      "kind": "train",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/train_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--train-csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
-        "--output-dir",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--max-per-class",
-        "250",
-        "--view",
-        "evidence",
-        "--epochs",
-        "3.0",
-        "--batch-size",
-        "2",
-        "--gradient-accumulation",
-        "8",
-        "--seed",
-        "42"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/final/adapter_config.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/run_metadata.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 42,
-        "split": "train",
-        "decoder": "train"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed42.free.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 42,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed42.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed42_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed42_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 42,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed42.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_closed_set.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_closed_set.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 42,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed42.closed.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed42_val_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed42_val_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 42,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed42.set_max.val",
-      "kind": "set_rescore",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/rescore_sets.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_closed_set.json",
-        "--aggregator",
-        "max",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_set_max.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_set_max.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_set_max.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 42,
-        "split": "val",
-        "decoder": "set_max"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed43.train",
-      "kind": "train",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/train_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--train-csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
-        "--output-dir",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--max-per-class",
-        "250",
-        "--view",
-        "evidence",
-        "--epochs",
-        "3.0",
-        "--batch-size",
-        "2",
-        "--gradient-accumulation",
-        "8",
-        "--seed",
-        "43"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/final/adapter_config.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/run_metadata.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 43,
-        "split": "train",
-        "decoder": "train"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed43.free.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 43,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed43.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed43_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed43_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 43,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed43.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_closed_set.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_closed_set.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 43,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed43.closed.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed43_val_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed43_val_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 43,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed43.set_max.val",
-      "kind": "set_rescore",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/rescore_sets.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_closed_set.json",
-        "--aggregator",
-        "max",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_set_max.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_set_max.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_set_max.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 43,
-        "split": "val",
-        "decoder": "set_max"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed44.train",
-      "kind": "train",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/train_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--train-csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
-        "--output-dir",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--max-per-class",
-        "250",
-        "--view",
-        "evidence",
-        "--epochs",
-        "3.0",
-        "--batch-size",
-        "2",
-        "--gradient-accumulation",
-        "8",
-        "--seed",
-        "44"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/final/adapter_config.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/run_metadata.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 44,
-        "split": "train",
-        "decoder": "train"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed44.free.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 44,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed44.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed44_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed44_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 44,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed44.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_closed_set.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_closed_set.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 44,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed44.closed.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed44_val_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_evidence/seed44_val_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 44,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_evidence.seed44.set_max.val",
-      "kind": "set_rescore",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/rescore_sets.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_closed_set.json",
-        "--aggregator",
-        "max",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_set_max.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_set_max.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_set_max.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_evidence",
-        "seed": 44,
-        "split": "val",
-        "decoder": "set_max"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed42.train",
-      "kind": "train",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/train_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--train-csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
-        "--output-dir",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--max-per-class",
-        "250",
-        "--view",
-        "pair",
-        "--epochs",
-        "3.0",
-        "--batch-size",
-        "2",
-        "--gradient-accumulation",
-        "8",
-        "--seed",
-        "42"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/final/adapter_config.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/run_metadata.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 42,
-        "split": "train",
-        "decoder": "train"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed42.free.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "pair",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 42,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed42.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed42_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed42_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 42,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed42.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "pair",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_closed_set.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_closed_set.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 42,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed42.closed.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed42_val_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed42_val_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 42,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed42.set_max.val",
-      "kind": "set_rescore",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/rescore_sets.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_closed_set.json",
-        "--aggregator",
-        "max",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_set_max.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_set_max.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_set_max.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 42,
-        "split": "val",
-        "decoder": "set_max"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed42.deletion_logsumexp.val",
-      "kind": "evidence_deletion",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_evidence_deletion.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_closed_set.json",
-        "--aggregator",
-        "logsumexp",
         "--seed",
         "42",
         "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed42_val_deletion_logsumexp.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/cropped_caption_targets/seed42.jsonl"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed42_val_deletion_logsumexp.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/cropped_caption_targets/seed42.jsonl"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption_targets",
         "seed": 42,
-        "split": "val",
-        "decoder": "deletion_logsumexp"
+        "split": "train",
+        "decoder": "none"
       },
-      "status": "pending",
+      "status": "skipped_existing",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed42.deletion_max.val",
-      "kind": "evidence_deletion",
+      "step_id": "session_disjoint.grounded_caption.seed42.train",
+      "kind": "train",
       "command": [
         "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_evidence_deletion.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_closed_set.json",
-        "--aggregator",
-        "max",
+        "/media/data1/feihong/UAV_understanding/scripts/train_qwen.py",
+        "--model-path",
+        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
+        "--data-root",
+        "/media/data1/feihong/uav_understanding_data",
+        "--train-csv",
+        "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
+        "--output-dir",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42",
+        "--labels-file",
+        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
+        "--max-per-class",
+        "250",
+        "--view",
+        "context",
+        "--epochs",
+        "3.0",
+        "--batch-size",
+        "2",
+        "--gradient-accumulation",
+        "8",
         "--seed",
         "42",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed42_val_deletion_max.json"
+        "--targets-jsonl",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/cropped_caption_targets/seed42.jsonl"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed42_val_deletion_max.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/final/adapter_config.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/run_metadata.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 42,
-        "split": "val",
-        "decoder": "deletion_max"
+        "split": "train",
+        "decoder": "train"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed42.as_context.free.val",
+      "step_id": "session_disjoint.grounded_caption.seed42.free.val",
       "kind": "evaluation",
       "command": [
         "/home/feihong/miniconda3/bin/python",
@@ -1797,7 +124,7 @@
         "--model-path",
         "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
         "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/final",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/final",
         "--data-root",
         "/media/data1/feihong/uav_understanding_data",
         "--csv",
@@ -1807,30 +134,30 @@
         "--view",
         "context",
         "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_context_predictions.jsonl"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_predictions.jsonl"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_context_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_context_predictions.metrics.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_predictions.jsonl",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_predictions.metrics.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
+        "experiment": "grounded_caption",
         "seed": 42,
         "split": "val",
         "decoder": "free"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed42.as_context.free.val.analyze",
+      "step_id": "session_disjoint.grounded_caption.seed42.free.val.analyze",
       "kind": "analysis",
       "command": [
         "/home/feihong/miniconda3/bin/python",
         "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
         "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_context_predictions.jsonl",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_predictions.jsonl",
         "--manifest",
         "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
         "--labels-file",
@@ -1838,23 +165,23 @@
         "--group-field",
         "session_id",
         "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed42_val_free.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed42_val_free.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed42_val_free.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed42_val_free.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
+        "experiment": "grounded_caption",
         "seed": 42,
         "split": "val",
         "decoder": "free"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed42.as_context.closed.val",
+      "step_id": "session_disjoint.grounded_caption.seed42.closed.val",
       "kind": "evaluation",
       "command": [
         "/home/feihong/miniconda3/bin/python",
@@ -1862,7 +189,7 @@
         "--model-path",
         "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
         "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/final",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/final",
         "--data-root",
         "/media/data1/feihong/uav_understanding_data",
         "--csv",
@@ -1877,30 +204,30 @@
         "logsumexp",
         "--fit-thresholds",
         "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_context_closed_set.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_closed_set.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_context_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_context_closed_set.thresholds.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_closed_set.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_closed_set.thresholds.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
+        "experiment": "grounded_caption",
         "seed": 42,
         "split": "val",
         "decoder": "closed"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed42.as_context.closed.val.analyze",
+      "step_id": "session_disjoint.grounded_caption.seed42.closed.val.analyze",
       "kind": "analysis",
       "command": [
         "/home/feihong/miniconda3/bin/python",
         "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
         "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_context_closed_set.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_closed_set.json",
         "--manifest",
         "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
         "--labels-file",
@@ -1908,214 +235,85 @@
         "--group-field",
         "session_id",
         "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed42_val_closed.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed42_val_closed.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed42_val_closed.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed42_val_closed.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
+        "experiment": "grounded_caption",
         "seed": 42,
         "split": "val",
         "decoder": "closed"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed42.as_evidence.free.val",
-      "kind": "evaluation",
+      "step_id": "session_disjoint.grounded_caption.seed42.set_max.val",
+      "kind": "set_rescore",
       "command": [
         "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_evidence_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_evidence_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_evidence_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
-        "seed": 42,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed42.as_evidence.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_evidence_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed42_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed42_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
-        "seed": 42,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed42.as_evidence.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
+        "/media/data1/feihong/UAV_understanding/scripts/rescore_sets.py",
+        "--scores",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_closed_set.json",
+        "--aggregator",
+        "max",
         "--fit-thresholds",
         "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_evidence_closed_set.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_set_max.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_evidence_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_evidence_closed_set.thresholds.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_set_max.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed42/val_set_max.thresholds.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
+        "experiment": "grounded_caption",
         "seed": 42,
         "split": "val",
-        "decoder": "closed"
+        "decoder": "set_max"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed42.as_evidence.closed.val.analyze",
-      "kind": "analysis",
+      "step_id": "session_disjoint.cropped_caption_targets.seed43",
+      "kind": "target_generation",
       "command": [
         "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_evidence_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
+        "/media/data1/feihong/UAV_understanding/scripts/build_cropped_caption_targets.py",
+        "--data-root",
+        "/media/data1/feihong/uav_understanding_data",
+        "--train-csv",
+        "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
+        "--captions-root",
+        "/media/data1/feihong/uav_understanding_data/description",
         "--labels-file",
         "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
+        "--max-per-class",
+        "250",
+        "--seed",
+        "43",
         "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed42_val_closed.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/cropped_caption_targets/seed43.jsonl"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed42_val_closed.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/cropped_caption_targets/seed43.jsonl"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
-        "seed": 42,
-        "split": "val",
-        "decoder": "closed"
+        "experiment": "grounded_caption_targets",
+        "seed": 43,
+        "split": "train",
+        "decoder": "none"
       },
-      "status": "pending",
+      "status": "skipped_existing",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed42.view_reliance.free.val",
-      "kind": "view_reliance",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_view_reliance.py",
-        "--joint",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_predictions.jsonl",
-        "--context",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_context_predictions.jsonl",
-        "--evidence",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_evidence_predictions.jsonl",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed42_val_view_reliance_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed42_val_view_reliance_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 42,
-        "split": "val",
-        "decoder": "view_reliance_free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed42.view_reliance.closed.val",
-      "kind": "view_reliance",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_view_reliance.py",
-        "--joint",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_closed_set.json",
-        "--context",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_context_closed_set.json",
-        "--evidence",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_as_evidence_closed_set.json",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed42_val_view_reliance_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed42_val_view_reliance_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 42,
-        "split": "val",
-        "decoder": "view_reliance_closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed43.train",
+      "step_id": "session_disjoint.grounded_caption.seed43.train",
       "kind": "train",
       "command": [
         "/home/feihong/miniconda3/bin/python",
@@ -2127,13 +325,13 @@
         "--train-csv",
         "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
         "--output-dir",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43",
         "--labels-file",
         "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
         "--max-per-class",
         "250",
         "--view",
-        "pair",
+        "context",
         "--epochs",
         "3.0",
         "--batch-size",
@@ -2141,24 +339,26 @@
         "--gradient-accumulation",
         "8",
         "--seed",
-        "43"
+        "43",
+        "--targets-jsonl",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/cropped_caption_targets/seed43.jsonl"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/final/adapter_config.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/run_metadata.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/final/adapter_config.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/run_metadata.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 43,
         "split": "train",
         "decoder": "train"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed43.free.val",
+      "step_id": "session_disjoint.grounded_caption.seed43.free.val",
       "kind": "evaluation",
       "command": [
         "/home/feihong/miniconda3/bin/python",
@@ -2166,7 +366,7 @@
         "--model-path",
         "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
         "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/final",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/final",
         "--data-root",
         "/media/data1/feihong/uav_understanding_data",
         "--csv",
@@ -2174,32 +374,32 @@
         "--labels-file",
         "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
         "--view",
-        "pair",
+        "context",
         "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_predictions.jsonl"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_predictions.jsonl"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_predictions.metrics.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_predictions.jsonl",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_predictions.metrics.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 43,
         "split": "val",
         "decoder": "free"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed43.free.val.analyze",
+      "step_id": "session_disjoint.grounded_caption.seed43.free.val.analyze",
       "kind": "analysis",
       "command": [
         "/home/feihong/miniconda3/bin/python",
         "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
         "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_predictions.jsonl",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_predictions.jsonl",
         "--manifest",
         "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
         "--labels-file",
@@ -2207,23 +407,23 @@
         "--group-field",
         "session_id",
         "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed43_val_free.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed43_val_free.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed43_val_free.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed43_val_free.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 43,
         "split": "val",
         "decoder": "free"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed43.closed.val",
+      "step_id": "session_disjoint.grounded_caption.seed43.closed.val",
       "kind": "evaluation",
       "command": [
         "/home/feihong/miniconda3/bin/python",
@@ -2231,7 +431,7 @@
         "--model-path",
         "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
         "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/final",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/final",
         "--data-root",
         "/media/data1/feihong/uav_understanding_data",
         "--csv",
@@ -2239,37 +439,37 @@
         "--labels-file",
         "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
         "--view",
-        "pair",
+        "context",
         "--candidate-batch-size",
         "18",
         "--set-aggregator",
         "logsumexp",
         "--fit-thresholds",
         "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_closed_set.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_closed_set.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_closed_set.thresholds.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_closed_set.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_closed_set.thresholds.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 43,
         "split": "val",
         "decoder": "closed"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed43.closed.val.analyze",
+      "step_id": "session_disjoint.grounded_caption.seed43.closed.val.analyze",
       "kind": "analysis",
       "command": [
         "/home/feihong/miniconda3/bin/python",
         "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
         "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_closed_set.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_closed_set.json",
         "--manifest",
         "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
         "--labels-file",
@@ -2277,433 +477,85 @@
         "--group-field",
         "session_id",
         "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed43_val_closed.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed43_val_closed.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed43_val_closed.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed43_val_closed.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 43,
         "split": "val",
         "decoder": "closed"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed43.set_max.val",
+      "step_id": "session_disjoint.grounded_caption.seed43.set_max.val",
       "kind": "set_rescore",
       "command": [
         "/home/feihong/miniconda3/bin/python",
         "/media/data1/feihong/UAV_understanding/scripts/rescore_sets.py",
         "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_closed_set.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_closed_set.json",
         "--aggregator",
         "max",
         "--fit-thresholds",
         "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_set_max.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_set_max.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_set_max.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_set_max.thresholds.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_set_max.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed43/val_set_max.thresholds.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 43,
         "split": "val",
         "decoder": "set_max"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed43.deletion_logsumexp.val",
-      "kind": "evidence_deletion",
+      "step_id": "session_disjoint.cropped_caption_targets.seed44",
+      "kind": "target_generation",
       "command": [
         "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_evidence_deletion.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_closed_set.json",
-        "--aggregator",
-        "logsumexp",
+        "/media/data1/feihong/UAV_understanding/scripts/build_cropped_caption_targets.py",
+        "--data-root",
+        "/media/data1/feihong/uav_understanding_data",
+        "--train-csv",
+        "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
+        "--captions-root",
+        "/media/data1/feihong/uav_understanding_data/description",
+        "--labels-file",
+        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
+        "--max-per-class",
+        "250",
         "--seed",
-        "43",
+        "44",
         "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed43_val_deletion_logsumexp.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/cropped_caption_targets/seed44.jsonl"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed43_val_deletion_logsumexp.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/cropped_caption_targets/seed44.jsonl"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 43,
-        "split": "val",
-        "decoder": "deletion_logsumexp"
+        "experiment": "grounded_caption_targets",
+        "seed": 44,
+        "split": "train",
+        "decoder": "none"
       },
-      "status": "pending",
+      "status": "skipped_existing",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed43.deletion_max.val",
-      "kind": "evidence_deletion",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_evidence_deletion.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_closed_set.json",
-        "--aggregator",
-        "max",
-        "--seed",
-        "43",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed43_val_deletion_max.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed43_val_deletion_max.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 43,
-        "split": "val",
-        "decoder": "deletion_max"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed43.as_context.free.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_context_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_context_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_context_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
-        "seed": 43,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed43.as_context.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_context_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed43_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed43_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
-        "seed": 43,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed43.as_context.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_context_closed_set.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_context_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_context_closed_set.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
-        "seed": 43,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed43.as_context.closed.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_context_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed43_val_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed43_val_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
-        "seed": 43,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed43.as_evidence.free.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_evidence_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_evidence_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_evidence_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
-        "seed": 43,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed43.as_evidence.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_evidence_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed43_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed43_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
-        "seed": 43,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed43.as_evidence.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_evidence_closed_set.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_evidence_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_evidence_closed_set.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
-        "seed": 43,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed43.as_evidence.closed.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_evidence_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed43_val_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed43_val_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
-        "seed": 43,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed43.view_reliance.free.val",
-      "kind": "view_reliance",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_view_reliance.py",
-        "--joint",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_predictions.jsonl",
-        "--context",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_context_predictions.jsonl",
-        "--evidence",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_evidence_predictions.jsonl",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed43_val_view_reliance_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed43_val_view_reliance_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 43,
-        "split": "val",
-        "decoder": "view_reliance_free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed43.view_reliance.closed.val",
-      "kind": "view_reliance",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_view_reliance.py",
-        "--joint",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_closed_set.json",
-        "--context",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_context_closed_set.json",
-        "--evidence",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_as_evidence_closed_set.json",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed43_val_view_reliance_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed43_val_view_reliance_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 43,
-        "split": "val",
-        "decoder": "view_reliance_closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.train",
+      "step_id": "session_disjoint.grounded_caption.seed44.train",
       "kind": "train",
       "command": [
         "/home/feihong/miniconda3/bin/python",
@@ -2715,13 +567,13 @@
         "--train-csv",
         "/media/data1/feihong/uav_understanding_data/session_disjoint/train.csv",
         "--output-dir",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44",
         "--labels-file",
         "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
         "--max-per-class",
         "250",
         "--view",
-        "pair",
+        "context",
         "--epochs",
         "3.0",
         "--batch-size",
@@ -2729,24 +581,26 @@
         "--gradient-accumulation",
         "8",
         "--seed",
-        "44"
+        "44",
+        "--targets-jsonl",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/cropped_caption_targets/seed44.jsonl"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/final/adapter_config.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/run_metadata.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/final/adapter_config.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/run_metadata.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 44,
         "split": "train",
         "decoder": "train"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed44.free.val",
+      "step_id": "session_disjoint.grounded_caption.seed44.free.val",
       "kind": "evaluation",
       "command": [
         "/home/feihong/miniconda3/bin/python",
@@ -2754,7 +608,7 @@
         "--model-path",
         "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
         "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/final",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/final",
         "--data-root",
         "/media/data1/feihong/uav_understanding_data",
         "--csv",
@@ -2762,32 +616,32 @@
         "--labels-file",
         "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
         "--view",
-        "pair",
+        "context",
         "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_predictions.jsonl"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_predictions.jsonl"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_predictions.metrics.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_predictions.jsonl",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_predictions.metrics.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 44,
         "split": "val",
         "decoder": "free"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed44.free.val.analyze",
+      "step_id": "session_disjoint.grounded_caption.seed44.free.val.analyze",
       "kind": "analysis",
       "command": [
         "/home/feihong/miniconda3/bin/python",
         "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
         "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_predictions.jsonl",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_predictions.jsonl",
         "--manifest",
         "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
         "--labels-file",
@@ -2795,23 +649,23 @@
         "--group-field",
         "session_id",
         "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed44_val_free.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed44_val_free.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed44_val_free.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed44_val_free.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 44,
         "split": "val",
         "decoder": "free"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed44.closed.val",
+      "step_id": "session_disjoint.grounded_caption.seed44.closed.val",
       "kind": "evaluation",
       "command": [
         "/home/feihong/miniconda3/bin/python",
@@ -2819,7 +673,7 @@
         "--model-path",
         "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
         "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/final",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/final",
         "--data-root",
         "/media/data1/feihong/uav_understanding_data",
         "--csv",
@@ -2827,37 +681,37 @@
         "--labels-file",
         "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
         "--view",
-        "pair",
+        "context",
         "--candidate-batch-size",
         "18",
         "--set-aggregator",
         "logsumexp",
         "--fit-thresholds",
         "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_closed_set.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_closed_set.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_closed_set.thresholds.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_closed_set.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_closed_set.thresholds.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 44,
         "split": "val",
         "decoder": "closed"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed44.closed.val.analyze",
+      "step_id": "session_disjoint.grounded_caption.seed44.closed.val.analyze",
       "kind": "analysis",
       "command": [
         "/home/feihong/miniconda3/bin/python",
         "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
         "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_closed_set.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_closed_set.json",
         "--manifest",
         "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
         "--labels-file",
@@ -2865,813 +719,47 @@
         "--group-field",
         "session_id",
         "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed44_val_closed.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed44_val_closed.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair/seed44_val_closed.json"
+        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/grounded_caption/seed44_val_closed.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 44,
         "split": "val",
         "decoder": "closed"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
-      "step_id": "session_disjoint.label_pair.seed44.set_max.val",
+      "step_id": "session_disjoint.grounded_caption.seed44.set_max.val",
       "kind": "set_rescore",
       "command": [
         "/home/feihong/miniconda3/bin/python",
         "/media/data1/feihong/UAV_understanding/scripts/rescore_sets.py",
         "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_closed_set.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_closed_set.json",
         "--aggregator",
         "max",
         "--fit-thresholds",
         "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_set_max.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_set_max.json"
       ],
       "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_set_max.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_set_max.thresholds.json"
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_set_max.json",
+        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/grounded_caption/seed44/val_set_max.thresholds.json"
       ],
       "metadata": {
         "protocol": "session_disjoint",
-        "experiment": "label_pair",
+        "experiment": "grounded_caption",
         "seed": 44,
         "split": "val",
         "decoder": "set_max"
       },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.deletion_logsumexp.val",
-      "kind": "evidence_deletion",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_evidence_deletion.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_closed_set.json",
-        "--aggregator",
-        "logsumexp",
-        "--seed",
-        "44",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed44_val_deletion_logsumexp.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed44_val_deletion_logsumexp.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 44,
-        "split": "val",
-        "decoder": "deletion_logsumexp"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.deletion_max.val",
-      "kind": "evidence_deletion",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_evidence_deletion.py",
-        "--scores",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_closed_set.json",
-        "--aggregator",
-        "max",
-        "--seed",
-        "44",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed44_val_deletion_max.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed44_val_deletion_max.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 44,
-        "split": "val",
-        "decoder": "deletion_max"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.as_context.free.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_context_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_context_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_context_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
-        "seed": 44,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.as_context.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_context_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed44_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed44_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
-        "seed": 44,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.as_context.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "context",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_context_closed_set.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_context_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_context_closed_set.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
-        "seed": 44,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.as_context.closed.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_context_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed44_val_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_context/seed44_val_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_context",
-        "seed": 44,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.as_evidence.free.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_qwen.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_evidence_predictions.jsonl"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_evidence_predictions.jsonl",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_evidence_predictions.metrics.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
-        "seed": 44,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.as_evidence.free.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_evidence_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed44_val_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed44_val_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
-        "seed": 44,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.as_evidence.closed.val",
-      "kind": "evaluation",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_closed_set.py",
-        "--model-path",
-        "/media/data1/feihong/UAV_understanding/models/qwen3-vl",
-        "--adapter-path",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/final",
-        "--data-root",
-        "/media/data1/feihong/uav_understanding_data",
-        "--csv",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--view",
-        "evidence",
-        "--candidate-batch-size",
-        "18",
-        "--set-aggregator",
-        "logsumexp",
-        "--fit-thresholds",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_evidence_closed_set.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_evidence_closed_set.json",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_evidence_closed_set.thresholds.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
-        "seed": 44,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.as_evidence.closed.val.analyze",
-      "kind": "analysis",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/analyze_predictions.py",
-        "--predictions",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_evidence_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed44_val_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/metrics/session_disjoint/label_pair_as_evidence/seed44_val_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair_as_evidence",
-        "seed": 44,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.view_reliance.free.val",
-      "kind": "view_reliance",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_view_reliance.py",
-        "--joint",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_predictions.jsonl",
-        "--context",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_context_predictions.jsonl",
-        "--evidence",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_evidence_predictions.jsonl",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed44_val_view_reliance_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed44_val_view_reliance_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 44,
-        "split": "val",
-        "decoder": "view_reliance_free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.label_pair.seed44.view_reliance.closed.val",
-      "kind": "view_reliance",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/evaluate_view_reliance.py",
-        "--joint",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_closed_set.json",
-        "--context",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_context_closed_set.json",
-        "--evidence",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_as_evidence_closed_set.json",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed44_val_view_reliance_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/diagnostics/session_disjoint/label_pair/seed44_val_view_reliance_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "label_pair",
-        "seed": 44,
-        "split": "val",
-        "decoder": "view_reliance_closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_context.seed42.free.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_predictions.jsonl",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed42_val_pair_vs_context_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed42_val_pair_vs_context_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_context",
-        "seed": 42,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_context.seed42.closed.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed42/val_closed_set.json",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed42_val_pair_vs_context_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed42_val_pair_vs_context_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_context",
-        "seed": 42,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_context.seed43.free.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_predictions.jsonl",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed43_val_pair_vs_context_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed43_val_pair_vs_context_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_context",
-        "seed": 43,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_context.seed43.closed.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed43/val_closed_set.json",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed43_val_pair_vs_context_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed43_val_pair_vs_context_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_context",
-        "seed": 43,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_context.seed44.free.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_predictions.jsonl",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed44_val_pair_vs_context_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed44_val_pair_vs_context_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_context",
-        "seed": 44,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_context.seed44.closed.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_context/seed44/val_closed_set.json",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed44_val_pair_vs_context_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed44_val_pair_vs_context_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_context",
-        "seed": 44,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_evidence.seed42.free.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_predictions.jsonl",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed42_val_pair_vs_evidence_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed42_val_pair_vs_evidence_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_evidence",
-        "seed": 42,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_evidence.seed42.closed.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed42/val_closed_set.json",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed42/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed42_val_pair_vs_evidence_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed42_val_pair_vs_evidence_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_evidence",
-        "seed": 42,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_evidence.seed43.free.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_predictions.jsonl",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed43_val_pair_vs_evidence_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed43_val_pair_vs_evidence_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_evidence",
-        "seed": 43,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_evidence.seed43.closed.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed43/val_closed_set.json",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed43/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed43_val_pair_vs_evidence_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed43_val_pair_vs_evidence_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_evidence",
-        "seed": 43,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_evidence.seed44.free.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_predictions.jsonl",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_predictions.jsonl",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed44_val_pair_vs_evidence_free.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed44_val_pair_vs_evidence_free.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_evidence",
-        "seed": 44,
-        "split": "val",
-        "decoder": "free"
-      },
-      "status": "pending",
-      "log": null
-    },
-    {
-      "step_id": "session_disjoint.compare.pair_vs_evidence.seed44.closed.val",
-      "kind": "comparison",
-      "command": [
-        "/home/feihong/miniconda3/bin/python",
-        "/media/data1/feihong/UAV_understanding/scripts/compare_predictions.py",
-        "--left",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_evidence/seed44/val_closed_set.json",
-        "--right",
-        "/media/data1/feihong/UAV_understanding/outputs/paper_suite/session_disjoint/label_pair/seed44/val_closed_set.json",
-        "--manifest",
-        "/media/data1/feihong/uav_understanding_data/session_disjoint/val.csv",
-        "--labels-file",
-        "/media/data1/feihong/UAV_understanding/configs/core18_complete.txt",
-        "--group-field",
-        "session_id",
-        "--output",
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed44_val_pair_vs_evidence_closed.json"
-      ],
-      "outputs": [
-        "/media/data1/feihong/UAV_understanding/results/paper_suite/comparisons/session_disjoint/seed44_val_pair_vs_evidence_closed.json"
-      ],
-      "metadata": {
-        "protocol": "session_disjoint",
-        "experiment": "pair_vs_evidence",
-        "seed": 44,
-        "split": "val",
-        "decoder": "closed"
-      },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     },
     {
@@ -3701,7 +789,7 @@
         "split": "all",
         "decoder": "all"
       },
-      "status": "pending",
+      "status": "deferred_prepare_only",
       "log": null
     }
   ]

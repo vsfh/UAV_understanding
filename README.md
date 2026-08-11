@@ -58,10 +58,48 @@ accumulation explicitly if needed.
 Downloading is deliberately separate from every experiment:
 
 ```bash
-python scripts/download_models.py qwen3-vl --models-root ./models
-python scripts/download_models.py openclip --models-root ./models
-python scripts/download_models.py geochat --models-root ./models
+bash runs/00_download_paper_models.sh
 ```
+
+The one-click command downloads and validates all paper checkpoints under
+`/media/data2/feihong/hf_cache`:
+
+- `qwen3-vl`: `Qwen/Qwen3-VL-8B-Instruct`;
+- `openclip`: `openai/clip-vit-large-patch14`;
+- `geochat`: `MBZUAI/geochat-7B`;
+- `uavit-1m`: `ZhanYang-nwpu/GeoChat-UAV`, an official UAVIT-1M-adapted checkpoint;
+- `geochat-vision-tower`: `openai/clip-vit-large-patch14-336`, required by both GeoChat models.
+
+`UAVIT-1M` itself is an instruction-tuning dataset, not a model checkpoint. The downloader uses
+the official GeoChat-UAV model trained on it for the paper's UAVIT-1M-adapted baseline. Download a
+subset or inspect paths without downloading with:
+
+```bash
+python scripts/download_models.py qwen3-vl openclip \
+  --models-root /media/data2/feihong/hf_cache
+python scripts/download_models.py all --dry-run
+```
+
+GeoChat and GeoChat-UAV still require the upstream GeoChat inference code; downloading their
+weights and CLIP-336 vision tower does not make them compatible with the Qwen evaluator.
+
+If downloading from China is slow, the launcher exposes two opt-in network modes. First try the
+official endpoint without the configured proxy and with Xet high-performance mode:
+
+```bash
+BYPASS_PROXY=1 HF_XET_HIGH_PERFORMANCE=1 bash runs/00_download_paper_models.sh
+```
+
+If the direct route is unavailable, use the community mirror instead:
+
+```bash
+BYPASS_PROXY=1 USE_HF_MIRROR=1 bash runs/00_download_paper_models.sh
+```
+
+The mirror mode reads the mirror's model API and uses `aria2c` directly because recent
+`huggingface_hub` versions reject mirror responses that omit Hugging Face-specific commit headers.
+Both commands keep the same target directories and can be rerun after interruption; switching
+from Hub/Xet to aria2 starts separate `.aria2` partial files for unfinished weight shards.
 
 The training and evaluation loaders require a local directory containing `config.json`, set
 `HF_HUB_OFFLINE=1` and `TRANSFORMERS_OFFLINE=1`, and call Transformers with
@@ -89,7 +127,7 @@ python scripts/validate_split.py \
 A four-row code-path smoke run is also available:
 
 ```bash
-bash runs/02_smoke_train.sh /media/data1/feihong/uav_understanding_data ./models/qwen3-vl
+bash runs/02_smoke_train.sh
 ```
 
 ## 4. Train
@@ -160,7 +198,7 @@ For test evaluation, pass the generated validation threshold file and private la
 
 ```bash
 python scripts/evaluate_closed_set.py \
-  --model-path ./models/qwen3-vl \
+  --model-path /media/data2/feihong/hf_cache/qwen3-vl \
   --adapter-path ./outputs/clear_full_seed42/final \
   --data-root /media/data1/feihong/uav_understanding_data \
   --csv /media/data1/feihong/uav_understanding_data/session_disjoint/test_inputs.csv \
@@ -172,14 +210,16 @@ python scripts/evaluate_closed_set.py \
 OpenCLIP validation is:
 
 ```bash
-python scripts/download_models.py openclip --models-root ./models
-bash runs/21_eval_clip_val.sh DATA_ROOT ./models/openclip
+python scripts/download_models.py openclip
+bash runs/21_eval_clip_val.sh
 ```
 
 Qwen3-VL zero-shot direct/definition prompts use the base model without an adapter:
 
 ```bash
-bash runs/23_eval_qwen_zero_shot_val.sh DATA_ROOT ./models/qwen3-vl definition \
+bash runs/23_eval_qwen_zero_shot_val.sh \
+  /media/data1/feihong/uav_understanding_data \
+  /media/data2/feihong/hf_cache/qwen3-vl definition \
   ./outputs/qwen_definition_val.jsonl context
 ```
 
@@ -187,11 +227,70 @@ bash runs/23_eval_qwen_zero_shot_val.sh DATA_ROOT ./models/qwen3-vl definition \
 
 `configs/ontology.yaml` contains compact working definitions and graph edges for all 67 visible
 classes. They are suitable for pipeline development, but the comments and paper both require them to
-be replaced or signed off against the final evidence cards before a main-table run. The downloader
-supports GeoChat, but no local GeoChat snapshot is currently present, and its upstream custom
-inference stack is not silently emulated by this Transformers-native code.
+be replaced or signed off against the final evidence cards before a main-table run. GeoChat and
+GeoChat-UAV snapshots are present locally, but their upstream custom inference stack is not yet
+integrated or silently emulated by this Transformers-native code.
 
 The current implementation covers label/set recognition, ranking metrics, and grouped bootstrap
 confidence intervals. Classwise calibration plots, proposal-crop evaluation, evidence-deletion
 diagnostics, and human explanation-quality ledgers require predictions or annotations not present in
 the supplied data and should be added only when those inputs exist.
+
+## One-click paper-table run
+
+Treat the existing per-crop descriptions under
+`/media/data1/feihong/uav_understanding_data/description` as the grounded-caption supervision and
+run every currently executable three-seed row with:
+
+```bash
+bash runs/30_run_paper_tables.sh
+```
+
+The launcher uses all three protocols, seeds 42/43/44, Qwen3-VL and OpenCLIP from
+`/media/data2/feihong/hf_cache`, and resumable outputs under `outputs/paper_tables`. It also adds a
+normalized-likelihood Qwen definition baseline so mAP, hard-negative accuracy, and AURC are
+available for that main-table row.
+
+After the model runs finish, five generated LaTeX tables and a cell-level coverage ledger are
+written to `results/paper_tables/paper_tables/`. The generated files do not overwrite the
+registered templates under `paper/table/`. Crop captions are recorded as
+`development_only_non_human_audited`; development CLEAR rows are explicitly marked as using proxy
+counterfactual targets. GeoChat inference, four unimplemented PEFT modes, reviewed robustness
+slices, proposal crops, evidence-assignment scores, and blinded caption ratings remain `\tbd`
+rather than receiving invented values.
+
+Extra suite arguments can be appended. For example, select another GPU without editing code:
+
+```bash
+CUDA_VISIBLE_DEVICES=1 bash runs/30_run_paper_tables.sh
+```
+
+This command is intentionally documented but is not launched automatically.
+
+The 49,140 MiB one-click defaults are deliberately conservative: ordinary LoRA keeps batch 2 with
+gradient accumulation 8, while random/graph/CLEAR multi-loss training automatically uses batch 1
+with accumulation 16. Closed-set candidate batch is 2, with 262,144 pixels per image, sequence
+length 2,048, and 128 generated tokens. The runner requires at least 40,000 MiB free before starting
+and enables PyTorch expandable CUDA segments. Closed-set scoring projects vocabulary logits only at
+supervised answer-token positions and never asks Transformers to compute its unused built-in loss.
+
+The terminal shows a total-suite progress bar, Hugging Face training progress, per-image free
+generation/OpenCLIP progress, target-construction progress, bootstrap progress, and closed-set
+candidate-batch progress with allocated/peak GPU memory. Rerunning the same command after a failure
+is safe because `--resume` skips outputs that are complete and restarts incomplete steps.
+
+The safety knobs remain explicit environment variables:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 \
+CANDIDATE_BATCH_SIZE=2 \
+TRAIN_BATCH_SIZE=2 \
+GRADIENT_ACCUMULATION=8 \
+MULTI_LOSS_BATCH_SIZE=1 \
+MULTI_LOSS_GRADIENT_ACCUMULATION=16 \
+MIN_FREE_GPU_MIB=40000 \
+bash runs/30_run_paper_tables.sh
+```
+
+Increasing `CANDIDATE_BATCH_SIZE` above 4 for pair-view evaluation or increasing multi-loss pair
+training above batch 1 is rejected on GPUs with at most 52 GiB.

@@ -344,6 +344,7 @@ def main() -> None:
     summaries = aggregate(records)
     result = {
         "profile": plan["profile"],
+        "supervision_assumptions": plan.get("supervision_assumptions", {}),
         "blockers_not_automated": plan["blockers_not_automated"],
         "metric_records": records,
         "summaries": summaries,

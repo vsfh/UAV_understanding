@@ -3,15 +3,19 @@ from __future__ import annotations
 
 import argparse
 import csv
+import fcntl
 import hashlib
 import json
 import os
 import shlex
 import subprocess
 import sys
+import time
 from collections import defaultdict
 from dataclasses import asdict, dataclass
 from pathlib import Path
+
+from tqdm.auto import tqdm
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -59,7 +63,11 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=Path("/media/data1/feihong/uav_understanding_data"),
     )
-    parser.add_argument("--models-root", type=Path, default=Path("models"))
+    parser.add_argument(
+        "--models-root",
+        type=Path,
+        default=Path("/media/data2/feihong/hf_cache"),
+    )
     parser.add_argument("--output-root", type=Path, default=Path("outputs/paper_suite"))
     parser.add_argument("--results-root", type=Path, default=Path("results/paper_suite"))
     parser.add_argument("--labels-file", type=Path, default=Path("configs/core18_complete.txt"))
@@ -81,6 +89,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--audited-targets", type=Path)
     parser.add_argument("--generic-targets", type=Path)
     parser.add_argument(
+        "--cropped-captions-root",
+        type=Path,
+        default=Path("description"),
+        help="Per-image teacher JSON root, relative to --data-root unless absolute",
+    )
+    parser.add_argument(
         "--provenance-ready-file",
         type=Path,
         help="Official mode requires a JSON file with a top-level READY gate status",
@@ -91,13 +105,29 @@ def parse_args() -> argparse.Namespace:
         help="Required in official mode before private test labels are opened",
     )
     parser.add_argument("--cuda-devices", default="0")
-    parser.add_argument("--candidate-batch-size", type=int, default=18)
+    parser.add_argument(
+        "--min-free-gpu-mib",
+        type=int,
+        default=40_000,
+        help="Fail before the suite starts if logical CUDA device 0 has less free memory",
+    )
+    parser.add_argument("--candidate-batch-size", type=int, default=2)
     parser.add_argument("--max-per-class", type=int, default=250)
     parser.add_argument("--batch-size", type=int, default=2)
     parser.add_argument("--gradient-accumulation", type=int, default=8)
+    parser.add_argument("--multi-loss-batch-size", type=int, default=1)
+    parser.add_argument("--multi-loss-gradient-accumulation", type=int, default=16)
+    parser.add_argument("--max-length", type=int, default=2048)
+    parser.add_argument("--max-pixels", type=int, default=262_144)
+    parser.add_argument("--max-new-tokens", type=int, default=128)
     parser.add_argument("--epochs", type=float, default=3.0)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--prepare-only",
+        action="store_true",
+        help="Run split validation and target generation without loading any model",
+    )
     parser.add_argument(
         "--print-commands",
         action="store_true",
@@ -112,6 +142,19 @@ def parse_args() -> argparse.Namespace:
         "--skip-free-generation",
         action="store_true",
         help="Run only the normalized-likelihood scorer",
+    )
+    parser.add_argument(
+        "--paper-tables-dir",
+        type=Path,
+        help=(
+            "Export the five registered paper-table schemas after suite aggregation; "
+            "defaults to <results-root>/paper_tables"
+        ),
+    )
+    parser.add_argument(
+        "--caption-quality-ledger",
+        type=Path,
+        help="Optional three-rater blinded ledger consumed by the paper-table exporter",
     )
     return parser.parse_args()
 
@@ -196,26 +239,29 @@ def experiments_for(args: argparse.Namespace) -> list[Experiment]:
         Experiment("label_pair", "pair"),
     ]
     if args.profile == "development":
-        target = "__development__"
         experiments.extend(
             [
-                Experiment("proxy_grounded_caption", "context", targets=target),
                 Experiment(
-                    "proxy_random_negative",
+                    "grounded_caption",
+                    "context",
+                    targets="__cropped_captions__",
+                ),
+                Experiment(
+                    "random_negative",
                     "pair",
-                    targets=target,
+                    targets="__cropped_captions__",
                     extra_train_args=("--lambda-neighbor", "0.1", "--random-negative"),
                 ),
                 Experiment(
-                    "proxy_graph_neighbor",
+                    "graph_neighbor",
                     "pair",
-                    targets=target,
+                    targets="__cropped_captions__",
                     extra_train_args=("--lambda-neighbor", "0.1"),
                 ),
                 Experiment(
                     "proxy_clear_no_dropout",
                     "pair",
-                    targets=target,
+                    targets="__cropped_plus_proxy_cf__",
                     extra_train_args=(
                         "--lambda-neighbor",
                         "0.1",
@@ -226,7 +272,7 @@ def experiments_for(args: argparse.Namespace) -> list[Experiment]:
                 Experiment(
                     "proxy_clear_full",
                     "pair",
-                    targets=target,
+                    targets="__cropped_plus_proxy_cf__",
                     extra_train_args=(
                         "--lambda-neighbor",
                         "0.1",
@@ -309,10 +355,18 @@ def preflight(
 ) -> list[str]:
     blockers = [
         "GeoChat is not automated: its upstream custom inference stack is absent.",
-        "PEFT rows other than the implemented LLM-only and projector+LLM LoRA require "
-        "separate architecture-specific training code and hardware.",
-        "Caption ratings, proposal/jitter crops, and challenge-slice annotations are not "
-        "present; the suite cannot fabricate them.",
+        "GeoChat-UAV/UAVIT-1M weights are present, but their upstream inference adapter "
+        "is not integrated.",
+        "Linear-probe, projector-only, QLoRA, full-fine-tuning, and parameter-matched "
+        "attention implementations are absent.",
+        "Human-audited caption ratings, factor/hierarchy annotations, and single-factor "
+        "swap cases are absent.",
+        "Proposal, jittered, irrelevant, and crop-budget inputs plus small-evidence, "
+        "adverse-capture, and complex-background slice annotations are absent.",
+        "Learning-curve group budgets, tail exemplars, six frozen prompt paraphrases, "
+        "and shuffled/missing-crop evaluations are not yet wired into the suite.",
+        "Per-domain macro-F1, evidence-assignment accuracy, ECE, paired permutation/Holm "
+        "tests, and the final heat-map/error-gallery workflow are not yet implemented.",
     ]
     data_root = resolve(args.data_root)
     labels_file = resolve(args.labels_file)
@@ -339,8 +393,24 @@ def preflight(
     target_paths = {
         experiment.targets
         for experiment in experiments
-        if experiment.targets not in {None, "__development__"}
+        if experiment.targets not in {
+            None,
+            "__development__",
+            "__cropped_captions__",
+            "__cropped_plus_proxy_cf__",
+        }
     }
+    if any(
+        experiment.targets in {"__cropped_captions__", "__cropped_plus_proxy_cf__"}
+        for experiment in experiments
+    ):
+        captions_root = (
+            args.cropped_captions_root
+            if args.cropped_captions_root.is_absolute()
+            else data_root / args.cropped_captions_root
+        )
+        if not captions_root.is_dir():
+            raise FileNotFoundError(captions_root)
     if args.development_targets is not None:
         target_paths.add(str(resolve(args.development_targets)))
     for target_text in sorted(target_paths):
@@ -498,6 +568,10 @@ def add_zero_shot(
                 "context",
                 "--prompt",
                 prompt,
+                "--max-new-tokens",
+                args.max_new_tokens,
+                "--max-pixels",
+                args.max_pixels,
                 "--output",
                 qwen_output,
                 *sample_args,
@@ -530,6 +604,90 @@ def add_zero_shot(
                 "decoder": "free",
             },
         )
+
+        if prompt == "definition":
+            qwen_closed_output = (
+                output_root
+                / protocol
+                / "zero_shot"
+                / f"qwen_definition_{split}_closed_set.json"
+            )
+            threshold_args: list[str | Path] = (
+                ["--fit-thresholds"]
+                if split == "val"
+                else [
+                    "--thresholds",
+                    output_root
+                    / protocol
+                    / "zero_shot"
+                    / "qwen_definition_val_closed_set.thresholds.json",
+                ]
+            )
+            closed_prefix = f"{protocol}.zero.qwen_definition.closed.{split}"
+            planner.add(
+                closed_prefix,
+                "evaluation",
+                python_command(
+                    "evaluate_closed_set.py",
+                    "--model-path",
+                    models_root / "qwen3-vl",
+                    "--data-root",
+                    data_root,
+                    "--csv",
+                    csv_path,
+                    *private_args,
+                    "--labels-file",
+                    labels_file,
+                    "--view",
+                    "context",
+                    "--candidate-batch-size",
+                    args.candidate_batch_size,
+                    "--max-length",
+                    args.max_length,
+                    "--max-pixels",
+                    args.max_pixels,
+                    "--set-aggregator",
+                    "logsumexp",
+                    *threshold_args,
+                    "--output",
+                    qwen_closed_output,
+                    *sample_args,
+                ),
+                [
+                    qwen_closed_output,
+                    *(
+                        [qwen_closed_output.with_suffix(".thresholds.json")]
+                        if split == "val"
+                        else []
+                    ),
+                ],
+                protocol=protocol,
+                experiment="qwen_definition",
+                seed=0,
+                split=split,
+                decoder="closed",
+            )
+            add_analysis(
+                planner,
+                step_prefix=closed_prefix,
+                predictions=qwen_closed_output,
+                output=(
+                    results_root
+                    / "metrics"
+                    / protocol
+                    / f"qwen_definition_{split}_closed_analysis.json"
+                ),
+                manifest=csv_path,
+                labels_file=labels_file,
+                group_field=GROUP_FIELDS[protocol],
+                metadata={
+                    "protocol": protocol,
+                    "experiment": "qwen_definition",
+                    "seed": 0,
+                    "split": split,
+                    "decoder": "closed",
+                },
+            )
 
         clip_output = (
             output_root / protocol / "zero_shot" / f"openclip_{prompt}_{split}.json"
@@ -605,6 +763,17 @@ def add_trained_run(
 ) -> None:
     run_dir = output_root / protocol / experiment.name / f"seed{seed}"
     protocol_dir = data_root / protocol
+    uses_multiple_losses = any(
+        flag in experiment.extra_train_args for flag in ("--lambda-neighbor", "--lambda-cf")
+    )
+    train_batch_size = (
+        args.multi_loss_batch_size if uses_multiple_losses else args.batch_size
+    )
+    gradient_accumulation = (
+        args.multi_loss_gradient_accumulation
+        if uses_multiple_losses
+        else args.gradient_accumulation
+    )
     train_args: list[str | Path | int | float] = [
         "--model-path",
         models_root / "qwen3-vl",
@@ -623,9 +792,13 @@ def add_trained_run(
         "--epochs",
         1 if args.profile == "smoke" else args.epochs,
         "--batch-size",
-        args.batch_size,
+        train_batch_size,
         "--gradient-accumulation",
-        1 if args.profile == "smoke" else args.gradient_accumulation,
+        1 if args.profile == "smoke" else gradient_accumulation,
+        "--max-length",
+        args.max_length,
+        "--max-pixels",
+        args.max_pixels,
         "--seed",
         seed,
     ]
@@ -633,7 +806,7 @@ def add_trained_run(
         train_args.extend(["--max-samples", max_samples])
     target_path = (
         targets_override
-        if experiment.targets == "__development__"
+        if targets_override is not None
         else Path(experiment.targets)
         if experiment.targets
         else None
@@ -706,6 +879,10 @@ def add_trained_run(
                     labels_file,
                     "--view",
                     experiment.view,
+                    "--max-new-tokens",
+                    args.max_new_tokens,
+                    "--max-pixels",
+                    args.max_pixels,
                     "--output",
                     predictions,
                     *sample_args,
@@ -767,6 +944,10 @@ def add_trained_run(
                 experiment.view,
                 "--candidate-batch-size",
                 args.candidate_batch_size,
+                "--max-length",
+                args.max_length,
+                "--max-pixels",
+                args.max_pixels,
                 "--set-aggregator",
                 "logsumexp",
                 *threshold_args,
@@ -921,6 +1102,10 @@ def add_trained_run(
                         labels_file,
                         "--view",
                         intervention_view,
+                        "--max-new-tokens",
+                        args.max_new_tokens,
+                        "--max-pixels",
+                        args.max_pixels,
                         "--output",
                         predictions,
                         *sample_args,
@@ -992,6 +1177,10 @@ def add_trained_run(
                     intervention_view,
                     "--candidate-batch-size",
                     args.candidate_batch_size,
+                    "--max-length",
+                    args.max_length,
+                    "--max-pixels",
+                    args.max_pixels,
                     "--set-aggregator",
                     "logsumexp",
                     *threshold_args,
@@ -1106,17 +1295,21 @@ def add_comparisons(
         ("label_evidence", "label_pair", "pair_vs_evidence"),
         ("label_pair_llm_lora", "label_pair", "projector_lora_effect"),
         ("label_pair_unweighted", "label_pair", "label_weight_effect"),
+        ("label_context", "grounded_caption", "caption_effect"),
         ("grounded_caption", "clear_full", "clear_vs_grounded"),
+        (
+            "grounded_caption",
+            "proxy_clear_full",
+            "proxy_clear_vs_grounded",
+        ),
         ("random_negative", "graph_neighbor", "graph_vs_random"),
         ("graph_neighbor", "clear_no_dropout", "counterfactual_effect"),
-        ("clear_no_dropout", "clear_full", "dropout_effect"),
-        ("proxy_grounded_caption", "proxy_clear_full", "proxy_clear_vs_grounded"),
-        ("proxy_random_negative", "proxy_graph_neighbor", "proxy_graph_vs_random"),
         (
-            "proxy_graph_neighbor",
+            "graph_neighbor",
             "proxy_clear_no_dropout",
             "proxy_counterfactual_effect",
         ),
+        ("clear_no_dropout", "clear_full", "dropout_effect"),
         ("proxy_clear_no_dropout", "proxy_clear_full", "proxy_dropout_effect"),
     ]
     for left, right, comparison in pairs:
@@ -1289,6 +1482,147 @@ def make_plan(args: argparse.Namespace) -> tuple[list[Step], list[str], Path, Pa
                                 split="train",
                                 decoder="none",
                             )
+                elif experiment.targets == "__cropped_captions__":
+                    targets_override = (
+                        output_root
+                        / protocol
+                        / "cropped_caption_targets"
+                        / f"seed{seed}.jsonl"
+                    )
+                    target_prefix = f"{protocol}.cropped_caption_targets.seed{seed}"
+                    if target_prefix not in planner.ids:
+                        captions_root = (
+                            args.cropped_captions_root
+                            if args.cropped_captions_root.is_absolute()
+                            else data_root / args.cropped_captions_root
+                        )
+                        planner.add(
+                            target_prefix,
+                            "target_generation",
+                            python_command(
+                                "build_cropped_caption_targets.py",
+                                "--data-root",
+                                data_root,
+                                "--train-csv",
+                                data_root / protocol / "train.csv",
+                                "--captions-root",
+                                captions_root,
+                                "--labels-file",
+                                labels_file,
+                                "--max-per-class",
+                                args.max_per_class,
+                                "--seed",
+                                seed,
+                                "--output",
+                                targets_override,
+                            ),
+                            [targets_override],
+                            protocol=protocol,
+                            experiment="grounded_caption_targets",
+                            seed=seed,
+                            split="train",
+                            decoder="none",
+                        )
+                elif experiment.targets == "__cropped_plus_proxy_cf__":
+                    cropped_targets = (
+                        output_root
+                        / protocol
+                        / "cropped_caption_targets"
+                        / f"seed{seed}.jsonl"
+                    )
+                    cropped_prefix = f"{protocol}.cropped_caption_targets.seed{seed}"
+                    if cropped_prefix not in planner.ids:
+                        captions_root = (
+                            args.cropped_captions_root
+                            if args.cropped_captions_root.is_absolute()
+                            else data_root / args.cropped_captions_root
+                        )
+                        planner.add(
+                            cropped_prefix,
+                            "target_generation",
+                            python_command(
+                                "build_cropped_caption_targets.py",
+                                "--data-root",
+                                data_root,
+                                "--train-csv",
+                                data_root / protocol / "train.csv",
+                                "--captions-root",
+                                captions_root,
+                                "--labels-file",
+                                labels_file,
+                                "--max-per-class",
+                                args.max_per_class,
+                                "--seed",
+                                seed,
+                                "--output",
+                                cropped_targets,
+                            ),
+                            [cropped_targets],
+                            protocol=protocol,
+                            experiment="grounded_caption_targets",
+                            seed=seed,
+                            split="train",
+                            decoder="none",
+                        )
+                    proxy_targets = (
+                        output_root / protocol / "proxy_targets" / f"seed{seed}.jsonl"
+                    )
+                    proxy_prefix = f"{protocol}.proxy_targets.seed{seed}"
+                    if proxy_prefix not in planner.ids:
+                        planner.add(
+                            proxy_prefix,
+                            "target_generation",
+                            python_command(
+                                "build_proxy_targets.py",
+                                "--data-root",
+                                data_root,
+                                "--train-csv",
+                                data_root / protocol / "train.csv",
+                                "--labels-file",
+                                labels_file,
+                                "--max-per-class",
+                                args.max_per_class,
+                                "--seed",
+                                seed,
+                                "--output",
+                                proxy_targets,
+                            ),
+                            [proxy_targets],
+                            protocol=protocol,
+                            experiment="proxy_targets",
+                            seed=seed,
+                            split="train",
+                            decoder="none",
+                        )
+                    targets_override = (
+                        output_root
+                        / protocol
+                        / "cropped_caption_proxy_cf_targets"
+                        / f"seed{seed}.jsonl"
+                    )
+                    merged_prefix = (
+                        f"{protocol}.cropped_caption_proxy_cf_targets.seed{seed}"
+                    )
+                    if merged_prefix not in planner.ids:
+                        planner.add(
+                            merged_prefix,
+                            "target_generation",
+                            python_command(
+                                "merge_grounded_proxy_counterfactuals.py",
+                                "--grounded-targets",
+                                cropped_targets,
+                                "--proxy-targets",
+                                proxy_targets,
+                                "--output",
+                                targets_override,
+                            ),
+                            [targets_override],
+                            protocol=protocol,
+                            experiment="grounded_proxy_counterfactual_targets",
+                            seed=seed,
+                            split="train",
+                            decoder="none",
+                        )
                 add_trained_run(
                     planner,
                     args=args,
@@ -1344,6 +1678,47 @@ def make_plan(args: argparse.Namespace) -> tuple[list[Step], list[str], Path, Pa
         split="all",
         decoder="all",
     )
+    paper_tables_dir = resolve(args.paper_tables_dir) if args.paper_tables_dir else (
+        results_root / "paper_tables"
+    )
+    table_args: list[str | Path | int] = [
+        "--summary",
+        summary_path,
+        "--output-dir",
+        paper_tables_dir,
+        "--primary-protocol",
+        "session_disjoint" if "session_disjoint" in protocols else protocols[0],
+        "--expected-seeds",
+        *seeds,
+        "--grounded-source",
+        "human-audited" if args.profile == "official" else "crop-caption",
+    ]
+    if args.caption_quality_ledger is not None:
+        table_args.extend(
+            ["--caption-quality-ledger", resolve(args.caption_quality_ledger)]
+        )
+    table_outputs = [
+        paper_tables_dir / filename
+        for filename in (
+            "main_results.tex",
+            "ablation.tex",
+            "peft_efficiency.tex",
+            "robustness.tex",
+            "caption_quality.tex",
+            "table_manifest.json",
+        )
+    ]
+    planner.add(
+        "suite.export_paper_tables",
+        "paper_table_export",
+        python_command("export_paper_tables.py", *table_args),
+        table_outputs,
+        protocol="all",
+        experiment="paper_tables",
+        seed=0,
+        split="all",
+        decoder="all",
+    )
     return planner.steps, blockers, plan_path, results_root
 
 
@@ -1358,6 +1733,17 @@ def save_plan(
     payload = {
         "profile": args.profile,
         "root": str(ROOT),
+        "supervision_assumptions": {
+            "crop_caption_is_grounded_caption": args.profile == "development",
+            "crop_caption_supervision_tier": (
+                "teacher_cropped_caption_not_human_audited"
+                if args.profile == "development"
+                else None
+            ),
+            "development_clear_counterfactual": (
+                "ontology_definition_proxy" if args.profile == "development" else None
+            ),
+        },
         "blockers_not_automated": blockers,
         "steps": [asdict(step) for step in steps],
     }
@@ -1368,25 +1754,50 @@ def outputs_exist(step: Step) -> bool:
     return bool(step.outputs) and all(Path(path).exists() for path in step.outputs)
 
 
+def acquire_suite_lock(results_root: Path):
+    results_root.mkdir(parents=True, exist_ok=True)
+    lock_path = results_root / ".suite.lock"
+    handle = lock_path.open("a+", encoding="utf-8")
+    try:
+        fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError as exc:
+        handle.seek(0)
+        owner = handle.read().strip() or "unknown process"
+        handle.close()
+        raise RuntimeError(
+            f"Another experiment suite owns {lock_path}: {owner}"
+        ) from exc
+    handle.seek(0)
+    handle.truncate()
+    handle.write(f"pid={os.getpid()} started={time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+    handle.flush()
+    return handle
+
+
 def run_step(step: Step, logs_root: Path, env: dict[str, str]) -> None:
     log_path = logs_root / f"{step.step_id}.log"
     log_path.parent.mkdir(parents=True, exist_ok=True)
     step.log = str(log_path)
     print(f"\n[{step.step_id}] {shlex.join(step.command)}", flush=True)
-    with log_path.open("w", encoding="utf-8") as log:
+    with log_path.open("wb") as log:
         process = subprocess.Popen(
             step.command,
             cwd=ROOT,
             env=env,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
-            text=True,
-            bufsize=1,
+            text=False,
+            bufsize=0,
         )
         assert process.stdout is not None
-        for line in process.stdout:
-            print(line, end="")
-            log.write(line)
+        while True:
+            chunk = os.read(process.stdout.fileno(), 4096)
+            if not chunk:
+                break
+            sys.stdout.buffer.write(chunk)
+            sys.stdout.buffer.flush()
+            log.write(chunk)
+            log.flush()
         return_code = process.wait()
     if return_code:
         raise subprocess.CalledProcessError(return_code, step.command)
@@ -1395,6 +1806,30 @@ def run_step(step: Step, logs_root: Path, env: dict[str, str]) -> None:
 def main() -> None:
     os.chdir(ROOT)
     args = parse_args()
+    _suite_lock = acquire_suite_lock(resolve(args.results_root))
+    if not args.dry_run and not args.prepare_only:
+        os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_devices
+        import torch
+
+        if not torch.cuda.is_available():
+            raise RuntimeError(
+                "CUDA is unavailable. Use --prepare-only for data preparation, --dry-run "
+                "to inspect the suite, or run on a GPU host."
+            )
+        free_bytes, total_bytes = torch.cuda.mem_get_info(0)
+        free_mib = free_bytes // 2**20
+        total_mib = total_bytes // 2**20
+        print(
+            f"CUDA logical device 0: {free_mib} MiB free / {total_mib} MiB total "
+            f"(physical selection CUDA_VISIBLE_DEVICES={args.cuda_devices})",
+            flush=True,
+        )
+        if free_mib < args.min_free_gpu_mib:
+            raise RuntimeError(
+                f"Only {free_mib} MiB GPU memory is free; this paper suite requires at "
+                f"least {args.min_free_gpu_mib} MiB before model loading. Stop other GPU "
+                "processes or explicitly lower --min-free-gpu-mib after reviewing the risk."
+            )
     try:
         steps, blockers, plan_path, results_root = make_plan(args)
     except (FileNotFoundError, ValueError, json.JSONDecodeError) as exc:
@@ -1416,34 +1851,52 @@ def main() -> None:
             print("Dry run complete; pass --print-commands or inspect the JSON plan.")
         return
 
-    import torch
-
-    if not torch.cuda.is_available():
-        raise RuntimeError(
-            "CUDA is unavailable. Use --dry-run to inspect the suite or run on a GPU host."
-        )
-
     env = os.environ.copy()
     env["CUDA_VISIBLE_DEVICES"] = args.cuda_devices
     env["HF_HUB_OFFLINE"] = "1"
     env["TRANSFORMERS_OFFLINE"] = "1"
+    env.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+    env.setdefault("TOKENIZERS_PARALLELISM", "false")
     logs_root = results_root / "logs"
-    for step in steps:
-        if args.resume and step.kind != "summary" and outputs_exist(step):
-            step.status = "skipped_existing"
-            print(f"[SKIP] {step.step_id}")
+    with tqdm(
+        total=len(steps),
+        desc="paper experiment suite",
+        unit="step",
+        dynamic_ncols=True,
+        mininterval=0.5,
+    ) as suite_progress:
+        for step_index, step in enumerate(steps, 1):
+            suite_progress.set_postfix_str(
+                f"{step_index}/{len(steps)} {step.step_id}", refresh=True
+            )
+            if args.prepare_only and step.kind not in {
+                "validation",
+                "target_generation",
+            }:
+                step.status = "deferred_prepare_only"
+                suite_progress.update(1)
+                continue
+            if args.resume and step.kind != "summary" and outputs_exist(step):
+                step.status = "skipped_existing"
+                tqdm.write(f"[SKIP] {step.step_id}")
+                save_plan(plan_path, args=args, blockers=blockers, steps=steps)
+                suite_progress.update(1)
+                continue
+            step.status = "running"
             save_plan(plan_path, args=args, blockers=blockers, steps=steps)
-            continue
-        step.status = "running"
-        save_plan(plan_path, args=args, blockers=blockers, steps=steps)
-        try:
-            run_step(step, logs_root, env)
-        except Exception:
-            step.status = "failed"
+            try:
+                run_step(step, logs_root, env)
+            except Exception:
+                step.status = "failed"
+                save_plan(plan_path, args=args, blockers=blockers, steps=steps)
+                raise
+            step.status = "completed"
             save_plan(plan_path, args=args, blockers=blockers, steps=steps)
-            raise
-        step.status = "completed"
+            suite_progress.update(1)
+    if args.prepare_only:
         save_plan(plan_path, args=args, blockers=blockers, steps=steps)
+        print(f"Preparation completed. Full plan: {plan_path}")
+        return
     print(f"Completed. Summary: {results_root / 'suite_summary.json'}")
 
 

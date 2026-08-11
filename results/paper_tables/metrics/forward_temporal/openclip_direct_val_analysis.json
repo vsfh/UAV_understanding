@@ -1,0 +1,233 @@
+{
+  "num_rows": 2684,
+  "num_groups": 619,
+  "group_field": "session_id",
+  "macro_f1": 0.06201252039711072,
+  "macro_f1_ci95": [
+    0.0510081287552276,
+    0.0733808212354834
+  ],
+  "micro_f1": 0.21274217585692995,
+  "micro_f1_ci95": [
+    0.18557784777607014,
+    0.2403998251953084
+  ],
+  "top_confusions": [
+    {
+      "target": "crop_lodging",
+      "prediction": "grain_drying_road",
+      "count": 957
+    },
+    {
+      "target": "green_algae_duckweed",
+      "prediction": "grain_drying_road",
+      "count": 303
+    },
+    {
+      "target": "green_algae_duckweed",
+      "prediction": "unclean_water_surface",
+      "count": 141
+    },
+    {
+      "target": "green_algae_duckweed",
+      "prediction": "crop_lodging",
+      "count": 89
+    },
+    {
+      "target": "exposed_garbage",
+      "prediction": "grain_drying_road",
+      "count": 72
+    },
+    {
+      "target": "green_algae_duckweed",
+      "prediction": "floating_garbage",
+      "count": 58
+    },
+    {
+      "target": "suspected_fire_smoke",
+      "prediction": "grain_drying_road",
+      "count": 51
+    },
+    {
+      "target": "dangerous_building",
+      "prediction": "grain_drying_road",
+      "count": 33
+    },
+    {
+      "target": "green_algae_duckweed",
+      "prediction": "bare_soil_netting",
+      "count": 30
+    },
+    {
+      "target": "crop_lodging",
+      "prediction": "open_storage_factory",
+      "count": 29
+    },
+    {
+      "target": "green_algae_duckweed",
+      "prediction": "open_storage_factory",
+      "count": 25
+    },
+    {
+      "target": "green_algae_duckweed",
+      "prediction": "construction_waste",
+      "count": 22
+    },
+    {
+      "target": "exposed_garbage",
+      "prediction": "crop_lodging",
+      "count": 18
+    },
+    {
+      "target": "green_algae_duckweed",
+      "prediction": "piled_materials_factory",
+      "count": 17
+    },
+    {
+      "target": "outbuilding_materials",
+      "prediction": "grain_drying_road",
+      "count": 13
+    },
+    {
+      "target": "suspected_fire_smoke",
+      "prediction": "crop_lodging",
+      "count": 12
+    },
+    {
+      "target": "grain_drying_road",
+      "prediction": "crop_lodging",
+      "count": 11
+    },
+    {
+      "target": "unclean_water_surface",
+      "prediction": "grain_drying_road",
+      "count": 10
+    },
+    {
+      "target": "exposed_garbage",
+      "prediction": "open_storage_factory",
+      "count": 9
+    },
+    {
+      "target": "suspected_fire_smoke",
+      "prediction": "piled_materials_factory",
+      "count": 8
+    }
+  ],
+  "per_class": {
+    "bare_soil_netting": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 0
+    },
+    "building_demolition": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 1
+    },
+    "collapsed_house_wall": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 11
+    },
+    "construction_waste": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 5
+    },
+    "crop_lodging": {
+      "precision": 0.6829268292682927,
+      "recall": 0.23422053231939163,
+      "f1": 0.3488108720271801,
+      "support": 1315
+    },
+    "dangerous_building": {
+      "precision": 0.05,
+      "recall": 0.015873015873015872,
+      "f1": 0.024096385542168676,
+      "support": 63
+    },
+    "exposed_garbage": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 127
+    },
+    "floating_garbage": {
+      "precision": 0.023809523809523808,
+      "recall": 0.4,
+      "f1": 0.0449438202247191,
+      "support": 5
+    },
+    "garbage_collection_point": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 0
+    },
+    "glass_greenhouse": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 0
+    },
+    "grain_drying_road": {
+      "precision": 0.07289002557544758,
+      "recall": 0.75,
+      "f1": 0.13286713286713286,
+      "support": 152
+    },
+    "green_algae_duckweed": {
+      "precision": 0.8888888888888888,
+      "recall": 0.15440289505428226,
+      "f1": 0.263103802672148,
+      "support": 829
+    },
+    "open_storage_construction": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 0
+    },
+    "open_storage_factory": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 0
+    },
+    "outbuilding_materials": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 27
+    },
+    "piled_materials_factory": {
+      "precision": 0.05555555555555555,
+      "recall": 0.3,
+      "f1": 0.09375,
+      "support": 10
+    },
+    "suspected_fire_smoke": {
+      "precision": 1.0,
+      "recall": 0.0782608695652174,
+      "f1": 0.14516129032258066,
+      "support": 115
+    },
+    "unclean_water_surface": {
+      "precision": 0.03636363636363636,
+      "recall": 0.25,
+      "f1": 0.06349206349206349,
+      "support": 24
+    }
+  },
+  "mean_average_precision": 0.12144570441532057,
+  "micro_average_precision": 0.23937663581011887,
+  "aurc": 0.7541821139224605,
+  "hard_negative_accuracy": 0.2920517560073937,
+  "hard_negative_comparisons": 1623,
+  "hard_negative_covered_labels": 5
+}

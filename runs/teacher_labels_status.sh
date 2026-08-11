@@ -17,7 +17,11 @@ fi
 
 COMPLETED=0
 if [[ -d "${OUTPUT_DIR}/cache" ]]; then
-  COMPLETED="$(rg -l '"automatic_audit"' "${OUTPUT_DIR}/cache" -g '*.json' | wc -l || true)"
+  while IFS= read -r -d '' record_path; do
+    if grep -q '"automatic_audit"' "${record_path}" 2>/dev/null; then
+      ((COMPLETED += 1))
+    fi
+  done < <(find "${OUTPUT_DIR}/cache" -type f -name '*.json' -print0)
 fi
 echo "fully cached records: ${COMPLETED}/5270"
 

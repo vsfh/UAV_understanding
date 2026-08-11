@@ -1,0 +1,27 @@
+{
+  "roots": {
+    "data_root": "",
+    "models_root": "",
+    "output_root": "",
+    "results_root": "",
+    "annotation_root": ""
+  },
+  "relative_paths": {
+    "train_manifest": "{protocol}/train.csv",
+    "validation_manifest": "{protocol}/val.csv",
+    "test_inputs": "{protocol}/test_inputs.csv",
+    "test_labels_private": "{protocol}/test_labels_private.csv",
+    "cropped_teacher_captions": "description",
+    "generic_caption_targets": "targets/generic_targets.human_audited.jsonl",
+    "grounded_caption_targets": "targets/grounded_targets.human_audited.jsonl",
+    "provenance_gate": "provenance/gate.json",
+    "qwen3_vl": "qwen3-vl",
+    "openclip": "openclip",
+    "geochat": "geochat",
+    "uavit_1m": "uavit-1m",
+    "proposal_crops": "proposal_crops/{protocol}/{split}.csv",
+    "challenge_slices": "challenge_slices/{protocol}/{split}.json",
+    "caption_quality_ratings": "caption_quality/ratings.tsv",
+    "factor_swap_cases": "factor_swaps/{protocol}/{split}.jsonl"
+  }
+}

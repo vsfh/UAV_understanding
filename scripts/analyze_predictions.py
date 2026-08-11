@@ -8,6 +8,7 @@ from collections import Counter
 from pathlib import Path
 
 import numpy as np
+from tqdm.auto import tqdm
 
 from clear_uav.metrics import pairwise_metrics, ranking_metrics
 from clear_uav.ontology import load_ontology
@@ -89,7 +90,13 @@ def main() -> None:
     rng = np.random.default_rng(args.seed)
     macro_values = []
     micro_values = []
-    for start in range(0, args.resamples, 250):
+    for start in tqdm(
+        range(0, args.resamples, 250),
+        total=(args.resamples + 249) // 250,
+        desc="group bootstrap",
+        unit="chunk",
+        dynamic_ncols=True,
+    ):
         count = min(250, args.resamples - start)
         weights = rng.multinomial(
             len(groups), np.full(len(groups), 1 / len(groups)), size=count

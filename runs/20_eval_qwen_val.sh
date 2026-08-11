@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DATA_ROOT="${1:-/media/data1/feihong/uav_understanding_data}"
-MODEL_PATH="${2:-./models/qwen3-vl}"
+MODEL_PATH="${2:-/media/data2/feihong/hf_cache/qwen3-vl}"
 ADAPTER_PATH="${3:-./outputs/clear_full_seed42/final}"
 VIEW="${4:-pair}"
 OUTPUT="${5:-${ADAPTER_PATH%/final}/val_predictions.jsonl}"

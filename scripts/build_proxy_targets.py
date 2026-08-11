@@ -6,6 +6,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from tqdm.auto import tqdm
+
 from clear_uav.data import cap_per_class, read_samples
 from clear_uav.ontology import load_label_subset, load_ontology
 
@@ -44,7 +46,12 @@ def main() -> None:
     samples = cap_per_class(samples, args.max_per_class, args.seed)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8") as handle:
-        for sample in samples:
+        for sample in tqdm(
+            samples,
+            desc="build proxy counterfactuals",
+            unit="target",
+            dynamic_ncols=True,
+        ):
             neighbors = ontology.neighbors(sample.label)
             if not neighbors:
                 raise ValueError(f"No graph neighbor for {sample.label}")

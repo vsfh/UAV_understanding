@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 import numpy as np
+from tqdm.auto import tqdm
 
 
 def parse_args() -> argparse.Namespace:
@@ -83,7 +84,13 @@ def main() -> None:
     rng = np.random.default_rng(args.seed)
     macro_differences = []
     micro_differences = []
-    for start in range(0, args.resamples, 250):
+    for start in tqdm(
+        range(0, args.resamples, 250),
+        total=(args.resamples + 249) // 250,
+        desc="paired bootstrap",
+        unit="chunk",
+        dynamic_ncols=True,
+    ):
         count = min(250, args.resamples - start)
         weights = rng.multinomial(
             len(groups), np.full(len(groups), 1 / len(groups)), size=count

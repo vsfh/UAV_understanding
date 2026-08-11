@@ -9,6 +9,7 @@ from pathlib import Path
 import torch
 from PIL import Image
 from transformers import AutoModelForZeroShotImageClassification, AutoProcessor
+from tqdm.auto import tqdm
 
 from clear_uav.data import cap_per_class, read_private_test_samples, read_samples
 from clear_uav.metrics import classification_metrics, pairwise_metrics, ranking_metrics
@@ -83,7 +84,14 @@ def main() -> None:
     predictions = []
     rows = []
     with torch.inference_mode():
-        for start in range(0, len(samples), args.batch_size):
+        for start in tqdm(
+            range(0, len(samples), args.batch_size),
+            total=(len(samples) + args.batch_size - 1) // args.batch_size,
+            desc=f"OpenCLIP {args.view}/{args.prompt}",
+            unit="batch",
+            dynamic_ncols=True,
+            mininterval=0.5,
+        ):
             batch = samples[start : start + args.batch_size]
             paths = [
                 sample.context_path if args.view == "context" else sample.evidence_path

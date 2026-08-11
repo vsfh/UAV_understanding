@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DATA_ROOT="${1:-/media/data1/feihong/uav_understanding_data}"
-MODEL_PATH="${2:-./models/qwen3-vl}"
+MODEL_PATH="${2:-/media/data2/feihong/hf_cache/qwen3-vl}"
 OUTPUT_DIR="${3:-./outputs/two_view_seed42}"
 export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}"
 
