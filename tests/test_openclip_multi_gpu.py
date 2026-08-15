@@ -44,6 +44,7 @@ def test_oom_reduction_preserves_effective_full_batch() -> None:
     assert reduced is not None
     assert reduced.full_batch == profile.full_batch // 2
     assert reduced.full_batch * reduced.full_accumulation == 16
+    assert reduced.minimum_free_mib < profile.minimum_free_mib
 
 
 def test_jobs_cover_zero_shot_and_every_protocol_seed_finetune() -> None:

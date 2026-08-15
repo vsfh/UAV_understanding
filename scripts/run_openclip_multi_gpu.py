@@ -74,15 +74,15 @@ def memory_profile(
 ) -> GpuProfile:
     available = total_mib if free_mib is None else min(total_mib, free_mib)
     if available >= 40_000:
-        settings = (192, 256, 192, 16, 1, available - 2_048)
+        settings = (192, 256, 192, 16, 1, 28_000)
     elif available >= 22_000:
-        settings = (96, 256, 96, 16, 1, available - 2_048)
+        settings = (96, 256, 96, 16, 1, 14_000)
     elif available >= 15_000:
-        settings = (64, 256, 64, 8, 2, available - 1_536)
+        settings = (64, 256, 64, 8, 2, 11_000)
     elif available >= 11_000:
-        settings = (32, 256, 32, 4, 4, available - 1_536)
+        settings = (32, 256, 32, 4, 4, 8_000)
     elif available >= 8_000:
-        settings = (16, 256, 16, 2, 8, available - 1_024)
+        settings = (16, 256, 16, 2, 8, 6_000)
     else:
         raise ValueError(
             f"GPU {index} ({name}) has only {available} MiB free; at least 8 GiB is required"
@@ -147,6 +147,7 @@ def reduced_batch_profile(profile: GpuProfile, job_kind: str) -> GpuProfile | No
                 else profile.full_accumulation
             ),
             zero_batch=max(1, profile.zero_batch // 2),
+            minimum_free_mib=max(4_000, profile.minimum_free_mib - 2_000),
         )
     if job_kind == "linear_probe" and (
         profile.linear_feature_batch > 1 or profile.zero_batch > 1
@@ -155,9 +156,14 @@ def reduced_batch_profile(profile: GpuProfile, job_kind: str) -> GpuProfile | No
             profile,
             linear_feature_batch=max(1, profile.linear_feature_batch // 2),
             zero_batch=max(1, profile.zero_batch // 2),
+            minimum_free_mib=max(4_000, profile.minimum_free_mib - 2_000),
         )
     if job_kind == "zero" and profile.zero_batch > 1:
-        return replace(profile, zero_batch=max(1, profile.zero_batch // 2))
+        return replace(
+            profile,
+            zero_batch=max(1, profile.zero_batch // 2),
+            minimum_free_mib=max(4_000, profile.minimum_free_mib - 2_000),
+        )
     return None
 
 
@@ -420,7 +426,7 @@ def main() -> None:
                     )
                     suffix = "" if attempt == 1 else f".attempt{attempt}"
                     log_path = logs_root / f"{job.job_id}{suffix}.log"
-                    saw_oom = False
+                    saw_memory_pressure = False
                     with log_path.open("wb") as log:
                         process = subprocess.Popen(
                             command,
@@ -433,9 +439,13 @@ def main() -> None:
                         )
 
                         def update_child_status(status: str) -> None:
-                            nonlocal saw_oom
-                            if "out of memory" in status.lower():
-                                saw_oom = True
+                            nonlocal saw_memory_pressure
+                            lowered = status.lower()
+                            if "out of memory" in lowered or (
+                                "gpu memory is free" in lowered
+                                and "requires at least" in lowered
+                            ):
+                                saw_memory_pressure = True
                             with lock:
                                 gpu_runtime[gpu.index]["latest"] = status
 
@@ -444,7 +454,7 @@ def main() -> None:
                         )
                     reduced = (
                         reduced_batch_profile(job_gpu, job.kind)
-                        if return_code and saw_oom
+                        if return_code and saw_memory_pressure
                         else None
                     )
                     if reduced is None:
@@ -456,13 +466,13 @@ def main() -> None:
                             f"retry_oom_gpu_{gpu.index}_attempt_{attempt}"
                         )
                         gpu_runtime[gpu.index]["latest"] = (
-                            f"OOM retry: zero={job_gpu.zero_batch}, "
+                            f"memory retry: zero={job_gpu.zero_batch}, "
                             f"feature={job_gpu.linear_feature_batch}, "
                             f"full={job_gpu.full_batch}x{job_gpu.full_accumulation}"
                         )
                         atomic_status(status_path, statuses)
                         tqdm.write(
-                            f"[OOM RETRY GPU {gpu.index}] {job.job_id}, "
+                            f"[MEMORY RETRY GPU {gpu.index}] {job.job_id}, "
                             f"attempt={attempt}, log={log_path}"
                         )
                 with lock:
@@ -476,13 +486,13 @@ def main() -> None:
                     else:
                         statuses[job.job_id] = f"completed_gpu_{gpu.index}"
                         tqdm.write(f"[DONE GPU {gpu.index}] {job.job_id}")
+                        bar.update(1)
                     gpu_runtime[gpu.index] = {
                         "job": "idle",
                         "latest": "waiting for next shard",
                         "started": None,
                     }
                     atomic_status(status_path, statuses)
-                    bar.update(1)
                 work_queue.task_done()
 
         threads = [
