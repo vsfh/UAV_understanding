@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import importlib.util
+import io
+import subprocess
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -58,3 +60,24 @@ def test_finetune_shard_skips_duplicate_zero_shot(tmp_path: Path) -> None:
     assert "--openclip-finetuning" in command
     assert command[command.index("--cuda-devices") + 1] == "2"
     assert command[command.index("--openclip-full-batch-size") + 1] == "2"
+
+
+def test_child_tqdm_carriage_returns_are_exposed_as_live_status() -> None:
+    module = load_module()
+    process = subprocess.Popen(
+        [
+            sys.executable,
+            "-c",
+            "import sys; sys.stdout.write('epoch 1 10%\\repoch 1 20%\\nfinished\\n')",
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
+    log = io.BytesIO()
+    statuses = []
+
+    return_code = module.stream_process(process, log, on_status=statuses.append)
+
+    assert return_code == 0
+    assert statuses == ["epoch 1 10%", "epoch 1 20%", "finished"]
+    assert b"epoch 1 10%\r" in log.getvalue()

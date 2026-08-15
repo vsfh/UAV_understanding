@@ -263,6 +263,9 @@ full-fine-tuning micro-batches and larger gradient accumulation, so one slow or 
 define every other card's settings. Each GPU runs one process at a time. Failed or interrupted
 shards can be resumed with the same command, and the final unified summary is written to
 `results/openclip_multi_gpu/suite_summary.json` with combined CSV, LaTeX, and paper tables.
+The terminal shows one overall job bar plus one live status row per GPU, including current shard,
+elapsed time, and the latest nested feature-cache/training/evaluation `tqdm` update. Complete child
+output remains available under `results/openclip_multi_gpu/logs/`.
 
 Qwen3-VL zero-shot direct/definition prompts use the base model without an adapter:
 

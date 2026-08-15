@@ -2,12 +2,15 @@
 from __future__ import annotations
 
 import argparse
+import codecs
 import json
 import os
 import queue
+import re
 import subprocess
 import sys
 import threading
+import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -16,6 +19,7 @@ from tqdm.auto import tqdm
 
 ROOT = Path(__file__).resolve().parents[1]
 PROTOCOLS = ("forward_temporal", "session_disjoint", "unseen_site")
+ANSI_ESCAPE = re.compile(r"\x1b\[[0-?]*[ -/]*[@-~]")
 
 
 @dataclass(frozen=True)
@@ -200,6 +204,44 @@ def atomic_status(path: Path, payload: dict) -> None:
     temporary.replace(path)
 
 
+def readable_status(text: str, maximum: int = 180) -> str:
+    cleaned = ANSI_ESCAPE.sub("", text).replace("\x1b", "").strip()
+    cleaned = " ".join(cleaned.split())
+    if len(cleaned) > maximum:
+        return "…" + cleaned[-(maximum - 1) :]
+    return cleaned
+
+
+def stream_process(
+    process: subprocess.Popen,
+    log,
+    *,
+    on_status,
+) -> int:
+    """Copy complete child output to a log and expose CR-based tqdm updates."""
+    assert process.stdout is not None
+    decoder = codecs.getincrementaldecoder("utf-8")("replace")
+    pending = ""
+    while True:
+        chunk = os.read(process.stdout.fileno(), 4096)
+        if not chunk:
+            break
+        log.write(chunk)
+        log.flush()
+        pending += decoder.decode(chunk)
+        records = re.split(r"[\r\n]+", pending)
+        pending = records.pop()
+        for record in records:
+            status = readable_status(record)
+            if status:
+                on_status(status)
+    pending += decoder.decode(b"", final=True)
+    status = readable_status(pending)
+    if status:
+        on_status(status)
+    return process.wait()
+
+
 def main() -> None:
     args = parse_args()
     profiles = detect_gpus(args.gpus)
@@ -246,6 +288,10 @@ def main() -> None:
     for job in jobs:
         work_queue.put(job)
     statuses = {job.job_id: "pending" for job in jobs}
+    gpu_runtime = {
+        profile.index: {"job": "idle", "latest": "waiting", "started": None}
+        for profile in profiles
+    }
     failures: list[tuple[str, int]] = []
     lock = threading.Lock()
     stop = threading.Event()
@@ -253,7 +299,26 @@ def main() -> None:
     logs_root = results_root / "logs"
     logs_root.mkdir(parents=True, exist_ok=True)
 
-    with tqdm(total=len(jobs), desc="OpenCLIP multi-GPU", unit="job", dynamic_ncols=True) as bar:
+    bar = tqdm(
+        total=len(jobs),
+        desc="OpenCLIP jobs",
+        unit="job",
+        dynamic_ncols=True,
+        position=0,
+    )
+    gpu_bars = {
+        profile.index: tqdm(
+            total=0,
+            desc=f"GPU {profile.index} idle",
+            bar_format="{desc} | {postfix}",
+            dynamic_ncols=True,
+            position=position,
+            leave=True,
+        )
+        for position, profile in enumerate(profiles, 1)
+    }
+
+    try:
 
         def worker(gpu: GpuProfile) -> None:
             while not stop.is_set():
@@ -273,27 +338,35 @@ def main() -> None:
                 )
                 with lock:
                     statuses[job.job_id] = f"running_gpu_{gpu.index}"
+                    gpu_runtime[gpu.index] = {
+                        "job": job.job_id,
+                        "latest": "starting child process",
+                        "started": time.monotonic(),
+                    }
                     atomic_status(status_path, statuses)
                     tqdm.write(f"[START GPU {gpu.index}] {job.job_id}")
                 log_path = logs_root / f"{job.job_id}.log"
                 env = os.environ.copy()
                 env.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
                 env.setdefault("TOKENIZERS_PARALLELISM", "false")
-                with log_path.open("w", encoding="utf-8") as log:
+                with log_path.open("wb") as log:
                     process = subprocess.Popen(
                         command,
                         cwd=ROOT,
                         env=env,
                         stdout=subprocess.PIPE,
                         stderr=subprocess.STDOUT,
-                        text=True,
-                        bufsize=1,
+                        text=False,
+                        bufsize=0,
                     )
-                    assert process.stdout is not None
-                    for line in process.stdout:
-                        log.write(line)
-                        log.flush()
-                    return_code = process.wait()
+
+                    def update_child_status(status: str) -> None:
+                        with lock:
+                            gpu_runtime[gpu.index]["latest"] = status
+
+                    return_code = stream_process(
+                        process, log, on_status=update_child_status
+                    )
                 with lock:
                     if return_code:
                         statuses[job.job_id] = f"failed_gpu_{gpu.index}"
@@ -305,6 +378,11 @@ def main() -> None:
                     else:
                         statuses[job.job_id] = f"completed_gpu_{gpu.index}"
                         tqdm.write(f"[DONE GPU {gpu.index}] {job.job_id}")
+                    gpu_runtime[gpu.index] = {
+                        "job": "idle",
+                        "latest": "waiting for next shard",
+                        "started": None,
+                    }
                     atomic_status(status_path, statuses)
                     bar.update(1)
                 work_queue.task_done()
@@ -315,8 +393,30 @@ def main() -> None:
         ]
         for thread in threads:
             thread.start()
-        for thread in threads:
-            thread.join()
+        while any(thread.is_alive() for thread in threads):
+            with lock:
+                snapshot = {
+                    index: dict(runtime) for index, runtime in gpu_runtime.items()
+                }
+            now = time.monotonic()
+            for profile in profiles:
+                runtime = snapshot[profile.index]
+                started = runtime["started"]
+                elapsed = int(now - started) if isinstance(started, float) else 0
+                hours, remainder = divmod(elapsed, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                gpu_bar = gpu_bars[profile.index]
+                gpu_bar.set_description_str(
+                    f"GPU {profile.index} {runtime['job']} {hours:02d}:{minutes:02d}:{seconds:02d}"
+                )
+                gpu_bar.set_postfix_str(runtime["latest"], refresh=True)
+            for thread in threads:
+                thread.join(timeout=0.2)
+            bar.refresh()
+    finally:
+        bar.close()
+        for gpu_bar in gpu_bars.values():
+            gpu_bar.close()
 
     if failures:
         raise subprocess.CalledProcessError(failures[0][1], failures[0][0])
