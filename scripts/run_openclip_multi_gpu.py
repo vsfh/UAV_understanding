@@ -25,9 +25,7 @@ ANSI_ESCAPE = re.compile(r"\x1b\[[0-?]*[ -/]*[@-~]")
 @dataclass(frozen=True)
 class GpuProfile:
     index: int
-    name: str
-    total_mib: int
-    free_mib: int
+    configured_mib: int
     zero_batch: int
     linear_batch: int
     linear_feature_batch: int
@@ -48,7 +46,13 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Distribute independent OpenCLIP experiment shards over heterogeneous GPUs"
     )
-    parser.add_argument("--gpus", type=int, nargs="+", help="Physical GPU indices; default: all")
+    parser.add_argument(
+        "--gpus",
+        type=int,
+        nargs="+",
+        default=[0],
+        help="CUDA device indices used verbatim; default: 0",
+    )
     parser.add_argument("--data-root", type=Path, default=Path("um7"))
     parser.add_argument("--models-root", type=Path, default=Path("hf_cache"))
     parser.add_argument(
@@ -69,60 +73,17 @@ def resolve(path: Path) -> Path:
     return path if path.is_absolute() else (ROOT / path).resolve()
 
 
-def memory_profile(
-    index: int, name: str, total_mib: int, free_mib: int | None = None
-) -> GpuProfile:
-    available = total_mib if free_mib is None else min(total_mib, free_mib)
-    if available < 10_000:
-        raise ValueError(
-            f"GPU {index} ({name}) has only {available} MiB free; the fixed 20GB "
-            "OpenCLIP profile requires at least 10000 MiB free before launch"
-        )
-    settings = (16, 256, 32, 2, 8, 8_000)
-    return GpuProfile(index, name, total_mib, available, *settings)
+def memory_profile(index: int) -> GpuProfile:
+    return GpuProfile(index, 20_000, 16, 256, 32, 2, 8, 8_000)
 
 
-def detect_gpus(selected: list[int] | None) -> list[GpuProfile]:
-    result = subprocess.run(
-        [
-            "nvidia-smi",
-            "--query-gpu=index,name,memory.total,memory.free",
-            "--format=csv,noheader,nounits",
-        ],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    inventory = {}
-    for line in result.stdout.splitlines():
-        index_text, name, total_text, free_text = [
-            part.strip() for part in line.split(",", 3)
-        ]
-        inventory[int(index_text)] = (name, int(total_text), int(free_text))
-    indices = selected if selected is not None else sorted(inventory)
+def detect_gpus(selected: list[int]) -> list[GpuProfile]:
+    indices = selected
     if len(indices) != len(set(indices)):
         raise ValueError("--gpus contains duplicate indices")
-    missing = [index for index in indices if index not in inventory]
-    if missing:
-        raise ValueError(f"Unknown GPU indices: {missing}; available={sorted(inventory)}")
-    return [memory_profile(index, *inventory[index]) for index in indices]
-
-
-def refresh_gpu_profile(profile: GpuProfile) -> GpuProfile:
-    result = subprocess.run(
-        [
-            "nvidia-smi",
-            "--id",
-            str(profile.index),
-            "--query-gpu=memory.free",
-            "--format=csv,noheader,nounits",
-        ],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    free_mib = int(result.stdout.strip().splitlines()[0])
-    return memory_profile(profile.index, profile.name, profile.total_mib, free_mib)
+    if any(index < 0 for index in indices):
+        raise ValueError("--gpus must contain non-negative CUDA device indices")
+    return [memory_profile(index) for index in indices]
 
 
 def reduced_batch_profile(profile: GpuProfile, job_kind: str) -> GpuProfile | None:
@@ -314,10 +275,7 @@ def main() -> None:
     print("GPU profiles:")
     for profile in profiles:
         print(json.dumps(asdict(profile), ensure_ascii=False))
-    print(
-        f"Selected {len(profiles)} GPUs, total physical memory "
-        f"{sum(profile.total_mib for profile in profiles)} MiB, jobs={len(jobs)}"
-    )
+    print(f"Selected CUDA devices {[profile.index for profile in profiles]}, jobs={len(jobs)}")
     print(
         "Memory is not pooled: every job must fit one GPU; independent jobs run in parallel."
     )
@@ -391,13 +349,13 @@ def main() -> None:
                     job = work_queue.get_nowait()
                 except queue.Empty:
                     return
-                job_gpu = refresh_gpu_profile(gpu)
+                job_gpu = gpu
                 with lock:
                     statuses[job.job_id] = f"running_gpu_{gpu.index}"
                     gpu_runtime[gpu.index] = {
                         "job": job.job_id,
                         "latest": (
-                            f"free={job_gpu.free_mib}MiB, zero={job_gpu.zero_batch}, "
+                            f"fixed20g zero={job_gpu.zero_batch}, "
                             f"feature={job_gpu.linear_feature_batch}, "
                             f"full={job_gpu.full_batch}x{job_gpu.full_accumulation}"
                         ),

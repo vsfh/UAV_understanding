@@ -210,11 +210,12 @@ exports are written below `results/openclip_full_suite_e20_20g/`.
 For heterogeneous multi-GPU execution, use:
 
 ```bash
-GPU_IDS=0,1,2 bash runs/33_run_openclip_multi_gpu.sh
+GPU_IDS=0,2,1 bash runs/33_run_openclip_multi_gpu.sh
 ```
 
-This does not pretend that VRAM is additive. It distributes independent protocol/seed shards,
-uses the same fixed 20 GB-safe micro-batches on every GPU with full-fine-tuning effective batch 16,
+This does not pretend that VRAM is additive. It passes the listed CUDA device IDs through verbatim,
+without calling `nvidia-smi`, discovering devices, or reordering them. Independent protocol/seed
+shards use the same fixed 20 GB-safe micro-batches with full-fine-tuning effective batch 16,
 keeps one job per GPU, retries CUDA OOM with a smaller micro-batch, and merges all
 completed shard plans into `results/openclip_multi_gpu_e20_20g/suite_summary.json`.
 

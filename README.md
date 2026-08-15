@@ -246,21 +246,22 @@ uses the conservative 20 GB profile: zero/evaluation batch 16, linear feature ba
 full-tune micro-batch of 2 with gradient accumulation 8. BF16 autocast and gradient checkpointing
 remain enabled. Existing completed outputs are skipped.
 
-For multiple GPUs with different memory capacities, use the heterogeneous scheduler:
+For multiple GPUs, use the shard scheduler:
 
 ```bash
-# Use every GPU reported by nvidia-smi
+# Default: CUDA device 0 only
 bash runs/33_run_openclip_multi_gpu.sh
 
-# Or select physical GPU indices explicitly
-GPU_IDS=0,1,2 bash runs/33_run_openclip_multi_gpu.sh
+# Device IDs are passed through verbatim; list them in the order valid on this host
+GPU_IDS=0,2,1 bash runs/33_run_openclip_multi_gpu.sh
 ```
 
 GPU memory is not pooled into one virtual card. Instead, independent protocol/seed shards are
-assigned dynamically to available GPUs. Every card uses the same fixed 20 GB-safe batch profile,
-so results do not depend on which GPU receives a seed. Current free VRAM is still checked before
-every task, and CUDA OOM automatically retries with half the micro-batch. Each GPU runs one process
-at a time. Failed or interrupted
+assigned dynamically to the selected CUDA devices. The scheduler does not call `nvidia-smi`, does
+not discover or reorder devices, and gives every selected device the same fixed 20 GB-safe batch
+profile. `GPU_IDS=0,2,1` therefore remains `0,2,1`, which also handles hosts whose displayed GPU 1
+and GPU 2 labels are swapped. CUDA OOM automatically retries with half the micro-batch. Each GPU
+runs one process at a time. Failed or interrupted
 shards can be resumed with the same command, and the final unified summary is written to
 `results/openclip_multi_gpu_e20_20g/suite_summary.json` with combined CSV, LaTeX, and paper tables.
 The terminal shows one overall job bar plus one live status row per GPU, including current shard,
