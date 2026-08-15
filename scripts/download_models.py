@@ -15,7 +15,7 @@ from urllib.request import Request, urlopen
 from huggingface_hub import snapshot_download
 
 
-DEFAULT_MODELS_ROOT = Path("/media/data2/feihong/hf_cache")
+DEFAULT_MODELS_ROOT = Path("hf_cache")
 
 
 @dataclass(frozen=True)

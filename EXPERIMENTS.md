@@ -16,7 +16,7 @@ legacy and corrected runs in one result table.
 ## Generate the teacher descriptions
 
 The paper's two-stage caption construction is implemented with the local
-`Qwen/Qwen3.6-35B-A3B-FP8` snapshot under `/media/4tb/feihong/hf_cache`. The full one-command
+`Qwen/Qwen3.6-35B-A3B-FP8` snapshot under `./hf_cache`. The full one-command
 generation run is:
 
 ```bash
@@ -54,8 +54,8 @@ model:
 
 ```bash
 bash runs/generate_teacher_labels.sh \
-  /media/data1/feihong/uav_understanding_data \
-  /media/4tb/feihong/hf_cache/models--Qwen--Qwen3.6-35B-A3B-FP8/snapshots/95a723d08a9490559dae23d0cff1d9466213d989 \
+  ./um7 \
+  ./hf_cache/models--Qwen--Qwen3.6-35B-A3B-FP8/snapshots/95a723d08a9490559dae23d0cff1d9466213d989 \
   /tmp/clear_teacher_dry \
   --max-samples 2 \
   --dry-run
@@ -190,6 +190,22 @@ Development random-negative and graph-neighbor rows reuse the same crop-caption 
 grounded baseline. CLEAR rows merge those positives with a separate ontology-derived proxy
 counterfactual file for each protocol and seed; only those CLEAR result names retain the `proxy_`
 prefix. They must not be presented as the full audited CLEAR method or as official test results.
+
+## OpenCLIP same-backbone comparison
+
+Create the minimal OpenCLIP environment once, then run the complete 24 GB comparison:
+
+```bash
+bash runs/setup_openclip_env.sh
+CUDA_VISIBLE_DEVICES=0 bash runs/32_run_openclip_full_suite_24g.sh
+```
+
+The suite evaluates both zero-shot prompts and trains linear-probe/full-visual-fine-tuning runs
+with seeds 42, 43, and 44 on all three protocols. All variants use the same local
+`./hf_cache/openclip` checkpoint, `context` input, Core-18 labels, validation metrics, and grouped
+bootstrap analysis. Full fine-tuning updates the complete vision encoder, visual projection, and
+classification head; the unused text encoder stays frozen. Results and compatible paper-table
+exports are written below `results/openclip_full_suite/`.
 
 ## Official run
 

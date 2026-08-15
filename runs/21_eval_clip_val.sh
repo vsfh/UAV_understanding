@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DATA_ROOT="${1:-/media/data1/feihong/uav_understanding_data}"
-MODEL_PATH="${2:-/media/data2/feihong/hf_cache/openclip}"
+DATA_ROOT="${1:-./um7}"
+MODEL_PATH="${2:-./hf_cache/openclip}"
 PROMPT="${3:-definition}"
 OUTPUT="${4:-./outputs/openclip_session_val.json}"
 

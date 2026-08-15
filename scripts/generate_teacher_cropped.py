@@ -20,9 +20,9 @@ MIN_WORDS = 70
 MAX_WORDS = 100
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff", ".webp"}
 
-DEFAULT_DATA_ROOT = Path("/media/data1/feihong/uav_understanding_data")
+DEFAULT_DATA_ROOT = Path("um7")
 DEFAULT_MODEL = Path(
-    "/media/4tb/feihong/hf_cache/"
+    "hf_cache/"
     "models--Qwen--Qwen3.6-35B-A3B-FP8/"
     "snapshots/95a723d08a9490559dae23d0cff1d9466213d989"
 )

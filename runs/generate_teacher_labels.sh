@@ -2,8 +2,8 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-DATA_ROOT="${1:-/media/data1/feihong/uav_understanding_data}"
-MODEL_PATH="${2:-/media/4tb/feihong/hf_cache/models--Qwen--Qwen3.6-35B-A3B-FP8/snapshots/95a723d08a9490559dae23d0cff1d9466213d989}"
+DATA_ROOT="${1:-./um7}"
+MODEL_PATH="${2:-./hf_cache/models--Qwen--Qwen3.6-35B-A3B-FP8/snapshots/95a723d08a9490559dae23d0cff1d9466213d989}"
 OUTPUT_DIR="${3:-${REPO_ROOT}/data/targets/qwen36_35b_session_seeds42_43_44_v5}"
 EXTRA_ARGS=()
 if (( $# > 3 )); then

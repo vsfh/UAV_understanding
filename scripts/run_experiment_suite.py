@@ -61,12 +61,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--data-root",
         type=Path,
-        default=Path("/media/data1/feihong/uav_understanding_data"),
+        default=Path("um7"),
     )
     parser.add_argument(
         "--models-root",
         type=Path,
-        default=Path("/media/data2/feihong/hf_cache"),
+        default=Path("hf_cache"),
     )
     parser.add_argument("--output-root", type=Path, default=Path("outputs/paper_suite"))
     parser.add_argument("--results-root", type=Path, default=Path("results/paper_suite"))
@@ -112,6 +112,21 @@ def parse_args() -> argparse.Namespace:
         help="Fail before the suite starts if logical CUDA device 0 has less free memory",
     )
     parser.add_argument("--candidate-batch-size", type=int, default=2)
+    parser.add_argument("--openclip-batch-size", type=int, default=32)
+    parser.add_argument(
+        "--openclip-finetuning",
+        action="store_true",
+        help="Also schedule OpenCLIP linear-probe and full visual fine-tuning runs",
+    )
+    parser.add_argument("--openclip-linear-epochs", type=int, default=20)
+    parser.add_argument("--openclip-linear-batch-size", type=int, default=32)
+    parser.add_argument("--openclip-linear-learning-rate", type=float, default=1e-3)
+    parser.add_argument("--openclip-full-epochs", type=int, default=3)
+    parser.add_argument("--openclip-full-batch-size", type=int, default=4)
+    parser.add_argument("--openclip-full-gradient-accumulation", type=int, default=4)
+    parser.add_argument("--openclip-full-learning-rate", type=float, default=5e-4)
+    parser.add_argument("--openclip-backbone-learning-rate", type=float, default=1e-5)
+    parser.add_argument("--openclip-num-workers", type=int, default=4)
     parser.add_argument("--max-per-class", type=int, default=250)
     parser.add_argument("--batch-size", type=int, default=2)
     parser.add_argument("--gradient-accumulation", type=int, default=8)
@@ -137,6 +152,18 @@ def parse_args() -> argparse.Namespace:
         "--skip-zero-shot",
         action="store_true",
         help="Skip deterministic OpenCLIP and base-Qwen baselines",
+    )
+    parser.add_argument(
+        "--zero-shot-only",
+        action="store_true",
+        help="Run validation, selected zero-shot baselines, analysis, and summaries only",
+    )
+    parser.add_argument(
+        "--zero-shot-models",
+        choices=["qwen", "openclip"],
+        nargs="+",
+        default=["qwen", "openclip"],
+        help="Zero-shot model families to schedule",
     )
     parser.add_argument(
         "--skip-free-generation",
@@ -220,6 +247,8 @@ def ready_status(path: Path) -> str | None:
 
 
 def experiments_for(args: argparse.Namespace) -> list[Experiment]:
+    if args.zero_shot_only:
+        return []
     if args.profile == "smoke":
         return [Experiment("label_pair", "pair")]
 
@@ -357,8 +386,8 @@ def preflight(
         "GeoChat is not automated: its upstream custom inference stack is absent.",
         "GeoChat-UAV/UAVIT-1M weights are present, but their upstream inference adapter "
         "is not integrated.",
-        "Linear-probe, projector-only, QLoRA, full-fine-tuning, and parameter-matched "
-        "attention implementations are absent.",
+        "Qwen linear-probe, projector-only, QLoRA, full-model fine-tuning, and "
+        "parameter-matched attention implementations are absent.",
         "Human-audited caption ratings, factor/hierarchy annotations, and single-factor "
         "swap cases are absent.",
         "Proposal, jittered, irrelevant, and crop-budget inputs plus small-evidence, "
@@ -370,11 +399,18 @@ def preflight(
     ]
     data_root = resolve(args.data_root)
     labels_file = resolve(args.labels_file)
-    qwen = resolve(args.models_root) / "qwen3-vl" / "config.json"
-    openclip = resolve(args.models_root) / "openclip" / "config.json"
-    required = [data_root, labels_file, qwen]
-    if not args.skip_zero_shot:
-        required.append(openclip)
+    models_root = resolve(args.models_root)
+    required = [data_root, labels_file]
+    needs_qwen = bool(experiments) or (
+        not args.skip_zero_shot and "qwen" in args.zero_shot_models
+    )
+    needs_openclip = args.openclip_finetuning or (
+        not args.skip_zero_shot and "openclip" in args.zero_shot_models
+    )
+    if needs_qwen:
+        required.append(models_root / "qwen3-vl" / "config.json")
+    if needs_openclip:
+        required.append(models_root / "openclip" / "config.json")
     missing = [str(path) for path in required if not path.exists()]
     if missing:
         raise FileNotFoundError("Missing required inputs:\n- " + "\n- ".join(missing))
@@ -478,6 +514,24 @@ class Planner:
                 metadata=metadata,
             )
         )
+
+    def keep_zero_shot_models(self, models: set[str]) -> None:
+        """Drop zero-shot steps belonging to unselected model families."""
+        kept: list[Step] = []
+        for step in self.steps:
+            experiment = str(step.metadata.get("experiment", ""))
+            family = next(
+                (
+                    candidate
+                    for candidate in ("qwen", "openclip")
+                    if experiment.startswith(f"{candidate}_")
+                ),
+                None,
+            )
+            if family is None or family in models:
+                kept.append(step)
+        self.steps = kept
+        self.ids = {step.step_id for step in kept}
 
 
 def python_command(script: str, *args: str | Path | int | float) -> list:
@@ -711,6 +765,8 @@ def add_zero_shot(
                 "context",
                 "--prompt",
                 prompt,
+                "--batch-size",
+                args.openclip_batch_size,
                 "--output",
                 clip_output,
                 *sample_args,
@@ -739,6 +795,165 @@ def add_zero_shot(
                 "protocol": protocol,
                 "experiment": f"openclip_{prompt}",
                 "seed": 0,
+                "split": split,
+                "decoder": "score",
+            },
+        )
+
+
+def add_openclip_trained_run(
+    planner: Planner,
+    *,
+    args: argparse.Namespace,
+    mode: str,
+    protocol: str,
+    seed: int,
+    data_root: Path,
+    models_root: Path,
+    output_root: Path,
+    results_root: Path,
+    labels_file: Path,
+    max_samples: int | None,
+    run_test: bool,
+) -> None:
+    if mode not in {"linear_probe", "full_finetune"}:
+        raise ValueError(f"Unknown OpenCLIP mode: {mode}")
+    protocol_dir = data_root / protocol
+    experiment = f"openclip_{mode}"
+    run_dir = output_root / protocol / experiment / f"seed{seed}"
+    checkpoint = run_dir / "final" / "openclip_classifier.pt"
+    linear = mode == "linear_probe"
+    epochs = args.openclip_linear_epochs if linear else args.openclip_full_epochs
+    batch_size = (
+        args.openclip_linear_batch_size if linear else args.openclip_full_batch_size
+    )
+    learning_rate = (
+        args.openclip_linear_learning_rate
+        if linear
+        else args.openclip_full_learning_rate
+    )
+    gradient_accumulation = (
+        1 if linear else args.openclip_full_gradient_accumulation
+    )
+    sample_args: list[str | int] = []
+    if max_samples is not None:
+        sample_args = ["--max-samples", max_samples]
+
+    prefix = f"{protocol}.{experiment}.seed{seed}"
+    train_args: list[str | Path | int | float] = [
+        "--model-path",
+        models_root / "openclip",
+        "--data-root",
+        data_root,
+        "--train-csv",
+        protocol_dir / "train.csv",
+        "--val-csv",
+        protocol_dir / "val.csv",
+        "--output-dir",
+        run_dir,
+        "--labels-file",
+        labels_file,
+        "--mode",
+        mode,
+        "--view",
+        "context",
+        "--prompt",
+        "definition",
+        "--epochs",
+        epochs,
+        "--batch-size",
+        batch_size,
+        "--gradient-accumulation",
+        gradient_accumulation,
+        "--learning-rate",
+        learning_rate,
+        "--backbone-learning-rate",
+        args.openclip_backbone_learning_rate,
+        "--num-workers",
+        args.openclip_num_workers,
+        "--max-per-class",
+        args.max_per_class,
+        "--seed",
+        seed,
+        *sample_args,
+    ]
+    if not linear:
+        train_args.append("--gradient-checkpointing")
+    planner.add(
+        f"{prefix}.train",
+        "train",
+        python_command("train_openclip.py", *train_args),
+        [checkpoint, run_dir / "run_metadata.json"],
+        protocol=protocol,
+        experiment=experiment,
+        seed=seed,
+        split="train",
+        decoder="train",
+    )
+
+    for split in (["val", "test"] if run_test else ["val"]):
+        csv_path = (
+            protocol_dir / "val.csv"
+            if split == "val"
+            else protocol_dir / "test_inputs.csv"
+        )
+        private_args: list[str | Path] = []
+        if split == "test":
+            private_args = [
+                "--private-labels",
+                protocol_dir / "test_labels_private.csv",
+            ]
+        output = run_dir / f"{split}_predictions.json"
+        eval_prefix = f"{prefix}.{split}"
+        planner.add(
+            eval_prefix,
+            "evaluation",
+            python_command(
+                "evaluate_openclip_finetuned.py",
+                "--model-path",
+                models_root / "openclip",
+                "--checkpoint",
+                checkpoint,
+                "--data-root",
+                data_root,
+                "--csv",
+                csv_path,
+                *private_args,
+                "--labels-file",
+                labels_file,
+                "--view",
+                "context",
+                "--batch-size",
+                args.openclip_batch_size,
+                "--output",
+                output,
+                *sample_args,
+            ),
+            [output],
+            protocol=protocol,
+            experiment=experiment,
+            seed=seed,
+            split=split,
+            decoder="score",
+        )
+        add_analysis(
+            planner,
+            step_prefix=eval_prefix,
+            predictions=output,
+            output=(
+                results_root
+                / "metrics"
+                / protocol
+                / experiment
+                / f"seed{seed}_{split}.json"
+            ),
+            manifest=csv_path,
+            labels_file=labels_file,
+            group_field=GROUP_FIELDS[protocol],
+            metadata={
+                "protocol": protocol,
+                "experiment": experiment,
+                "seed": seed,
                 "split": split,
                 "decoder": "score",
             },
@@ -1367,6 +1582,8 @@ def add_comparisons(
 
 
 def make_plan(args: argparse.Namespace) -> tuple[list[Step], list[str], Path, Path]:
+    if args.zero_shot_only and args.skip_zero_shot:
+        raise ValueError("--zero-shot-only cannot be combined with --skip-zero-shot")
     data_root = resolve(args.data_root)
     models_root = resolve(args.models_root)
     output_root = resolve(args.output_root)
@@ -1442,6 +1659,23 @@ def make_plan(args: argparse.Namespace) -> tuple[list[Step], list[str], Path, Pa
                     labels_file=labels_file,
                     max_samples=None,
                 )
+        if args.openclip_finetuning:
+            for mode in ("linear_probe", "full_finetune"):
+                for seed in seeds:
+                    add_openclip_trained_run(
+                        planner,
+                        args=args,
+                        mode=mode,
+                        protocol=protocol,
+                        seed=seed,
+                        data_root=data_root,
+                        models_root=models_root,
+                        output_root=output_root,
+                        results_root=results_root,
+                        labels_file=labels_file,
+                        max_samples=max_samples,
+                        run_test=args.profile == "official",
+                    )
         for experiment in experiments:
             for seed in seeds:
                 targets_override = None
@@ -1639,6 +1873,7 @@ def make_plan(args: argparse.Namespace) -> tuple[list[Step], list[str], Path, Pa
                     targets_override=targets_override,
                 )
 
+    planner.keep_zero_shot_models(set(args.zero_shot_models))
     add_comparisons(
         planner,
         args=args,

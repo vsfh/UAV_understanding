@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "${SCRIPT_DIR}/.." && pwd)"
-MODELS_ROOT="${1:-/media/data2/feihong/hf_cache}"
+MODELS_ROOT="${1:-./hf_cache}"
 
 if [[ "${BYPASS_PROXY:-0}" == "1" ]]; then
   unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy

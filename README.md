@@ -9,7 +9,7 @@ bash runs/run_all_experiments.sh --profile development --dry-run
 
 This repository turns the current paper draft into a small, offline-first experiment codebase.
 The implemented path is Qwen3-VL-8B-Instruct LoRA training and evaluation on the three curated
-protocols under `/media/data1/feihong/uav_understanding_data`.
+protocols under `./um7`.
 
 Current scores are development diagnostics, not registered main-table results: the paper's
 acquisition-provenance `READY` gate and human-adjudication requirements are still unmet.
@@ -26,7 +26,8 @@ acquisition-provenance `READY` gate and human-adjudication requirements are stil
   deterministic view dropout;
 - free-generation JSON diagnostics;
 - normalized candidate log-likelihood, independent thresholds, and log-sum-exp set aggregation;
-- OpenCLIP ViT-L/14 direct/definition zero-shot baseline;
+- OpenCLIP ViT-L/14 direct/definition zero-shot, linear-probe, and full visual fine-tuning
+  baselines;
 - pair macro/micro F1, label mAP, top-1 error AURC, worst-class recall, exact-set accuracy, and
   set metrics.
 
@@ -62,7 +63,7 @@ bash runs/00_download_paper_models.sh
 ```
 
 The one-click command downloads and validates all paper checkpoints under
-`/media/data2/feihong/hf_cache`:
+`./hf_cache`:
 
 - `qwen3-vl`: `Qwen/Qwen3-VL-8B-Instruct`;
 - `openclip`: `openai/clip-vit-large-patch14`;
@@ -76,7 +77,7 @@ subset or inspect paths without downloading with:
 
 ```bash
 python scripts/download_models.py qwen3-vl openclip \
-  --models-root /media/data2/feihong/hf_cache
+  --models-root ./hf_cache
 python scripts/download_models.py all --dry-run
 ```
 
@@ -108,7 +109,7 @@ The training and evaluation loaders require a local directory containing `config
 ## 3. Validate data
 
 ```bash
-bash runs/01_validate_data.sh /media/data1/feihong/uav_understanding_data
+bash runs/01_validate_data.sh ./um7
 ```
 
 Current data status (checked 2026-07-23): most of `photos_2025-05-30_2025-06-30` has been restored,
@@ -119,7 +120,7 @@ content-group, and session leakage validation with 16,597/2,384/4,778 train/vali
 
 ```bash
 python scripts/validate_split.py \
-  --data-root /media/data1/feihong/uav_understanding_data \
+  --data-root ./um7 \
   --protocol session_disjoint \
   --labels-file configs/core18_complete.txt
 ```
@@ -198,11 +199,11 @@ For test evaluation, pass the generated validation threshold file and private la
 
 ```bash
 python scripts/evaluate_closed_set.py \
-  --model-path /media/data2/feihong/hf_cache/qwen3-vl \
+  --model-path ./hf_cache/qwen3-vl \
   --adapter-path ./outputs/clear_full_seed42/final \
-  --data-root /media/data1/feihong/uav_understanding_data \
-  --csv /media/data1/feihong/uav_understanding_data/session_disjoint/test_inputs.csv \
-  --private-labels /media/data1/feihong/uav_understanding_data/session_disjoint/test_labels_private.csv \
+  --data-root ./um7 \
+  --csv ./um7/session_disjoint/test_inputs.csv \
+  --private-labels ./um7/session_disjoint/test_labels_private.csv \
   --thresholds ./outputs/clear_full_seed42/val_closed_set.thresholds.json \
   --output ./outputs/clear_full_seed42/test_closed_set.json
 ```
@@ -214,12 +215,44 @@ python scripts/download_models.py openclip
 bash runs/21_eval_clip_val.sh
 ```
 
+To run every OpenCLIP direct/definition validation baseline over all three protocols, first create
+the small dedicated environment and then launch the resumable suite:
+
+```bash
+bash runs/setup_openclip_env.sh
+CUDA_VISIBLE_DEVICES=0 bash runs/31_run_openclip_only.sh
+```
+
+The environment is stored under `~/.conda/envs/uav-openclip`; the setup script installs
+dependencies only and never starts an experiment. Set `OPENCLIP_ENV_PREFIX` during setup and
+`OPENCLIP_PYTHON` during evaluation if you prefer another location.
+
+For the fair same-backbone comparison on a 24 GB RTX 4090, run:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 bash runs/32_run_openclip_full_suite_24g.sh
+```
+
+This schedules, on each of the three protocols:
+
+- OpenCLIP zero-shot with direct and definition prompts;
+- OpenCLIP linear probe with the entire pretrained model frozen and only a normalized classifier
+  trained;
+- OpenCLIP full visual fine-tuning with the vision encoder, visual projection, and classifier
+  trained while the text encoder remains frozen.
+
+Linear probe and full fine-tuning use seeds 42/43/44. The 24 GB defaults are a full-tune
+micro-batch of 4 with gradient accumulation 4, BF16 autocast, gradient checkpointing, and a 20 GB
+free-memory preflight gate. Existing completed outputs are skipped. Lower `FULL_BATCH_SIZE=2` and
+raise `FULL_GRADIENT_ACCUMULATION=8` if another process or driver overhead reduces available
+memory.
+
 Qwen3-VL zero-shot direct/definition prompts use the base model without an adapter:
 
 ```bash
 bash runs/23_eval_qwen_zero_shot_val.sh \
-  /media/data1/feihong/uav_understanding_data \
-  /media/data2/feihong/hf_cache/qwen3-vl definition \
+  ./um7 \
+  ./hf_cache/qwen3-vl definition \
   ./outputs/qwen_definition_val.jsonl context
 ```
 
@@ -239,7 +272,7 @@ the supplied data and should be added only when those inputs exist.
 ## One-click paper-table run
 
 Treat the existing per-crop descriptions under
-`/media/data1/feihong/uav_understanding_data/description` as the grounded-caption supervision and
+`./um7/description` as the grounded-caption supervision and
 run every currently executable three-seed row with:
 
 ```bash
@@ -247,7 +280,7 @@ bash runs/30_run_paper_tables.sh
 ```
 
 The launcher uses all three protocols, seeds 42/43/44, Qwen3-VL and OpenCLIP from
-`/media/data2/feihong/hf_cache`, and resumable outputs under `outputs/paper_tables`. It also adds a
+`./hf_cache`, and resumable outputs under `outputs/paper_tables`. It also adds a
 normalized-likelihood Qwen definition baseline so mAP, hard-negative accuracy, and AURC are
 available for that main-table row.
 

@@ -34,12 +34,12 @@ from clear_uav.teacher_targets import (
 
 
 DEFAULT_TEACHER = Path(
-    "/media/4tb/feihong/hf_cache/"
+    "hf_cache/"
     "models--Qwen--Qwen3.6-35B-A3B-FP8/"
     "snapshots/95a723d08a9490559dae23d0cff1d9466213d989"
 )
 DEFAULT_FP8_KERNEL = Path(
-    "/home/feihong/.cache/huggingface/hub/"
+    "hf_cache/"
     "kernels--kernels-community--finegrained-fp8/"
     "snapshots/13d2d7021a8854a5b767daf6513875ab9eb6c09d"
 )

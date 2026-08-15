@@ -25,6 +25,8 @@ DISPLAY_NAMES = {
     "qwen_definition": "Qwen3-VL definition",
     "openclip_direct": "OpenCLIP direct",
     "openclip_definition": "OpenCLIP definition",
+    "openclip_linear_probe": "OpenCLIP linear probe",
+    "openclip_full_finetune": "OpenCLIP full visual fine-tuning",
     "label_pair_unweighted": "Label LoRA (pair, no token weight)",
     "label_pair_llm_lora": "LLM LoRA (pair)",
     "label_context": "Label LoRA (context)",
