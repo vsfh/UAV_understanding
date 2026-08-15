@@ -1582,7 +1582,7 @@ def add_comparisons(
 
 
 def make_plan(args: argparse.Namespace) -> tuple[list[Step], list[str], Path, Path]:
-    if args.zero_shot_only and args.skip_zero_shot:
+    if args.zero_shot_only and args.skip_zero_shot and not args.openclip_finetuning:
         raise ValueError("--zero-shot-only cannot be combined with --skip-zero-shot")
     data_root = resolve(args.data_root)
     models_root = resolve(args.models_root)

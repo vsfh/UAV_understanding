@@ -247,6 +247,23 @@ free-memory preflight gate. Existing completed outputs are skipped. Lower `FULL_
 raise `FULL_GRADIENT_ACCUMULATION=8` if another process or driver overhead reduces available
 memory.
 
+For multiple GPUs with different memory capacities, use the heterogeneous scheduler:
+
+```bash
+# Use every GPU reported by nvidia-smi
+bash runs/33_run_openclip_multi_gpu.sh
+
+# Or select physical GPU indices explicitly
+GPU_IDS=0,1,2 bash runs/33_run_openclip_multi_gpu.sh
+```
+
+GPU memory is not pooled into one virtual card. Instead, independent protocol/seed shards are
+assigned dynamically to available GPUs. Cards with 24/16/12/8 GB receive progressively smaller
+full-fine-tuning micro-batches and larger gradient accumulation, so one slow or small card does not
+define every other card's settings. Each GPU runs one process at a time. Failed or interrupted
+shards can be resumed with the same command, and the final unified summary is written to
+`results/openclip_multi_gpu/suite_summary.json` with combined CSV, LaTeX, and paper tables.
+
 Qwen3-VL zero-shot direct/definition prompts use the base model without an adapter:
 
 ```bash

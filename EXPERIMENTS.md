@@ -207,6 +207,16 @@ bootstrap analysis. Full fine-tuning updates the complete vision encoder, visual
 classification head; the unused text encoder stays frozen. Results and compatible paper-table
 exports are written below `results/openclip_full_suite/`.
 
+For heterogeneous multi-GPU execution, use:
+
+```bash
+GPU_IDS=0,1,2 bash runs/33_run_openclip_multi_gpu.sh
+```
+
+This does not pretend that VRAM is additive. It distributes independent protocol/seed shards,
+chooses per-GPU batch and accumulation settings from each card's physical memory, keeps one job per
+GPU, and merges all completed shard plans into `results/openclip_multi_gpu/suite_summary.json`.
+
 ## Official run
 
 Official mode deliberately refuses to start unless all of the following are supplied:
