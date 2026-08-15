@@ -112,7 +112,7 @@ def parse_args() -> argparse.Namespace:
         help="Fail before the suite starts if logical CUDA device 0 has less free memory",
     )
     parser.add_argument("--candidate-batch-size", type=int, default=2)
-    parser.add_argument("--openclip-batch-size", type=int, default=32)
+    parser.add_argument("--openclip-batch-size", type=int, default=16)
     parser.add_argument(
         "--openclip-finetuning",
         action="store_true",
@@ -129,8 +129,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--openclip-linear-feature-batch-size", type=int, default=32)
     parser.add_argument("--openclip-linear-learning-rate", type=float, default=1e-3)
     parser.add_argument("--openclip-full-epochs", type=int, default=20)
-    parser.add_argument("--openclip-full-batch-size", type=int, default=4)
-    parser.add_argument("--openclip-full-gradient-accumulation", type=int, default=4)
+    parser.add_argument("--openclip-full-batch-size", type=int, default=2)
+    parser.add_argument("--openclip-full-gradient-accumulation", type=int, default=8)
     parser.add_argument("--openclip-full-learning-rate", type=float, default=5e-4)
     parser.add_argument("--openclip-backbone-learning-rate", type=float, default=1e-5)
     parser.add_argument("--openclip-num-workers", type=int, default=4)

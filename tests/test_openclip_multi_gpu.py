@@ -21,15 +21,16 @@ def load_module():
     return module
 
 
-def test_memory_profiles_adapt_batch_to_each_gpu() -> None:
+def test_memory_profiles_use_same_20gb_safe_batch_on_every_gpu() -> None:
     module = load_module()
     large = module.memory_profile(0, "large", 24_564, 23_000)
     small = module.memory_profile(1, "small", 24_564, 12_288)
 
-    assert (large.full_batch, large.full_accumulation) == (16, 1)
-    assert (small.full_batch, small.full_accumulation) == (4, 4)
+    assert (large.full_batch, large.full_accumulation) == (2, 8)
+    assert (small.full_batch, small.full_accumulation) == (2, 8)
     assert large.linear_batch == small.linear_batch == 256
-    assert large.linear_feature_batch > small.linear_feature_batch
+    assert large.linear_feature_batch == small.linear_feature_batch == 32
+    assert large.zero_batch == small.zero_batch == 16
     assert large.minimum_free_mib < large.total_mib
     assert small.minimum_free_mib < small.total_mib
     assert large.full_batch * large.full_accumulation == 16
@@ -78,7 +79,7 @@ def test_finetune_shard_skips_duplicate_zero_shot(tmp_path: Path) -> None:
     assert "--openclip-finetuning" in command
     assert command[command.index("--openclip-finetuning-modes") + 1] == "full_finetune"
     assert command[command.index("--cuda-devices") + 1] == "2"
-    assert command[command.index("--openclip-full-batch-size") + 1] == "8"
+    assert command[command.index("--openclip-full-batch-size") + 1] == "2"
     assert command[command.index("--openclip-full-epochs") + 1] == "20"
 
 

@@ -230,7 +230,7 @@ dependencies only and never starts an experiment. Set `OPENCLIP_ENV_PREFIX` duri
 For the fair same-backbone comparison on a 24 GB RTX 4090, run:
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 bash runs/32_run_openclip_full_suite_24g.sh
+CUDA_VISIBLE_DEVICES=0 bash runs/34_run_openclip_full_suite_20g.sh
 ```
 
 This schedules, on each of the three protocols:
@@ -241,11 +241,10 @@ This schedules, on each of the three protocols:
 - OpenCLIP full visual fine-tuning with the vision encoder, visual projection, and classifier
   trained while the text encoder remains frozen.
 
-Linear probe and full fine-tuning both run for 20 epochs with seeds 42/43/44. The 24 GB single-card
-defaults are a full-tune micro-batch of 8 with gradient accumulation 2, BF16 autocast, gradient
-checkpointing, and a 20 GB free-memory preflight gate. Existing completed outputs are skipped.
-Lower `FULL_BATCH_SIZE` and raise `FULL_GRADIENT_ACCUMULATION` by the same factor if another process
-or driver overhead reduces available memory.
+Linear probe and full fine-tuning both run for 20 epochs with seeds 42/43/44. Every OpenCLIP entry
+uses the conservative 20 GB profile: zero/evaluation batch 16, linear feature batch 32, and a
+full-tune micro-batch of 2 with gradient accumulation 8. BF16 autocast and gradient checkpointing
+remain enabled. Existing completed outputs are skipped.
 
 For multiple GPUs with different memory capacities, use the heterogeneous scheduler:
 
@@ -258,15 +257,15 @@ GPU_IDS=0,1,2 bash runs/33_run_openclip_multi_gpu.sh
 ```
 
 GPU memory is not pooled into one virtual card. Instead, independent protocol/seed shards are
-assigned dynamically to available GPUs. Before every task, current free VRAM is queried again;
-larger free-memory cards receive larger image/feature micro-batches while full fine-tuning keeps an
-effective batch of 16 through gradient accumulation. CUDA OOM automatically retries with half the
-micro-batch. Each GPU runs one process at a time. Failed or interrupted
+assigned dynamically to available GPUs. Every card uses the same fixed 20 GB-safe batch profile,
+so results do not depend on which GPU receives a seed. Current free VRAM is still checked before
+every task, and CUDA OOM automatically retries with half the micro-batch. Each GPU runs one process
+at a time. Failed or interrupted
 shards can be resumed with the same command, and the final unified summary is written to
-`results/openclip_multi_gpu_e20/suite_summary.json` with combined CSV, LaTeX, and paper tables.
+`results/openclip_multi_gpu_e20_20g/suite_summary.json` with combined CSV, LaTeX, and paper tables.
 The terminal shows one overall job bar plus one live status row per GPU, including current shard,
 elapsed time, and the latest nested feature-cache/training/evaluation `tqdm` update. Complete child
-output remains available under `results/openclip_multi_gpu_e20/logs/`.
+output remains available under `results/openclip_multi_gpu_e20_20g/logs/`.
 
 Qwen3-VL zero-shot direct/definition prompts use the base model without an adapter:
 

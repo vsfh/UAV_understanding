@@ -197,7 +197,7 @@ Create the minimal OpenCLIP environment once, then run the complete 24 GB compar
 
 ```bash
 bash runs/setup_openclip_env.sh
-CUDA_VISIBLE_DEVICES=0 bash runs/32_run_openclip_full_suite_24g.sh
+CUDA_VISIBLE_DEVICES=0 bash runs/34_run_openclip_full_suite_20g.sh
 ```
 
 The suite evaluates both zero-shot prompts and trains linear-probe/full-visual-fine-tuning runs
@@ -205,7 +205,7 @@ with seeds 42, 43, and 44 on all three protocols. All variants use the same loca
 `./hf_cache/openclip` checkpoint, `context` input, Core-18 labels, validation metrics, and grouped
 bootstrap analysis. Full fine-tuning updates the complete vision encoder, visual projection, and
 classification head; the unused text encoder stays frozen. Results and compatible paper-table
-exports are written below `results/openclip_full_suite_e20/`.
+exports are written below `results/openclip_full_suite_e20_20g/`.
 
 For heterogeneous multi-GPU execution, use:
 
@@ -214,9 +214,9 @@ GPU_IDS=0,1,2 bash runs/33_run_openclip_multi_gpu.sh
 ```
 
 This does not pretend that VRAM is additive. It distributes independent protocol/seed shards,
-chooses per-GPU micro-batches from current free VRAM while preserving full-fine-tuning effective
-batch 16, keeps one job per GPU, retries CUDA OOM with a smaller micro-batch, and merges all
-completed shard plans into `results/openclip_multi_gpu_e20/suite_summary.json`.
+uses the same fixed 20 GB-safe micro-batches on every GPU with full-fine-tuning effective batch 16,
+keeps one job per GPU, retries CUDA OOM with a smaller micro-batch, and merges all
+completed shard plans into `results/openclip_multi_gpu_e20_20g/suite_summary.json`.
 
 ## Official run
 

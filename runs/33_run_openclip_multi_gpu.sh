@@ -8,8 +8,8 @@ cd "${REPO_ROOT}"
 PYTHON_BIN="${OPENCLIP_PYTHON:-${HOME}/.conda/envs/uav-openclip/bin/python}"
 DATA_ROOT="${DATA_ROOT:-${REPO_ROOT}/um7}"
 MODELS_ROOT="${MODELS_ROOT:-${REPO_ROOT}/hf_cache}"
-OUTPUT_ROOT="${OUTPUT_ROOT:-${REPO_ROOT}/outputs/openclip_multi_gpu_e20}"
-RESULTS_ROOT="${RESULTS_ROOT:-${REPO_ROOT}/results/openclip_multi_gpu_e20}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-${REPO_ROOT}/outputs/openclip_multi_gpu_e20_20g}"
+RESULTS_ROOT="${RESULTS_ROOT:-${REPO_ROOT}/results/openclip_multi_gpu_e20_20g}"
 GPU_IDS="${GPU_IDS:-}"
 
 for required_path in \

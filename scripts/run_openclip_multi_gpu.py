@@ -52,10 +52,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--data-root", type=Path, default=Path("um7"))
     parser.add_argument("--models-root", type=Path, default=Path("hf_cache"))
     parser.add_argument(
-        "--output-root", type=Path, default=Path("outputs/openclip_multi_gpu_e20")
+        "--output-root", type=Path, default=Path("outputs/openclip_multi_gpu_e20_20g")
     )
     parser.add_argument(
-        "--results-root", type=Path, default=Path("results/openclip_multi_gpu_e20")
+        "--results-root", type=Path, default=Path("results/openclip_multi_gpu_e20_20g")
     )
     parser.add_argument("--labels-file", type=Path, default=Path("configs/core18_complete.txt"))
     parser.add_argument("--protocols", choices=PROTOCOLS, nargs="+", default=list(PROTOCOLS))
@@ -73,20 +73,12 @@ def memory_profile(
     index: int, name: str, total_mib: int, free_mib: int | None = None
 ) -> GpuProfile:
     available = total_mib if free_mib is None else min(total_mib, free_mib)
-    if available >= 40_000:
-        settings = (192, 256, 192, 16, 1, 28_000)
-    elif available >= 22_000:
-        settings = (96, 256, 96, 16, 1, 14_000)
-    elif available >= 15_000:
-        settings = (64, 256, 64, 8, 2, 11_000)
-    elif available >= 11_000:
-        settings = (32, 256, 32, 4, 4, 8_000)
-    elif available >= 8_000:
-        settings = (16, 256, 16, 2, 8, 6_000)
-    else:
+    if available < 10_000:
         raise ValueError(
-            f"GPU {index} ({name}) has only {available} MiB free; at least 8 GiB is required"
+            f"GPU {index} ({name}) has only {available} MiB free; the fixed 20GB "
+            "OpenCLIP profile requires at least 10000 MiB free before launch"
         )
+    settings = (16, 256, 32, 2, 8, 8_000)
     return GpuProfile(index, name, total_mib, available, *settings)
 
 
@@ -328,6 +320,10 @@ def main() -> None:
     )
     print(
         "Memory is not pooled: every job must fit one GPU; independent jobs run in parallel."
+    )
+    print(
+        "Fixed 20GB-safe profile: zero/eval=16, linear feature=32, "
+        "full=2x8 (effective batch 16)."
     )
     print(
         f"Protocols={args.protocols}, seeds={args.seeds}, "
