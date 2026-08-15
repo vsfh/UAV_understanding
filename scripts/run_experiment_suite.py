@@ -118,10 +118,17 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Also schedule OpenCLIP linear-probe and full visual fine-tuning runs",
     )
+    parser.add_argument(
+        "--openclip-finetuning-modes",
+        choices=["linear_probe", "full_finetune"],
+        nargs="+",
+        default=["linear_probe", "full_finetune"],
+    )
     parser.add_argument("--openclip-linear-epochs", type=int, default=20)
-    parser.add_argument("--openclip-linear-batch-size", type=int, default=32)
+    parser.add_argument("--openclip-linear-batch-size", type=int, default=256)
+    parser.add_argument("--openclip-linear-feature-batch-size", type=int, default=32)
     parser.add_argument("--openclip-linear-learning-rate", type=float, default=1e-3)
-    parser.add_argument("--openclip-full-epochs", type=int, default=3)
+    parser.add_argument("--openclip-full-epochs", type=int, default=20)
     parser.add_argument("--openclip-full-batch-size", type=int, default=4)
     parser.add_argument("--openclip-full-gradient-accumulation", type=int, default=4)
     parser.add_argument("--openclip-full-learning-rate", type=float, default=5e-4)
@@ -863,6 +870,8 @@ def add_openclip_trained_run(
         epochs,
         "--batch-size",
         batch_size,
+        "--feature-batch-size",
+        args.openclip_linear_feature_batch_size,
         "--gradient-accumulation",
         gradient_accumulation,
         "--learning-rate",
@@ -1660,7 +1669,7 @@ def make_plan(args: argparse.Namespace) -> tuple[list[Step], list[str], Path, Pa
                     max_samples=None,
                 )
         if args.openclip_finetuning:
-            for mode in ("linear_probe", "full_finetune"):
+            for mode in args.openclip_finetuning_modes:
                 for seed in seeds:
                     add_openclip_trained_run(
                         planner,

@@ -11,7 +11,7 @@ import subprocess
 import sys
 import threading
 import time
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 
 from tqdm.auto import tqdm
@@ -27,8 +27,10 @@ class GpuProfile:
     index: int
     name: str
     total_mib: int
+    free_mib: int
     zero_batch: int
     linear_batch: int
+    linear_feature_batch: int
     full_batch: int
     full_accumulation: int
     minimum_free_mib: int
@@ -50,10 +52,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--data-root", type=Path, default=Path("um7"))
     parser.add_argument("--models-root", type=Path, default=Path("hf_cache"))
     parser.add_argument(
-        "--output-root", type=Path, default=Path("outputs/openclip_multi_gpu")
+        "--output-root", type=Path, default=Path("outputs/openclip_multi_gpu_e20")
     )
     parser.add_argument(
-        "--results-root", type=Path, default=Path("results/openclip_multi_gpu")
+        "--results-root", type=Path, default=Path("results/openclip_multi_gpu_e20")
     )
     parser.add_argument("--labels-file", type=Path, default=Path("configs/core18_complete.txt"))
     parser.add_argument("--protocols", choices=PROTOCOLS, nargs="+", default=list(PROTOCOLS))
@@ -67,27 +69,32 @@ def resolve(path: Path) -> Path:
     return path if path.is_absolute() else (ROOT / path).resolve()
 
 
-def memory_profile(index: int, name: str, total_mib: int) -> GpuProfile:
-    if total_mib >= 20_000:
-        settings = (16, 32, 4, 4, min(18_000, total_mib - 2_048))
-    elif total_mib >= 14_000:
-        settings = (12, 24, 2, 8, total_mib - 2_048)
-    elif total_mib >= 10_000:
-        settings = (8, 16, 1, 16, total_mib - 1_536)
-    elif total_mib >= 8_000:
-        settings = (4, 8, 1, 16, total_mib - 1_024)
+def memory_profile(
+    index: int, name: str, total_mib: int, free_mib: int | None = None
+) -> GpuProfile:
+    available = total_mib if free_mib is None else min(total_mib, free_mib)
+    if available >= 40_000:
+        settings = (192, 256, 192, 16, 1, available - 2_048)
+    elif available >= 22_000:
+        settings = (96, 256, 96, 16, 1, available - 2_048)
+    elif available >= 15_000:
+        settings = (64, 256, 64, 8, 2, available - 1_536)
+    elif available >= 11_000:
+        settings = (32, 256, 32, 4, 4, available - 1_536)
+    elif available >= 8_000:
+        settings = (16, 256, 16, 2, 8, available - 1_024)
     else:
         raise ValueError(
-            f"GPU {index} ({name}) has only {total_mib} MiB; at least 8 GiB is required"
+            f"GPU {index} ({name}) has only {available} MiB free; at least 8 GiB is required"
         )
-    return GpuProfile(index, name, total_mib, *settings)
+    return GpuProfile(index, name, total_mib, available, *settings)
 
 
 def detect_gpus(selected: list[int] | None) -> list[GpuProfile]:
     result = subprocess.run(
         [
             "nvidia-smi",
-            "--query-gpu=index,name,memory.total",
+            "--query-gpu=index,name,memory.total,memory.free",
             "--format=csv,noheader,nounits",
         ],
         check=True,
@@ -96,8 +103,10 @@ def detect_gpus(selected: list[int] | None) -> list[GpuProfile]:
     )
     inventory = {}
     for line in result.stdout.splitlines():
-        index_text, name, memory_text = [part.strip() for part in line.split(",", 2)]
-        inventory[int(index_text)] = (name, int(memory_text))
+        index_text, name, total_text, free_text = [
+            part.strip() for part in line.split(",", 3)
+        ]
+        inventory[int(index_text)] = (name, int(total_text), int(free_text))
     indices = selected if selected is not None else sorted(inventory)
     if len(indices) != len(set(indices)):
         raise ValueError("--gpus contains duplicate indices")
@@ -107,9 +116,55 @@ def detect_gpus(selected: list[int] | None) -> list[GpuProfile]:
     return [memory_profile(index, *inventory[index]) for index in indices]
 
 
+def refresh_gpu_profile(profile: GpuProfile) -> GpuProfile:
+    result = subprocess.run(
+        [
+            "nvidia-smi",
+            "--id",
+            str(profile.index),
+            "--query-gpu=memory.free",
+            "--format=csv,noheader,nounits",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    free_mib = int(result.stdout.strip().splitlines()[0])
+    return memory_profile(profile.index, profile.name, profile.total_mib, free_mib)
+
+
+def reduced_batch_profile(profile: GpuProfile, job_kind: str) -> GpuProfile | None:
+    if job_kind == "full_finetune" and (
+        profile.full_batch > 1 or profile.zero_batch > 1
+    ):
+        reduced_full = max(1, profile.full_batch // 2)
+        return replace(
+            profile,
+            full_batch=reduced_full,
+            full_accumulation=(
+                profile.full_accumulation * 2
+                if reduced_full < profile.full_batch
+                else profile.full_accumulation
+            ),
+            zero_batch=max(1, profile.zero_batch // 2),
+        )
+    if job_kind == "linear_probe" and (
+        profile.linear_feature_batch > 1 or profile.zero_batch > 1
+    ):
+        return replace(
+            profile,
+            linear_feature_batch=max(1, profile.linear_feature_batch // 2),
+            zero_batch=max(1, profile.zero_batch // 2),
+        )
+    if job_kind == "zero" and profile.zero_batch > 1:
+        return replace(profile, zero_batch=max(1, profile.zero_batch // 2))
+    return None
+
+
 def jobs_for(protocols: list[str], seeds: list[int]) -> list[Job]:
     finetuning = [
-        Job(f"finetune.{protocol}.seed{seed}", "finetune", protocol, seed)
+        Job(f"{mode}.{protocol}.seed{seed}", mode, protocol, seed)
+        for mode in ("full_finetune", "linear_probe")
         for protocol in protocols
         for seed in seeds
     ]
@@ -133,7 +188,7 @@ def command_for(
         if job.kind == "zero"
         else results_root
         / "shards"
-        / "finetune"
+        / job.kind
         / job.protocol
         / f"seed{job.seed}"
     )
@@ -163,6 +218,8 @@ def command_for(
         str(gpu.zero_batch),
         "--openclip-linear-batch-size",
         str(gpu.linear_batch),
+        "--openclip-linear-feature-batch-size",
+        str(gpu.linear_feature_batch),
         "--openclip-full-batch-size",
         str(gpu.full_batch),
         "--openclip-full-gradient-accumulation",
@@ -175,19 +232,21 @@ def command_for(
         str(gpu.minimum_free_mib),
         "--resume",
     ]
-    if job.kind == "finetune":
+    if job.kind in {"linear_probe", "full_finetune"}:
         command.extend(
             [
                 "--seeds",
                 str(job.seed),
                 "--skip-zero-shot",
                 "--openclip-finetuning",
+                "--openclip-finetuning-modes",
+                job.kind,
                 "--openclip-linear-epochs",
                 "20",
                 "--openclip-linear-learning-rate",
                 "1e-3",
                 "--openclip-full-epochs",
-                "3",
+                "20",
                 "--openclip-full-learning-rate",
                 "5e-4",
                 "--openclip-backbone-learning-rate",
@@ -264,6 +323,10 @@ def main() -> None:
     print(
         "Memory is not pooled: every job must fit one GPU; independent jobs run in parallel."
     )
+    print(
+        f"Protocols={args.protocols}, seeds={args.seeds}, "
+        "modes=['zero', 'linear_probe', 'full_finetune'], epochs=20"
+    )
     if args.dry_run:
         for index, job in enumerate(jobs):
             gpu = profiles[index % len(profiles)]
@@ -326,47 +389,82 @@ def main() -> None:
                     job = work_queue.get_nowait()
                 except queue.Empty:
                     return
-                command = command_for(
-                    job,
-                    gpu,
-                    args=args,
-                    data_root=data_root,
-                    models_root=models_root,
-                    output_root=output_root,
-                    results_root=results_root,
-                    labels_file=labels_file,
-                )
+                job_gpu = refresh_gpu_profile(gpu)
                 with lock:
                     statuses[job.job_id] = f"running_gpu_{gpu.index}"
                     gpu_runtime[gpu.index] = {
                         "job": job.job_id,
-                        "latest": "starting child process",
+                        "latest": (
+                            f"free={job_gpu.free_mib}MiB, zero={job_gpu.zero_batch}, "
+                            f"feature={job_gpu.linear_feature_batch}, "
+                            f"full={job_gpu.full_batch}x{job_gpu.full_accumulation}"
+                        ),
                         "started": time.monotonic(),
                     }
                     atomic_status(status_path, statuses)
                     tqdm.write(f"[START GPU {gpu.index}] {job.job_id}")
-                log_path = logs_root / f"{job.job_id}.log"
                 env = os.environ.copy()
                 env.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
                 env.setdefault("TOKENIZERS_PARALLELISM", "false")
-                with log_path.open("wb") as log:
-                    process = subprocess.Popen(
-                        command,
-                        cwd=ROOT,
-                        env=env,
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.STDOUT,
-                        text=False,
-                        bufsize=0,
+                attempt = 1
+                while True:
+                    command = command_for(
+                        job,
+                        job_gpu,
+                        args=args,
+                        data_root=data_root,
+                        models_root=models_root,
+                        output_root=output_root,
+                        results_root=results_root,
+                        labels_file=labels_file,
                     )
+                    suffix = "" if attempt == 1 else f".attempt{attempt}"
+                    log_path = logs_root / f"{job.job_id}{suffix}.log"
+                    saw_oom = False
+                    with log_path.open("wb") as log:
+                        process = subprocess.Popen(
+                            command,
+                            cwd=ROOT,
+                            env=env,
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.STDOUT,
+                            text=False,
+                            bufsize=0,
+                        )
 
-                    def update_child_status(status: str) -> None:
-                        with lock:
-                            gpu_runtime[gpu.index]["latest"] = status
+                        def update_child_status(status: str) -> None:
+                            nonlocal saw_oom
+                            if "out of memory" in status.lower():
+                                saw_oom = True
+                            with lock:
+                                gpu_runtime[gpu.index]["latest"] = status
 
-                    return_code = stream_process(
-                        process, log, on_status=update_child_status
+                        return_code = stream_process(
+                            process, log, on_status=update_child_status
+                        )
+                    reduced = (
+                        reduced_batch_profile(job_gpu, job.kind)
+                        if return_code and saw_oom
+                        else None
                     )
+                    if reduced is None:
+                        break
+                    attempt += 1
+                    job_gpu = reduced
+                    with lock:
+                        statuses[job.job_id] = (
+                            f"retry_oom_gpu_{gpu.index}_attempt_{attempt}"
+                        )
+                        gpu_runtime[gpu.index]["latest"] = (
+                            f"OOM retry: zero={job_gpu.zero_batch}, "
+                            f"feature={job_gpu.linear_feature_batch}, "
+                            f"full={job_gpu.full_batch}x{job_gpu.full_accumulation}"
+                        )
+                        atomic_status(status_path, statuses)
+                        tqdm.write(
+                            f"[OOM RETRY GPU {gpu.index}] {job.job_id}, "
+                            f"attempt={attempt}, log={log_path}"
+                        )
                 with lock:
                     if return_code:
                         statuses[job.job_id] = f"failed_gpu_{gpu.index}"

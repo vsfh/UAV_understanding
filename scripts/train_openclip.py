@@ -75,6 +75,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--prompt", choices=["direct", "definition"], default="definition")
     parser.add_argument("--epochs", type=int, required=True)
     parser.add_argument("--batch-size", type=int, required=True)
+    parser.add_argument(
+        "--feature-batch-size",
+        type=int,
+        help="Image-encoder batch for linear-probe feature extraction",
+    )
     parser.add_argument("--gradient-accumulation", type=int, default=1)
     parser.add_argument("--learning-rate", type=float, required=True)
     parser.add_argument("--backbone-learning-rate", type=float, default=1e-5)
@@ -182,6 +187,8 @@ def main() -> None:
         raise RuntimeError("OpenCLIP training requires CUDA")
     if args.batch_size < 1 or args.gradient_accumulation < 1 or args.epochs < 1:
         raise ValueError("Batch size, gradient accumulation, and epochs must be positive")
+    if args.feature_batch_size is not None and args.feature_batch_size < 1:
+        raise ValueError("--feature-batch-size must be positive")
 
     seed_everything(args.seed)
     device = torch.device("cuda")
@@ -216,12 +223,17 @@ def main() -> None:
     classifier = OpenCLIPClassifier(text_features.shape[-1], len(labels)).to(device)
     classifier.initialize_from_text(text_features)
 
+    image_batch_size = (
+        args.feature_batch_size
+        if args.mode == "linear_probe" and args.feature_batch_size is not None
+        else args.batch_size
+    )
     train_loader = make_loader(
         train_samples,
         processor,
         label_to_index,
         args.view,
-        batch_size=args.batch_size,
+        batch_size=image_batch_size,
         workers=args.num_workers,
         shuffle=args.mode == "full_finetune",
         seed=args.seed,
@@ -231,7 +243,7 @@ def main() -> None:
         processor,
         label_to_index,
         args.view,
-        batch_size=args.batch_size,
+        batch_size=image_batch_size,
         workers=args.num_workers,
         shuffle=False,
         seed=args.seed,
@@ -372,7 +384,13 @@ def main() -> None:
         "labels": labels,
         "view": args.view,
         "prompt": args.prompt,
+        "classifier_batch_size": args.batch_size,
+        "feature_batch_size": image_batch_size,
+        "gradient_accumulation": args.gradient_accumulation,
         "seed": args.seed,
+        "epochs": args.epochs,
+        "learning_rate": args.learning_rate,
+        "backbone_learning_rate": args.backbone_learning_rate,
         "num_train_samples": len(train_samples),
         "num_val_samples": len(val_samples),
         "trainable_parameters": trainable_parameter_count(model, classifier),

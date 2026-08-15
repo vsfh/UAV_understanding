@@ -241,11 +241,11 @@ This schedules, on each of the three protocols:
 - OpenCLIP full visual fine-tuning with the vision encoder, visual projection, and classifier
   trained while the text encoder remains frozen.
 
-Linear probe and full fine-tuning use seeds 42/43/44. The 24 GB defaults are a full-tune
-micro-batch of 4 with gradient accumulation 4, BF16 autocast, gradient checkpointing, and a 20 GB
-free-memory preflight gate. Existing completed outputs are skipped. Lower `FULL_BATCH_SIZE=2` and
-raise `FULL_GRADIENT_ACCUMULATION=8` if another process or driver overhead reduces available
-memory.
+Linear probe and full fine-tuning both run for 20 epochs with seeds 42/43/44. The 24 GB single-card
+defaults are a full-tune micro-batch of 8 with gradient accumulation 2, BF16 autocast, gradient
+checkpointing, and a 20 GB free-memory preflight gate. Existing completed outputs are skipped.
+Lower `FULL_BATCH_SIZE` and raise `FULL_GRADIENT_ACCUMULATION` by the same factor if another process
+or driver overhead reduces available memory.
 
 For multiple GPUs with different memory capacities, use the heterogeneous scheduler:
 
@@ -258,14 +258,15 @@ GPU_IDS=0,1,2 bash runs/33_run_openclip_multi_gpu.sh
 ```
 
 GPU memory is not pooled into one virtual card. Instead, independent protocol/seed shards are
-assigned dynamically to available GPUs. Cards with 24/16/12/8 GB receive progressively smaller
-full-fine-tuning micro-batches and larger gradient accumulation, so one slow or small card does not
-define every other card's settings. Each GPU runs one process at a time. Failed or interrupted
+assigned dynamically to available GPUs. Before every task, current free VRAM is queried again;
+larger free-memory cards receive larger image/feature micro-batches while full fine-tuning keeps an
+effective batch of 16 through gradient accumulation. CUDA OOM automatically retries with half the
+micro-batch. Each GPU runs one process at a time. Failed or interrupted
 shards can be resumed with the same command, and the final unified summary is written to
-`results/openclip_multi_gpu/suite_summary.json` with combined CSV, LaTeX, and paper tables.
+`results/openclip_multi_gpu_e20/suite_summary.json` with combined CSV, LaTeX, and paper tables.
 The terminal shows one overall job bar plus one live status row per GPU, including current shard,
 elapsed time, and the latest nested feature-cache/training/evaluation `tqdm` update. Complete child
-output remains available under `results/openclip_multi_gpu/logs/`.
+output remains available under `results/openclip_multi_gpu_e20/logs/`.
 
 Qwen3-VL zero-shot direct/definition prompts use the base model without an adapter:
 

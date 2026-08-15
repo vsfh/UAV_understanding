@@ -8,13 +8,14 @@ cd "${REPO_ROOT}"
 PYTHON_BIN="${OPENCLIP_PYTHON:-${HOME}/.conda/envs/uav-openclip/bin/python}"
 DATA_ROOT="${DATA_ROOT:-${REPO_ROOT}/um7}"
 MODELS_ROOT="${MODELS_ROOT:-${REPO_ROOT}/hf_cache}"
-OUTPUT_ROOT="${OUTPUT_ROOT:-${REPO_ROOT}/outputs/openclip_full_suite}"
-RESULTS_ROOT="${RESULTS_ROOT:-${REPO_ROOT}/results/openclip_full_suite}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-${REPO_ROOT}/outputs/openclip_full_suite_e20}"
+RESULTS_ROOT="${RESULTS_ROOT:-${REPO_ROOT}/results/openclip_full_suite_e20}"
 CUDA_DEVICES="${CUDA_VISIBLE_DEVICES:-0}"
 ZERO_SHOT_BATCH_SIZE="${ZERO_SHOT_BATCH_SIZE:-16}"
-LINEAR_BATCH_SIZE="${LINEAR_BATCH_SIZE:-32}"
-FULL_BATCH_SIZE="${FULL_BATCH_SIZE:-4}"
-FULL_GRADIENT_ACCUMULATION="${FULL_GRADIENT_ACCUMULATION:-4}"
+LINEAR_BATCH_SIZE="${LINEAR_BATCH_SIZE:-256}"
+LINEAR_FEATURE_BATCH_SIZE="${LINEAR_FEATURE_BATCH_SIZE:-64}"
+FULL_BATCH_SIZE="${FULL_BATCH_SIZE:-8}"
+FULL_GRADIENT_ACCUMULATION="${FULL_GRADIENT_ACCUMULATION:-2}"
 NUM_WORKERS="${NUM_WORKERS:-4}"
 MIN_FREE_GPU_MIB="${MIN_FREE_GPU_MIB:-20000}"
 
@@ -44,6 +45,7 @@ echo "Model:                   ${MODELS_ROOT}/openclip"
 echo "GPU:                     ${CUDA_VISIBLE_DEVICES}"
 echo "Zero-shot batch:         ${ZERO_SHOT_BATCH_SIZE}"
 echo "Linear-probe batch:      ${LINEAR_BATCH_SIZE}"
+echo "Linear feature batch:    ${LINEAR_FEATURE_BATCH_SIZE}"
 echo "Full-tune micro-batch:   ${FULL_BATCH_SIZE}"
 echo "Full-tune accumulation:  ${FULL_GRADIENT_ACCUMULATION}"
 
@@ -62,8 +64,9 @@ exec "${PYTHON_BIN}" scripts/run_experiment_suite.py \
   --openclip-batch-size "${ZERO_SHOT_BATCH_SIZE}" \
   --openclip-linear-epochs 20 \
   --openclip-linear-batch-size "${LINEAR_BATCH_SIZE}" \
+  --openclip-linear-feature-batch-size "${LINEAR_FEATURE_BATCH_SIZE}" \
   --openclip-linear-learning-rate 1e-3 \
-  --openclip-full-epochs 3 \
+  --openclip-full-epochs 20 \
   --openclip-full-batch-size "${FULL_BATCH_SIZE}" \
   --openclip-full-gradient-accumulation "${FULL_GRADIENT_ACCUMULATION}" \
   --openclip-full-learning-rate 5e-4 \
