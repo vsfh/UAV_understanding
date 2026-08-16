@@ -16,8 +16,8 @@ sshfs feihong@10.119.46.67:/feihong/miniconda3 \
     "${REPO_ROOT}/conda" \
     -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3
 
-sshfs feihong@10.119.46.67:/feihong/output \
-    "${REPO_ROOT}/output" \
+sshfs feihong@10.119.46.67:/feihong/outputs \
+    "./outputs" \
     -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3
     
 sshfs feihong@10.119.46.67:/feihong/result \

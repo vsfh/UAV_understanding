@@ -1,0 +1,29 @@
+runtime:
+  device: cuda
+model:
+  path: ./hf_cache/qwen3-vl
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  protocols: [forward_temporal, session_disjoint, unseen_site]
+  max_per_class: 250
+  targets: null
+train:
+  seeds: [42, 43, 44]
+  epochs: 20
+  view: pair
+  batch_size: 2
+  gradient_accumulation: 8
+  learning_rate: 2.0e-4
+  max_length: 2048
+  max_pixels: 262144
+  logging_steps: 10
+  lora_scope: projector_llm
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  label_weight: 2.0
+output:
+  root: ./outputs/qwen_lora/{protocol}/seed{seed}
+  skip_existing: true

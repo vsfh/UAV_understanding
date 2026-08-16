@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+export CUDA_VISIBLE_DEVICES="${GPU_ID:-0}"
+export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
+PYTHON="${QWEN_PYTHON:-/home/feihong/miniconda3/bin/python}"
+exec "${PYTHON}" scripts/qwen_lora.py \
+  --config "${1:-configs/yaml/qwen_lora.yaml}"

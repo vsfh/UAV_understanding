@@ -1,0 +1,22 @@
+runtime:
+  device: cuda
+model:
+  path: ./hf_cache/openclip
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  protocols: [forward_temporal, session_disjoint, unseen_site]
+  split: val
+  max_per_class: null
+checkpoints:
+  - name: linear_probe
+    path: ./outputs/openclip_linear_probe/{protocol}/seed{seed}/best.pt
+    seeds: [42, 43, 44]
+  - name: full_finetune
+    path: ./outputs/openclip_full_finetune/{protocol}/seed{seed}/best.pt
+    seeds: [42, 43, 44]
+test:
+  batch_size: 16
+output:
+  path: ./results/openclip/{name}/{protocol}/seed{seed}_val.json

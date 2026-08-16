@@ -1,29 +1,18 @@
 from __future__ import annotations
 
 import csv
-import importlib.util
 import json
 from pathlib import Path
 import subprocess
 import sys
 
 from PIL import Image
+from clear_uav.supervision import read_targets
 
 
 ROOT = Path(__file__).parents[1]
 BUILD_SCRIPT = ROOT / "scripts/build_cropped_caption_targets.py"
 MERGE_SCRIPT = ROOT / "scripts/merge_grounded_proxy_counterfactuals.py"
-TRAIN_SCRIPT = ROOT / "scripts/train_qwen.py"
-
-
-def load_train_module():
-    spec = importlib.util.spec_from_file_location("train_qwen", TRAIN_SCRIPT)
-    assert spec is not None and spec.loader is not None
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-
 def test_crop_caption_becomes_grounded_target_without_fake_counterfactual(
     tmp_path: Path,
 ) -> None:
@@ -115,40 +104,10 @@ def test_crop_caption_becomes_grounded_target_without_fake_counterfactual(
     assert row["supervision_tier"] == "teacher_cropped_caption_not_human_audited"
     assert "counterfactual_target" not in row
 
-    targets, counterfactuals, tiers = load_train_module().read_targets(output_path)
+    targets, counterfactuals, tiers = read_targets(output_path)
     assert json.loads(targets["record-1"])["evidence"] == description
     assert counterfactuals == {}
     assert tiers == {"record-1": "teacher_cropped_caption_not_human_audited"}
-
-    counterfactual_run = subprocess.run(
-        [
-            sys.executable,
-            str(TRAIN_SCRIPT),
-            "--model-path",
-            str(tmp_path / "unused-model"),
-            "--data-root",
-            str(tmp_path),
-            "--train-csv",
-            str(train_csv),
-            "--ontology",
-            str(ROOT / "configs/ontology.yaml"),
-            "--labels-file",
-            str(labels_path),
-            "--targets-jsonl",
-            str(output_path),
-            "--output-dir",
-            str(tmp_path / "unused-output"),
-            "--lambda-cf",
-            "0.1",
-        ],
-        capture_output=True,
-        text=True,
-    )
-    assert counterfactual_run.returncode != 0
-    assert "Counterfactual loss requires counterfactual_target" in (
-        counterfactual_run.stdout + counterfactual_run.stderr
-    )
-
 
 def test_crop_grounded_positive_can_merge_with_explicit_proxy_counterfactual(
     tmp_path: Path,

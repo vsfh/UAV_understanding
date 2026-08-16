@@ -219,5 +219,8 @@ __marimo__/
 
 # CLEAR-UAV local artifacts
 models/
-outputs/
-data/
+outputs
+data
+um7
+results
+hf_cache

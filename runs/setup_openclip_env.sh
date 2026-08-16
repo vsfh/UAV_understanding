@@ -35,6 +35,7 @@ echo "PyTorch wheel index: ${PYTORCH_INDEX_URL}"
     "numpy>=1.26" \
     "pillow>=10" \
     "pyyaml>=6" \
+    "tensorboard>=2.18" \
     "tqdm>=4.66"
 "${CONDA_EXECUTABLE}" run --prefix "${ENV_PREFIX}" \
   python -m pip install --no-deps --editable "${REPO_ROOT}"
@@ -43,6 +44,6 @@ echo "PyTorch wheel index: ${PYTORCH_INDEX_URL}"
   'import torch, transformers, clear_uav; print("torch", torch.__version__, "cuda", torch.version.cuda, "available", torch.cuda.is_available()); print("transformers", transformers.__version__)'
 
 echo "Environment ready. This script did not run any experiment."
-echo "Zero-shot only: CUDA_VISIBLE_DEVICES=0 bash runs/31_run_openclip_only.sh"
-echo "Full comparison: CUDA_VISIBLE_DEVICES=0 bash runs/34_run_openclip_full_suite_20g.sh"
-echo "Multi-GPU suite: bash runs/33_run_openclip_multi_gpu.sh"
+echo "Linear probe: bash runs/openclip_linear_probe.sh"
+echo "Full fine-tune: bash runs/openclip_full_finetune.sh"
+echo "Test: bash runs/test_openclip.sh"
