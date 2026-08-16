@@ -6,15 +6,15 @@ data:
   root: ./um7
   ontology: ./configs/ontology.yaml
   labels: ./configs/core18_complete.txt
-  protocols: [forward_temporal, session_disjoint, unseen_site]
+  protocols: [session_disjoint]
   split: val
   max_per_class: null
 adapters:
-  - name: lora
-    path: ./outputs/qwen_lora/{protocol}/seed{seed}/final
+  - name: label_crop
+    path: ./outputs/qwen_label_crop/{protocol}/seed{seed}/final
     seeds: [43]
 test:
-  view: pair
+  view: evidence
   max_pixels: 262144
   max_new_tokens: 128
 output:

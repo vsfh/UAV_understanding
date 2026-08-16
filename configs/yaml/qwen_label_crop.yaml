@@ -6,13 +6,13 @@ data:
   root: ./um7
   ontology: ./configs/ontology.yaml
   labels: ./configs/core18_complete.txt
-  protocols: [forward_temporal, session_disjoint, unseen_site]
+  protocols: [session_disjoint]
   max_per_class: 250
   targets: null
 train:
   seeds: [43]
   epochs: 5
-  view: pair
+  view: evidence
   batch_size: 16
   gradient_accumulation: 1
   learning_rate: 2.0e-4
@@ -25,5 +25,5 @@ train:
   lora_dropout: 0.05
   label_weight: 2.0
 output:
-  root: ./outputs/qwen_lora/{protocol}/seed{seed}
+  root: ./outputs/qwen_label_crop/{protocol}/seed{seed}
   skip_existing: true
