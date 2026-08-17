@@ -1,0 +1,21 @@
+runtime:
+  device: cuda
+model:
+  path: ./hf_cache/qwen3-vl
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  protocols: [session_disjoint]
+  split: val
+  max_per_class: null
+adapters:
+  - name: label_context
+    path: ./outputs/qwen_label_context/{protocol}/seed{seed}/final
+    seeds: [43]
+test:
+  view: context
+  max_pixels: 262144
+  max_new_tokens: 128
+output:
+  path: ./results/qwen/{name}/{protocol}/seed{seed}_val.json

@@ -6,9 +6,11 @@
 | OpenCLIP full fine-tune | `scripts/openclip_finetune.py` | `configs/yaml/openclip_full_finetune.yaml` | `runs/openclip_full_finetune.sh` |
 | Qwen LoRA | `scripts/qwen_lora.py` | `configs/yaml/qwen_lora.yaml` | `runs/qwen_lora.sh` |
 | Qwen label-crop LoRA | `scripts/qwen_lora.py` | `configs/yaml/qwen_label_crop.yaml` | `runs/qwen_label_crop.sh` |
+| Qwen label-context LoRA | `scripts/qwen_lora.py` | `configs/yaml/qwen_label_context.yaml` | `runs/qwen_label_context.sh` |
 | OpenCLIP test | `scripts/test_openclip.py` | `configs/yaml/openclip_test.yaml` | `runs/test_openclip.sh` |
 | Qwen test | `scripts/test_qwen.py` | `configs/yaml/qwen_test.yaml` | `runs/test_qwen.sh` |
 | Qwen label-crop test | `scripts/test_qwen.py` | `configs/yaml/qwen_label_crop_test.yaml` | `runs/test_qwen_label_crop.sh` |
+| Qwen label-context test | `scripts/test_qwen.py` | `configs/yaml/qwen_label_context_test.yaml` | `runs/test_qwen_label_context.sh` |
 
 每个训练 YAML 当前定义 3 protocols × 3 seeds，共 9 个 run。不同算法由不同 Python 文件运行，
 没有总 suite、shard scheduler 或动态命令拼接层。

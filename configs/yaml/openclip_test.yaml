@@ -12,10 +12,10 @@ data:
 checkpoints:
   - name: linear_probe
     path: ./outputs/openclip_linear_probe/{protocol}/seed{seed}/best.pt
-    seeds: [42, 43, 44]
+    seeds: [43]
   - name: full_finetune
     path: ./outputs/openclip_full_finetune/{protocol}/seed{seed}/best.pt
-    seeds: [42, 43, 44]
+    seeds: [43]
 test:
   batch_size: 16
 output:

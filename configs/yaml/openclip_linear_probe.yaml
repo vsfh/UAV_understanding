@@ -9,7 +9,7 @@ data:
   protocols: [forward_temporal, session_disjoint, unseen_site]
   max_per_class: 250
 train:
-  seeds: [42, 43, 44]
+  seeds: [43]
   epochs: 20
   view: context
   prompt: definition
