@@ -1,0 +1,43 @@
+runtime:
+  device: cuda
+  seed: 43
+
+model:
+  path: ./hf_cache/geochat
+  vision_tower: ./hf_cache/geochat-vision-tower
+  # Override with GEOCHAT_ROOT when the official GeoChat source is elsewhere.
+  code_root: ./third_party/GeoChat
+  load_8bit: false
+  load_4bit: false
+
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  protocols: [session_disjoint]
+  split: val
+  max_per_class: null
+
+prompts:
+  - name: direct
+    template: |-
+      Classify this UAV context image into exactly one canonical event label.
+      Candidate labels:
+      {label_list}
+      Return only the canonical label, using its exact snake_case spelling. Do not explain.
+
+  - name: definition
+    template: |-
+      Classify this UAV context image into exactly one canonical event label.
+      Candidate labels and their visual definitions:
+      {definition_list}
+      Return only the canonical label, using its exact snake_case spelling. Do not explain.
+
+test:
+  view: context
+  conv_mode: llava_v1
+  max_length: 2048
+  max_new_tokens: 32
+
+output:
+  path: ./results/geochat/{prompt}/{protocol}/seed{seed}_val.json

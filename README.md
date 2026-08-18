@@ -12,11 +12,13 @@ scripts/openclip_finetune.py
 scripts/qwen_lora.py
 scripts/test_openclip.py
 scripts/test_qwen.py
+scripts/test_geochat.py
 runs/                          YAML 对应的一键入口
 ```
 
-默认数据和模型路径分别是 `./um7` 与 `./hf_cache`。每个训练配置覆盖
-`forward_temporal`、`session_disjoint`、`unseen_site`，并使用 seeds 42/43/44 和 20 epochs。
+默认数据和模型路径分别是 `./um7` 与 `./hf_cache`。当前训练和测试配置统一使用 seed 43；
+主实验覆盖 `forward_temporal`、`session_disjoint`、`unseen_site`，label-crop 和
+label-context 消融只跑 `session_disjoint`。
 
 ## 安装
 
@@ -68,7 +70,12 @@ bash runs/qwen_lora.sh configs/yaml/qwen_lora.yaml
 ```bash
 bash runs/test_openclip.sh
 bash runs/test_qwen.sh
+bash runs/test_geochat.sh
 ```
+
+GeoChat 测试需要官方源码及其独立环境。源码默认放在 `third_party/GeoChat`；也可以分别通过
+`GEOCHAT_ROOT` 和 `GEOCHAT_PYTHON` 指定源码目录与 Python。该测试以 seed 43 对 context 图像
+分别运行 YAML 中的 direct prompt 和 definition prompt。
 
 OpenCLIP 测试配置中的 `checkpoints` 是列表；Qwen 测试配置中的 `adapters` 也是列表。
 增加同一模型族的新 checkpoint 只需增加一项，无需修改测试循环。增加新的模型族时，可以复用

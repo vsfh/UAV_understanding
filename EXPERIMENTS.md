@@ -11,9 +11,11 @@
 | Qwen test | `scripts/test_qwen.py` | `configs/yaml/qwen_test.yaml` | `runs/test_qwen.sh` |
 | Qwen label-crop test | `scripts/test_qwen.py` | `configs/yaml/qwen_label_crop_test.yaml` | `runs/test_qwen_label_crop.sh` |
 | Qwen label-context test | `scripts/test_qwen.py` | `configs/yaml/qwen_label_context_test.yaml` | `runs/test_qwen_label_context.sh` |
+| GeoChat zero-shot test | `scripts/test_geochat.py` | `configs/yaml/geochat_test.yaml` | `runs/test_geochat.sh` |
 
-每个训练 YAML 当前定义 3 protocols × 3 seeds，共 9 个 run。不同算法由不同 Python 文件运行，
-没有总 suite、shard scheduler 或动态命令拼接层。
+所有当前训练和测试 YAML 都固定使用 seed 43。主实验覆盖 3 个 protocols，label-crop 和
+label-context 消融只跑 `session_disjoint`。不同算法由不同 Python 文件运行，没有总 suite、
+shard scheduler 或动态命令拼接层。
 
 配置修改示例：复制一个 YAML，修改参数，然后把它作为 bash 的第一个参数：
 
@@ -28,6 +30,8 @@ bash runs/openclip_full_finetune.sh configs/yaml/openclip_full_finetune_ablation
 outputs/openclip_linear_probe/<protocol>/seed<seed>/
 outputs/openclip_full_finetune/<protocol>/seed<seed>/
 outputs/qwen_lora/<protocol>/seed<seed>/
+outputs/qwen_label_crop/<protocol>/seed<seed>/
+outputs/qwen_label_context/<protocol>/seed<seed>/
 ```
 
 测试结果：
@@ -35,4 +39,5 @@ outputs/qwen_lora/<protocol>/seed<seed>/
 ```text
 results/openclip/<checkpoint-name>/<protocol>/seed<seed>_val.json
 results/qwen/<adapter-name>/<protocol>/seed<seed>_val.json
+results/geochat/<prompt>/<protocol>/seed<seed>_val.json
 ```
