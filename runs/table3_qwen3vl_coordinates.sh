@@ -7,4 +7,4 @@ export HF_HOME="${REPO_ROOT}/hf_cache"
 export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
 export PYTHONPATH="${REPO_ROOT}/src${PYTHONPATH:+:${PYTHONPATH}}"
 unset HF_HUB_OFFLINE TRANSFORMERS_OFFLINE
-exec "${TABLE3_PYTHON:-/home/feihong/miniconda3/bin/python}" scripts/table3_qwen3vl_coordinates.py
+exec python scripts/table3_qwen3vl_coordinates.py
