@@ -1,0 +1,228 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Qwen3.6-35B FP8 全图定位与检测实验简报",
+    "description": "汇总 full_localization 与 full_detection 当前已有的两个测试协议结果。",
+    "generatedAt": "2026-08-27T00:00:00+08:00",
+    "charts": [
+      {
+        "id": "recall_025_comparison",
+        "title": "Recall@IoU=0.25 对比",
+        "subtitle": "同一 protocol、同一批样本；Detection joint 额外要求类别正确",
+        "showDescription": true,
+        "intent": "comparison",
+        "question": "不同任务口径在两个测试协议上的低阈值定位召回如何？",
+        "rationale": "分组柱状图直接比较三个评价口径，并避免把离散 protocol 误画成趋势。",
+        "type": "bar",
+        "dataset": "spatial_metrics",
+        "sourceId": "results_summary",
+        "source": {
+          "id": "recall_query",
+          "label": "Recall@IoU=0.25 comparison",
+          "path": "reports/qwen3.6_35b_fp8_two_experiments_2026-08-27/summary_metrics.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT protocol, evaluation_mode, recall_iou_025, num_samples, valid_output_rate FROM read_csv_auto('reports/qwen3.6_35b_fp8_two_experiments_2026-08-27/summary_metrics.csv')",
+            "description": "Selects the three spatial-evaluation modes for each completed protocol."
+          }
+        },
+        "valueFormat": "percent",
+        "layout": "full",
+        "encodings": {
+          "x": {"field": "protocol", "type": "nominal", "label": "Protocol"},
+          "y": {"field": "recall_iou_025", "type": "quantitative", "label": "Recall@IoU=0.25", "format": "percent"},
+          "color": {"field": "evaluation_mode", "type": "nominal", "label": "评价口径"},
+          "tooltip": [
+            {"field": "num_samples", "type": "quantitative", "label": "样本数", "format": "number"},
+            {"field": "valid_output_rate", "type": "quantitative", "label": "有效输出率", "format": "percent"}
+          ]
+        },
+        "palette": {"kind": "categorical", "name": "blue-orange-pink"},
+        "legend": {"position": "bottom", "title": "评价口径"},
+        "settings": {"groupMode": "grouped", "showValues": true, "sort": "none"},
+        "surface": {"surface": "export", "viewMode": "both"}
+      }
+    ],
+    "tables": [
+      {
+        "id": "spatial_table",
+        "title": "空间定位指标",
+        "subtitle": "两个已完成 protocol；比例按完整有效测试样本作为分母",
+        "showDescription": true,
+        "dataset": "spatial_metrics",
+        "sourceId": "results_summary",
+        "source": {
+          "id": "spatial_query",
+          "label": "Spatial metric summary",
+          "path": "reports/qwen3.6_35b_fp8_two_experiments_2026-08-27/summary_metrics.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT protocol, evaluation_mode, num_samples, valid_output_rate, median_iou, recall_iou_025, recall_iou_050, recall_iou_075, normalized_center_error FROM read_csv_auto('reports/qwen3.6_35b_fp8_two_experiments_2026-08-27/summary_metrics.csv') ORDER BY protocol, evaluation_mode",
+            "description": "Returns the stored spatial metrics and output-validity rate for each mode."
+          }
+        },
+        "defaultSort": {"field": "protocol", "direction": "asc"},
+        "density": "compact",
+        "layout": "full",
+        "columns": [
+          {"field": "protocol", "label": "Protocol", "type": "text"},
+          {"field": "evaluation_mode", "label": "评价口径", "type": "text"},
+          {"field": "num_samples", "label": "N", "format": "number"},
+          {"field": "valid_output_rate", "label": "有效输出", "format": "percent"},
+          {"field": "median_iou", "label": "Median IoU", "format": "number"},
+          {"field": "recall_iou_025", "label": "R@0.25", "format": "percent"},
+          {"field": "recall_iou_050", "label": "R@0.50", "format": "percent"},
+          {"field": "recall_iou_075", "label": "R@0.75", "format": "percent"},
+          {"field": "normalized_center_error", "label": "Center error", "format": "number"}
+        ]
+      },
+      {
+        "id": "classification_table",
+        "title": "Full detection 分类指标",
+        "subtitle": "Macro-F1 按 definition.json 的全部 67 类取平均",
+        "showDescription": true,
+        "dataset": "classification_metrics",
+        "sourceId": "results_summary",
+        "source": {
+          "id": "classification_query",
+          "label": "Detection classification summary",
+          "path": "reports/qwen3.6_35b_fp8_two_experiments_2026-08-27/summary_metrics.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT protocol, num_samples, accuracy, macro_f1, weighted_f1, observed_classes, zero_f1_present_classes FROM read_csv_auto('reports/qwen3.6_35b_fp8_two_experiments_2026-08-27/summary_metrics.csv') WHERE evaluation_mode = 'Detection joint' ORDER BY protocol",
+            "description": "Selects classification metrics for the full-detection experiment."
+          }
+        },
+        "defaultSort": {"field": "protocol", "direction": "asc"},
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {"field": "protocol", "label": "Protocol", "type": "text"},
+          {"field": "num_samples", "label": "N", "format": "number"},
+          {"field": "accuracy", "label": "Accuracy", "format": "percent"},
+          {"field": "macro_f1", "label": "Macro-F1", "format": "percent"},
+          {"field": "weighted_f1", "label": "Weighted-F1", "format": "percent"},
+          {"field": "observed_classes", "label": "测试出现类别", "format": "number"},
+          {"field": "zero_f1_present_classes", "label": "有样本但 F1=0", "format": "number"}
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "results_summary",
+        "label": "Qwen3.6-35B FP8 two-experiment metric summary",
+        "path": "reports/qwen3.6_35b_fp8_two_experiments_2026-08-27/summary_metrics.csv",
+        "query": {
+          "engine": "Python",
+          "language": "python",
+          "description": "Loaded the four completed result JSON files, checked row counts and UID/bbox alignment, and recomputed output-validity and relaxed-parser sensitivity metrics.",
+          "executed_at": "2026-08-27T00:00:00+08:00",
+          "tables_used": [
+            "results/qwen3.6_35b_fp8/full_localization/forward_temporal_test.json",
+            "results/qwen3.6_35b_fp8/full_localization/session_disjoint_test.json",
+            "results/qwen3.6_35b_fp8/full_detection/forward_temporal_test.json",
+            "results/qwen3.6_35b_fp8/full_detection/session_disjoint_test.json",
+            "um7/forward_temporal/test_inputs.csv",
+            "um7/session_disjoint/test_inputs.csv",
+            "configs/yaml/qwen_full_localization.yaml",
+            "configs/yaml/qwen_full_detection.yaml"
+          ],
+          "filters": ["split = test", "completed protocols only", "missing-image rows excluded by evaluator"],
+          "metric_definitions": [
+            "IoU: intersection area divided by union area between predicted and GT bbox.",
+            "Recall@IoU=t: fraction of evaluated images with IoU greater than or equal to threshold t.",
+            "Normalized center error: Euclidean center distance divided by the 0-1000 coordinate-system diagonal; lower is better.",
+            "Detection bbox-only: bbox metrics ignore whether the predicted category is correct.",
+            "Detection joint: IoU is forced to 0 and center error to 1 when category is incorrect.",
+            "Macro-F1: unweighted mean of per-class F1 across all 67 configured labels.",
+            "Relaxed localization parser: accepts an otherwise valid bbox_1000 even when the JSON object contains extra keys."
+          ]
+        }
+      }
+    ],
+    "blocks": [
+      {"id": "title", "type": "markdown", "body": "# Qwen3.6-35B FP8 全图定位与检测实验简报"},
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "results_summary",
+        "body": "## 技术摘要\n\n- **两个实验当前都不能形成可靠的全图框选能力。** Full localization 在两个 protocol 上的 Median IoU 均为 0，Recall@0.50 仅 **0.61% / 0.81%**。\n- **Detection prompt 的 bbox-only 结果反而更好。** Recall@0.25 在 forward/session 上为 **8.84% / 12.62%**，高于 localization 的 **3.91% / 4.18%**；但加入类别正确要求后变为 **1.71% / 9.09%**。\n- **分类受协议类别分布影响很大。** Detection Accuracy 从 forward 的 **7.34%** 升到 session 的 **34.84%**，但 Macro-F1 仅从 **4.65%** 升到 **6.55%**，说明高 Accuracy 主要来自头部类别，而非广泛的类别能力。\n- **定位实验还存在输出解析问题。** 严格格式有效率只有 **59.25% / 55.32%**；即便放宽为允许额外 JSON 字段，Recall@0.25 也只有 **5.99% / 7.50%**，所以解析并非唯一瓶颈。"
+      },
+      {
+        "id": "spatial_finding",
+        "type": "markdown",
+        "sourceId": "results_summary",
+        "body": "## Detection 的框更接近目标，但整体精度仍低\n\n下图比较同一批测试图片上的三种口径。`Detection bbox-only` 只看框；`Detection joint` 在类别错误时直接把 IoU 置 0。两个协议中 bbox-only 都优于 localization，说明要求模型同时输出类别没有削弱其框坐标，反而可能提供了更明确的事件约束。但所有口径的 Recall@0.50 都不超过 **3.33%**，仍不足以作为可用定位系统。"
+      },
+      {"id": "recall_chart", "type": "chart", "chartId": "recall_025_comparison"},
+      {"id": "spatial_table_block", "type": "table", "tableId": "spatial_table"},
+      {
+        "id": "classification_finding",
+        "type": "markdown",
+        "sourceId": "results_summary",
+        "body": "## Session 的高 Accuracy 主要由少数高频类贡献\n\n`session_disjoint` 中 `crop_lodging` 和 `green_algae_duckweed` 合计占测试样本约三分之二，模型在这两类上取得了大部分正确预测，因此 Weighted-F1 达 **44.49%**。但测试集中实际出现的 60 类中仍有 **38 类 F1=0**；forward 中则有 52 个出现类别、其中 **26 类 F1=0**。所以当前更应以 Macro-F1 和逐类结果判断分类能力，而不能只看 Accuracy。"
+      },
+      {"id": "classification_table_block", "type": "table", "tableId": "classification_table"},
+      {
+        "id": "scope_definitions",
+        "type": "markdown",
+        "sourceId": "results_summary",
+        "body": "## 实验范围与指标口径\n\n目前每个实验只完成 `forward_temporal` 和 `session_disjoint`；`unseen_site` 尚无结果。forward 使用 **5,092** 张，session 原始测试表有 5,323 条，但两个实验都因缺图或缺 bbox 跳过 30 条，最终使用 **5,293** 张。两个实验在同一 protocol 上的 UID、图片和 GT bbox 完全一致。\n\nMedian IoU 和各阈值 Recall 越高越好；normalized center error 越低越好。Detection joint 同时考察分类和框，类别错误时定位指标直接记为失败，因此不能与 bbox-only 当作完全相同任务解读。"
+      },
+      {
+        "id": "robustness",
+        "type": "markdown",
+        "sourceId": "results_summary",
+        "body": "## 严格解析放大了定位失败，但不是根因\n\nLocalization 解析器要求 JSON 只能包含 `bbox_1000` 一个键。forward 有 **1,014** 条、session 有 **1,101** 条输出包含可用 bbox，但因额外输出 `label`、`event_type` 等字段被判为无效。放宽这一条件后，有效 bbox 比例可升至 **79.16% / 76.12%**，但 Recall@0.25 仍只有 **5.99% / 7.50%**，说明主要问题仍是框的位置和尺度不准。"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "sourceId": "results_summary",
+        "body": "## 限制与稳健性\n\n这是单模型、单次确定性生成结果，没有多 seed 或置信区间。两个 protocol 之间有 **1,029 张重复图片**，因此不能把它们视为完全独立的两次验证。评价 ontology 来自 `definition.json` 的全部 67 类，而各 protocol 并未覆盖全部类别；固定 ontology Macro-F1 会把缺测类也按 0 计入。"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## 建议下一步\n\n1. 先完成 `unseen_site`，补齐协议覆盖。\n2. Localization 解析器允许忽略额外字段，同时继续保留严格格式有效率作为单独指标。\n3. 优先分析 bbox 尺度偏差和中心偏差；当前仅修复 JSON 不足以解决低 IoU。\n4. 分类报告同时保留 fixed-ontology Macro-F1、observed-class Macro-F1 和逐类 support，避免被头部类别 Accuracy 误导。"
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## 后续问题\n\nDetection prompt 为什么显著改善 bbox-only？需要按类别和目标面积分桶，判断增益来自类别语义约束、框尺度变化，还是少数高频类别。`unseen_site` 是否保持这一排序，将决定该现象能否作为稳定结论。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-27T00:00:00+08:00",
+    "status": "ready",
+    "datasets": {
+      "spatial_metrics": [
+        {"protocol": "forward_temporal", "evaluation_mode": "Localization", "num_samples": 5092, "valid_output_rate": 0.5924980361, "median_iou": 0.0, "recall_iou_025": 0.0390809112, "recall_iou_050": 0.0060879811, "recall_iou_075": 0.0, "normalized_center_error": 0.5566013113},
+        {"protocol": "forward_temporal", "evaluation_mode": "Detection bbox-only", "num_samples": 5092, "valid_output_rate": 0.9884131972, "median_iou": 0.0, "recall_iou_025": 0.0883739199, "recall_iou_050": 0.0168892380, "recall_iou_075": 0.0011783189, "normalized_center_error": 0.2565221793},
+        {"protocol": "forward_temporal", "evaluation_mode": "Detection joint", "num_samples": 5092, "valid_output_rate": 0.9884131972, "median_iou": 0.0, "recall_iou_025": 0.0170856245, "recall_iou_050": 0.0037313433, "recall_iou_075": 0.0001963865, "normalized_center_error": 0.9378447715},
+        {"protocol": "session_disjoint", "evaluation_mode": "Localization", "num_samples": 5293, "valid_output_rate": 0.5531834498, "median_iou": 0.0, "recall_iou_025": 0.0417532590, "recall_iou_050": 0.0081239373, "recall_iou_075": 0.0009446439, "normalized_center_error": 0.5846508025},
+        {"protocol": "session_disjoint", "evaluation_mode": "Detection bbox-only", "num_samples": 5293, "valid_output_rate": 0.9909314189, "median_iou": 0.0073405001, "recall_iou_025": 0.1262044209, "recall_iou_050": 0.0332514642, "recall_iou_075": 0.0077460797, "normalized_center_error": 0.2451098751},
+        {"protocol": "session_disjoint", "evaluation_mode": "Detection joint", "num_samples": 5293, "valid_output_rate": 0.9909314189, "median_iou": 0.0, "recall_iou_025": 0.0908747402, "recall_iou_050": 0.0268278859, "recall_iou_075": 0.0075571510, "normalized_center_error": 0.7158511452}
+      ],
+      "classification_metrics": [
+        {"protocol": "forward_temporal", "num_samples": 5092, "accuracy": 0.0734485467, "macro_f1": 0.0464507424, "weighted_f1": 0.0982281070, "observed_classes": 52, "zero_f1_present_classes": 26},
+        {"protocol": "session_disjoint", "num_samples": 5293, "accuracy": 0.3483846590, "macro_f1": 0.0655121332, "weighted_f1": 0.4449491069, "observed_classes": 60, "zero_f1_present_classes": 38}
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "results_summary",
+      "label": "Qwen3.6-35B FP8 two-experiment metric summary",
+      "path": "reports/qwen3.6_35b_fp8_two_experiments_2026-08-27/summary_metrics.csv"
+    }
+  ],
+  "package_info": {"originUrl": "artifact://qwen3.6-35b-fp8-two-experiments-2026-08-27"}
+}

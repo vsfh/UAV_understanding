@@ -1,0 +1,43 @@
+experiment: table3_dinov2_gt_crop
+
+runtime:
+  device: cuda
+
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  protocols: [session_disjoint]
+
+model:
+  family: encoder
+  method: full_finetune
+  repo_id: facebook/dinov2-base
+  revision: main
+  path: ./hf_cache/dinov2-base
+
+representation:
+  view: gt_crop
+
+train:
+  seeds: [43]
+  epochs: 20
+  batch_size: 32
+  gradient_accumulation: 1
+  learning_rate: 0.001
+  backbone_learning_rate: 0.00001
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  class_balance_power: 0.5
+  num_workers: 8
+
+test:
+  batch_size: 64
+  num_workers: 8
+
+output:
+  root: ./outputs/table3/dinov2_gt_crop/{protocol}/seed{seed}
+  checkpoint: ./outputs/table3/dinov2_gt_crop/{protocol}/seed{seed}/best.pt
+  results: ./results/table3/dinov2_gt_crop/{protocol}/seed{seed}_test.json
+  skip_existing: true

@@ -1,0 +1,215 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Qwen Full Detection：forward_temporal 零分类指标诊断",
+    "description": "区分测试集缺类与测试集存在但零命中的类别。",
+    "generatedAt": "2026-08-25T19:59:52+08:00",
+    "charts": [
+      {
+        "id": "zero_present_support",
+        "title": "测试集中存在、但 F1 为 0 的类别",
+        "subtitle": "柱长为 GT 图片数；这些类别的 TP 均为 0",
+        "showDescription": true,
+        "intent": "comparison",
+        "question": "哪些实际出现的类别被完全漏判，涉及多少测试图片？",
+        "rationale": "按 GT support 排序可区分大样本系统性失败与极小样本波动。",
+        "type": "bar",
+        "dataset": "zero_present",
+        "sourceId": "full_detection_result",
+        "source": {
+          "id": "zero_present_query",
+          "label": "Zero-F1 classes present in forward_temporal",
+          "path": "reports/qwen_full_detection_forward_temporal_diagnosis_2026-08-25/zero_metric_classes.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT category, support, predicted, true_positive FROM read_csv_auto('reports/qwen_full_detection_forward_temporal_diagnosis_2026-08-25/zero_metric_classes.csv') WHERE support > 0 ORDER BY support DESC",
+            "description": "Selects classes with test GT but zero F1, ordered by GT support."
+          }
+        },
+        "valueFormat": "number",
+        "layout": "full",
+        "encodings": {
+          "x": {"field": "category", "type": "nominal", "label": "类别"},
+          "y": {"field": "support", "type": "quantitative", "label": "GT 图片数", "format": "number"},
+          "tooltip": [
+            {"field": "predicted", "type": "quantitative", "label": "被预测为该类", "format": "number"},
+            {"field": "true_positive", "type": "quantitative", "label": "TP", "format": "number"}
+          ]
+        },
+        "palette": {"kind": "categorical", "name": "blue-orange-pink"},
+        "legend": {"position": "none"},
+        "settings": {"orientation": "horizontal", "showValues": true, "sort": "-y"},
+        "surface": {"surface": "export", "viewMode": "both"}
+      }
+    ],
+    "tables": [
+      {
+        "id": "zero_metric_classes",
+        "title": "Precision / Recall / F1 全为 0 的 41 类",
+        "subtitle": "support=0 表示该协议没有该类 GT；predicted 是模型输出该类的次数",
+        "showDescription": true,
+        "dataset": "zero_all",
+        "sourceId": "full_detection_result",
+        "source": {
+          "id": "zero_all_query",
+          "label": "All zero-metric classes",
+          "path": "reports/qwen_full_detection_forward_temporal_diagnosis_2026-08-25/zero_metric_classes.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT category, diagnosis, support, predicted, true_positive FROM read_csv_auto('reports/qwen_full_detection_forward_temporal_diagnosis_2026-08-25/zero_metric_classes.csv') ORDER BY support DESC, predicted DESC",
+            "description": "Lists all classes whose stored precision, recall and F1 are all zero."
+          }
+        },
+        "defaultSort": {"field": "support", "direction": "desc"},
+        "density": "compact",
+        "layout": "full",
+        "columns": [
+          {"field": "category", "label": "类别", "type": "text"},
+          {"field": "diagnosis", "label": "诊断", "type": "text"},
+          {"field": "support", "label": "GT 图片数", "format": "number"},
+          {"field": "predicted", "label": "预测为该类", "format": "number"},
+          {"field": "true_positive", "label": "TP", "format": "number"}
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "full_detection_result",
+        "label": "Qwen3.6-35B FP8 full-detection forward_temporal result",
+        "path": "results/qwen3.6_35b_fp8/full_detection/forward_temporal_test.json",
+        "query": {
+          "engine": "Python",
+          "language": "python",
+          "description": "Recomputed target support, predicted counts and true positives from every result row and reconciled them with the stored per-class metrics.",
+          "executed_at": "2026-08-25T19:59:52+08:00",
+          "tables_used": [
+            "results/qwen3.6_35b_fp8/full_detection/forward_temporal_test.json",
+            "um7/forward_temporal/test_labels_private.csv",
+            "scripts/qwen_full_detection.py"
+          ],
+          "filters": ["protocol = forward_temporal", "precision = recall = f1 = 0"],
+          "metric_definitions": [
+            "Support: number of test rows whose target category is the class.",
+            "Precision: TP / (TP + FP), or 0 when the denominator is zero in the current evaluator.",
+            "Recall: TP / (TP + FN), or 0 when the denominator is zero in the current evaluator.",
+            "F1: harmonic mean of precision and recall, or 0 when both are zero.",
+            "Macro-F1: unweighted mean of per-class F1 across all 67 definition labels."
+          ]
+        }
+      }
+    ],
+    "blocks": [
+      {"id": "title", "type": "markdown", "body": "# Qwen Full Detection：forward_temporal 零分类指标诊断"},
+      {
+        "id": "answer",
+        "type": "markdown",
+        "sourceId": "full_detection_result",
+        "body": "## 结论\n\n- 共评测 **5,092** 张图，`skipped_missing_images=0`；与私有测试标签逐 UID 核对后，**0 缺失、0 标签错位**。\n- 评价 ontology 有 **67 类**，测试集实际出现 **52 类**。有 **41 类**的 Precision、Recall、F1 全为 0：其中 **15 类没有任何 GT 图片**，另外 **26 类在测试集中存在但 TP=0**。\n- `balloon_banner` 属于第一种：**GT=0**，但模型预测了 **4 次**，4 次均为误报。因此 Precision=0；Recall 在当前代码里因分母为 0 被记成 0，严格报告时更适合写 N/A。\n- 26 个实际出现但零命中的类别合计涉及 **1,169 张 GT 图片**；这里可以直接理解为这些类别的分类全部错了。"
+      },
+      {
+        "id": "overall",
+        "type": "markdown",
+        "sourceId": "full_detection_result",
+        "body": "## 总体信号\n\n分类正确 **374 / 5,092**，Accuracy **7.34%**；原始 Macro-F1 **4.65%**。如果只对测试集中实际出现的 52 类取 Macro-F1，则为 **5.98%**。有效 JSON 比例 **98.84%**，只有 59 条格式无效，因此主要问题不是 JSON 解析，而是类别识别本身。"
+      },
+      {"id": "chart", "type": "chart", "chartId": "zero_present_support"},
+      {"id": "table", "type": "table", "tableId": "zero_metric_classes"},
+      {
+        "id": "interpretation",
+        "type": "markdown",
+        "sourceId": "full_detection_result",
+        "body": "## 如何解释这些 0\n\n1. **support=0：不能说该类被测错。** 测试集没有正样本，Recall 实际不可定义；若模型仍输出该类，则这些输出都是 FP，Precision 为 0。\n2. **support>0 且 TP=0：该类确实全错。** 无论模型是否曾输出过这个标签，只要没有一次与同类 GT 对上，Precision、Recall、F1 都为 0。\n3. 当前 Macro-F1 固定对 67 个定义标签求平均，所以 15 个缺测类也作为 0 参与平均。建议同时报告 fixed-ontology Macro-F1（4.65%）和 observed-class Macro-F1（5.98%），并把零 support 的 Recall 标为 N/A。\n\n最严重的系统性失败包括 `garbage_collection_point`（344 张、0 TP）、`open_storage_construction`（341 张、0 TP）、`suspected_fire_smoke`（163 张、0 TP）和 `water_discoloration`（88 张、0 TP）。另外，测试集没有 `blue_tarp_shed`，模型却输出了 **962 次**，说明标签先验或视觉定义存在明显偏置。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-25T19:59:52+08:00",
+    "status": "ready",
+    "datasets": {
+      "zero_present": [
+        {"category": "garbage_collection_point", "support": 344, "predicted": 4, "true_positive": 0},
+        {"category": "open_storage_construction", "support": 341, "predicted": 2, "true_positive": 0},
+        {"category": "suspected_fire_smoke", "support": 163, "predicted": 0, "true_positive": 0},
+        {"category": "water_discoloration", "support": 88, "predicted": 0, "true_positive": 0},
+        {"category": "river_construction", "support": 56, "predicted": 1, "true_positive": 0},
+        {"category": "collapsed_house_wall", "support": 50, "predicted": 0, "true_positive": 0},
+        {"category": "abandoned_building", "support": 19, "predicted": 8, "true_positive": 0},
+        {"category": "burning_marks_grass", "support": 18, "predicted": 7, "true_positive": 0},
+        {"category": "street_vendor_vehicle", "support": 13, "predicted": 0, "true_positive": 0},
+        {"category": "street_vendor_canopy", "support": 12, "predicted": 2, "true_positive": 0},
+        {"category": "building_materials_factory", "support": 11, "predicted": 144, "true_positive": 0},
+        {"category": "open_storage_residential", "support": 11, "predicted": 0, "true_positive": 0},
+        {"category": "street_vendor", "support": 7, "predicted": 7, "true_positive": 0},
+        {"category": "outdoor_business", "support": 5, "predicted": 0, "true_positive": 0},
+        {"category": "unclean_water_surface", "support": 5, "predicted": 97, "true_positive": 0},
+        {"category": "hillside_excavation", "support": 4, "predicted": 1, "true_positive": 0},
+        {"category": "muck_truck", "support": 4, "predicted": 0, "true_positive": 0},
+        {"category": "swimmer", "support": 4, "predicted": 9, "true_positive": 0},
+        {"category": "fire_lane_obstruction", "support": 3, "predicted": 2, "true_positive": 0},
+        {"category": "incomplete_soil_cover", "support": 3, "predicted": 0, "true_positive": 0},
+        {"category": "landscaping_construction", "support": 3, "predicted": 21, "true_positive": 0},
+        {"category": "black_odorous_water", "support": 1, "predicted": 92, "true_positive": 0},
+        {"category": "landslide_risk", "support": 1, "predicted": 5, "true_positive": 0},
+        {"category": "muck_truck_covered", "support": 1, "predicted": 23, "true_positive": 0},
+        {"category": "road_occupying_pile", "support": 1, "predicted": 9, "true_positive": 0},
+        {"category": "shoreline_structure", "support": 1, "predicted": 76, "true_positive": 0}
+      ],
+      "zero_all": [
+        {"category": "garbage_collection_point", "diagnosis": "有 GT，全部错", "support": 344, "predicted": 4, "true_positive": 0},
+        {"category": "open_storage_construction", "diagnosis": "有 GT，全部错", "support": 341, "predicted": 2, "true_positive": 0},
+        {"category": "suspected_fire_smoke", "diagnosis": "有 GT，全部错", "support": 163, "predicted": 0, "true_positive": 0},
+        {"category": "water_discoloration", "diagnosis": "有 GT，全部错", "support": 88, "predicted": 0, "true_positive": 0},
+        {"category": "river_construction", "diagnosis": "有 GT，全部错", "support": 56, "predicted": 1, "true_positive": 0},
+        {"category": "collapsed_house_wall", "diagnosis": "有 GT，全部错", "support": 50, "predicted": 0, "true_positive": 0},
+        {"category": "abandoned_building", "diagnosis": "有 GT，全部错", "support": 19, "predicted": 8, "true_positive": 0},
+        {"category": "burning_marks_grass", "diagnosis": "有 GT，全部错", "support": 18, "predicted": 7, "true_positive": 0},
+        {"category": "street_vendor_vehicle", "diagnosis": "有 GT，全部错", "support": 13, "predicted": 0, "true_positive": 0},
+        {"category": "street_vendor_canopy", "diagnosis": "有 GT，全部错", "support": 12, "predicted": 2, "true_positive": 0},
+        {"category": "building_materials_factory", "diagnosis": "有 GT，全部错", "support": 11, "predicted": 144, "true_positive": 0},
+        {"category": "open_storage_residential", "diagnosis": "有 GT，全部错", "support": 11, "predicted": 0, "true_positive": 0},
+        {"category": "street_vendor", "diagnosis": "有 GT，全部错", "support": 7, "predicted": 7, "true_positive": 0},
+        {"category": "outdoor_business", "diagnosis": "有 GT，全部错", "support": 5, "predicted": 0, "true_positive": 0},
+        {"category": "unclean_water_surface", "diagnosis": "有 GT，全部错", "support": 5, "predicted": 97, "true_positive": 0},
+        {"category": "hillside_excavation", "diagnosis": "有 GT，全部错", "support": 4, "predicted": 1, "true_positive": 0},
+        {"category": "muck_truck", "diagnosis": "有 GT，全部错", "support": 4, "predicted": 0, "true_positive": 0},
+        {"category": "swimmer", "diagnosis": "有 GT，全部错", "support": 4, "predicted": 9, "true_positive": 0},
+        {"category": "fire_lane_obstruction", "diagnosis": "有 GT，全部错", "support": 3, "predicted": 2, "true_positive": 0},
+        {"category": "incomplete_soil_cover", "diagnosis": "有 GT，全部错", "support": 3, "predicted": 0, "true_positive": 0},
+        {"category": "landscaping_construction", "diagnosis": "有 GT，全部错", "support": 3, "predicted": 21, "true_positive": 0},
+        {"category": "black_odorous_water", "diagnosis": "有 GT，全部错", "support": 1, "predicted": 92, "true_positive": 0},
+        {"category": "landslide_risk", "diagnosis": "有 GT，全部错", "support": 1, "predicted": 5, "true_positive": 0},
+        {"category": "muck_truck_covered", "diagnosis": "有 GT，全部错", "support": 1, "predicted": 23, "true_positive": 0},
+        {"category": "road_occupying_pile", "diagnosis": "有 GT，全部错", "support": 1, "predicted": 9, "true_positive": 0},
+        {"category": "shoreline_structure", "diagnosis": "有 GT，全部错", "support": 1, "predicted": 76, "true_positive": 0},
+        {"category": "blue_tarp_shed", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 962, "true_positive": 0},
+        {"category": "disorderly_materials", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 298, "true_positive": 0},
+        {"category": "construction_vehicle", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 251, "true_positive": 0},
+        {"category": "construction_site_pile", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 220, "true_positive": 0},
+        {"category": "building_damage", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 69, "true_positive": 0},
+        {"category": "banner", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 58, "true_positive": 0},
+        {"category": "excavator", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 48, "true_positive": 0},
+        {"category": "land_use_change", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 32, "true_positive": 0},
+        {"category": "grain_drying_road", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 22, "true_positive": 0},
+        {"category": "messy_green_space", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 17, "true_positive": 0},
+        {"category": "piled_materials_factory", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 17, "true_positive": 0},
+        {"category": "embankment_structure", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 15, "true_positive": 0},
+        {"category": "straw_burning", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 13, "true_positive": 0},
+        {"category": "accumulated_building_material", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 10, "true_positive": 0},
+        {"category": "balloon_banner", "diagnosis": "无 GT，仅误报", "support": 0, "predicted": 4, "true_positive": 0}
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "full_detection_result",
+      "label": "Qwen3.6-35B FP8 full-detection forward_temporal result",
+      "path": "results/qwen3.6_35b_fp8/full_detection/forward_temporal_test.json"
+    }
+  ],
+  "package_info": {"originUrl": "artifact://qwen-full-detection-forward-temporal-diagnosis-2026-08-25"}
+}

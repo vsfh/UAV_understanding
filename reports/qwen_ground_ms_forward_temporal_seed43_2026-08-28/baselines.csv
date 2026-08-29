@@ -1,0 +1,6 @@
+predictor,median_iou,recall_025,recall_050,center_error,note
+Qwen Ground MS epoch 6,0.0910509303,0.2124516368,0.0267323256,0.2228694260,best checkpoint by validation median IoU
+Full-image constant,0.1181027815,0.0882870182,0.0123109389,0.2266175002,always predicts the entire image
+Centered half-image,0.0826229304,0.1906436831,0.0200492442,0.2266175002,always predicts a centered 0.5 by 0.5 box
+Train mean box,0.0308334809,0.1477312744,0.0281392895,0.2249575704,constant mean cxcywh from capped training set
+Train median box,0.0020174724,0.1041153744,0.0175870564,0.2247030884,constant median cxcywh from capped training set

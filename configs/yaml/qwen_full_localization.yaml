@@ -1,0 +1,44 @@
+experiment: qwen_full_localization
+
+model:
+  path: ./hf_cache/models--Qwen--Qwen3.6-35B-A3B-FP8
+  device_map: auto
+
+data:
+  root: ./um7
+  definitions: ./um7/definition.json
+  bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  protocols: [forward_temporal, session_disjoint, unseen_site]
+  max_samples: null
+
+input:
+  max_pixels: 262144
+  min_pixels: 65536
+
+generation:
+  max_new_tokens: 64
+
+prompt:
+  system: >-
+    You localize operational events in full-scene aerial drone imagery. Use only visible
+    evidence and return exactly one compact JSON object with no markdown or extra text.
+  user: |-
+    You are analyzing a full-resolution aerial drone image.
+
+    The image contains exactly one event belonging to one of the provided categories.
+    Locate the complete spatial extent of the event.
+
+    Return exactly one JSON object:
+    {
+      "bbox_1000": [x_min, y_min, x_max, y_max]
+    }
+
+    Coordinates are normalized to a 0–1000 coordinate system relative to the original
+    image. The bounding box should cover the complete event region, not only one object
+    inside it.
+
+    Categories:
+    {categories}
+
+output:
+  path: ./results/qwen3.6_35b_fp8/full_localization/{protocol}_test.json

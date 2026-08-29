@@ -1,0 +1,291 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Qwen Ground MS：forward_temporal seed 43 训练诊断",
+    "description": "分析训练曲线、验证指标、常数框基线与下一轮实验优先级。",
+    "generatedAt": "2026-08-28T17:02:53+08:00",
+    "charts": [
+      {
+        "id": "median_iou_curve",
+        "title": "Validation Median IoU",
+        "subtitle": "40 epochs；最佳值 0.0911 出现在 epoch 6",
+        "showDescription": true,
+        "intent": "trend",
+        "question": "Median IoU 在训练过程中何时达到峰值，之后是否保持？",
+        "rationale": "40 个连续 epoch 足以支持折线趋势，并直接显示早期峰值与后续回落。",
+        "type": "line",
+        "dataset": "epoch_metrics",
+        "sourceId": "ground_ms_diagnostics",
+        "source": {
+          "id": "median_curve_query",
+          "label": "Epoch-level validation metrics",
+          "path": "reports/qwen_ground_ms_forward_temporal_seed43_2026-08-28/epoch_metrics.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT epoch, train_loss, median_iou, recall_025, recall_050, recall_075, center_error FROM read_csv_auto('reports/qwen_ground_ms_forward_temporal_seed43_2026-08-28/epoch_metrics.csv') ORDER BY epoch",
+            "description": "Reads the completed TensorBoard run's 40 epoch summaries in training order."
+          }
+        },
+        "valueFormat": "number",
+        "layout": "full",
+        "encodings": {
+          "x": {"field": "epoch", "type": "quantitative", "label": "Epoch"},
+          "y": {"field": "median_iou", "type": "quantitative", "label": "Median IoU", "format": "number"},
+          "tooltip": [
+            {"field": "train_loss", "type": "quantitative", "label": "Train loss", "format": "number"},
+            {"field": "recall_025", "type": "quantitative", "label": "Recall@0.25", "format": "percent"},
+            {"field": "recall_050", "type": "quantitative", "label": "Recall@0.50", "format": "percent"},
+            {"field": "center_error", "type": "quantitative", "label": "Center error", "format": "number"}
+          ]
+        },
+        "palette": {"kind": "categorical", "name": "blue-orange-pink"},
+        "legend": {"position": "none"},
+        "settings": {"showValues": false, "sort": "none"},
+        "surface": {"surface": "export", "viewMode": "both"}
+      },
+      {
+        "id": "baseline_comparison",
+        "title": "模型与常数框基线",
+        "subtitle": "同一 2,843 张 validation 图；比较 Median IoU 与 Recall@0.25",
+        "showDescription": true,
+        "intent": "comparison",
+        "question": "训练后的模型是否明显超过不看图像的固定框先验？",
+        "rationale": "分组柱状图同时展示典型样本表现与低阈值召回，避免只看单一指标。",
+        "type": "bar",
+        "dataset": "baselines",
+        "sourceId": "ground_ms_diagnostics",
+        "source": {
+          "id": "baseline_query",
+          "label": "Constant-box baseline comparison",
+          "path": "reports/qwen_ground_ms_forward_temporal_seed43_2026-08-28/baselines.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT predictor, median_iou, recall_025, recall_050, center_error, note FROM read_csv_auto('reports/qwen_ground_ms_forward_temporal_seed43_2026-08-28/baselines.csv')",
+            "description": "Compares the best checkpoint with four deterministic constant-box baselines on the same validation targets."
+          }
+        },
+        "valueFormat": "percent",
+        "layout": "full",
+        "encodings": {
+          "x": {"field": "predictor", "type": "nominal", "label": "预测器"},
+          "y": {"fields": ["median_iou", "recall_025"], "type": "quantitative", "label": "Score", "format": "percent"},
+          "tooltip": [
+            {"field": "recall_050", "type": "quantitative", "label": "Recall@0.50", "format": "percent"},
+            {"field": "center_error", "type": "quantitative", "label": "Center error", "format": "number"},
+            {"field": "note", "type": "nominal", "label": "说明"}
+          ]
+        },
+        "palette": {"kind": "categorical", "name": "blue-orange-pink"},
+        "legend": {"position": "bottom", "title": "指标"},
+        "settings": {"groupMode": "grouped", "showValues": true, "sort": "none"},
+        "surface": {"surface": "export", "viewMode": "both"}
+      }
+    ],
+    "tables": [
+      {
+        "id": "selected_epochs",
+        "title": "关键 epoch 指标",
+        "subtitle": "包含各指标峰值附近与最终 epoch，展示 checkpoint 选择的指标权衡",
+        "showDescription": true,
+        "dataset": "selected_epochs",
+        "sourceId": "ground_ms_diagnostics",
+        "source": {
+          "id": "selected_epoch_query",
+          "label": "Selected epoch metrics",
+          "path": "reports/qwen_ground_ms_forward_temporal_seed43_2026-08-28/epoch_metrics.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT epoch, train_loss, median_iou, recall_025, recall_050, recall_075, center_error FROM read_csv_auto('reports/qwen_ground_ms_forward_temporal_seed43_2026-08-28/epoch_metrics.csv') WHERE epoch IN (1, 6, 14, 18, 35, 40) ORDER BY epoch",
+            "description": "Selects the initial, best-Median-IoU, best-center-error, best-Recall, and final epochs."
+          }
+        },
+        "defaultSort": {"field": "epoch", "direction": "asc"},
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {"field": "epoch", "label": "Epoch", "format": "number"},
+          {"field": "train_loss", "label": "Train loss", "format": "number"},
+          {"field": "median_iou", "label": "Median IoU", "format": "number"},
+          {"field": "recall_025", "label": "R@0.25", "format": "percent"},
+          {"field": "recall_050", "label": "R@0.50", "format": "percent"},
+          {"field": "recall_075", "label": "R@0.75", "format": "percent"},
+          {"field": "center_error", "label": "Center error", "format": "number"}
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ground_ms_diagnostics",
+        "label": "Qwen Ground MS forward_temporal seed 43 diagnostics",
+        "path": "outputs/qwen_ground_ms/forward_temporal/seed43",
+        "query": {
+          "engine": "Python",
+          "language": "python",
+          "description": "Read the latest complete TensorBoard event, checkpoint metadata, current YAML, split CSVs and COCO bbox targets; recomputed constant-box baselines without running the model.",
+          "executed_at": "2026-08-28T17:02:53+08:00",
+          "tables_used": [
+            "outputs/qwen_ground_ms/forward_temporal/seed43/tensorboard/events.out.tfevents.1787837842.4090-48g.1363730.0",
+            "outputs/qwen_ground_ms/forward_temporal/seed43/best.pt",
+            "outputs/qwen_ground_ms/forward_temporal/seed43/metrics.json",
+            "configs/yaml/qwen_ground_ms.yaml",
+            "um7/forward_temporal/train.csv",
+            "um7/forward_temporal/val.csv",
+            "um7/crop_bboxes_all_photos/crop_bboxes.json",
+            "src/clear_uav/qwen_ground_ms.py",
+            "scripts/qwen_ground_ms.py"
+          ],
+          "filters": [
+            "protocol = forward_temporal",
+            "seed = 43",
+            "latest complete TensorBoard event only",
+            "validation rows with available images and bbox targets",
+            "training max_per_class = 250"
+          ],
+          "metric_definitions": [
+            "Median IoU: median intersection-over-union across the 2,843 validation images.",
+            "Recall@IoU=t: fraction of validation images with IoU at least threshold t.",
+            "Normalized center error: predicted-to-target center distance divided by the unit-square diagonal; lower is better.",
+            "Train loss: epoch mean of 5 times L1 plus 2 times GIoU loss plus 1 times heatmap BCE.",
+            "Constant-box baseline: repeats one fixed cxcywh box for every validation image and uses the same localization_metrics implementation.",
+            "Best checkpoint: epoch with the highest validation Median IoU."
+          ]
+        }
+      }
+    ],
+    "blocks": [
+      {"id": "title", "type": "markdown", "body": "# Qwen Ground MS：forward_temporal seed 43 训练诊断"},
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "ground_ms_diagnostics",
+        "body": "## 技术摘要\n\n- **模型学到了一些低阈值定位信号，但还没有稳定学会目标中心和完整范围。** 最佳 checkpoint 为 epoch 6：Median IoU **0.0911**、Recall@0.25 **21.25%**、Recall@0.50 **2.67%**、中心误差 **0.2229**。\n- **Median IoU 甚至低于不看图的 full-image 常数框基线 0.1181。** 模型的优势主要体现在 Recall@0.25（21.25% 对 8.83%），而中心误差仅略优于常数框，说明预测仍明显依赖空间/尺度先验。\n- **40 epoch 没有带来一致收益。** epoch 6 到 40 的训练损失再下降 **9.6%**，但 Median IoU 下降 **36.7%**；与此同时 Recall@0.50 从 2.67% 升到 4.12%，表现为指标间权衡，而不是所有验证指标一起过拟合。\n- **当前只有 validation 结果，没有 `results/qwen_ground_ms/forward_temporal/seed43_test.json`。** 因此还不能判断 test 泛化性能。"
+      },
+      {
+        "id": "early_peak",
+        "type": "markdown",
+        "sourceId": "ground_ms_diagnostics",
+        "body": "## Median IoU 在 epoch 6 见顶，此后长期低位波动\n\n当前以 Median IoU 保存 checkpoint，因此选择 epoch 6 是符合代码口径的。后续训练没有恢复该峰值：最终 epoch 40 为 **0.0577**。但 Recall@0.25 在 epoch 18 达到 **21.84%**，Recall@0.50 在 epoch 35 达到 **4.33%**，说明不同 checkpoint 优化的是不同样本区间。下一轮不应只保存单一 best.pt，而应保留 Median IoU、R@0.25、R@0.50 的 Pareto checkpoint。"
+      },
+      {"id": "curve", "type": "chart", "chartId": "median_iou_curve"},
+      {"id": "epoch_table", "type": "table", "tableId": "selected_epochs"},
+      {
+        "id": "prior_baseline",
+        "type": "markdown",
+        "sourceId": "ground_ms_diagnostics",
+        "body": "## 常数框基线说明模型仍主要解决了少量容易样本\n\nFull-image 常数框的 Median IoU 为 **0.1181**，高于模型的 0.0911；centered-half 常数框的 Recall@0.25 已达到 **19.06%**，距离模型 21.25% 很近。模型确实把 R@0.25 提高了约 **2.19 个百分点**，但中心误差 0.2229 与各常数框的 0.2247–0.2266 几乎相同。最优先的目标应是提升图像条件下的中心定位，而不是继续增加 epoch。"
+      },
+      {"id": "baseline_chart", "type": "chart", "chartId": "baseline_comparison"},
+      {
+        "id": "data_scope",
+        "type": "markdown",
+        "sourceId": "ground_ms_diagnostics",
+        "body": "## 数据裁剪过强，验证分布又高度集中\n\n训练表有 **17,547** 张可读取图片，但 `max_per_class=250` 后只保留 **2,860** 张，约 **83.7%** 的训练数据被丢弃。对纯定位任务，按类别硬截断会同时损失 bbox 尺度、位置、站点和拍摄条件的多样性。验证集有 2,843 张，其中 `crop_lodging` 与 `green_algae_duckweed` 合计占 **75.4%**；单个聚合指标很容易被这两类的 bbox 分布主导。"
+      },
+      {
+        "id": "loss_diagnosis",
+        "type": "markdown",
+        "sourceId": "ground_ms_diagnostics",
+        "body": "## 损失下降主要来自 L1，重叠与 heatmap 信号没有持续改善\n\n按每个 optimizer step 记录的样本均值，L1 从 epoch 1 的 **0.2088** 降到 epoch 40 的 **0.1587**；GIoU loss 仍约为 **1.05**，表明大量预测框与 GT 的几何重叠依然很弱。Heatmap loss 在 epoch 10 降至约 0.192 后没有继续改善，而且目前没有验证 heatmap 指标或可视化，无法确认辅助分支是否真的提供空间监督。更重要的是，heatmap 只共享 fusion tokens，并未直接参与 bbox center 解码。"
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "sourceId": "ground_ms_diagnostics",
+        "body": "## 模型与训练口径\n\n每个样本输入 1 张全图、4 张 coarse tile 和 9 张 fine tile；最后 3 个视觉 block 与融合/解码结构共同训练。checkpoint 中约有 **45.7M** 个视觉参数和 **34.1M** 个 grounding 参数，共 **79.8M** 个可训练参数。Batch size 16、gradient accumulation 8，对应有效 batch 128；2,860 张训练图每个 epoch 只有约 23 次参数更新。"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "sourceId": "ground_ms_diagnostics",
+        "body": "## 限制与稳健性\n\n诊断只使用最新完整的 40-epoch TensorBoard 事件；同目录另有一个 268-step 的早期残留事件和一个空事件，不能把它们与完整 run 拼接。当前没有逐样本 validation 输出，因此还无法按类别、目标面积、中心位置或站点直接定位失败来源。常数框基线证明了聚合 Median IoU 对目标面积分布敏感，不能单独作为模型有效性的证据。"
+      },
+      {
+        "id": "recommendations",
+        "type": "markdown",
+        "body": "## 改进建议（按优先级）\n\n1. **先完成正确评测。** 用 epoch 6 的现有 best.pt 跑 forward test；验证阶段额外保存逐样本预测，并报告按 bbox 面积分桶的 Median IoU/R@阈值。\n2. **停止丢弃大部分定位数据。** 优先尝试保留全部 17.5k 图片，再用 sampler 控制类别曝光；若必须截断，也应按 bbox 面积、site 和类别共同分层。\n3. **建立低成本容量消融。** 比较 vision 全冻结、只解冻最后 1 block、当前最后 3 blocks；79.8M 可训练参数相对 2,860 张样本偏大。\n4. **让 heatmap 真正参与中心预测。** 用 soft-argmax/heatmap-weighted global tokens 产生中心，再让 bbox head 主要回归宽高；同时记录 heatmap center error。\n5. **做 loss 小型消融。** 比较 heatmap weight 0/1、BCE 与 focal/MSE，并分别监控 center、width/height L1 和 GIoU，确认哪一项真正改善验证 IoU。\n6. **缩短并改进 checkpoint 策略。** Median-IoU 主实验可先用 8–12 epoch 加 early stopping；同时保存 R@0.25 和 R@0.50 最优 checkpoint，不建议继续单纯增加 epoch。\n7. **测试较小有效 batch。** 当前有效 batch 128、每 epoch 约 23 updates；可对比 32 或 64，观察是否改善图像条件下的空间差异学习。"
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## 下一步需要回答的问题\n\n模型的 R@0.25 增益是否只来自大框或两个验证头部类别？Heatmap 峰值是否与 GT 中心一致？epoch 35 的较高 R@0.50 能否在 test 上复现？回答这三点后，才能决定下一轮应优先改数据、loss，还是 fusion/decoder 结构。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-28T17:02:53+08:00",
+    "status": "ready",
+    "datasets": {
+      "epoch_metrics": [
+        {"epoch": 1, "train_loss": 3.5019912720, "median_iou": 0.0721953958, "recall_025": 0.2099894434, "recall_050": 0.0313049592, "recall_075": 0.0017587056, "center_error": 0.2211812139},
+        {"epoch": 2, "train_loss": 3.4116716385, "median_iou": 0.0613121018, "recall_025": 0.1909954250, "recall_050": 0.0323601812, "recall_075": 0.0024621878, "center_error": 0.2275324017},
+        {"epoch": 3, "train_loss": 3.4124736786, "median_iou": 0.0691351816, "recall_025": 0.1790362298, "recall_050": 0.0358775929, "recall_075": 0.0014069645, "center_error": 0.2260362655},
+        {"epoch": 4, "train_loss": 3.4050354958, "median_iou": 0.0778593794, "recall_025": 0.1913471669, "recall_050": 0.0320084430, "recall_075": 0.0010552234, "center_error": 0.2241692692},
+        {"epoch": 5, "train_loss": 3.3972458839, "median_iou": 0.0818922892, "recall_025": 0.1938093603, "recall_050": 0.0320084430, "recall_075": 0.0003517411, "center_error": 0.2237508297},
+        {"epoch": 6, "train_loss": 3.3865969181, "median_iou": 0.0910509303, "recall_025": 0.2124516368, "recall_050": 0.0267323256, "recall_075": 0.0003517411, "center_error": 0.2228694260},
+        {"epoch": 7, "train_loss": 3.3666129112, "median_iou": 0.0798834190, "recall_025": 0.2156172991, "recall_050": 0.0355258547, "recall_075": 0.0014069645, "center_error": 0.2217683792},
+        {"epoch": 8, "train_loss": 3.3298799992, "median_iou": 0.0733625218, "recall_025": 0.1966232806, "recall_050": 0.0341188870, "recall_075": 0.0024621878, "center_error": 0.2227864712},
+        {"epoch": 9, "train_loss": 3.3126893044, "median_iou": 0.0604674779, "recall_025": 0.1836088598, "recall_050": 0.0348223709, "recall_075": 0.0021104468, "center_error": 0.2224922925},
+        {"epoch": 10, "train_loss": 3.3092660904, "median_iou": 0.0546165667, "recall_025": 0.1924023926, "recall_050": 0.0298979953, "recall_075": 0.0007034822, "center_error": 0.2211718857},
+        {"epoch": 11, "train_loss": 3.3199787140, "median_iou": 0.0690809265, "recall_025": 0.1994372159, "recall_050": 0.0369328186, "recall_075": 0.0028139290, "center_error": 0.2221793830},
+        {"epoch": 12, "train_loss": 3.3187952042, "median_iou": 0.0716078505, "recall_025": 0.2043615878, "recall_050": 0.0355258547, "recall_075": 0.0014069645, "center_error": 0.2209426909},
+        {"epoch": 13, "train_loss": 3.2910845280, "median_iou": 0.0672480837, "recall_025": 0.2054168135, "recall_050": 0.0327119231, "recall_075": 0.0010552234, "center_error": 0.2248998880},
+        {"epoch": 14, "train_loss": 3.2871994972, "median_iou": 0.0628481731, "recall_025": 0.2054168135, "recall_050": 0.0348223709, "recall_075": 0.0024621878, "center_error": 0.2194629312},
+        {"epoch": 15, "train_loss": 3.2697768211, "median_iou": 0.0578426309, "recall_025": 0.1927541345, "recall_050": 0.0386915244, "recall_075": 0.0024621878, "center_error": 0.2229408622},
+        {"epoch": 16, "train_loss": 3.2714245319, "median_iou": 0.0468092896, "recall_025": 0.1931058764, "recall_050": 0.0306014773, "recall_075": 0.0017587056, "center_error": 0.2228378505},
+        {"epoch": 17, "train_loss": 3.2368721962, "median_iou": 0.0600125194, "recall_025": 0.2120998949, "recall_050": 0.0365810767, "recall_075": 0.0021104468, "center_error": 0.2227464765},
+        {"epoch": 18, "train_loss": 3.2259519100, "median_iou": 0.0675361678, "recall_025": 0.2184312344, "recall_050": 0.0393950045, "recall_075": 0.0024621878, "center_error": 0.2268931866},
+        {"epoch": 19, "train_loss": 3.2368199825, "median_iou": 0.0712511092, "recall_025": 0.2142103463, "recall_050": 0.0334154069, "recall_075": 0.0017587056, "center_error": 0.2225021869},
+        {"epoch": 20, "train_loss": 3.2120466232, "median_iou": 0.0656199828, "recall_025": 0.2113964111, "recall_050": 0.0316567011, "recall_075": 0.0024621878, "center_error": 0.2228399068},
+        {"epoch": 21, "train_loss": 3.1952390671, "median_iou": 0.0729487836, "recall_025": 0.2156172991, "recall_050": 0.0316567011, "recall_075": 0.0021104468, "center_error": 0.2237486541},
+        {"epoch": 22, "train_loss": 3.2030665874, "median_iou": 0.0606499054, "recall_025": 0.2149138302, "recall_050": 0.0383397825, "recall_075": 0.0021104468, "center_error": 0.2279259115},
+        {"epoch": 23, "train_loss": 3.1925761699, "median_iou": 0.0617536195, "recall_025": 0.2120998949, "recall_050": 0.0320084430, "recall_075": 0.0024621878, "center_error": 0.2232663035},
+        {"epoch": 24, "train_loss": 3.1989562511, "median_iou": 0.0641064644, "recall_025": 0.2096377015, "recall_050": 0.0330636650, "recall_075": 0.0028139290, "center_error": 0.2259162962},
+        {"epoch": 25, "train_loss": 3.1828010082, "median_iou": 0.0593311898, "recall_025": 0.2050650716, "recall_050": 0.0327119231, "recall_075": 0.0024621878, "center_error": 0.2231435031},
+        {"epoch": 26, "train_loss": 3.1608235836, "median_iou": 0.0436635576, "recall_025": 0.1959197968, "recall_050": 0.0330636650, "recall_075": 0.0031656700, "center_error": 0.2281581759},
+        {"epoch": 27, "train_loss": 3.1504764557, "median_iou": 0.0546881519, "recall_025": 0.2092859596, "recall_050": 0.0372845568, "recall_075": 0.0017587056, "center_error": 0.2293453217},
+        {"epoch": 28, "train_loss": 3.1401391029, "median_iou": 0.0610755831, "recall_025": 0.2145620883, "recall_050": 0.0404502302, "recall_075": 0.0024621878, "center_error": 0.2283212692},
+        {"epoch": 29, "train_loss": 3.1243953705, "median_iou": 0.0563249551, "recall_025": 0.2043615878, "recall_050": 0.0341188870, "recall_075": 0.0038691524, "center_error": 0.2294452339},
+        {"epoch": 30, "train_loss": 3.1259052753, "median_iou": 0.0563382059, "recall_025": 0.2117481530, "recall_050": 0.0400984883, "recall_075": 0.0021104468, "center_error": 0.2276432216},
+        {"epoch": 31, "train_loss": 3.1048581600, "median_iou": 0.0550573170, "recall_025": 0.2043615878, "recall_050": 0.0362293348, "recall_075": 0.0021104468, "center_error": 0.2265523523},
+        {"epoch": 32, "train_loss": 3.0980291367, "median_iou": 0.0585840195, "recall_025": 0.2124516368, "recall_050": 0.0383397825, "recall_075": 0.0031656700, "center_error": 0.2285854220},
+        {"epoch": 33, "train_loss": 3.0938026905, "median_iou": 0.0607645884, "recall_025": 0.2103411853, "recall_050": 0.0379880406, "recall_075": 0.0031656700, "center_error": 0.2278469503},
+        {"epoch": 34, "train_loss": 3.0839228630, "median_iou": 0.0593170039, "recall_025": 0.2096377015, "recall_050": 0.0408019684, "recall_075": 0.0042208936, "center_error": 0.2287873477},
+        {"epoch": 35, "train_loss": 3.0741987228, "median_iou": 0.0559035875, "recall_025": 0.2075272650, "recall_050": 0.0432641581, "recall_075": 0.0038691524, "center_error": 0.2299549580},
+        {"epoch": 36, "train_loss": 3.0682773590, "median_iou": 0.0616357476, "recall_025": 0.2082307488, "recall_050": 0.0393950045, "recall_075": 0.0038691524, "center_error": 0.2283680886},
+        {"epoch": 37, "train_loss": 3.0654425621, "median_iou": 0.0589438565, "recall_025": 0.2103411853, "recall_050": 0.0429124162, "recall_075": 0.0042208936, "center_error": 0.2296887338},
+        {"epoch": 38, "train_loss": 3.0652527809, "median_iou": 0.0602263957, "recall_025": 0.2068237811, "recall_050": 0.0404502302, "recall_075": 0.0028139290, "center_error": 0.2288936228},
+        {"epoch": 39, "train_loss": 3.0638127327, "median_iou": 0.0574241616, "recall_025": 0.2078790069, "recall_050": 0.0404502302, "recall_075": 0.0028139290, "center_error": 0.2292083055},
+        {"epoch": 40, "train_loss": 3.0614447594, "median_iou": 0.0576720387, "recall_025": 0.2068237811, "recall_050": 0.0411537103, "recall_075": 0.0028139290, "center_error": 0.2292243242}
+      ],
+      "selected_epochs": [
+        {"epoch": 1, "train_loss": 3.5019912720, "median_iou": 0.0721953958, "recall_025": 0.2099894434, "recall_050": 0.0313049592, "recall_075": 0.0017587056, "center_error": 0.2211812139},
+        {"epoch": 6, "train_loss": 3.3865969181, "median_iou": 0.0910509303, "recall_025": 0.2124516368, "recall_050": 0.0267323256, "recall_075": 0.0003517411, "center_error": 0.2228694260},
+        {"epoch": 14, "train_loss": 3.2871994972, "median_iou": 0.0628481731, "recall_025": 0.2054168135, "recall_050": 0.0348223709, "recall_075": 0.0024621878, "center_error": 0.2194629312},
+        {"epoch": 18, "train_loss": 3.2259519100, "median_iou": 0.0675361678, "recall_025": 0.2184312344, "recall_050": 0.0393950045, "recall_075": 0.0024621878, "center_error": 0.2268931866},
+        {"epoch": 35, "train_loss": 3.0741987228, "median_iou": 0.0559035875, "recall_025": 0.2075272650, "recall_050": 0.0432641581, "recall_075": 0.0038691524, "center_error": 0.2299549580},
+        {"epoch": 40, "train_loss": 3.0614447594, "median_iou": 0.0576720387, "recall_025": 0.2068237811, "recall_050": 0.0411537103, "recall_075": 0.0028139290, "center_error": 0.2292243242}
+      ],
+      "baselines": [
+        {"predictor": "Qwen Ground MS epoch 6", "median_iou": 0.0910509303, "recall_025": 0.2124516368, "recall_050": 0.0267323256, "center_error": 0.2228694260, "note": "best checkpoint by validation median IoU"},
+        {"predictor": "Full-image constant", "median_iou": 0.1181027815, "recall_025": 0.0882870182, "recall_050": 0.0123109389, "center_error": 0.2266175002, "note": "always predicts the entire image"},
+        {"predictor": "Centered half-image", "median_iou": 0.0826229304, "recall_025": 0.1906436831, "recall_050": 0.0200492442, "center_error": 0.2266175002, "note": "always predicts a centered 0.5 by 0.5 box"},
+        {"predictor": "Train mean box", "median_iou": 0.0308334809, "recall_025": 0.1477312744, "recall_050": 0.0281392895, "center_error": 0.2249575704, "note": "constant mean cxcywh from capped training set"},
+        {"predictor": "Train median box", "median_iou": 0.0020174724, "recall_025": 0.1041153744, "recall_050": 0.0175870564, "center_error": 0.2247030884, "note": "constant median cxcywh from capped training set"}
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "ground_ms_diagnostics",
+      "label": "Qwen Ground MS forward_temporal seed 43 diagnostics",
+      "path": "outputs/qwen_ground_ms/forward_temporal/seed43"
+    }
+  ],
+  "package_info": {"originUrl": "artifact://qwen-ground-ms-forward-temporal-seed43-2026-08-28"}
+}

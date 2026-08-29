@@ -1,0 +1,265 @@
+{
+  "generated_at": "2026-08-20T04:38:36+00:00",
+  "scope": {
+    "split": "val",
+    "seed": 43,
+    "configured_labels": 18
+  },
+  "files": [
+    "results/openclip/full_finetune/forward_temporal/seed43_val.json",
+    "results/openclip/full_finetune/session_disjoint/seed43_val.json",
+    "results/openclip/full_finetune/unseen_site/seed43_val.json",
+    "results/openclip/linear_probe/forward_temporal/seed43_val.json",
+    "results/openclip/linear_probe/session_disjoint/seed43_val.json",
+    "results/openclip/linear_probe/unseen_site/seed43_val.json",
+    "results/qwen/label_context/session_disjoint/seed43_val.json",
+    "results/qwen/label_crop/session_disjoint/seed43_val.json",
+    "results/qwen/lora/forward_temporal/seed43_val.json",
+    "results/qwen/lora/session_disjoint/seed43_val.json",
+    "results/qwen/lora/unseen_site/seed43_val.json"
+  ],
+  "quality": {
+    "results/openclip/linear_probe/forward_temporal/seed43_val.json": {
+      "num_samples": 2684,
+      "observed_classes": 13,
+      "dominant_label": "crop_lodging",
+      "dominant_share": 0.4899403874813711,
+      "parse_failures": 0,
+      "parse_failure_rate": 0.0
+    },
+    "results/openclip/full_finetune/forward_temporal/seed43_val.json": {
+      "num_samples": 2684,
+      "observed_classes": 13,
+      "dominant_label": "crop_lodging",
+      "dominant_share": 0.4899403874813711,
+      "parse_failures": 0,
+      "parse_failure_rate": 0.0
+    },
+    "results/qwen/lora/forward_temporal/seed43_val.json": {
+      "num_samples": 2684,
+      "observed_classes": 13,
+      "dominant_label": "crop_lodging",
+      "dominant_share": 0.4899403874813711,
+      "parse_failures": 1,
+      "parse_failure_rate": 0.00037257824143070045
+    },
+    "results/openclip/linear_probe/session_disjoint/seed43_val.json": {
+      "num_samples": 2384,
+      "observed_classes": 18,
+      "dominant_label": "green_algae_duckweed",
+      "dominant_share": 0.4052013422818792,
+      "parse_failures": 0,
+      "parse_failure_rate": 0.0
+    },
+    "results/openclip/full_finetune/session_disjoint/seed43_val.json": {
+      "num_samples": 2384,
+      "observed_classes": 18,
+      "dominant_label": "green_algae_duckweed",
+      "dominant_share": 0.4052013422818792,
+      "parse_failures": 0,
+      "parse_failure_rate": 0.0
+    },
+    "results/qwen/lora/session_disjoint/seed43_val.json": {
+      "num_samples": 2384,
+      "observed_classes": 18,
+      "dominant_label": "green_algae_duckweed",
+      "dominant_share": 0.4052013422818792,
+      "parse_failures": 5,
+      "parse_failure_rate": 0.0020973154362416107
+    },
+    "results/openclip/linear_probe/unseen_site/seed43_val.json": {
+      "num_samples": 1828,
+      "observed_classes": 18,
+      "dominant_label": "green_algae_duckweed",
+      "dominant_share": 0.40809628008752735,
+      "parse_failures": 0,
+      "parse_failure_rate": 0.0
+    },
+    "results/openclip/full_finetune/unseen_site/seed43_val.json": {
+      "num_samples": 1828,
+      "observed_classes": 18,
+      "dominant_label": "green_algae_duckweed",
+      "dominant_share": 0.40809628008752735,
+      "parse_failures": 0,
+      "parse_failure_rate": 0.0
+    },
+    "results/qwen/lora/unseen_site/seed43_val.json": {
+      "num_samples": 1828,
+      "observed_classes": 18,
+      "dominant_label": "green_algae_duckweed",
+      "dominant_share": 0.40809628008752735,
+      "parse_failures": 3,
+      "parse_failure_rate": 0.0016411378555798686
+    },
+    "results/qwen/label_crop/session_disjoint/seed43_val.json": {
+      "num_samples": 2384,
+      "observed_classes": 18,
+      "dominant_label": "green_algae_duckweed",
+      "dominant_share": 0.4052013422818792,
+      "parse_failures": 2,
+      "parse_failure_rate": 0.0008389261744966443
+    },
+    "results/qwen/label_context/session_disjoint/seed43_val.json": {
+      "num_samples": 2384,
+      "observed_classes": 18,
+      "dominant_label": "green_algae_duckweed",
+      "dominant_share": 0.4052013422818792,
+      "parse_failures": 4,
+      "parse_failure_rate": 0.0016778523489932886
+    }
+  },
+  "main_comparison": [
+    {
+      "protocol": "forward_temporal",
+      "method": "OpenCLIP linear probe",
+      "macro_f1": 0.10246392814136572,
+      "micro_f1": 0.5979880774962743,
+      "worst_class_recall": 0.0,
+      "num_samples": 2684,
+      "observed_classes": 13,
+      "dominant_share": 0.4899403874813711
+    },
+    {
+      "protocol": "forward_temporal",
+      "method": "OpenCLIP full FT",
+      "macro_f1": 0.14124120469903467,
+      "micro_f1": 0.565946348733234,
+      "worst_class_recall": 0.0,
+      "num_samples": 2684,
+      "observed_classes": 13,
+      "dominant_share": 0.4899403874813711
+    },
+    {
+      "protocol": "forward_temporal",
+      "method": "Qwen pair LoRA",
+      "macro_f1": 0.3711209219220094,
+      "micro_f1": 0.8477734302217254,
+      "worst_class_recall": 0.0,
+      "num_samples": 2684,
+      "observed_classes": 13,
+      "dominant_share": 0.4899403874813711
+    },
+    {
+      "protocol": "session_disjoint",
+      "method": "OpenCLIP linear probe",
+      "macro_f1": 0.1530078053918225,
+      "micro_f1": 0.5125838926174496,
+      "worst_class_recall": 0.0,
+      "num_samples": 2384,
+      "observed_classes": 18,
+      "dominant_share": 0.4052013422818792
+    },
+    {
+      "protocol": "session_disjoint",
+      "method": "OpenCLIP full FT",
+      "macro_f1": 0.22861161531241647,
+      "micro_f1": 0.4974832214765101,
+      "worst_class_recall": 0.0,
+      "num_samples": 2384,
+      "observed_classes": 18,
+      "dominant_share": 0.4052013422818792
+    },
+    {
+      "protocol": "session_disjoint",
+      "method": "Qwen pair LoRA",
+      "macro_f1": 0.6764417238228517,
+      "micro_f1": 0.8603821121142138,
+      "worst_class_recall": 0.3,
+      "num_samples": 2384,
+      "observed_classes": 18,
+      "dominant_share": 0.4052013422818792
+    },
+    {
+      "protocol": "unseen_site",
+      "method": "OpenCLIP linear probe",
+      "macro_f1": 0.1316315674831687,
+      "micro_f1": 0.425054704595186,
+      "worst_class_recall": 0.0,
+      "num_samples": 1828,
+      "observed_classes": 18,
+      "dominant_share": 0.40809628008752735
+    },
+    {
+      "protocol": "unseen_site",
+      "method": "OpenCLIP full FT",
+      "macro_f1": 0.2269762684687263,
+      "micro_f1": 0.5136761487964989,
+      "worst_class_recall": 0.0,
+      "num_samples": 1828,
+      "observed_classes": 18,
+      "dominant_share": 0.40809628008752735
+    },
+    {
+      "protocol": "unseen_site",
+      "method": "Qwen pair LoRA",
+      "macro_f1": 0.7012894243078809,
+      "micro_f1": 0.8781823159047358,
+      "worst_class_recall": 0.2777777777777778,
+      "num_samples": 1828,
+      "observed_classes": 18,
+      "dominant_share": 0.40809628008752735
+    }
+  ],
+  "view_ablation": [
+    {
+      "view": "pair",
+      "pair_macro_f1": 0.6764417238228517,
+      "pair_micro_f1": 0.8603821121142138,
+      "set_macro_f1": 0.7010787206405075,
+      "set_micro_f1": 0.8519065917824417,
+      "parse_failure_rate": 0.0020973154362416107,
+      "num_samples": 2384
+    },
+    {
+      "view": "crop-only",
+      "pair_macro_f1": 0.6605582709859732,
+      "pair_micro_f1": 0.8447335291649182,
+      "set_macro_f1": 0.6655660382938837,
+      "set_micro_f1": 0.8260997933274284,
+      "parse_failure_rate": 0.0008389261744966443,
+      "num_samples": 2384
+    },
+    {
+      "view": "context-only",
+      "pair_macro_f1": 0.2690071281092525,
+      "pair_micro_f1": 0.5491183879093199,
+      "set_macro_f1": 0.30814834715159417,
+      "set_micro_f1": 0.5075437537718769,
+      "parse_failure_rate": 0.0016778523489932886,
+      "num_samples": 2384
+    }
+  ],
+  "openclip_full_minus_linear": [
+    {
+      "protocol": "forward_temporal",
+      "macro_f1": 0.03877727655766895,
+      "micro_f1": -0.032041728763040234,
+      "mean_average_precision": 0.059636654894867275,
+      "hard_negative_accuracy": -0.012939001848428777,
+      "aurc": -0.0501719666139204
+    },
+    {
+      "protocol": "session_disjoint",
+      "macro_f1": 0.07560380992059398,
+      "micro_f1": -0.015100671140939548,
+      "mean_average_precision": 0.07091567508913141,
+      "hard_negative_accuracy": -0.05641025641025643,
+      "aurc": -0.019301564926638315
+    },
+    {
+      "protocol": "unseen_site",
+      "macro_f1": 0.09534470098555758,
+      "micro_f1": 0.0886214442013129,
+      "mean_average_precision": 0.08733531243006876,
+      "hard_negative_accuracy": -0.11641443538998841,
+      "aurc": -0.1330183209200274
+    }
+  ],
+  "missing_stage_results": [
+    "GeoChat direct prompt",
+    "GeoChat definition prompt",
+    "Qwen zero-shot direct/definition baselines",
+    "test split",
+    "multi-seed variance"
+  ]
+}
