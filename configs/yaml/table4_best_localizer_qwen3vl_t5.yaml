@@ -1,0 +1,79 @@
+experiment: table4_best_localizer_qwen3vl_t5
+
+runtime:
+  device: cuda
+
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  definitions: ./um7/definition.json
+  bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  negative_label: no_event
+  protocols: [session_disjoint]
+
+model:
+  family: best_localizer_qwen3vl
+
+classifier_model:
+  family: qwen3vl
+  repo_id: Qwen/Qwen3-VL-8B-Instruct
+  revision: main
+  path: ./hf_cache/qwen3-vl
+
+selection:
+  metric: ap50
+  candidates:
+    - name: dfine
+      config: ./configs/yaml/table4_dfine_t1.yaml
+    - name: grounding_dino
+      config: ./configs/yaml/table4_grounding_dino_t1.yaml
+    - name: yolo_world
+      config: ./configs/yaml/table4_yolo_world_t1.yaml
+
+classifier_prompt:
+  system: Classify the operational event visible in this predicted source-pixel crop.
+  user: |-
+    Return only one canonical category name. Categories and visual definitions:
+    {categories}
+
+prompt:
+  open_vocab_template: "{label}: {definition}"
+
+classifier_input:
+  max_pixels: 1048576
+  min_pixels: 65536
+
+classifier_generation:
+  max_new_tokens: 32
+
+train:
+  seeds: [43]
+
+classifier_train:
+  epochs: 5
+  batch_size: 1
+  gradient_accumulation: 8
+  learning_rate: 0.0002
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  class_balance_power: 0.5
+  num_workers: 0
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  lora_scope: projector_llm
+
+cascade:
+  context_margin: 0.2
+
+validation:
+  fallback_threshold: 0.5
+
+output:
+  root: ./outputs/table4/best_localizer_qwen3vl_t5/{protocol}/seed{seed}
+  classifier_adapter: ./outputs/table4/best_localizer_qwen3vl_t5/{protocol}/seed{seed}/classifier
+  selection: ./outputs/table4/best_localizer_qwen3vl_t5/{protocol}/seed{seed}/selected_localizer.json
+  calibration: ./outputs/table4/best_localizer_qwen3vl_t5/{protocol}/seed{seed}/calibration.json
+  results: ./results/table4/best_localizer_qwen3vl_t5/{protocol}/seed{seed}_test.json
+  skip_existing: true

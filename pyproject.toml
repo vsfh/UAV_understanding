@@ -19,6 +19,7 @@ dependencies = [
   "tensorboard>=2.18",
   "tqdm>=4.66",
   "transformers>=5.8,<5.9",
+  "ultralytics>=8.3",
 ]
 
 [project.optional-dependencies]

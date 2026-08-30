@@ -1,0 +1,51 @@
+experiment: table4_florence2_t4
+
+runtime:
+  device: cuda
+
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  definitions: ./um7/definition.json
+  bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  negative_label: no_event
+  protocols: [session_disjoint]
+
+model:
+  family: florence2
+  repo_id: florence-community/Florence-2-base-ft
+  revision: main
+  path: ./hf_cache/florence-2-base-ft-transformers58
+
+prompt:
+  user: |-
+    Determine whether one supported operational event is present. Return
+    only JSON with exactly the keys presence, bbox_1000, category, confidence.
+    bbox_1000 is [x1,y1,x2,y2] in the full-image 0-1000 coordinate system or
+    null for no-event. Categories: {categories}
+  open_vocab_template: "{label}: {definition}"
+
+generation:
+  max_new_tokens: 128
+
+train:
+  seeds: [43]
+  epochs: 10
+  batch_size: 4
+  gradient_accumulation: 4
+  learning_rate: 0.00001
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  class_balance_power: 0.5
+  num_workers: 4
+
+validation:
+  fallback_threshold: 0.5
+
+output:
+  root: ./outputs/table4/florence2_t4/{protocol}/seed{seed}
+  model: ./outputs/table4/florence2_t4/{protocol}/seed{seed}/best
+  calibration: ./outputs/table4/florence2_t4/{protocol}/seed{seed}/calibration.json
+  results: ./results/table4/florence2_t4/{protocol}/seed{seed}_test.json
+  skip_existing: true

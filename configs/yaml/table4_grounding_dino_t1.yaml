@@ -1,0 +1,38 @@
+experiment: table4_grounding_dino_t1
+
+runtime:
+  device: cuda
+
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  definitions: ./um7/definition.json
+  bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  negative_label: no_event
+  protocols: [session_disjoint]
+
+model:
+  family: grounding_dino
+  mode: zero_shot_validation_calibrated
+  repo_id: IDEA-Research/grounding-dino-base
+  revision: main
+  path: ./hf_cache/grounding-dino-base
+
+prompt:
+  open_vocab_template: "{label}: {definition}"
+
+train:
+  seeds: [43]
+
+inference:
+  prompt_chunk_size: 6
+  minimum_score: 0.05
+  text_threshold: 0.05
+
+validation:
+  fallback_threshold: 0.25
+
+output:
+  calibration: ./outputs/table4/grounding_dino_t1/{protocol}/seed{seed}/calibration.json
+  results: ./results/table4/grounding_dino_t1/{protocol}/seed{seed}_test.json

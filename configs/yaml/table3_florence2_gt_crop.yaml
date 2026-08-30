@@ -21,7 +21,7 @@ representation:
   view: gt_crop
 
 prompt: >-
-  <CAPTION> Classify the event in this delivered source-resolution GT crop.
+  Classify the event in this delivered source-resolution GT crop.
   Return only one canonical category name. Categories: {categories}
 
 train:

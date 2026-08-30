@@ -1,0 +1,64 @@
+experiment: table4_dfine_dinov2_t5
+
+runtime:
+  device: cuda
+
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  definitions: ./um7/definition.json
+  bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  negative_label: no_event
+  protocols: [session_disjoint]
+
+model:
+  family: dfine
+  repo_id: PekingU/DFine_r50vd
+  revision: main
+  path: ./hf_cache/dfine-r50vd
+
+classifier_model:
+  family: dinov2
+  repo_id: facebook/dinov2-base
+  revision: main
+  path: ./hf_cache/dinov2-base
+
+prompt:
+  open_vocab_template: "{label}: {definition}"
+
+train:
+  seeds: [43]
+  epochs: 10
+  batch_size: 2
+  gradient_accumulation: 8
+  learning_rate: 0.00001
+  weight_decay: 0.0001
+  warmup_ratio: 0.1
+  class_balance_power: 0.5
+  num_workers: 8
+
+classifier_train:
+  epochs: 20
+  batch_size: 32
+  gradient_accumulation: 1
+  learning_rate: 0.001
+  backbone_learning_rate: 0.00001
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  class_balance_power: 0.5
+  num_workers: 8
+
+cascade:
+  context_margin: 0.2
+
+validation:
+  fallback_threshold: 0.5
+
+output:
+  root: ./outputs/table4/dfine_dinov2_t5/{protocol}/seed{seed}
+  model: ./outputs/table4/dfine_dinov2_t5/{protocol}/seed{seed}/localizer
+  classifier: ./outputs/table4/dfine_dinov2_t5/{protocol}/seed{seed}/classifier.pt
+  calibration: ./outputs/table4/dfine_dinov2_t5/{protocol}/seed{seed}/calibration.json
+  results: ./results/table4/dfine_dinov2_t5/{protocol}/seed{seed}_test.json
+  skip_existing: true

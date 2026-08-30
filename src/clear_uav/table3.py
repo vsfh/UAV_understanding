@@ -4,6 +4,7 @@ import json
 import math
 import random
 from collections import Counter
+from contextlib import contextmanager
 from pathlib import Path
 
 import numpy as np
@@ -16,7 +17,13 @@ from torch.optim import AdamW
 from torch.utils.data import DataLoader, Dataset, WeightedRandomSampler
 from torch.utils.tensorboard import SummaryWriter
 from tqdm.auto import tqdm
-from transformers import AutoModel, AutoModelForMultimodalLM, AutoProcessor
+from transformers import (
+    AutoModel,
+    AutoModelForCausalLM,
+    AutoProcessor,
+    PretrainedConfig,
+    PreTrainedTokenizerBase,
+)
 
 from clear_uav.data import read_private_test_samples, read_samples
 from clear_uav.experiment_config import experiment_runs, project_path
@@ -656,15 +663,59 @@ def florence_val_loss(model, batches, device):
     model.eval(); losses = []
     for batch in batches:
         batch = {key: value.to(device) for key, value in batch.items()}
-        losses.append(model(**batch).loss.float().item())
+        with torch.autocast("cuda", dtype=torch.float16):
+            losses.append(model(**batch).loss.float().item())
     return sum(losses) / len(losses)
 
 
+@contextmanager
+def florence_legacy_transformers_compat():
+    """Restore APIs used while the Microsoft Florence-2 remote code is constructed."""
+    added_attributes = []
+    if not hasattr(PretrainedConfig, "forced_bos_token_id"):
+        PretrainedConfig.forced_bos_token_id = None
+        added_attributes.append((PretrainedConfig, "forced_bos_token_id"))
+    if not hasattr(PreTrainedTokenizerBase, "additional_special_tokens"):
+        PreTrainedTokenizerBase.additional_special_tokens = property(
+            lambda tokenizer: list(tokenizer._extra_special_tokens)
+        )
+        added_attributes.append((PreTrainedTokenizerBase, "additional_special_tokens"))
+    try:
+        yield
+    finally:
+        for owner, name in reversed(added_attributes):
+            delattr(owner, name)
+
+
 def load_florence(path: Path, device, dtype=torch.float16):
-    processor = AutoProcessor.from_pretrained(path, local_files_only=True, trust_remote_code=True)
-    model = AutoModelForMultimodalLM.from_pretrained(
-        path, local_files_only=True, trust_remote_code=True, dtype=dtype
-    ).to(device)
+    with florence_legacy_transformers_compat():
+        processor = AutoProcessor.from_pretrained(path, local_files_only=True, trust_remote_code=True)
+        model = AutoModelForCausalLM.from_pretrained(
+            path,
+            local_files_only=True,
+            trust_remote_code=True,
+            dtype=dtype,
+            attn_implementation="eager",
+        )
+        # Generation creates a fresh instance of this dynamically loaded config,
+        # after the temporary base-class compatibility context has exited.
+        language_config_class = type(model.language_model.config)
+        if "forced_bos_token_id" not in language_config_class.__dict__:
+            language_config_class.forced_bos_token_id = None
+        # Transformers 5 no longer resolves this legacy checkpoint's nested
+        # tied-weight paths, so restore the shared BART embeddings explicitly.
+        shared_embeddings = model.language_model.model.shared
+        model.language_model.model.encoder.embed_tokens = shared_embeddings
+        model.language_model.model.decoder.embed_tokens = shared_embeddings
+        model.language_model.lm_head.weight = shared_embeddings.weight
+        model._tied_weights_keys = {
+            "language_model.model.encoder.embed_tokens.weight": "language_model.model.shared.weight",
+            "language_model.model.decoder.embed_tokens.weight": "language_model.model.shared.weight",
+            "language_model.lm_head.weight": "language_model.model.shared.weight",
+        }
+        model.language_model._tied_weights_keys = {}
+        model.language_model.model._tied_weights_keys = {}
+        model = model.to(device)
     return model, processor
 
 
@@ -727,7 +778,13 @@ def test_florence(config: dict) -> None:
             with torch.inference_mode():
                 for batch in tqdm(batches, desc=f"{config['experiment']} {protocol}"):
                     batch = {key: value.to(device) for key, value in batch.items()}
-                    generated = model.generate(**batch, max_new_tokens=config["test"]["max_new_tokens"], do_sample=False)
+                    with torch.autocast("cuda", dtype=torch.float16):
+                        generated = model.generate(
+                            **batch,
+                            max_new_tokens=config["test"]["max_new_tokens"],
+                            do_sample=False,
+                            use_cache=False,
+                        )
                     for text in processor.batch_decode(generated, skip_special_tokens=True):
                         raw_outputs.append(text)
                         prediction = parse_label(text, labels); predictions.append(prediction); valid.append(prediction is not None)

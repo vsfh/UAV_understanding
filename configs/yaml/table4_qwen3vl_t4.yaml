@@ -1,0 +1,63 @@
+experiment: table4_qwen3vl_t4
+
+runtime:
+  device: cuda
+
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  definitions: ./um7/definition.json
+  bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  negative_label: no_event
+  protocols: [session_disjoint]
+
+model:
+  family: qwen3vl
+  repo_id: Qwen/Qwen3-VL-8B-Instruct
+  revision: main
+  path: ./hf_cache/qwen3-vl
+
+prompt:
+  system: You detect operational events in full-resolution aerial UAV images.
+  user: |-
+    Determine whether one supported operational event is present. If present,
+    locate its complete contextual evidence region and classify it. Return only
+    one JSON object with exactly these keys:
+    {"presence": <boolean>, "bbox_1000": <[x1,y1,x2,y2] or null>,
+    "category": <canonical category or null>, "confidence": <0 to 1>}.
+    Coordinates use the 0-1000 system of the full image. Categories:
+    {categories}
+  open_vocab_template: "{label}: {definition}"
+
+input:
+  max_pixels: 1048576
+  min_pixels: 65536
+
+generation:
+  max_new_tokens: 128
+
+train:
+  seeds: [43]
+  epochs: 5
+  batch_size: 1
+  gradient_accumulation: 8
+  learning_rate: 0.0002
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  class_balance_power: 0.5
+  num_workers: 0
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  lora_scope: projector_llm
+
+validation:
+  fallback_threshold: 0.5
+
+output:
+  root: ./outputs/table4/qwen3vl_t4/{protocol}/seed{seed}
+  adapter: ./outputs/table4/qwen3vl_t4/{protocol}/seed{seed}/best
+  calibration: ./outputs/table4/qwen3vl_t4/{protocol}/seed{seed}/calibration.json
+  results: ./results/table4/qwen3vl_t4/{protocol}/seed{seed}_test.json
+  skip_existing: true
