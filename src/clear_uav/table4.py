@@ -612,6 +612,7 @@ def predict_grounding_dino(model, processor, samples, config, device, descriptio
             text_prompt = ". ".join(prompt.rstrip(". ") for prompt in chunk) + "."
             inputs = processor(images=image, text=text_prompt, return_tensors="pt")
             inputs = {key: value.to(device) for key, value in inputs.items()}
+            inputs["pixel_values"] = inputs["pixel_values"].to(dtype=model.dtype)
             outputs = model(**inputs)
             result = processor.post_process_grounded_object_detection(
                 outputs,
