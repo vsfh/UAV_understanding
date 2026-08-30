@@ -1021,7 +1021,13 @@ class FlorenceDiscoveryCollator:
     def __init__(self, processor, config, training):
         self.processor = processor
         self.training = training
-        self.prompt = config["prompt"]["user"].replace("{categories}", category_block(config))
+        labels, definitions = definitions_from_config(config)
+        template = config["prompt"]["open_vocab_template"]
+        categories = "; ".join(
+            template.format(label=label, definition=definitions[label]).rstrip(".")
+            for label in labels
+        )
+        self.prompt = config["prompt"]["user"].replace("{categories}", categories)
 
     def __call__(self, samples):
         images = []
@@ -1031,6 +1037,11 @@ class FlorenceDiscoveryCollator:
         batch = self.processor(
             text=[self.prompt] * len(samples), images=images, padding=True, return_tensors="pt"
         )
+        if batch["input_ids"].shape[1] > self.processor.tokenizer.model_max_length:
+            raise ValueError(
+                f"Florence encoder input has {batch['input_ids'].shape[1]} tokens, "
+                f"but the model limit is {self.processor.tokenizer.model_max_length}"
+            )
         if self.training:
             targets = self.processor.tokenizer(
                 [discovery_target(sample) for sample in samples],

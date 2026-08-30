@@ -19,11 +19,9 @@ model:
   path: ./hf_cache/florence-2-base-ft-transformers58
 
 prompt:
-  user: |-
-    Determine whether one supported operational event is present. Return
-    only JSON with exactly the keys presence, bbox_1000, category, confidence.
-    bbox_1000 is [x1,y1,x2,y2] in the full-image 0-1000 coordinate system or
-    null for no-event. Categories: {categories}
+  user: >-
+    JSON only with presence(bool), bbox_1000([x1,y1,x2,y2] full-image 0-1000
+    or null), category(label or null), confidence(0-1). Categories: {categories}
   open_vocab_template: "{label}: {definition}"
 
 generation:
