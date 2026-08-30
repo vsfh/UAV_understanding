@@ -6,4 +6,4 @@ export CUDA_VISIBLE_DEVICES="${GPU_ID:-${CUDA_VISIBLE_DEVICES:-0}}"
 export HF_HOME="${REPO_ROOT}/hf_cache" TORCH_HOME="${REPO_ROOT}/hf_cache/torch"
 export PYTHONPATH="${REPO_ROOT}/src${PYTHONPATH:+:${PYTHONPATH}}"
 unset HF_HUB_OFFLINE TRANSFORMERS_OFFLINE
-exec "${TABLE4_PYTHON:-/home/feihong/miniconda3/bin/python}" scripts/table4_yolo_world_t1.py
+exec python scripts/table4_yolo_world_t1.py
