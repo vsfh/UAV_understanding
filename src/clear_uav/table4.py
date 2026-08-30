@@ -70,7 +70,6 @@ def ensure_hf_model(model_config: dict) -> Path:
             "*.safetensors",
             "*.tiktoken",
             "*.txt",
-            "pytorch_model*.bin",
         ],
     )
     return destination
@@ -610,7 +609,8 @@ def predict_grounding_dino(model, processor, samples, config, device, descriptio
         started = time.perf_counter()
         for start in range(0, len(prompts), chunk_size):
             chunk = prompts[start : start + chunk_size]
-            inputs = processor(images=image, text=[chunk], return_tensors="pt")
+            text_prompt = ". ".join(prompt.rstrip(". ") for prompt in chunk) + "."
+            inputs = processor(images=image, text=text_prompt, return_tensors="pt")
             inputs = {key: value.to(device) for key, value in inputs.items()}
             outputs = model(**inputs)
             result = processor.post_process_grounded_object_detection(
