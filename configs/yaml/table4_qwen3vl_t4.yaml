@@ -10,6 +10,11 @@ data:
   definitions: ./um7/definition.json
   bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
   negative_label: no_event
+  no_event:
+    root: ./um7/no_event
+    group_gap_seconds: 60
+    split_ratios: {train: 0.7, val: 0.1, test: 0.2}
+    seed: 43
   protocols: [session_disjoint]
 
 model:
@@ -46,6 +51,7 @@ train:
   weight_decay: 0.01
   warmup_ratio: 0.1
   class_balance_power: 0.5
+  samples_per_epoch: positive_records
   num_workers: 12
   lora_r: 16
   lora_alpha: 32

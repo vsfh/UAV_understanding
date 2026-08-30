@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import math
+import re
 import statistics
 import time
+from collections import Counter
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from urllib.request import urlretrieve
 
@@ -15,7 +19,7 @@ from peft import LoraConfig, PeftModel, get_peft_model
 from PIL import Image
 from torch import nn
 from torch.optim import AdamW
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset, WeightedRandomSampler
 from torch.utils.tensorboard import SummaryWriter
 from tqdm.auto import tqdm
 from transformers import (
@@ -47,6 +51,13 @@ class DiscoverySample:
     image_path: Path
     evidence_path: Path | None
     bbox_1000: tuple[float, float, float, float] | None
+    group_id: str | None = None
+    negative_subtype: str | None = None
+
+
+NO_EVENT_TIMESTAMP = re.compile(
+    r"photo - (\d{4}-\d{2}-\d{2}T\d{6}\.\d+)\.png$"
+)
 
 
 def ensure_hf_model(model_config: dict) -> Path:
@@ -123,6 +134,90 @@ def row_presence(row: dict[str, str], label: str | None, negative_label: str) ->
     return bool(label and label != negative_label)
 
 
+def no_event_groups(root: Path, gap_seconds: float) -> list[list[Path]]:
+    timestamped = []
+    untimestamped = []
+    for path in sorted(root.glob("*.png")):
+        match = NO_EVENT_TIMESTAMP.fullmatch(path.name)
+        if match:
+            timestamped.append(
+                (
+                    datetime.strptime(match.group(1), "%Y-%m-%dT%H%M%S.%f"),
+                    path,
+                )
+            )
+        else:
+            untimestamped.append(path)
+
+    groups = []
+    current = []
+    previous = None
+    for captured_at, path in sorted(timestamped):
+        if previous is not None and (captured_at - previous).total_seconds() > gap_seconds:
+            groups.append(current)
+            current = []
+        current.append(path)
+        previous = captured_at
+    if current:
+        groups.append(current)
+    if untimestamped:
+        groups.append(untimestamped)
+    return groups
+
+
+def no_event_split(config: dict, protocol: str) -> dict[str, list[tuple[Path, str]]]:
+    settings = config["data"].get("no_event")
+    if not settings:
+        return {"train": [], "val": [], "test": []}
+
+    root = project_path(settings["root"])
+    groups = no_event_groups(root, settings["group_gap_seconds"])
+    ratios = settings["split_ratios"]
+    split_names = ("train", "val", "test")
+    total = sum(len(group) for group in groups)
+    ratio_total = sum(ratios[name] for name in split_names)
+    targets = {
+        name: total * ratios[name] / ratio_total for name in split_names
+    }
+    counts = {name: 0 for name in split_names}
+    result = {name: [] for name in split_names}
+    seed = settings.get("seed", 43)
+
+    def digest(group):
+        names = "\n".join(path.name for path in group)
+        return hashlib.sha256(f"{seed}:{protocol}:{names}".encode()).digest()
+
+    for group in sorted(groups, key=lambda value: (-len(value), digest(value))):
+        split = max(
+            split_names,
+            key=lambda name: (targets[name] - counts[name]) / targets[name],
+        )
+        group_names = "\n".join(path.name for path in group)
+        group_id = f"neggrp_{hashlib.sha256(group_names.encode()).hexdigest()[:16]}"
+        result[split].extend((path, group_id) for path in group)
+        counts[split] += len(group)
+    return result
+
+
+def read_no_event_samples(config: dict, protocol: str, split: str) -> list[DiscoverySample]:
+    samples = []
+    for path, group_id in no_event_split(config, protocol)[split]:
+        uid = hashlib.sha256(path.name.encode()).hexdigest()[:20]
+        samples.append(
+            DiscoverySample(
+                record_uid=f"neg_{uid}",
+                label=None,
+                presence=False,
+                image_path=path,
+                evidence_path=None,
+                bbox_1000=None,
+                group_id=group_id,
+                negative_subtype="ordinary",
+            )
+        )
+    return samples
+
+
 def read_discovery_samples(config: dict, protocol: str, split: str) -> list[DiscoverySample]:
     data_root = project_path(config["data"]["root"])
     supported = set(labels_from_config(config))
@@ -156,10 +251,70 @@ def read_discovery_samples(config: dict, protocol: str, split: str) -> list[Disc
                 image_path=image_path,
                 evidence_path=evidence_path if presence else None,
                 bbox_1000=boxes[image_name] if presence else None,
+                group_id=row.get("content_group_id") or None,
+                negative_subtype=(
+                    (label_row.get("negative_subtype") or None)
+                    if not presence
+                    else None
+                ),
             )
         )
+    samples.extend(read_no_event_samples(config, protocol, split))
     maximum = config["data"].get("max_samples")
     return samples[:maximum] if maximum else samples
+
+
+def discovery_sampler(samples, train_config: dict, seed: int):
+    labels = [sample.label or "no_event" for sample in samples]
+    counts = Counter(labels)
+    power = train_config["class_balance_power"]
+    weights = torch.tensor(
+        [counts[label] ** (-power) for label in labels], dtype=torch.double
+    )
+    budget = train_config.get("samples_per_epoch", "positive_records")
+    if budget == "positive_records":
+        budget = sum(sample.presence for sample in samples)
+    elif budget is None:
+        budget = len(samples)
+    return WeightedRandomSampler(
+        weights,
+        num_samples=int(budget),
+        replacement=True,
+        generator=torch.Generator().manual_seed(seed),
+    )
+
+
+def training_data_state(config: dict, protocol: str) -> dict:
+    data_root = project_path(config["data"]["root"])
+    manifest = data_root / protocol / "train.csv"
+    negatives = no_event_split(config, protocol)["train"]
+    fingerprint_rows = [
+        (path.name, path.stat().st_size, group_id)
+        for path, group_id in negatives
+    ]
+    return {
+        "version": 1,
+        "positive_manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+        "negative_records": len(negatives),
+        "negative_fingerprint": hashlib.sha256(
+            json.dumps(fingerprint_rows, separators=(",", ":")).encode()
+        ).hexdigest(),
+        "samples_per_epoch": config["train"].get("samples_per_epoch"),
+    }
+
+
+def training_data_is_current(output_dir: Path, config: dict, protocol: str) -> bool:
+    path = output_dir / "training_data.json"
+    return path.is_file() and json.loads(path.read_text()) == training_data_state(
+        config, protocol
+    )
+
+
+def save_training_data_state(output_dir: Path, config: dict, protocol: str) -> None:
+    (output_dir / "training_data.json").write_text(
+        json.dumps(training_data_state(config, protocol), indent=2),
+        encoding="utf-8",
+    )
 
 
 def box_iou(first, second) -> float:
@@ -288,6 +443,8 @@ def save_results(path: Path, config: dict, protocol: str, samples, predictions, 
         rows.append(
             {
                 "record_uid": sample.record_uid,
+                "group_id": sample.group_id,
+                "negative_subtype": sample.negative_subtype,
                 "target": {
                     "presence": sample.presence,
                     "bbox_1000": sample.bbox_1000,
@@ -469,17 +626,17 @@ def train_dfine(config: dict) -> None:
             values = {"protocol": protocol, "seed": seed}
             output_dir = project_path(config["output"]["root"], **values)
             model_dir = project_path(config["output"]["model"], **values)
-            if config["output"].get("skip_existing") and (model_dir / "config.json").exists():
+            if (
+                config["output"].get("skip_existing")
+                and (model_dir / "config.json").exists()
+                and training_data_is_current(output_dir, config, protocol)
+            ):
                 print(f"[skip] {model_dir}")
             else:
                 seed_everything(seed)
                 train_samples = read_discovery_samples(config, protocol, "train")
                 model, processor = load_dfine(project_path(config["model"]["path"]), device, False)
-                sampler = class_sampler(
-                    [sample.label or "no_event" for sample in train_samples],
-                    train_config["class_balance_power"],
-                    seed,
-                )
+                sampler = discovery_sampler(train_samples, train_config, seed)
                 train_batches = detection_loader(
                     train_samples,
                     DFineCollator(processor),
@@ -526,6 +683,7 @@ def train_dfine(config: dict) -> None:
                     writer.flush()
                 model.save_pretrained(model_dir)
                 processor.save_pretrained(model_dir)
+                save_training_data_state(output_dir, config, protocol)
                 writer.close()
                 del model, optimizer
                 torch.cuda.empty_cache()
@@ -909,8 +1067,13 @@ def train_qwen_discovery(config: dict) -> None:
     for protocol in config["data"]["protocols"]:
         for seed in train_config["seeds"]:
             values = {"protocol": protocol, "seed": seed}
+            output_dir = project_path(config["output"]["root"], **values)
             adapter_dir = project_path(config["output"]["adapter"], **values)
-            if config["output"].get("skip_existing") and (adapter_dir / "adapter_config.json").exists():
+            if (
+                config["output"].get("skip_existing")
+                and (adapter_dir / "adapter_config.json").exists()
+                and training_data_is_current(output_dir, config, protocol)
+            ):
                 print(f"[skip] {adapter_dir}")
             else:
                 seed_everything(seed)
@@ -930,11 +1093,7 @@ def train_qwen_discovery(config: dict) -> None:
                     ),
                 ).to(device)
                 model.gradient_checkpointing_enable()
-                sampler = class_sampler(
-                    [sample.label or "no_event" for sample in train_samples],
-                    train_config["class_balance_power"],
-                    seed,
-                )
+                sampler = discovery_sampler(train_samples, train_config, seed)
                 train_batches = vlm_loader(
                     train_samples,
                     QwenDiscoveryCollator(processor, config, True),
@@ -953,7 +1112,6 @@ def train_qwen_discovery(config: dict) -> None:
                     updates * train_config["epochs"],
                     train_config["warmup_ratio"],
                 )
-                output_dir = project_path(config["output"]["root"], **values)
                 output_dir.mkdir(parents=True, exist_ok=True)
                 writer = SummaryWriter(output_dir / "tensorboard")
                 global_step = 0
@@ -979,6 +1137,7 @@ def train_qwen_discovery(config: dict) -> None:
                     writer.flush()
                 model.save_pretrained(adapter_dir)
                 processor.save_pretrained(adapter_dir)
+                save_training_data_state(output_dir, config, protocol)
                 writer.close()
                 del model, optimizer
                 torch.cuda.empty_cache()
@@ -1096,18 +1255,19 @@ def train_florence_discovery(config: dict) -> None:
     for protocol in config["data"]["protocols"]:
         for seed in train_config["seeds"]:
             values = {"protocol": protocol, "seed": seed}
+            output_dir = project_path(config["output"]["root"], **values)
             model_dir = project_path(config["output"]["model"], **values)
-            if config["output"].get("skip_existing") and (model_dir / "config.json").exists():
+            if (
+                config["output"].get("skip_existing")
+                and (model_dir / "config.json").exists()
+                and training_data_is_current(output_dir, config, protocol)
+            ):
                 print(f"[skip] {model_dir}")
             else:
                 seed_everything(seed)
                 train_samples = read_discovery_samples(config, protocol, "train")
                 model, processor = load_florence(project_path(config["model"]["path"]), device)
-                sampler = class_sampler(
-                    [sample.label or "no_event" for sample in train_samples],
-                    train_config["class_balance_power"],
-                    seed,
-                )
+                sampler = discovery_sampler(train_samples, train_config, seed)
                 train_batches = vlm_loader(
                     train_samples,
                     FlorenceDiscoveryCollator(processor, config, True),
@@ -1126,7 +1286,6 @@ def train_florence_discovery(config: dict) -> None:
                     updates * train_config["epochs"],
                     train_config["warmup_ratio"],
                 )
-                output_dir = project_path(config["output"]["root"], **values)
                 output_dir.mkdir(parents=True, exist_ok=True)
                 writer = SummaryWriter(output_dir / "tensorboard")
                 global_step = 0
@@ -1152,6 +1311,7 @@ def train_florence_discovery(config: dict) -> None:
                     writer.flush()
                 model.save_pretrained(model_dir)
                 processor.save_pretrained(model_dir)
+                save_training_data_state(output_dir, config, protocol)
                 writer.close()
                 del model, optimizer
                 torch.cuda.empty_cache()
