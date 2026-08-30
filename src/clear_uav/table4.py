@@ -19,6 +19,7 @@ from torch.utils.data import DataLoader, Dataset
 from torch.utils.tensorboard import SummaryWriter
 from tqdm.auto import tqdm
 from transformers import (
+    AutoImageProcessor,
     AutoModel,
     AutoModelForMultimodalLM,
     AutoModelForZeroShotObjectDetection,
@@ -417,7 +418,7 @@ def dfine_loss(model, batches, device):
 
 
 def load_dfine(path: Path, device, trained: bool):
-    processor = AutoProcessor.from_pretrained(path, local_files_only=True)
+    processor = AutoImageProcessor.from_pretrained(path, local_files_only=True)
     model = DFineForObjectDetection.from_pretrained(
         path,
         local_files_only=True,

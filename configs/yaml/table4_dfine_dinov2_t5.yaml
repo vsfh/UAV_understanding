@@ -14,9 +14,9 @@ data:
 
 model:
   family: dfine
-  repo_id: PekingU/DFine_r50vd
+  repo_id: ustc-community/dfine-large-coco
   revision: main
-  path: ./hf_cache/dfine-r50vd
+  path: ./hf_cache/dfine-large-coco
 
 classifier_model:
   family: dinov2
