@@ -4,7 +4,6 @@ import json
 import math
 import random
 from collections import Counter
-from contextlib import contextmanager
 from pathlib import Path
 
 import numpy as np
@@ -19,15 +18,13 @@ from torch.utils.tensorboard import SummaryWriter
 from tqdm.auto import tqdm
 from transformers import (
     AutoModel,
-    AutoModelForCausalLM,
+    AutoModelForMultimodalLM,
     AutoProcessor,
-    PretrainedConfig,
-    PreTrainedTokenizerBase,
 )
 
 from clear_uav.data import read_private_test_samples, read_samples
 from clear_uav.experiment_config import experiment_runs, project_path
-from clear_uav.modeling import LORA_PATTERNS, load_qwen
+from clear_uav.modeling import LORA_PATTERNS, assistant_only_labels, load_qwen
 from clear_uav.ontology import load_label_subset, load_ontology
 
 
@@ -40,7 +37,10 @@ def seed_everything(seed: int) -> None:
 
 def ensure_hf_model(model_config: dict) -> Path:
     destination = project_path(model_config["path"])
-    if (destination / "config.json").is_file():
+    has_weights = any(destination.glob("*.safetensors")) or any(
+        destination.glob("pytorch_model*.bin")
+    )
+    if (destination / "config.json").is_file() and has_weights:
         print(f"[download skip] {destination}")
         return destination
     destination.mkdir(parents=True, exist_ok=True)
@@ -56,7 +56,6 @@ def ensure_hf_model(model_config: dict) -> Path:
             "*.safetensors",
             "*.tiktoken",
             "*.txt",
-            "pytorch_model.bin",
         ],
     )
     return destination
@@ -290,7 +289,6 @@ def train_encoder(config: dict) -> None:
             continue
         seed_everything(seed)
         train_samples = read_samples(root / protocol / "train.csv", root, include_labels=label_set)
-        val_samples = read_samples(root / protocol / "val.csv", root, include_labels=label_set)
         processor = AutoProcessor.from_pretrained(model_path, local_files_only=True)
         backbone = AutoModel.from_pretrained(model_path, local_files_only=True)
         model = EncoderClassifier(backbone, encoder_hidden_dim(backbone), len(labels)).to(device)
@@ -302,10 +300,6 @@ def train_encoder(config: dict) -> None:
         train_batches = encoder_loader(
             train_samples, processor, labels, train_config["batch_size"],
             train_config["num_workers"], sampler
-        )
-        val_batches = encoder_loader(
-            val_samples, processor, labels, train_config["batch_size"],
-            train_config["num_workers"]
         )
         optimizer = AdamW(
             [
@@ -320,7 +314,6 @@ def train_encoder(config: dict) -> None:
         )
         output_dir.mkdir(parents=True, exist_ok=True)
         writer = SummaryWriter(output_dir / "tensorboard")
-        best_f1 = -1.0
         global_step = 0
         for epoch in range(1, train_config["epochs"] + 1):
             model.train()
@@ -340,24 +333,19 @@ def train_encoder(config: dict) -> None:
                     optimizer.zero_grad(set_to_none=True)
                     global_step += 1
                     writer.add_scalar("train/loss", loss.item(), global_step)
-            metrics = evaluate_encoder(model, val_batches, labels, device)[-1]
             writer.add_scalar("epoch/train_loss", total_loss / len(train_batches), epoch)
-            writer.add_scalar("epoch/val_macro_f1", metrics["macro_f1"], epoch)
             writer.flush()
-            if metrics["macro_f1"] > best_f1:
-                best_f1 = metrics["macro_f1"]
-                temporary = checkpoint_path.with_suffix(".tmp")
-                torch.save(
-                    {
-                        "epoch": epoch,
-                        "labels": labels,
-                        "backbone": model.backbone.state_dict(),
-                        "classifier": model.classifier.state_dict(),
-                        "metrics": metrics,
-                    },
-                    temporary,
-                )
-                temporary.replace(checkpoint_path)
+        temporary = checkpoint_path.with_suffix(".tmp")
+        torch.save(
+            {
+                "epoch": train_config["epochs"],
+                "labels": labels,
+                "backbone": model.backbone.state_dict(),
+                "classifier": model.classifier.state_dict(),
+            },
+            temporary,
+        )
+        temporary.replace(checkpoint_path)
         writer.close()
         del model, optimizer
         torch.cuda.empty_cache()
@@ -461,23 +449,11 @@ class QwenCollator:
             },
         )
         if self.training:
-            prompts = self.processor.apply_chat_template(
-                [messages[:-1] for messages in conversations],
-                add_generation_prompt=True,
-                tokenize=True,
-                return_dict=True,
-                return_tensors="pt",
-                processor_kwargs={
-                    "padding": True,
-                    "size": {"longest_edge": self.max_pixels, "shortest_edge": min(65536, self.max_pixels)},
-                },
+            encoded["labels"] = assistant_only_labels(
+                encoded["input_ids"],
+                encoded["attention_mask"],
+                self.processor.tokenizer,
             )
-            labels = torch.full_like(encoded["input_ids"], -100)
-            for row in range(len(samples)):
-                full = encoded["attention_mask"][row].bool().nonzero().flatten()
-                prompt = prompts["attention_mask"][row].bool().nonzero().flatten()
-                labels[row, full[len(prompt):]] = encoded["input_ids"][row, full[len(prompt):]]
-            encoded["labels"] = labels
         return dict(encoded)
 
 
@@ -487,16 +463,6 @@ def vlm_loader(samples, collator, batch_size, workers, sampler=None):
         num_workers=workers, collate_fn=collator, pin_memory=True,
         persistent_workers=workers > 0,
     )
-
-
-@torch.inference_mode()
-def qwen_val_loss(model, batches, device):
-    model.eval()
-    losses = []
-    for batch in batches:
-        batch = {key: value.to(device) for key, value in batch.items()}
-        losses.append(model(**batch).loss.float().item())
-    return sum(losses) / len(losses)
 
 
 def train_qwen(config: dict) -> None:
@@ -515,7 +481,6 @@ def train_qwen(config: dict) -> None:
             continue
         seed_everything(seed)
         train_samples = read_samples(root / protocol / "train.csv", root, include_labels=label_set)
-        val_samples = read_samples(root / protocol / "val.csv", root, include_labels=label_set)
         model, processor = load_qwen(project_path(config["model"]["path"]))
         model.config.use_cache = False
         model.enable_input_require_grads()
@@ -535,21 +500,12 @@ def train_qwen(config: dict) -> None:
             config["representation"].get("context_margin", 0.0),
             config["prompt"], train_config["max_pixels"], True,
         )
-        val_collator = QwenCollator(
-            processor, labels, root, boxes, config["representation"]["view"],
-            config["representation"].get("context_margin", 0.0),
-            config["prompt"], train_config["max_pixels"], True,
-        )
         sampler = class_sampler(
             [sample.label for sample in train_samples], train_config["class_balance_power"], seed
         )
         train_batches = vlm_loader(
             train_samples, train_collator, train_config["batch_size"],
             train_config["num_workers"], sampler
-        )
-        val_batches = vlm_loader(
-            val_samples, val_collator, train_config["batch_size"],
-            train_config["num_workers"]
         )
         optimizer = AdamW(
             [parameter for parameter in model.parameters() if parameter.requires_grad],
@@ -559,7 +515,6 @@ def train_qwen(config: dict) -> None:
         scheduler = cosine_scheduler(optimizer, updates * train_config["epochs"], train_config["warmup_ratio"])
         output_dir.mkdir(parents=True, exist_ok=True)
         writer = SummaryWriter(output_dir / "tensorboard")
-        best_loss = float("inf")
         global_step = 0
         for epoch in range(1, train_config["epochs"] + 1):
             model.train()
@@ -575,12 +530,9 @@ def train_qwen(config: dict) -> None:
                     optimizer.step(); scheduler.step(); optimizer.zero_grad(set_to_none=True)
                     global_step += 1
                     writer.add_scalar("train/loss", loss.item(), global_step)
-            val_loss = qwen_val_loss(model, val_batches, device)
-            writer.add_scalar("epoch/val_loss", val_loss, epoch); writer.flush()
-            if val_loss < best_loss:
-                best_loss = val_loss
-                model.save_pretrained(adapter_dir)
-                processor.save_pretrained(adapter_dir)
+            writer.flush()
+        model.save_pretrained(adapter_dir)
+        processor.save_pretrained(adapter_dir)
         writer.close()
         del model, optimizer
         torch.cuda.empty_cache()
@@ -613,7 +565,12 @@ def test_qwen(config: dict) -> None:
                 config["representation"].get("context_margin", 0.0),
                 config["prompt"], config["test"]["max_pixels"], False,
             )
-            batches = vlm_loader(samples, collator, config["test"]["batch_size"], 0)
+            batches = vlm_loader(
+                samples,
+                collator,
+                config["test"]["batch_size"],
+                config["test"]["num_workers"],
+            )
             predictions, valid, raw_outputs = [], [], []
             with torch.inference_mode():
                 for batch in tqdm(batches, desc=f"{config['experiment']} {protocol}"):
@@ -648,7 +605,14 @@ class FlorenceCollator:
 
     def __call__(self, samples):
         images = [render_view(sample, self.data_root, self.boxes, "gt_crop", 0.0) for sample in samples]
-        batch = self.processor(text=[self.prompt] * len(samples), images=images, padding=True, return_tensors="pt")
+        batch = self.processor(
+            text=[self.prompt] * len(samples),
+            images=images,
+            padding=True,
+            return_tensors="pt",
+            do_resize=True,
+            size={"height": 768, "width": 768},
+        )
         if self.training:
             targets = self.processor.tokenizer(
                 [sample.label for sample in samples], padding=True, return_tensors="pt"
@@ -658,64 +622,13 @@ class FlorenceCollator:
         return dict(batch)
 
 
-@torch.inference_mode()
-def florence_val_loss(model, batches, device):
-    model.eval(); losses = []
-    for batch in batches:
-        batch = {key: value.to(device) for key, value in batch.items()}
-        with torch.autocast("cuda", dtype=torch.float16):
-            losses.append(model(**batch).loss.float().item())
-    return sum(losses) / len(losses)
-
-
-@contextmanager
-def florence_legacy_transformers_compat():
-    """Restore APIs used while the Microsoft Florence-2 remote code is constructed."""
-    added_attributes = []
-    if not hasattr(PretrainedConfig, "forced_bos_token_id"):
-        PretrainedConfig.forced_bos_token_id = None
-        added_attributes.append((PretrainedConfig, "forced_bos_token_id"))
-    if not hasattr(PreTrainedTokenizerBase, "additional_special_tokens"):
-        PreTrainedTokenizerBase.additional_special_tokens = property(
-            lambda tokenizer: list(tokenizer._extra_special_tokens)
-        )
-        added_attributes.append((PreTrainedTokenizerBase, "additional_special_tokens"))
-    try:
-        yield
-    finally:
-        for owner, name in reversed(added_attributes):
-            delattr(owner, name)
-
-
-def load_florence(path: Path, device, dtype=torch.float16):
-    with florence_legacy_transformers_compat():
-        processor = AutoProcessor.from_pretrained(path, local_files_only=True, trust_remote_code=True)
-        model = AutoModelForCausalLM.from_pretrained(
-            path,
-            local_files_only=True,
-            trust_remote_code=True,
-            dtype=dtype,
-            attn_implementation="eager",
-        )
-        # Generation creates a fresh instance of this dynamically loaded config,
-        # after the temporary base-class compatibility context has exited.
-        language_config_class = type(model.language_model.config)
-        if "forced_bos_token_id" not in language_config_class.__dict__:
-            language_config_class.forced_bos_token_id = None
-        # Transformers 5 no longer resolves this legacy checkpoint's nested
-        # tied-weight paths, so restore the shared BART embeddings explicitly.
-        shared_embeddings = model.language_model.model.shared
-        model.language_model.model.encoder.embed_tokens = shared_embeddings
-        model.language_model.model.decoder.embed_tokens = shared_embeddings
-        model.language_model.lm_head.weight = shared_embeddings.weight
-        model._tied_weights_keys = {
-            "language_model.model.encoder.embed_tokens.weight": "language_model.model.shared.weight",
-            "language_model.model.decoder.embed_tokens.weight": "language_model.model.shared.weight",
-            "language_model.lm_head.weight": "language_model.model.shared.weight",
-        }
-        model.language_model._tied_weights_keys = {}
-        model.language_model.model._tied_weights_keys = {}
-        model = model.to(device)
+def load_florence(path: Path, device, dtype=torch.float32):
+    processor = AutoProcessor.from_pretrained(path, local_files_only=True)
+    model = AutoModelForMultimodalLM.from_pretrained(
+        path,
+        local_files_only=True,
+        dtype=dtype,
+    ).to(device)
     return model, processor
 
 
@@ -731,31 +644,26 @@ def train_florence(config: dict) -> None:
             print(f"[skip] {best_dir}"); continue
         seed_everything(seed)
         train_samples = read_samples(root / protocol / "train.csv", root, include_labels=label_set)
-        val_samples = read_samples(root / protocol / "val.csv", root, include_labels=label_set)
         model, processor = load_florence(project_path(config["model"]["path"]), device)
         train_collator = FlorenceCollator(processor, labels, root, boxes, config["prompt"], True)
-        val_collator = FlorenceCollator(processor, labels, root, boxes, config["prompt"], True)
         sampler = class_sampler([s.label for s in train_samples], train_config["class_balance_power"], seed)
         train_batches = vlm_loader(train_samples, train_collator, train_config["batch_size"], train_config["num_workers"], sampler)
-        val_batches = vlm_loader(val_samples, val_collator, train_config["batch_size"], train_config["num_workers"])
         optimizer = AdamW(model.parameters(), lr=train_config["learning_rate"], weight_decay=train_config["weight_decay"])
         updates = math.ceil(len(train_batches) / train_config["gradient_accumulation"])
         scheduler = cosine_scheduler(optimizer, updates * train_config["epochs"], train_config["warmup_ratio"])
         output_dir.mkdir(parents=True, exist_ok=True); writer = SummaryWriter(output_dir / "tensorboard")
-        best_loss = float("inf"); global_step = 0
+        global_step = 0
         for epoch in range(1, train_config["epochs"] + 1):
             model.train(); optimizer.zero_grad(set_to_none=True)
             for batch_index, batch in enumerate(tqdm(train_batches, desc=f"{config['experiment']} epoch {epoch}"), 1):
                 batch = {key: value.to(device) for key, value in batch.items()}
-                with torch.autocast("cuda", dtype=torch.float16): loss = model(**batch).loss
+                with torch.autocast("cuda", dtype=torch.bfloat16): loss = model(**batch).loss
                 (loss / train_config["gradient_accumulation"]).backward()
                 if batch_index % train_config["gradient_accumulation"] == 0 or batch_index == len(train_batches):
                     optimizer.step(); scheduler.step(); optimizer.zero_grad(set_to_none=True)
                     global_step += 1; writer.add_scalar("train/loss", loss.item(), global_step)
-            val_loss = florence_val_loss(model, val_batches, device)
-            writer.add_scalar("epoch/val_loss", val_loss, epoch); writer.flush()
-            if val_loss < best_loss:
-                best_loss = val_loss; model.save_pretrained(best_dir); processor.save_pretrained(best_dir)
+            writer.flush()
+        model.save_pretrained(best_dir); processor.save_pretrained(best_dir)
         writer.close(); del model, optimizer; torch.cuda.empty_cache()
 
 
@@ -771,19 +679,28 @@ def test_florence(config: dict) -> None:
                 root / protocol / "test_inputs.csv", root / protocol / "test_labels_private.csv",
                 root, include_labels=label_set
             )
-            model, processor = load_florence(project_path(config["output"]["model"], **values), device)
+            model, processor = load_florence(
+                project_path(config["output"]["model"], **values),
+                device,
+                dtype=torch.bfloat16,
+            )
+            model.eval()
             collator = FlorenceCollator(processor, labels, root, boxes, config["prompt"], False)
-            batches = vlm_loader(samples, collator, config["test"]["batch_size"], 0)
+            batches = vlm_loader(
+                samples,
+                collator,
+                config["test"]["batch_size"],
+                config["test"]["num_workers"],
+            )
             predictions, valid, raw_outputs = [], [], []
             with torch.inference_mode():
                 for batch in tqdm(batches, desc=f"{config['experiment']} {protocol}"):
                     batch = {key: value.to(device) for key, value in batch.items()}
-                    with torch.autocast("cuda", dtype=torch.float16):
+                    with torch.autocast("cuda", dtype=torch.bfloat16):
                         generated = model.generate(
                             **batch,
                             max_new_tokens=config["test"]["max_new_tokens"],
                             do_sample=False,
-                            use_cache=False,
                         )
                     for text in processor.batch_decode(generated, skip_special_tokens=True):
                         raw_outputs.append(text)

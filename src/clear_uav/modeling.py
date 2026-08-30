@@ -23,6 +23,22 @@ LORA_PATTERNS = {
 }
 
 
+def assistant_only_labels(input_ids, attention_mask, tokenizer):
+    prefix = tokenizer.encode("<|im_start|>assistant\n", add_special_tokens=False)
+    labels = torch.full_like(input_ids, -100)
+    for row in range(input_ids.shape[0]):
+        positions = attention_mask[row].bool().nonzero().flatten()
+        tokens = input_ids[row, positions].tolist()
+        start = max(
+            index
+            for index in range(len(tokens) - len(prefix) + 1)
+            if tokens[index : index + len(prefix)] == prefix
+        )
+        answer_positions = positions[start + len(prefix) :]
+        labels[row, answer_positions] = input_ids[row, answer_positions]
+    return labels
+
+
 def enable_offline_mode() -> None:
     os.environ["HF_HUB_OFFLINE"] = "1"
     os.environ["TRANSFORMERS_OFFLINE"] = "1"

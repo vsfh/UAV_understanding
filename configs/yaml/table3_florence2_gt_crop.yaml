@@ -13,9 +13,9 @@ data:
 model:
   family: florence2
   method: full_finetune
-  repo_id: microsoft/Florence-2-base-ft
+  repo_id: florence-community/Florence-2-base-ft
   revision: main
-  path: ./hf_cache/florence-2-base-ft
+  path: ./hf_cache/florence-2-base-ft-transformers58
 
 representation:
   view: gt_crop
@@ -27,16 +27,17 @@ prompt: >-
 train:
   seeds: [43]
   epochs: 10
-  batch_size: 8
+  batch_size: 4
   gradient_accumulation: 2
   learning_rate: 0.00001
   weight_decay: 0.01
   warmup_ratio: 0.1
   class_balance_power: 0.5
-  num_workers: 4
+  num_workers: 12
 
 test:
-  batch_size: 8
+  batch_size: 4
+  num_workers: 12
   max_new_tokens: 32
 
 output:

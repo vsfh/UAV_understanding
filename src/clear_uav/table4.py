@@ -28,7 +28,7 @@ from transformers import (
 )
 
 from clear_uav.experiment_config import load_yaml, project_path
-from clear_uav.modeling import LORA_PATTERNS, load_qwen
+from clear_uav.modeling import LORA_PATTERNS, assistant_only_labels, load_qwen
 from clear_uav.table3 import (
     EncoderClassifier,
     class_sampler,
@@ -404,18 +404,6 @@ def detection_loader(samples, collator, batch_size, workers, shuffle=False, samp
     )
 
 
-@torch.inference_mode()
-def dfine_loss(model, batches, device):
-    model.eval()
-    losses = []
-    for batch, labels in batches:
-        batch = {key: value.to(device) for key, value in batch.items()}
-        labels = [{key: value.to(device) for key, value in row.items()} for row in labels]
-        with torch.autocast("cuda", dtype=torch.bfloat16):
-            losses.append(model(**batch, labels=labels).loss.float().item())
-    return statistics.fmean(losses)
-
-
 def load_dfine(path: Path, device, trained: bool):
     processor = AutoImageProcessor.from_pretrained(path, local_files_only=True)
     model = DFineForObjectDetection.from_pretrained(
@@ -486,7 +474,6 @@ def train_dfine(config: dict) -> None:
             else:
                 seed_everything(seed)
                 train_samples = read_discovery_samples(config, protocol, "train")
-                val_samples = read_discovery_samples(config, protocol, "val")
                 model, processor = load_dfine(project_path(config["model"]["path"]), device, False)
                 sampler = class_sampler(
                     [sample.label or "no_event" for sample in train_samples],
@@ -499,13 +486,6 @@ def train_dfine(config: dict) -> None:
                     train_config["batch_size"],
                     train_config["num_workers"],
                     sampler=sampler,
-                )
-                val_batches = detection_loader(
-                    val_samples,
-                    DFineCollator(processor),
-                    train_config["batch_size"],
-                    train_config["num_workers"],
-                    False,
                 )
                 optimizer = AdamW(
                     model.parameters(),
@@ -520,7 +500,6 @@ def train_dfine(config: dict) -> None:
                 )
                 output_dir.mkdir(parents=True, exist_ok=True)
                 writer = SummaryWriter(output_dir / "tensorboard")
-                best_loss = float("inf")
                 global_step = 0
                 for epoch in range(1, train_config["epochs"] + 1):
                     model.train()
@@ -544,13 +523,9 @@ def train_dfine(config: dict) -> None:
                             optimizer.zero_grad(set_to_none=True)
                             global_step += 1
                             writer.add_scalar("train/loss", loss.item(), global_step)
-                    val_loss = dfine_loss(model, val_batches, device)
-                    writer.add_scalar("epoch/val_loss", val_loss, epoch)
                     writer.flush()
-                    if val_loss < best_loss:
-                        best_loss = val_loss
-                        model.save_pretrained(model_dir)
-                        processor.save_pretrained(model_dir)
+                model.save_pretrained(model_dir)
+                processor.save_pretrained(model_dir)
                 writer.close()
                 del model, optimizer
                 torch.cuda.empty_cache()
@@ -871,20 +846,11 @@ class QwenDiscoveryCollator:
             processor_kwargs={"padding": True, "size": size},
         )
         if self.training:
-            prompts = self.processor.apply_chat_template(
-                [messages[:-1] for messages in conversations],
-                add_generation_prompt=True,
-                tokenize=True,
-                return_dict=True,
-                return_tensors="pt",
-                processor_kwargs={"padding": True, "size": size},
+            encoded["labels"] = assistant_only_labels(
+                encoded["input_ids"],
+                encoded["attention_mask"],
+                self.processor.tokenizer,
             )
-            targets = torch.full_like(encoded["input_ids"], -100)
-            for row in range(len(samples)):
-                full = encoded["attention_mask"][row].bool().nonzero().flatten()
-                prefix = prompts["attention_mask"][row].bool().nonzero().flatten()
-                targets[row, full[len(prefix) :]] = encoded["input_ids"][row, full[len(prefix) :]]
-            encoded["labels"] = targets
         return dict(encoded)
 
 
@@ -899,16 +865,6 @@ def vlm_loader(samples, collator, batch_size, workers, sampler=None):
         pin_memory=True,
         persistent_workers=workers > 0,
     )
-
-
-@torch.inference_mode()
-def qwen_loss(model, batches, device):
-    model.eval()
-    losses = []
-    for batch in batches:
-        batch = {key: value.to(device) for key, value in batch.items()}
-        losses.append(model(**batch).loss.float().item())
-    return statistics.fmean(losses)
 
 
 def load_qwen_adapter(config, protocol, seed, device):
@@ -959,7 +915,6 @@ def train_qwen_discovery(config: dict) -> None:
             else:
                 seed_everything(seed)
                 train_samples = read_discovery_samples(config, protocol, "train")
-                val_samples = read_discovery_samples(config, protocol, "val")
                 model, processor = load_qwen(project_path(config["model"]["path"]))
                 model.config.use_cache = False
                 model.enable_input_require_grads()
@@ -987,12 +942,6 @@ def train_qwen_discovery(config: dict) -> None:
                     train_config["num_workers"],
                     sampler,
                 )
-                val_batches = vlm_loader(
-                    val_samples,
-                    QwenDiscoveryCollator(processor, config, True),
-                    train_config["batch_size"],
-                    train_config["num_workers"],
-                )
                 optimizer = AdamW(
                     [parameter for parameter in model.parameters() if parameter.requires_grad],
                     lr=train_config["learning_rate"],
@@ -1007,7 +956,6 @@ def train_qwen_discovery(config: dict) -> None:
                 output_dir = project_path(config["output"]["root"], **values)
                 output_dir.mkdir(parents=True, exist_ok=True)
                 writer = SummaryWriter(output_dir / "tensorboard")
-                best_loss = float("inf")
                 global_step = 0
                 for epoch in range(1, train_config["epochs"] + 1):
                     model.train()
@@ -1028,13 +976,9 @@ def train_qwen_discovery(config: dict) -> None:
                             optimizer.zero_grad(set_to_none=True)
                             global_step += 1
                             writer.add_scalar("train/loss", loss.item(), global_step)
-                    val_loss = qwen_loss(model, val_batches, device)
-                    writer.add_scalar("epoch/val_loss", val_loss, epoch)
                     writer.flush()
-                    if val_loss < best_loss:
-                        best_loss = val_loss
-                        model.save_pretrained(adapter_dir)
-                        processor.save_pretrained(adapter_dir)
+                model.save_pretrained(adapter_dir)
+                processor.save_pretrained(adapter_dir)
                 writer.close()
                 del model, optimizer
                 torch.cuda.empty_cache()
@@ -1109,16 +1053,6 @@ def load_florence(path: Path, device):
 
 
 @torch.inference_mode()
-def florence_loss(model, batches, device):
-    model.eval()
-    losses = []
-    for batch in batches:
-        batch = {key: value.to(device) for key, value in batch.items()}
-        losses.append(model(**batch).loss.float().item())
-    return statistics.fmean(losses)
-
-
-@torch.inference_mode()
 def predict_florence(model, processor, samples, config, device, description):
     collator = FlorenceDiscoveryCollator(processor, config, False)
     labels = set(labels_from_config(config))
@@ -1157,7 +1091,6 @@ def train_florence_discovery(config: dict) -> None:
             else:
                 seed_everything(seed)
                 train_samples = read_discovery_samples(config, protocol, "train")
-                val_samples = read_discovery_samples(config, protocol, "val")
                 model, processor = load_florence(project_path(config["model"]["path"]), device)
                 sampler = class_sampler(
                     [sample.label or "no_event" for sample in train_samples],
@@ -1170,12 +1103,6 @@ def train_florence_discovery(config: dict) -> None:
                     train_config["batch_size"],
                     train_config["num_workers"],
                     sampler,
-                )
-                val_batches = vlm_loader(
-                    val_samples,
-                    FlorenceDiscoveryCollator(processor, config, True),
-                    train_config["batch_size"],
-                    train_config["num_workers"],
                 )
                 optimizer = AdamW(
                     model.parameters(),
@@ -1191,7 +1118,6 @@ def train_florence_discovery(config: dict) -> None:
                 output_dir = project_path(config["output"]["root"], **values)
                 output_dir.mkdir(parents=True, exist_ok=True)
                 writer = SummaryWriter(output_dir / "tensorboard")
-                best_loss = float("inf")
                 global_step = 0
                 for epoch in range(1, train_config["epochs"] + 1):
                     model.train()
@@ -1212,13 +1138,9 @@ def train_florence_discovery(config: dict) -> None:
                             optimizer.zero_grad(set_to_none=True)
                             global_step += 1
                             writer.add_scalar("train/loss", loss.item(), global_step)
-                    val_loss = florence_loss(model, val_batches, device)
-                    writer.add_scalar("epoch/val_loss", val_loss, epoch)
                     writer.flush()
-                    if val_loss < best_loss:
-                        best_loss = val_loss
-                        model.save_pretrained(model_dir)
-                        processor.save_pretrained(model_dir)
+                model.save_pretrained(model_dir)
+                processor.save_pretrained(model_dir)
                 writer.close()
                 del model, optimizer
                 torch.cuda.empty_cache()
@@ -1287,19 +1209,6 @@ def classifier_loader(samples, processor, labels, batch_size, workers, sampler=N
     )
 
 
-@torch.inference_mode()
-def classifier_loss(model, batches, device):
-    model.eval()
-    losses = []
-    for pixels, targets in batches:
-        with torch.autocast("cuda", dtype=torch.bfloat16):
-            loss = nn.functional.cross_entropy(
-                model(pixels.to(device, non_blocking=True)), targets.to(device)
-            )
-        losses.append(loss.item())
-    return statistics.fmean(losses)
-
-
 def train_dinov2_classifier(config, protocol, seed):
     ensure_hf_model(config["classifier_model"])
     device = torch.device(config["runtime"]["device"])
@@ -1311,7 +1220,6 @@ def train_dinov2_classifier(config, protocol, seed):
         return
     seed_everything(seed)
     train_samples = read_discovery_samples(config, protocol, "train")
-    val_samples = read_discovery_samples(config, protocol, "val")
     path = project_path(config["classifier_model"]["path"])
     processor = AutoProcessor.from_pretrained(path, local_files_only=True)
     backbone = AutoModel.from_pretrained(path, local_files_only=True)
@@ -1328,13 +1236,6 @@ def train_dinov2_classifier(config, protocol, seed):
         train_config["num_workers"],
         sampler,
     )
-    val_batches = classifier_loader(
-        val_samples,
-        processor,
-        labels,
-        train_config["batch_size"],
-        train_config["num_workers"],
-    )
     optimizer = AdamW(
         [
             {"params": model.backbone.parameters(), "lr": train_config["backbone_learning_rate"]},
@@ -1347,7 +1248,6 @@ def train_dinov2_classifier(config, protocol, seed):
         optimizer, updates * train_config["epochs"], train_config["warmup_ratio"]
     )
     output.parent.mkdir(parents=True, exist_ok=True)
-    best_loss = float("inf")
     for epoch in range(1, train_config["epochs"] + 1):
         model.train()
         optimizer.zero_grad(set_to_none=True)
@@ -1364,17 +1264,14 @@ def train_dinov2_classifier(config, protocol, seed):
                 optimizer.step()
                 scheduler.step()
                 optimizer.zero_grad(set_to_none=True)
-        val_loss = classifier_loss(model, val_batches, device)
-        if val_loss < best_loss:
-            best_loss = val_loss
-            torch.save(
-                {
-                    "backbone": model.backbone.state_dict(),
-                    "classifier": model.classifier.state_dict(),
-                    "labels": labels,
-                },
-                output,
-            )
+    torch.save(
+        {
+            "backbone": model.backbone.state_dict(),
+            "classifier": model.classifier.state_dict(),
+            "labels": labels,
+        },
+        output,
+    )
     del model, optimizer
     torch.cuda.empty_cache()
 
@@ -1542,20 +1439,11 @@ class QwenCropCollator:
             processor_kwargs={"padding": True, "size": size},
         )
         if self.training:
-            prompts = self.processor.apply_chat_template(
-                [messages[:-1] for messages in conversations],
-                add_generation_prompt=True,
-                tokenize=True,
-                return_dict=True,
-                return_tensors="pt",
-                processor_kwargs={"padding": True, "size": size},
+            encoded["labels"] = assistant_only_labels(
+                encoded["input_ids"],
+                encoded["attention_mask"],
+                self.processor.tokenizer,
             )
-            targets = torch.full_like(encoded["input_ids"], -100)
-            for row in range(len(samples)):
-                full = encoded["attention_mask"][row].bool().nonzero().flatten()
-                prefix = prompts["attention_mask"][row].bool().nonzero().flatten()
-                targets[row, full[len(prefix) :]] = encoded["input_ids"][row, full[len(prefix) :]]
-            encoded["labels"] = targets
         return dict(encoded)
 
 
@@ -1572,9 +1460,6 @@ def train_qwen_crop_classifier(config, protocol, seed):
     seed_everything(seed)
     train_samples = [
         sample for sample in read_discovery_samples(config, protocol, "train") if sample.presence
-    ]
-    val_samples = [
-        sample for sample in read_discovery_samples(config, protocol, "val") if sample.presence
     ]
     model, processor = load_qwen(project_path(config["classifier_model"]["path"]))
     model.config.use_cache = False
@@ -1601,12 +1486,6 @@ def train_qwen_crop_classifier(config, protocol, seed):
         train_config["num_workers"],
         sampler,
     )
-    val_batches = vlm_loader(
-        val_samples,
-        QwenCropCollator(processor, config, True),
-        train_config["batch_size"],
-        train_config["num_workers"],
-    )
     optimizer = AdamW(
         [parameter for parameter in model.parameters() if parameter.requires_grad],
         lr=train_config["learning_rate"],
@@ -1616,7 +1495,6 @@ def train_qwen_crop_classifier(config, protocol, seed):
     scheduler = cosine_scheduler(
         optimizer, updates * train_config["epochs"], train_config["warmup_ratio"]
     )
-    best_loss = float("inf")
     for epoch in range(1, train_config["epochs"] + 1):
         model.train()
         optimizer.zero_grad(set_to_none=True)
@@ -1634,11 +1512,8 @@ def train_qwen_crop_classifier(config, protocol, seed):
                 optimizer.step()
                 scheduler.step()
                 optimizer.zero_grad(set_to_none=True)
-        val_loss = qwen_loss(model, val_batches, device)
-        if val_loss < best_loss:
-            best_loss = val_loss
-            model.save_pretrained(adapter_dir)
-            processor.save_pretrained(adapter_dir)
+    model.save_pretrained(adapter_dir)
+    processor.save_pretrained(adapter_dir)
     del model, optimizer
     torch.cuda.empty_cache()
 

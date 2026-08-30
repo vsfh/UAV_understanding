@@ -30,24 +30,24 @@ prompt:
 train:
   seeds: [43]
   epochs: 10
-  batch_size: 2
-  gradient_accumulation: 8
+  batch_size: 4
+  gradient_accumulation: 2
   learning_rate: 0.00001
   weight_decay: 0.0001
   warmup_ratio: 0.1
   class_balance_power: 0.5
-  num_workers: 8
+  num_workers: 12
 
 classifier_train:
   epochs: 20
-  batch_size: 32
-  gradient_accumulation: 1
+  batch_size: 4
+  gradient_accumulation: 2
   learning_rate: 0.001
   backbone_learning_rate: 0.00001
   weight_decay: 0.01
   warmup_ratio: 0.1
   class_balance_power: 0.5
-  num_workers: 8
+  num_workers: 12
 
 cascade:
   context_margin: 0.2

@@ -30,20 +30,21 @@ train:
   seeds: [43]
   epochs: 5
   batch_size: 4
-  gradient_accumulation: 8
+  gradient_accumulation: 2
   learning_rate: 0.0002
   warmup_ratio: 0.1
   class_balance_power: 0.5
   max_pixels: 995328
-  num_workers: 0
+  num_workers: 12
   lora_r: 16
   lora_alpha: 32
   lora_dropout: 0.05
   lora_scope: projector_llm
 
 test:
-  batch_size: 1
-  max_pixels: 1048576
+  batch_size: 4
+  max_pixels: 995328
+  num_workers: 12
   max_new_tokens: 32
 
 output:
