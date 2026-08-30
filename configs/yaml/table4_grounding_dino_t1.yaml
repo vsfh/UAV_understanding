@@ -2,6 +2,7 @@ experiment: table4_grounding_dino_t1
 
 runtime:
   device: cuda
+  precision: float32
 
 data:
   root: ./um7

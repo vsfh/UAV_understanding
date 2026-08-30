@@ -591,7 +591,7 @@ def load_grounding_dino(config, device):
     path = project_path(config["model"]["path"])
     processor = AutoProcessor.from_pretrained(path, local_files_only=True)
     model = AutoModelForZeroShotObjectDetection.from_pretrained(
-        path, local_files_only=True, dtype=torch.bfloat16
+        path, local_files_only=True
     ).to(device).eval()
     return model, processor
 
@@ -600,6 +600,11 @@ def load_grounding_dino(config, device):
 def predict_grounding_dino(model, processor, samples, config, device, description):
     _, prompts = definition_prompts(config)
     chunk_size = config["inference"]["prompt_chunk_size"]
+    prompt_chunks = [
+        ". ".join(prompt.rstrip(". ") for prompt in prompts[start : start + chunk_size])
+        + "."
+        for start in range(0, len(prompts), chunk_size)
+    ]
     predictions = []
     for sample in tqdm(samples, desc=description, unit="image"):
         with Image.open(sample.image_path) as source:
@@ -607,12 +612,9 @@ def predict_grounding_dino(model, processor, samples, config, device, descriptio
         best = None
         synchronize(device)
         started = time.perf_counter()
-        for start in range(0, len(prompts), chunk_size):
-            chunk = prompts[start : start + chunk_size]
-            text_prompt = ". ".join(prompt.rstrip(". ") for prompt in chunk) + "."
+        for text_prompt in prompt_chunks:
             inputs = processor(images=image, text=text_prompt, return_tensors="pt")
             inputs = {key: value.to(device) for key, value in inputs.items()}
-            inputs["pixel_values"] = inputs["pixel_values"].to(dtype=model.dtype)
             outputs = model(**inputs)
             result = processor.post_process_grounded_object_detection(
                 outputs,
