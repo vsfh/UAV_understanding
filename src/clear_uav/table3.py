@@ -614,12 +614,32 @@ class FlorenceCollator:
             size={"height": 768, "width": 768},
         )
         if self.training:
-            targets = self.processor.tokenizer(
-                [sample.label for sample in samples], padding=True, return_tensors="pt"
-            )["input_ids"]
-            targets[targets == self.processor.tokenizer.pad_token_id] = -100
-            batch["labels"] = targets
+            tokenizer = self.processor.tokenizer
+            targets = [
+                torch.tensor(
+                    tokenizer(sample.label, add_special_tokens=False)["input_ids"]
+                    + [tokenizer.eos_token_id],
+                    dtype=torch.long,
+                )
+                for sample in samples
+            ]
+            batch["labels"] = nn.utils.rnn.pad_sequence(
+                targets, batch_first=True, padding_value=-100
+            )
         return dict(batch)
+
+
+def configure_florence_classification_generation(model, tokenizer) -> None:
+    generation = model.generation_config
+    generation.decoder_start_token_id = tokenizer.eos_token_id
+    generation.bos_token_id = tokenizer.bos_token_id
+    generation.eos_token_id = tokenizer.eos_token_id
+    generation.pad_token_id = tokenizer.pad_token_id
+    generation.forced_bos_token_id = None
+    generation.forced_eos_token_id = None
+    generation.num_beams = 1
+    generation.no_repeat_ngram_size = 0
+    generation.early_stopping = False
 
 
 def load_florence(path: Path, device, dtype=torch.float32):
@@ -629,7 +649,15 @@ def load_florence(path: Path, device, dtype=torch.float32):
         local_files_only=True,
         dtype=dtype,
     ).to(device)
+    configure_florence_classification_generation(model, processor.tokenizer)
     return model, processor
+
+
+def florence_recipe_is_current(output_dir: Path, recipe_version: int) -> bool:
+    path = output_dir / "training_recipe.json"
+    return path.is_file() and json.loads(path.read_text(encoding="utf-8")) == {
+        "recipe_version": recipe_version
+    }
 
 
 def train_florence(config: dict) -> None:
@@ -640,7 +668,11 @@ def train_florence(config: dict) -> None:
     for protocol, seed in experiment_runs(config):
         values = {"protocol": protocol, "seed": seed}
         output_dir = project_path(config["output"]["root"], **values); best_dir = output_dir / "best"
-        if config["output"].get("skip_existing") and (best_dir / "config.json").exists():
+        if (
+            config["output"].get("skip_existing")
+            and (best_dir / "config.json").exists()
+            and florence_recipe_is_current(output_dir, train_config["recipe_version"])
+        ):
             print(f"[skip] {best_dir}"); continue
         seed_everything(seed)
         train_samples = read_samples(root / protocol / "train.csv", root, include_labels=label_set)
@@ -651,19 +683,68 @@ def train_florence(config: dict) -> None:
         optimizer = AdamW(model.parameters(), lr=train_config["learning_rate"], weight_decay=train_config["weight_decay"])
         updates = math.ceil(len(train_batches) / train_config["gradient_accumulation"])
         scheduler = cosine_scheduler(optimizer, updates * train_config["epochs"], train_config["warmup_ratio"])
-        output_dir.mkdir(parents=True, exist_ok=True); writer = SummaryWriter(output_dir / "tensorboard")
+        output_dir.mkdir(parents=True, exist_ok=True)
+        writer = SummaryWriter(
+            output_dir / "tensorboard" / f"recipe_v{train_config['recipe_version']}"
+        )
         global_step = 0
         for epoch in range(1, train_config["epochs"] + 1):
             model.train(); optimizer.zero_grad(set_to_none=True)
-            for batch_index, batch in enumerate(tqdm(train_batches, desc=f"{config['experiment']} epoch {epoch}"), 1):
+            running_loss = 0.0
+            gradient_norm = 0.0
+            progress = tqdm(
+                train_batches,
+                desc=(
+                    f"{config['experiment']} {protocol} "
+                    f"epoch {epoch}/{train_config['epochs']}"
+                ),
+                unit="batch",
+            )
+            for batch_index, batch in enumerate(progress, 1):
                 batch = {key: value.to(device) for key, value in batch.items()}
                 with torch.autocast("cuda", dtype=torch.bfloat16): loss = model(**batch).loss
+                loss_value = float(loss.detach())
+                if not math.isfinite(loss_value):
+                    raise FloatingPointError(
+                        f"non-finite Florence loss at {protocol} epoch {epoch} "
+                        f"batch {batch_index}: {loss_value}"
+                    )
                 (loss / train_config["gradient_accumulation"]).backward()
+                running_loss += loss_value
                 if batch_index % train_config["gradient_accumulation"] == 0 or batch_index == len(train_batches):
+                    gradient_norm = float(
+                        nn.utils.clip_grad_norm_(
+                            model.parameters(),
+                            train_config["max_grad_norm"],
+                            error_if_nonfinite=True,
+                        )
+                    )
                     optimizer.step(); scheduler.step(); optimizer.zero_grad(set_to_none=True)
-                    global_step += 1; writer.add_scalar("train/loss", loss.item(), global_step)
+                    global_step += 1
+                    writer.add_scalar("train/loss", loss_value, global_step)
+                    writer.add_scalar(
+                        "train/average_loss", running_loss / batch_index, global_step
+                    )
+                    writer.add_scalar("train/gradient_norm", gradient_norm, global_step)
+                    writer.add_scalar(
+                        "train/learning_rate", scheduler.get_last_lr()[0], global_step
+                    )
+                progress.set_postfix(
+                    loss=f"{loss_value:.4f}",
+                    avg=f"{running_loss / batch_index:.4f}",
+                    grad=f"{gradient_norm:.3f}",
+                    lr=f"{scheduler.get_last_lr()[0]:.2e}",
+                )
             writer.flush()
+            print(
+                f"{config['experiment']} {protocol} epoch {epoch}: "
+                f"loss={running_loss / len(train_batches):.4f}"
+            )
         model.save_pretrained(best_dir); processor.save_pretrained(best_dir)
+        (output_dir / "training_recipe.json").write_text(
+            json.dumps({"recipe_version": train_config["recipe_version"]}, indent=2),
+            encoding="utf-8",
+        )
         writer.close(); del model, optimizer; torch.cuda.empty_cache()
 
 
@@ -701,6 +782,10 @@ def test_florence(config: dict) -> None:
                             **batch,
                             max_new_tokens=config["test"]["max_new_tokens"],
                             do_sample=False,
+                            num_beams=1,
+                            no_repeat_ngram_size=0,
+                            forced_bos_token_id=None,
+                            forced_eos_token_id=None,
                         )
                     for text in processor.batch_decode(generated, skip_special_tokens=True):
                         raw_outputs.append(text)
