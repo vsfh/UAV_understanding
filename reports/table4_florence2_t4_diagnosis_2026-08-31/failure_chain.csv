@@ -1,0 +1,4 @@
+stage,failure_rate,failed,total,denominator
+NaN loss,0.9999518072,20749,20750,TensorBoard loss points
+non-finite checkpoint values,0.9995577560,231443968,231546368,checkpoint floating values
+invalid test outputs,1.0,5338,5338,test rows

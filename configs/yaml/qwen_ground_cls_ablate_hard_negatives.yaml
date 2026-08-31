@@ -1,0 +1,11 @@
+base_config: ./configs/yaml/qwen_ground_cls.yaml
+experiment: qwen_ground_cls_ablate_hard_negatives
+
+classification:
+  components:
+    hard_negative_mining: false
+
+output:
+  root: ./outputs/qwen_ground_cls_ablations/no_hard_negatives/{protocol}/seed{seed}
+  checkpoint: ./outputs/qwen_ground_cls_ablations/no_hard_negatives/{protocol}/seed{seed}/best.pt
+  test_results: ./results/qwen_ground_cls_ablations/no_hard_negatives/{protocol}/seed{seed}_test.json

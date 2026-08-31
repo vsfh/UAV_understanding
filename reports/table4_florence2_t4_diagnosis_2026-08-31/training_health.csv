@@ -1,0 +1,6 @@
+order,check,value,meaning
+1,TensorBoard loss,1 finite / 20750 points,steps 2 through 20750 are NaN
+2,First finite loss,11.729 at step 1,failure starts after the first update
+3,Trained checkpoint tensors,664 / 665 contaminated,almost all model tensors contain NaN or Inf
+4,Trained floating values,99.956% non-finite,231443968 / 231546368 values are corrupted
+5,Base pretrained checkpoint,0 / 665 contaminated,corruption was introduced during this training run

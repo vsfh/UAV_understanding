@@ -18,11 +18,24 @@ classification:
   roi_output_size: [4, 4]
   hidden_dim: 768
   dropout: 0.1
+  components:
+    null_eventness: true
+    highres_roi: true
+    global_context: true
+    hard_negative_mining: true
+
+presence:
+  threshold: 0.5
+  focal_gamma: 2.0
+  positive_alpha: 0.5
+  hard_negative_fraction: 0.5
+  hard_negative_weight: 2.0
 
 initialization:
   grounding_checkpoint: ./outputs/qwen_ground_single_view_highres_heatmap/{protocol}/seed{seed}/best.pt
 
 box_conditioning:
+  enabled: true
   gt_only_epochs: 3
   transition_epochs: 3
 
@@ -34,6 +47,11 @@ data:
   root: ./um7
   ontology: ./configs/ontology.yaml
   bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  no_event:
+    root: ./um7/no_event
+    group_gap_seconds: 60
+    split_ratios: {train: 0.7, val: 0.1, test: 0.2}
+    seed: 43
   protocols: [forward_temporal, session_disjoint, unseen_site]
   max_test_samples: null
 
@@ -43,7 +61,8 @@ train:
   batch_size: 24
   gradient_accumulation: 2
   class_balance_power: 0.5
-  samples_per_epoch: null
+  negative_fraction: 0.1
+  samples_per_epoch: positive_records_preserved
   learning_rate: 1.0e-4
   vision_learning_rate: 1.0e-6
   weight_decay: 0.01
@@ -53,6 +72,7 @@ train:
   giou_weight: 2.0
   heatmap_weight: 1.0
   classification_weight: 1.0
+  presence_weight: 1.0
   label_smoothing: 0.0
   gradient_checkpointing: true
   num_workers: 12

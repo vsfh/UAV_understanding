@@ -1,0 +1,8 @@
+order,metric,reported_value,diagnostic_status
+1,P-AP,1.000,invalid because all scores tie and positives precede negatives
+2,N-FPR,1.000,degenerate because score=0 threshold=0 and comparison uses >=
+3,AP50,0.000,reliable because no prediction contains a box
+4,C-F1,0.000,reliable because no prediction contains a category
+5,G-mAP50,0.000,reliable because boxes and categories are both absent
+6,Valid rate,0.000,reliable because all 5338 outputs are non-JSON
+7,Median latency,332.8 ms,understates useful generation because output is one period

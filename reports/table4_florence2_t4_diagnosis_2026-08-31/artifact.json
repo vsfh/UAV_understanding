@@ -1,0 +1,336 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Florence-2 T4：训练数值崩溃诊断",
+    "description": "诊断 session_disjoint seed 43 的训练、输出有效性、指标可信度与重跑优先级。",
+    "generatedAt": "2026-08-31T13:32:45+08:00",
+    "charts": [
+      {
+        "id": "failure_chain",
+        "title": "训练到输出的失败率",
+        "subtitle": "三个阶段使用各自完整分母；均接近或达到 100%",
+        "showDescription": true,
+        "intent": "comparison",
+        "question": "数值崩溃是否贯穿 loss、checkpoint 和测试输出？",
+        "rationale": "三个阶段只有一个可比的失败比例，简单柱状图可直接展示故障贯穿整条链路。",
+        "type": "bar",
+        "dataset": "failure_chain",
+        "sourceId": "florence_diagnosis",
+        "source": {
+          "id": "failure_chain_query",
+          "label": "Florence-2 failure-chain summary",
+          "path": "reports/table4_florence2_t4_diagnosis_2026-08-31/failure_chain.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT stage, failure_rate, failed, total, denominator FROM read_csv_auto('reports/table4_florence2_t4_diagnosis_2026-08-31/failure_chain.csv')",
+            "description": "Reads the reviewed failure-rate summary derived from complete loss, checkpoint and test-output audits.",
+            "tables_used": ["reports/table4_florence2_t4_diagnosis_2026-08-31/failure_chain.csv"]
+          }
+        },
+        "valueFormat": "percent",
+        "layout": "full",
+        "encodings": {
+          "x": {"field": "stage", "type": "nominal", "label": "阶段"},
+          "y": {"field": "failure_rate", "type": "quantitative", "label": "失败率", "format": "percent"},
+          "tooltip": [
+            {"field": "failed", "type": "quantitative", "label": "失败数", "format": "number"},
+            {"field": "total", "type": "quantitative", "label": "总数", "format": "number"},
+            {"field": "denominator", "type": "nominal", "label": "分母"}
+          ]
+        },
+        "palette": {"kind": "categorical", "name": "blue-orange-pink"},
+        "legend": {"position": "none"},
+        "settings": {"showValues": true, "sort": "none"},
+        "surface": {"surface": "export", "viewMode": "both"}
+      }
+    ],
+    "tables": [
+      {
+        "id": "reported_metrics",
+        "title": "测试集报告指标",
+        "subtitle": "session_disjoint，4,778 个正样本与 560 个 no-event 样本",
+        "showDescription": true,
+        "dataset": "reported_metrics",
+        "sourceId": "florence_evaluation",
+        "source": {
+          "id": "reported_metrics_query",
+          "label": "Reviewed Florence-2 reported metrics",
+          "path": "reports/table4_florence2_t4_diagnosis_2026-08-31/reported_metrics.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT order, metric, reported_value, diagnostic_status FROM read_csv_auto('reports/table4_florence2_t4_diagnosis_2026-08-31/reported_metrics.csv') ORDER BY order",
+            "description": "Reads the reported test metrics with audit status assigned from the complete row-level diagnostic.",
+            "tables_used": ["reports/table4_florence2_t4_diagnosis_2026-08-31/reported_metrics.csv"]
+          }
+        },
+        "defaultSort": {"field": "order", "direction": "asc"},
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {"field": "order", "label": "#", "format": "number"},
+          {"field": "metric", "label": "指标", "type": "text"},
+          {"field": "reported_value", "label": "报告值", "type": "text"},
+          {"field": "diagnostic_status", "label": "诊断", "type": "text"}
+        ]
+      },
+      {
+        "id": "training_health",
+        "title": "训练与权重健康检查",
+        "subtitle": "TensorBoard 全量 scalar 与保存的 safetensors 逐 tensor 有限性检查",
+        "showDescription": true,
+        "dataset": "training_health",
+        "sourceId": "florence_training",
+        "source": {
+          "id": "training_health_query",
+          "label": "Reviewed Florence-2 training health checks",
+          "path": "reports/table4_florence2_t4_diagnosis_2026-08-31/training_health.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT order, check, value, meaning FROM read_csv_auto('reports/table4_florence2_t4_diagnosis_2026-08-31/training_health.csv') ORDER BY order",
+            "description": "Reads the complete loss and checkpoint finite-value audit summary.",
+            "tables_used": ["reports/table4_florence2_t4_diagnosis_2026-08-31/training_health.csv"]
+          }
+        },
+        "defaultSort": {"field": "order", "direction": "asc"},
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {"field": "order", "label": "#", "format": "number"},
+          {"field": "check", "label": "检查项", "type": "text"},
+          {"field": "value", "label": "结果", "type": "text"},
+          {"field": "meaning", "label": "含义", "type": "text"}
+        ]
+      },
+      {
+        "id": "output_health",
+        "title": "逐样本输出检查",
+        "subtitle": "完整扫描 5,338 条测试预测，不是抽样",
+        "showDescription": true,
+        "dataset": "output_health",
+        "sourceId": "florence_evaluation",
+        "source": {
+          "id": "output_health_query",
+          "label": "Reviewed Florence-2 output health checks",
+          "path": "reports/table4_florence2_t4_diagnosis_2026-08-31/output_health.csv",
+          "query": {
+            "engine": "DuckDB",
+            "language": "sql",
+            "sql": "SELECT order, check, value, meaning FROM read_csv_auto('reports/table4_florence2_t4_diagnosis_2026-08-31/output_health.csv') ORDER BY order",
+            "description": "Reads the complete 5338-row output audit summary.",
+            "tables_used": ["reports/table4_florence2_t4_diagnosis_2026-08-31/output_health.csv"]
+          }
+        },
+        "defaultSort": {"field": "order", "direction": "asc"},
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {"field": "order", "label": "#", "format": "number"},
+          {"field": "check", "label": "检查项", "type": "text"},
+          {"field": "value", "label": "结果", "type": "text"},
+          {"field": "meaning", "label": "含义", "type": "text"}
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "florence_evaluation",
+        "label": "Florence-2 T4 evaluation outputs and metric implementation",
+        "path": "results/table4/florence2_t4/session_disjoint/seed43_test.json",
+        "query": {
+          "engine": "Python",
+          "language": "python",
+          "description": "Read every stored test row, reproduced counts and latency quantiles, and inspected threshold/AP implementation without running the model.",
+          "executed_at": "2026-08-31T13:32:45+08:00",
+          "tables_used": [
+            "results/table4/florence2_t4/session_disjoint/seed43_test.json",
+            "outputs/table4/florence2_t4/session_disjoint/seed43/calibration.json",
+            "configs/yaml/table4_florence2_t4.yaml",
+            "src/clear_uav/table4.py"
+          ],
+          "filters": [
+            "experiment = table4_florence2_t4",
+            "protocol = session_disjoint",
+            "seed = 43",
+            "all 5,338 stored test rows"
+          ],
+          "metric_definitions": [
+            "Valid rate: fraction of generated strings accepted by parse_discovery as the exact required JSON schema.",
+            "P-AP: custom rank-based average precision over presence_score; equal scores retain input row order.",
+            "N-FPR: fraction of no-event rows whose presence_score is greater than or equal to the calibrated threshold.",
+            "AP50: presence/localization average precision requiring IoU at least 0.5.",
+            "G-mAP50: class-macro average precision requiring correct class and IoU at least 0.5."
+          ]
+        }
+      },
+      {
+        "id": "florence_training",
+        "label": "Florence-2 T4 TensorBoard and saved-weight finite-value audit",
+        "path": "outputs/table4/florence2_t4/session_disjoint/seed43",
+        "query": {
+          "engine": "Python",
+          "language": "python",
+          "description": "Loaded all train/loss scalar events and checked every floating tensor in the saved and base safetensors files with torch.isfinite.",
+          "executed_at": "2026-08-31T13:32:45+08:00",
+          "tables_used": [
+            "outputs/table4/florence2_t4/session_disjoint/seed43/tensorboard/events.out.tfevents.1788083949.gpu4090-02.2877434.0",
+            "outputs/table4/florence2_t4/session_disjoint/seed43/best/model.safetensors",
+            "hf_cache/florence-2-base-ft-transformers58/model.safetensors",
+            "src/clear_uav/table4.py"
+          ],
+          "filters": [
+            "all 20,750 train/loss scalar points",
+            "all 665 floating tensors in each saved model",
+            "finite means neither NaN nor positive/negative infinity"
+          ],
+          "metric_definitions": [
+            "Finite loss point: math.isfinite applied to the TensorBoard scalar value.",
+            "Contaminated tensor: a floating tensor containing at least one non-finite value.",
+            "Non-finite parameter share: non-finite floating values divided by all floating values in the saved checkpoint."
+          ]
+        }
+      },
+      {
+        "id": "florence_diagnosis",
+        "label": "Florence-2 T4 combined failure-chain audit",
+        "path": "reports/table4_florence2_t4_diagnosis_2026-08-31/failure_chain.csv",
+        "query": {
+          "engine": "DuckDB",
+          "language": "sql",
+          "sql": "SELECT stage, failure_rate, failed, total, denominator FROM read_csv_auto('reports/table4_florence2_t4_diagnosis_2026-08-31/failure_chain.csv')",
+          "description": "Reads three reviewed stage-specific failure rates derived from the complete TensorBoard, checkpoint and test-output audits.",
+          "executed_at": "2026-08-31T13:32:45+08:00",
+          "tables_used": [
+            "reports/table4_florence2_t4_diagnosis_2026-08-31/failure_chain.csv"
+          ],
+          "filters": ["all stored loss points, floating tensors and test rows"],
+          "metric_definitions": [
+            "Loss failure rate: NaN train/loss points divided by all logged train/loss points.",
+            "Checkpoint failure rate: non-finite floating parameter values divided by all floating parameter values.",
+            "Output failure rate: invalid generated outputs divided by all test outputs."
+          ]
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# Florence-2 T4：训练数值崩溃诊断"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "body": "## 技术摘要\n\n- **这次结果不能代表 Florence-2 的真实能力。** 训练第 1 个记录点 loss 为 11.729，从第 2 个点开始直到第 20,750 个点全部为 NaN。\n- **保存的 checkpoint 已基本完全损坏。** 665 个浮点 tensor 中 664 个含非有限值；2.315 亿个浮点参数值中 99.956% 为 NaN/Inf。原始预训练权重没有非有限值。\n- **测试输出完全坍缩。** 5,338 张图无一例外只生成 `.`，有效 JSON 率为 0，因而 AP50、C-F1 与 G-mAP50 全为 0。\n- **P-AP=1.0 是排序实现造成的假象。** 所有 presence score 都为 0，而结果文件先保存全部正样本、再保存负样本；稳定排序把正样本保留在前面，得到虚假的满分。"
+      },
+      {
+        "id": "reported_metrics_section",
+        "type": "markdown",
+        "sourceId": "florence_evaluation",
+        "body": "## 真正可信的结论是输出有效率为零\n\nAP50、C-F1 和 G-mAP50 的零分与逐样本结果一致：模型没有给出任何 bbox 或类别。N-FPR=1.0 则不能解释成模型在负样本上主动幻觉，因为无效输出的 presence score 被回退为 0，而校准阈值也退化成 0；`score >= threshold` 因而把全部负样本计作误报。"
+      },
+      {
+        "id": "failure_chain_context",
+        "type": "markdown",
+        "sourceId": "florence_diagnosis",
+        "body": "## 故障从训练阶段一直传递到全部测试输出\n\nLoss、checkpoint 参数值和测试输出使用不同分母，但失败率分别达到 99.995%、99.956% 和 100%。这条一致的证据链说明评测零分是训练数值崩溃的下游结果，而不是某个类别、bbox 阈值或 JSON 解析细节单独造成。"
+      },
+      {"id": "failure_chain_chart", "type": "chart", "chartId": "failure_chain"},
+      {"id": "reported_metrics_table", "type": "table", "tableId": "reported_metrics"},
+      {
+        "id": "training_failure_section",
+        "type": "markdown",
+        "sourceId": "florence_training",
+        "body": "## 数值崩溃发生在第一次参数更新之后\n\n训练日志只有 step 1 的 loss 有限，step 2 起全部为 NaN，整次运行仍继续了约 3.69 小时并保存损坏权重。代码将完整模型加载为 FP16，直接用 AdamW 更新所有参数，同时没有 GradScaler、BF16、梯度裁剪或非有限 loss 中止检查。这是当前最强、且与时间点一致的原因；它说明问题首先在训练数值稳定性，而不是 prompt 或 JSON parser。"
+      },
+      {"id": "training_health_table", "type": "table", "tableId": "training_health"},
+      {
+        "id": "output_failure_section",
+        "type": "markdown",
+        "sourceId": "florence_evaluation",
+        "body": "## 生成端没有出现可供二次解析的部分答案\n\n测试集中原始输出只有一个唯一值 `.`，正样本 4,778 条、负样本 560 条均完全相同。因此这不是严格 JSON parser 误杀了近似正确答案，也不是少数类别或某一数据切片失败，而是整个生成分布已经坍缩。"
+      },
+      {"id": "output_health_table", "type": "table", "tableId": "output_health"},
+      {
+        "id": "metric_artifact_section",
+        "type": "markdown",
+        "sourceId": "florence_evaluation",
+        "body": "## P-AP 和阈值需要增加退化保护\n\n当前自定义 AP 对同分样本使用 Python 稳定排序。因为测试读取顺序是正样本在前、追加的 no-event 在后，所有分数相同时仍得到 P-AP=1.0；同样，验证集所有分数为 0 时，阈值搜索只考虑候选 0，而 `>= 0` 使 N-FPR 变成 1.0。对于全同分或 valid rate 为 0 的运行，应将排名型指标标记为无效，并回退到预设阈值而不是选择退化候选。"
+      },
+      {
+        "id": "scope_section",
+        "type": "markdown",
+        "sourceId": "florence_evaluation",
+        "body": "## 评测范围与指标口径\n\n本次只有 session-disjoint、seed 43 一组结果。测试集共 5,338 张图，其中 4,778 张含 core18 商业事件、560 张为 ordinary no-event。模型要求生成 presence、bbox_1000、category 和 confidence 四字段 JSON；任何格式错误都会被记为 invalid，并回退到 presence score 0、空框和空类别。"
+      },
+      {
+        "id": "method_section",
+        "type": "markdown",
+        "sourceId": "florence_training",
+        "body": "## 模型与训练检查方法\n\n配置使用 Florence-2-base-ft，完整模型训练 10 epoch，batch size 4、gradient accumulation 2、learning rate 1e-5。诊断读取了全部 TensorBoard loss 点、完整测试 JSON、校准文件和当前指标实现，并逐 tensor 对训练后 checkpoint 与原始预训练 checkpoint 执行有限性检查；没有重新加载模型推理。"
+      },
+      {
+        "id": "limitations_section",
+        "type": "markdown",
+        "body": "## 限制与稳健性\n\n没有保存第一个 optimizer step 前后的梯度、optimizer state 或逐层激活，因此无法仅凭现有文件证明最先溢出的具体层。FP16 全参数 AdamW 是基于代码路径与崩溃时点的高可信诊断，但仍应通过一个 10–50 step 的有限性 smoke test 确认。当前延迟中位数 332.8 ms 也不能代表可用模型：输出只生成一个句点，正常 JSON 会需要更多 token。没有画性能图，因为所有 5,338 个输出完全相同，图形不会增加信息。"
+      },
+      {
+        "id": "recommendations_section",
+        "type": "markdown",
+        "body": "## 重跑前的改进顺序\n\n1. **先丢弃当前 checkpoint，不要据此比较模型。** 它的 99.956% 浮点值非有限，无法修复或继续训练。\n2. **把训练权重与 optimizer master weights 保持 FP32，前向优先用 BF16。** 如果只能 FP16，必须加入 GradScaler；同时增加 gradient clipping。\n3. **增加快速失败保护。** 每步检查 loss 和梯度是否有限，首次 NaN 就终止并保留触发 batch；先跑 50 step smoke test，再启动 10 epoch。\n4. **修正退化指标。** valid rate 为 0 或 score 全同值时，将 P-AP/校准结果标记为 invalid；阈值搜索没有有效候选时使用 fallback 0.5。\n5. **稳定后再检查 Florence 专用任务格式。** 先确认模型能过拟合一个很小的数据子集并生成合法 JSON，再判断是否需要专用 task token 或结构化解码。"
+      },
+      {
+        "id": "further_questions_section",
+        "type": "markdown",
+        "body": "## 下一轮需要回答的问题\n\n修正数值稳定性后，前 50 step 的 loss、梯度范数和参数有限率是否正常？小样本过拟合能否达到接近 100% valid JSON？只有这两项通过后，AP50/G-mAP50 和 latency 才值得与其他 Table 4 方法比较。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-31T13:32:45+08:00",
+    "status": "ready",
+    "datasets": {
+      "reported_metrics": [
+        {"order": 1, "metric": "P-AP", "reported_value": "1.000", "diagnostic_status": "无效：全同分且正样本排在负样本前"},
+        {"order": 2, "metric": "N-FPR", "reported_value": "1.000", "diagnostic_status": "退化：score=0、threshold=0、使用 >="},
+        {"order": 3, "metric": "AP50", "reported_value": "0.000", "diagnostic_status": "可信：没有任何预测框"},
+        {"order": 4, "metric": "C-F1", "reported_value": "0.000", "diagnostic_status": "可信：没有任何预测类别"},
+        {"order": 5, "metric": "G-mAP50", "reported_value": "0.000", "diagnostic_status": "可信：定位与分类输出均为空"},
+        {"order": 6, "metric": "Valid rate", "reported_value": "0.000", "diagnostic_status": "可信：5,338/5,338 均非 JSON"},
+        {"order": 7, "metric": "Median latency", "reported_value": "332.8 ms", "diagnostic_status": "低估正常生成：实际只输出一个句点"}
+      ],
+      "failure_chain": [
+        {"stage": "NaN loss", "failure_rate": 0.9999518072, "failed": 20749, "total": 20750, "denominator": "TensorBoard loss points"},
+        {"stage": "非有限权重值", "failure_rate": 0.9995577560, "failed": 231443968, "total": 231546368, "denominator": "checkpoint floating values"},
+        {"stage": "无效测试输出", "failure_rate": 1.0, "failed": 5338, "total": 5338, "denominator": "test rows"}
+      ],
+      "training_health": [
+        {"order": 1, "check": "TensorBoard loss", "value": "1 finite / 20,750 points", "meaning": "step 2 起连续 20,749 个 NaN"},
+        {"order": 2, "check": "首个有限 loss", "value": "11.729 at step 1", "meaning": "崩溃发生在第一次更新之后"},
+        {"order": 3, "check": "训练后 tensor", "value": "664 / 665 contaminated", "meaning": "几乎所有模型张量含 NaN/Inf"},
+        {"order": 4, "check": "训练后浮点值", "value": "99.956% non-finite", "meaning": "231,443,968 / 231,546,368 个值损坏"},
+        {"order": 5, "check": "原始预训练 checkpoint", "value": "0 / 665 contaminated", "meaning": "损坏由本次训练产生，不是下载文件问题"}
+      ],
+      "output_health": [
+        {"order": 1, "check": "测试记录", "value": "5,338", "meaning": "4,778 positive + 560 no-event"},
+        {"order": 2, "check": "唯一 raw output", "value": "`.`", "meaning": "全部 5,338 条完全相同"},
+        {"order": 3, "check": "合法 JSON", "value": "0 / 5,338", "meaning": "不是局部格式问题"},
+        {"order": 4, "check": "校准阈值", "value": "0.0", "meaning": "验证集也完全退化"},
+        {"order": 5, "check": "Latency P90", "value": "655.5 ms", "meaning": "另有最高 11.09 s 的异常长尾"}
+      ]
+    }
+  },
+  "sources": [
+    {"id": "florence_evaluation", "label": "Florence-2 T4 evaluation outputs and metric implementation", "path": "results/table4/florence2_t4/session_disjoint/seed43_test.json"},
+    {"id": "florence_training", "label": "Florence-2 T4 training and checkpoint finite-value audit", "path": "outputs/table4/florence2_t4/session_disjoint/seed43"},
+    {"id": "florence_diagnosis", "label": "Florence-2 T4 combined failure-chain audit", "path": "reports/table4_florence2_t4_diagnosis_2026-08-31/failure_chain.csv"}
+  ],
+  "package_info": {
+    "originUrl": "artifact://table4-florence2-t4-diagnosis-2026-08-31"
+  }
+}

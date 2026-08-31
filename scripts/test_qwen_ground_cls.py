@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import json
+import statistics
+import time
 
 import torch
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
-from clear_uav.experiment_config import load_yaml, project_path
+from clear_uav.experiment_config import project_path
 from clear_uav.qwen_ground_cls import (
     GroundClassificationCollator,
     GroundClassificationDataset,
     QwenGroundCLS,
     classification_metrics,
+    load_cls_config,
     load_class_labels,
+    read_no_event_images,
 )
 from clear_uav.qwen_ground_ms import (
     cxcywh_to_xyxy,
@@ -37,12 +42,81 @@ def move_inputs(batch: dict, device: torch.device) -> dict:
     }
 
 
+def average_precision(items: list[tuple[float, bool]], positives: int) -> float:
+    true_positives = 0
+    precision_sum = 0.0
+    for rank, (_, correct) in enumerate(
+        sorted(items, key=lambda item: item[0], reverse=True), 1
+    ):
+        if correct:
+            true_positives += 1
+            precision_sum += true_positives / rank
+    return precision_sum / positives
+
+
+def presence_metrics(
+    targets: torch.Tensor,
+    scores: torch.Tensor,
+    threshold: float,
+) -> dict[str, float]:
+    predictions = scores >= threshold
+    targets = targets.bool()
+    true_positive = int((predictions & targets).sum())
+    false_positive = int((predictions & ~targets).sum())
+    false_negative = int((~predictions & targets).sum())
+    true_negative = int((~predictions & ~targets).sum())
+    precision = true_positive / max(1, true_positive + false_positive)
+    recall = true_positive / max(1, true_positive + false_negative)
+    f1 = 2 * precision * recall / max(1e-12, precision + recall)
+    ap_items = list(zip(scores.tolist(), targets.tolist()))
+    return {
+        "accuracy": (true_positive + true_negative) / len(targets),
+        "precision": precision,
+        "recall": recall,
+        "f1": f1,
+        "p_ap": average_precision(ap_items, int(targets.sum())),
+        "n_fpr": false_positive / max(1, int((~targets).sum())),
+        "threshold": threshold,
+    }
+
+
+def grounded_map50(
+    presence_targets: torch.Tensor,
+    class_targets: torch.Tensor,
+    class_predictions: torch.Tensor,
+    joint_scores: torch.Tensor,
+    ious: torch.Tensor,
+    labels: list[str],
+) -> float:
+    values = []
+    for class_index in range(len(labels)):
+        positives = int(
+            (presence_targets & (class_targets == class_index)).sum()
+        )
+        if positives == 0:
+            continue
+        items = []
+        for sample_index in torch.where(class_predictions == class_index)[0]:
+            correct = bool(
+                presence_targets[sample_index]
+                and class_targets[sample_index] == class_index
+                and ious[sample_index] >= 0.5
+            )
+            items.append((float(joint_scores[sample_index]), correct))
+        values.append(average_precision(items, positives))
+    return statistics.fmean(values)
+
+
 def main() -> None:
-    config = load_yaml(CONFIG)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", default=CONFIG)
+    args = parser.parse_args()
+    config = load_cls_config(args.config)
     device = torch.device(config["runtime"]["device"])
     data_root = project_path(config["data"]["root"])
     labels = load_class_labels(project_path(config["data"]["ontology"]))
     targets = load_bbox_targets(project_path(config["data"]["bbox_annotations"]))
+    threshold = config["presence"]["threshold"]
 
     for protocol in config["data"]["protocols"]:
         for seed in config["train"]["seeds"]:
@@ -54,6 +128,7 @@ def main() -> None:
                 labels_csv=data_root / protocol / "test_labels_private.csv",
                 limit=config["data"].get("max_test_samples"),
             )
+            negative_images = read_no_event_images(config["data"], protocol, "test")
             vision, processor = load_qwen_vision(
                 project_path(config["model"]["path"]), device
             )
@@ -69,7 +144,11 @@ def main() -> None:
             )
             model.eval()
             dataset = GroundClassificationDataset(
-                samples, data_root, targets, labels
+                samples,
+                data_root,
+                targets,
+                labels,
+                negative_images,
             )
             batches = DataLoader(
                 dataset,
@@ -81,10 +160,16 @@ def main() -> None:
                 persistent_workers=config["test"]["num_workers"] > 0,
             )
 
-            all_predictions = []
-            all_targets = []
+            all_presence_scores = []
+            all_presence_targets = []
+            all_class_probabilities = []
             all_class_predictions = []
             all_class_targets = []
+            all_ious = []
+            positive_predictions = []
+            positive_targets = []
+            positive_class_predictions = []
+            positive_class_targets = []
             rows = []
             with torch.inference_mode():
                 for batch in tqdm(
@@ -92,76 +177,126 @@ def main() -> None:
                     desc=f"qwen_ground_cls {protocol} seed{seed}",
                     unit="batch",
                 ):
+                    torch.cuda.synchronize()
+                    started = time.perf_counter()
                     with torch.autocast("cuda", dtype=torch.bfloat16):
                         output = model(**move_inputs(batch, device))
+                    torch.cuda.synchronize()
+                    latency_ms = 1000 * (time.perf_counter() - started) / len(batch["record_uids"])
+
                     predictions = output["bbox_cxcywh"].float().cpu()
                     batch_targets = batch["targets"]
+                    presence_targets = batch["presence_targets"].bool()
+                    presence_scores = output["presence_logits"].float().sigmoid().cpu()
                     probabilities = output["class_logits"].float().softmax(-1).cpu()
                     class_predictions = probabilities.argmax(-1)
                     class_targets = batch["class_targets"]
                     predicted_xyxy = cxcywh_to_xyxy(predictions).clamp(0, 1)
                     target_xyxy = cxcywh_to_xyxy(batch_targets).clamp(0, 1)
-                    batch_ious, batch_errors = per_box_metrics(predictions, batch_targets)
+                    batch_ious = torch.zeros(len(predictions))
+                    batch_errors = torch.zeros(len(predictions))
+                    if presence_targets.any():
+                        positive_ious, positive_errors = per_box_metrics(
+                            predictions[presence_targets],
+                            batch_targets[presence_targets],
+                        )
+                        batch_ious[presence_targets] = positive_ious
+                        batch_errors[presence_targets] = positive_errors
+                        positive_predictions.append(predictions[presence_targets])
+                        positive_targets.append(batch_targets[presence_targets])
+                        positive_class_predictions.append(class_predictions[presence_targets])
+                        positive_class_targets.append(class_targets[presence_targets])
 
-                    all_predictions.append(predictions)
-                    all_targets.append(batch_targets)
+                    all_presence_scores.append(presence_scores)
+                    all_presence_targets.append(presence_targets)
+                    all_class_probabilities.append(probabilities.max(-1).values)
                     all_class_predictions.append(class_predictions)
                     all_class_targets.append(class_targets)
-                    for (
-                        uid,
-                        image_file,
-                        prediction,
-                        target,
-                        predicted_class,
-                        target_class,
-                        class_probability,
-                        sample_iou,
-                        sample_error,
-                    ) in zip(
-                        batch["record_uids"],
-                        batch["image_files"],
-                        predicted_xyxy,
-                        target_xyxy,
-                        class_predictions,
-                        class_targets,
-                        probabilities,
-                        batch_ious,
-                        batch_errors,
-                    ):
-                        rows.append(
-                            {
-                                "record_uid": uid,
-                                "image_file": image_file,
-                                "prediction_bbox_1000": (prediction * 1000).tolist(),
-                                "target_bbox_1000": (target * 1000).tolist(),
-                                "prediction_category": labels[int(predicted_class)],
-                                "target_category": labels[int(target_class)],
-                                "category_confidence": float(class_probability[predicted_class]),
-                                "iou": float(sample_iou),
-                                "normalized_center_error": float(sample_error),
-                            }
-                        )
+                    all_ious.append(batch_ious)
+                    for sample_index, uid in enumerate(batch["record_uids"]):
+                        is_positive = bool(presence_targets[sample_index])
+                        predicts_event = presence_scores[sample_index] >= threshold
+                        predicted_class = int(class_predictions[sample_index])
+                        row = {
+                            "record_uid": uid,
+                            "group_id": batch["group_ids"][sample_index],
+                            "image_file": batch["image_files"][sample_index],
+                            "target_presence": is_positive,
+                            "target_bbox_1000": (
+                                (target_xyxy[sample_index] * 1000).tolist()
+                                if is_positive else None
+                            ),
+                            "target_category": (
+                                labels[int(class_targets[sample_index])]
+                                if is_positive else None
+                            ),
+                            "prediction_presence": bool(predicts_event),
+                            "presence_score": float(presence_scores[sample_index]),
+                            "prediction_bbox_1000": (
+                                (predicted_xyxy[sample_index] * 1000).tolist()
+                                if predicts_event else None
+                            ),
+                            "prediction_category": (
+                                labels[predicted_class] if predicts_event else None
+                            ),
+                            "candidate_bbox_1000": (
+                                predicted_xyxy[sample_index] * 1000
+                            ).tolist(),
+                            "candidate_category": labels[predicted_class],
+                            "category_confidence": float(
+                                probabilities[sample_index, predicted_class]
+                            ),
+                            "iou": float(batch_ious[sample_index]) if is_positive else None,
+                            "normalized_center_error": (
+                                float(batch_errors[sample_index]) if is_positive else None
+                            ),
+                            "latency_ms": latency_ms,
+                        }
+                        rows.append(row)
 
-            box_predictions = torch.cat(all_predictions)
-            box_targets = torch.cat(all_targets)
+            presence_scores = torch.cat(all_presence_scores)
+            presence_targets = torch.cat(all_presence_targets)
+            class_probabilities = torch.cat(all_class_probabilities)
             class_predictions = torch.cat(all_class_predictions)
             class_targets = torch.cat(all_class_targets)
-            ious, _ = per_box_metrics(box_predictions, box_targets)
-            class_correct = class_predictions == class_targets
+            ious = torch.cat(all_ious)
+            box_predictions = torch.cat(positive_predictions)
+            box_targets = torch.cat(positive_targets)
+            positive_class_predictions = torch.cat(positive_class_predictions)
+            positive_class_targets = torch.cat(positive_class_targets)
+            positive_scores = presence_scores[presence_targets]
+            positive_ious = ious[presence_targets]
+            class_correct = positive_class_predictions == positive_class_targets
+            predicted_present = positive_scores >= threshold
+            joint_scores = presence_scores * class_probabilities
             metrics = {
-                "localization": localization_metrics(box_predictions, box_targets),
-                "classification": classification_metrics(
-                    class_targets, class_predictions, labels
+                "presence": presence_metrics(
+                    presence_targets, presence_scores, threshold
+                ),
+                "localization_positive_only": localization_metrics(
+                    box_predictions, box_targets
+                ),
+                "classification_positive_only": classification_metrics(
+                    positive_class_targets, positive_class_predictions, labels
+                ),
+                "g_map50": grounded_map50(
+                    presence_targets,
+                    class_targets,
+                    class_predictions,
+                    joint_scores,
+                    ious,
+                    labels,
                 ),
                 "grounded_accuracy_at_iou_0.25": float(
-                    (class_correct & (ious >= 0.25)).float().mean()
+                    (predicted_present & class_correct & (positive_ious >= 0.25)).float().mean()
                 ),
                 "grounded_accuracy_at_iou_0.50": float(
-                    (class_correct & (ious >= 0.50)).float().mean()
+                    (predicted_present & class_correct & (positive_ious >= 0.50)).float().mean()
                 ),
                 "grounded_accuracy_at_iou_0.75": float(
-                    (class_correct & (ious >= 0.75)).float().mean()
+                    (predicted_present & class_correct & (positive_ious >= 0.75)).float().mean()
                 ),
+                "median_latency_ms": statistics.median(row["latency_ms"] for row in rows),
             }
             result = {
                 "experiment": config["experiment"],
@@ -169,6 +304,9 @@ def main() -> None:
                 "seed": seed,
                 "checkpoint_epoch": checkpoint["epoch"],
                 "num_samples": len(dataset),
+                "num_positive": int(presence_targets.sum()),
+                "num_no_event": int((~presence_targets).sum()),
+                "components": config["classification"]["components"],
                 "labels": labels,
                 "metrics": metrics,
                 "rows": rows,

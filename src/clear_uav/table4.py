@@ -292,7 +292,7 @@ def training_data_state(config: dict, protocol: str) -> dict:
         (path.name, path.stat().st_size, group_id)
         for path, group_id in negatives
     ]
-    return {
+    state = {
         "version": 1,
         "positive_manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
         "negative_records": len(negatives),
@@ -301,6 +301,9 @@ def training_data_state(config: dict, protocol: str) -> dict:
         ).hexdigest(),
         "samples_per_epoch": config["train"].get("samples_per_epoch"),
     }
+    if "recipe_version" in config["train"]:
+        state["recipe_version"] = config["train"]["recipe_version"]
+    return state
 
 
 def training_data_is_current(output_dir: Path, config: dict, protocol: str) -> bool:
@@ -1212,12 +1215,12 @@ class FlorenceDiscoveryCollator:
         return dict(batch)
 
 
-def load_florence(path: Path, device):
+def load_florence(path: Path, device, training: bool = False):
     processor = AutoProcessor.from_pretrained(path, local_files_only=True)
     model = AutoModelForMultimodalLM.from_pretrained(
         path,
         local_files_only=True,
-        dtype=torch.float16,
+        dtype=torch.float32 if training else torch.bfloat16,
     ).to(device)
     return model, processor
 
@@ -1266,7 +1269,9 @@ def train_florence_discovery(config: dict) -> None:
             else:
                 seed_everything(seed)
                 train_samples = read_discovery_samples(config, protocol, "train")
-                model, processor = load_florence(project_path(config["model"]["path"]), device)
+                model, processor = load_florence(
+                    project_path(config["model"]["path"]), device, training=True
+                )
                 sampler = discovery_sampler(train_samples, train_config, seed)
                 train_batches = vlm_loader(
                     train_samples,
@@ -1287,28 +1292,77 @@ def train_florence_discovery(config: dict) -> None:
                     train_config["warmup_ratio"],
                 )
                 output_dir.mkdir(parents=True, exist_ok=True)
-                writer = SummaryWriter(output_dir / "tensorboard")
+                writer = SummaryWriter(
+                    output_dir
+                    / "tensorboard"
+                    / f"recipe_v{train_config['recipe_version']}"
+                )
                 global_step = 0
                 for epoch in range(1, train_config["epochs"] + 1):
                     model.train()
                     optimizer.zero_grad(set_to_none=True)
-                    for batch_index, batch in enumerate(
-                        tqdm(train_batches, desc=f"{config['experiment']} epoch {epoch}"), 1
-                    ):
+                    running_loss = 0.0
+                    gradient_norm = 0.0
+                    progress = tqdm(
+                        train_batches,
+                        desc=(
+                            f"{config['experiment']} {protocol} "
+                            f"epoch {epoch}/{train_config['epochs']}"
+                        ),
+                        unit="batch",
+                    )
+                    for batch_index, batch in enumerate(progress, 1):
                         batch = {key: value.to(device) for key, value in batch.items()}
-                        with torch.autocast("cuda", dtype=torch.float16):
+                        with torch.autocast("cuda", dtype=torch.bfloat16):
                             loss = model(**batch).loss
+                        loss_value = float(loss.detach())
+                        if not math.isfinite(loss_value):
+                            raise FloatingPointError(
+                                f"non-finite Florence loss at {protocol} epoch {epoch} "
+                                f"batch {batch_index}: {loss_value}"
+                            )
                         (loss / train_config["gradient_accumulation"]).backward()
+                        running_loss += loss_value
                         if (
                             batch_index % train_config["gradient_accumulation"] == 0
                             or batch_index == len(train_batches)
                         ):
+                            gradient_norm = float(
+                                nn.utils.clip_grad_norm_(
+                                    model.parameters(),
+                                    train_config["max_grad_norm"],
+                                    error_if_nonfinite=True,
+                                )
+                            )
                             optimizer.step()
                             scheduler.step()
                             optimizer.zero_grad(set_to_none=True)
                             global_step += 1
-                            writer.add_scalar("train/loss", loss.item(), global_step)
+                            writer.add_scalar("train/loss", loss_value, global_step)
+                            writer.add_scalar(
+                                "train/average_loss",
+                                running_loss / batch_index,
+                                global_step,
+                            )
+                            writer.add_scalar(
+                                "train/gradient_norm", gradient_norm, global_step
+                            )
+                            writer.add_scalar(
+                                "train/learning_rate",
+                                scheduler.get_last_lr()[0],
+                                global_step,
+                            )
+                        progress.set_postfix(
+                            loss=f"{loss_value:.4f}",
+                            avg=f"{running_loss / batch_index:.4f}",
+                            grad=f"{gradient_norm:.3f}",
+                            lr=f"{scheduler.get_last_lr()[0]:.2e}",
+                        )
                     writer.flush()
+                    print(
+                        f"{config['experiment']} {protocol} epoch {epoch}: "
+                        f"loss={running_loss / len(train_batches):.4f}"
+                    )
                 model.save_pretrained(model_dir)
                 processor.save_pretrained(model_dir)
                 save_training_data_state(output_dir, config, protocol)

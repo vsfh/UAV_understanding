@@ -1,25 +1,29 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import json
 import math
-from collections import Counter
 
 import torch
 from torch import nn
 from torch.nn import functional as F
 from torch.optim import AdamW
-from torch.utils.data import DataLoader, WeightedRandomSampler
+from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm.auto import tqdm
 
-from clear_uav.experiment_config import experiment_runs, load_yaml, project_path
+from clear_uav.experiment_config import experiment_runs, project_path
 from clear_uav.qwen_ground_cls import (
     GroundClassificationCollator,
     GroundClassificationDataset,
     QwenGroundCLS,
+    classification_sampler,
+    focal_presence_loss,
     gt_box_probability,
+    load_cls_config,
     load_class_labels,
+    read_no_event_images,
 )
 from clear_uav.qwen_ground_ms import (
     checkpoint_payload,
@@ -40,6 +44,7 @@ CONFIG = "configs/yaml/qwen_ground_cls.yaml"
 
 def make_loader(
     samples,
+    negative_images,
     data_root,
     targets,
     labels,
@@ -47,21 +52,14 @@ def make_loader(
     train_config,
     seed,
 ):
-    dataset = GroundClassificationDataset(samples, data_root, targets, labels)
-    class_counts = Counter(dataset.labels)
-    sample_weights = torch.tensor(
-        [
-            class_counts[label] ** (-train_config["class_balance_power"])
-            for label in dataset.labels
-        ],
-        dtype=torch.double,
+    dataset = GroundClassificationDataset(
+        samples,
+        data_root,
+        targets,
+        labels,
+        negative_images,
     )
-    sampler = WeightedRandomSampler(
-        sample_weights,
-        num_samples=train_config.get("samples_per_epoch") or len(dataset),
-        replacement=True,
-        generator=torch.Generator().manual_seed(seed),
-    )
+    sampler = classification_sampler(dataset, train_config, seed)
     return DataLoader(
         dataset,
         batch_size=train_config["batch_size"],
@@ -95,6 +93,7 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
     labels = load_class_labels(project_path(config["data"]["ontology"]))
     targets = load_bbox_targets(project_path(config["data"]["bbox_annotations"]))
     train_samples = read_ground_samples(data_root / protocol / "train.csv", data_root)
+    negative_images = read_no_event_images(config["data"], protocol, "train")
 
     vision, processor = load_qwen_vision(project_path(config["model"]["path"]), device)
     model = QwenGroundCLS(
@@ -116,6 +115,7 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
         model.vision_encoder.gradient_checkpointing_enable()
     train_batches = make_loader(
         train_samples,
+        negative_images,
         data_root,
         targets,
         labels,
@@ -162,8 +162,10 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
         f"{sum(parameter.numel() for parameter in structure_parameters):,}"
     )
     print(
-        f"training images: {len(train_batches.dataset):,}; "
+        f"training images: {len(train_samples):,} positive + "
+        f"{len(negative_images):,} no-event; "
         f"samples per epoch: {len(train_batches.sampler):,}; "
+        f"negative exposure: {train_config['negative_fraction']:.0%}; "
         f"class balance power: {train_config['class_balance_power']}"
     )
 
@@ -176,6 +178,8 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
         running_loss = 0.0
         running_classification_loss = 0.0
         running_accuracy = 0.0
+        running_presence_loss = 0.0
+        running_presence_accuracy = 0.0
         progress = tqdm(
             train_batches,
             desc=(
@@ -187,50 +191,80 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
         for batch_index, batch in enumerate(progress, 1):
             target = batch["targets"].to(device, non_blocking=True)
             class_target = batch["class_targets"].to(device, non_blocking=True)
+            presence_target = batch["presence_targets"].to(device, non_blocking=True)
+            positive_mask = presence_target.bool()
             with torch.autocast("cuda", dtype=torch.bfloat16):
                 output = model(
                     **move_inputs(batch, device),
                     gt_boxes=target,
+                    positive_mask=positive_mask,
                     gt_box_probability=scheduled_gt_probability,
                 )
                 prediction = output["bbox_cxcywh"]
-                bbox_loss, l1, giou = localization_loss(
-                    prediction.float(),
-                    target,
-                    train_config["l1_weight"],
-                    train_config["giou_weight"],
-                )
-                heatmap_losses = []
-                for logits, sample_target in zip(output["heatmap_logits"], target):
-                    height, width = logits.shape[-2:]
-                    heatmap_target = gaussian_heatmap(
-                        sample_target.unsqueeze(0), height, width
+                if positive_mask.any():
+                    bbox_loss, l1, giou = localization_loss(
+                        prediction[positive_mask].float(),
+                        target[positive_mask],
+                        train_config["l1_weight"],
+                        train_config["giou_weight"],
                     )
-                    heatmap_losses.append(
-                        -(
-                            heatmap_target.flatten(1)
-                            * logits.float().flatten(1).log_softmax(-1)
+                    heatmap_losses = []
+                    for sample_index in torch.where(positive_mask)[0].tolist():
+                        logits = output["heatmap_logits"][sample_index]
+                        sample_target = target[sample_index]
+                        height, width = logits.shape[-2:]
+                        heatmap_target = gaussian_heatmap(
+                            sample_target.unsqueeze(0), height, width
                         )
-                        .sum(-1)
-                        .mean()
+                        heatmap_losses.append(
+                            -(
+                                heatmap_target.flatten(1)
+                                * logits.float().flatten(1).log_softmax(-1)
+                            )
+                            .sum(-1)
+                            .mean()
+                        )
+                    heatmap_loss = torch.stack(heatmap_losses).mean()
+                    classification_loss = F.cross_entropy(
+                        output["class_logits"][positive_mask].float(),
+                        class_target[positive_mask],
+                        label_smoothing=train_config["label_smoothing"],
                     )
-                heatmap_loss = torch.stack(heatmap_losses).mean()
-                classification_loss = F.cross_entropy(
-                    output["class_logits"].float(),
-                    class_target,
-                    label_smoothing=train_config["label_smoothing"],
-                )
+                else:
+                    zero = prediction.sum() * 0
+                    bbox_loss = l1 = giou = heatmap_loss = classification_loss = zero
+                if config["classification"]["components"]["null_eventness"]:
+                    presence_loss = focal_presence_loss(
+                        output["presence_logits"].float(),
+                        presence_target,
+                        config["presence"],
+                        config["classification"]["components"]["hard_negative_mining"],
+                    )
+                else:
+                    presence_loss = output["presence_logits"].sum() * 0
                 loss = (
                     bbox_loss
                     + train_config["heatmap_weight"] * heatmap_loss
                     + train_config["classification_weight"] * classification_loss
+                    + train_config["presence_weight"] * presence_loss
                 )
 
             (loss / train_config["gradient_accumulation"]).backward()
-            accuracy = (output["class_logits"].argmax(-1) == class_target).float().mean()
+            if positive_mask.any():
+                accuracy = (
+                    output["class_logits"][positive_mask].argmax(-1)
+                    == class_target[positive_mask]
+                ).float().mean()
+            else:
+                accuracy = loss.new_zeros(())
+            presence_accuracy = (
+                (output["presence_logits"] >= 0) == positive_mask
+            ).float().mean()
             running_loss += loss.item()
             running_classification_loss += classification_loss.item()
             running_accuracy += accuracy.item()
+            running_presence_loss += presence_loss.item()
+            running_presence_accuracy += presence_accuracy.item()
             if (
                 batch_index % train_config["gradient_accumulation"] == 0
                 or batch_index == len(train_batches)
@@ -247,7 +281,14 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
                 writer.add_scalar(
                     "train/classification", classification_loss.item(), global_step
                 )
+                writer.add_scalar("train/presence", presence_loss.item(), global_step)
                 writer.add_scalar("train/classification_accuracy", accuracy.item(), global_step)
+                writer.add_scalar(
+                    "train/presence_accuracy", presence_accuracy.item(), global_step
+                )
+                writer.add_scalar(
+                    "train/highres_roi_gate", output["highres_gate"].item(), global_step
+                )
                 writer.add_scalar(
                     "train/scheduled_gt_box_probability",
                     scheduled_gt_probability,
@@ -268,6 +309,7 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
                 loss=f"{running_loss / batch_index:.4f}",
                 cls=f"{running_classification_loss / batch_index:.4f}",
                 acc=f"{running_accuracy / batch_index:.3f}",
+                presence=f"{running_presence_accuracy / batch_index:.3f}",
                 gt_box=f"{scheduled_gt_probability:.2f}",
             )
 
@@ -275,14 +317,17 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
             "train_loss": running_loss / len(train_batches),
             "classification_loss": running_classification_loss / len(train_batches),
             "classification_accuracy": running_accuracy / len(train_batches),
+            "presence_loss": running_presence_loss / len(train_batches),
+            "presence_accuracy": running_presence_accuracy / len(train_batches),
             "gt_box_probability": scheduled_gt_probability,
+            "highres_roi_gate": float(model.highres_gate.tanh().detach()),
         }
         for name, value in epoch_metrics.items():
             writer.add_scalar(f"epoch/{name}", value, epoch)
         writer.flush()
         print(f"{protocol} seed{seed} epoch {epoch}: {epoch_metrics}")
         payload = checkpoint_payload(model, epoch, epoch_metrics, config)
-        payload["format_version"] = 6
+        payload["format_version"] = 7
         payload["labels"] = labels
         save_checkpoint(payload, checkpoint_path)
 
@@ -295,7 +340,10 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
 
 
 def main() -> None:
-    config = load_yaml(CONFIG)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", default=CONFIG)
+    args = parser.parse_args()
+    config = load_cls_config(args.config)
     for protocol, seed in experiment_runs(config):
         train_run(config, protocol, seed)
 

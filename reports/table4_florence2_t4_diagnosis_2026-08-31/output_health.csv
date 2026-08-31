@@ -1,0 +1,6 @@
+order,check,value,meaning
+1,Test records,5338,4778 positive plus 560 no-event
+2,Only raw output,period,all 5338 rows are identical
+3,Valid JSON,0 / 5338,this is not a localized parser problem
+4,Calibration threshold,0.0,the validation predictions also degenerated
+5,Latency P90,655.5 ms,maximum latency is 11.09 seconds

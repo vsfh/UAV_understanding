@@ -33,6 +33,7 @@ generation:
   max_new_tokens: 128
 
 train:
+  recipe_version: 2
   seeds: [43]
   epochs: 10
   batch_size: 4
@@ -40,6 +41,7 @@ train:
   learning_rate: 0.00001
   weight_decay: 0.01
   warmup_ratio: 0.1
+  max_grad_norm: 1.0
   class_balance_power: 0.5
   samples_per_epoch: positive_records
   num_workers: 12

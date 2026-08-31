@@ -255,6 +255,10 @@ class QwenGroundMS(nn.Module):
         short_edge = max(1, round(self.pooled_long_edge * height / width))
         return short_edge, self.pooled_long_edge
 
+    def grounding_queries(self) -> torch.Tensor:
+        """Return the query bank decoded against the fused image tokens."""
+        return self.event_query
+
     def forward(
         self,
         pixel_values: torch.Tensor,
@@ -270,6 +274,7 @@ class QwenGroundMS(nn.Module):
         image_features = torch.split(vision_output, split_sizes)
 
         sequences, pooled_shapes = [], []
+        high_resolution_features = []
         heatmap_logits, heatmap_features = [], []
         for features, grid in zip(image_features, image_grid_thw.tolist()):
             time, source_height, source_width = grid
@@ -285,6 +290,7 @@ class QwenGroundMS(nn.Module):
                 + self.position_embedding(coordinates)
             ).view(source_height, source_width, -1)
             high_resolution_grid = embedded_spatial.permute(2, 0, 1).unsqueeze(0)
+            high_resolution_features.append(high_resolution_grid.squeeze(0))
             logits = self.heatmap_head(high_resolution_grid)
             probabilities = logits.flatten(1).softmax(-1)
             heatmap_logits.append(logits)
@@ -319,12 +325,13 @@ class QwenGroundMS(nn.Module):
             batch_size, -1
         )
 
-        query = self.event_query.unsqueeze(0).expand(batch_size, -1, -1)
-        event_feature = self.event_decoder(
+        query = self.grounding_queries().unsqueeze(0).expand(batch_size, -1, -1)
+        query_features = self.event_decoder(
             query,
             f_fused,
             memory_key_padding_mask=padding_mask,
-        )[:, 0]
+        )
+        event_feature = query_features[:, 0]
         heatmap_feature = torch.cat(heatmap_features)
         center = self.center_head(heatmap_feature)
         size = self.size_head(event_feature)
@@ -333,7 +340,9 @@ class QwenGroundMS(nn.Module):
             "bbox_cxcywh": bbox_cxcywh,
             "heatmap_logits": heatmap_logits,
             "event_feature": event_feature,
+            "query_features": query_features,
             "heatmap_feature": heatmap_feature,
+            "high_resolution_features": high_resolution_features,
             "f_fused": f_fused,
             "padding_mask": padding_mask,
             "global_token_indices": global_token_indices,
