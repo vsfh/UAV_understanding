@@ -642,6 +642,28 @@ def configure_florence_classification_generation(model, tokenizer) -> None:
     generation.early_stopping = False
 
 
+def florence_label_constraint(tokenizer, labels):
+    sequences = [
+        tokenizer(label, add_special_tokens=False)["input_ids"]
+        + [tokenizer.eos_token_id]
+        for label in labels
+    ]
+    decoder_start = tokenizer.eos_token_id
+
+    def allowed_tokens(_batch_id, input_ids):
+        prefix = input_ids.tolist()
+        if prefix and prefix[0] == decoder_start:
+            prefix = prefix[1:]
+        allowed = {
+            sequence[len(prefix)]
+            for sequence in sequences
+            if len(sequence) > len(prefix) and sequence[: len(prefix)] == prefix
+        }
+        return sorted(allowed) if allowed else [tokenizer.eos_token_id]
+
+    return allowed_tokens
+
+
 def load_florence(path: Path, device, dtype=torch.float32):
     processor = AutoProcessor.from_pretrained(path, local_files_only=True)
     model = AutoModelForMultimodalLM.from_pretrained(
@@ -767,6 +789,11 @@ def test_florence(config: dict) -> None:
             )
             model.eval()
             collator = FlorenceCollator(processor, labels, root, boxes, config["prompt"], False)
+            label_constraint = (
+                florence_label_constraint(processor.tokenizer, labels)
+                if config["test"].get("constrained_decoding", False)
+                else None
+            )
             batches = vlm_loader(
                 samples,
                 collator,
@@ -786,6 +813,7 @@ def test_florence(config: dict) -> None:
                             no_repeat_ngram_size=0,
                             forced_bos_token_id=None,
                             forced_eos_token_id=None,
+                            prefix_allowed_tokens_fn=label_constraint,
                         )
                     for text in processor.batch_decode(generated, skip_special_tokens=True):
                         raw_outputs.append(text)

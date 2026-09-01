@@ -41,6 +41,7 @@ test:
   batch_size: 4
   num_workers: 12
   max_new_tokens: 32
+  constrained_decoding: true
 
 output:
   root: ./outputs/table3/florence2_gt_crop/{protocol}/seed{seed}
