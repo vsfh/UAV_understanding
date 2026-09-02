@@ -25,10 +25,8 @@ model:
 
 prompt:
   user: >-
-    Return only no_event, or one canonical category immediately followed by
-    four native location tokens <loc_x1><loc_y1><loc_x2><loc_y2>. Location
-    tokens range from <loc_0> to <loc_999> on the full image. Categories:
-    {categories}
+    Output only no_event or category<loc_x1><loc_y1><loc_x2><loc_y2>.
+    Use native <loc_0>-<loc_999> full-image coordinates. Categories: {categories}
   open_vocab_template: "{label}: {definition}"
 
 generation:
@@ -38,7 +36,7 @@ generation:
   constrained_grammar: true
 
 train:
-  recipe_version: 3
+  recipe_version: 4
   seeds: [43]
   epochs: 10
   batch_size: 4
