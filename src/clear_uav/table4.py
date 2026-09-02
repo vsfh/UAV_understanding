@@ -32,6 +32,11 @@ from transformers import (
 )
 
 from clear_uav.experiment_config import load_yaml, project_path
+from clear_uav.generation_constraints import (
+    grounding_prefix_allowed_tokens,
+    label_prefix_allowed_tokens,
+    location_token_strings,
+)
 from clear_uav.modeling import LORA_PATTERNS, assistant_only_labels, load_qwen
 from clear_uav.table3 import (
     EncoderClassifier,
@@ -904,51 +909,71 @@ def category_block(config: dict) -> str:
     return "\n".join(f"- {label}: {definitions[label]}" for label in labels)
 
 
-def discovery_target(sample: DiscoverySample) -> str:
+def add_qwen_location_tokens(model, processor, count: int = 1000) -> list[int]:
+    tokens = location_token_strings(count)
+    processor.tokenizer.add_tokens(tokens, special_tokens=True)
+    model.resize_token_embeddings(len(processor.tokenizer), mean_resizing=False)
+    return processor.tokenizer.convert_tokens_to_ids(tokens)
+
+
+def native_location_token_ids(tokenizer, count: int = 1000) -> list[int]:
+    tokens = location_token_strings(count)
+    ids = tokenizer.convert_tokens_to_ids(tokens)
+    if len(set(ids)) != count or tokenizer.unk_token_id in ids:
+        raise ValueError("tokenizer does not provide 1000 native <loc_*> tokens")
+    return ids
+
+
+def quantized_location_tokens(bbox_1000, count: int = 1000) -> list[str]:
+    return [
+        f"<loc_{max(0, min(count - 1, round(value * (count - 1) / 1000)))}>"
+        for value in bbox_1000
+    ]
+
+
+def grounding_target(sample: DiscoverySample, count: int = 1000) -> str:
     if not sample.presence:
-        value = {
-            "presence": False,
-            "bbox_1000": None,
-            "category": None,
-            "confidence": 1.0,
-        }
-    else:
-        value = {
-            "presence": True,
-            "bbox_1000": [round(number, 2) for number in sample.bbox_1000],
-            "category": sample.label,
-            "confidence": 1.0,
-        }
-    return json.dumps(value, separators=(",", ":"))
+        return "no_event"
+    return sample.label + "".join(quantized_location_tokens(sample.bbox_1000, count))
 
 
-def parse_discovery(text: str, labels: set[str]) -> dict:
-    value = json.loads(text)
-    if set(value) != {"presence", "bbox_1000", "category", "confidence"}:
-        raise ValueError("invalid keys")
-    if type(value["presence"]) is not bool:
-        raise ValueError("presence must be boolean")
-    confidence = float(value["confidence"])
-    if not 0 <= confidence <= 1:
-        raise ValueError("confidence outside [0,1]")
-    if not value["presence"]:
-        if value["bbox_1000"] is not None or value["category"] is not None:
-            raise ValueError("negative output must use null bbox and category")
-        return {
-            "presence_score": 1 - confidence,
-            "bbox_1000": None,
-            "category": None,
-        }
-    bbox = [float(number) for number in value["bbox_1000"]]
-    if len(bbox) != 4 or not all(0 <= number <= 1000 for number in bbox):
-        raise ValueError("invalid bbox")
-    if bbox[0] >= bbox[2] or bbox[1] >= bbox[3] or value["category"] not in labels:
-        raise ValueError("invalid positive output")
-    return {
-        "presence_score": confidence,
-        "bbox_1000": bbox,
-        "category": value["category"],
+def parse_grounding_tokens(
+    token_ids,
+    tokenizer,
+    labels,
+    location_token_ids,
+    negative_label: str = "no_event",
+):
+    ignored = {tokenizer.pad_token_id, tokenizer.eos_token_id}
+    ids = [int(token) for token in token_ids if int(token) not in ignored]
+    negative = tokenizer(negative_label, add_special_tokens=False)["input_ids"]
+    if ids == negative:
+        return {"presence_score": 0.0, "bbox_1000": None, "category": None}
+
+    loc_to_index = {token: index for index, token in enumerate(location_token_ids)}
+    for label in labels:
+        prefix = tokenizer(label, add_special_tokens=False)["input_ids"]
+        coordinates = ids[len(prefix) :]
+        if ids[: len(prefix)] != prefix or len(coordinates) != 4:
+            continue
+        if not all(token in loc_to_index for token in coordinates):
+            continue
+        bbox = [1000 * loc_to_index[token] / (len(location_token_ids) - 1) for token in coordinates]
+        if bbox[0] >= bbox[2] or bbox[1] >= bbox[3]:
+            raise ValueError("invalid generated box ordering")
+        return {"presence_score": 1.0, "bbox_1000": bbox, "category": label}
+    raise ValueError("output does not match grounding token grammar")
+
+
+def event_probability(first_scores, tokenizer, labels, negative_label="no_event") -> float:
+    probabilities = first_scores.float().softmax(dim=-1)
+    event_tokens = {
+        tokenizer(label, add_special_tokens=False)["input_ids"][0] for label in labels
     }
+    negative_token = tokenizer(negative_label, add_special_tokens=False)["input_ids"][0]
+    event_score = probabilities[list(event_tokens)].sum()
+    negative_score = probabilities[negative_token]
+    return float(event_score / (event_score + negative_score).clamp_min(1e-12))
 
 
 class VlmDataset(Dataset):
@@ -967,6 +992,7 @@ class QwenDiscoveryCollator:
         self.processor = processor
         self.config = config
         self.training = training
+        self.location_count = config["generation"]["location_tokens"]
         self.prompt = config["prompt"]["user"].replace("{categories}", category_block(config))
 
     def messages(self, sample, answer=None, image=None, prompt=None):
@@ -991,7 +1017,10 @@ class QwenDiscoveryCollator:
 
     def __call__(self, samples):
         conversations = [
-            self.messages(sample, discovery_target(sample) if self.training else None)
+            self.messages(
+                sample,
+                grounding_target(sample, self.location_count) if self.training else None,
+            )
             for sample in samples
         ]
         size = {
@@ -1030,6 +1059,9 @@ def vlm_loader(samples, collator, batch_size, workers, sampler=None):
 
 def load_qwen_adapter(config, protocol, seed, device):
     model, processor = load_qwen(project_path(config["model"]["path"]))
+    add_qwen_location_tokens(
+        model, processor, config["generation"]["location_tokens"]
+    )
     adapter = project_path(config["output"]["adapter"], protocol=protocol, seed=seed)
     model = PeftModel.from_pretrained(model, adapter, local_files_only=True).to(device).eval()
     return model, processor
@@ -1038,27 +1070,51 @@ def load_qwen_adapter(config, protocol, seed, device):
 @torch.inference_mode()
 def predict_qwen_discovery(model, processor, samples, config, device, description):
     collator = QwenDiscoveryCollator(processor, config, False)
-    labels = set(labels_from_config(config))
+    labels = labels_from_config(config)
+    location_ids = processor.tokenizer.convert_tokens_to_ids(
+        location_token_strings(config["generation"]["location_tokens"])
+    )
     predictions = []
     for sample in tqdm(samples, desc=description, unit="image"):
         synchronize(device)
         started = time.perf_counter()
         batch = collator([sample])
         batch = {key: value.to(device) for key, value in batch.items()}
+        input_length = batch["input_ids"].shape[1]
+        constraint = grounding_prefix_allowed_tokens(
+            processor.tokenizer,
+            labels,
+            location_token_ids=location_ids,
+            prompt_length=input_length,
+        )
         generated = model.generate(
             **batch,
             do_sample=False,
             max_new_tokens=config["generation"]["max_new_tokens"],
+            prefix_allowed_tokens_fn=(
+                constraint
+                if config["generation"].get("constrained_grammar", True)
+                else None
+            ),
+            return_dict_in_generate=True,
+            output_scores=True,
         )
         synchronize(device)
         latency = (time.perf_counter() - started) * 1000
-        raw = processor.decode(
-            generated[0, batch["input_ids"].shape[1] :], skip_special_tokens=True
-        ).strip()
+        output_ids = generated.sequences[0, input_length:]
+        raw = processor.decode(output_ids, skip_special_tokens=False).strip()
         try:
-            parsed = parse_discovery(raw, labels)
+            parsed = parse_grounding_tokens(
+                output_ids,
+                processor.tokenizer,
+                labels,
+                location_ids,
+            )
+            parsed["presence_score"] = event_probability(
+                generated.scores[0][0], processor.tokenizer, labels
+            )
             predictions.append(parsed | {"valid": True, "latency_ms": latency, "raw_output": raw})
-        except (json.JSONDecodeError, KeyError, TypeError, ValueError):
+        except (KeyError, TypeError, ValueError):
             predictions.append(empty_prediction(latency, raw, False))
     return predictions
 
@@ -1082,6 +1138,11 @@ def train_qwen_discovery(config: dict) -> None:
                 seed_everything(seed)
                 train_samples = read_discovery_samples(config, protocol, "train")
                 model, processor = load_qwen(project_path(config["model"]["path"]))
+                location_ids = add_qwen_location_tokens(
+                    model,
+                    processor,
+                    config["generation"]["location_tokens"],
+                )
                 model.config.use_cache = False
                 model.enable_input_require_grads()
                 model = get_peft_model(
@@ -1093,6 +1154,10 @@ def train_qwen_discovery(config: dict) -> None:
                         target_modules=LORA_PATTERNS[train_config["lora_scope"]],
                         bias="none",
                         task_type="CAUSAL_LM",
+                        trainable_token_indices={
+                            "model.language_model.embed_tokens": location_ids,
+                            "lm_head": location_ids,
+                        },
                     ),
                 ).to(device)
                 model.gradient_checkpointing_enable()
@@ -1121,12 +1186,18 @@ def train_qwen_discovery(config: dict) -> None:
                 for epoch in range(1, train_config["epochs"] + 1):
                     model.train()
                     optimizer.zero_grad(set_to_none=True)
+                    running_loss = 0.0
+                    progress = tqdm(
+                        train_batches,
+                        desc=f"{config['experiment']} epoch {epoch}",
+                    )
                     for batch_index, batch in enumerate(
-                        tqdm(train_batches, desc=f"{config['experiment']} epoch {epoch}"), 1
+                        progress, 1
                     ):
                         batch = {key: value.to(device) for key, value in batch.items()}
                         with torch.autocast("cuda", dtype=torch.bfloat16):
                             loss = model(**batch).loss
+                        running_loss += float(loss.detach())
                         (loss / train_config["gradient_accumulation"]).backward()
                         if (
                             batch_index % train_config["gradient_accumulation"] == 0
@@ -1137,6 +1208,10 @@ def train_qwen_discovery(config: dict) -> None:
                             optimizer.zero_grad(set_to_none=True)
                             global_step += 1
                             writer.add_scalar("train/loss", loss.item(), global_step)
+                        progress.set_postfix(
+                            loss=f"{float(loss.detach()):.4f}",
+                            avg=f"{running_loss / batch_index:.4f}",
+                        )
                     writer.flush()
                 model.save_pretrained(adapter_dir)
                 processor.save_pretrained(adapter_dir)
@@ -1183,6 +1258,7 @@ class FlorenceDiscoveryCollator:
     def __init__(self, processor, config, training):
         self.processor = processor
         self.training = training
+        self.location_count = config["generation"]["location_tokens"]
         labels, definitions = definitions_from_config(config)
         template = config["prompt"]["open_vocab_template"]
         categories = "; ".join(
@@ -1205,13 +1281,21 @@ class FlorenceDiscoveryCollator:
                 f"but the model limit is {self.processor.tokenizer.model_max_length}"
             )
         if self.training:
-            targets = self.processor.tokenizer(
-                [discovery_target(sample) for sample in samples],
-                padding=True,
-                return_tensors="pt",
-            )["input_ids"]
-            targets[targets == self.processor.tokenizer.pad_token_id] = -100
-            batch["labels"] = targets
+            tokenizer = self.processor.tokenizer
+            targets = [
+                torch.tensor(
+                    tokenizer(
+                        grounding_target(sample, self.location_count),
+                        add_special_tokens=False,
+                    )["input_ids"]
+                    + [tokenizer.eos_token_id],
+                    dtype=torch.long,
+                )
+                for sample in samples
+            ]
+            batch["labels"] = nn.utils.rnn.pad_sequence(
+                targets, batch_first=True, padding_value=-100
+            )
         return dict(batch)
 
 
@@ -1222,31 +1306,59 @@ def load_florence(path: Path, device, training: bool = False):
         local_files_only=True,
         dtype=torch.float32 if training else torch.bfloat16,
     ).to(device)
+    model.generation_config.forced_bos_token_id = None
+    model.generation_config.forced_eos_token_id = None
+    model.generation_config.num_beams = 1
     return model, processor
 
 
 @torch.inference_mode()
 def predict_florence(model, processor, samples, config, device, description):
     collator = FlorenceDiscoveryCollator(processor, config, False)
-    labels = set(labels_from_config(config))
+    labels = labels_from_config(config)
+    location_ids = native_location_token_ids(
+        processor.tokenizer, config["generation"]["location_tokens"]
+    )
     predictions = []
     for sample in tqdm(samples, desc=description, unit="image"):
         synchronize(device)
         started = time.perf_counter()
         batch = collator([sample])
         batch = {key: value.to(device) for key, value in batch.items()}
+        constraint = grounding_prefix_allowed_tokens(
+            processor.tokenizer,
+            labels,
+            location_token_ids=location_ids,
+            decoder_start_token_id=model.config.text_config.decoder_start_token_id,
+        )
         generated = model.generate(
             **batch,
             do_sample=False,
             max_new_tokens=config["generation"]["max_new_tokens"],
+            prefix_allowed_tokens_fn=(
+                constraint
+                if config["generation"].get("constrained_grammar", True)
+                else None
+            ),
+            return_dict_in_generate=True,
+            output_scores=True,
         )
         synchronize(device)
         latency = (time.perf_counter() - started) * 1000
-        raw = processor.batch_decode(generated, skip_special_tokens=True)[0].strip()
+        output_ids = generated.sequences[0]
+        raw = processor.decode(output_ids, skip_special_tokens=False).strip()
         try:
-            parsed = parse_discovery(raw, labels)
+            parsed = parse_grounding_tokens(
+                output_ids,
+                processor.tokenizer,
+                labels,
+                location_ids,
+            )
+            parsed["presence_score"] = event_probability(
+                generated.scores[0][0], processor.tokenizer, labels
+            )
             predictions.append(parsed | {"valid": True, "latency_ms": latency, "raw_output": raw})
-        except (json.JSONDecodeError, KeyError, TypeError, ValueError):
+        except (KeyError, TypeError, ValueError):
             predictions.append(empty_prediction(latency, raw, False))
     return predictions
 
@@ -1785,6 +1897,17 @@ def classify_qwen_crops(model, processor, samples, localizations, config, device
             **inputs,
             do_sample=False,
             max_new_tokens=config["classifier_generation"]["max_new_tokens"],
+            prefix_allowed_tokens_fn=(
+                label_prefix_allowed_tokens(
+                    processor.tokenizer,
+                    labels,
+                    prompt_length=inputs["input_ids"].shape[1],
+                )
+                if config["classifier_generation"].get(
+                    "constrained_decoding", False
+                )
+                else None
+            ),
         )
         synchronize(device)
         latency = localization["latency_ms"] + (time.perf_counter() - started) * 1000
@@ -1934,20 +2057,42 @@ def qwen_discovery_call(model, processor, image, config, device):
             }
         },
     ).to(device)
+    input_length = inputs["input_ids"].shape[1]
+    labels = labels_from_config(config)
+    location_ids = processor.tokenizer.convert_tokens_to_ids(
+        location_token_strings(config["generation"]["location_tokens"])
+    )
+    constraint = grounding_prefix_allowed_tokens(
+        processor.tokenizer,
+        labels,
+        location_token_ids=location_ids,
+        prompt_length=input_length,
+    )
     generated = model.generate(
         **inputs,
         do_sample=False,
         max_new_tokens=config["generation"]["max_new_tokens"],
+        prefix_allowed_tokens_fn=(
+            constraint
+            if config["generation"].get("constrained_grammar", True)
+            else None
+        ),
+        return_dict_in_generate=True,
+        output_scores=True,
     )
     synchronize(device)
     latency = (time.perf_counter() - started) * 1000
-    raw = processor.decode(
-        generated[0, inputs["input_ids"].shape[1] :], skip_special_tokens=True
-    ).strip()
+    output_ids = generated.sequences[0, input_length:]
+    raw = processor.decode(output_ids, skip_special_tokens=False).strip()
     try:
-        parsed = parse_discovery(raw, set(labels_from_config(config)))
+        parsed = parse_grounding_tokens(
+            output_ids, processor.tokenizer, labels, location_ids
+        )
+        parsed["presence_score"] = event_probability(
+            generated.scores[0][0], processor.tokenizer, labels
+        )
         return parsed | {"valid": True, "latency_ms": latency, "raw_output": raw}
-    except (json.JSONDecodeError, KeyError, TypeError, ValueError):
+    except (KeyError, TypeError, ValueError):
         return empty_prediction(latency, raw, False)
 
 

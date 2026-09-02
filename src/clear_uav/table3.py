@@ -12,6 +12,7 @@ from huggingface_hub import snapshot_download
 from peft import LoraConfig, PeftModel, get_peft_model
 from PIL import Image, ImageDraw
 from torch import nn
+from torch.nn import functional as F
 from torch.optim import AdamW
 from torch.utils.data import DataLoader, Dataset, WeightedRandomSampler
 from torch.utils.tensorboard import SummaryWriter
@@ -24,6 +25,7 @@ from transformers import (
 
 from clear_uav.data import read_private_test_samples, read_samples
 from clear_uav.experiment_config import experiment_runs, project_path
+from clear_uav.generation_constraints import label_prefix_allowed_tokens
 from clear_uav.modeling import LORA_PATTERNS, assistant_only_labels, load_qwen
 from clear_uav.ontology import load_label_subset, load_ontology
 
@@ -575,8 +577,18 @@ def test_qwen(config: dict) -> None:
             with torch.inference_mode():
                 for batch in tqdm(batches, desc=f"{config['experiment']} {protocol}"):
                     batch = {key: value.to(device) for key, value in batch.items()}
-                    generated = model.generate(**batch, do_sample=False, max_new_tokens=config["test"]["max_new_tokens"])
                     input_length = batch["input_ids"].shape[1]
+                    label_constraint = label_prefix_allowed_tokens(
+                        processor.tokenizer,
+                        labels,
+                        prompt_length=input_length,
+                    )
+                    generated = model.generate(
+                        **batch,
+                        do_sample=False,
+                        max_new_tokens=config["test"]["max_new_tokens"],
+                        prefix_allowed_tokens_fn=label_constraint,
+                    )
                     texts = processor.batch_decode(generated[:, input_length:], skip_special_tokens=True)
                     for text in texts:
                         raw_outputs.append(text)
@@ -602,6 +614,7 @@ class FlorenceCollator:
         self.boxes = boxes
         self.training = training
         self.prompt = prompt.format(categories=", ".join(labels))
+        self.label_to_index = {label: index for index, label in enumerate(labels)}
 
     def __call__(self, samples):
         images = [render_view(sample, self.data_root, self.boxes, "gt_crop", 0.0) for sample in samples]
@@ -613,20 +626,29 @@ class FlorenceCollator:
             do_resize=True,
             size={"height": 768, "width": 768},
         )
-        if self.training:
-            tokenizer = self.processor.tokenizer
-            targets = [
-                torch.tensor(
-                    tokenizer(sample.label, add_special_tokens=False)["input_ids"]
-                    + [tokenizer.eos_token_id],
-                    dtype=torch.long,
-                )
-                for sample in samples
-            ]
-            batch["labels"] = nn.utils.rnn.pad_sequence(
-                targets, batch_first=True, padding_value=-100
-            )
+        batch["class_labels"] = torch.tensor(
+            [self.label_to_index[sample.label] for sample in samples],
+            dtype=torch.long,
+        )
         return dict(batch)
+
+
+class FlorenceClassificationHead(nn.Module):
+    def __init__(self, hidden_dim: int, num_classes: int, dropout: float) -> None:
+        super().__init__()
+        self.network = nn.Sequential(
+            nn.LayerNorm(hidden_dim),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, num_classes),
+        )
+
+    def forward(self, features):
+        return self.network(features.float())
+
+
+def florence_classification_logits(model, head, pixel_values):
+    features = model.get_image_features(pixel_values=pixel_values).pooler_output
+    return head(features.mean(dim=1))
 
 
 def configure_florence_classification_generation(model, tokenizer) -> None:
@@ -640,28 +662,6 @@ def configure_florence_classification_generation(model, tokenizer) -> None:
     generation.num_beams = 1
     generation.no_repeat_ngram_size = 0
     generation.early_stopping = False
-
-
-def florence_label_constraint(tokenizer, labels):
-    sequences = [
-        tokenizer(label, add_special_tokens=False)["input_ids"]
-        + [tokenizer.eos_token_id]
-        for label in labels
-    ]
-    decoder_start = tokenizer.eos_token_id
-
-    def allowed_tokens(_batch_id, input_ids):
-        prefix = input_ids.tolist()
-        if prefix and prefix[0] == decoder_start:
-            prefix = prefix[1:]
-        allowed = {
-            sequence[len(prefix)]
-            for sequence in sequences
-            if len(sequence) > len(prefix) and sequence[: len(prefix)] == prefix
-        }
-        return sorted(allowed) if allowed else [tokenizer.eos_token_id]
-
-    return allowed_tokens
 
 
 def load_florence(path: Path, device, dtype=torch.float32):
@@ -693,16 +693,34 @@ def train_florence(config: dict) -> None:
         if (
             config["output"].get("skip_existing")
             and (best_dir / "config.json").exists()
+            and (best_dir / "classifier.pt").exists()
             and florence_recipe_is_current(output_dir, train_config["recipe_version"])
         ):
             print(f"[skip] {best_dir}"); continue
         seed_everything(seed)
         train_samples = read_samples(root / protocol / "train.csv", root, include_labels=label_set)
         model, processor = load_florence(project_path(config["model"]["path"]), device)
+        model.requires_grad_(False)
+        model.model.vision_tower.requires_grad_(True)
+        model.model.multi_modal_projector.requires_grad_(True)
+        head = FlorenceClassificationHead(
+            model.config.text_config.hidden_size,
+            len(labels),
+            train_config["classifier_dropout"],
+        ).to(device)
         train_collator = FlorenceCollator(processor, labels, root, boxes, config["prompt"], True)
         sampler = class_sampler([s.label for s in train_samples], train_config["class_balance_power"], seed)
         train_batches = vlm_loader(train_samples, train_collator, train_config["batch_size"], train_config["num_workers"], sampler)
-        optimizer = AdamW(model.parameters(), lr=train_config["learning_rate"], weight_decay=train_config["weight_decay"])
+        optimizer = AdamW(
+            [
+                {
+                    "params": [parameter for parameter in model.parameters() if parameter.requires_grad],
+                    "lr": train_config["learning_rate"],
+                },
+                {"params": head.parameters(), "lr": train_config["head_learning_rate"]},
+            ],
+            weight_decay=train_config["weight_decay"],
+        )
         updates = math.ceil(len(train_batches) / train_config["gradient_accumulation"])
         scheduler = cosine_scheduler(optimizer, updates * train_config["epochs"], train_config["warmup_ratio"])
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -711,7 +729,7 @@ def train_florence(config: dict) -> None:
         )
         global_step = 0
         for epoch in range(1, train_config["epochs"] + 1):
-            model.train(); optimizer.zero_grad(set_to_none=True)
+            model.train(); head.train(); optimizer.zero_grad(set_to_none=True)
             running_loss = 0.0
             gradient_norm = 0.0
             progress = tqdm(
@@ -724,7 +742,12 @@ def train_florence(config: dict) -> None:
             )
             for batch_index, batch in enumerate(progress, 1):
                 batch = {key: value.to(device) for key, value in batch.items()}
-                with torch.autocast("cuda", dtype=torch.bfloat16): loss = model(**batch).loss
+                class_labels = batch.pop("class_labels")
+                with torch.autocast("cuda", dtype=torch.bfloat16):
+                    logits = florence_classification_logits(
+                        model, head, batch["pixel_values"]
+                    )
+                    loss = F.cross_entropy(logits, class_labels)
                 loss_value = float(loss.detach())
                 if not math.isfinite(loss_value):
                     raise FloatingPointError(
@@ -736,7 +759,11 @@ def train_florence(config: dict) -> None:
                 if batch_index % train_config["gradient_accumulation"] == 0 or batch_index == len(train_batches):
                     gradient_norm = float(
                         nn.utils.clip_grad_norm_(
-                            model.parameters(),
+                            [
+                                parameter
+                                for group in optimizer.param_groups
+                                for parameter in group["params"]
+                            ],
                             train_config["max_grad_norm"],
                             error_if_nonfinite=True,
                         )
@@ -763,11 +790,12 @@ def train_florence(config: dict) -> None:
                 f"loss={running_loss / len(train_batches):.4f}"
             )
         model.save_pretrained(best_dir); processor.save_pretrained(best_dir)
+        torch.save(head.state_dict(), best_dir / "classifier.pt")
         (output_dir / "training_recipe.json").write_text(
             json.dumps({"recipe_version": train_config["recipe_version"]}, indent=2),
             encoding="utf-8",
         )
-        writer.close(); del model, optimizer; torch.cuda.empty_cache()
+        writer.close(); del model, head, optimizer; torch.cuda.empty_cache()
 
 
 def test_florence(config: dict) -> None:
@@ -788,12 +816,21 @@ def test_florence(config: dict) -> None:
                 dtype=torch.bfloat16,
             )
             model.eval()
-            collator = FlorenceCollator(processor, labels, root, boxes, config["prompt"], False)
-            label_constraint = (
-                florence_label_constraint(processor.tokenizer, labels)
-                if config["test"].get("constrained_decoding", False)
-                else None
+            head = FlorenceClassificationHead(
+                model.config.text_config.hidden_size,
+                len(labels),
+                config["train"]["classifier_dropout"],
+            ).to(device)
+            head.load_state_dict(
+                torch.load(
+                    project_path(config["output"]["model"], **values)
+                    / "classifier.pt",
+                    map_location=device,
+                    weights_only=True,
+                )
             )
+            head.eval()
+            collator = FlorenceCollator(processor, labels, root, boxes, config["prompt"], False)
             batches = vlm_loader(
                 samples,
                 collator,
@@ -804,24 +841,20 @@ def test_florence(config: dict) -> None:
             with torch.inference_mode():
                 for batch in tqdm(batches, desc=f"{config['experiment']} {protocol}"):
                     batch = {key: value.to(device) for key, value in batch.items()}
+                    batch.pop("class_labels")
                     with torch.autocast("cuda", dtype=torch.bfloat16):
-                        generated = model.generate(
-                            **batch,
-                            max_new_tokens=config["test"]["max_new_tokens"],
-                            do_sample=False,
-                            num_beams=1,
-                            no_repeat_ngram_size=0,
-                            forced_bos_token_id=None,
-                            forced_eos_token_id=None,
-                            prefix_allowed_tokens_fn=label_constraint,
-                        )
-                    for text in processor.batch_decode(generated, skip_special_tokens=True):
-                        raw_outputs.append(text)
-                        prediction = parse_label(text, labels); predictions.append(prediction); valid.append(prediction is not None)
+                        indices = florence_classification_logits(
+                            model, head, batch["pixel_values"]
+                        ).argmax(dim=-1).tolist()
+                    for index in indices:
+                        prediction = labels[index]
+                        raw_outputs.append(prediction)
+                        predictions.append(prediction)
+                        valid.append(True)
             targets = [sample.label for sample in samples]
             metrics = table3_metrics(targets, predictions, valid, labels)
             save_predictions(
                 project_path(config["output"]["results"], **values), config["experiment"],
                 protocol, seed, samples, predictions, valid, metrics, raw_outputs
             )
-            print(protocol, seed, metrics); del model; torch.cuda.empty_cache()
+            print(protocol, seed, metrics); del model, head; torch.cuda.empty_cache()

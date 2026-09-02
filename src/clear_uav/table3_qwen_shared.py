@@ -6,6 +6,8 @@ from collections import Counter
 
 import torch
 from peft import LoraConfig, PeftModel, get_peft_model
+from torch import nn
+from torch.nn import functional as F
 from torch.optim import AdamW
 from torch.utils.data import DataLoader, Dataset, Sampler
 from torch.utils.tensorboard import SummaryWriter
@@ -13,15 +15,13 @@ from tqdm.auto import tqdm
 
 from clear_uav.data import read_private_test_samples, read_samples
 from clear_uav.experiment_config import experiment_runs, project_path
-from clear_uav.modeling import LORA_PATTERNS, assistant_only_labels, load_qwen
+from clear_uav.modeling import LORA_PATTERNS, load_qwen
 from clear_uav.table3 import (
-    QwenCollator,
     bbox_records,
     coordinate_text,
     cosine_scheduler,
     ensure_hf_model,
     labels_from_config,
-    parse_label,
     render_view,
     save_predictions,
     seed_everything,
@@ -95,6 +95,8 @@ class MixedViewQwenCollator:
         self.boxes = boxes
         self.max_pixels = max_pixels
 
+        self.label_to_index = {label: index for index, label in enumerate(labels)}
+
     def messages(self, row: dict):
         sample = row["sample"]
         representation = row["representation"]
@@ -126,17 +128,13 @@ class MixedViewQwenCollator:
                     {"type": "text", "text": instruction},
                 ],
             },
-            {
-                "role": "assistant",
-                "content": [{"type": "text", "text": sample.label}],
-            },
         ]
 
     def __call__(self, rows: list[dict]) -> dict:
         conversations = [self.messages(row) for row in rows]
         encoded = self.processor.apply_chat_template(
             conversations,
-            add_generation_prompt=False,
+            add_generation_prompt=True,
             tokenize=True,
             return_dict=True,
             return_tensors="pt",
@@ -148,17 +146,60 @@ class MixedViewQwenCollator:
                 },
             },
         )
-        encoded["labels"] = assistant_only_labels(
-            encoded["input_ids"],
-            encoded["attention_mask"],
-            self.processor.tokenizer,
+        encoded["class_labels"] = torch.tensor(
+            [self.label_to_index[row["sample"].label] for row in rows],
+            dtype=torch.long,
         )
         return dict(encoded)
+
+
+class QwenClassificationHead(nn.Module):
+    def __init__(self, hidden_dim: int, num_classes: int, dropout: float) -> None:
+        super().__init__()
+        self.network = nn.Sequential(
+            nn.LayerNorm(hidden_dim),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, num_classes),
+        )
+
+    def forward(self, features):
+        return self.network(features.float())
+
+
+def qwen_classification_logits(model, head, batch):
+    attention_mask = batch["attention_mask"]
+    conditional_model = model.get_base_model() if hasattr(model, "get_base_model") else model
+    outputs = conditional_model.model(
+        **batch,
+        use_cache=False,
+        return_dict=True,
+    )
+    hidden = outputs.last_hidden_state
+    positions = torch.arange(hidden.shape[1], device=hidden.device).unsqueeze(0)
+    last = positions.expand_as(attention_mask).masked_fill(
+        ~attention_mask.bool(), -1
+    ).argmax(dim=1)
+    features = hidden[torch.arange(hidden.shape[0], device=hidden.device), last]
+    return head(features)
+
+
+class ViewQwenCollator(MixedViewQwenCollator):
+    def __init__(self, processor, labels, data_root, boxes, representation, max_pixels):
+        super().__init__(processor, labels, data_root, boxes, max_pixels)
+        self.representation = representation
+
+    def __call__(self, samples):
+        rows = [
+            {"sample": sample, "representation": self.representation}
+            for sample in samples
+        ]
+        return super().__call__(rows)
 
 
 @torch.inference_mode()
 def predict_view(
     model,
+    head,
     processor,
     samples,
     representation,
@@ -170,17 +211,14 @@ def predict_view(
     description,
 ):
     model.eval()
-    model.config.use_cache = True
-    collator = QwenCollator(
+    head.eval()
+    collator = ViewQwenCollator(
         processor,
         labels,
         data_root,
         boxes,
-        representation["view"],
-        representation.get("context_margin", 0.0),
-        representation["prompt"],
+        representation,
         evaluation_config["max_pixels"],
-        False,
     )
     batches = vlm_loader(
         samples,
@@ -190,24 +228,16 @@ def predict_view(
     )
     predictions, valid, raw_outputs = [], [], []
     for batch in tqdm(batches, desc=description):
+        batch.pop("class_labels")
         batch = {key: value.to(device) for key, value in batch.items()}
-        generated = model.generate(
-            **batch,
-            do_sample=False,
-            max_new_tokens=evaluation_config["max_new_tokens"],
-        )
-        input_length = batch["input_ids"].shape[1]
-        texts = processor.batch_decode(
-            generated[:, input_length:], skip_special_tokens=True
-        )
-        for text in texts:
-            raw_outputs.append(text)
-            prediction = parse_label(text, labels)
+        indices = qwen_classification_logits(model, head, batch).argmax(dim=-1).tolist()
+        for index in indices:
+            prediction = labels[index]
+            raw_outputs.append(prediction)
             predictions.append(prediction)
-            valid.append(prediction is not None)
+            valid.append(True)
     targets = [sample.label for sample in samples]
     metrics = table3_metrics(targets, predictions, valid, labels)
-    model.config.use_cache = False
     return predictions, valid, raw_outputs, metrics
 
 
@@ -225,10 +255,15 @@ def train_qwen_shared(config: dict) -> None:
         output_dir = project_path(config["output"]["root"], **values)
         adapter_dir = project_path(config["output"]["adapter"], **values)
         validation_path = project_path(config["output"]["validation"], **values)
+        recipe_path = output_dir / "training_recipe.json"
         if (
             config["output"].get("skip_existing")
             and (adapter_dir / "adapter_config.json").exists()
+            and (adapter_dir / "classifier.pt").exists()
             and validation_path.exists()
+            and recipe_path.is_file()
+            and json.loads(recipe_path.read_text(encoding="utf-8"))
+            == {"recipe_version": train_config["recipe_version"]}
         ):
             print(f"[skip] {adapter_dir}")
             continue
@@ -255,6 +290,11 @@ def train_qwen_shared(config: dict) -> None:
             ),
         ).to(device)
         model.gradient_checkpointing_enable()
+        head = QwenClassificationHead(
+            model.config.text_config.hidden_size,
+            len(labels),
+            train_config["classifier_dropout"],
+        ).to(device)
 
         dataset = MixedViewDataset(train_samples, config["representations"])
         sampler = BalancedViewSampler(
@@ -279,12 +319,18 @@ def train_qwen_shared(config: dict) -> None:
             pin_memory=True,
             persistent_workers=train_config["num_workers"] > 0,
         )
-        parameters = [
-            parameter for parameter in model.parameters() if parameter.requires_grad
-        ]
         optimizer = AdamW(
-            parameters,
-            lr=train_config["learning_rate"],
+            [
+                {
+                    "params": [
+                        parameter
+                        for parameter in model.parameters()
+                        if parameter.requires_grad
+                    ],
+                    "lr": train_config["learning_rate"],
+                },
+                {"params": head.parameters(), "lr": train_config["head_learning_rate"]},
+            ],
             weight_decay=train_config["weight_decay"],
         )
         updates = math.ceil(
@@ -304,6 +350,7 @@ def train_qwen_shared(config: dict) -> None:
         for epoch in range(1, train_config["epochs"] + 1):
             sampler.set_epoch(epoch)
             model.train()
+            head.train()
             model.config.use_cache = False
             optimizer.zero_grad(set_to_none=True)
             running_loss = 0.0
@@ -315,8 +362,10 @@ def train_qwen_shared(config: dict) -> None:
                 1,
             ):
                 batch = {key: value.to(device) for key, value in batch.items()}
+                class_labels = batch.pop("class_labels")
                 with torch.autocast("cuda", dtype=torch.bfloat16):
-                    loss = model(**batch).loss
+                    logits = qwen_classification_logits(model, head, batch)
+                    loss = F.cross_entropy(logits, class_labels)
                 (loss / train_config["gradient_accumulation"]).backward()
                 running_loss += loss.item()
                 if (
@@ -333,6 +382,7 @@ def train_qwen_shared(config: dict) -> None:
             for representation in config["representations"]:
                 _, _, _, metrics = predict_view(
                     model,
+                    head,
                     processor,
                     val_samples,
                     representation,
@@ -365,6 +415,7 @@ def train_qwen_shared(config: dict) -> None:
                 best_score = composite
                 model.save_pretrained(adapter_dir)
                 processor.save_pretrained(adapter_dir)
+                torch.save(head.state_dict(), adapter_dir / "classifier.pt")
                 best_summary = {
                     "selection_metric": "mean_macro_f1",
                     "best_epoch": epoch,
@@ -377,8 +428,14 @@ def train_qwen_shared(config: dict) -> None:
                 )
 
         writer.close()
+        recipe_path.write_text(
+            json.dumps(
+                {"recipe_version": train_config["recipe_version"]}, indent=2
+            ),
+            encoding="utf-8",
+        )
         print(f"selected checkpoint: {best_summary}")
-        del model, optimizer
+        del model, head, optimizer
         torch.cuda.empty_cache()
 
 
@@ -396,6 +453,7 @@ def test_qwen_shared(config: dict, view_names: list[str] | None = None) -> None:
     for protocol in config["data"]["protocols"]:
         for seed in config["train"]["seeds"]:
             values = {"protocol": protocol, "seed": seed}
+            summary = {}
             samples = read_private_test_samples(
                 data_root / protocol / "test_inputs.csv",
                 data_root / protocol / "test_labels_private.csv",
@@ -408,10 +466,25 @@ def test_qwen_shared(config: dict, view_names: list[str] | None = None) -> None:
                 project_path(config["output"]["adapter"], **values),
                 local_files_only=True,
             ).to(device).eval()
+            head = QwenClassificationHead(
+                model.config.text_config.hidden_size,
+                len(labels),
+                config["train"]["classifier_dropout"],
+            ).to(device)
+            head.load_state_dict(
+                torch.load(
+                    project_path(config["output"]["adapter"], **values)
+                    / "classifier.pt",
+                    map_location=device,
+                    weights_only=True,
+                )
+            )
+            head.eval()
 
             for representation in representations:
                 predictions, valid, raw_outputs, metrics = predict_view(
                     model,
+                    head,
                     processor,
                     samples,
                     representation,
@@ -439,7 +512,23 @@ def test_qwen_shared(config: dict, view_names: list[str] | None = None) -> None:
                     metrics,
                     raw_outputs,
                 )
+                summary[representation["name"]] = metrics
                 print(protocol, seed, representation["name"], metrics)
 
-            del model
+            summary_path = project_path(config["output"]["summary"], **values)
+            summary_path.parent.mkdir(parents=True, exist_ok=True)
+            summary_path.write_text(
+                json.dumps(
+                    {
+                        "experiment": config["experiment"],
+                        "protocol": protocol,
+                        "seed": seed,
+                        "views": summary,
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+
+            del model, head
             torch.cuda.empty_cache()

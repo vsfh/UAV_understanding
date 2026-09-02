@@ -51,6 +51,7 @@ classifier_input:
 
 classifier_generation:
   max_new_tokens: 32
+  constrained_decoding: true
 
 train:
   seeds: [43]

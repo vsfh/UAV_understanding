@@ -12,7 +12,7 @@ data:
 
 model:
   family: qwen3vl
-  method: shared_lora
+  method: shared_lora_classifier
   repo_id: Qwen/Qwen3-VL-8B-Instruct
   revision: main
   path: ./hf_cache/qwen3-vl
@@ -65,11 +65,14 @@ representations:
         its canonical name. Categories: {categories}
 
 train:
+  recipe_version: 2
   seeds: [43]
   epochs: 5
   batch_size: 4
   gradient_accumulation: 2
   learning_rate: 0.0002
+  head_learning_rate: 0.001
+  classifier_dropout: 0.1
   weight_decay: 0.01
   warmup_ratio: 0.1
   class_balance_power: 0.5
@@ -86,17 +89,16 @@ validation:
   batch_size: 4
   max_pixels: 995328
   num_workers: 12
-  max_new_tokens: 32
 
 test:
   batch_size: 4
   max_pixels: 995328
   num_workers: 12
-  max_new_tokens: 32
 
 output:
   root: ./outputs/table3/qwen3vl_shared/{protocol}/seed{seed}
   adapter: ./outputs/table3/qwen3vl_shared/{protocol}/seed{seed}/best
   validation: ./outputs/table3/qwen3vl_shared/{protocol}/seed{seed}/validation.json
   results: ./results/table3/qwen3vl_{view}/{protocol}/seed{seed}_test.json
+  summary: ./results/table3/qwen3vl_shared/{protocol}/seed{seed}_five_views.json
   skip_existing: true

@@ -12,7 +12,7 @@ data:
 
 model:
   family: florence2
-  method: full_finetune
+  method: vision_classifier
   repo_id: florence-community/Florence-2-base-ft
   revision: main
   path: ./hf_cache/florence-2-base-ft-transformers58
@@ -25,12 +25,14 @@ prompt: >-
   Return only one canonical category name. Categories: {categories}
 
 train:
-  recipe_version: 2
+  recipe_version: 3
   seeds: [43]
   epochs: 10
   batch_size: 4
   gradient_accumulation: 2
   learning_rate: 0.00001
+  head_learning_rate: 0.001
+  classifier_dropout: 0.1
   weight_decay: 0.01
   warmup_ratio: 0.1
   max_grad_norm: 1.0
@@ -40,8 +42,6 @@ train:
 test:
   batch_size: 4
   num_workers: 12
-  max_new_tokens: 32
-  constrained_decoding: true
 
 output:
   root: ./outputs/table3/florence2_gt_crop/{protocol}/seed{seed}

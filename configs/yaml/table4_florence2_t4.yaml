@@ -25,15 +25,20 @@ model:
 
 prompt:
   user: >-
-    JSON only with presence(bool), bbox_1000([x1,y1,x2,y2] full-image 0-1000
-    or null), category(label or null), confidence(0-1). Categories: {categories}
+    Return only no_event, or one canonical category immediately followed by
+    four native location tokens <loc_x1><loc_y1><loc_x2><loc_y2>. Location
+    tokens range from <loc_0> to <loc_999> on the full image. Categories:
+    {categories}
   open_vocab_template: "{label}: {definition}"
 
 generation:
-  max_new_tokens: 128
+  route: native_discrete_location_tokens
+  location_tokens: 1000
+  max_new_tokens: 32
+  constrained_grammar: true
 
 train:
-  recipe_version: 2
+  recipe_version: 3
   seeds: [43]
   epochs: 10
   batch_size: 4

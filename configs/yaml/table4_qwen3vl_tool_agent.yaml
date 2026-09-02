@@ -27,10 +27,9 @@ prompt:
   system: You detect operational events in aerial UAV image views.
   user: |-
     Determine whether one supported operational event is present in this view.
-    If present, locate and classify it. Return only one JSON object with exactly
-    these keys: {"presence": <boolean>, "bbox_1000": <[x1,y1,x2,y2] or null>,
-    "category": <canonical category or null>, "confidence": <0 to 1>}.
-    Coordinates use the 0-1000 system of the supplied view. Categories:
+    Return only `no_event`, or one canonical category immediately followed by
+    four location tokens <loc_x1><loc_y1><loc_x2><loc_y2>. Location tokens range
+    from <loc_0> to <loc_999> on the supplied view. Categories:
     {categories}
   open_vocab_template: "{label}: {definition}"
 
@@ -39,7 +38,10 @@ input:
   min_pixels: 65536
 
 generation:
-  max_new_tokens: 128
+  route: discrete_location_tokens
+  location_tokens: 1000
+  max_new_tokens: 32
+  constrained_grammar: true
 
 agent:
   tile_grid: 2
@@ -48,6 +50,7 @@ agent:
   inspect_context_margin: 0.2
 
 train:
+  recipe_version: 2
   seeds: [43]
   epochs: 5
   batch_size: 4
