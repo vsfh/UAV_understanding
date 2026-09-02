@@ -1309,6 +1309,9 @@ def load_florence(path: Path, device, training: bool = False):
     model.generation_config.forced_bos_token_id = None
     model.generation_config.forced_eos_token_id = None
     model.generation_config.num_beams = 1
+    model.generation_config.early_stopping = False
+    model.generation_config.no_repeat_ngram_size = 0
+    model.generation_config.validate(strict=True)
     return model, processor
 
 
