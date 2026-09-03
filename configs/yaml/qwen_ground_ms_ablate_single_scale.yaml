@@ -1,0 +1,10 @@
+base_config: ./configs/yaml/qwen_ground_ms.yaml
+experiment: qwen_ground_ms_v2_single_scale
+
+model:
+  pyramid_scales: [1]
+
+output:
+  root: ./outputs/qwen_ground_ms_ablations/single_scale/{protocol}/seed{seed}
+  checkpoint: ./outputs/qwen_ground_ms_ablations/single_scale/{protocol}/seed{seed}/last.pt
+  test_results: ./results/qwen_ground_ms_ablations/single_scale/{protocol}/seed{seed}_test.json

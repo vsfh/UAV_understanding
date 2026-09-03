@@ -3,12 +3,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 
 import torch
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
-from clear_uav.experiment_config import load_yaml, project_path
+from clear_uav.experiment_config import load_yaml_with_base, project_path
 from clear_uav.qwen_ground_ms import (
     GroundCollator,
     GroundDataset,
@@ -35,7 +36,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Test Qwen single-view grounding")
     parser.add_argument("--config", required=True)
     args = parser.parse_args()
-    config = load_yaml(args.config)
+    config = load_yaml_with_base(args.config)
     device = torch.device(config["runtime"]["device"])
     data_root = project_path(config["data"]["root"])
     targets = load_bbox_targets(project_path(config["data"]["bbox_annotations"]))
@@ -70,7 +71,7 @@ def main() -> None:
                 persistent_workers=config["test"]["num_workers"] > 0,
             )
 
-            all_predictions, all_targets, rows = [], [], []
+            all_predictions, all_targets, all_heatmap_centers, entropies, rows = [], [], [], [], []
             with torch.inference_mode():
                 for batch in tqdm(
                     batches,
@@ -80,17 +81,29 @@ def main() -> None:
                     with torch.autocast("cuda", dtype=torch.bfloat16):
                         output = model(**move_inputs(batch, device))
                     predictions = output["bbox_cxcywh"].float().cpu()
+                    heatmap_centers = output["heatmap_center"].float().cpu()
+                    batch_entropies = []
+                    for logits in output["heatmap_logits"]:
+                        probabilities = logits.float().flatten().softmax(0)
+                        batch_entropies.append(
+                            float(-(probabilities * probabilities.clamp_min(1e-8).log()).sum())
+                            / math.log(probabilities.numel())
+                        )
                     batch_targets = batch["targets"]
                     predicted_xyxy = cxcywh_to_xyxy(predictions).clamp(0, 1)
                     target_xyxy = cxcywh_to_xyxy(batch_targets).clamp(0, 1)
                     batch_ious, batch_errors = per_box_metrics(predictions, batch_targets)
                     all_predictions.append(predictions)
                     all_targets.append(batch_targets)
-                    for uid, image_file, prediction, target, sample_iou, sample_error in zip(
+                    all_heatmap_centers.append(heatmap_centers)
+                    entropies.extend(batch_entropies)
+                    for uid, image_file, prediction, target, heatmap_center, heatmap_entropy, sample_iou, sample_error in zip(
                         batch["record_uids"],
                         batch["image_files"],
                         predicted_xyxy,
                         target_xyxy,
+                        heatmap_centers,
+                        batch_entropies,
                         batch_ious,
                         batch_errors,
                     ):
@@ -100,6 +113,8 @@ def main() -> None:
                                 "image_file": image_file,
                                 "prediction_bbox_1000": (prediction * 1000).tolist(),
                                 "target_bbox_1000": (target * 1000).tolist(),
+                                "heatmap_center_1000": (heatmap_center * 1000).tolist(),
+                                "heatmap_normalized_entropy": heatmap_entropy,
                                 "iou": float(sample_iou),
                                 "normalized_center_error": float(sample_error),
                             }
@@ -109,6 +124,13 @@ def main() -> None:
                 torch.cat(all_predictions),
                 torch.cat(all_targets),
             )
+            heatmap_centers = torch.cat(all_heatmap_centers)
+            box_targets = torch.cat(all_targets)
+            metrics["heatmap_center_error"] = float(
+                torch.linalg.vector_norm(heatmap_centers - box_targets[:, :2], dim=-1).mean()
+                / math.sqrt(2)
+            )
+            metrics["heatmap_normalized_entropy"] = sum(entropies) / len(entropies)
             result = {
                 "experiment": config["experiment"],
                 "protocol": protocol,

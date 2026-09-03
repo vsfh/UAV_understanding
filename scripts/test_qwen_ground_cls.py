@@ -18,6 +18,7 @@ from clear_uav.qwen_ground_cls import (
     classification_metrics,
     load_cls_config,
     load_class_labels,
+    load_definition_prototypes,
     read_no_event_images,
 )
 from clear_uav.qwen_ground_ms import (
@@ -83,11 +84,12 @@ def presence_metrics(
 def grounded_map50(
     presence_targets: torch.Tensor,
     class_targets: torch.Tensor,
-    class_predictions: torch.Tensor,
-    joint_scores: torch.Tensor,
+    presence_scores: torch.Tensor,
+    class_probabilities: torch.Tensor,
     ious: torch.Tensor,
     labels: list[str],
 ) -> float:
+    joint_scores = presence_scores[:, None] * class_probabilities
     values = []
     for class_index in range(len(labels)):
         positives = int(
@@ -96,15 +98,41 @@ def grounded_map50(
         if positives == 0:
             continue
         items = []
-        for sample_index in torch.where(class_predictions == class_index)[0]:
+        for sample_index in range(len(presence_targets)):
             correct = bool(
                 presence_targets[sample_index]
                 and class_targets[sample_index] == class_index
                 and ious[sample_index] >= 0.5
             )
-            items.append((float(joint_scores[sample_index]), correct))
+            items.append((float(joint_scores[sample_index, class_index]), correct))
         values.append(average_precision(items, positives))
     return statistics.fmean(values)
+
+
+def best_presence_threshold(
+    targets: torch.Tensor,
+    scores: torch.Tensor,
+    max_n_fpr: float,
+) -> float:
+    upper = float(
+        torch.nextafter(scores.max(), scores.new_tensor(float("inf")))
+    )
+    candidates = sorted(
+        set(scores.tolist()) | {upper}
+    )
+    feasible = [
+        threshold
+        for threshold in candidates
+        if presence_metrics(targets, scores, threshold)["n_fpr"] <= max_n_fpr
+    ]
+    return max(
+        feasible,
+        key=lambda threshold: (
+            presence_metrics(targets, scores, threshold)["recall"],
+            presence_metrics(targets, scores, threshold)["precision"],
+            threshold,
+        ),
+    )
 
 
 def main() -> None:
@@ -114,9 +142,13 @@ def main() -> None:
     config = load_cls_config(args.config)
     device = torch.device(config["runtime"]["device"])
     data_root = project_path(config["data"]["root"])
-    labels = load_class_labels(project_path(config["data"]["ontology"]))
+    labels_path = config["data"].get("labels")
+    labels = load_class_labels(
+        project_path(config["data"]["ontology"]),
+        project_path(labels_path) if labels_path else None,
+    )
     targets = load_bbox_targets(project_path(config["data"]["bbox_annotations"]))
-    threshold = config["presence"]["threshold"]
+    class_prototypes = load_definition_prototypes(config["classification"], labels)
 
     for protocol in config["data"]["protocols"]:
         for seed in config["train"]["seeds"]:
@@ -129,6 +161,13 @@ def main() -> None:
                 limit=config["data"].get("max_test_samples"),
             )
             negative_images = read_no_event_images(config["data"], protocol, "test")
+            train_labels = {
+                sample.label
+                for sample in read_ground_samples(
+                    data_root / protocol / "train.csv", data_root
+                )
+                if sample.label in labels
+            }
             vision, processor = load_qwen_vision(
                 project_path(config["model"]["path"]), device
             )
@@ -137,12 +176,48 @@ def main() -> None:
                 config["model"],
                 config["classification"],
                 len(labels),
+                class_prototypes,
             ).to(device)
             checkpoint = load_ground_checkpoint(
                 model,
                 project_path(config["output"]["checkpoint"], **values),
             )
             model.eval()
+            threshold = config["presence"]["threshold"]
+            if config["presence"].get("calibrate_on_val"):
+                calibration_samples = read_ground_samples(
+                    data_root / protocol / "val.csv",
+                    data_root,
+                    limit=config["presence"].get("calibration_samples"),
+                )
+                calibration_dataset = GroundClassificationDataset(
+                    calibration_samples,
+                    data_root,
+                    targets,
+                    labels,
+                    read_no_event_images(config["data"], protocol, "val"),
+                )
+                calibration_batches = DataLoader(
+                    calibration_dataset,
+                    batch_size=config["test"]["batch_size"],
+                    shuffle=False,
+                    num_workers=config["test"]["num_workers"],
+                    collate_fn=GroundClassificationCollator(processor, config["input"]),
+                    pin_memory=True,
+                )
+                calibration_scores, calibration_targets = [], []
+                with torch.inference_mode():
+                    for batch in tqdm(calibration_batches, desc="presence calibration"):
+                        with torch.autocast("cuda", dtype=torch.bfloat16):
+                            output = model(**move_inputs(batch, device))
+                        calibration_scores.append(output["presence_logits"].float().sigmoid().cpu())
+                        calibration_targets.append(batch["presence_targets"].bool())
+                threshold = best_presence_threshold(
+                    torch.cat(calibration_targets),
+                    torch.cat(calibration_scores),
+                    config["presence"]["max_n_fpr"],
+                )
+                print(f"calibrated presence threshold: {threshold:.2f}")
             dataset = GroundClassificationDataset(
                 samples,
                 data_root,
@@ -209,7 +284,7 @@ def main() -> None:
 
                     all_presence_scores.append(presence_scores)
                     all_presence_targets.append(presence_targets)
-                    all_class_probabilities.append(probabilities.max(-1).values)
+                    all_class_probabilities.append(probabilities)
                     all_class_predictions.append(class_predictions)
                     all_class_targets.append(class_targets)
                     all_ious.append(batch_ious)
@@ -268,7 +343,13 @@ def main() -> None:
             positive_ious = ious[presence_targets]
             class_correct = positive_class_predictions == positive_class_targets
             predicted_present = positive_scores >= threshold
-            joint_scores = presence_scores * class_probabilities
+            label_to_index = {label: index for index, label in enumerate(labels)}
+            seen_indices = {label_to_index[label] for label in train_labels}
+            unseen_indices = set(range(len(labels))) - seen_indices
+            seen_mask = torch.tensor(
+                [int(target) in seen_indices for target in positive_class_targets]
+            )
+            unseen_mask = ~seen_mask
             metrics = {
                 "presence": presence_metrics(
                     presence_targets, presence_scores, threshold
@@ -279,11 +360,25 @@ def main() -> None:
                 "classification_positive_only": classification_metrics(
                     positive_class_targets, positive_class_predictions, labels
                 ),
+                "classification_seen_only": classification_metrics(
+                    positive_class_targets[seen_mask],
+                    positive_class_predictions[seen_mask],
+                    labels,
+                    seen_indices,
+                    supported_only=True,
+                ),
+                "classification_unseen_only": classification_metrics(
+                    positive_class_targets[unseen_mask],
+                    positive_class_predictions[unseen_mask],
+                    labels,
+                    unseen_indices,
+                    supported_only=True,
+                ),
                 "g_map50": grounded_map50(
                     presence_targets,
                     class_targets,
-                    class_predictions,
-                    joint_scores,
+                    presence_scores,
+                    class_probabilities,
                     ious,
                     labels,
                 ),
@@ -298,6 +393,31 @@ def main() -> None:
                 ),
                 "median_latency_ms": statistics.median(row["latency_ms"] for row in rows),
             }
+            metrics["table4"] = {
+                "p_ap": metrics["presence"]["p_ap"],
+                "n_fpr": metrics["presence"]["n_fpr"],
+                "p_precision": metrics["presence"]["precision"],
+                "p_recall": metrics["presence"]["recall"],
+                "p_f1": metrics["presence"]["f1"],
+                "ap50": average_precision(
+                    list(
+                        zip(
+                            presence_scores.tolist(),
+                            (presence_targets & (ious >= 0.5)).tolist(),
+                        )
+                    ),
+                    int(presence_targets.sum()),
+                ),
+                "c_f1": metrics["classification_positive_only"]["macro_f1"],
+                "g_map50": metrics["g_map50"],
+                "valid_rate": 1.0,
+                "median_ms": metrics["median_latency_ms"],
+                "mean_calls": 1.0,
+                "max_calls": 1,
+                "threshold": threshold,
+                "positive_records": int(presence_targets.sum()),
+                "negative_records": int((~presence_targets).sum()),
+            }
             result = {
                 "experiment": config["experiment"],
                 "protocol": protocol,
@@ -307,7 +427,10 @@ def main() -> None:
                 "num_positive": int(presence_targets.sum()),
                 "num_no_event": int((~presence_targets).sum()),
                 "components": config["classification"]["components"],
+                "classification_mode": config["classification"]["mode"],
                 "labels": labels,
+                "seen_labels": sorted(train_labels),
+                "unseen_labels": sorted(set(labels) - train_labels),
                 "metrics": metrics,
                 "rows": rows,
             }

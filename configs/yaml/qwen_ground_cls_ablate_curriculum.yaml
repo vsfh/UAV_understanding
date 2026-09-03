@@ -1,10 +1,10 @@
 base_config: ./configs/yaml/qwen_ground_cls.yaml
-experiment: qwen_ground_cls_ablate_curriculum
+experiment: qwen_ground_cls_v2_no_curriculum
 
 box_conditioning:
   enabled: false
 
 output:
   root: ./outputs/qwen_ground_cls_ablations/no_curriculum/{protocol}/seed{seed}
-  checkpoint: ./outputs/qwen_ground_cls_ablations/no_curriculum/{protocol}/seed{seed}/best.pt
+  checkpoint: ./outputs/qwen_ground_cls_ablations/no_curriculum/{protocol}/seed{seed}/last.pt
   test_results: ./results/qwen_ground_cls_ablations/no_curriculum/{protocol}/seed{seed}_test.json

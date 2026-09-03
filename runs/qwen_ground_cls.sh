@@ -9,4 +9,5 @@ export HF_HOME="${REPO_ROOT}/hf_cache"
 export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
 export PYTHONPATH="${REPO_ROOT}/src${PYTHONPATH:+:${PYTHONPATH}}"
 PYTHON="${QWEN_PYTHON:-/home/feihong/miniconda3/bin/python}"
-exec "${PYTHON}" scripts/qwen_ground_cls.py
+exec "${PYTHON}" scripts/qwen_ground_cls.py \
+  --config "${1:-configs/yaml/qwen_ground_cls.yaml}"

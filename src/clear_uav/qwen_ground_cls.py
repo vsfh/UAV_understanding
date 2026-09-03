@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import math
 import re
 from collections import Counter
@@ -12,8 +13,9 @@ from torch import nn
 from torch.nn import functional as F
 from torch.utils.data import Dataset, WeightedRandomSampler
 from torchvision.ops import roi_align
+from transformers import AutoTokenizer, CLIPTextModelWithProjection
 
-from clear_uav.experiment_config import load_yaml, project_path
+from clear_uav.experiment_config import load_yaml_with_base, project_path
 from clear_uav.ontology import load_ontology
 from clear_uav.qwen_ground_ms import GroundCollator, QwenGroundMS, cxcywh_to_xyxy
 
@@ -23,27 +25,42 @@ NO_EVENT_TIMESTAMP = re.compile(
 )
 
 
-def load_class_labels(path: Path) -> list[str]:
-    return list(load_ontology(path).labels)
+def load_class_labels(ontology_path: Path, labels_path: Path | None = None) -> list[str]:
+    if labels_path is not None:
+        return [
+            line.strip()
+            for line in labels_path.read_text().splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        ]
+    return list(load_ontology(ontology_path).labels)
+
+
+@torch.inference_mode()
+def load_definition_prototypes(config: dict, labels: list[str]) -> torch.Tensor | None:
+    if config["mode"] == "fixed":
+        return None
+    cache = project_path(config["prototype_cache"])
+    if cache.exists():
+        payload = torch.load(cache, map_location="cpu", weights_only=True)
+        if payload["labels"] == labels:
+            return payload["embeddings"]
+
+    definitions = json.loads(project_path(config["definitions"]).read_text())
+    texts = [f"{label.replace('_', ' ')}: {definitions[label]}" for label in labels]
+    model_path = project_path(config["text_model"])
+    tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)
+    text_model = CLIPTextModelWithProjection.from_pretrained(
+        model_path, local_files_only=True
+    ).eval()
+    inputs = tokenizer(texts, padding=True, truncation=True, return_tensors="pt")
+    embeddings = F.normalize(text_model(**inputs).text_embeds.float(), dim=-1).cpu()
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    torch.save({"labels": labels, "embeddings": embeddings}, cache)
+    return embeddings
 
 
 def load_cls_config(path: str | Path) -> dict:
-    override = load_yaml(path)
-    base_path = override.pop("base_config", None)
-    if base_path is None:
-        return override
-
-    config = load_yaml(project_path(base_path))
-
-    def merge(target: dict, source: dict) -> None:
-        for key, value in source.items():
-            if isinstance(value, dict) and isinstance(target.get(key), dict):
-                merge(target[key], value)
-            else:
-                target[key] = value
-
-    merge(config, override)
-    return config
+    return load_yaml_with_base(path)
 
 
 def no_event_split(
@@ -133,6 +150,8 @@ class GroundClassificationDataset(Dataset):
         self.rows = []
         self.labels = []
         for sample in samples:
+            if sample.label not in label_to_index:
+                continue
             image_file = sample.context_path.relative_to(data_root).as_posix()
             if image_file not in targets:
                 continue
@@ -220,22 +239,6 @@ def classification_sampler(
     )
 
 
-def roi_align_fused_features(
-    fused: torch.Tensor,
-    pooled_shapes: list[tuple[int, int]],
-    boxes_cxcywh: torch.Tensor,
-    output_size: tuple[int, int],
-) -> torch.Tensor:
-    feature_maps = []
-    for batch_index, (height, width) in enumerate(pooled_shapes):
-        feature_maps.append(
-            fused[batch_index, : height * width]
-            .transpose(0, 1)
-            .reshape(fused.shape[-1], height, width)
-        )
-    return roi_align_feature_maps(feature_maps, boxes_cxcywh, output_size)
-
-
 def roi_align_feature_maps(
     feature_maps: list[torch.Tensor],
     boxes_cxcywh: torch.Tensor,
@@ -266,26 +269,21 @@ class QwenGroundCLS(QwenGroundMS):
         model_config: dict,
         classifier_config: dict,
         num_classes: int,
+        class_prototypes: torch.Tensor | None = None,
     ) -> None:
         super().__init__(vision_encoder, model_config)
         fusion_dim = model_config["hidden_dim"]
         classifier_dim = classifier_config.get("hidden_dim", fusion_dim)
         components = classifier_config["components"]
-        self.use_null_eventness = components["null_eventness"]
-        self.use_highres_roi = components["highres_roi"]
+        self.use_roi = components["roi"]
         self.use_global_context = components["global_context"]
         self.roi_output_size = tuple(classifier_config["roi_output_size"])
+        self.classification_mode = classifier_config["mode"]
 
-        self.null_query = nn.Parameter(torch.randn(1, fusion_dim))
-        self.eventness_head = nn.Linear(fusion_dim, 1)
-        self.nullness_head = nn.Linear(fusion_dim, 1)
-        nn.init.zeros_(self.eventness_head.weight)
-        nn.init.zeros_(self.eventness_head.bias)
-        nn.init.zeros_(self.nullness_head.weight)
-        nn.init.zeros_(self.nullness_head.bias)
+        self.presence_head = nn.Linear(fusion_dim, 1)
+        nn.init.zeros_(self.presence_head.weight)
+        nn.init.zeros_(self.presence_head.bias)
 
-        self.highres_norm = nn.LayerNorm(fusion_dim)
-        self.highres_gate = nn.Parameter(torch.zeros(()))
         self.classifier_fusion = nn.Sequential(
             nn.Linear(2 * fusion_dim, classifier_dim),
             nn.LayerNorm(classifier_dim),
@@ -296,12 +294,14 @@ class QwenGroundCLS(QwenGroundMS):
             nn.GELU(),
             nn.Dropout(classifier_config["dropout"]),
         )
-        self.classifier = nn.Linear(classifier_dim, num_classes)
-
-    def grounding_queries(self) -> torch.Tensor:
-        if self.use_null_eventness:
-            return torch.cat((self.event_query, self.null_query), dim=0)
-        return self.event_query
+        if self.classification_mode == "definition":
+            self.register_buffer("class_prototypes", class_prototypes, persistent=False)
+            self.visual_to_text = nn.Linear(
+                classifier_dim, class_prototypes.shape[-1], bias=False
+            )
+            self.class_logit_scale = nn.Parameter(torch.tensor(math.log(10.0)))
+        else:
+            self.classifier = nn.Linear(classifier_dim, num_classes)
 
     def forward(
         self,
@@ -313,14 +313,7 @@ class QwenGroundCLS(QwenGroundMS):
     ) -> dict[str, torch.Tensor]:
         output = super().forward(pixel_values, image_grid_thw)
         event_feature = output["event_feature"].float()
-        if self.use_null_eventness:
-            null_feature = output["query_features"][:, 1].float()
-            presence_logits = (
-                self.eventness_head(event_feature) - self.nullness_head(null_feature)
-            ).squeeze(-1)
-        else:
-            null_feature = torch.zeros_like(event_feature)
-            presence_logits = event_feature.new_full((len(event_feature),), 20.0)
+        presence_logits = self.presence_head(event_feature).squeeze(-1)
 
         predicted_boxes = output["bbox_cxcywh"].detach()
         if positive_mask is None:
@@ -342,25 +335,15 @@ class QwenGroundCLS(QwenGroundMS):
             gt_mask[:, None], gt_boxes if gt_boxes is not None else predicted_boxes, predicted_boxes
         )
 
-        fused_roi_grid = roi_align_fused_features(
-            output["f_fused"],
-            output["pooled_shapes"],
-            conditioning_boxes,
-            self.roi_output_size,
-        )
-        fused_roi_feature = fused_roi_grid.mean((-2, -1))
-        roi_feature = fused_roi_feature
-        highres_roi_feature = torch.zeros_like(roi_feature)
-        if self.use_highres_roi:
-            highres_roi_grid = roi_align_feature_maps(
-                output["high_resolution_features"],
+        if self.use_roi:
+            roi_grid = roi_align_feature_maps(
+                output["fine_features"],
                 conditioning_boxes,
                 self.roi_output_size,
             )
-            highres_roi_feature = self.highres_norm(
-                highres_roi_grid.mean((-2, -1))
-            )
-            roi_feature = roi_feature + self.highres_gate.tanh() * highres_roi_feature
+            roi_feature = roi_grid.mean((-2, -1))
+        else:
+            roi_feature = torch.zeros_like(event_feature)
 
         global_feature = (
             event_feature
@@ -370,20 +353,25 @@ class QwenGroundCLS(QwenGroundMS):
         classification_feature = self.classifier_fusion(
             torch.cat((global_feature, roi_feature), dim=-1)
         )
+        if self.classification_mode == "definition":
+            visual = F.normalize(self.visual_to_text(classification_feature), dim=-1)
+            class_logits = (
+                self.class_logit_scale.exp().clamp(max=100)
+                * visual
+                @ self.class_prototypes.T
+            )
+        else:
+            class_logits = self.classifier(classification_feature)
         positive_count = positive_mask.sum().clamp_min(1)
         output.update(
             {
                 "presence_logits": presence_logits,
-                "null_feature": null_feature,
-                "class_logits": self.classifier(classification_feature),
+                "class_logits": class_logits,
                 "classification_feature": classification_feature,
                 "roi_feature": roi_feature,
-                "fused_roi_feature": fused_roi_feature,
-                "highres_roi_feature": highres_roi_feature,
                 "classification_boxes": conditioning_boxes,
                 "gt_box_fraction": (gt_mask & positive_mask).float().sum()
                 / positive_count,
-                "highres_gate": self.highres_gate.tanh(),
             }
         )
         return output
@@ -405,7 +393,6 @@ def focal_presence_loss(
     logits: torch.Tensor,
     targets: torch.Tensor,
     config: dict,
-    hard_negative_mining: bool,
 ) -> torch.Tensor:
     cross_entropy = F.binary_cross_entropy_with_logits(logits, targets, reduction="none")
     probabilities = logits.sigmoid()
@@ -416,30 +403,40 @@ def focal_presence_loss(
         targets.new_tensor(1 - config["positive_alpha"]),
     )
     losses = alpha * (1 - correct_probability).pow(config["focal_gamma"]) * cross_entropy
-    weights = torch.ones_like(losses)
-    negative_indices = torch.where(targets == 0)[0]
-    if hard_negative_mining and len(negative_indices):
-        count = max(1, math.ceil(len(negative_indices) * config["hard_negative_fraction"]))
-        hardest = negative_indices[logits[negative_indices].detach().topk(count).indices]
-        weights[hardest] = config["hard_negative_weight"]
-    return (losses * weights).sum() / weights.sum()
+    return losses.mean()
 
 
 def classification_metrics(
     targets: torch.Tensor,
     predictions: torch.Tensor,
     labels: list[str],
+    include_indices: set[int] | None = None,
+    supported_only: bool = False,
 ) -> dict:
     targets = targets.long().cpu()
     predictions = predictions.long().cpu()
+    if not len(targets):
+        return {
+            "accuracy": None,
+            "macro_f1": None,
+            "weighted_f1": None,
+            "evaluated_labels": [],
+            "per_class": {},
+            "confusion_matrix_labels": labels,
+            "confusion_matrix": [],
+        }
     matrix = torch.zeros((len(labels), len(labels)), dtype=torch.long)
     for target, prediction in zip(targets.tolist(), predictions.tolist()):
         matrix[target, prediction] += 1
 
+    indices = list(range(len(labels))) if include_indices is None else sorted(include_indices)
+    if supported_only:
+        indices = [index for index in indices if matrix[index].sum()]
     per_class = {}
     f1_values = []
     weighted_f1 = 0.0
-    for index, label in enumerate(labels):
+    for index in indices:
+        label = labels[index]
         true_positive = int(matrix[index, index])
         false_positive = int(matrix[:, index].sum()) - true_positive
         false_negative = int(matrix[index].sum()) - true_positive
@@ -467,8 +464,9 @@ def classification_metrics(
     total = len(targets)
     return {
         "accuracy": float((targets == predictions).float().mean()),
-        "macro_f1": sum(f1_values) / len(f1_values),
-        "weighted_f1": weighted_f1 / total,
+        "macro_f1": sum(f1_values) / max(1, len(f1_values)),
+        "weighted_f1": weighted_f1 / max(1, total),
+        "evaluated_labels": [labels[index] for index in indices],
         "per_class": per_class,
         "confusion_matrix_labels": labels,
         "confusion_matrix": matrix.tolist(),

@@ -171,7 +171,10 @@ class QwenGroundMS(nn.Module):
         super().__init__()
         self.vision_encoder = vision_encoder
         self.trainable_vision_blocks = model_config["trainable_vision_blocks"]
-        self.pooled_long_edge = model_config["pooled_long_edge"]
+        components = model_config["components"]
+        self.pyramid_scales = model_config["pyramid_scales"]
+        self.center_mode = components["center_mode"]
+        self.size_uses_heatmap = components["size_uses_heatmap"]
         vision_dim = vision_encoder.config.out_hidden_size
         fusion_dim = model_config["hidden_dim"]
         self.feature_projection = nn.Linear(vision_dim, fusion_dim)
@@ -180,21 +183,7 @@ class QwenGroundMS(nn.Module):
             nn.GELU(),
             nn.Linear(fusion_dim, fusion_dim),
         )
-
-        encoder_layer = nn.TransformerEncoderLayer(
-            d_model=fusion_dim,
-            nhead=model_config["num_heads"],
-            dim_feedforward=fusion_dim * model_config["mlp_ratio"],
-            dropout=model_config["dropout"],
-            activation="gelu",
-            batch_first=True,
-            norm_first=True,
-        )
-        self.fusion_encoder = nn.TransformerEncoder(
-            encoder_layer,
-            num_layers=model_config["num_layers"],
-            norm=nn.LayerNorm(fusion_dim),
-        )
+        self.level_embedding = nn.Embedding(len(self.pyramid_scales), fusion_dim)
         decoder_layer = nn.TransformerDecoderLayer(
             d_model=fusion_dim,
             nhead=model_config["num_heads"],
@@ -210,21 +199,18 @@ class QwenGroundMS(nn.Module):
             norm=nn.LayerNorm(fusion_dim),
         )
         self.event_query = nn.Parameter(torch.randn(1, fusion_dim))
-        self.center_head = nn.Sequential(
-            nn.Linear(fusion_dim, fusion_dim),
-            nn.GELU(),
+        self.query_center_head = nn.Sequential(
             nn.Linear(fusion_dim, fusion_dim),
             nn.GELU(),
             nn.Linear(fusion_dim, 2),
         )
+        size_input_dim = fusion_dim * (2 if self.size_uses_heatmap else 1)
         self.size_head = nn.Sequential(
-            nn.Linear(fusion_dim, fusion_dim),
-            nn.GELU(),
-            nn.Linear(fusion_dim, fusion_dim),
+            nn.Linear(size_input_dim, fusion_dim),
             nn.GELU(),
             nn.Linear(fusion_dim, 2),
         )
-        self.heatmap_head = nn.Conv2d(fusion_dim, 1, kernel_size=1)
+        self.heatmap_logit_scale = nn.Parameter(torch.tensor(math.log(10.0)))
 
         self.vision_encoder.requires_grad_(False)
         for block in self.vision_encoder.blocks[-self.trainable_vision_blocks :]:
@@ -248,15 +234,7 @@ class QwenGroundMS(nn.Module):
         y, x = torch.meshgrid(y, x, indexing="ij")
         return torch.stack((x.flatten(), y.flatten()), dim=-1)
 
-    def pooled_shape(self, height: int, width: int) -> tuple[int, int]:
-        if height >= width:
-            short_edge = max(1, round(self.pooled_long_edge * width / height))
-            return self.pooled_long_edge, short_edge
-        short_edge = max(1, round(self.pooled_long_edge * height / width))
-        return short_edge, self.pooled_long_edge
-
     def grounding_queries(self) -> torch.Tensor:
-        """Return the query bank decoded against the fused image tokens."""
         return self.event_query
 
     def forward(
@@ -273,41 +251,37 @@ class QwenGroundMS(nn.Module):
         split_sizes = (image_grid_thw.prod(-1) // merge**2).tolist()
         image_features = torch.split(vision_output, split_sizes)
 
-        sequences, pooled_shapes = [], []
-        high_resolution_features = []
-        heatmap_logits, heatmap_features = [], []
+        memories, fine_sequences, fine_shapes = [], [], []
         for features, grid in zip(image_features, image_grid_thw.tolist()):
             time, source_height, source_width = grid
             source_height //= merge
             source_width //= merge
             spatial = features.view(time, source_height, source_width, -1).mean(0)
-            target_height, target_width = self.pooled_shape(source_height, source_width)
-            coordinates = self.spatial_coordinates(
-                features.device, source_height, source_width
+            projected = self.feature_projection(spatial.flatten(0, 1)).view(
+                source_height, source_width, -1
             )
-            embedded_spatial = (
-                self.feature_projection(spatial.flatten(0, 1))
-                + self.position_embedding(coordinates)
-            ).view(source_height, source_width, -1)
-            high_resolution_grid = embedded_spatial.permute(2, 0, 1).unsqueeze(0)
-            high_resolution_features.append(high_resolution_grid.squeeze(0))
-            logits = self.heatmap_head(high_resolution_grid)
-            probabilities = logits.flatten(1).softmax(-1)
-            heatmap_logits.append(logits)
-            heatmap_features.append(
-                probabilities @ embedded_spatial.flatten(0, 1)
-            )
-            embedded = F.adaptive_avg_pool2d(
-                high_resolution_grid,
-                (target_height, target_width),
-            ).squeeze(0).flatten(1).transpose(0, 1)
-            sequences.append(embedded)
-            pooled_shapes.append((target_height, target_width))
+            levels = []
+            for level, scale in enumerate(self.pyramid_scales):
+                height = max(1, round(source_height / scale))
+                width = max(1, round(source_width / scale))
+                level_grid = F.adaptive_avg_pool2d(
+                    projected.permute(2, 0, 1).unsqueeze(0), (height, width)
+                ).squeeze(0).permute(1, 2, 0)
+                coordinates = self.spatial_coordinates(features.device, height, width)
+                level_tokens = (
+                    level_grid.flatten(0, 1)
+                    + self.position_embedding(coordinates)
+                    + self.level_embedding.weight[level]
+                )
+                levels.append(level_tokens)
+            fine_sequences.append(levels[0])
+            fine_shapes.append((source_height, source_width))
+            memories.append(torch.cat(levels))
 
-        batch_size = len(sequences)
-        sequence_lengths = [len(sequence) for sequence in sequences]
+        batch_size = len(memories)
+        sequence_lengths = [len(memory) for memory in memories]
         maximum = max(sequence_lengths)
-        fused_input = vision_output.new_zeros(
+        memory = vision_output.new_zeros(
             batch_size,
             maximum,
             self.feature_projection.out_features,
@@ -316,37 +290,54 @@ class QwenGroundMS(nn.Module):
         padding_mask = torch.ones(
             batch_size, maximum, dtype=torch.bool, device=vision_output.device
         )
-        for batch_index, sequence in enumerate(sequences):
-            fused_input[batch_index, : len(sequence)] = sequence
+        for batch_index, sequence in enumerate(memories):
+            memory[batch_index, : len(sequence)] = sequence
             padding_mask[batch_index, : len(sequence)] = False
-
-        f_fused = self.fusion_encoder(fused_input, src_key_padding_mask=padding_mask)
-        global_token_indices = torch.arange(maximum, device=f_fused.device).expand(
-            batch_size, -1
-        )
 
         query = self.grounding_queries().unsqueeze(0).expand(batch_size, -1, -1)
         query_features = self.event_decoder(
             query,
-            f_fused,
+            memory,
             memory_key_padding_mask=padding_mask,
         )
         event_feature = query_features[:, 0]
-        heatmap_feature = torch.cat(heatmap_features)
-        center = self.center_head(heatmap_feature)
-        size = self.size_head(event_feature)
-        bbox_cxcywh = torch.cat((center, size), dim=-1).sigmoid()
+        heatmap_logits, heatmap_features, heatmap_centers, fine_features = [], [], [], []
+        scale = self.heatmap_logit_scale.exp().clamp(max=100)
+        for fine, shape, event in zip(fine_sequences, fine_shapes, event_feature):
+            height, width = shape
+            logits = scale * (F.normalize(fine, dim=-1) @ F.normalize(event, dim=-1))
+            probabilities = logits.softmax(-1)
+            coordinates = self.spatial_coordinates(fine.device, height, width)
+            heatmap_logits.append(logits.view(1, 1, height, width))
+            heatmap_features.append(probabilities @ fine)
+            heatmap_centers.append(probabilities.float() @ coordinates)
+            fine_features.append(fine.transpose(0, 1).reshape(-1, height, width))
+
+        heatmap_feature = torch.stack(heatmap_features)
+        heatmap_center = torch.stack(heatmap_centers)
+        center = (
+            heatmap_center
+            if self.center_mode == "softargmax"
+            else self.query_center_head(event_feature).sigmoid()
+        )
+        size_input = (
+            torch.cat((event_feature, heatmap_feature), dim=-1)
+            if self.size_uses_heatmap
+            else event_feature
+        )
+        size = self.size_head(size_input).sigmoid()
+        bbox_cxcywh = torch.cat((center, size), dim=-1)
         return {
             "bbox_cxcywh": bbox_cxcywh,
             "heatmap_logits": heatmap_logits,
+            "heatmap_center": heatmap_center,
             "event_feature": event_feature,
             "query_features": query_features,
             "heatmap_feature": heatmap_feature,
-            "high_resolution_features": high_resolution_features,
-            "f_fused": f_fused,
+            "fine_features": fine_features,
+            "memory": memory,
             "padding_mask": padding_mask,
-            "global_token_indices": global_token_indices,
-            "pooled_shapes": pooled_shapes,
+            "fine_shapes": fine_shapes,
         }
 
 
@@ -411,6 +402,14 @@ def gaussian_heatmap(
     return heatmap.unsqueeze(1)
 
 
+def spatial_heatmap_loss(logits: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
+    target = target.flatten(1)
+    return (
+        target
+        * (target.clamp_min(1e-8).log() - logits.float().flatten(1).log_softmax(-1))
+    ).sum(-1).mean()
+
+
 def per_box_metrics(
     predictions: torch.Tensor,
     targets: torch.Tensor,
@@ -462,7 +461,7 @@ def checkpoint_payload(model: QwenGroundMS, epoch: int, metrics: dict, config: d
         if not key.startswith("vision_encoder.") or key in trainable_parameters
     }
     return {
-        "format_version": 5,
+        "format_version": 6,
         "epoch": epoch,
         "metrics": metrics,
         "model_config": config["model"],

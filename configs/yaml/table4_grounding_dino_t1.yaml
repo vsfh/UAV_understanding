@@ -38,6 +38,7 @@ inference:
 
 validation:
   fallback_threshold: 0.25
+  max_n_fpr: 0.1
 
 output:
   calibration: ./outputs/table4/grounding_dino_t1/{protocol}/seed{seed}/calibration.json

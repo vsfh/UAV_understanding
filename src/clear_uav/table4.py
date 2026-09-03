@@ -401,23 +401,50 @@ def macro_f1(samples, predictions, labels, threshold: float) -> float:
     return statistics.fmean(values)
 
 
-def select_threshold(samples, predictions, fallback: float) -> float:
+def presence_at_threshold(samples, predictions, threshold: float) -> dict[str, float]:
+    tp = sum(
+        sample.presence and prediction["presence_score"] >= threshold
+        for sample, prediction in zip(samples, predictions)
+    )
+    fp = sum(
+        not sample.presence and prediction["presence_score"] >= threshold
+        for sample, prediction in zip(samples, predictions)
+    )
+    fn = sum(
+        sample.presence and prediction["presence_score"] < threshold
+        for sample, prediction in zip(samples, predictions)
+    )
+    negatives = sum(not sample.presence for sample in samples)
+    precision = tp / (tp + fp) if tp + fp else 0.0
+    recall = tp / (tp + fn) if tp + fn else 0.0
+    return {
+        "precision": precision,
+        "recall": recall,
+        "f1": 2 * precision * recall / (precision + recall) if precision + recall else 0.0,
+        "n_fpr": fp / negatives if negatives else 0.0,
+    }
+
+
+def select_threshold(samples, predictions, validation: dict) -> tuple[float, dict]:
     positives = sum(sample.presence for sample in samples)
     negatives = len(samples) - positives
     if not positives or not negatives:
-        return fallback
-    candidates = sorted({prediction["presence_score"] for prediction in predictions})
-    best_threshold, best_f1 = fallback, -1.0
-    for threshold in candidates:
-        tp = sum(s.presence and p["presence_score"] >= threshold for s, p in zip(samples, predictions))
-        fp = sum(not s.presence and p["presence_score"] >= threshold for s, p in zip(samples, predictions))
-        fn = sum(s.presence and p["presence_score"] < threshold for s, p in zip(samples, predictions))
-        precision = tp / (tp + fp) if tp + fp else 0.0
-        recall = tp / (tp + fn) if tp + fn else 0.0
-        f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
-        if f1 > best_f1:
-            best_threshold, best_f1 = threshold, f1
-    return best_threshold
+        threshold = validation["fallback_threshold"]
+        return threshold, presence_at_threshold(samples, predictions, threshold)
+
+    scores = {prediction["presence_score"] for prediction in predictions}
+    candidates = sorted(scores | {math.nextafter(max(scores), math.inf)})
+    rows = [
+        (threshold, presence_at_threshold(samples, predictions, threshold))
+        for threshold in candidates
+    ]
+    maximum_fpr = validation["max_n_fpr"]
+    feasible = [row for row in rows if row[1]["n_fpr"] <= maximum_fpr]
+    threshold, metrics = max(
+        feasible,
+        key=lambda row: (row[1]["recall"], row[1]["precision"], row[0]),
+    )
+    return threshold, metrics
 
 
 def table4_metrics(samples, predictions, labels, threshold: float, classification: bool) -> dict:
@@ -427,9 +454,14 @@ def table4_metrics(samples, predictions, labels, threshold: float, classificatio
         if not sample.presence
     ]
     per_class_ap = [localization_ap50(samples, predictions, label) for label in labels]
+    operating_point = presence_at_threshold(samples, predictions, threshold)
+    calls = [prediction.get("num_calls", 1) for prediction in predictions]
     return {
         "p_ap": presence_ap(samples, predictions),
         "n_fpr": sum(negatives) / len(negatives) if negatives else None,
+        "p_precision": operating_point["precision"],
+        "p_recall": operating_point["recall"],
+        "p_f1": operating_point["f1"],
         "ap50": localization_ap50(samples, predictions),
         "c_f1": macro_f1(samples, predictions, labels, threshold) if classification else None,
         "g_map50": (
@@ -438,6 +470,8 @@ def table4_metrics(samples, predictions, labels, threshold: float, classificatio
         ),
         "valid_rate": sum(prediction["valid"] for prediction in predictions) / len(predictions),
         "median_ms": statistics.median(prediction["latency_ms"] for prediction in predictions),
+        "mean_calls": statistics.fmean(calls),
+        "max_calls": max(calls),
         "threshold": threshold,
         "positive_records": sum(sample.presence for sample in samples),
         "negative_records": sum(not sample.presence for sample in samples),
@@ -481,12 +515,26 @@ def calibration_path(config: dict, protocol: str, seed: int) -> Path:
 
 
 def save_calibration(config, protocol, seed, samples, predictions, classification=False):
-    threshold = select_threshold(samples, predictions, config["validation"]["fallback_threshold"])
+    threshold, selection = select_threshold(samples, predictions, config["validation"])
     labels = labels_from_config(config)
     metrics = table4_metrics(samples, predictions, labels, threshold, classification)
     path = calibration_path(config, protocol, seed)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps({"threshold": threshold, "metrics": metrics}, indent=2), encoding="utf-8")
+    path.write_text(
+        json.dumps(
+            {
+                "threshold": threshold,
+                "selection": {
+                    "policy": "max_recall_at_fpr",
+                    "max_n_fpr": config["validation"]["max_n_fpr"],
+                    **selection,
+                },
+                "metrics": metrics,
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
     return threshold, metrics
 
 
@@ -1672,7 +1720,6 @@ def classify_dinov2_crops(model, processor, samples, localizations, config, devi
 
 
 def train_dfine_dinov2(config: dict) -> None:
-    train_dfine(config)
     device = torch.device(config["runtime"]["device"])
     for protocol in config["data"]["protocols"]:
         for seed in config["train"]["seeds"]:
@@ -2135,7 +2182,9 @@ def predict_qwen_agent(model, processor, samples, config, device, description):
         global_prediction = qwen_discovery_call(model, processor, image, config, device)
         calls.append({"view": "global", "prediction": global_prediction})
         candidates = [global_prediction]
+        searched_tiles = False
         if global_prediction["presence_score"] < config["agent"]["early_exit_threshold"]:
+            searched_tiles = True
             for tile, region in sliding_tiles(
                 image, config["agent"]["tile_grid"], config["agent"]["overlap"]
             ):
@@ -2150,7 +2199,9 @@ def predict_qwen_agent(model, processor, samples, config, device, description):
                 candidates.append(tile_prediction)
         best = max(candidates, key=lambda prediction: prediction["presence_score"])
         total_latency = sum(call["prediction"]["latency_ms"] for call in calls)
+        verified = False
         if best["bbox_1000"] is not None:
+            verified = True
             inspect_crop = crop_from_box(
                 image, best["bbox_1000"], config["agent"]["inspect_context_margin"]
             )
@@ -2171,6 +2222,12 @@ def predict_qwen_agent(model, processor, samples, config, device, description):
                 "category": category,
                 "valid": valid,
                 "latency_ms": total_latency,
+                "num_calls": len(calls),
+                "route": (
+                    "global"
+                    + ("_tiles" if searched_tiles else "")
+                    + ("_verify" if verified else "")
+                ),
                 "raw_output": calls,
             }
         )
@@ -2178,7 +2235,17 @@ def predict_qwen_agent(model, processor, samples, config, device, description):
 
 
 def train_qwen_agent(config: dict) -> None:
-    train_qwen_discovery(config)
+    adapter = project_path(
+        config["output"]["adapter"],
+        protocol=config["data"]["protocols"][0],
+        seed=config["train"]["seeds"][0],
+    )
+    if not (adapter / "adapter_config.json").is_file():
+        raise FileNotFoundError(
+            f"shared Direct Qwen adapter not found: {adapter}; "
+            "run runs/table4_qwen3vl_t4.sh first"
+        )
+    print(f"[reuse] Direct Qwen adapter: {adapter}")
     device = torch.device(config["runtime"]["device"])
     for protocol in config["data"]["protocols"]:
         for seed in config["train"]["seeds"]:

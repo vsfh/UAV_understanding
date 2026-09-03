@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader, WeightedRandomSampler
 from torch.utils.tensorboard import SummaryWriter
 from tqdm.auto import tqdm
 
-from clear_uav.experiment_config import experiment_runs, load_yaml, project_path
+from clear_uav.experiment_config import experiment_runs, load_yaml_with_base, project_path
 from clear_uav.qwen_ground_ms import (
     GroundCollator,
     GroundDataset,
@@ -27,6 +27,7 @@ from clear_uav.qwen_ground_ms import (
     read_ground_samples,
     save_checkpoint,
     seed_everything,
+    spatial_heatmap_loss,
 )
 
 
@@ -79,7 +80,7 @@ def move_inputs(batch: dict, device: torch.device) -> dict:
 def train_run(config: dict, protocol: str, seed: int) -> None:
     values = {"protocol": protocol, "seed": seed}
     output_dir = project_path(config["output"]["root"], **values)
-    checkpoint_path = output_dir / "best.pt"
+    checkpoint_path = project_path(config["output"]["checkpoint"], **values)
     if config["output"].get("skip_existing") and checkpoint_path.exists():
         print(f"[skip] {checkpoint_path}")
         return
@@ -158,6 +159,7 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
         model.train()
         optimizer.zero_grad(set_to_none=True)
         running_loss = 0.0
+        running_heatmap = 0.0
         progress = tqdm(
             train_batches,
             desc=f"qwen_ground_ms {protocol} seed{seed} epoch {epoch}/{train_config['epochs']}",
@@ -180,16 +182,12 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
                     heatmap_target = gaussian_heatmap(
                         sample_target.unsqueeze(0), height, width
                     )
-                    heatmap_losses.append(
-                        -(
-                            heatmap_target.flatten(1)
-                            * logits.float().flatten(1).log_softmax(-1)
-                        ).sum(-1).mean()
-                    )
+                    heatmap_losses.append(spatial_heatmap_loss(logits, heatmap_target))
                 heatmap_loss = torch.stack(heatmap_losses).mean()
                 loss = bbox_loss + train_config["heatmap_weight"] * heatmap_loss
             (loss / train_config["gradient_accumulation"]).backward()
             running_loss += loss.item()
+            running_heatmap += heatmap_loss.item()
             if (
                 batch_index % train_config["gradient_accumulation"] == 0
                 or batch_index == len(train_batches)
@@ -202,27 +200,41 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
                 writer.add_scalar("train/loss", loss.item(), global_step)
                 writer.add_scalar("train/l1", l1.item(), global_step)
                 writer.add_scalar("train/giou", giou.item(), global_step)
-                writer.add_scalar("train/heatmap", heatmap_loss.item(), global_step)
+                writer.add_scalar("train/heatmap_kl", heatmap_loss.item(), global_step)
+                writer.add_scalar(
+                    "train/heatmap_center_error",
+                    torch.linalg.vector_norm(
+                        output["heatmap_center"].float() - target[:, :2], dim=-1
+                    ).mean().item(),
+                    global_step,
+                )
                 writer.add_scalar(
                     "train/vision_learning_rate", scheduler.get_last_lr()[0], global_step
                 )
                 writer.add_scalar(
                     "train/grounding_learning_rate", scheduler.get_last_lr()[1], global_step
                 )
-            progress.set_postfix(loss=f"{running_loss / batch_index:.4f}")
+            progress.set_postfix(
+                loss=f"{running_loss / batch_index:.4f}",
+                heatmap_kl=f"{running_heatmap / batch_index:.4f}",
+            )
 
         epoch_loss = running_loss / len(train_batches)
         writer.add_scalar("epoch/train_loss", epoch_loss, epoch)
         writer.flush()
         print(f"{protocol} seed{seed} epoch {epoch}: train_loss={epoch_loss:.6f}")
+        epoch_metrics = {
+            "train_loss": epoch_loss,
+            "heatmap_kl": running_heatmap / len(train_batches),
+        }
         save_checkpoint(
-            checkpoint_payload(model, epoch, {"train_loss": epoch_loss}, config),
+            checkpoint_payload(model, epoch, epoch_metrics, config),
             checkpoint_path,
         )
 
     writer.close()
     (output_dir / "metrics.json").write_text(
-        json.dumps({"final_train_loss": epoch_loss}, indent=2),
+        json.dumps(epoch_metrics, indent=2),
         encoding="utf-8",
     )
     del model, vision, optimizer
@@ -233,7 +245,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Train Qwen single-view grounding")
     parser.add_argument("--config", required=True)
     args = parser.parse_args()
-    config = load_yaml(args.config)
+    config = load_yaml_with_base(args.config)
     for protocol, seed in experiment_runs(config):
         train_run(config, protocol, seed)
 

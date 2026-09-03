@@ -1,4 +1,4 @@
-experiment: qwen_ground_single_view_highres_heatmap
+experiment: qwen_ground_ms_v2
 
 runtime:
   device: cuda
@@ -6,13 +6,15 @@ runtime:
 model:
   path: ./hf_cache/models--Qwen--Qwen3.6-35B-A3B-FP8
   trainable_vision_blocks: 3
-  pooled_long_edge: 36
-  num_layers: 3
+  pyramid_scales: [1, 2, 4]
   decoder_layers: 1
   hidden_dim: 768
   num_heads: 12
   mlp_ratio: 4
   dropout: 0.1
+  components:
+    center_mode: softargmax
+    size_uses_heatmap: true
 
 input:
   max_pixels: 995328
@@ -47,7 +49,7 @@ test:
   num_workers: 8
 
 output:
-  root: ./outputs/qwen_ground_single_view_highres_heatmap/{protocol}/seed{seed}
-  checkpoint: ./outputs/qwen_ground_single_view_highres_heatmap/{protocol}/seed{seed}/best.pt
-  test_results: ./results/qwen_ground_single_view_highres_heatmap/{protocol}/seed{seed}_test.json
+  root: ./outputs/qwen_ground_ms_v2/{protocol}/seed{seed}
+  checkpoint: ./outputs/qwen_ground_ms_v2/{protocol}/seed{seed}/last.pt
+  test_results: ./results/qwen_ground_ms_v2/{protocol}/seed{seed}_test.json
   skip_existing: true

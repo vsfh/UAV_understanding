@@ -40,6 +40,7 @@ train:
 
 validation:
   fallback_threshold: 0.5
+  max_n_fpr: 0.1
 
 output:
   root: ./outputs/table4/dfine_t1/{protocol}/seed{seed}

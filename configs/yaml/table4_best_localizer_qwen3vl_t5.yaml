@@ -75,6 +75,7 @@ cascade:
 
 validation:
   fallback_threshold: 0.5
+  max_n_fpr: 0.1
 
 output:
   root: ./outputs/table4/best_localizer_qwen3vl_t5/{protocol}/seed{seed}

@@ -23,6 +23,7 @@ from clear_uav.qwen_ground_cls import (
     gt_box_probability,
     load_cls_config,
     load_class_labels,
+    load_definition_prototypes,
     read_no_event_images,
 )
 from clear_uav.qwen_ground_ms import (
@@ -36,6 +37,7 @@ from clear_uav.qwen_ground_ms import (
     read_ground_samples,
     save_checkpoint,
     seed_everything,
+    spatial_heatmap_loss,
 )
 
 
@@ -90,17 +92,23 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
     seed_everything(seed)
     device = torch.device(config["runtime"]["device"])
     data_root = project_path(config["data"]["root"])
-    labels = load_class_labels(project_path(config["data"]["ontology"]))
+    labels_path = config["data"].get("labels")
+    labels = load_class_labels(
+        project_path(config["data"]["ontology"]),
+        project_path(labels_path) if labels_path else None,
+    )
     targets = load_bbox_targets(project_path(config["data"]["bbox_annotations"]))
     train_samples = read_ground_samples(data_root / protocol / "train.csv", data_root)
     negative_images = read_no_event_images(config["data"], protocol, "train")
 
     vision, processor = load_qwen_vision(project_path(config["model"]["path"]), device)
+    class_prototypes = load_definition_prototypes(config["classification"], labels)
     model = QwenGroundCLS(
         vision,
         config["model"],
         config["classification"],
         len(labels),
+        class_prototypes,
     ).to(device)
     initialization_path = project_path(
         config["initialization"]["grounding_checkpoint"], **values
@@ -162,7 +170,7 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
         f"{sum(parameter.numel() for parameter in structure_parameters):,}"
     )
     print(
-        f"training images: {len(train_samples):,} positive + "
+        f"training images: {sum(label != 'no_event' for label in train_batches.dataset.labels):,} positive + "
         f"{len(negative_images):,} no-event; "
         f"samples per epoch: {len(train_batches.sampler):,}; "
         f"negative exposure: {train_config['negative_fraction']:.0%}; "
@@ -217,12 +225,7 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
                             sample_target.unsqueeze(0), height, width
                         )
                         heatmap_losses.append(
-                            -(
-                                heatmap_target.flatten(1)
-                                * logits.float().flatten(1).log_softmax(-1)
-                            )
-                            .sum(-1)
-                            .mean()
+                            spatial_heatmap_loss(logits, heatmap_target)
                         )
                     heatmap_loss = torch.stack(heatmap_losses).mean()
                     classification_loss = F.cross_entropy(
@@ -233,15 +236,11 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
                 else:
                     zero = prediction.sum() * 0
                     bbox_loss = l1 = giou = heatmap_loss = classification_loss = zero
-                if config["classification"]["components"]["null_eventness"]:
-                    presence_loss = focal_presence_loss(
-                        output["presence_logits"].float(),
-                        presence_target,
-                        config["presence"],
-                        config["classification"]["components"]["hard_negative_mining"],
-                    )
-                else:
-                    presence_loss = output["presence_logits"].sum() * 0
+                presence_loss = focal_presence_loss(
+                    output["presence_logits"].float(),
+                    presence_target,
+                    config["presence"],
+                )
                 loss = (
                     bbox_loss
                     + train_config["heatmap_weight"] * heatmap_loss
@@ -277,7 +276,7 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
                 writer.add_scalar("train/loss", loss.item(), global_step)
                 writer.add_scalar("train/l1", l1.item(), global_step)
                 writer.add_scalar("train/giou", giou.item(), global_step)
-                writer.add_scalar("train/heatmap", heatmap_loss.item(), global_step)
+                writer.add_scalar("train/heatmap_kl", heatmap_loss.item(), global_step)
                 writer.add_scalar(
                     "train/classification", classification_loss.item(), global_step
                 )
@@ -285,9 +284,6 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
                 writer.add_scalar("train/classification_accuracy", accuracy.item(), global_step)
                 writer.add_scalar(
                     "train/presence_accuracy", presence_accuracy.item(), global_step
-                )
-                writer.add_scalar(
-                    "train/highres_roi_gate", output["highres_gate"].item(), global_step
                 )
                 writer.add_scalar(
                     "train/scheduled_gt_box_probability",
@@ -320,14 +316,13 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
             "presence_loss": running_presence_loss / len(train_batches),
             "presence_accuracy": running_presence_accuracy / len(train_batches),
             "gt_box_probability": scheduled_gt_probability,
-            "highres_roi_gate": float(model.highres_gate.tanh().detach()),
         }
         for name, value in epoch_metrics.items():
             writer.add_scalar(f"epoch/{name}", value, epoch)
         writer.flush()
         print(f"{protocol} seed{seed} epoch {epoch}: {epoch_metrics}")
         payload = checkpoint_payload(model, epoch, epoch_metrics, config)
-        payload["format_version"] = 7
+        payload["format_version"] = 8
         payload["labels"] = labels
         save_checkpoint(payload, checkpoint_path)
 

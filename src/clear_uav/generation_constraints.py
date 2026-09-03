@@ -20,7 +20,7 @@ def grounding_prefix_allowed_tokens(
     prompt_length: int = 0,
     decoder_start_token_id: int | None = None,
 ):
-    """Constrain generation to `no_event` or `label + four <loc_*> tokens`."""
+    """Constrain generation to `no_event` or `label + an ordered box`."""
     label_sequences = {
         label: tokenizer(label, add_special_tokens=False)["input_ids"]
         for label in labels
@@ -28,6 +28,7 @@ def grounding_prefix_allowed_tokens(
     negative = tokenizer(negative_label, add_special_tokens=False)["input_ids"]
     eos = tokenizer.eos_token_id
     loc_ids = set(location_token_ids)
+    loc_index = {token: index for index, token in enumerate(location_token_ids)}
 
     def allowed_tokens(_batch_id, input_ids):
         prefix = input_ids[prompt_length:].tolist()
@@ -51,8 +52,14 @@ def grounding_prefix_allowed_tokens(
             if prefix[: len(sequence)] != sequence:
                 continue
             coordinates = prefix[len(sequence) :]
-            if len(coordinates) < 4 and all(token in loc_ids for token in coordinates):
-                allowed.update(loc_ids)
+            if not all(token in loc_ids for token in coordinates):
+                continue
+            if len(coordinates) < 2:
+                allowed.update(location_token_ids[:-1])
+            elif len(coordinates) == 2:
+                allowed.update(location_token_ids[loc_index[coordinates[0]] + 1 :])
+            elif len(coordinates) == 3:
+                allowed.update(location_token_ids[loc_index[coordinates[1]] + 1 :])
             elif len(coordinates) == 4 and all(token in loc_ids for token in coordinates):
                 allowed.add(eos)
 

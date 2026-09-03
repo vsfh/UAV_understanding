@@ -51,6 +51,7 @@ train:
 
 validation:
   fallback_threshold: 0.5
+  max_n_fpr: 0.1
 
 output:
   root: ./outputs/table4/florence2_t4/{protocol}/seed{seed}

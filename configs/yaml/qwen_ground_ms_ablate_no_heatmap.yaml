@@ -1,0 +1,15 @@
+base_config: ./configs/yaml/qwen_ground_ms.yaml
+experiment: qwen_ground_ms_v2_no_heatmap
+
+model:
+  components:
+    center_mode: query
+    size_uses_heatmap: false
+
+train:
+  heatmap_weight: 0.0
+
+output:
+  root: ./outputs/qwen_ground_ms_ablations/no_heatmap/{protocol}/seed{seed}
+  checkpoint: ./outputs/qwen_ground_ms_ablations/no_heatmap/{protocol}/seed{seed}/last.pt
+  test_results: ./results/qwen_ground_ms_ablations/no_heatmap/{protocol}/seed{seed}_test.json
