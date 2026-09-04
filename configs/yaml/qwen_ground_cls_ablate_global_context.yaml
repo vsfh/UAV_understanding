@@ -5,7 +5,12 @@ classification:
   components:
     global_context: false
 
+train:
+  epochs: 8
+  learning_rate: 1.5e-4
+  vision_learning_rate: 1.0e-6
+
 output:
-  root: ./outputs/qwen_ground_cls_ablations/no_global_context/{protocol}/seed{seed}
-  checkpoint: ./outputs/qwen_ground_cls_ablations/no_global_context/{protocol}/seed{seed}/last.pt
-  test_results: ./results/qwen_ground_cls_ablations/no_global_context/{protocol}/seed{seed}_test.json
+  root: ./outputs/qwen_ground_cls_ablations/e8_lr1p5e4/no_global_context/{protocol}/seed{seed}
+  checkpoint: ./outputs/qwen_ground_cls_ablations/e8_lr1p5e4/no_global_context/{protocol}/seed{seed}/last.pt
+  test_results: ./results/qwen_ground_cls_ablations/e8_lr1p5e4/no_global_context/{protocol}/seed{seed}_test.json
