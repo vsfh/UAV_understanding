@@ -542,6 +542,42 @@ def read_threshold(config, protocol, seed) -> float:
     return json.loads(calibration_path(config, protocol, seed).read_text())["threshold"]
 
 
+def prediction_cache_path(config, split: str, protocol: str, seed: int) -> Path:
+    return project_path(
+        config["output"][f"{split}_predictions"],
+        protocol=protocol,
+        seed=seed,
+    )
+
+
+def save_prediction_cache(config, split, protocol, seed, samples, predictions) -> None:
+    path = prediction_cache_path(config, split, protocol, seed)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(
+            [
+                {"record_uid": sample.record_uid, "prediction": prediction}
+                for sample, prediction in zip(samples, predictions)
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+
+def read_prediction_cache(config, split, protocol, seed):
+    path = prediction_cache_path(config, split, protocol, seed)
+    if not path.is_file():
+        print(f"[cache miss] {path}")
+        return {}
+    predictions = {
+        row["record_uid"]: row["prediction"]
+        for row in json.loads(path.read_text(encoding="utf-8"))
+    }
+    print(f"[cache reuse] {len(predictions):,} full-image predictions from {path}")
+    return predictions
+
+
 def ensure_yolo_model(model_config: dict) -> Path:
     destination = project_path(model_config["path"])
     if destination.is_file():
@@ -1044,6 +1080,7 @@ class QwenDiscoveryCollator:
         self.prompt = config["prompt"]["user"].replace("{categories}", category_block(config))
 
     def messages(self, sample, answer=None, image=None, prompt=None):
+        image = image if image is not None else str(sample.image_path)
         messages = [
             {
                 "role": "system",
@@ -1052,7 +1089,7 @@ class QwenDiscoveryCollator:
             {
                 "role": "user",
                 "content": [
-                    {"type": "image", "image": image or str(sample.image_path)},
+                    {"type": "image", "image": image},
                     {"type": "text", "text": prompt or self.prompt},
                 ],
             },
@@ -1116,40 +1153,53 @@ def load_qwen_adapter(config, protocol, seed, device):
 
 
 @torch.inference_mode()
-def predict_qwen_discovery(model, processor, samples, config, device, description):
-    collator = QwenDiscoveryCollator(processor, config, False)
-    labels = labels_from_config(config)
-    location_ids = processor.tokenizer.convert_tokens_to_ids(
-        location_token_strings(config["generation"]["location_tokens"])
+def qwen_discovery_batch(
+    model,
+    processor,
+    conversations,
+    config,
+    device,
+    labels,
+    location_ids,
+):
+    size = {
+        "longest_edge": config["input"]["max_pixels"],
+        "shortest_edge": config["input"]["min_pixels"],
+    }
+    synchronize(device)
+    started = time.perf_counter()
+    inputs = processor.apply_chat_template(
+        conversations,
+        add_generation_prompt=True,
+        tokenize=True,
+        return_dict=True,
+        return_tensors="pt",
+        processor_kwargs={"padding": True, "size": size},
+    ).to(device)
+    input_length = inputs["input_ids"].shape[1]
+    constraint = grounding_prefix_allowed_tokens(
+        processor.tokenizer,
+        labels,
+        location_token_ids=location_ids,
+        prompt_length=input_length,
     )
+    generated = model.generate(
+        **inputs,
+        do_sample=False,
+        max_new_tokens=config["generation"]["max_new_tokens"],
+        prefix_allowed_tokens_fn=(
+            constraint
+            if config["generation"].get("constrained_grammar", True)
+            else None
+        ),
+        return_dict_in_generate=True,
+        output_scores=True,
+    )
+    synchronize(device)
+    latency = (time.perf_counter() - started) * 1000 / len(conversations)
     predictions = []
-    for sample in tqdm(samples, desc=description, unit="image"):
-        synchronize(device)
-        started = time.perf_counter()
-        batch = collator([sample])
-        batch = {key: value.to(device) for key, value in batch.items()}
-        input_length = batch["input_ids"].shape[1]
-        constraint = grounding_prefix_allowed_tokens(
-            processor.tokenizer,
-            labels,
-            location_token_ids=location_ids,
-            prompt_length=input_length,
-        )
-        generated = model.generate(
-            **batch,
-            do_sample=False,
-            max_new_tokens=config["generation"]["max_new_tokens"],
-            prefix_allowed_tokens_fn=(
-                constraint
-                if config["generation"].get("constrained_grammar", True)
-                else None
-            ),
-            return_dict_in_generate=True,
-            output_scores=True,
-        )
-        synchronize(device)
-        latency = (time.perf_counter() - started) * 1000
-        output_ids = generated.sequences[0, input_length:]
+    for index in range(len(conversations)):
+        output_ids = generated.sequences[index, input_length:]
         raw = processor.decode(output_ids, skip_special_tokens=False).strip()
         try:
             parsed = parse_grounding_tokens(
@@ -1159,11 +1209,51 @@ def predict_qwen_discovery(model, processor, samples, config, device, descriptio
                 location_ids,
             )
             parsed["presence_score"] = event_probability(
-                generated.scores[0][0], processor.tokenizer, labels
+                generated.scores[0][index], processor.tokenizer, labels
             )
-            predictions.append(parsed | {"valid": True, "latency_ms": latency, "raw_output": raw})
+            predictions.append(
+                parsed
+                | {
+                    "valid": True,
+                    "latency_ms": latency,
+                    "inference_batch_size": len(conversations),
+                    "raw_output": raw,
+                }
+            )
         except (KeyError, TypeError, ValueError):
-            predictions.append(empty_prediction(latency, raw, False))
+            predictions.append(
+                empty_prediction(latency, raw, False)
+                | {"inference_batch_size": len(conversations)}
+            )
+    return predictions
+
+
+@torch.inference_mode()
+def predict_qwen_discovery(model, processor, samples, config, device, description):
+    collator = QwenDiscoveryCollator(processor, config, False)
+    labels = labels_from_config(config)
+    location_ids = processor.tokenizer.convert_tokens_to_ids(
+        location_token_strings(config["generation"]["location_tokens"])
+    )
+    batch_size = config.get("test", {}).get("batch_size", 1)
+    predictions = []
+    progress = tqdm(total=len(samples), desc=description, unit="image")
+    for start in range(0, len(samples), batch_size):
+        batch_samples = samples[start : start + batch_size]
+        conversations = [collator.messages(sample) for sample in batch_samples]
+        predictions.extend(
+            qwen_discovery_batch(
+                model,
+                processor,
+                conversations,
+                config,
+                device,
+                labels,
+                location_ids,
+            )
+        )
+        progress.update(len(batch_samples))
+    progress.close()
     return predictions
 
 
@@ -1261,8 +1351,8 @@ def train_qwen_discovery(config: dict) -> None:
                             avg=f"{running_loss / batch_index:.4f}",
                         )
                     writer.flush()
-                model.save_pretrained(adapter_dir)
-                processor.save_pretrained(adapter_dir)
+                    model.save_pretrained(adapter_dir)
+                    processor.save_pretrained(adapter_dir)
                 save_training_data_state(output_dir, config, protocol)
                 writer.close()
                 del model, optimizer
@@ -1271,6 +1361,9 @@ def train_qwen_discovery(config: dict) -> None:
             val_samples = read_discovery_samples(config, protocol, "val")
             predictions = predict_qwen_discovery(
                 model, processor, val_samples, config, device, "qwen validation"
+            )
+            save_prediction_cache(
+                config, "validation", protocol, seed, val_samples, predictions
             )
             save_calibration(config, protocol, seed, val_samples, predictions, True)
             del model
@@ -1287,6 +1380,7 @@ def test_qwen_discovery(config: dict) -> None:
             predictions = predict_qwen_discovery(
                 model, processor, samples, config, device, "qwen test"
             )
+            save_prediction_cache(config, "test", protocol, seed, samples, predictions)
             threshold = read_threshold(config, protocol, seed)
             metrics = table4_metrics(samples, predictions, labels_from_config(config), threshold, True)
             save_results(
@@ -2077,73 +2171,26 @@ def test_best_localizer_qwen(config: dict) -> None:
 
 
 @torch.inference_mode()
-def qwen_discovery_call(model, processor, image, config, device):
-    prompt = config["prompt"]["user"].replace("{categories}", category_block(config))
-    messages = [
-        {
-            "role": "system",
-            "content": [{"type": "text", "text": config["prompt"]["system"]}],
-        },
-        {
-            "role": "user",
-            "content": [
-                {"type": "image", "image": image},
-                {"type": "text", "text": prompt},
-            ],
-        },
-    ]
-    synchronize(device)
-    started = time.perf_counter()
-    inputs = processor.apply_chat_template(
-        messages,
-        add_generation_prompt=True,
-        tokenize=True,
-        return_dict=True,
-        return_tensors="pt",
-        processor_kwargs={
-            "size": {
-                "longest_edge": config["input"]["max_pixels"],
-                "shortest_edge": config["input"]["min_pixels"],
-            }
-        },
-    ).to(device)
-    input_length = inputs["input_ids"].shape[1]
-    labels = labels_from_config(config)
-    location_ids = processor.tokenizer.convert_tokens_to_ids(
-        location_token_strings(config["generation"]["location_tokens"])
-    )
-    constraint = grounding_prefix_allowed_tokens(
-        processor.tokenizer,
+def qwen_discovery_images(
+    model,
+    processor,
+    images,
+    config,
+    device,
+    collator,
+    labels,
+    location_ids,
+):
+    conversations = [collator.messages(None, image=image) for image in images]
+    return qwen_discovery_batch(
+        model,
+        processor,
+        conversations,
+        config,
+        device,
         labels,
-        location_token_ids=location_ids,
-        prompt_length=input_length,
+        location_ids,
     )
-    generated = model.generate(
-        **inputs,
-        do_sample=False,
-        max_new_tokens=config["generation"]["max_new_tokens"],
-        prefix_allowed_tokens_fn=(
-            constraint
-            if config["generation"].get("constrained_grammar", True)
-            else None
-        ),
-        return_dict_in_generate=True,
-        output_scores=True,
-    )
-    synchronize(device)
-    latency = (time.perf_counter() - started) * 1000
-    output_ids = generated.sequences[0, input_length:]
-    raw = processor.decode(output_ids, skip_special_tokens=False).strip()
-    try:
-        parsed = parse_grounding_tokens(
-            output_ids, processor.tokenizer, labels, location_ids
-        )
-        parsed["presence_score"] = event_probability(
-            generated.scores[0][0], processor.tokenizer, labels
-        )
-        return parsed | {"valid": True, "latency_ms": latency, "raw_output": raw}
-    except (KeyError, TypeError, ValueError):
-        return empty_prediction(latency, raw, False)
 
 
 def sliding_tiles(image: Image.Image, grid: int, overlap: float):
@@ -2173,30 +2220,68 @@ def tile_box_to_global(bbox, tile_region, image_size):
 
 
 @torch.inference_mode()
-def predict_qwen_agent(model, processor, samples, config, device, description):
+def predict_qwen_agent(
+    model,
+    processor,
+    samples,
+    config,
+    device,
+    description,
+    global_predictions=None,
+):
+    collator = QwenDiscoveryCollator(processor, config, False)
+    labels = labels_from_config(config)
+    location_ids = processor.tokenizer.convert_tokens_to_ids(
+        location_token_strings(config["generation"]["location_tokens"])
+    )
+    batch_size = config.get("test", {}).get("batch_size", 1)
+    global_predictions = global_predictions or {}
     predictions = []
     for sample in tqdm(samples, desc=description, unit="image"):
         with Image.open(sample.image_path) as source:
             image = source.convert("RGB")
         calls = []
-        global_prediction = qwen_discovery_call(model, processor, image, config, device)
+        global_prediction = global_predictions.get(sample.record_uid)
+        if global_prediction is None:
+            global_prediction = qwen_discovery_images(
+                model,
+                processor,
+                [image],
+                config,
+                device,
+                collator,
+                labels,
+                location_ids,
+            )[0]
         calls.append({"view": "global", "prediction": global_prediction})
         candidates = [global_prediction]
         searched_tiles = False
         if global_prediction["presence_score"] < config["agent"]["early_exit_threshold"]:
             searched_tiles = True
-            for tile, region in sliding_tiles(
+            tiles = sliding_tiles(
                 image, config["agent"]["tile_grid"], config["agent"]["overlap"]
-            ):
-                tile_prediction = qwen_discovery_call(model, processor, tile, config, device)
-                if tile_prediction["bbox_1000"] is not None:
-                    tile_prediction["bbox_1000"] = tile_box_to_global(
-                        tile_prediction["bbox_1000"], region, image.size
-                    )
-                calls.append(
-                    {"view": "tile", "region_pixels": region, "prediction": tile_prediction}
+            )
+            for start in range(0, len(tiles), batch_size):
+                tile_batch = tiles[start : start + batch_size]
+                tile_predictions = qwen_discovery_images(
+                    model,
+                    processor,
+                    [tile for tile, _ in tile_batch],
+                    config,
+                    device,
+                    collator,
+                    labels,
+                    location_ids,
                 )
-                candidates.append(tile_prediction)
+                for tile_prediction, (_, region) in zip(tile_predictions, tile_batch):
+                    if tile_prediction["bbox_1000"] is not None:
+                        tile_prediction["bbox_1000"] = tile_box_to_global(
+                            tile_prediction["bbox_1000"], region, image.size
+                        )
+                    calls.append(
+                        {"view": "tile", "region_pixels": region, "prediction": tile_prediction}
+                    )
+                    candidates.append(tile_prediction)
         best = max(candidates, key=lambda prediction: prediction["presence_score"])
         total_latency = sum(call["prediction"]["latency_ms"] for call in calls)
         verified = False
@@ -2205,7 +2290,16 @@ def predict_qwen_agent(model, processor, samples, config, device, description):
             inspect_crop = crop_from_box(
                 image, best["bbox_1000"], config["agent"]["inspect_context_margin"]
             )
-            inspected = qwen_discovery_call(model, processor, inspect_crop, config, device)
+            inspected = qwen_discovery_images(
+                model,
+                processor,
+                [inspect_crop],
+                config,
+                device,
+                collator,
+                labels,
+                location_ids,
+            )[0]
             calls.append({"view": "source_pixel_inspection", "prediction": inspected})
             total_latency += inspected["latency_ms"]
             category = inspected["category"]
@@ -2251,8 +2345,17 @@ def train_qwen_agent(config: dict) -> None:
         for seed in config["train"]["seeds"]:
             model, processor = load_qwen_adapter(config, protocol, seed, device)
             samples = read_discovery_samples(config, protocol, "val")
+            global_predictions = read_prediction_cache(
+                config, "validation", protocol, seed
+            )
             predictions = predict_qwen_agent(
-                model, processor, samples, config, device, "qwen agent validation"
+                model,
+                processor,
+                samples,
+                config,
+                device,
+                "qwen agent validation",
+                global_predictions,
             )
             save_calibration(config, protocol, seed, samples, predictions, True)
             del model
@@ -2266,8 +2369,15 @@ def test_qwen_agent(config: dict) -> None:
             values = {"protocol": protocol, "seed": seed}
             model, processor = load_qwen_adapter(config, protocol, seed, device)
             samples = read_discovery_samples(config, protocol, "test")
+            global_predictions = read_prediction_cache(config, "test", protocol, seed)
             predictions = predict_qwen_agent(
-                model, processor, samples, config, device, "qwen agent test"
+                model,
+                processor,
+                samples,
+                config,
+                device,
+                "qwen agent test",
+                global_predictions,
             )
             threshold = read_threshold(config, protocol, seed)
             metrics = table4_metrics(samples, predictions, labels_from_config(config), threshold, True)

@@ -45,9 +45,9 @@ generation:
   constrained_grammar: true
 
 train:
-  recipe_version: 2
+  recipe_version: 3
   seeds: [43]
-  epochs: 5
+  epochs: 3
   batch_size: 4
   gradient_accumulation: 2
   learning_rate: 0.0002
@@ -61,6 +61,9 @@ train:
   lora_dropout: 0.05
   lora_scope: projector_llm
 
+test:
+  batch_size: 4
+
 validation:
   fallback_threshold: 0.5
   max_n_fpr: 0.1
@@ -69,5 +72,7 @@ output:
   root: ./outputs/table4/qwen3vl_t4/{protocol}/seed{seed}
   adapter: ./outputs/table4/qwen3vl_t4/{protocol}/seed{seed}/best
   calibration: ./outputs/table4/qwen3vl_t4/{protocol}/seed{seed}/calibration.json
+  validation_predictions: ./outputs/table4/qwen3vl_t4/{protocol}/seed{seed}/validation_predictions.json
+  test_predictions: ./outputs/table4/qwen3vl_t4/{protocol}/seed{seed}/test_predictions.json
   results: ./results/table4/qwen3vl_t4/{protocol}/seed{seed}_test.json
   skip_existing: true
