@@ -23,12 +23,8 @@ def phase(label):
         print(f"[done] {label} ({elapsed(time.monotonic() - start)})", flush=True)
 
 
-def run_with_progress(command, *, cwd, env, label, index, total, interval=15):
-    """Heartbeat lives in the parent even if native loading holds the child's GIL.
-
-    Elapsed time is NOT a percentage or proof that a child is making progress.
-    Keep inherited stdout/stderr so the child's real tqdm bars remain live.
-    """
+def run_with_progress(command, *, cwd, env, label, index, total):
+    """Inherit stdout/stderr so real child tqdm bars remain live; no heartbeat."""
     child_env = dict(os.environ if env is None else env)
     child_env["PYTHONUNBUFFERED"] = "1"
     start = time.monotonic()
@@ -36,14 +32,7 @@ def run_with_progress(command, *, cwd, env, label, index, total, interval=15):
     print("[stage] Starting Python and importing dependencies...", flush=True)
     process = subprocess.Popen(command, cwd=cwd, env=child_env)
     try:
-        while True:
-            try:
-                code = process.wait(timeout=interval)
-                break
-            except subprocess.TimeoutExpired:
-                print(f"[waiting] {label} | elapsed {elapsed(time.monotonic()-start)}"
-                      f" | process {process.pid} has not exited; see last stage above",
-                      flush=True)
+        code = process.wait()
     except KeyboardInterrupt:
         # The terminal normally delivers Ctrl+C to both parent and child.
         # If the child does not exit, terminate only this runner's child.

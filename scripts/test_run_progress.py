@@ -27,14 +27,15 @@ class ProgressTests(unittest.TestCase):
         self.assertIn("[stopped]", output.getvalue())
         self.assertNotIn("[done]", output.getvalue())
 
-    def test_heartbeat_and_completion(self):
+    def test_silent_wait_and_completion(self):
         output = io.StringIO()
         with redirect_stdout(output):
             run_with_progress([sys.executable, "-c", "import time; time.sleep(0.15)"],
                               cwd=ROOT, env=None, label="silent child", index=1,
-                              total=2, interval=0.02)
+                              total=2)
         self.assertIn("[task 1/2]", output.getvalue())
-        self.assertIn("[waiting]", output.getvalue())
+        self.assertNotIn("[waiting]", output.getvalue())
+        self.assertNotIn("has not exited", output.getvalue())
         self.assertIn("[task 1/2 done]", output.getvalue())
 
     def test_child_failure_propagates(self):

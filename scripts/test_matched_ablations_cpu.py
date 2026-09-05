@@ -3,8 +3,11 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
+import run_matched_ablations as runner
 from run_matched_ablations import (check_budget, check_epoch, check_result,
-                                  fingerprint, stage_names, state)
+                                  fingerprint, stage_names, state, prerequisite,
+                                  check_initialization)
 
 
 class MatchedTests(unittest.TestCase):
@@ -31,9 +34,43 @@ class MatchedTests(unittest.TestCase):
         check_epoch(12)
 
     def test_stage_dependencies(self):
-        self.assertEqual(stage_names(["no_roi"]), ["full_ms", "full_cls", "no_roi"])
-        self.assertEqual(stage_names(["single_scale"]), ["full_ms", "full_cls",
-                                                         "single_scale_ms", "single_scale_cls"])
+        self.assertEqual(stage_names(["no_roi"]), ["no_roi"])
+        self.assertEqual(stage_names(["single_scale"]),
+                         ["single_scale_ms", "single_scale_cls"])
+        self.assertEqual(stage_names(["no_heatmap"]),
+                         ["no_heatmap_ms", "no_heatmap_cls"])
+        self.assertEqual(stage_names(["full_ms"]), ["full_ms"])
+        self.assertEqual(stage_names(["full_cls"]), ["full_cls"])
+
+    def test_selection_deduplicates_and_orders_dependencies(self):
+        self.assertEqual(stage_names(["full_cls", "full", "full_ms"]),
+                         ["full_ms", "full_cls"])
+        self.assertEqual(stage_names(list(runner.GROUPS)), list(runner.STAGES))
+        with self.assertRaises(ValueError):
+            stage_names(["typo"])
+
+    def test_prerequisites(self):
+        for name in ("full_ms", "no_heatmap_ms", "single_scale_ms"):
+            self.assertIsNone(prerequisite(name))
+        for name in ("full_cls", "no_roi", "fixed_classifier", "no_global", "no_curriculum"):
+            self.assertEqual(prerequisite(name), "full_ms")
+        self.assertEqual(prerequisite("no_heatmap_cls"), "no_heatmap_ms")
+        self.assertEqual(prerequisite("single_scale_cls"), "single_scale_ms")
+
+    def test_shared_initialization_requires_complete_matching_checkpoint(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            ckpt, receipt = root / "last.pt", root / "matched_run_config.json"
+            with patch.object(runner, "paths", return_value=(ckpt, None, receipt)):
+                with self.assertRaisesRegex(ValueError, "--only full_ms first"):
+                    check_initialization("no_roi", lambda _: self.config, {"a"})
+                ckpt.touch()
+                with patch.object(runner, "state", return_value="trained") as inspect:
+                    check_initialization("no_roi", lambda _: self.config, {"a"})
+                    inspect.assert_called_once_with(self.config, ckpt, None, receipt, {"a"})
+                with patch.object(runner, "state", side_effect=ValueError("epoch 1")):
+                    with self.assertRaisesRegex(ValueError, "not ready"):
+                        check_initialization("no_roi", lambda _: self.config, {"a"})
 
     def test_uid_and_metrics(self):
         payload = self.payload()
