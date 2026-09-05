@@ -1,6 +1,9 @@
 base_config: ./configs/yaml/qwen_ground_ms.yaml
 experiment: qwen_ground_ms_v2_no_heatmap
 
+data:
+  protocols: [session_disjoint]
+
 model:
   components:
     center_mode: query

@@ -5,12 +5,14 @@ import argparse
 import json
 import statistics
 import time
+from types import SimpleNamespace
 
 import torch
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
 from clear_uav.experiment_config import project_path
+from clear_uav.table4 import table4_metrics
 from clear_uav.qwen_ground_cls import (
     GroundClassificationCollator,
     GroundClassificationDataset,
@@ -326,6 +328,8 @@ def main() -> None:
                                 float(batch_errors[sample_index]) if is_positive else None
                             ),
                             "latency_ms": latency_ms,
+                            "inference_batch_size": len(batch["record_uids"]),
+                            "timing_scope": "transfer_and_forward_amortized_excludes_loader_and_postprocess",
                         }
                         rows.append(row)
 
@@ -393,31 +397,17 @@ def main() -> None:
                 ),
                 "median_latency_ms": statistics.median(row["latency_ms"] for row in rows),
             }
-            metrics["table4"] = {
-                "p_ap": metrics["presence"]["p_ap"],
-                "n_fpr": metrics["presence"]["n_fpr"],
-                "p_precision": metrics["presence"]["precision"],
-                "p_recall": metrics["presence"]["recall"],
-                "p_f1": metrics["presence"]["f1"],
-                "ap50": average_precision(
-                    list(
-                        zip(
-                            presence_scores.tolist(),
-                            (presence_targets & (ious >= 0.5)).tolist(),
-                        )
-                    ),
-                    int(presence_targets.sum()),
-                ),
-                "c_f1": metrics["classification_positive_only"]["macro_f1"],
-                "g_map50": metrics["g_map50"],
-                "valid_rate": 1.0,
-                "median_ms": metrics["median_latency_ms"],
-                "mean_calls": 1.0,
-                "max_calls": 1,
-                "threshold": threshold,
-                "positive_records": int(presence_targets.sum()),
-                "negative_records": int((~presence_targets).sum()),
-            }
+            # Preserve the all-class score diagnostic, but use exactly the same
+            # single-candidate presence-score AP as every Table IV baseline.
+            metrics["g_map50_legacy_class_scores"] = metrics["g_map50"]
+            metric_samples = [SimpleNamespace(presence=r["target_presence"],
+                bbox_1000=r["target_bbox_1000"], label=r["target_category"]) for r in rows]
+            metric_predictions = [dict(presence_score=r["presence_score"],
+                bbox_1000=r["candidate_bbox_1000"], category=r["candidate_category"],
+                valid=True, latency_ms=r["latency_ms"],
+                timing_scope=r["timing_scope"]) for r in rows]
+            metrics["table4"] = table4_metrics(metric_samples, metric_predictions, labels, threshold, True)
+            metrics["g_map50"] = metrics["table4"]["g_map50"]
             result = {
                 "experiment": config["experiment"],
                 "protocol": protocol,

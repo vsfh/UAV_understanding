@@ -1,6 +1,9 @@
 base_config: ./configs/yaml/qwen_ground_cls.yaml
 experiment: qwen_ground_cls_v2_no_global_context
 
+data:
+  protocols: [session_disjoint]
+
 classification:
   components:
     global_context: false

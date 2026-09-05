@@ -1,0 +1,14 @@
+base_config: ./configs/yaml/table4_matched_full_cls.yaml
+experiment: table4_matched_no_heatmap_cls
+model:
+  components:
+    center_mode: query
+    size_uses_heatmap: false
+train:
+  heatmap_weight: 0.0
+initialization:
+  grounding_checkpoint: ./outputs/table4_matched_ablations/no_heatmap_ms/{protocol}/seed{seed}/last.pt
+output:
+  root: ./outputs/table4_matched_ablations/no_heatmap_cls/{protocol}/seed{seed}
+  checkpoint: ./outputs/table4_matched_ablations/no_heatmap_cls/{protocol}/seed{seed}/last.pt
+  test_results: ./results/table4_matched_ablations/no_heatmap_cls/{protocol}/seed{seed}_test.json

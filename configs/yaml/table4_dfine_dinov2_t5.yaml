@@ -67,5 +67,6 @@ output:
   model: ./outputs/table4/dfine_t1/{protocol}/seed{seed}/best
   classifier: ./outputs/table4/dfine_dinov2_t5/{protocol}/seed{seed}/classifier.pt
   calibration: ./outputs/table4/dfine_dinov2_t5/{protocol}/seed{seed}/calibration.json
+  presence_calibration: ./outputs/table4/dfine_t1/{protocol}/seed{seed}/calibration.json
   results: ./results/table4/dfine_dinov2_t5/{protocol}/seed{seed}_test.json
   skip_existing: true

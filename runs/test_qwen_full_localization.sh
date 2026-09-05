@@ -8,5 +8,5 @@ unset HF_HUB_OFFLINE TRANSFORMERS_OFFLINE LOCAL_KERNELS
 export HF_HOME="${REPO_ROOT}/hf_cache"
 export PYTHONPATH="${REPO_ROOT}/src${PYTHONPATH:+:${PYTHONPATH}}"
 PYTHON="${QWEN_PYTHON:-/home/feihong/miniconda3/bin/python}"
-exec "${PYTHON}" scripts/test_qwen_full_localization.py \
+exec python scripts/test_qwen_full_localization.py \
   --config "${1:-configs/yaml/qwen_full_localization.yaml}"

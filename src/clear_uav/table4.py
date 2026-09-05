@@ -380,18 +380,15 @@ def localization_ap50(samples, predictions, category: str | None = None) -> floa
     return average_precision(items, positives)
 
 
-def macro_f1(samples, predictions, labels, threshold: float) -> float:
+def macro_f1(samples, predictions, labels) -> float:
+    """Candidate classification Macro-F1 on positive records before presence gating."""
     values = []
     for label in labels:
         tp = fp = fn = 0
         for sample, prediction in zip(samples, predictions):
             if not sample.presence:
                 continue
-            predicted = (
-                prediction["category"]
-                if prediction["presence_score"] >= threshold
-                else None
-            )
+            predicted = prediction["category"]
             tp += sample.label == label and predicted == label
             fp += sample.label != label and predicted == label
             fn += sample.label == label and predicted != label
@@ -448,6 +445,8 @@ def select_threshold(samples, predictions, validation: dict) -> tuple[float, dic
 
 
 def table4_metrics(samples, predictions, labels, threshold: float, classification: bool) -> dict:
+    if not samples or len(samples) != len(predictions):
+        raise ValueError("metrics require non-empty, aligned samples and predictions")
     negatives = [
         prediction["presence_score"] >= threshold
         for sample, prediction in zip(samples, predictions)
@@ -456,6 +455,7 @@ def table4_metrics(samples, predictions, labels, threshold: float, classificatio
     per_class_ap = [localization_ap50(samples, predictions, label) for label in labels]
     operating_point = presence_at_threshold(samples, predictions, threshold)
     calls = [prediction.get("num_calls", 1) for prediction in predictions]
+    timing_scopes = dict(Counter(p.get("timing_scope", "legacy_unspecified") for p in predictions))
     return {
         "p_ap": presence_ap(samples, predictions),
         "n_fpr": sum(negatives) / len(negatives) if negatives else None,
@@ -463,7 +463,7 @@ def table4_metrics(samples, predictions, labels, threshold: float, classificatio
         "p_recall": operating_point["recall"],
         "p_f1": operating_point["f1"],
         "ap50": localization_ap50(samples, predictions),
-        "c_f1": macro_f1(samples, predictions, labels, threshold) if classification else None,
+        "c_f1": macro_f1(samples, predictions, labels) if classification else None,
         "g_map50": (
             statistics.fmean(value for value in per_class_ap if value is not None)
             if classification else None
@@ -472,6 +472,8 @@ def table4_metrics(samples, predictions, labels, threshold: float, classificatio
         "median_ms": statistics.median(prediction["latency_ms"] for prediction in predictions),
         "mean_calls": statistics.fmean(calls),
         "max_calls": max(calls),
+        "timing_scopes": timing_scopes,
+        "ap_ranking": "presence_score_single_candidate",
         "threshold": threshold,
         "positive_records": sum(sample.presence for sample in samples),
         "negative_records": sum(not sample.presence for sample in samples),
@@ -479,6 +481,8 @@ def table4_metrics(samples, predictions, labels, threshold: float, classificatio
 
 
 def save_results(path: Path, config: dict, protocol: str, samples, predictions, metrics) -> None:
+    if len(samples) != len(predictions) or len({s.record_uid for s in samples}) != len(samples):
+        raise ValueError("refusing to save misaligned or duplicate record IDs")
     path.parent.mkdir(parents=True, exist_ok=True)
     rows = []
     for sample, prediction in zip(samples, predictions):
@@ -539,7 +543,11 @@ def save_calibration(config, protocol, seed, samples, predictions, classificatio
 
 
 def read_threshold(config, protocol, seed) -> float:
-    return json.loads(calibration_path(config, protocol, seed).read_text())["threshold"]
+    template = config["output"].get(
+        "presence_calibration", config["output"]["calibration"]
+    )
+    path = project_path(template, protocol=protocol, seed=seed)
+    return json.loads(path.read_text(encoding="utf-8"))["threshold"]
 
 
 def prediction_cache_path(config, split: str, protocol: str, seed: int) -> Path:
@@ -1217,13 +1225,15 @@ def qwen_discovery_batch(
                     "valid": True,
                     "latency_ms": latency,
                     "inference_batch_size": len(conversations),
+                    "timing_scope": "preprocess_generate_amortized_excludes_decode_and_io",
                     "raw_output": raw,
                 }
             )
         except (KeyError, TypeError, ValueError):
             predictions.append(
                 empty_prediction(latency, raw, False)
-                | {"inference_batch_size": len(conversations)}
+                | {"inference_batch_size": len(conversations),
+                   "timing_scope": "preprocess_generate_amortized_excludes_decode_and_io"}
             )
     return predictions
 
@@ -2317,6 +2327,9 @@ def predict_qwen_agent(
                 "valid": valid,
                 "latency_ms": total_latency,
                 "num_calls": len(calls),
+                "timing_scope": "sum_of_amortized_view_costs_excludes_routing_and_io",
+                "global_prediction_cached": sample.record_uid in global_predictions,
+                "call_batch_sizes": [call["prediction"].get("inference_batch_size") for call in calls],
                 "route": (
                     "global"
                     + ("_tiles" if searched_tiles else "")

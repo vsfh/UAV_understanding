@@ -1,0 +1,11 @@
+base_config: ./configs/yaml/paper_shift_qwen_forward_temporal.yaml
+experiment: paper_shift_tiling
+agent:
+  tile_grid: 2
+  overlap: 0.1
+  early_exit_threshold: 0.85
+  inspect_context_margin: 0.2
+output:
+  root: ./outputs/table4_shifts/qwen3vl_adaptive_tiling/{protocol}/seed{seed}
+  calibration: ./outputs/table4_shifts/qwen3vl_adaptive_tiling/{protocol}/seed{seed}/calibration.json
+  results: ./results/table4_shifts/qwen3vl_adaptive_tiling/{protocol}/seed{seed}_test.json

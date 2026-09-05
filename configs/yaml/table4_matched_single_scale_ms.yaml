@@ -1,0 +1,8 @@
+base_config: ./configs/yaml/table4_matched_full_ms.yaml
+experiment: table4_matched_single_scale_ms
+model:
+  pyramid_scales: [1]
+output:
+  root: ./outputs/table4_matched_ablations/single_scale_ms/{protocol}/seed{seed}
+  checkpoint: ./outputs/table4_matched_ablations/single_scale_ms/{protocol}/seed{seed}/last.pt
+  test_results: ./results/table4_matched_ablations/single_scale_ms/{protocol}/seed{seed}_test.json

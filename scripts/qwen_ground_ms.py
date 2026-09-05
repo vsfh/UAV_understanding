@@ -13,6 +13,7 @@ from torch.utils.data import DataLoader, WeightedRandomSampler
 from torch.utils.tensorboard import SummaryWriter
 from tqdm.auto import tqdm
 
+from clear_uav.run_progress import phase
 from clear_uav.experiment_config import experiment_runs, load_yaml_with_base, project_path
 from clear_uav.qwen_ground_ms import (
     GroundCollator,
@@ -88,11 +89,15 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
     seed_everything(seed)
     device = torch.device(config["runtime"]["device"])
     data_root = project_path(config["data"]["root"])
-    targets = load_bbox_targets(project_path(config["data"]["bbox_annotations"]))
-    train_samples = read_ground_samples(data_root / protocol / "train.csv", data_root)
+    with phase(f"{protocol}: read ROI annotations"):
+        targets = load_bbox_targets(project_path(config["data"]["bbox_annotations"]))
+    with phase(f"{protocol}: collect training image records"):
+        train_samples = read_ground_samples(data_root / protocol / "train.csv", data_root)
+    print(f"[data] {len(train_samples):,} training records", flush=True)
 
     vision, processor = load_qwen_vision(project_path(config["model"]["path"]), device)
-    model = QwenGroundMS(vision, config["model"]).to(device)
+    with phase("Create grounding heads"):
+        model = QwenGroundMS(vision, config["model"]).to(device)
     if config["train"]["gradient_checkpointing"]:
         model.vision_encoder.gradient_checkpointing_enable()
     collator = GroundCollator(processor, config["input"])
@@ -156,6 +161,7 @@ def train_run(config: dict, protocol: str, seed: int) -> None:
     )
 
     for epoch in range(1, train_config["epochs"] + 1):
+        print(f"[train] epoch {epoch}/{train_config['epochs']}: starting batches", flush=True)
         model.train()
         optimizer.zero_grad(set_to_none=True)
         running_loss = 0.0

@@ -1,6 +1,9 @@
 base_config: ./configs/yaml/qwen_ground_ms.yaml
 experiment: qwen_ground_ms_v2_single_scale
 
+data:
+  protocols: [session_disjoint]
+
 model:
   pyramid_scales: [1]
 

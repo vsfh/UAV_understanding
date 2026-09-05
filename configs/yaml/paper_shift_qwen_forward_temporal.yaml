@@ -1,0 +1,11 @@
+base_config: ./configs/yaml/table4_qwen3vl_t4.yaml
+experiment: paper_shift_qwen
+data:
+  protocols: [forward_temporal]
+output:
+  root: ./outputs/table4_shifts/qwen3vl_t4/{protocol}/seed{seed}
+  adapter: ./outputs/table4_shifts/qwen3vl_t4/{protocol}/seed{seed}/best
+  calibration: ./outputs/table4_shifts/qwen3vl_t4/{protocol}/seed{seed}/calibration.json
+  validation_predictions: ./outputs/table4_shifts/qwen3vl_t4/{protocol}/seed{seed}/validation_predictions.json
+  test_predictions: ./outputs/table4_shifts/qwen3vl_t4/{protocol}/seed{seed}/test_predictions.json
+  results: ./results/table4_shifts/qwen3vl_t4/{protocol}/seed{seed}_test.json

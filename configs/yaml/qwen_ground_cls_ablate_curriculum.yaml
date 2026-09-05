@@ -1,6 +1,9 @@
 base_config: ./configs/yaml/qwen_ground_cls.yaml
 experiment: qwen_ground_cls_v2_no_curriculum
 
+data:
+  protocols: [session_disjoint]
+
 box_conditioning:
   enabled: false
 

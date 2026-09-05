@@ -34,12 +34,12 @@ if [[ "${SOURCE_TARGET}" != "${REPO_ROOT}/third_party/GeoChat" ]]; then
   echo "Refusing unexpected source target: ${SOURCE_TARGET}" >&2
   exit 1
 fi
-if [[ ! -x "${PYTHON}" ]]; then
+if [[ ! -x python ]]; then
   echo "Python is not executable: ${PYTHON}" >&2
   exit 1
 fi
 
-"${PYTHON}" - <<'PY'
+python - <<'PY'
 import transformers
 
 if transformers.__version__ != "5.8.0":
@@ -129,7 +129,7 @@ fi
 # import time. GeoChat-7B is Llama-based, while the unused legacy MPT backend
 # imports Transformers-private _expand_mask helpers removed before 5.8. Keep
 # only the implementation required by this checkpoint.
-"${PYTHON}" - "${SOURCE_STAGE}/geochat/model/__init__.py" <<'PY'
+python - "${SOURCE_STAGE}/geochat/model/__init__.py" <<'PY'
 import sys
 from pathlib import Path
 
@@ -143,7 +143,7 @@ PY
 # This import gate runs before deletion. If the official custom code is not
 # import-compatible with Transformers 5.8.0, the old checkpoint remains intact.
 PYTHONPATH="${SOURCE_STAGE}${PYTHONPATH:+:${PYTHONPATH}}" \
-  "${PYTHON}" - "${MODEL_STAGE}" <<'PY'
+  python - "${MODEL_STAGE}" <<'PY'
 import sys
 
 import transformers
@@ -160,7 +160,7 @@ print("GeoChat custom configuration registered successfully under Transformers 5
 PY
 
 # Make the checkpoint use the freshly downloaded local vision tower.
-"${PYTHON}" - "${MODEL_STAGE}/config.json" "${VISION_TARGET}" <<'PY'
+python - "${MODEL_STAGE}/config.json" "${VISION_TARGET}" <<'PY'
 import json
 import sys
 from pathlib import Path
@@ -200,10 +200,10 @@ mv -- "${VISION_STAGE}" "${VISION_TARGET}"
 mv -- "${SOURCE_STAGE}" "${SOURCE_TARGET}"
 
 # --no-deps preserves Transformers 5.8.0 instead of applying GeoChat's old pin.
-"${PYTHON}" -m pip install --no-deps -e "${SOURCE_TARGET}"
+python -m pip install --no-deps -e "${SOURCE_TARGET}"
 
 PYTHONPATH="${SOURCE_TARGET}${PYTHONPATH:+:${PYTHONPATH}}" \
-  "${PYTHON}" - "${MODEL_TARGET}" <<'PY'
+  python - "${MODEL_TARGET}" <<'PY'
 import sys
 
 import transformers

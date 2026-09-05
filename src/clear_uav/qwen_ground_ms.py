@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import random
+from contextlib import ExitStack
 from pathlib import Path
 
 import numpy as np
@@ -18,6 +19,8 @@ from transformers.models.qwen3_5_moe.modeling_qwen3_5_moe import (
 )
 
 from clear_uav.data import Sample, iter_csv_rows
+from clear_uav.run_progress import phase
+from tqdm.auto import tqdm
 
 
 def seed_everything(seed: int) -> None:
@@ -34,28 +37,37 @@ def model_snapshot(model_root: Path) -> Path:
 
 
 def load_qwen_vision(model_root: Path, device: torch.device) -> tuple[nn.Module, object]:
-    snapshot = model_snapshot(model_root)
-    config = AutoConfig.from_pretrained(snapshot, local_files_only=True)
-    config.vision_config._attn_implementation = "sdpa"
-    with torch.device("meta"):
-        vision = Qwen3_5MoeVisionModel(config.vision_config)
+    with phase("Locate vision model and read configuration"):
+        snapshot = model_snapshot(model_root)
+        config = AutoConfig.from_pretrained(snapshot, local_files_only=True)
+        config.vision_config._attn_implementation = "sdpa"
+    with phase("Create vision model structure (meta device)"):
+        with torch.device("meta"):
+            vision = Qwen3_5MoeVisionModel(config.vision_config)
+        # Non-persistent buffer must be materialized outside the meta device.
+        rotary = vision.rotary_pos_emb
+        rotary.inv_freq = 1.0 / (
+            rotary.theta
+            ** (torch.arange(0, rotary.dim, 2, dtype=torch.float32) / rotary.dim)
+        )
 
-    # inv_freq is a non-persistent buffer, so it is not restored by load_state_dict.
-    # Recreate it outside the meta device before moving the vision model to CUDA.
-    rotary = vision.rotary_pos_emb
-    rotary.inv_freq = 1.0 / (
-        rotary.theta
-        ** (torch.arange(0, rotary.dim, 2, dtype=torch.float32) / rotary.dim)
-    )
-
+    weight_path = snapshot / "outside.safetensors"
     state = {}
-    with safe_open(snapshot / "outside.safetensors", framework="pt", device="cpu") as weights:
-        for key in weights.keys():
-            if key.startswith("model.visual."):
+    with ExitStack() as stack:
+        with phase(f"Open weight file: {weight_path} (first access may be slow)"):
+            weights = stack.enter_context(
+                safe_open(weight_path, framework="pt", device="cpu")
+            )
+        keys = [key for key in weights.keys() if key.startswith("model.visual.")]
+        with phase(f"Extract {len(keys)} vision tensors (mapped views, not disk-byte progress)"):
+            for key in tqdm(keys, desc="Vision tensors", unit="tensor", dynamic_ncols=True):
                 state[key.removeprefix("model.visual.")] = weights.get_tensor(key)
-    vision.load_state_dict(state, strict=True, assign=True)
-    vision.to(device=device, dtype=torch.bfloat16)
-    processor = AutoProcessor.from_pretrained(snapshot, local_files_only=True).image_processor
+    with phase("Assign vision weights"):
+        vision.load_state_dict(state, strict=True, assign=True)
+    with phase(f"Materialize vision weights on {device} (may read mapped storage)"):
+        vision.to(device=device, dtype=torch.bfloat16)
+    with phase("Load image processor"):
+        processor = AutoProcessor.from_pretrained(snapshot, local_files_only=True).image_processor
     return vision, processor
 
 
