@@ -480,7 +480,9 @@ def table4_metrics(samples, predictions, labels, threshold: float, classificatio
     }
 
 
-def save_results(path: Path, config: dict, protocol: str, samples, predictions, metrics) -> None:
+def save_results(path: Path, config: dict, protocol: str, samples, predictions, metrics, *, seed: int) -> None:
+    if seed not in config['train']['seeds']:
+        raise ValueError('Result seed is not part of the configured experiment')
     if len(samples) != len(predictions) or len({s.record_uid for s in samples}) != len(samples):
         raise ValueError("refusing to save misaligned or duplicate record IDs")
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -505,6 +507,9 @@ def save_results(path: Path, config: dict, protocol: str, samples, predictions, 
             {
                 "experiment": config["experiment"],
                 "protocol": protocol,
+                "seed": seed,
+                "result_schema_version": 2,
+                "config_sha256": hashlib.sha256(json.dumps(config, sort_keys=True, separators=(",", ":")).encode()).hexdigest(),
                 "metrics": metrics,
                 "rows": rows,
             },
@@ -814,6 +819,7 @@ def test_dfine(config: dict) -> None:
                 samples,
                 predictions,
                 metrics,
+                seed=seed,
             )
             print(protocol, seed, metrics)
             del model
@@ -918,6 +924,7 @@ def test_grounding_dino(config: dict) -> None:
                 samples,
                 predictions,
                 metrics,
+                seed=seed,
             )
             print(protocol, seed, metrics)
 
@@ -992,6 +999,7 @@ def test_yolo_world(config: dict) -> None:
                 samples,
                 predictions,
                 metrics,
+                seed=seed,
             )
             print(protocol, seed, metrics)
 
@@ -1400,6 +1408,7 @@ def test_qwen_discovery(config: dict) -> None:
                 samples,
                 predictions,
                 metrics,
+                seed=seed,
             )
             print(protocol, seed, metrics)
             del model
@@ -1667,6 +1676,7 @@ def test_florence_discovery(config: dict) -> None:
                 samples,
                 predictions,
                 metrics,
+                seed=seed,
             )
             print(protocol, seed, metrics)
             del model
@@ -1874,6 +1884,7 @@ def test_dfine_dinov2(config: dict) -> None:
                 samples,
                 predictions,
                 metrics,
+                seed=seed,
             )
             print(protocol, seed, metrics)
             del locator, classifier
@@ -2174,6 +2185,7 @@ def test_best_localizer_qwen(config: dict) -> None:
                 samples,
                 predictions,
                 metrics,
+                seed=seed,
             )
             print(protocol, seed, selected, metrics)
             del classifier
@@ -2401,6 +2413,7 @@ def test_qwen_agent(config: dict) -> None:
                 samples,
                 predictions,
                 metrics,
+                seed=seed,
             )
             print(protocol, seed, metrics)
             del model

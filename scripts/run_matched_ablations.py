@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import sys
@@ -22,6 +23,8 @@ CHOICES = tuple(dict.fromkeys((*GROUPS, *STAGES)))
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from clear_uav.run_progress import phase, run_with_progress
+from clear_uav.experiment_guard import (artifact_identity, assert_unlocked,
+                                       stage_lock, verify_artifact, write_json_atomic)
 
 
 def stage_names(names):
@@ -39,11 +42,16 @@ def prerequisite(name):
     return name[:-4] + "_ms" if name.endswith("_cls") else "full_ms"
 
 
+def lock_path(name):
+    return ROOT / "reports/experiment_locks" / f"matched_{name}_session_disjoint_seed43.lock"
+
+
 def check_initialization(name, load_config, reference_ids):
     """A shared MS checkpoint must be complete and match its config receipt."""
     dependency = prerequisite(name)
     if dependency is None:
         return
+    assert_unlocked(lock_path(dependency), dependency)
     config = load_config(ROOT / f"configs/yaml/table4_matched_{dependency}.yaml")
     check_budget(config)
     checkpoint, _, receipt = paths(config)
@@ -96,7 +104,9 @@ def check_result(payload, config, reference_ids):
         raise ValueError("Result UIDs are duplicated or differ from frozen test")
     metrics = payload.get("metrics", {}).get("table4", {})
     for key in ("ap50", "c_f1", "g_map50", "n_fpr", "p_recall"):
-        if not isinstance(metrics.get(key), (int, float)):
+        if (isinstance(metrics.get(key), bool)
+                or not isinstance(metrics.get(key), (int, float))
+                or not math.isfinite(metrics[key])):
             raise ValueError(f"Missing unified Table IV metric: {key}")
 
 
@@ -108,7 +118,11 @@ def state(config, checkpoint, result, receipt, reference_ids, epoch_loader=load_
         saved = json.loads(receipt.read_text())
         if saved.get("config_sha256") != fingerprint(config):
             raise ValueError(f"Resolved config differs from checkpoint receipt: {checkpoint}")
+        if "checkpoint_identity" in saved:
+            verify_artifact(checkpoint, saved["checkpoint_identity"], ROOT)
         if result is not None and result.exists():
+            if "result_identity" in saved:
+                verify_artifact(result, saved["result_identity"], ROOT)
             check_result(json.loads(result.read_text()), config, reference_ids)
             return "done"
         return "trained"
@@ -124,6 +138,16 @@ def state(config, checkpoint, result, receipt, reference_ids, epoch_loader=load_
                 return "new"
         raise ValueError(f"Nonempty run directory without checkpoint: {checkpoint.parent}")
     return "new"
+
+
+def seal_artifacts(checkpoint, result, receipt, checkpoint_origin):
+    """Record newly finished work; do not invent historical artifact provenance."""
+    saved = json.loads(receipt.read_text(encoding="utf-8"))
+    saved["checkpoint_origin"] = checkpoint_origin
+    saved["checkpoint_identity"] = artifact_identity(checkpoint, ROOT)
+    if result is not None and result.is_file():
+        saved["result_identity"] = artifact_identity(result, ROOT)
+    write_json_atomic(receipt, saved)
 
 
 def paths(config):
@@ -156,6 +180,7 @@ def main():
         relative = Path(f"configs/yaml/table4_matched_{name}.yaml")
         config = load_yaml_with_base(ROOT / relative)
         check_budget(config)
+        assert_unlocked(lock_path(name), name)
         checkpoint, result, receipt = paths(config)
         is_ms = name.endswith("_ms")
         if not is_ms:
@@ -185,26 +210,31 @@ def main():
     child_env = os.environ.copy()
     child_env["PYTHONPATH"] = str(ROOT / "src") + os.pathsep + child_env.get("PYTHONPATH", "")
     for name, config, checkpoint, result, receipt, status, commands in stages:
-        is_ms = name.endswith("_ms")
-        current = state(config, checkpoint, None if is_ms else result, receipt, reference_ids)
-        if current != status:
-            raise ValueError(f"Run state changed during preflight: {name}")
-        if not is_ms and status == "new":
-            check_initialization(name, load_yaml_with_base, reference_ids)
-        if status == "new":
-            checkpoint.parent.mkdir(parents=True, exist_ok=True)
-            if not receipt.exists():
-                with receipt.open("x", encoding="utf-8") as out:
-                    json.dump({"config_sha256": fingerprint(config), "resolved_config": config},
-                              out, indent=2)
-        for command in commands:
-            task_index += 1
-            action = "evaluate" if Path(command[1]).name.startswith("test_") else "train"
-            run_with_progress(command, cwd=ROOT, env=child_env,
-                              label=f"{name} / {action}", index=task_index, total=total)
-            check_epoch(load_epoch(checkpoint))
-        if not is_ms:
-            check_result(json.loads(result.read_text()), config, reference_ids)
+        with stage_lock(lock_path(name), name):
+            is_ms = name.endswith("_ms")
+            current = state(config, checkpoint, None if is_ms else result, receipt, reference_ids)
+            if current != status:
+                raise ValueError(f"Run state changed during preflight: {name}; rerun the same command.")
+            if not is_ms and status == "new":
+                check_initialization(name, load_yaml_with_base, reference_ids)
+            if status == "new":
+                checkpoint.parent.mkdir(parents=True, exist_ok=True)
+                if not receipt.exists():
+                    with receipt.open("x", encoding="utf-8") as out:
+                        json.dump({"config_sha256": fingerprint(config), "resolved_config": config},
+                                  out, indent=2)
+            for command in commands:
+                task_index += 1
+                action = "evaluate" if Path(command[1]).name.startswith("test_") else "train"
+                run_with_progress(command, cwd=ROOT, env=child_env,
+                                  label=f"{name} / {action}", index=task_index, total=total)
+                check_epoch(load_epoch(checkpoint))
+            if not is_ms:
+                check_result(json.loads(result.read_text()), config, reference_ids)
+            if commands:
+                seal_artifacts(checkpoint, None if is_ms else result, receipt,
+                               "trained_by_this_run" if status == "new"
+                               else "preexisting_epoch_validated_not_historically_hashed")
 
 
 if __name__ == "__main__":
