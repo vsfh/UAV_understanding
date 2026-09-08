@@ -157,8 +157,12 @@ def completed(config, artifact, marker):
         validate_artifact(config, artifact, marker)
         return True
     if artifact.exists():
-        raise ValueError(f"Existing output has no completion receipt: {artifact}. "
-                         "Preserve it and inspect before rerunning.")
+        protocol = config["data"]["protocols"][0]
+        hint = (f" Inspect/preserve it, then explicitly verify existing Qwen outputs with: "
+                f"python scripts/run_paper_shifts.py --protocol {protocol} --only qwen --recover-existing"
+                if marker.stem.endswith(("_qwen_calibration", "_qwen_results")) else
+                " Preserve it and inspect before rerunning.")
+        raise ValueError(f"Existing output has no completion receipt: {artifact}." + hint)
     return False
 
 
@@ -167,9 +171,18 @@ def main():
     parser.add_argument("--protocol", nargs="+", choices=PROTOCOLS, default=list(PROTOCOLS))
     parser.add_argument("--only", nargs="+", choices=tuple(GROUPS), default=["ground", "qwen", "tiling"],
                         help="Run only the selected models; GPU selection is inherited from your environment.")
+    parser.add_argument("--recover-existing", action="store_true",
+                        help="With --only qwen, validate and register completed existing outputs; never train or infer.")
     args = parser.parse_args()
     steps = plan(tuple(dict.fromkeys(args.protocol)), args.only)
     catalog = {step[3].stem: step for step in plan()}
+    if args.recover_existing:
+        if set(args.only) != {"qwen"}:
+            raise ValueError("--recover-existing requires --only qwen; it never starts missing experiments")
+        from recover_paper_qwen import recover_existing_qwen
+        for protocol in dict.fromkeys(args.protocol):
+            recover_existing_qwen(protocol, catalog, sys.modules[__name__])
+        return
     scheduled = {step[3].stem for step in steps}
     for _, config, artifact, marker in steps:
         assert_unlocked(lock_path(marker), marker.stem)
