@@ -1,0 +1,12 @@
+base_config: configs/yaml/table4_qwen3vl_t4.yaml
+protocol: session_disjoint
+seed: 43
+checkpoint: outputs/table4/qwen3vl_t4/session_disjoint/seed43/best
+output: outputs/qwen_pilot_20260909
+steps: 32
+accumulation: 4
+learning_rate: 0.00002
+subset_fraction: 0.5
+val_per_class: 12
+val_negatives: 64
+arms: [control, random_half, diverse_half, diverse_qa]

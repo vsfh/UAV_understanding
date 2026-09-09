@@ -1,0 +1,69 @@
+experiment: qwen_grpo_roi
+protocol: session_disjoint
+seed: 43
+device: cuda
+output: outputs/qwen_grpo_roi/session_disjoint/seed43
+
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  definitions: ./um7/definition.json
+  bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  negative_label: no_event
+  # Reuse the exact train-only random-half candidate, including negatives.
+  subset: outputs/qwen_pilot_20260909/random_half.json
+  no_event:
+    root: ./um7/no_event
+    group_gap_seconds: 60
+    split_ratios: {train: 0.7, val: 0.1, test: 0.2}
+    seed: 43
+
+model:
+  path: ./hf_cache/qwen3-vl
+  initial_adapter: outputs/qwen_pilot_20260909/random_half/adapter
+  head_dim: 256
+  max_center_shift: 0.2
+  max_log_scale: 0.7
+
+prompt:
+  system: You detect operational events in full-resolution aerial UAV images.
+  user: |-
+    Determine whether one supported operational event is present. If present,
+    locate its complete contextual evidence region and classify it. Return only
+    `no_event`, or one canonical category immediately followed by four location
+    tokens: <loc_x1><loc_y1><loc_x2><loc_y2>. Each location token is an integer
+    from <loc_0> to <loc_999> on the full image. Categories:
+    {categories}
+  open_vocab_template: "{label}: {definition}"
+
+input: {max_pixels: 995328, min_pixels: 65536}
+generation: {location_tokens: 1000, max_new_tokens: 32}
+train:
+  seeds: [43]
+  steps: 500
+  gradient_accumulation: 2  # image groups per optimizer update
+  learning_rate: 0.000005
+  head_learning_rate: 0.0002
+  weight_decay: 0.01
+  class_balance_power: 0.5
+  max_grad_norm: 1.0
+  save_every: 100
+grpo:
+  group_size: 4
+  rollout_batch_size: 4     # lower to 1 when GPU memory is shared tightly
+  clip: 0.2
+  beta: 0.03
+  advantage_epsilon: 0.0001
+  # One on-policy update per rollout; no stale rollouts or critic model.
+reward:
+  category_weight: 0.25
+  iou_weight: 0.75
+  negative_correct: 1.0
+  negative_false_positive: -1.0
+loss:
+  sft: 0.3
+  l1: 2.0
+  giou: 1.0
+  residual: 0.01
+validation: {fallback_threshold: 0.5, max_n_fpr: 0.1}
