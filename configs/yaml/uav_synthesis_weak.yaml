@@ -1,0 +1,19 @@
+# Reuse the finished crop/inpainting LoRA and existing generated descriptions.
+pipeline_config: configs/yaml/perception_qwen.yaml
+work_dir: outputs/uav_synthesis/seed43
+selection_dir: outputs/uav_synthesis_weak/seed43
+synthetic_root: um7/synthetic_weak
+hf_cache: hf_cache
+classes:
+  - building_demolition
+  - glass_greenhouse
+  - floating_garbage
+  - collapsed_house_wall
+  - dangerous_building
+per_class: 3000
+chunk_size: 100
+crop_inference_steps: 50
+inpaint_inference_steps: 30
+seed: 43
+gpu: '1'
+save_conditions: false

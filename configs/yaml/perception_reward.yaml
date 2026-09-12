@@ -1,0 +1,101 @@
+experiment: perception_reward
+protocol: session_disjoint
+seed: 43
+device: cuda
+output: ./outputs/perception_reward/{protocol}/seed{seed}
+
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  definitions: ./um7/definition.json
+  bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  negative_label: no_event
+  no_event:
+    root: ./um7/no_event
+    group_gap_seconds: 60
+    split_ratios: {train: 0.7, val: 0.1, test: 0.2}
+    seed: 43
+model:
+  path: ./hf_cache/qwen3-vl
+  initial_checkpoint: ./outputs/perception_qwen/{protocol}/seed{seed}/best
+  head_dim: 512
+prompt:
+  system: You detect operational events in full-resolution aerial UAV images.
+  user: |-
+    Determine whether one supported operational event is present. If present,
+    identify its complete contextual evidence region. Return one canonical
+    category followed immediately by <vis>, which represents that region.
+    Otherwise return no_event. Categories:
+    {categories}
+input: {max_pixels: 995328, min_pixels: 65536}
+# A bounded coarse-to-fine policy adaptation, not GETok reproduction.
+actions:
+  hidden_dim: 256
+  max_steps: 6
+  center_step: 0.25
+  log_scale_step: 0.35
+  decay: 0.75
+  minimum_size: 0.0001
+  oracle_stop_margin: 0.0001
+train:
+  seeds: [43]
+  class_balance_power: 0.5
+  samples_per_epoch: positive_records
+  num_workers: 4
+sft:
+  epochs: 3
+  steps: null
+  batch_size: 2
+  gradient_accumulation: 4
+  train_backbone: true
+  train_box_head: true
+  learning_rate: 0.00002
+  head_learning_rate: 0.0001
+  policy_learning_rate: 0.0002
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  max_grad_norm: 1.0
+loss: {language: 1.0, l1: 1.0, giou: 1.0, action: 1.0}
+grpo:
+  # Frozen greedy generated category -> <vis> replay -> sampled box actions.
+  # Only correctly classified positive examples supply localization rewards.
+  # VLM and baseline box MLP stay frozen: this cannot improve classification.
+  epochs: 2
+  steps: 500  # Total optimizer updates, including repeated updates per rollout.
+  batch_size: 2
+  gradient_accumulation: 4
+  # Buffer this many image microbatches before optimization. Old action
+  # log-probabilities stay frozen while the buffer is reused below.
+  updates_per_rollout: 2
+  group_size: 8
+  policy_learning_rate: 0.0001
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  max_grad_norm: 1.0
+  clip: 0.2
+  beta: 0.03
+  advantage_epsilon: 0.0001
+  imitation_anchor: 0.05
+reward: {final_iou: 1.0, iou_gain: 1.0, step_cost: 0.002}
+reward_model:
+  enabled: true
+  weight: 0.2
+  cache: ./outputs/perception_reward/{protocol}/seed{seed}/feature_cache
+  checkpoint: ./outputs/perception_reward/{protocol}/seed{seed}/rm/best.pt
+  feature_channels: 64
+  grid_size: 16
+  projection_seed: 1729
+  hidden_dim: 256
+  roi_size: 4
+  preference_pairs: null
+  train:
+    epochs: 5
+    batch_images: 4
+    candidates_per_image: 8
+    learning_rate: 0.001
+    ranking_weight: 0.2
+    ranking_margin: 0.05
+    human_preference_weight: 0.2
+test: {batch_size: 2}
+validation: {fallback_threshold: 0.5, max_n_fpr: 0.1}
