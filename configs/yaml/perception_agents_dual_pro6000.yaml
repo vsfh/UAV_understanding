@@ -1,0 +1,77 @@
+experiment: perception_agents_dual
+protocol: session_disjoint
+seed: 43
+device: cuda
+initial_checkpoint: ./outputs/perception_spatial/{protocol}/seed{seed}/best
+proposal_cache: ./outputs/perception_agents/{protocol}/seed{seed}/proposals
+output: ./outputs/perception_agents_dual/{protocol}/seed{seed}
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  definitions: ./um7/definition.json
+  bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  negative_label: no_event
+  no_event:
+    root: ./um7/no_event
+    group_gap_seconds: 60
+    split_ratios: {train: 0.7, val: 0.1, test: 0.2}
+    seed: 43
+model:
+  path: ./hf_cache/qwen3-vl
+  head_dim: 512
+  attn_implementation: sdpa
+  # Keep weights on the new machine's local SSD; mmap avoids two extra CPU copies.
+  disable_mmap: false
+spatial:
+  feature_source: final_llm_image_tokens
+  interaction_dim: 256
+  num_heads: 8
+  dropout: 0.1
+  residual_gate_init: 0.0
+  max_image_tokens: 2048
+prompt:
+  system: You detect operational events in full-resolution aerial UAV images.
+  user: |-
+    Determine whether one supported operational event is present. If present,
+    identify its complete contextual evidence region. Return one canonical
+    category followed immediately by <vis>, which represents that region.
+    Otherwise return no_event. Categories:
+    {categories}
+agents:
+  max_revisions: 2
+  accept_iou: 0.5
+  marker_width: 4
+  bootstrap_max_samples: null
+  verifier_candidates_per_image: 4
+  candidate_seed: 4300
+input:
+  max_pixels: 995328
+  min_pixels: 65536
+train:
+  epochs: 3
+  batch_size: 2
+  gradient_accumulation: 2
+  gradient_checkpointing: false
+  learning_rate: 0.00002
+  head_learning_rate: 0.0001
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  max_grad_norm: 1.0
+  class_balance_power: 0.5
+  samples_per_epoch: positive_records
+  num_workers: 0
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  log_every: 10
+  benchmark_warmup_steps: 2
+loss: {language: 1.0, l1: 1.0, giou: 1.0}
+test:
+  batch_size: 4
+validation:
+  batch_size: 4
+  fallback_threshold: 0.5
+  max_n_fpr: 0.1
+distributed:
+  gradient_bucket_mb: 64
