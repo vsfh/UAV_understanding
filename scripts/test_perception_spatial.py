@@ -52,7 +52,7 @@ def evaluate(config, split):
         config["train"]["seeds"] = [config["seed"]]
         save_results(output / f"{part}_results.json", config, config["protocol"], samples, predictions,
                      metrics, seed=config["seed"])
-        print(json.dumps({"extension": "spatial_interaction", "split": part, **metrics}, indent=2), flush=True)
+        print(json.dumps({"extension": config.get("experiment", "spatial_interaction"), "split": part, **metrics}, indent=2), flush=True)
 
 
 def main():

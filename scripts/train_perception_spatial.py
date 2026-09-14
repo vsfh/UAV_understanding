@@ -1,7 +1,8 @@
 """SFT with <vis>-to-image spatial cross-attention on final Qwen LLM states.
 
 This is an architecture-inspired adaptation, not an MVP-LM reproduction. It
-uses one image and one LLM pass, without raw ViT or multiscale feature fusion.
+uses one image per sample. An optional low-rank spatial adapter processes Qwen's
+native merged visual streams; it adds no image tokens or extra model calls.
 """
 import argparse
 import json
@@ -22,6 +23,7 @@ from train_perception_qwen import (
 )
 from perception_extension_runtime import load_qwen
 from perception_spatial_head import SpatialInteraction, spatial_memory, save_spatial_heads, load_spatial_heads
+from perception_spatial_lora import VisualSpatialAdapter
 
 DEFAULT_CONFIG = "configs/yaml/perception_spatial.yaml"
 
@@ -41,6 +43,15 @@ class SpatialPerceptionQwen(nn.Module):
         self.image_token_id = vlm.config.image_token_id
         self.merge_size = vlm.config.vision_config.spatial_merge_size
         self.max_image_tokens = spatial.get("max_image_tokens", 2048)
+        adapter = config.get("spatial_lora", {})
+        self.spatial_adapter = None
+        if adapter.get("enabled", False):
+            visual = vlm.get_base_model().model.visual
+            self.spatial_adapter = VisualSpatialAdapter(
+                hidden_dim, len(visual.deepstack_merger_list), self.merge_size,
+                adapter["rank"], adapter["alpha"], adapter.get("dropout", 0.05))
+            self._visual_adapter_hook = visual.register_forward_hook(
+                self.spatial_adapter.inject, with_kwargs=True)
         self._capture_context = None
         self.visual_state = None
         self._capture_hook = vlm.get_base_model().model.language_model.register_forward_hook(self.capture)
@@ -138,16 +149,27 @@ def train(config):
                             num_workers=settings["num_workers"])
     if len(loader) == 0:
         raise ValueError("Sampler produced zero training batches")
-    optimizer = torch.optim.AdamW([
+    groups = [
         {"params": [p for p in model.vlm.parameters() if p.requires_grad], "lr": settings["learning_rate"]},
         {"params": list(model.box_head.parameters()) + list(model.spatial_head.parameters()),
          "lr": settings["head_learning_rate"]},
-    ], weight_decay=settings["weight_decay"])
+    ]
+    if model.spatial_adapter is not None:
+        groups.append({"params": list(model.spatial_adapter.parameters()),
+                       "lr": config["spatial_lora"]["learning_rate"]})
+    optimizer = torch.optim.AdamW(groups, weight_decay=settings["weight_decay"])
+    counts = {"vlm_lora_and_vis": sum(p.numel() for p in model.vlm.parameters() if p.requires_grad),
+              "roi_and_spatial_head": sum(p.numel() for p in model.box_head.parameters()) +
+                                      sum(p.numel() for p in model.spatial_head.parameters()),
+              "visual_spatial_adapter": sum(p.numel() for p in model.spatial_adapter.parameters())
+                                        if model.spatial_adapter is not None else 0}
+    print(f"[parameters] {counts}", flush=True)
     accumulation = settings["gradient_accumulation"]
     updates = math.ceil(len(loader) / accumulation) * settings["epochs"]
     scheduler = get_cosine_schedule_with_warmup(optimizer, int(updates * settings["warmup_ratio"]), updates)
     output.mkdir(parents=True, exist_ok=True)
     (output / "config.yaml").write_text(yaml.safe_dump(config, sort_keys=False), encoding="utf-8")
+    (output / "trainable_parameters.json").write_text(json.dumps(counts, indent=2), encoding="utf-8")
     best, history = float("inf"), []
     for epoch in range(1, settings["epochs"] + 1):
         model.train()
@@ -181,6 +203,7 @@ def train(config):
             (checkpoint / "extension.json").write_text(json.dumps({
                 "extension": "spatial_interaction", "feature_source": "final_llm_image_tokens",
                 "spatial": config["spatial"], "epoch": epoch, "val_loss": val,
+                "spatial_lora": config.get("spatial_lora"), "experiment": config.get("experiment"),
             }, indent=2), encoding="utf-8")
         (output / "history.json").write_text(json.dumps(history, indent=2), encoding="utf-8")
         print(f"epoch {epoch}: val_loss={val:.4f}, best={best:.4f}", flush=True)

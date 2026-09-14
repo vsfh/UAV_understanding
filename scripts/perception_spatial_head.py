@@ -90,6 +90,8 @@ def save_spatial_heads(model, checkpoint):
     checkpoint.mkdir(parents=True, exist_ok=True)
     torch.save(model.box_head.state_dict(), checkpoint / "box_head.pt")
     torch.save(model.spatial_head.state_dict(), checkpoint / "spatial_head.pt")
+    if getattr(model, "spatial_adapter", None) is not None:
+        torch.save(model.spatial_adapter.state_dict(), checkpoint / "spatial_adapter.pt")
 
 
 def load_spatial_heads(model, checkpoint, require_spatial=False):
@@ -100,6 +102,11 @@ def load_spatial_heads(model, checkpoint, require_spatial=False):
         model.spatial_head.load_state_dict(torch.load(checkpoint / "spatial_head.pt", map_location="cpu", weights_only=True))
     elif require_spatial:
         raise FileNotFoundError(f"Missing spatial head in extension checkpoint: {checkpoint}")
+    if getattr(model, "spatial_adapter", None) is not None:
+        adapter_path = checkpoint / "spatial_adapter.pt"
+        if adapter_path.is_file() or require_spatial:
+            model.spatial_adapter.load_state_dict(torch.load(
+                adapter_path, map_location="cpu", weights_only=True))
 
 
 def checkpoint_fingerprint(checkpoint):
@@ -135,6 +142,9 @@ def evaluation_configuration(saved, runtime):
 
 def evaluation_signature(config):
     values = {key: config.get(key) for key in ('protocol', 'seed', 'model', 'spatial', 'input', 'prompt', 'data', 'validation')}
+    # Preserve existing signatures for old, non-adapter spatial checkpoints.
+    if 'spatial_lora' in config:
+        values['spatial_lora'] = config['spatial_lora']
     return hashlib.sha256(json.dumps(values, sort_keys=True).encode()).hexdigest()
 
 

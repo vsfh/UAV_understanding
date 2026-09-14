@@ -1,0 +1,9 @@
+# Frozen current-paper model. No training, new adapter, or changed category output.
+source_dir: ./outputs/perception_spatial/session_disjoint/seed43
+split: test
+output: ./outputs/spatial_evidence/session_disjoint/seed43
+device: cuda
+batch_size: 2
+permutation_seed: 43
+# Includes model loading, inference and summary; worker stops ahead of this cap.
+max_hours: 12
