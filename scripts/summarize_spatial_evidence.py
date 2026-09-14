@@ -162,7 +162,7 @@ def main():
              "Cached timing/call counts are not intervention runtime; see worker_status for wall time.",
              "CI resamples paired content groups; records without a group use singleton record IDs."]
     result = {"state": state, "processed_records": len(rows), "planned_records": len(planned),
-              "checkpoint": plan.get("checkpoint", str((source / "best").resolve())),
+              "checkpoint": str(Path(config["source_dir"]) / "best"),
               "checkpoint_sha256": plan.get("checkpoint_sha256"), "residual_gate": plan.get("residual_gate"),
               "protocol": trained["protocol"], "seed": trained["seed"], "split": split,
               "full_benchmark_claim_allowed": complete, "frozen_threshold": threshold,

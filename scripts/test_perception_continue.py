@@ -55,7 +55,7 @@ def evaluate(config, split):
                 "max_n_fpr": config["validation"]["max_n_fpr"], "num_samples": len(samples),
                 "sample_limit": None, "limited_run": bool(config["data"].get("max_samples")),
                 "split": "val", "protocol": config["protocol"], "seed": config["seed"],
-                "checkpoint": str(checkpoint.resolve()), "checkpoint_sha256": fingerprint,
+                "checkpoint": str(checkpoint), "checkpoint_sha256": fingerprint,
                 "evaluation_signature": evaluation_signature(config),
             }, indent=2), encoding="utf-8")
         else:

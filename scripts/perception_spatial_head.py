@@ -151,8 +151,9 @@ def evaluation_signature(config):
 def validate_calibration(calibration, config, checkpoint, fingerprint):
     if calibration.get('split') != 'val':
         raise ValueError('Calibration must come from validation; rerun --split val')
-    if calibration.get('checkpoint') != str(Path(checkpoint).resolve()) or calibration.get('checkpoint_sha256') != fingerprint:
-        raise ValueError('Calibration checkpoint path/content differs; rerun --split val')
+    # Checkpoint location is provenance, not identity: allow moving the repository.
+    if not fingerprint or calibration.get('checkpoint_sha256') != fingerprint:
+        raise ValueError('Calibration checkpoint content differs; use the calibrated weights or rerun --split val')
     if calibration.get('protocol') != config['protocol'] or calibration.get('seed') != config['seed']:
         raise ValueError('Calibration protocol/seed differs; rerun --split val')
     if calibration.get('evaluation_signature') != evaluation_signature(config):

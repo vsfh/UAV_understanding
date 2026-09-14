@@ -27,6 +27,13 @@ def seeded_order(uids, seed):
     return sorted(uids, key=lambda uid: hashlib.sha256(f"{seed}:{uid}".encode()).digest())
 
 
+def validate_plan(previous, current):
+    # Old plans stored the source location; moving identical files is safe.
+    previous = {key: value for key, value in previous.items() if key != "source_dir"}
+    if previous != current:
+        raise ValueError("Checkpoint, cached predictions or intervention plan changed; use a new output directory")
+
+
 def cached_completion(tokenizer, raw_output):
     tokens = tokenizer.encode(raw_output, add_special_tokens=False)
     if tokenizer.eos_token_id in tokens:
@@ -131,15 +138,14 @@ def worker(spec, deadline):
     order = seeded_order(rows, spec["permutation_seed"])
     head_state = torch.load(source / "best" / "spatial_head.pt", map_location="cpu", weights_only=True)
     plan = {"source_sha256": hashlib.sha256(result_path.read_bytes()).hexdigest(),
-            "checkpoint_sha256": fingerprint, "source_dir": str(source),
+            "checkpoint_sha256": fingerprint,
             "total_records": len(order), "record_uids": order,
             "residual_gate": head_state["residual_gate"].item(),
             "conditions": list(CONDITIONS), "permutation_seed": spec["permutation_seed"]}
     del head_state
     plan_path = output / "plan.json"
     if plan_path.exists():
-        if json.loads(plan_path.read_text()) != plan:
-            raise ValueError("Checkpoint, cached predictions or intervention plan changed; use a new output directory")
+        validate_plan(json.loads(plan_path.read_text()), plan)
     else:
         plan_path.write_text(json.dumps(plan, indent=2), encoding="utf-8")
     progress_path = output / "paired_predictions.jsonl"
@@ -232,24 +238,25 @@ def main():
     started = time.monotonic()
     status = {"training": False, "max_hours": budget / 3600, "worker": "not_started"}
     try:
-        if not args.summary_only:
-            command = [sys.executable, __file__, "--config", args.config,
-                       "--worker-deadline", str(time.time() + budget - 180)]
-            try:
-                child = subprocess.run(command, timeout=budget - 120)
-                status["worker"] = "returned" if child.returncode == 0 else "failed"
-                status["returncode"] = child.returncode
-            except subprocess.TimeoutExpired:
-                status["worker"] = "deadline_stopped"
+        command = [sys.executable, "scripts/run_spatial_evidence.py", "--config", args.config,
+                   "--worker-deadline", str(time.time() + budget - 180)]
+        try:
+            child = subprocess.run(command, timeout=budget - 120)
+            status["worker"] = "returned" if child.returncode == 0 else "failed"
+            status["returncode"] = child.returncode
+        except subprocess.TimeoutExpired:
+            status["worker"] = "deadline_stopped"
         status["elapsed_seconds"] = time.monotonic() - started
         (output / "status.json").write_text(json.dumps(status, indent=2), encoding="utf-8")
         if not (output / "paired_predictions.jsonl").is_file():
-            raise RuntimeError("No paired predictions were completed; see worker error above")
+            if status["worker"] != "failed":
+                print("No paired predictions completed within this run.", file=sys.stderr)
+            raise SystemExit(status.get("returncode") or 1)
         remaining = budget - (time.monotonic() - started) - 5
         subprocess.run([sys.executable, "scripts/summarize_spatial_evidence.py", "--config", args.config],
                        check=True, timeout=max(1, remaining))
         if status["worker"] == "failed":
-            raise RuntimeError("Worker failed; summary contains only saved paired records")
+            raise SystemExit(status["returncode"])
     finally:
         status["elapsed_seconds"] = time.monotonic() - started
         (output / "status.json").write_text(json.dumps(status, indent=2), encoding="utf-8")

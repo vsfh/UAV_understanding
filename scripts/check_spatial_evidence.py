@@ -11,7 +11,8 @@ from unittest.mock import patch
 import torch
 from torch import nn
 
-from perception_spatial_head import SpatialInteraction
+from perception_spatial_head import (SpatialInteraction, checkpoint_fingerprint,
+                                    evaluation_signature, validate_calibration)
 import run_spatial_evidence as evidence
 import summarize_spatial_evidence as summary
 
@@ -20,6 +21,80 @@ def decode(head, query):
     raw = head(query).sigmoid()
     return torch.cat((torch.minimum(raw[:, :2], raw[:, 2:]),
                       torch.maximum(raw[:, :2], raw[:, 2:])), -1) * 1000
+
+
+class PortabilityTests(unittest.TestCase):
+    def setUp(self):
+        self.config = {'protocol': 'session_disjoint', 'seed': 43, 'data': {}}
+        self.fingerprint = 'a' * 64
+        self.calibration = {
+            'split': 'val', 'protocol': 'session_disjoint', 'seed': 43,
+            'checkpoint': '/media/data2/feihong/UAV_understanding/outputs/model/best',
+            'checkpoint_sha256': self.fingerprint,
+            'evaluation_signature': evaluation_signature(self.config),
+            'limited_run': False, 'threshold': .5,
+        }
+
+    def test_checkpoint_relocation_never_compares_or_rewrites_paths(self):
+        original = copy.deepcopy(self.calibration)
+        for checkpoint in ('outputs/model/best', '/home/feihong/UAV_understanding/outputs/model/best'):
+            validate_calibration(self.calibration, self.config, checkpoint, self.fingerprint)
+        self.assertEqual(self.calibration, original)
+
+    def test_content_and_calibration_checks_remain_strict(self):
+        cases = [('checkpoint_sha256', 'b' * 64), ('checkpoint_sha256', None),
+                 ('checkpoint_sha256', ''), ('split', 'test'), ('protocol', 'unseen_site'),
+                 ('seed', 44), ('evaluation_signature', 'changed'), ('limited_run', True),
+                 ('threshold', float('nan')), ('threshold', -1), ('threshold', 2)]
+        for key, value in cases:
+            with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                calibration = {**self.calibration, key: value}
+                validate_calibration(calibration, self.config, calibration['checkpoint'], self.fingerprint)
+        with self.assertRaises(ValueError):
+            validate_calibration({**self.calibration, 'checkpoint_sha256': ''}, self.config, 'best', '')
+
+    def test_fingerprint_depends_on_files_not_repository_location(self):
+        with TemporaryDirectory() as directory:
+            roots = [Path(directory) / 'old', Path(directory) / 'new']
+            for root in roots:
+                root.mkdir()
+                (root / 'box_head.pt').write_bytes(b'box weights')
+                (root / 'spatial_head.pt').write_bytes(b'spatial weights')
+            self.assertEqual(checkpoint_fingerprint(roots[0]), checkpoint_fingerprint(roots[1]))
+            (roots[1] / 'spatial_head.pt').write_bytes(b'changed weights')
+            self.assertNotEqual(checkpoint_fingerprint(roots[0]), checkpoint_fingerprint(roots[1]))
+
+    def test_resume_ignores_legacy_location_but_not_plan_content(self):
+        current = {'checkpoint_sha256': 'a', 'source_sha256': 'b', 'record_uids': ['n', 'p'],
+                   'conditions': list(evidence.CONDITIONS), 'permutation_seed': 43}
+        previous = {**current, 'source_dir': '/old/repository/outputs/model'}
+        original = copy.deepcopy(previous)
+        evidence.validate_plan(previous, current)
+        evidence.validate_plan(current, current)
+        self.assertEqual(previous, original)
+        for key, value in [('checkpoint_sha256', 'x'), ('source_sha256', 'x'),
+                           ('record_uids', ['p', 'n']), ('conditions', ['full']), ('permutation_seed', 44)]:
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                evidence.validate_plan({**previous, key: value}, current)
+
+    def test_worker_failure_keeps_exit_code_without_parent_traceback(self):
+        for has_progress in (False, True):
+            with self.subTest(has_progress=has_progress), TemporaryDirectory() as directory:
+                output = Path(directory)
+                if has_progress:
+                    (output / 'paired_predictions.jsonl').write_text('{}\n')
+                responses = [SimpleNamespace(returncode=7), SimpleNamespace(returncode=0)]
+                with patch.object(evidence, 'read_yaml', return_value={'output': directory, 'max_hours': 12}), \
+                        patch.object(evidence.sys, 'argv', ['run_spatial_evidence.py']), \
+                        patch.object(evidence.subprocess, 'run', side_effect=responses) as run, \
+                        self.assertRaises(SystemExit) as error:
+                    evidence.main()
+                self.assertEqual(error.exception.code, 7)
+                self.assertEqual(run.call_count, 2 if has_progress else 1)
+                self.assertEqual(run.call_args_list[0].args[0][1], 'scripts/run_spatial_evidence.py')
+                status = json.loads((output / 'status.json').read_text())
+                self.assertEqual(status['worker'], 'failed')
+                self.assertEqual(status['returncode'], 7)
 
 
 class EvidenceTests(unittest.TestCase):
