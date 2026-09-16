@@ -1,0 +1,34 @@
+# Run from the repository root. These jobs do not train or change old results.
+output: outputs/paper_small_checks
+protocol: session_disjoint
+seed: 43
+predictions:
+  direct: results/table4/qwen3vl_t4/session_disjoint/seed43_test.json
+  perception: outputs/perception_continue/session_disjoint/seed43/test_results.json
+validation:
+  direct: outputs/table4/qwen3vl_t4/session_disjoint/seed43/validation_predictions.json
+  perception: outputs/perception_continue/session_disjoint/seed43/val_results.json
+alert_threshold: 0.9627646803855896
+perception_config: outputs/perception_continue/session_disjoint/seed43/config.yaml
+perception_checkpoint: outputs/perception_continue/session_disjoint/seed43/best
+direct_config: configs/yaml/table4_qwen3vl_t4.yaml
+dfine_config: configs/yaml/table4_dfine_t1.yaml
+grounding_dino_config: configs/yaml/table4_grounding_dino_t1.yaml
+dinov2_config: configs/yaml/table4_dfine_dinov2_t5.yaml
+candidate_k: [1, 10, all]
+# Same score floor/prompts as the existing Grounding DINO row. No test tuning.
+grounding_minimum_score: 0.05
+classifier_top_k: 10
+classifier_batch_size: 64
+profile:
+  samples: 96
+  warmup_batches: 3
+  batch_sizes: [1, 2]
+roi_review:
+  per_class: 20
+  annotators: [A, B]
+  seed: 20260916
+roi_perturbation:
+  fractions: [0.05, 0.10, 0.20]
+  repeats: 50
+  seed: 20260916

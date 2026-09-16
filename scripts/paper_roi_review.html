@@ -1,0 +1,49 @@
+<!doctype html><html lang="zh"><meta charset="utf-8">
+<title>Independent ROI review</title>
+<style>
+body{font:16px system-ui;margin:24px;background:#f5f7f8;color:#172c38}header,section{max-width:1280px;margin:auto}button,select{font:inherit;padding:8px 14px;margin:6px;border:1px solid #a8b8c3;border-radius:6px;background:white}button{cursor:pointer}#view{max-height:72vh;overflow:auto;background:#172c38;border-radius:8px}canvas{display:block;touch-action:none;cursor:crosshair}#status{color:#35615a}p{line-height:1.5}.active{background:#cce6df}#candidates{display:flex;gap:30px}label{display:inline-block;margin:8px}
+[hidden]{display:none!important}
+</style>
+<header><h2 id="title"></h2><p id="instructions"></p><strong id="progress"></strong>
+<button onclick="move(-1)">上一张</button><button onclick="move(1)">下一张</button>
+<button onclick="nativeSize=!nativeSize;render()">适应窗口 / 原始尺寸</button>
+<button onclick="exportAnswers()">导出 JSON</button><span id="status"></span>
+<p id="label"></p><div id="candidates"></div>
+<button id="clear" onclick="responses[task().id]={};persist();render()">重画此框</button>
+<label id="uncertain"><input type="checkbox" onchange="responses[task().id]={uncertain:this.checked};persist();render()">无法独立确定范围</label>
+</header><section><div id="view"><canvas id="canvas"></canvas></div></section>
+<script>
+const DATA=__REVIEW_DATA__;
+const storageKey='roi-review-'+DATA.manifest_hash+'-'+DATA.reviewer+'-'+DATA.mode;
+let responses=JSON.parse(localStorage.getItem(storageKey)||'{}'), index=0, nativeSize=false, currentCandidate='C1';
+let image=new Image(), start=null, active=null;
+const canvas=document.getElementById('canvas'), ctx=canvas.getContext('2d');
+const task=()=>DATA.tasks[index];
+document.getElementById('title').textContent=`Reviewer ${DATA.reviewer} — ${DATA.mode==='draw'?'独立 ROI 复标':'盲评证据充分性'}`;
+document.getElementById('instructions').textContent=DATA.mode==='draw'?
+'请先独立完成全部框选，再打开 utility 页面。根据事件类别，画出足以判断该事件的上下文区域。包含必要周边，不要求紧贴物体。不要查看另一位审核者或原参考框。':
+'分别查看 C1 和 C2，判断框内是否保留足以识别指定事件的视觉证据。回答是、否或不确定。不以贴合原标注边界为判断标准。';
+document.getElementById('clear').hidden=DATA.mode!=='draw';
+document.getElementById('uncertain').hidden=DATA.mode!=='draw';
+function complete(r){return DATA.mode==='draw'?Boolean(r?.box||r?.uncertain):Boolean(r?.C1&&r?.C2)}
+function persist(){localStorage.setItem(storageKey,JSON.stringify(responses));document.getElementById('status').textContent='已保存在此浏览器，请定期导出';progress()}
+function progress(){document.getElementById('progress').textContent=`${index+1}/${DATA.tasks.length} · 已完成 ${DATA.tasks.filter(t=>complete(responses[t.id])).length}`}
+function load(){const id=task().id;image.onload=()=>{if(task().id===id)render()};image.src=task().image;progress();document.getElementById('label').textContent=task().id+' — '+task().label;}
+function render(){if(!image.complete||!image.naturalWidth)return;
+ const scale=nativeSize?1:Math.min(1,(document.getElementById('view').clientWidth)/image.naturalWidth);
+ canvas.width=image.naturalWidth*scale;canvas.height=image.naturalHeight*scale;
+ ctx.drawImage(image,0,0,canvas.width,canvas.height);
+ const box=active||(DATA.mode==='draw'?responses[task().id]?.box:task().candidates.find(c=>c.id===currentCandidate)?.box);
+ if(box){ctx.strokeStyle='#ffbe35';ctx.lineWidth=3;ctx.strokeRect(box[0]/1000*canvas.width,box[1]/1000*canvas.height,(box[2]-box[0])/1000*canvas.width,(box[3]-box[1])/1000*canvas.height)}
+ if(DATA.mode==='draw')document.querySelector('#uncertain input').checked=!!responses[task().id]?.uncertain;
+ const panel=document.getElementById('candidates');panel.replaceChildren();
+ if(DATA.mode==='utility')for(const c of task().candidates){const group=document.createElement('div'),b=document.createElement('button'),s=document.createElement('select');b.textContent=c.id+(c.box?'':' (no ROI)');b.className=c.id===currentCandidate?'active':'';b.onclick=()=>{currentCandidate=c.id;render()};for(const [v,text] of [['','请选择'],['yes','是：证据充分'],['no','否：证据不足'],['uncertain','不确定']]){let o=document.createElement('option');o.value=v;o.textContent=text;s.append(o)}s.value=responses[task().id]?.[c.id]||'';s.onchange=()=>{responses[task().id]||={};responses[task().id][c.id]=s.value;persist()};group.append(b,s);panel.append(group)}
+}
+function xy(e){const r=canvas.getBoundingClientRect();return [Math.max(0,Math.min(1000,(e.clientX-r.left)/r.width*1000)),Math.max(0,Math.min(1000,(e.clientY-r.top)/r.height*1000))]}
+canvas.onpointerdown=e=>{if(DATA.mode!=='draw')return;start=xy(e);canvas.setPointerCapture(e.pointerId)};
+canvas.onpointermove=e=>{if(!start)return;let p=xy(e);active=[Math.min(start[0],p[0]),Math.min(start[1],p[1]),Math.max(start[0],p[0]),Math.max(start[1],p[1])];render()};
+canvas.onpointerup=e=>{if(active&&active[2]>active[0]&&active[3]>active[1]){responses[task().id]={box:active,uncertain:false};persist()}start=null;active=null;render()};
+function move(delta){if(delta>0&&!complete(responses[task().id])&&!confirm('此项尚未完成，仍要跳过吗？'))return;index=Math.max(0,Math.min(DATA.tasks.length-1,index+delta));currentCandidate='C1';active=null;start=null;load()}
+function exportAnswers(){const data={reviewer:DATA.reviewer,mode:DATA.mode,manifest_hash:DATA.manifest_hash,responses};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download=DATA.reviewer+'_'+DATA.mode+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+load();
+</script></html>
