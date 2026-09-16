@@ -1,0 +1,61 @@
+experiment: perception_qwen
+protocol: session_disjoint
+seed: 43
+device: cuda
+data:
+  root: ./um7
+  ontology: ./configs/ontology.yaml
+  labels: ./configs/core18_complete.txt
+  definitions: ./um7/definition.json
+  bbox_annotations: ./um7/crop_bboxes_all_photos/crop_bboxes.json
+  negative_label: no_event
+  no_event:
+    root: ./um7/no_event
+    group_gap_seconds: 60
+    split_ratios:
+      train: 0.7
+      val: 0.1
+      test: 0.2
+    seed: 43
+model:
+  path: ./hf_cache/qwen3-vl
+  head_dim: 512
+prompt:
+  system: You detect operational events in full-resolution aerial UAV images.
+  user: 'Determine whether one supported operational event is present. If present,
+
+    identify its complete contextual evidence region. Return one canonical
+
+    category followed immediately by <vis>, which represents that region.
+
+    Otherwise return no_event. Categories:
+
+    {categories}'
+input:
+  max_pixels: 995328
+  min_pixels: 65536
+train:
+  epochs: 3
+  batch_size: 2
+  gradient_accumulation: 4
+  learning_rate: 0.0002
+  head_learning_rate: 0.0002
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  max_grad_norm: 1.0
+  class_balance_power: 0.5
+  samples_per_epoch: positive_records
+  num_workers: 4
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+loss:
+  language: 1.0
+  l1: 1.0
+  giou: 1.0
+test:
+  batch_size: 2
+validation:
+  fallback_threshold: 0.5
+  max_n_fpr: 0.1
+output: ./outputs/perception_qwen/{protocol}/seed{seed}
